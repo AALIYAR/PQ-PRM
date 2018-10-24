@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="stcTopLc"
+                             partialTriggers=" stcDeleteDialog stcfbb stcNewButton stcDelB stcSaveButton0 stcCancelButton0 stcSaveButton1 stcCancelButton1"
+                             rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN, RO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateAccountAttachments ? nls['INSERT_TITLE_ACCOUNTATTACHMENTS'] :  nls['EDIT_TITLE_ACCOUNTATTACHMENT: #{bindings.stcName.inputValue}'] }"
+                          helpTopicId="RBH_ACCOUNTATTACHMENTS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="stcfbb" layout="horizontal"
+                                       rendered="#{ bindings.AccountAttachmentsIterator.currentRow!=null  and bindings.AccountAttachmentsIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateAccountAttachments and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="stcFirst stcPrevious stcNext stcLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstAccountAttachments.execute}"
+                                             id="stcFirst" partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousAccountAttachments.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="stcPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1} / #{bindings.AccountAttachmentsIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextAccountAttachments.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="stcNext" partialSubmit="true"
+                                             rendered="#{bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1 lt bindings.AccountAttachmentsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1 lt bindings.AccountAttachmentsIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastAccountAttachments.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="stcLast" partialSubmit="true"
+                                             rendered="#{bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1 lt bindings.AccountAttachmentsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.AccountAttachmentsIterator.rangeStart+bindings.AccountAttachmentsIterator.currentRowIndexInRange+1 lt bindings.AccountAttachmentsIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateAccountAttachments.execute}"
+                                             action="Createstc"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_ACCOUNTATTACHMENTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateAccountAttachments and (true) }"
+                                             id="stcNewButton"></af:commandToolbarButton>
+                    <af:commandToolbarButton action="DeleteAccountAttachments"
+                                             partialSubmit="true"
+                                             icon="/jheadstart/images/deleteRow.png"
+                                             shortDesc="#{nls['DELETE_BUTTON_LABEL_ACCOUNTATTACHMENTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateAccountAttachments and  bindings.AccountAttachmentsIterator.currentRow!=null   }"
+                                             immediate="true" id="stcDelB">
+                      <af:showPopupBehavior popupId="stcDeletePopup"/>
+                    </af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="stcPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveAccountAttachments.execute}"
+                                      rendered="#{!pageFlowScope.hideSaveButton}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="stcSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="stcCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.AccountAttachmentsIterator.findMode!='true'}"
+                       id="stcSw" defaultFacet="hasRows"
+                       facetName="#{( bindings.AccountAttachmentsIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp" id="stcNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="stcFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="2"
+                                    id="stcFI">
+                  <af:inputFile id="stcAtt" label="Upload File"
+                                columns="#{bindings.stcAttachment.hints.displayWidth}"
+                                binding="#{stcAttachmentFileHandlerBean.usesUploadIndicator}"
+                                shortDesc="#{bindings.stcAttachment.hints.tooltip}"
+                                helpTopicId="RBH_STCATTACHMENT"
+                                valueChangeListener="#{stcAttachmentFileHandlerBean.uploadFile}"/>
+                  <af:panelLabelAndMessage label="Download File"
+                                           id="stcAttachmentDLLabel"
+                                           shortDesc="#{bindings.stcAttachmentDL.hints.tooltip}"
+                                           helpTopicId="RBH_STCATTACHMENTDL">
+                    <af:commandLink id="stcADL"
+                                    rendered="#{stcAttachmentDLFileHandlerBean.fileExist}">
+                      <af:outputText id="ot1"
+                                     value="#{stcAttachmentDLFileHandlerBean.fileName}"/>
+                      <af:fileDownloadActionListener contentType="#{stcAttachmentDLFileHandlerBean.contentType}"
+                                                     filename="#{stcAttachmentDLFileHandlerBean.fileName}"
+                                                     method="#{stcAttachmentDLFileHandlerBean.downloadFile}"/>
+                    </af:commandLink>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl0" valign="top"
+                                           layout="horizontal"></af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="stcATy"
+                                value="#{bindings.stcAttachmentType.inputValue}"
+                                label="#{bindings.stcAttachmentType.hints.label}"
+                                required="#{bindings.stcAttachmentType.hints.mandatory}"
+                                rows="#{bindings.stcAttachmentType.hints.displayHeight}"
+                                columns="#{bindings.stcAttachmentType.hints.displayWidth}"
+                                maximumLength="20"
+                                shortDesc="#{bindings.stcAttachmentType.hints.tooltip}"
+                                helpTopicId="RBH_STCATTACHMENTTYPE">
+                    <f:validator binding="#{bindings.stcAttachmentType.validator}"/>
+                  </af:inputText>
+                  <af:popup id="hoverPopup0">
+                    <af:noteWindow>
+                      <af:outputText value="#{bindings.stcDescription.inputValue}"/>
+                    </af:noteWindow>
+                  </af:popup>
+                  <af:panelLabelAndMessage label="#{bindings.stcDescription.hints.label}"
+                                           shortDesc="#{bindings.stcDescription.hints.tooltip}"
+                                           helpTopicId="RBH_STCDESCRIPTION"
+                                           showRequired="#{bindings.stcDescription.hints.mandatory}"
+                                           id="stcDescriptionLabel">
+                    <af:inputText id="stcDes"
+                                  value="#{bindings.stcDescription.inputValue}"
+                                  required="#{bindings.stcDescription.hints.mandatory}"
+                                  rows="#{bindings.stcDescription.hints.displayHeight}"
+                                  columns="#{bindings.stcDescription.hints.displayWidth}"
+                                  maximumLength="4000" autoSubmit="true"
+                                  simple="true"
+                                  partialTriggers="stcDescriptionEditorLink stcDescriptionEditorText">
+                      <f:validator binding="#{bindings.stcDescription.validator}"/>
+                      <af:showPopupBehavior popupId="hoverPopup0"
+                                            triggerType="mouseHover"
+                                            align="endAfter"/>
+                    </af:inputText>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl1" valign="top"
+                                           layout="horizontal">
+                        <af:commandLink id="stcDescriptionEditorLink"
+                                        immediate="true" partialSubmit="true">
+                          <af:showPopupBehavior popupId="stcDescriptionPopup"/>
+                          <af:image source="/jheadstart/images/editor.gif"
+                                    id="stcDescriptionIcon"
+                                    clientComponent="true"/>
+                        </af:commandLink>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="stcFS"
+                                value="#{bindings.stcFileSize.inputValue}"
+                                label="#{bindings.stcFileSize.hints.label}"
+                                required="#{bindings.stcFileSize.hints.mandatory}"
+                                rows="#{bindings.stcFileSize.hints.displayHeight}"
+                                columns="#{bindings.stcFileSize.hints.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.stcFileSize.hints.tooltip}"
+                                helpTopicId="RBH_STCFILESIZE">
+                    <f:validator binding="#{bindings.stcFileSize.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.stcFileSize.format}"/>
+                  </af:inputText>
+                  <af:inputText id="stcCB"
+                                value="#{bindings.stcCreatedBy.inputValue}"
+                                label="#{bindings.stcCreatedBy.hints.label}"
+                                required="#{bindings.stcCreatedBy.hints.mandatory}"
+                                rows="#{bindings.stcCreatedBy.hints.displayHeight}"
+                                columns="#{bindings.stcCreatedBy.hints.displayWidth}"
+                                maximumLength="40"
+                                shortDesc="#{bindings.stcCreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_STCCREATEDBY">
+                    <f:validator binding="#{bindings.stcCreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="stcCD"
+                                value="#{bindings.stcCreatedDate.inputValue}"
+                                label="#{bindings.stcCreatedDate.hints.label}"
+                                required="#{bindings.stcCreatedDate.hints.mandatory}"
+                                shortDesc="#{bindings.stcCreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_STCCREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="stcLUB"
+                                value="#{bindings.stcLastUpdatedBy.inputValue}"
+                                label="#{bindings.stcLastUpdatedBy.hints.label}"
+                                required="#{bindings.stcLastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.stcLastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.stcLastUpdatedBy.hints.displayWidth}"
+                                maximumLength="40"
+                                shortDesc="#{bindings.stcLastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_STCLASTUPDATEDBY">
+                    <f:validator binding="#{bindings.stcLastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="stcLUD"
+                                value="#{bindings.stcLastUpdatedDate.inputValue}"
+                                label="#{bindings.stcLastUpdatedDate.hints.label}"
+                                required="#{bindings.stcLastUpdatedDate.hints.mandatory}"
+                                shortDesc="#{bindings.stcLastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_STCLASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" "
+                                helpTopicId="RBH_ACCOUNTATTACHMENTS">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveAccountAttachments.execute}"
+                                            rendered="#{!pageFlowScope.hideSaveButton}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="stcSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="stcCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="stcDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="stcDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_ACCOUNTATTACHMENT: #{bindings.stcName.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteAccountAttachments.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="stcDescriptionPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher" childCreation="deferred">
+          <af:dialog modal="true" resize="on" title="Text Editor" id="dialog0">
+            <af:inputText rows="10" columns="100"
+                          value="#{bindings.stcDescription.inputValue}"
+                          simple="true" maximumLength="4000"
+                          id="stcDescriptionEditorText"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

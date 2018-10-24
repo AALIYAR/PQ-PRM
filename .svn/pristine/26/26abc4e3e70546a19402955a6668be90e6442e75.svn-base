@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PrmTargetedMarket"
+  Version="11.1.1.59.23"
+  DBObjectType="table"
+  DBObjectName="PRM_TARGETED_MARKET"
+  AliasName="PrmTargetedMarket"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.pq.tracs.model.eo.PrmBaseEntity">
+  <DesignTime>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TARGETED_MARKET"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PrmTargetedProductId"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="PRM_TARGETED_PRODUCT_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TARGETED_MARKET">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TargetedMarket"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="TARGETED_MARKET"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_TARGETED_MARKET">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_TARGETED_MARKET">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    IsUpdateable="while_insert"
+    IsNotNull="true"
+    ColumnName="CREATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_TARGETED_MARKET"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_TARGETED_MARKET">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedDate"
+    IsNotNull="true"
+    ColumnName="LAST_UPDATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_TARGETED_MARKET"
+    RetrievedOnInsert="true"
+    ChangeIndicator="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="PrmTargetedProduct"
+    Association="com.pq.tracs.model.ao.TargetedProductToTargetedMarketFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.TargetedProductToTargetedMarketFkAssoc.PrmTargetedProduct"
+    AssociationOtherEnd="com.pq.tracs.model.ao.TargetedProductToTargetedMarketFkAssoc.PrmTargetedMarket"
+    Type="com.pq.tracs.model.eo.PrmBaseEntity"
+    IsUpdateable="true"/>
+  <Key
+    Name="PrmTargetedMarketsPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRM_TARGETED_MARKETS_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedMarket.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046424">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046424"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedMarket.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046425">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046425"/>
+      <Attr Name="_checkCondition"
+        Value='"PRM_TARGETED_PRODUCT_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.pq.tracs.model.eo.PrmTargetedMarket.PrmTargetedProductId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046426">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046426"/>
+      <Attr Name="_checkCondition" Value='"TARGETED_MARKET" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedMarket.TargetedMarket"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046427">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046427"/>
+      <Attr Name="_checkCondition" Value='"CREATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedMarket.CreatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046428">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046428"/>
+      <Attr Name="_checkCondition" Value='"CREATED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedMarket.CreatedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046429">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046429"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedMarket.LastUpdatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046430">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046430"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedMarket.LastUpdatedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="PrmTargetedMarketsR01">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PRM_TARGETED_PRODUCT_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="PRM_TARGETED_MARKETS_R01"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.pq.tracs.model.eo.PrmTargetedMarket.PrmTargetedProductId"/>
+    </AttrArray>
+  </Key>
+</Entity>

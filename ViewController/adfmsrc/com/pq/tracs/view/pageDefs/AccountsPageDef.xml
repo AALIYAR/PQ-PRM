@@ -1,0 +1,2617 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="AccountsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, ADMIN, RO, BSSRO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="AccountsIterator" Binds="TraxContentOwnerView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="-1"/>
+    <searchRegion id="AccountsIteratorTraxContentOwnerViewCriteriaQuery"
+                  Binds="AccountsIterator"
+                  Criteria="TraxContentOwnerViewCriteria"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <searchRegion id="AccountsIteratorTraxContentOwnerQuickQueryQuery"
+                  Binds="AccountsIterator" Criteria="TraxContentOwnerQuickQuery"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AccountOpportunitiesIterator" Binds="PrmOpportunityView2"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountOpportunitiesIteratorPrmOpportunityViewCriteriaQuery"
+                  Binds="AccountOpportunitiesIterator"
+                  Criteria="PrmOpportunityViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryAccountOpportunitiesInvoke"
+                  Binds="ExecuteQueryAccountOpportunities" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <variableIterator id="variables">
+      <variable Name="st0EditLinkVar" Type="String"/>
+      <variable Name="st2NewContactVar" Type="String"/>
+      <variable Name="staEditLinkVar" Type="String"/>
+    </variableIterator>
+    <iterator id="AccountAddressesIterator" Binds="TraxAddressView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountAddressesIteratorTraxAddressViewCriteriaQuery"
+                  Binds="AccountAddressesIterator"
+                  Criteria="TraxAddressViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="City"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AccountContactsIterator" Binds="TraxContentOwnerContactView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountContactsIteratorTraxContentOwnerContactViewCriteriaQuery"
+                  Binds="AccountContactsIterator"
+                  Criteria="TraxContentOwnerContactViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="FirstName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AccountContractsIterator" Binds="TraxContractView2"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountContractsIteratorQuery"
+                  Binds="AccountContractsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ContractNumber"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <searchRegion id="AccountContractsIteratorTraxActiveContractQuickQueryQuery"
+                  Binds="AccountContractsIterator"
+                  Criteria="TraxActiveContractQuickQuery"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ContractNumber"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="InActiveAccountContractsIterator"
+              Binds="TraxInactiveContractView"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="InActiveAccountContractsIteratorQuery"
+                  Binds="InActiveAccountContractsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ContractNumber"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <searchRegion id="InActiveAccountContractsIteratorTraxInactiveContractQuickQueryQuery"
+                  Binds="InActiveAccountContractsIterator"
+                  Criteria="TraxInactiveContractQuickQuery"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ContractNumber"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AccountTitlesIterator" Binds="AccountTitlesReadOnlyView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountTitlesIteratorAccountTitlesReadOnlyViewCriteriaQuery"
+                  Binds="AccountTitlesIterator"
+                  Criteria="AccountTitlesReadOnlyViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="LongTitle"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="KeyAccountActionsIterator" Binds="KeyAccountActionView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="KeyAccountActionsIteratorKeyAccountActionViewCriteriaQuery"
+                  Binds="KeyAccountActionsIterator"
+                  Criteria="KeyAccountActionViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="EventName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="KeyAccountNotesIterator" Binds="KeyAccountNoteView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="KeyAccountNotesIteratorKeyAccountNoteViewCriteriaQuery"
+                  Binds="KeyAccountNotesIterator"
+                  Criteria="KeyAccountNoteViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="NoteType"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <invokeAction id="applyBindParamsKeyAccountNoteTypeLookupInvoke"
+                  Binds="applyBindParamsKeyAccountNoteTypeLookup"
+                  Refresh="always"/>
+    <iterator id="KeyAccountNoteTypeLookupIterator"
+              Binds="KeyAccountNoteTypeLookup"
+              DataControl="PrmAppModuleDataControl" RangeSize="-1"/>
+    <iterator id="KeyAccountRoyaltiesIterator" Binds="PrmAccountRoyaltyView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="KeyAccountRoyaltiesIteratorPrmAccountRoyaltyViewCriteriaQuery"
+                  Binds="KeyAccountRoyaltiesIterator"
+                  Criteria="PrmAccountRoyaltyViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Year"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AccountAllianceManagersIterator"
+              Binds="PrmAccountAllianceManagerView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountAllianceManagersIteratorPrmAccountAllianceManagerViewCriteriaQuery"
+                  Binds="AccountAllianceManagersIterator"
+                  Criteria="PrmAccountAllianceManagerViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="AllianceManager"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryAccountAllianceManagersInvoke"
+                  Binds="ExecuteQueryAccountAllianceManagers"
+                  Refresh="renderModel" RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="AccountExclusivesIterator" Binds="PrmAccountExclusiveView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountExclusivesIteratorPrmAccountExclusiveViewCriteriaQuery"
+                  Binds="AccountExclusivesIterator"
+                  Criteria="PrmAccountExclusiveViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ExlusiveWith"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AccountActivitiesIterator" Binds="PrmAccountActivityView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="7"/>
+    <searchRegion id="AccountActivitiesIteratorPrmAccountActivityViewCriteriaQuery"
+                  Binds="AccountActivitiesIterator"
+                  Criteria="PrmAccountActivityViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Type"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryAccountActivitiesInvoke"
+                  Binds="ExecuteQueryAccountActivities" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="AccountContactMethodsIterator"
+              Binds="PrmAccountContactMethodView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountContactMethodsIteratorQuery"
+                  Binds="AccountContactMethodsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ContactMethodType"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AccountAttachmentsIterator"
+              Binds="TraxContentOwnerAttachmentView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <iterator id="AccountProductDisciplinesIterator"
+              Binds="PrmAccountProductDisciplineView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <iterator id="AccountEventsIterator" Binds="TraxContentOwnerEventView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AccountEventsIteratorQuery" Binds="AccountEventsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="EventName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <taskFlow id="LovTaskFlow"
+              taskFlowId="#{pageFlowScope.jhsLovTaskFlowManager.currentTaskFlowId}"
+              activation="deferred"
+              parametersMap="#{pageFlowScope.jhsLovTaskFlowManager.currentParamMap}"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <attributeValues id="AccContentOwnerNo" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccNameTable" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccName" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountsIterator" id="AccKeyAccountLevel"
+          Uses="LOV_KeyAccountLevel" StaticList="false"/>
+    <button id="AccPoolFlag" IterBinding="AccountsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PoolFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="AccSite" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Site"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccAllianceManager" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="AllianceManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccParentContentOwnerId"
+                     IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="ParentContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccParentAccount" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Parentaccount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccAddressLine1" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="AddressLine1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccCity" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="City"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccStateOrProvince" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="StateOrProvince"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccZipOrPostalCode" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="ZipOrPostalCode"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountsIterator" id="AccCountry" Uses="LOV_Country"
+          StaticList="false"/>
+    <attributeValues id="AccAccountaddress" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Accountaddress"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccMainUrl" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="MainUrl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccContactname" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Contactname"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccContactphone" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Contactphone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccContactemail" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Contactemail"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="AccExclusiveFlag" IterBinding="AccountsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ExclusiveFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="AccSummonFlag" IterBinding="AccountsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="SummonFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="AccDialogFlag" IterBinding="AccountsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="DialogFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="AccIllustrataFlag" IterBinding="AccountsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="IllustrataFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="AccProblematicPublisher" IterBinding="AccountsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ProblematicPublisher"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="AccFacebook" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Facebook"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccLinkedin" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Linkedin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccTwitter" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="Twitter"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccWorkPhone" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="WorkPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccWorkEmail" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="WorkEmail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccWorkFax" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="WorkFax"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountsIterator" id="AccPrimaryLanguage"
+          Uses="LOV_PrimaryLanguage" StaticList="false"/>
+    <attributeValues id="AccVanLoozenId" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="VanLoozenId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccCreatedBy" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccCreatedDate" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccLastUpdatedBy" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccLastUpdatedDate" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccPartnerSince" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="PartnerSince"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountsIterator" id="AccBrandingLogoStatus"
+          Uses="LOV_BrandingLogoStatus" StaticList="false"/>
+    <button id="AccNewsletterFlag" IterBinding="AccountsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="NewsletterFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="AccNewsletterDate" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="NewsletterDate"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="AccHolidayGiftFlag" IterBinding="AccountsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="HolidayGiftFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="AccHolidayGiftDate" IterBinding="AccountsIterator">
+      <AttrNames>
+        <Item Value="HolidayGiftDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountsTable" IterBinding="AccountsIterator">
+      <nodeDefinition Name="Accounts"
+                      DefName="com.pq.tracs.model.vo.TraxContentOwnerView">
+        <AttrNames>
+          <Item Value="ContentOwnerNo"/>
+          <Item Value="Name"/>
+          <Item Value="Name"/>
+          <Item Value="Name"/>
+          <Item Value="Name"/>
+          <Item Value="KeyAccountLevel"/>
+          <Item Value="PoolFlag"/>
+          <Item Value="Site"/>
+          <Item Value="AllianceManager"/>
+          <Item Value="ParentContentOwnerId"/>
+          <Item Value="Parentaccount"/>
+          <Item Value="AddressLine1"/>
+          <Item Value="City"/>
+          <Item Value="StateOrProvince"/>
+          <Item Value="ZipOrPostalCode"/>
+          <Item Value="Country"/>
+          <Item Value="Accountaddress"/>
+          <Item Value="MainUrl"/>
+          <Item Value="Contactname"/>
+          <Item Value="Contactphone"/>
+          <Item Value="Contactemail"/>
+          <Item Value="ExclusiveFlag"/>
+          <Item Value="SummonFlag"/>
+          <Item Value="DialogFlag"/>
+          <Item Value="IllustrataFlag"/>
+          <Item Value="ProblematicPublisher"/>
+          <Item Value="Facebook"/>
+          <Item Value="Linkedin"/>
+          <Item Value="Twitter"/>
+          <Item Value="WorkPhone"/>
+          <Item Value="WorkEmail"/>
+          <Item Value="WorkFax"/>
+          <Item Value="PrimaryLanguage"/>
+          <Item Value="VanLoozenId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="PartnerSince"/>
+          <Item Value="BrandingLogoStatus"/>
+          <Item Value="NewsletterFlag"/>
+          <Item Value="NewsletterDate"/>
+          <Item Value="HolidayGiftFlag"/>
+          <Item Value="HolidayGiftDate"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="TraxContentOwnerView"/>
+        </Accessors>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccounts" IterBinding="AccountsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccounts" IterBinding="AccountsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccounts" IterBinding="AccountsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccounts" IterBinding="AccountsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccounts" IterBinding="AccountsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr" NDValue="#{pageFlowScope.rowKeyStrAccounts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccounts" IterBinding="AccountsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="ExecuteQueryAccountOpportunities"
+            IterBinding="AccountOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="st0Id" IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st0OpportunityNo"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st0Name" IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st0EditLink" IterBinding="variables">
+      <AttrNames>
+        <Item Value="st0EditLinkVar"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountOpportunitiesIterator"
+          id="st0OpportunityType" Uses="LOV_OpportunityType"
+          StaticList="false"/>
+    <attributeValues id="st0AllianceManager"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AllianceManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st0Description"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st0Summary" IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="Summary"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountOpportunitiesIterator"
+          id="st0CurrentStatus" Uses="LOV_CurrentStatus" StaticList="false"/>
+    <list IterBinding="AccountOpportunitiesIterator"
+          id="st0ReasonLost" Uses="LOV_ReasonLost" StaticList="false"/>
+    <attributeValues id="st0ProbabilityPct"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="ProbabilityPct"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountOpportunitiesIterator"
+          id="st0Priority" Uses="LOV_Priority" StaticList="false"/>
+    <list IterBinding="AccountOpportunitiesIterator"
+          id="st0ExpectedPipelines" Uses="LOV_ExpectedPipelines"
+          StaticList="false"/>
+    <list IterBinding="AccountOpportunitiesIterator"
+          id="st0EstimatedCloseQuarter" Uses="LOV_EstimatedCloseQuarter"
+          StaticList="false"/>
+    <attributeValues id="st0AgreementReceivedDate"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AgreementReceivedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="st0ExclusivitySoughtObtained"
+            IterBinding="AccountOpportunitiesIterator" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ExclusivitySoughtObtained"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="AccountOpportunitiesIterator"
+          id="st0DocumentSigned" Uses="LOV_DocumentSigned" StaticList="false"/>
+    <button id="st0AutoAddTargetsFlag"
+            IterBinding="AccountOpportunitiesIterator" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="AutoAddTargetsFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="st0OpenAccessFlag" IterBinding="AccountOpportunitiesIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="OpenAccessFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="st0CreatedBy"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st0CreatedDate"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st0LastUpdatedBy"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st0LastUpdatedDate"
+                     IterBinding="AccountOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountOpportunitiesTable"
+          IterBinding="AccountOpportunitiesIterator">
+      <nodeDefinition Name="AccountOpportunities"
+                      DefName="com.pq.tracs.model.vo.PrmOpportunityView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="OpportunityNo"/>
+          <Item Value="Name"/>
+          <Item Value="OpportunityType"/>
+          <Item Value="AllianceManager"/>
+          <Item Value="Description"/>
+          <Item Value="Summary"/>
+          <Item Value="CurrentStatus"/>
+          <Item Value="ReasonLost"/>
+          <Item Value="ProbabilityPct"/>
+          <Item Value="Priority"/>
+          <Item Value="ExpectedPipelines"/>
+          <Item Value="EstimatedCloseQuarter"/>
+          <Item Value="AgreementReceivedDate"/>
+          <Item Value="ExclusivitySoughtObtained"/>
+          <Item Value="DocumentSigned"/>
+          <Item Value="AutoAddTargetsFlag"/>
+          <Item Value="OpenAccessFlag"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountOpportunities"
+            IterBinding="AccountOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountOpportunities"
+            IterBinding="AccountOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountOpportunities"
+            IterBinding="AccountOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountOpportunities"
+            IterBinding="AccountOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountOpportunities"
+            IterBinding="AccountOpportunitiesIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountOpportunities}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountOpportunities"
+            IterBinding="AccountOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues id="st1Id" IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1AddressLine1"
+                     IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="AddressLine1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1AddressLine2"
+                     IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="AddressLine2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1City" IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="City"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1StateOrProvince"
+                     IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="StateOrProvince"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1ZipOrPostalCode"
+                     IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="ZipOrPostalCode"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountAddressesIterator" id="st1Country"
+          Uses="LOV_Country" StaticList="false"/>
+    <attributeValues id="st1County" IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="County"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="st1PrimaryFlag" IterBinding="AccountAddressesIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="st1SiteOrDepartment"
+                     IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="SiteOrDepartment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1AddressComments"
+                     IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="AddressComments"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1CreatedBy" IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1CreatedDate" IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1LastUpdatedBy"
+                     IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st1LastUpdatedDate"
+                     IterBinding="AccountAddressesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountAddressesTable" IterBinding="AccountAddressesIterator">
+      <nodeDefinition Name="AccountAddresses"
+                      DefName="com.pq.tracs.model.vo.TraxAddressView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="AddressLine1"/>
+          <Item Value="AddressLine2"/>
+          <Item Value="City"/>
+          <Item Value="StateOrProvince"/>
+          <Item Value="ZipOrPostalCode"/>
+          <Item Value="Country"/>
+          <Item Value="County"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="SiteOrDepartment"/>
+          <Item Value="AddressComments"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountAddresses" IterBinding="AccountAddressesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountAddresses" IterBinding="AccountAddressesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountAddresses" IterBinding="AccountAddressesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountAddresses" IterBinding="AccountAddressesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountAddresses"
+            IterBinding="AccountAddressesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountAddresses}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountAddresses" IterBinding="AccountAddressesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountAddresses" IterBinding="AccountAddressesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="st2ContactId" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="ContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2FirstName" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2LastName" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2JobTitle" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2WorkPhone" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="WorkPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2WorkEmail" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="WorkEmail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2CellPhone" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="CellPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2WorkFax" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="WorkFax"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="st2PrimaryFlag" IterBinding="AccountContactsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="st2ActiveFlag" IterBinding="AccountContactsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ActiveFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="st2ActContactActiveFlag" IterBinding="AccountContactsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ActiveFlag1"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="st2CreatedBy" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2CreatedDate" IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2LastUpdatedBy"
+                     IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2LastUpdatedDate"
+                     IterBinding="AccountContactsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st2NewContact" IterBinding="variables">
+      <AttrNames>
+        <Item Value="st2NewContactVar"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountContactsTable" IterBinding="AccountContactsIterator">
+      <nodeDefinition Name="AccountContacts"
+                      DefName="com.pq.tracs.model.vo.TraxContentOwnerContactView">
+        <AttrNames>
+          <Item Value="ContactId"/>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="JobTitle"/>
+          <Item Value="WorkPhone"/>
+          <Item Value="WorkEmail"/>
+          <Item Value="CellPhone"/>
+          <Item Value="WorkFax"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="ActiveFlag"/>
+          <Item Value="ActiveFlag1"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountContacts" IterBinding="AccountContactsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountContacts" IterBinding="AccountContactsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountContacts" IterBinding="AccountContactsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountContacts" IterBinding="AccountContactsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountContacts"
+            IterBinding="AccountContactsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountContacts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountContacts" IterBinding="AccountContactsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountContacts" IterBinding="AccountContactsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="st3Id" IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3ContractNumber"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="ContractNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3Note" IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="Note"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountContractsIterator" id="st3Form" Uses="LOV_Form"
+          StaticList="false"/>
+    <list IterBinding="AccountContractsIterator" id="st3Status"
+          Uses="LOV_Status" StaticList="false"/>
+    <list IterBinding="AccountContractsIterator" id="st3Type" Uses="LOV_Type"
+          StaticList="false"/>
+    <list IterBinding="AccountContractsIterator" id="st3Division"
+          Uses="LOV_Division" StaticList="false"/>
+    <attributeValues id="st3CompSubsToProvide"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="CompSubsToProvide"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3FormatOfCompSubs"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="FormatOfCompSubs"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3EffectiveDate"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="EffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3ExpirationDate"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountContractsIterator" id="st3TermLength"
+          Uses="LOV_TermLength" StaticList="false"/>
+    <list IterBinding="AccountContractsIterator"
+          id="st3CancellationNoticeTerm" Uses="LOV_CancellationNoticeTerm"
+          StaticList="false"/>
+    <attributeValues id="st3RolloverDate"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="RolloverDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3CancellationDate"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="CancellationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3CancellationEffectiveDate"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="CancellationEffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountContractsIterator" id="st3CancellationReason"
+          Uses="LOV_CancellationReason" StaticList="false"/>
+    <attributeValues id="st3AutoRenewsFlag"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="AutoRenewsFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3Signatory" IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="Signatory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3ContractSignedDate"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="ContractSignedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountContractsIterator" id="st3AutoRenewTermMonths"
+          Uses="LOV_AutoRenewTermMonths" StaticList="false"/>
+    <list IterBinding="AccountContractsIterator" id="st3Exclusivity"
+          Uses="LOV_Exclusivity" StaticList="false"/>
+    <list IterBinding="AccountContractsIterator" id="st3ContentMasterOwner"
+          Uses="LOV_ContentMasterOwner" StaticList="false"/>
+    <attributeValues id="st3RightsToBeRetained"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="RightsToBeRetained"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3NoteFlag" IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="NoteFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3RelationshipOwner"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="RelationshipOwner"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3AgreementContactId"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="AgreementContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3QaContactId" IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="QaContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3TechnicalContactId"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="TechnicalContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3CreatedBy" IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3CreatedDate" IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3LastUpdatedBy"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st3LastUpdatedDate"
+                     IterBinding="AccountContractsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountContractsTable" IterBinding="AccountContractsIterator">
+      <nodeDefinition Name="AccountContracts"
+                      DefName="com.pq.tracs.model.ro.TraxContractView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContractNumber"/>
+          <Item Value="Note"/>
+          <Item Value="Form"/>
+          <Item Value="Status"/>
+          <Item Value="Type"/>
+          <Item Value="Division"/>
+          <Item Value="CompSubsToProvide"/>
+          <Item Value="FormatOfCompSubs"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="TermLength"/>
+          <Item Value="CancellationNoticeTerm"/>
+          <Item Value="RolloverDate"/>
+          <Item Value="CancellationDate"/>
+          <Item Value="CancellationEffectiveDate"/>
+          <Item Value="CancellationReason"/>
+          <Item Value="AutoRenewsFlag"/>
+          <Item Value="Signatory"/>
+          <Item Value="ContractSignedDate"/>
+          <Item Value="AutoRenewTermMonths"/>
+          <Item Value="Exclusivity"/>
+          <Item Value="ContentMasterOwner"/>
+          <Item Value="RightsToBeRetained"/>
+          <Item Value="NoteFlag"/>
+          <Item Value="RelationshipOwner"/>
+          <Item Value="AgreementContactId"/>
+          <Item Value="QaContactId"/>
+          <Item Value="TechnicalContactId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountContracts" IterBinding="AccountContractsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountContracts" IterBinding="AccountContractsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountContracts" IterBinding="AccountContractsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountContracts" IterBinding="AccountContractsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountContracts"
+            IterBinding="AccountContractsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountContracts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="st31Id" IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31ContractNumber"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="ContractNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31Note"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="Note"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31Form" Uses="LOV_Form" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31Status" Uses="LOV_Status" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31Type" Uses="LOV_Type" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31Division" Uses="LOV_Division" StaticList="false"/>
+    <attributeValues id="st31CompSubsToProvide"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="CompSubsToProvide"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31FormatOfCompSubs"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="FormatOfCompSubs"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31EffectiveDate"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="EffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31ExpirationDate"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31TermLength" Uses="LOV_TermLength" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31CancellationNoticeTerm" Uses="LOV_CancellationNoticeTerm"
+          StaticList="false"/>
+    <attributeValues id="st31RolloverDate"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="RolloverDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31CancellationDate"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="CancellationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31CancellationEffectiveDate"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="CancellationEffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31CancellationReason" Uses="LOV_CancellationReason"
+          StaticList="false"/>
+    <attributeValues id="st31AutoRenewsFlag"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="AutoRenewsFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31Signatory"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="Signatory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31ContractSignedDate"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="ContractSignedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31AutoRenewTermMonths" Uses="LOV_AutoRenewTermMonths"
+          StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31Exclusivity" Uses="LOV_Exclusivity" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31ContentMasterOwner" Uses="LOV_ContentMasterOwner"
+          StaticList="false"/>
+    <attributeValues id="st31RightsToBeRetained"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="RightsToBeRetained"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31NoteFlag"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="NoteFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31RelationshipOwner"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="RelationshipOwner"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31AgreementContactId"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="AgreementContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31QaContactId"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="QaContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31TechnicalContactId"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="TechnicalContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31CreatedBy"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31CreatedDate"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31LastUpdatedBy"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31LastUpdatedDate"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31ContentOwnerId"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31ActiveFlag"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="ActiveFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31ContractTemplateId"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="ContractTemplateId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31AccountId"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31AccountNumber"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="AccountNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31AccountName"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31AccountSite"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31AutoAdd" Uses="LOV_AutoAdd" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31Assignment" Uses="LOV_Assignment" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31RoyaltyBearing" Uses="LOV_RoyaltyBearing" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31FairTreatmentClause" Uses="LOV_FairTreatmentClause"
+          StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31IssueEditionCoverage" Uses="LOV_IssueEditionCoverage"
+          StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31CompleteContentSet" Uses="LOV_CompleteContentSet"
+          StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31WarrantyAndIndemnification"
+          Uses="LOV_WarrantyAndIndemnification" StaticList="false"/>
+    <list IterBinding="InActiveAccountContractsIterator"
+          id="st31Governance" Uses="LOV_Governance" StaticList="false"/>
+    <attributeValues id="st31Guarantee"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="Guarantee"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st31TechnicalContact"
+                     IterBinding="InActiveAccountContractsIterator">
+      <AttrNames>
+        <Item Value="TechnicalContact"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="InActiveAccountContractsTable"
+          IterBinding="InActiveAccountContractsIterator">
+      <nodeDefinition Name="InActiveAccountContracts"
+                      DefName="com.pq.tracs.model.ro.TraxContractView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContractNumber"/>
+          <Item Value="Note"/>
+          <Item Value="Form"/>
+          <Item Value="Status"/>
+          <Item Value="Type"/>
+          <Item Value="Division"/>
+          <Item Value="CompSubsToProvide"/>
+          <Item Value="FormatOfCompSubs"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="TermLength"/>
+          <Item Value="CancellationNoticeTerm"/>
+          <Item Value="RolloverDate"/>
+          <Item Value="CancellationDate"/>
+          <Item Value="CancellationEffectiveDate"/>
+          <Item Value="CancellationReason"/>
+          <Item Value="AutoRenewsFlag"/>
+          <Item Value="Signatory"/>
+          <Item Value="ContractSignedDate"/>
+          <Item Value="AutoRenewTermMonths"/>
+          <Item Value="Exclusivity"/>
+          <Item Value="ContentMasterOwner"/>
+          <Item Value="RightsToBeRetained"/>
+          <Item Value="NoteFlag"/>
+          <Item Value="RelationshipOwner"/>
+          <Item Value="AgreementContactId"/>
+          <Item Value="QaContactId"/>
+          <Item Value="TechnicalContactId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="ActiveFlag"/>
+          <Item Value="ContractTemplateId"/>
+          <Item Value="AccountId"/>
+          <Item Value="AccountNumber"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountSite"/>
+          <Item Value="AutoAdd"/>
+          <Item Value="Assignment"/>
+          <Item Value="RoyaltyBearing"/>
+          <Item Value="FairTreatmentClause"/>
+          <Item Value="IssueEditionCoverage"/>
+          <Item Value="CompleteContentSet"/>
+          <Item Value="WarrantyAndIndemnification"/>
+          <Item Value="Governance"/>
+          <Item Value="Guarantee"/>
+          <Item Value="TechnicalContact"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstInActiveAccountContracts"
+            IterBinding="InActiveAccountContractsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousInActiveAccountContracts"
+            IterBinding="InActiveAccountContractsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextInActiveAccountContracts"
+            IterBinding="InActiveAccountContractsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastInActiveAccountContracts"
+            IterBinding="InActiveAccountContractsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyInActiveAccountContracts"
+            IterBinding="InActiveAccountContractsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrInActiveAccountContracts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="st4Id" IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4TargetTrackingNo"
+                     IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4CatalogNumber" IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4LongTitle" IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountTitlesIterator" id="st4ProductLine"
+          Uses="LOV_ProductLine" StaticList="false"/>
+    <attributeValues id="st4PublicationStartYear"
+                     IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="PublicationStartYear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4PublicationEndYear"
+                     IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="PublicationEndYear"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountTitlesIterator" id="st4FilmAvailability"
+          Uses="LOV_FilmAvailability" StaticList="false"/>
+    <list IterBinding="AccountTitlesIterator" id="st4BibliographicStatus"
+          Uses="LOV_BibliographicStatus" StaticList="false"/>
+    <attributeValues id="st4ExercisingRights"
+                     IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="ExercisingRights"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountTitlesIterator" id="st4PrimaryPmClass"
+          Uses="LOV_PrimaryPmClass" StaticList="false"/>
+    <attributeValues id="st4PrimaryClassification"
+                     IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="PrimaryClassification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4OwnerType" IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="OwnerType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4PrimaryFlag" IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4CreatedBy" IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4CreatedDate" IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4LastUpdatedBy" IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st4LastUpdatedDate"
+                     IterBinding="AccountTitlesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountTitlesTable" IterBinding="AccountTitlesIterator">
+      <nodeDefinition Name="AccountTitles"
+                      DefName="com.pq.tracs.model.vo.AccountTitlesReadOnlyView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="ProductLine"/>
+          <Item Value="PublicationStartYear"/>
+          <Item Value="PublicationEndYear"/>
+          <Item Value="FilmAvailability"/>
+          <Item Value="BibliographicStatus"/>
+          <Item Value="ExercisingRights"/>
+          <Item Value="PrimaryPmClass"/>
+          <Item Value="PrimaryClassification"/>
+          <Item Value="OwnerType"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountTitles" IterBinding="AccountTitlesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountTitles" IterBinding="AccountTitlesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountTitles" IterBinding="AccountTitlesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountTitles" IterBinding="AccountTitlesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountTitles"
+            IterBinding="AccountTitlesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountTitles}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="st5EventType" IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="EventType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st5EventName" IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="EventName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st5EventDate" IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="EventDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st5Description"
+                     IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st5Note" IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="Note"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st5CreatedBy" IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st5CreatedDate"
+                     IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st5LastUpdatedBy"
+                     IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st5LastUpdatedDate"
+                     IterBinding="KeyAccountActionsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="KeyAccountActionsTable" IterBinding="KeyAccountActionsIterator">
+      <nodeDefinition Name="KeyAccountActions"
+                      DefName="com.pq.tracs.model.vo.KeyAccountActionView">
+        <AttrNames>
+          <Item Value="EventType"/>
+          <Item Value="EventName"/>
+          <Item Value="EventDate"/>
+          <Item Value="Description"/>
+          <Item Value="Note"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstKeyAccountActions" IterBinding="KeyAccountActionsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousKeyAccountActions"
+            IterBinding="KeyAccountActionsIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextKeyAccountActions" IterBinding="KeyAccountActionsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastKeyAccountActions" IterBinding="KeyAccountActionsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyKeyAccountActions"
+            IterBinding="KeyAccountActionsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrKeyAccountActions}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateKeyAccountActions" IterBinding="KeyAccountActionsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteKeyAccountActions" IterBinding="KeyAccountActionsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsKeyAccountNoteTypeLookup"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="KeyAccountNoteTypeLookup"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{KeyAccountNoteTypeLookupQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+    </methodAction>
+    <table id="KeyAccountNoteTypeLookup"
+           IterBinding="KeyAccountNoteTypeLookupIterator">
+      <AttrNames>
+        <Item Value="InternalValue"/>
+        <Item Value="DisplayValue"/>
+      </AttrNames>
+    </table>
+    <attributeValues id="st6NoteType" IterBinding="KeyAccountNotesIterator">
+      <AttrNames>
+        <Item Value="NoteType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st6NoteText" IterBinding="KeyAccountNotesIterator">
+      <AttrNames>
+        <Item Value="NoteText"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st6CreatedBy" IterBinding="KeyAccountNotesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st6CreatedDate" IterBinding="KeyAccountNotesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st6LastUpdatedBy"
+                     IterBinding="KeyAccountNotesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st6LastUpdatedDate"
+                     IterBinding="KeyAccountNotesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="KeyAccountNotesTable" IterBinding="KeyAccountNotesIterator">
+      <nodeDefinition Name="KeyAccountNotes"
+                      DefName="com.pq.tracs.model.vo.KeyAccountNoteView">
+        <AttrNames>
+          <Item Value="NoteType"/>
+          <Item Value="NoteText"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstKeyAccountNotes" IterBinding="KeyAccountNotesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousKeyAccountNotes" IterBinding="KeyAccountNotesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextKeyAccountNotes" IterBinding="KeyAccountNotesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastKeyAccountNotes" IterBinding="KeyAccountNotesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyKeyAccountNotes"
+            IterBinding="KeyAccountNotesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrKeyAccountNotes}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateKeyAccountNotes" IterBinding="KeyAccountNotesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteKeyAccountNotes" IterBinding="KeyAccountNotesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="st7Year" IterBinding="KeyAccountRoyaltiesIterator">
+      <AttrNames>
+        <Item Value="Year"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st7RoyaltyAmt"
+                     IterBinding="KeyAccountRoyaltiesIterator">
+      <AttrNames>
+        <Item Value="RoyaltyAmt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st7GuaranteeAmt"
+                     IterBinding="KeyAccountRoyaltiesIterator">
+      <AttrNames>
+        <Item Value="GuaranteeAmt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st7AdvanceAmt"
+                     IterBinding="KeyAccountRoyaltiesIterator">
+      <AttrNames>
+        <Item Value="AdvanceAmt"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st7CreatedBy"
+                     IterBinding="KeyAccountRoyaltiesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st7CreatedDate"
+                     IterBinding="KeyAccountRoyaltiesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st7LastUpdatedBy"
+                     IterBinding="KeyAccountRoyaltiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st7LastUpdatedDate"
+                     IterBinding="KeyAccountRoyaltiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="KeyAccountRoyaltiesTable"
+          IterBinding="KeyAccountRoyaltiesIterator">
+      <nodeDefinition Name="KeyAccountRoyalties"
+                      DefName="com.pq.tracs.model.vo.PrmAccountRoyaltyView">
+        <AttrNames>
+          <Item Value="Year"/>
+          <Item Value="RoyaltyAmt"/>
+          <Item Value="GuaranteeAmt"/>
+          <Item Value="AdvanceAmt"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstKeyAccountRoyalties"
+            IterBinding="KeyAccountRoyaltiesIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousKeyAccountRoyalties"
+            IterBinding="KeyAccountRoyaltiesIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextKeyAccountRoyalties"
+            IterBinding="KeyAccountRoyaltiesIterator" RequiresUpdateModel="true"
+            Action="next"/>
+    <action id="LastKeyAccountRoyalties"
+            IterBinding="KeyAccountRoyaltiesIterator" RequiresUpdateModel="true"
+            Action="last"/>
+    <action id="SetCurrentRowWithKeyKeyAccountRoyalties"
+            IterBinding="KeyAccountRoyaltiesIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrKeyAccountRoyalties}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateKeyAccountRoyalties"
+            IterBinding="KeyAccountRoyaltiesIterator" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="DeleteKeyAccountRoyalties"
+            IterBinding="KeyAccountRoyaltiesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryAccountAllianceManagers"
+            IterBinding="AccountAllianceManagersIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="st8PrmAllianceManagerId"
+                     IterBinding="AccountAllianceManagersIterator">
+      <AttrNames>
+        <Item Value="PrmAllianceManagerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st8AllianceManager"
+                     IterBinding="AccountAllianceManagersIterator">
+      <AttrNames>
+        <Item Value="AllianceManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st8StartDate"
+                     IterBinding="AccountAllianceManagersIterator">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st8EndDate"
+                     IterBinding="AccountAllianceManagersIterator">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st8CreatedBy"
+                     IterBinding="AccountAllianceManagersIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st8CreatedDate"
+                     IterBinding="AccountAllianceManagersIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st8LastUpdatedBy"
+                     IterBinding="AccountAllianceManagersIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st8LastUpdatedDate"
+                     IterBinding="AccountAllianceManagersIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountAllianceManagersTable"
+          IterBinding="AccountAllianceManagersIterator">
+      <nodeDefinition Name="AccountAllianceManagers"
+                      DefName="com.pq.tracs.model.vo.PrmAccountAllianceManagerView">
+        <AttrNames>
+          <Item Value="PrmAllianceManagerId"/>
+          <Item Value="AllianceManager"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountAllianceManagers"
+            IterBinding="AccountAllianceManagersIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountAllianceManagers"
+            IterBinding="AccountAllianceManagersIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountAllianceManagers"
+            IterBinding="AccountAllianceManagersIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountAllianceManagers"
+            IterBinding="AccountAllianceManagersIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountAllianceManagers"
+            IterBinding="AccountAllianceManagersIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountAllianceManagers}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountAllianceManagers"
+            IterBinding="AccountAllianceManagersIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountAllianceManagers"
+            IterBinding="AccountAllianceManagersIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="st9ExlusiveWith"
+                     IterBinding="AccountExclusivesIterator">
+      <AttrNames>
+        <Item Value="ExlusiveWith"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st9ExclusiveEnds"
+                     IterBinding="AccountExclusivesIterator">
+      <AttrNames>
+        <Item Value="ExclusiveEnds"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st9CreatedBy" IterBinding="AccountExclusivesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st9CreatedDate"
+                     IterBinding="AccountExclusivesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st9LastUpdatedBy"
+                     IterBinding="AccountExclusivesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st9LastUpdatedDate"
+                     IterBinding="AccountExclusivesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountExclusivesTable" IterBinding="AccountExclusivesIterator">
+      <nodeDefinition Name="AccountExclusives"
+                      DefName="com.pq.tracs.model.vo.PrmAccountExclusiveView">
+        <AttrNames>
+          <Item Value="ExlusiveWith"/>
+          <Item Value="ExclusiveEnds"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountExclusives" IterBinding="AccountExclusivesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountExclusives"
+            IterBinding="AccountExclusivesIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextAccountExclusives" IterBinding="AccountExclusivesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountExclusives" IterBinding="AccountExclusivesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountExclusives"
+            IterBinding="AccountExclusivesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountExclusives}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountExclusives" IterBinding="AccountExclusivesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountExclusives" IterBinding="AccountExclusivesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryAccountActivities"
+            IterBinding="AccountActivitiesIterator" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues id="staActivityId" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="ActivityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staJhsUsersId" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="JhsUsersId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staContactId" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="ContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountActivitiesIterator" id="staType" Uses="LOV_Type"
+          StaticList="false"/>
+    <list IterBinding="AccountActivitiesIterator" id="staSubType"
+          Uses="LOV_SubType" StaticList="false"/>
+    <attributeValues id="staEditLink" IterBinding="variables">
+      <AttrNames>
+        <Item Value="staEditLinkVar"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staOwner" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="Owner"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staDescription"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountActivitiesIterator" id="staStatus"
+          Uses="LOV_Status" StaticList="false"/>
+    <list IterBinding="AccountActivitiesIterator" id="staPriority"
+          Uses="LOV_Priority" StaticList="false"/>
+    <attributeValues id="staContactName"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="ContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staContactNameLink"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="ContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staActualStartDate"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="ActualStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staCompletionDate"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="CompletionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staFormDescription"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staDueDate" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="DueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staExpectedStartDate"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="ExpectedStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staHoursSpent" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="HoursSpent"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staNotes" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staEmailText" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="EmailText"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="staPrimaryFlag" IterBinding="AccountActivitiesIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="staAddedDate" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staRemovedDate"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staCreatedBy" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staCreatedDate"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staLastUpdatedBy"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staLastUpdatedDate"
+                     IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staUserType" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="UserType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="staAddDate" IterBinding="AccountActivitiesIterator">
+      <AttrNames>
+        <Item Value="AddDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountActivitiesTable" IterBinding="AccountActivitiesIterator">
+      <nodeDefinition Name="AccountActivities"
+                      DefName="com.pq.tracs.model.vo.PrmAccountActivityView">
+        <AttrNames>
+          <Item Value="ActivityId"/>
+          <Item Value="JhsUsersId"/>
+          <Item Value="ContactId"/>
+          <Item Value="Type"/>
+          <Item Value="SubType"/>
+          <Item Value="Owner"/>
+          <Item Value="Description"/>
+          <Item Value="Description"/>
+          <Item Value="Status"/>
+          <Item Value="Priority"/>
+          <Item Value="ContactName"/>
+          <Item Value="ContactName"/>
+          <Item Value="ContactName"/>
+          <Item Value="ContactName"/>
+          <Item Value="ActualStartDate"/>
+          <Item Value="CompletionDate"/>
+          <Item Value="Description"/>
+          <Item Value="Description"/>
+          <Item Value="DueDate"/>
+          <Item Value="ExpectedStartDate"/>
+          <Item Value="HoursSpent"/>
+          <Item Value="Notes"/>
+          <Item Value="EmailText"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="UserType"/>
+          <Item Value="AddDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountActivities" IterBinding="AccountActivitiesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountActivities"
+            IterBinding="AccountActivitiesIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextAccountActivities" IterBinding="AccountActivitiesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountActivities" IterBinding="AccountActivitiesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountActivities"
+            IterBinding="AccountActivitiesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountActivities}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountActivities" IterBinding="AccountActivitiesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountActivities" IterBinding="AccountActivitiesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <list IterBinding="AccountContactMethodsIterator"
+          id="stbContactMethodType" Uses="LOV_ContactMethodType"
+          StaticList="false"/>
+    <list IterBinding="AccountContactMethodsIterator"
+          id="stbContactMethodSubType" Uses="LOV_ContactMethodSubType"
+          StaticList="false"/>
+    <attributeValues id="stbContactDetail1"
+                     IterBinding="AccountContactMethodsIterator">
+      <AttrNames>
+        <Item Value="ContactDetail1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stbContactDetail2"
+                     IterBinding="AccountContactMethodsIterator">
+      <AttrNames>
+        <Item Value="ContactDetail2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stbContactMethodNote"
+                     IterBinding="AccountContactMethodsIterator">
+      <AttrNames>
+        <Item Value="ContactMethodNote"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="stbPrimaryFlag" IterBinding="AccountContactMethodsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="stbCreatedBy"
+                     IterBinding="AccountContactMethodsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stbCreatedDate"
+                     IterBinding="AccountContactMethodsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stbLastUpdatedBy"
+                     IterBinding="AccountContactMethodsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stbLastUpdatedDate"
+                     IterBinding="AccountContactMethodsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountContactMethodsTable"
+          IterBinding="AccountContactMethodsIterator">
+      <nodeDefinition Name="AccountContactMethods"
+                      DefName="com.pq.tracs.model.vo.PrmAccountContactMethodView">
+        <AttrNames>
+          <Item Value="ContactMethodType"/>
+          <Item Value="ContactMethodSubType"/>
+          <Item Value="ContactDetail1"/>
+          <Item Value="ContactDetail2"/>
+          <Item Value="ContactMethodNote"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountContactMethods"
+            IterBinding="AccountContactMethodsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountContactMethods"
+            IterBinding="AccountContactMethodsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountContactMethods"
+            IterBinding="AccountContactMethodsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountContactMethods"
+            IterBinding="AccountContactMethodsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchAccountContactMethods"
+                  IterBinding="AccountContactMethodsIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchAccountContactMethods.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchAccountContactMethods.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchAccountContactMethods.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyAccountContactMethods"
+            IterBinding="AccountContactMethodsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountContactMethods}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountContactMethods"
+            IterBinding="AccountContactMethodsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountContactMethods"
+            IterBinding="AccountContactMethodsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="stcName" IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcAttachment"
+                     IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcAttachmentDL"
+                     IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcAttachmentType"
+                     IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="AttachmentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcDescription"
+                     IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcFileSize" IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="FileSize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcCreatedBy" IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcCreatedDate"
+                     IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcLastUpdatedBy"
+                     IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stcLastUpdatedDate"
+                     IterBinding="AccountAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountAttachmentsTable" IterBinding="AccountAttachmentsIterator">
+      <nodeDefinition Name="AccountAttachments"
+                      DefName="com.pq.tracs.model.vo.TraxContentOwnerAttachmentView">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="AttachmentType"/>
+          <Item Value="Description"/>
+          <Item Value="FileSize"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountAttachments"
+            IterBinding="AccountAttachmentsIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousAccountAttachments"
+            IterBinding="AccountAttachmentsIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextAccountAttachments" IterBinding="AccountAttachmentsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountAttachments" IterBinding="AccountAttachmentsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountAttachments"
+            IterBinding="AccountAttachmentsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountAttachments}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountAttachments"
+            IterBinding="AccountAttachmentsIterator" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="DeleteAccountAttachments"
+            IterBinding="AccountAttachmentsIterator" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <list IterBinding="AccountProductDisciplinesIterator"
+          id="stfProductDiscipline" Uses="LOV_ProductDiscipline"
+          StaticList="false"/>
+    <list IterBinding="AccountProductDisciplinesIterator"
+          id="stfAccountCategory" Uses="LOV_AccountCategory"
+          StaticList="false"/>
+    <button id="stfActiveFlag" IterBinding="AccountProductDisciplinesIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ActiveFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="stfNotes"
+                     IterBinding="AccountProductDisciplinesIterator">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stfCreatedBy"
+                     IterBinding="AccountProductDisciplinesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stfCreatedDate"
+                     IterBinding="AccountProductDisciplinesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stfLastUpdatedBy"
+                     IterBinding="AccountProductDisciplinesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stfLastUpdatedDate"
+                     IterBinding="AccountProductDisciplinesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountProductDisciplinesTable"
+          IterBinding="AccountProductDisciplinesIterator">
+      <nodeDefinition Name="AccountProductDisciplines"
+                      DefName="com.pq.tracs.model.vo.PrmAccountProductDisciplineView">
+        <AttrNames>
+          <Item Value="ProductDiscipline"/>
+          <Item Value="AccountCategory"/>
+          <Item Value="ActiveFlag"/>
+          <Item Value="Notes"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountProductDisciplines"
+            IterBinding="AccountProductDisciplinesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountProductDisciplines"
+            IterBinding="AccountProductDisciplinesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountProductDisciplines"
+            IterBinding="AccountProductDisciplinesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountProductDisciplines"
+            IterBinding="AccountProductDisciplinesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountProductDisciplines"
+            IterBinding="AccountProductDisciplinesIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountProductDisciplines}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountProductDisciplines"
+            IterBinding="AccountProductDisciplinesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountProductDisciplines"
+            IterBinding="AccountProductDisciplinesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="stdEventId" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="EventId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdId1" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="Id1"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="AccountEventsIterator" id="stdEventType"
+          Uses="LOV_EventType" StaticList="false"/>
+    <attributeValues id="stdEventName" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="EventName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdEventDate" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="EventDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdDescription" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdNote" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="Note"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdAddedDte" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="AddedDte"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdRemovedDate" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdCreatedBy1" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdCreatedDate1" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdLastUpdatedBy1" IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="stdLastUpdatedDate1"
+                     IterBinding="AccountEventsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate1"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountEventsTable" IterBinding="AccountEventsIterator">
+      <nodeDefinition Name="AccountEvents"
+                      DefName="com.pq.tracs.model.vo.TraxContentOwnerEventView">
+        <AttrNames>
+          <Item Value="EventId"/>
+          <Item Value="Id1"/>
+          <Item Value="EventType"/>
+          <Item Value="EventName"/>
+          <Item Value="EventDate"/>
+          <Item Value="Description"/>
+          <Item Value="Note"/>
+          <Item Value="AddedDte"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="CreatedBy1"/>
+          <Item Value="CreatedDate1"/>
+          <Item Value="LastUpdatedBy1"/>
+          <Item Value="LastUpdatedDate1"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountEvents" IterBinding="AccountEventsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountEvents" IterBinding="AccountEventsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountEvents" IterBinding="AccountEventsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountEvents" IterBinding="AccountEventsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountEvents"
+            IterBinding="AccountEventsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountEvents}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountEvents" IterBinding="AccountEventsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountEvents" IterBinding="AccountEventsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

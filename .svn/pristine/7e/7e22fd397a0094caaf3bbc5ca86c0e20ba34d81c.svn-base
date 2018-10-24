@@ -1,0 +1,842 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="UlrTopLc"
+                             partialTriggers=" UlrCancelButton0 asAreaUlrSearchOptions qsAreaUlrSearchOptions"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_ULRICHS']}"
+                          helpTopicId="RBH_ULRICHS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0"></af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="UlrCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:panelGroupLayout id="modelSearchAreaUlr"
+                                 rendered="#{!pageFlowScope.createModes.CreateUlrichs and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreaUlrSearchOptions:qsButtonUlr qsAreaUlrSearchOptions:asButtonUlr ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreaUlrSearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.UlrichsIteratorTraxUlrichsTitleViewCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.UlrichsIteratorTraxUlrichsTitleViewCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.UlrichsIteratorTraxUlrichsTitleViewCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.UlrichsIteratorTraxUlrichsTitleViewCriteriaQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchUlrichs.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonUlr"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchUlrichs.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreaUlrSearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.UlrichsIteratorTraxUlrichsTitleQuickQueryQuery.queryDescriptor}"
+                             model="#{bindings.UlrichsIteratorTraxUlrichsTitleQuickQueryQuery.queryModel}"
+                             queryListener="#{bindings.UlrichsIteratorTraxUlrichsTitleQuickQueryQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchUlrichs.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonUlr"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchUlrichs.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="UlrPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="UlrichsDetails"></af:commandMenuItem>
+                    <af:group id="Ulrtbb"
+                              rendered="#{ (bindings.UlrichsIterator.viewObject!=null and bindings.UlrichsIterator.viewObject.currentRow!=null)}">
+                      <af:commandMenuItem actionListener="#{bindings.FirstUlrichs.execute}"
+                                          id="UlrFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousUlrichs.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="UlrPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextUlrichs.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="UlrNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastUlrichs.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="UlrLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="UlrTab"
+                                                       type="excelHTML"
+                                                       filename="Ulrichs.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="UlrTab"
+                                                       type="excelHTML"
+                                                       filename="Ulrichs.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="UlrPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.UlrichsIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="UlrTab" contentDelivery="immediate"
+                        value="#{bindings.UlrichsTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.UlrichsTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.UlrichsTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.UlrichsTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.UlrichsTable.rangeSize}"
+                        autoHeightRows="#{bindings.UlrichsTable.estimatedRowCount}"
+                        fetchSize="#{bindings.UlrichsTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.UlrichsIteratorTraxUlrichsTitleQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.UlrichsIteratorTraxUlrichsTitleQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.UlrichsTable.table}"
+                        partialTriggers=":::qsAreaUlrSearchOptions :::asAreaUlrSearchOptions :::UlrPC ::UlrFirst ::UlrPrevious ::UlrNext ::UlrLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_ULRICHS']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="UlrTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="UlrichsDetails"></af:commandMenuItem>
+                      </af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="UlrUSICol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="UlrichsSerialId" align="right"
+                           rowHeader="false"
+                           helpTopicId="RBH_ULRULRICHSSERIALID"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.UlrichsSerialId.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="UlrUSI"
+                                value="#{row.bindings.UlrichsSerialId.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.UlrichsSerialId.label}"
+                                required="#{bindings.UlrichsTable.hints.UlrichsSerialId.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.UlrichsSerialId.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.UlrichsSerialId.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.UlrichsSerialId.tooltip}">
+                    <f:validator binding="#{row.bindings.UlrichsSerialId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.UlrichsTable.hints.UlrichsSerialId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrLinkedTitleFlagCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="LinkedTitleFlag" align="center"
+                           rowHeader="false"
+                           helpTopicId="RBH_ULRLINKEDTITLEFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.LinkedTitleFlag.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="UlrLinkedTitleFlag"
+                                            label="#{bindings.UlrichsTable.hints.LinkedTitleFlag.label}"
+                                            value="#{UlrLinkedTitleFlagcheckboxInTable.value}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.UlrichsTable.hints.LinkedTitleFlag.tooltip}"
+                                            autoSubmit="true"
+                                            valueChangeListener="#{UlrLinkedTitleFlagDependsOnItem.updateModelValue}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="UlrTtlCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Title"
+                           rowHeader="false" helpTopicId="RBH_ULRTITLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.Title.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:inputText id="cl1"
+                                value="#{row.bindings.Title.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.Title.label}"
+                                required="#{bindings.UlrichsTable.hints.Title.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.Title.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.Title.displayWidth}"
+                                maximumLength="1000" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.Title.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.Title.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2"
+                                  shortDesc="#{bindings.UlrichsTable.hints.Title.tooltip}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="UlrichsDetails" text="#{row.Title}"></af:commandLink>
+                </af:column>
+                <af:column id="UlrSTtCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="SubTitle"
+                           rowHeader="false" helpTopicId="RBH_ULRSUBTITLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.SubTitle.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:inputText id="UlrSTt"
+                                value="#{row.bindings.SubTitle.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.SubTitle.label}"
+                                required="#{bindings.UlrichsTable.hints.SubTitle.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.SubTitle.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.SubTitle.displayWidth}"
+                                maximumLength="1000" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.SubTitle.tooltip}">
+                    <f:validator binding="#{row.bindings.SubTitle.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrCCdCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CountryCode"
+                           rowHeader="false" helpTopicId="RBH_ULRCOUNTRYCODE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.CountryCode.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:inputText id="UlrCCd"
+                                value="#{row.bindings.CountryCode.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.CountryCode.label}"
+                                required="#{bindings.UlrichsTable.hints.CountryCode.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.CountryCode.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.CountryCode.displayWidth}"
+                                maximumLength="10" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.CountryCode.tooltip}">
+                    <f:validator binding="#{row.bindings.CountryCode.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrETACol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="ExplanationOfTitleAcronym"
+                           rowHeader="false"
+                           helpTopicId="RBH_ULREXPLANATIONOFTITLEACRONYM"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.ExplanationOfTitleAcronym.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:inputText id="UlrETA"
+                                value="#{row.bindings.ExplanationOfTitleAcronym.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.ExplanationOfTitleAcronym.label}"
+                                required="#{bindings.UlrichsTable.hints.ExplanationOfTitleAcronym.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.ExplanationOfTitleAcronym.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.ExplanationOfTitleAcronym.displayWidth}"
+                                maximumLength="1000" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.ExplanationOfTitleAcronym.tooltip}">
+                    <f:validator binding="#{row.bindings.ExplanationOfTitleAcronym.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrYFPCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="YearFirstPublished" rowHeader="false"
+                           helpTopicId="RBH_ULRYEARFIRSTPUBLISHED"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.YearFirstPublished.label}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <af:inputText id="UlrYFP"
+                                value="#{row.bindings.YearFirstPublished.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.YearFirstPublished.label}"
+                                required="#{bindings.UlrichsTable.hints.YearFirstPublished.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.YearFirstPublished.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.YearFirstPublished.displayWidth}"
+                                maximumLength="1000" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.YearFirstPublished.tooltip}">
+                    <f:validator binding="#{row.bindings.YearFirstPublished.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrFreCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Frequency"
+                           rowHeader="false" helpTopicId="RBH_ULRFREQUENCY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.Frequency.label}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <af:inputText id="UlrFre"
+                                value="#{row.bindings.Frequency.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.Frequency.label}"
+                                required="#{bindings.UlrichsTable.hints.Frequency.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.Frequency.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.Frequency.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.Frequency.tooltip}">
+                    <f:validator binding="#{row.bindings.Frequency.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrBNCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="BibliographicNotes" rowHeader="false"
+                           helpTopicId="RBH_ULRBIBLIOGRAPHICNOTES"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.BibliographicNotes.label}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <af:inputText id="UlrBN"
+                                value="#{row.bindings.BibliographicNotes.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.BibliographicNotes.label}"
+                                required="#{bindings.UlrichsTable.hints.BibliographicNotes.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.BibliographicNotes.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.BibliographicNotes.displayWidth}"
+                                maximumLength="1000" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.BibliographicNotes.tooltip}">
+                    <f:validator binding="#{row.bindings.BibliographicNotes.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrVTCCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="VariantTitleCataloging"
+                           rowHeader="false"
+                           helpTopicId="RBH_ULRVARIANTTITLECATALOGING"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.VariantTitleCataloging.label}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <af:inputText id="UlrVTC"
+                                value="#{row.bindings.VariantTitleCataloging.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.VariantTitleCataloging.label}"
+                                required="#{bindings.UlrichsTable.hints.VariantTitleCataloging.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.VariantTitleCataloging.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.VariantTitleCataloging.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.VariantTitleCataloging.tooltip}">
+                    <f:validator binding="#{row.bindings.VariantTitleCataloging.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrPSDCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="PublisherSubdivision" rowHeader="false"
+                           helpTopicId="RBH_ULRPUBLISHERSUBDIVISION"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.PublisherSubdivision.label}"
+                                    id="ol10"/>
+                  </f:facet>
+                  <af:inputText id="UlrPSD"
+                                value="#{row.bindings.PublisherSubdivision.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.PublisherSubdivision.label}"
+                                required="#{bindings.UlrichsTable.hints.PublisherSubdivision.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.PublisherSubdivision.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.PublisherSubdivision.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.PublisherSubdivision.tooltip}">
+                    <f:validator binding="#{row.bindings.PublisherSubdivision.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrPPCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="ParentPublisher" rowHeader="false"
+                           helpTopicId="RBH_ULRPARENTPUBLISHER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.ParentPublisher.label}"
+                                    id="ol11"/>
+                  </f:facet>
+                  <af:inputText id="UlrPP"
+                                value="#{row.bindings.ParentPublisher.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.ParentPublisher.label}"
+                                required="#{bindings.UlrichsTable.hints.ParentPublisher.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.ParentPublisher.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.ParentPublisher.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.ParentPublisher.tooltip}">
+                    <f:validator binding="#{row.bindings.ParentPublisher.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrCPCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="CoPublisher"
+                           rowHeader="false" helpTopicId="RBH_ULRCOPUBLISHER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.CoPublisher.label}"
+                                    id="ol12"/>
+                  </f:facet>
+                  <af:inputText id="UlrCP"
+                                value="#{row.bindings.CoPublisher.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.CoPublisher.label}"
+                                required="#{bindings.UlrichsTable.hints.CoPublisher.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.CoPublisher.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.CoPublisher.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.CoPublisher.tooltip}">
+                    <f:validator binding="#{row.bindings.CoPublisher.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrNOCol" noWrap="true" width="240"
+                           rowHeader="false"
+                           helpTopicId="RBH_ULRNEWSPAPEROWNERSHIP"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.NewspaperOwnership.label}"
+                                    id="ol13"/>
+                  </f:facet>
+                  <af:inputText id="UlrNO"
+                                value="#{row.bindings.NewspaperOwnership.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.NewspaperOwnership.label}"
+                                required="#{bindings.UlrichsTable.hints.NewspaperOwnership.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.NewspaperOwnership.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.NewspaperOwnership.displayWidth}"
+                                readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.NewspaperOwnership.tooltip}">
+                    <f:validator binding="#{row.bindings.NewspaperOwnership.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrWAUCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="WebAddressUrl" rowHeader="false"
+                           helpTopicId="RBH_ULRWEBADDRESSURL"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.WebAddressUrl.label}"
+                                    id="ol14"/>
+                  </f:facet>
+                  <af:inputText id="UlrWAU"
+                                value="#{row.bindings.WebAddressUrl.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.WebAddressUrl.label}"
+                                required="#{bindings.UlrichsTable.hints.WebAddressUrl.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.WebAddressUrl.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.WebAddressUrl.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.WebAddressUrl.tooltip}">
+                    <f:validator binding="#{row.bindings.WebAddressUrl.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrRSFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="RefereedSerialFlag" rowHeader="false"
+                           helpTopicId="RBH_ULRREFEREEDSERIALFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.RefereedSerialFlag.label}"
+                                    id="ol15"/>
+                  </f:facet>
+                  <af:inputText id="UlrRSF"
+                                value="#{row.bindings.RefereedSerialFlag.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.RefereedSerialFlag.label}"
+                                required="#{bindings.UlrichsTable.hints.RefereedSerialFlag.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.RefereedSerialFlag.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.RefereedSerialFlag.displayWidth}"
+                                maximumLength="10" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.RefereedSerialFlag.tooltip}">
+                    <f:validator binding="#{row.bindings.RefereedSerialFlag.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrNARCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="NumberOfAnnotationRecords"
+                           align="right" rowHeader="false"
+                           helpTopicId="RBH_ULRNUMBEROFANNOTATIONRECORDS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.NumberOfAnnotationRecords.label}"
+                                    id="ol16"/>
+                  </f:facet>
+                  <af:inputText id="UlrNAR"
+                                value="#{row.bindings.NumberOfAnnotationRecords.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.NumberOfAnnotationRecords.label}"
+                                required="#{bindings.UlrichsTable.hints.NumberOfAnnotationRecords.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.NumberOfAnnotationRecords.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.NumberOfAnnotationRecords.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.NumberOfAnnotationRecords.tooltip}">
+                    <f:validator binding="#{row.bindings.NumberOfAnnotationRecords.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.UlrichsTable.hints.NumberOfAnnotationRecords.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrAnnCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Annotation"
+                           rowHeader="false" helpTopicId="RBH_ULRANNOTATION"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.Annotation.label}"
+                                    id="ol17"/>
+                  </f:facet>
+                  <af:inputText id="UlrAnn"
+                                value="#{row.bindings.Annotation.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.Annotation.label}"
+                                required="#{bindings.UlrichsTable.hints.Annotation.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.Annotation.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.Annotation.displayWidth}"
+                                maximumLength="2000" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.Annotation.tooltip}">
+                    <f:validator binding="#{row.bindings.Annotation.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrSICol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="SpecialIndex"
+                           rowHeader="false" helpTopicId="RBH_ULRSPECIALINDEX"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.SpecialIndex.label}"
+                                    id="ol18"/>
+                  </f:facet>
+                  <af:inputText id="UlrSI"
+                                value="#{row.bindings.SpecialIndex.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.SpecialIndex.label}"
+                                required="#{bindings.UlrichsTable.hints.SpecialIndex.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.SpecialIndex.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.SpecialIndex.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.SpecialIndex.tooltip}">
+                    <f:validator binding="#{row.bindings.SpecialIndex.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrRNCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="RecordNumber"
+                           align="right" rowHeader="false"
+                           helpTopicId="RBH_ULRRECORDNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.RecordNumber.label}"
+                                    id="ol19"/>
+                  </f:facet>
+                  <af:inputText id="UlrRN"
+                                value="#{row.bindings.RecordNumber.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.RecordNumber.label}"
+                                required="#{bindings.UlrichsTable.hints.RecordNumber.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.RecordNumber.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.RecordNumber.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.RecordNumber.tooltip}">
+                    <f:validator binding="#{row.bindings.RecordNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.UlrichsTable.hints.RecordNumber.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrStCCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="StatusCode"
+                           rowHeader="false" helpTopicId="RBH_ULRSTATUSCODE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.StatusCode.label}"
+                                    id="ol20"/>
+                  </f:facet>
+                  <af:inputText id="UlrStC"
+                                value="#{row.bindings.StatusCode.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.StatusCode.label}"
+                                required="#{bindings.UlrichsTable.hints.StatusCode.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.StatusCode.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.StatusCode.displayWidth}"
+                                maximumLength="30" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.StatusCode.tooltip}">
+                    <f:validator binding="#{row.bindings.StatusCode.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrPMCCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="PrimaryPmClass" rowHeader="false"
+                           helpTopicId="RBH_ULRPRIMARYPMCLASS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.PrimaryPmClass.label}"
+                                    id="ol21"/>
+                  </f:facet>
+                  <af:inputText id="UlrPMC"
+                                value="#{row.bindings.PrimaryPmClass.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.PrimaryPmClass.label}"
+                                required="#{bindings.UlrichsTable.hints.PrimaryPmClass.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.PrimaryPmClass.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.PrimaryPmClass.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.PrimaryPmClass.tooltip}">
+                    <f:validator binding="#{row.bindings.PrimaryPmClass.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrSPCCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="SecondaryPmClass" rowHeader="false"
+                           helpTopicId="RBH_ULRSECONDARYPMCLASS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.SecondaryPmClass.label}"
+                                    id="ol22"/>
+                  </f:facet>
+                  <af:inputText id="UlrSPC"
+                                value="#{row.bindings.SecondaryPmClass.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.SecondaryPmClass.label}"
+                                required="#{bindings.UlrichsTable.hints.SecondaryPmClass.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.SecondaryPmClass.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.SecondaryPmClass.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.SecondaryPmClass.tooltip}">
+                    <f:validator binding="#{row.bindings.SecondaryPmClass.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrRCNCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="RightsContactName" rowHeader="false"
+                           helpTopicId="RBH_ULRRIGHTSCONTACTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.RightsContactName.label}"
+                                    id="ol23"/>
+                  </f:facet>
+                  <af:inputText id="UlrRCN"
+                                value="#{row.bindings.RightsContactName.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.RightsContactName.label}"
+                                required="#{bindings.UlrichsTable.hints.RightsContactName.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.RightsContactName.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.RightsContactName.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.RightsContactName.tooltip}">
+                    <f:validator binding="#{row.bindings.RightsContactName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrOAICol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="OpenAccessIndicator" rowHeader="false"
+                           helpTopicId="RBH_ULROPENACCESSINDICATOR"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.OpenAccessIndicator.label}"
+                                    id="ol24"/>
+                  </f:facet>
+                  <af:inputText id="UlrOAI"
+                                value="#{row.bindings.OpenAccessIndicator.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.OpenAccessIndicator.label}"
+                                required="#{bindings.UlrichsTable.hints.OpenAccessIndicator.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.OpenAccessIndicator.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.OpenAccessIndicator.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.OpenAccessIndicator.tooltip}">
+                    <f:validator binding="#{row.bindings.OpenAccessIndicator.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrAOFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="AvailableOnlineFlag" rowHeader="false"
+                           helpTopicId="RBH_ULRAVAILABLEONLINEFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.AvailableOnlineFlag.label}"
+                                    id="ol25"/>
+                  </f:facet>
+                  <af:inputText id="UlrAOF"
+                                value="#{row.bindings.AvailableOnlineFlag.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.AvailableOnlineFlag.label}"
+                                required="#{bindings.UlrichsTable.hints.AvailableOnlineFlag.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.AvailableOnlineFlag.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.AvailableOnlineFlag.displayWidth}"
+                                maximumLength="1" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.AvailableOnlineFlag.tooltip}">
+                    <f:validator binding="#{row.bindings.AvailableOnlineFlag.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrFormatCol" sortable="true" filterable="true"
+                           noWrap="true" width="180" sortProperty="Format"
+                           rowHeader="false" helpTopicId="RBH_ULRFORMAT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.Format.label}"
+                                    id="ol26"/>
+                  </f:facet>
+                  <af:inputText id="UlrFormat"
+                                value="#{row.bindings.Format.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.Format.label}"
+                                required="#{bindings.UlrichsTable.hints.Format.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.Format.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.Format.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.Format.tooltip}">
+                    <f:validator binding="#{row.bindings.Format.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrCATCol" noWrap="true" width="100"
+                           visible="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN']}"
+                           rowHeader="false" helpTopicId="RBH_ULRCREATEASTARGET"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="Create New Target" id="ol27"/>
+                  </f:facet>
+                  <af:commandButton id="UlrCAT"
+                                    textAndAccessKey="Create New Target"
+                                    actionListener="#{bindings.UlrCreateAsTarget.execute}"
+                                    visible="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN']}"
+                                    disabled="#{row.bindings.LinkedTitleFlag.attributeValue == 'Y'}"></af:commandButton>
+                </af:column>
+                <af:column id="UlrCBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="CreatedBy"
+                           rowHeader="false" helpTopicId="RBH_ULRCREATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.CreatedBy.label}"
+                                    id="ol28"/>
+                  </f:facet>
+                  <af:inputText id="UlrCB"
+                                value="#{row.bindings.CreatedBy.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.CreatedBy.label}"
+                                required="#{bindings.UlrichsTable.hints.CreatedBy.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.CreatedBy.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.CreatedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.CreatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrCDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CreatedDate"
+                           rowHeader="false" helpTopicId="RBH_ULRCREATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.CreatedDate.label}"
+                                    id="ol29"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="UlrCD"
+                                value="#{row.bindings.CreatedDate.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.CreatedDate.label}"
+                                required="#{bindings.UlrichsTable.hints.CreatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.CreatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="UlrLUBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="LastUpdatedBy" rowHeader="false"
+                           helpTopicId="RBH_ULRLASTUPDATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.LastUpdatedBy.label}"
+                                    id="ol30"/>
+                  </f:facet>
+                  <af:inputText id="UlrLUB"
+                                value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.LastUpdatedBy.label}"
+                                required="#{bindings.UlrichsTable.hints.LastUpdatedBy.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.LastUpdatedBy.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.LastUpdatedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.LastUpdatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="UlrLUDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="LastUpdatedDate" rowHeader="false"
+                           helpTopicId="RBH_ULRLASTUPDATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.LastUpdatedDate.label}"
+                                    id="ol31"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="UlrLUD"
+                                value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.LastUpdatedDate.label}"
+                                required="#{bindings.UlrichsTable.hints.LastUpdatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.LastUpdatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="UlrIssnCol" sortable="true" filterable="true"
+                           noWrap="true" width="180" sortProperty="Issn"
+                           rowHeader="false" helpTopicId="RBH_ULRISSN"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.UlrichsTable.hints.Issn.label}"
+                                    id="ol32"/>
+                  </f:facet>
+                  <af:inputText id="UlrIssn"
+                                value="#{row.bindings.Issn.inputValue}"
+                                label="#{bindings.UlrichsTable.hints.Issn.label}"
+                                required="#{bindings.UlrichsTable.hints.Issn.mandatory}"
+                                rows="#{bindings.UlrichsTable.hints.Issn.displayHeight}"
+                                columns="#{bindings.UlrichsTable.hints.Issn.displayWidth}"
+                                maximumLength="100" readOnly="true"
+                                shortDesc="#{bindings.UlrichsTable.hints.Issn.tooltip}">
+                    <f:validator binding="#{row.bindings.Issn.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

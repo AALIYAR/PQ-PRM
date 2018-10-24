@@ -1,0 +1,76 @@
+## revision_history
+## 25-feb-2011   Steven Davelaar
+## 1.2           Removed immediate="true property, we cannot predict how it should be set, one can always
+##               use the Additional Properties property to generate immediate="true"
+## 25-feb-2011   Steven Davelaar
+## 1.1           Changed reference to popup region container since popups are now generated at bottom page
+## 18-oct-2010   Steven Davelaar
+## 1.0           Initial creation
+
+#macro (REASSIGN_EXECUTABLE)
+    <iterator Binds="ReassignProductManagerLookup" RangeSize="25"
+              DataControl="PrmAppModuleDataControl"
+              id="ReassignProductManagerLookupIterator"/>
+#end
+#macro (REASSIGN_BINDING)
+    <list IterBinding="ReassignProductManagerLookupIterator"
+          ListOperMode="navigation"
+          ListIter="ReassignProductManagerLookupIterator"
+          id="ReassignProductManagerLookup" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
+#end
+
+${JHS.pageDefGenerator.addExecutable($JHS.page,"ReassignProductManagerLookupIterator","#REASSIGN_EXECUTABLE()")}
+${JHS.pageDefGenerator.addBinding($JHS.page,"ReassignProductManagerLookup","#REASSIGN_BINDING()")}
+
+<af:popup id="#NEW_ID("noSelectionPopup")"
+          binding="#{pageFlowScope.ProductManagerProductsTable.noSelectionPopup}">
+  <af:dialog modal="true" type="cancel"
+             title="Select Targets First">
+    <af:outputText value="You must select at least one row."/>
+  </af:dialog>
+</af:popup>
+
+<af:popup id="#NEW_ID("reAssignPopup")"
+          binding="#{pageFlowScope.ProductManagerProductsTable.reAssignPopup}">
+  <af:dialog modal="true" type="okCancel"
+             title="Set Values"
+             dialogListener="#{pageFlowScope.ProductManagerProductsTable.handleOk}">
+    <af:outputText value="Any changes will be applied to all selected products."/>
+    <af:selectOneChoice value="#{pageFlowScope.ProductManagerProductsTable.newAM}"
+                        label="Product Manager"
+                        required="false"
+                        shortDesc="#{bindings.ReassignProductManagerLookup.hints.tooltip}"
+                        id="#NEW_ID("amAccountSelect")">
+      <f:selectItems value="#{bindings.ReassignProductManagerLookup.items}"
+                     id="#NEW_ID("amAccountItems")"/>
+    </af:selectOneChoice>
+  </af:dialog>
+</af:popup>
+
+#if (${JHS.current.item.icon}!='')
+  #set ($elemName = "commandToolbarButton")
+#else
+  #set ($elemName = "commandButton")
+#end    
+  <af:${elemName}  #ITEM_ID_IN_FORM() #BUTTON_TEXT_IN_FORM() #JHS_PROP("icon" $JHS.current.item.icon)
+       #JHS_PROP("action" $JHS.current.item.action) 
+       #JHS_PROP("actionListener" $JHS.current.item.actionListener)
+       #if ($JHS.current.item.actionListener=='' && $JHS.current.item.methodCall!='')
+         actionListener="#{bindings.${JHS.current.item.bindingName}.execute}"
+       #end
+       #ITEM_PARTIAL_TRIGGERS()  
+       ## check for layout style, so we can determine whether item should be shown in
+       ## toolbar table pageComponent or form pageComponent or both
+       #if ($JHS.current.pageComponent.tableLayout || $JHS.current.group.hasTableLayout) #ITEM_RENDERED_IN_TABLE() #else #ITEM_RENDERED_IN_FORM() #end          
+       #ITEM_DISABLED_IN_FORM() #ITEM_HINT() #ITEM_ADDITIONAL_PROPERTIES()
+       #if ($JHS.current.item.hasDependentItems) partialSubmit="true" #end
+       >
+#if (${JHS.current.item.contextRegion})
+      <af:showPopupBehavior popupId="${JHS.page.getRelativePopupId("#REGION_POPUP_ID(${JHS.current.item.contextRegion})","${JHS.engine.fullNamingContainerPath}")}" />
+      #JHS_PARSE("POPUP_REGION_CONTAINER" ${JHS.current.item.contextRegion})
+#end  
+   </af:${elemName}>   

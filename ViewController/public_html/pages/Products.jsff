@@ -1,0 +1,1840 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="PrdTopLc"
+                             partialTriggers=" PrdDeleteDialog Prdfbb PrdNewButton PrdDelB PrdSaveButton0 PrdCancelButton0 PrdSaveButton1 PrdCancelButton1"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO, PA']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateProducts ? nls['INSERT_TITLE_PRODUCTS'] :  ((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product') ? nls['EDIT_TITLE_PRODUCT: #{bindings.PrdName.inputValue}'] : nls['VIEW_TITLE_PRODUCT: #{bindings.PrdName.inputValue}'])  }"
+                          helpTopicId="RBH_PRODUCTS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="Prdfbb" layout="horizontal"
+                                       rendered="#{ (bindings.ProductsIterator.viewObject!=null and bindings.ProductsIterator.viewObject.currentRow!=null) and bindings.ProductsIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateProducts and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="PrdFirst PrdPrevious PrdNext PrdLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstProducts.execute}"
+                                             id="PrdFirst" partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousProducts.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="PrdPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1} / #{bindings.ProductsIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextProducts.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="PrdNext" partialSubmit="true"
+                                             rendered="#{bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1 lt bindings.ProductsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1 lt bindings.ProductsIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastProducts.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="PrdLast" partialSubmit="true"
+                                             rendered="#{bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1 lt bindings.ProductsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.ProductsIterator.rangeStart+bindings.ProductsIterator.currentRowIndexInRange+1 lt bindings.ProductsIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateProducts.execute}"
+                                             action="CreatePrd"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_PRODUCTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateProducts and (true) and (jhsUserRoles['ADMIN, PA'])}"
+                                             id="PrdNewButton"></af:commandToolbarButton>
+                    <af:commandToolbarButton action="DeleteProducts"
+                                             partialSubmit="true"
+                                             icon="/jheadstart/images/deleteRow.png"
+                                             shortDesc="#{nls['DELETE_BUTTON_LABEL_PRODUCTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateProducts and  (bindings.ProductsIterator.viewObject!=null and bindings.ProductsIterator.viewObject.currentRow!=null)  and (jhsUserRoles['ADMIN'])}"
+                                             immediate="true" id="PrdDelB">
+                      <af:showPopupBehavior popupId="PrdDeletePopup"/>
+                    </af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="PrdPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveProducts.execute}"
+                                      rendered="#{((((((((jhsUserRoles['ADMIN, PA']) or ((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))) or ((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))) or ((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))) or ((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))) or (jhsUserRoles['PM,GCA,ADMIN'])) or (jhsUserRoles['PM,GCA,ADMIN'])) or (jhsUserRoles['ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="PrdSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="PrdCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.ProductsIterator.findMode!='true'}"
+                       id="PrdSw" defaultFacet="hasRows"
+                       facetName="#{( (bindings.ProductsIterator.viewObject!=null and bindings.ProductsIterator.viewObject.currentRow!=null)) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp" id="PrdNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="PrdFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="4"
+                                    id="PrdFI">
+                  <af:inputText id="PrdPI"
+                                value="#{bindings.PrdPrdId.inputValue}"
+                                label="#{bindings.PrdPrdId.hints.label}"
+                                required="#{bindings.PrdPrdId.hints.mandatory}"
+                                rows="#{bindings.PrdPrdId.hints.displayHeight}"
+                                columns="#{bindings.PrdPrdId.hints.displayWidth}"
+                                readOnly="#{(((pageFlowScope.createModes.CreateProducts) and (!(jhsUserRoles['ADMIN, PA']))) or ((!pageFlowScope.createModes.CreateProducts) and (!((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))))) or (!(jhsUserRoles['ADMIN']))}"
+                                shortDesc="#{bindings.PrdPrdId.hints.tooltip}"
+                                helpTopicId="RBH_PRDPRDID">
+                    <f:validator binding="#{bindings.PrdPrdId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.PrdPrdId.format}"/>
+                  </af:inputText>
+                  <af:inputText id="PrdNm"
+                                value="#{bindings.PrdName.inputValue}"
+                                label="#{bindings.PrdName.hints.label}"
+                                required="#{bindings.PrdName.hints.mandatory}"
+                                rows="#{bindings.PrdName.hints.displayHeight}"
+                                columns="40" maximumLength="400"
+                                readOnly="#{((pageFlowScope.createModes.CreateProducts) and (!(jhsUserRoles['ADMIN, PA']))) or ((!pageFlowScope.createModes.CreateProducts) and (!((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))))}"
+                                shortDesc="#{bindings.PrdName.hints.tooltip}"
+                                helpTopicId="RBH_PRDNAME">
+                    <f:validator binding="#{bindings.PrdName.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="PrdShrtNm"
+                                value="#{bindings.PrdShortName.inputValue}"
+                                label="#{bindings.PrdShortName.hints.label}"
+                                required="#{bindings.PrdShortName.hints.mandatory}"
+                                rows="#{bindings.PrdShortName.hints.displayHeight}"
+                                columns="40" maximumLength="400"
+                                readOnly="#{((pageFlowScope.createModes.CreateProducts) and (!(jhsUserRoles['ADMIN, PA']))) or ((!pageFlowScope.createModes.CreateProducts) and (!((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))))}"
+                                shortDesc="#{bindings.PrdShortName.hints.tooltip}"
+                                helpTopicId="RBH_PRDSHORTNAME">
+                    <f:validator binding="#{bindings.PrdShortName.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="PrdPF"
+                                value="#{bindings.PrdProductFamily.inputValue}"
+                                label="#{bindings.PrdProductFamily.hints.label}"
+                                required="#{bindings.PrdProductFamily.hints.mandatory}"
+                                rows="#{bindings.PrdProductFamily.hints.displayHeight}"
+                                columns="40" maximumLength="100"
+                                readOnly="#{((pageFlowScope.createModes.CreateProducts) and (!(jhsUserRoles['ADMIN, PA']))) or ((!pageFlowScope.createModes.CreateProducts) and (!((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))))}"
+                                shortDesc="#{bindings.PrdProductFamily.hints.tooltip}"
+                                helpTopicId="RBH_PRDPRODUCTFAMILY">
+                    <f:validator binding="#{bindings.PrdProductFamily.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="PrdPM"
+                                value="#{bindings.PrdProductManager.inputValue}"
+                                label="#{bindings.PrdProductManager.hints.label}"
+                                required="#{bindings.PrdProductManager.hints.mandatory}"
+                                rows="#{bindings.PrdProductManager.hints.displayHeight}"
+                                columns="#{bindings.PrdProductManager.hints.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.PrdProductManager.hints.tooltip}"
+                                helpTopicId="RBH_PRDPRODUCTMANAGER">
+                    <f:validator binding="#{bindings.PrdProductManager.validator}"/>
+                  </af:inputText>
+                  <af:selectBooleanCheckbox id="PrdTF"
+                                            value="#{bindings.PrdTargetableFlag.inputValue}"
+                                            label="#{bindings.PrdTargetableFlag.hints.label}"
+                                            readOnly="#{((pageFlowScope.createModes.CreateProducts) and (!(jhsUserRoles['ADMIN, PA']))) or ((!pageFlowScope.createModes.CreateProducts) and (!((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))))}"
+                                            shortDesc="#{bindings.PrdTargetableFlag.hints.tooltip}"
+                                            helpTopicId="RBH_PRDTARGETABLEFLAG"
+                                            autoSubmit="true"
+                                            valueChangeListener="#{PrdTargetableFlagDependsOnItem.updateModelValue}"></af:selectBooleanCheckbox>
+                  <af:selectOneChoice id="PrdPT"
+                                      value="#{bindings.PrdProductType.inputValue}"
+                                      label="#{bindings.PrdProductType.hints.label}"
+                                      required="#{bindings.PrdProductType.hints.mandatory}"
+                                      readOnly="#{(((pageFlowScope.createModes.CreateProducts) and (!(jhsUserRoles['ADMIN, PA']))) or ((!pageFlowScope.createModes.CreateProducts) and (!((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))))) or (!(jhsUserRoles['ADMIN, PA']))}"
+                                      shortDesc="#{bindings.PrdProductType.hints.tooltip}"
+                                      helpTopicId="RBH_PRDPRODUCTTYPE"
+                                      autoSubmit="true"
+                                      valueChangeListener="#{PrdProductTypeDependsOnItem.updateModelValue}">
+                    <f:selectItems value="#{bindings.PrdProductType.items}"/>
+                  </af:selectOneChoice>
+                  <af:inputText id="PrdCB"
+                                value="#{bindings.PrdCreatedBy.inputValue}"
+                                label="#{bindings.PrdCreatedBy.hints.label}"
+                                required="#{bindings.PrdCreatedBy.hints.mandatory}"
+                                rows="#{bindings.PrdCreatedBy.hints.displayHeight}"
+                                columns="#{bindings.PrdCreatedBy.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.PrdCreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_PRDCREATEDBY">
+                    <f:validator binding="#{bindings.PrdCreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="PrdCD"
+                                value="#{bindings.PrdCreatedDate.inputValue}"
+                                label="#{bindings.PrdCreatedDate.hints.label}"
+                                required="#{bindings.PrdCreatedDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateProducts) and (!(jhsUserRoles['ADMIN, PA']))) or ((!pageFlowScope.createModes.CreateProducts) and (!((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))))}"
+                                shortDesc="#{bindings.PrdCreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_PRDCREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="PrdLUB"
+                                value="#{bindings.PrdLastUpdatedBy.inputValue}"
+                                label="#{bindings.PrdLastUpdatedBy.hints.label}"
+                                required="#{bindings.PrdLastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.PrdLastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.PrdLastUpdatedBy.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.PrdLastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_PRDLASTUPDATEDBY">
+                    <f:validator binding="#{bindings.PrdLastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="PrdLUD"
+                                value="#{bindings.PrdLastUpdatedDate.inputValue}"
+                                label="#{bindings.PrdLastUpdatedDate.hints.label}"
+                                required="#{bindings.PrdLastUpdatedDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateProducts) and (!(jhsUserRoles['ADMIN, PA']))) or ((!pageFlowScope.createModes.CreateProducts) and (!((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))))}"
+                                shortDesc="#{bindings.PrdLastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_PRDLASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" " helpTopicId="RBH_PRODUCTS">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveProducts.execute}"
+                                            rendered="#{((((((((jhsUserRoles['ADMIN, PA']) or ((jhsUserRoles['ADMIN']) or (jhsUserRoles['PA']) and (bindings.PrdProductTypeTmp.inputValue == 'Future Product'))) or ((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))) or ((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))) or ((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))) or (jhsUserRoles['PM,GCA,ADMIN'])) or (jhsUserRoles['PM,GCA,ADMIN'])) or (jhsUserRoles['ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="PrdSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="PrdCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+          <af:panelTabbed position="above" childCreation="lazy" id="pst0"
+                          dimensionsFrom="auto" styleClass="AFStretchWidth">
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_PRODUCTTITLES']}"
+                               partialTriggers=" PrdTopLc qsAreas50SearchOptions"
+                               id="s50TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s50TopLc"
+                                   partialTriggers=" PrdTopLc qsAreas50SearchOptions"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp3"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas50"
+                                     rendered="#{!pageFlowScope.createModes.CreateProductTitles and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas50SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.ProductTitlesIteratorPrmProductTitleViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.ProductTitlesIteratorPrmProductTitleViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.ProductTitlesIteratorPrmProductTitleViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl0">
+                  <af:panelCollection id="s50PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu0">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu1">
+                          <af:group id="s50tbb"
+                                    rendered="#{ bindings.ProductTitlesIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstProductTitles.execute}"
+                                                id="s50First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousProductTitles.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s50Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextProductTitles.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s50Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastProductTitles.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s50Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi0">
+                          <af:exportCollectionActionListener exportedId="s50Tab"
+                                                             type="excelHTML"
+                                                             filename="ProductTitles.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar1">
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl0"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s50Tab"
+                                                             type="excelHTML"
+                                                             filename="ProductTitles.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s50Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.ProductTitlesIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s50Tab" contentDelivery="immediate"
+                              value="#{bindings.ProductTitlesTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.ProductTitlesTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.ProductTitlesTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.ProductTitlesTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.ProductTitlesTable.rangeSize}"
+                              autoHeightRows="#{bindings.ProductTitlesTable.estimatedRowCount lt 5 ? 5 : bindings.ProductTitlesTable.estimatedRowCount lt bindings.ProductTitlesTable.rangeSize ? bindings.ProductTitlesTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.ProductTitlesTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.ProductTitlesIteratorPrmProductTitleViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.ProductTitlesIteratorPrmProductTitleViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.ProductTitlesTable.table}"
+                              partialTriggers=":::qsAreas50SearchOptions :::s50PC ::s50First ::s50Previous ::s50Next ::s50Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_PRODUCTTITLES']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s50TablePopup" childCreation="deferred">
+                          <af:menu id="menu2">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu3"></af:menu>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s50TTNCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetTrackingNo"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S50TARGETTRACKINGNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.TargetTrackingNo.label}"
+                                          id="ol0"/>
+                        </f:facet>
+                        <af:inputText id="s50TTN"
+                                      value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.TargetTrackingNo.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.TargetTrackingNo.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.TargetTrackingNo.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.TargetTrackingNo.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.TargetTrackingNo.tooltip}">
+                          <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ProductTitlesTable.hints.TargetTrackingNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s50TtlCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="LongTitle" rowHeader="false"
+                                 helpTopicId="RBH_S50LONGTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.LongTitle.label}"
+                                          id="ol1"/>
+                        </f:facet>
+                        <af:inputText id="cl1"
+                                      value="#{row.bindings.LongTitle.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.LongTitle.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.LongTitle.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.LongTitle.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.LongTitle.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.LongTitle.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s50Ttl"
+                                        text="#{row.bindings.LongTitle.attributeValue}"
+                                        shortDesc="#{bindings.ProductTitlesTable.hints.LongTitle.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Titles"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s50Id.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Title #{bindings.s50TargetTrackingNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s50Id.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s50ANmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="AccountName" rowHeader="false"
+                                 helpTopicId="RBH_S50ACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.AccountName.label}"
+                                          id="ol2"/>
+                        </f:facet>
+                        <af:inputText id="s50ANm"
+                                      value="#{row.bindings.AccountName.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.AccountName.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.AccountName.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.AccountName.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.AccountName.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.AccountName.tooltip}"
+                                      autoSubmit="true">
+                          <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s50AccountNumberCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="AccountNumber" align="right"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S50ACCOUNTNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.AccountNumber.label}"
+                                          id="ol3"/>
+                        </f:facet>
+                        <af:inputText id="s50AccountNumber"
+                                      value="#{row.bindings.AccountNumber.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.AccountNumber.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.AccountNumber.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.AccountNumber.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.AccountNumber.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.AccountNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountNumber.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ProductTitlesTable.hints.AccountNumber.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s50PLCol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="ProductLine" rowHeader="false"
+                                 helpTopicId="RBH_S50PRODUCTLINE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.ProductLine.label}"
+                                          id="ol4"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s50PL"
+                                            value="#{row.bindings.ProductLine.inputValue}"
+                                            label="#{bindings.ProductTitlesTable.hints.ProductLine.label}"
+                                            required="#{bindings.ProductTitlesTable.hints.ProductLine.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.ProductTitlesTable.hints.ProductLine.tooltip}">
+                          <f:selectItems value="#{row.bindings.ProductLine.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s50CNCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CatalogNumber" rowHeader="false"
+                                 helpTopicId="RBH_S50CATALOGNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.CatalogNumber.label}"
+                                          id="ol5"/>
+                        </f:facet>
+                        <af:inputText id="s50CN"
+                                      value="#{row.bindings.CatalogNumber.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.CatalogNumber.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.CatalogNumber.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.CatalogNumber.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.CatalogNumber.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.CatalogNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s50CRCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CatalogRoot" rowHeader="false"
+                                 helpTopicId="RBH_S50CATALOGROOT"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.CatalogRoot.label}"
+                                          id="ol6"/>
+                        </f:facet>
+                        <af:inputText id="s50CR"
+                                      value="#{row.bindings.CatalogRoot.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.CatalogRoot.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.CatalogRoot.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.CatalogRoot.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.CatalogRoot.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.CatalogRoot.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogRoot.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s50AuCol" sortable="true" filterable="true"
+                                 noWrap="true" width="260" sortProperty="Author"
+                                 rowHeader="false" helpTopicId="RBH_S50AUTHOR"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.Author.label}"
+                                          id="ol7"/>
+                        </f:facet>
+                        <af:panelLabelAndMessage shortDesc="#{bindings.ProductTitlesTable.hints.Author.tooltip}">
+                          <af:inputText id="s50Au"
+                                        value="#{row.bindings.Author.inputValue}"
+                                        label="#{bindings.ProductTitlesTable.hints.Author.label}"
+                                        required="#{bindings.ProductTitlesTable.hints.Author.mandatory}"
+                                        rows="#{bindings.ProductTitlesTable.hints.Author.displayHeight}"
+                                        columns="40" maximumLength="600"
+                                        readOnly="true" autoSubmit="true"
+                                        simple="true"
+                                        partialTriggers="s50AuthorEditorLink s50AuthorEditorText">
+                            <f:validator binding="#{row.bindings.Author.validator}"/>
+                          </af:inputText>
+                          <af:commandLink id="s50AuthorEditorLink"
+                                          rendered="false" immediate="true"
+                                          partialSubmit="true">
+                            <af:showPopupBehavior popupId="s50AuthorPopup"/>
+                            <af:image source="/jheadstart/images/editor.gif"
+                                      id="s50AuthorIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                        </af:panelLabelAndMessage>
+                        <af:popup id="s50AuthorPopup"
+                                  contentDelivery="lazyUncached"
+                                  eventContext="launcher"
+                                  childCreation="deferred">
+                          <af:dialog modal="true" resize="on"
+                                     title="Text Editor" id="dialog0">
+                            <af:inputText rows="10" columns="100"
+                                          value="#{row.bindings.Author.inputValue}"
+                                          simple="true" maximumLength="600"
+                                          id="s50AuthorEditorText"/>
+                          </af:dialog>
+                        </af:popup>
+                      </af:column>
+                      <af:column id="s50PSYCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="PublicationStartYear"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S50PUBLICATIONSTARTYEAR"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.PublicationStartYear.label}"
+                                          id="ol8"/>
+                        </f:facet>
+                        <af:inputText id="s50PSY"
+                                      value="#{row.bindings.PublicationStartYear.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.PublicationStartYear.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.PublicationStartYear.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.PublicationStartYear.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.PublicationStartYear.displayWidth}"
+                                      maximumLength="4" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.PublicationStartYear.tooltip}">
+                          <f:validator binding="#{row.bindings.PublicationStartYear.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s50PEYCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="PublicationEndYear"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S50PUBLICATIONENDYEAR"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.PublicationEndYear.label}"
+                                          id="ol9"/>
+                        </f:facet>
+                        <af:inputText id="s50PEY"
+                                      value="#{row.bindings.PublicationEndYear.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.PublicationEndYear.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.PublicationEndYear.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.PublicationEndYear.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.PublicationEndYear.displayWidth}"
+                                      maximumLength="4" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.PublicationEndYear.tooltip}">
+                          <f:validator binding="#{row.bindings.PublicationEndYear.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s50FACol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="FilmAvailability"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S50FILMAVAILABILITY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.FilmAvailability.label}"
+                                          id="ol10"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s50FA"
+                                            value="#{row.bindings.FilmAvailability.inputValue}"
+                                            label="#{bindings.ProductTitlesTable.hints.FilmAvailability.label}"
+                                            required="#{bindings.ProductTitlesTable.hints.FilmAvailability.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.ProductTitlesTable.hints.FilmAvailability.tooltip}">
+                          <f:selectItems value="#{row.bindings.FilmAvailability.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s50BSCol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="BibliographicStatus"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S50BIBLIOGRAPHICSTATUS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.BibliographicStatus.label}"
+                                          id="ol11"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s50BS"
+                                            value="#{row.bindings.BibliographicStatus.inputValue}"
+                                            label="#{bindings.ProductTitlesTable.hints.BibliographicStatus.label}"
+                                            required="#{bindings.ProductTitlesTable.hints.BibliographicStatus.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.ProductTitlesTable.hints.BibliographicStatus.tooltip}">
+                          <f:selectItems value="#{row.bindings.BibliographicStatus.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s50PRFCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="PeerReviewFlag" align="center"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S50PEERREVIEWFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.PeerReviewFlag.label}"
+                                          id="ol12"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="s50PRF"
+                                                  label="#{bindings.ProductTitlesTable.hints.PeerReviewFlag.label}"
+                                                  value="#{s50PeerReviewFlagcheckboxInTable.value}"
+                                                  readOnly="true"
+                                                  shortDesc="#{bindings.ProductTitlesTable.hints.PeerReviewFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="s50OACol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="OpenAccess" rowHeader="false"
+                                 helpTopicId="RBH_S50OPENACCESS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.OpenAccess.label}"
+                                          id="ol13"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s50OA"
+                                            value="#{row.bindings.OpenAccess.inputValue}"
+                                            label="#{bindings.ProductTitlesTable.hints.OpenAccess.label}"
+                                            required="#{bindings.ProductTitlesTable.hints.OpenAccess.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.ProductTitlesTable.hints.OpenAccess.tooltip}">
+                          <f:selectItems value="#{row.bindings.OpenAccess.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s50PrimaryPmClassCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="PrimaryPmClass" rowHeader="false"
+                                 helpTopicId="RBH_S50PRIMARYPMCLASS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.PrimaryPmClass.label}"
+                                          id="ol14"/>
+                        </f:facet>
+                        <af:inputText id="s50PrimaryPmClass"
+                                      value="#{row.bindings.PrimaryPmClass.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.PrimaryPmClass.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.PrimaryPmClass.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.PrimaryPmClass.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.PrimaryPmClass.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.PrimaryPmClass.tooltip}">
+                          <f:validator binding="#{row.bindings.PrimaryPmClass.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s50ExternalIndexesCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="ExternalIndexes"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S50EXTERNALINDEXES"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ProductTitlesTable.hints.ExternalIndexes.label}"
+                                          id="ol15"/>
+                        </f:facet>
+                        <af:inputText id="s50ExternalIndexes"
+                                      value="#{row.bindings.ExternalIndexes.inputValue}"
+                                      label="#{bindings.ProductTitlesTable.hints.ExternalIndexes.label}"
+                                      required="#{bindings.ProductTitlesTable.hints.ExternalIndexes.mandatory}"
+                                      rows="#{bindings.ProductTitlesTable.hints.ExternalIndexes.displayHeight}"
+                                      columns="#{bindings.ProductTitlesTable.hints.ExternalIndexes.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.ProductTitlesTable.hints.ExternalIndexes.tooltip}">
+                          <f:validator binding="#{row.bindings.ExternalIndexes.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_TARGETEDPRODUCTTITLES']}"
+                               partialTriggers=" PrdTopLc s51DeleteDialog qsAreas51SearchOptions s51PC:s51Arm s51PC:s51delrmTM s51PC:s51Arl s51PC:s51Tab:s51delrm s51PC:s51Tab:s51delrl"
+                               id="s51TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s51TopLc"
+                                   partialTriggers=" PrdTopLc s51DeleteDialog qsAreas51SearchOptions s51PC:s51Arm s51PC:s51delrmTM s51PC:s51Arl s51PC:s51Tab:s51delrm s51PC:s51Tab:s51delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp4"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas51"
+                                     rendered="#{!pageFlowScope.createModes.CreateTargetedProductTitles and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas51SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.TargetedProductTitlesIteratorPrmTargetedProductTitleViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.TargetedProductTitlesIteratorPrmTargetedProductTitleViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.TargetedProductTitlesIteratorPrmTargetedProductTitleViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl1">
+                  <af:panelCollection id="s51PC" featuresOff="  detach "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu4">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu5">
+                          <af:group id="s51tbb"
+                                    rendered="#{ bindings.TargetedProductTitlesIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstTargetedProductTitles.execute}"
+                                                id="s51First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousTargetedProductTitles.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s51Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextTargetedProductTitles.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s51Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastTargetedProductTitles.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s51Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s51Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.TargetedProductTitlesTable.addRow}"
+                                            rendered="#{ (bindings.ProductsIterator.viewObject!=null and bindings.ProductsIterator.viewObject.currentRow!=null) and ((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s51delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{(jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')}">
+                          <af:showPopupBehavior popupId="::s51DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi1">
+                          <af:exportCollectionActionListener exportedId="s51Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetedProductTitles.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar2">
+                        <!-- Also create CreateTargetedProductTitles bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s51Arl" immediate="false"
+                                             rendered="#{ (bindings.ProductsIterator.viewObject!=null and bindings.ProductsIterator.viewObject.currentRow!=null) and ((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.TargetedProductTitlesTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl2"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s51Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetedProductTitles.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s51Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                        <af:popup id="confirmDeletePopup0"
+                                  binding="#{pageFlowScope.TargetedProductTitlesTable.confirmDeletePopup}">
+                          <af:dialog modal="true" type="okCancel"
+                                     title="Confirm Delete"
+                                     dialogListener="#{pageFlowScope.TargetedProductTitlesTable.handleDeleteOK}">
+                            <af:outputText value="Are you sure you want to delete the selected rows?"/>
+                          </af:dialog>
+                        </af:popup>
+                        <af:commandButton id="s51MDB"
+                                          textAndAccessKey="Delete Selected">
+                          <af:showPopupBehavior popupId="confirmDeletePopup0"
+                                                align="beforeStart"/>
+                        </af:commandButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.TargetedProductTitlesIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s51Tab" contentDelivery="immediate"
+                              value="#{bindings.TargetedProductTitlesTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true"
+                              selectionListener="#{bindings.TargetedProductTitlesTable.collectionModel.makeCurrent}"
+                              rowSelection="multiple"
+                              rowDisclosureListener="#{pageFlowScope.TargetedProductTitlesTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.TargetedProductTitlesTable.rangeSize}"
+                              autoHeightRows="#{bindings.TargetedProductTitlesTable.estimatedRowCount lt 5 ? 5 : bindings.TargetedProductTitlesTable.estimatedRowCount lt bindings.TargetedProductTitlesTable.rangeSize ? bindings.TargetedProductTitlesTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.TargetedProductTitlesTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.TargetedProductTitlesIteratorPrmTargetedProductTitleViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.TargetedProductTitlesIteratorPrmTargetedProductTitleViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.TargetedProductTitlesTable.table}"
+                              partialTriggers=":::qsAreas51SearchOptions :::s51PC ::s51First ::s51Previous ::s51Next ::s51Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_TARGETEDPRODUCTTITLES']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s51TablePopup" childCreation="deferred">
+                          <af:menu id="menu6">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu7"></af:menu>
+                            <af:commandMenuItem id="s51delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{(jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')}">
+                              <af:showPopupBehavior popupId=":::s51DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s51ActionColumn" frozen="true" width="20"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl2">
+                          <af:commandImageLink id="s51delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{(jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s51DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s51TTNCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetTrackingNo"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51TARGETTRACKINGNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.TargetTrackingNo.label}"
+                                          showRequired="false" id="ol16"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s51TargetTrackingNoPgl"
+                                             layout="horizontal">
+                          <af:inputText id="s51TTN"
+                                        label="#{bindings.TargetedProductTitlesTable.hints.TargetTrackingNo.label}"
+                                        readOnly="#{((pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')))) or ((!pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))))}"
+                                        columns="#{bindings.TargetedProductTitlesTable.hints.TargetTrackingNo.displayWidth}"
+                                        maximumLength="20"
+                                        shortDesc="#{bindings.TargetedProductTitlesTable.hints.TargetTrackingNo.tooltip}"
+                                        value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s51TargetTrackingNoLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s51TargetTrackingNoLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.TargetedProductTitlesTable.hints.TargetTrackingNo.format}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')))) or ((!pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')))))}"
+                                          id="cl3"
+                                          actionListener="#{pageFlowScope.s51TargetTrackingNoLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s51TargetTrackingNoIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb2"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s51TargetTrackingNoLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s51TargetTrackingNoLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s51CNCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CatalogNumber" rowHeader="false"
+                                 helpTopicId="RBH_S51CATALOGNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.CatalogNumber.label}"
+                                          id="ol17"/>
+                        </f:facet>
+                        <af:inputText id="s51CN"
+                                      value="#{row.bindings.CatalogNumber.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.CatalogNumber.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.CatalogNumber.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.CatalogNumber.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.CatalogNumber.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.CatalogNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51LTCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240"
+                                 sortProperty="LongTitle" rowHeader="false"
+                                 helpTopicId="RBH_S51LONGTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.LongTitle.label}"
+                                          id="ol18"/>
+                        </f:facet>
+                        <af:inputText id="cl4"
+                                      value="#{row.bindings.LongTitle.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.LongTitle.label}"
+                                      required="true"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.LongTitle.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.LongTitle.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.LongTitle.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s51LT"
+                                        text="#{row.bindings.LongTitle.attributeValue}"
+                                        shortDesc="#{bindings.TargetedProductTitlesTable.hints.LongTitle.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Titles"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s51TitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Title #{bindings.s51TargetTrackingNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s51TitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s51ANCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240" sortProperty="Name"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51ACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.Name.label}"
+                                          id="ol19"/>
+                        </f:facet>
+                        <af:inputText id="s51AN"
+                                      value="#{row.bindings.Name.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.Name.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.Name.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.Name.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.Name.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.Name.tooltip}">
+                          <f:validator binding="#{row.bindings.Name.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51AuCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240" sortProperty="Author"
+                                 rowHeader="false" helpTopicId="RBH_S51AUTHOR"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.Author.label}"
+                                          id="ol20"/>
+                        </f:facet>
+                        <af:inputText id="s51Au"
+                                      value="#{row.bindings.Author.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.Author.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.Author.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.Author.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.Author.displayWidth}"
+                                      maximumLength="600" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.Author.tooltip}">
+                          <f:validator binding="#{row.bindings.Author.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51ExternalIndexesCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="ExternalIndexes"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51EXTERNALINDEXES"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.ExternalIndexes.label}"
+                                          id="ol21"/>
+                        </f:facet>
+                        <af:inputText id="s51ExternalIndexes"
+                                      value="#{row.bindings.ExternalIndexes.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.ExternalIndexes.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.ExternalIndexes.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.ExternalIndexes.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.ExternalIndexes.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.ExternalIndexes.tooltip}">
+                          <f:validator binding="#{row.bindings.ExternalIndexes.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51AiTargetingFlagCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="AiTargetingFlag" align="center"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51AITARGETINGFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.AiTargetingFlag.label}"
+                                          showRequired="#{bindings.TargetedProductTitlesTable.hints.AiTargetingFlag.mandatory}"
+                                          id="ol22"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="s51AiTargetingFlag"
+                                                  label="#{bindings.TargetedProductTitlesTable.hints.AiTargetingFlag.label}"
+                                                  value="#{s51AiTargetingFlagcheckboxInTable.value}"
+                                                  readOnly="#{((pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')))) or ((!pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))))}"
+                                                  shortDesc="#{bindings.TargetedProductTitlesTable.hints.AiTargetingFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="s51ADCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="AddedDate" rowHeader="false"
+                                 helpTopicId="RBH_S51ADDEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.AddedDate.label}"
+                                          showRequired="#{bindings.TargetedProductTitlesTable.hints.AddedDate.mandatory}"
+                                          id="ol23"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                        id="id0">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s51AD"
+                                      value="#{row.bindings.AddedDate.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.AddedDate.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.AddedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')))) or ((!pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))))}"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.AddedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s51RDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="RemovedDate" rowHeader="false"
+                                 helpTopicId="RBH_S51REMOVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.RemovedDate.label}"
+                                          showRequired="#{bindings.TargetedProductTitlesTable.hints.RemovedDate.mandatory}"
+                                          id="ol24"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                        id="id1">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s51RD"
+                                      value="#{row.bindings.RemovedDate.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.RemovedDate.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.RemovedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')))) or ((!pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))))}"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.RemovedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s51OpportunityNoCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="OpportunityNo" rowHeader="false"
+                                 helpTopicId="RBH_S51OPPORTUNITYNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.OpportunityNo.label}"
+                                          id="ol25"/>
+                        </f:facet>
+                        <af:inputText id="s51OpportunityNo"
+                                      value="#{row.bindings.OpportunityNo.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.OpportunityNo.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.OpportunityNo.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.OpportunityNo.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.OpportunityNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.OpportunityNo.tooltip}">
+                          <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.TargetedProductTitlesTable.hints.OpportunityNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51ONCol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="OpportunityName"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51OPPORTUNITYNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.OpportunityName.label}"
+                                          id="ol26"/>
+                        </f:facet>
+                        <af:inputText id="cl5"
+                                      value="#{row.bindings.OpportunityName.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.OpportunityName.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.OpportunityName.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.OpportunityName.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.OpportunityName.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.OpportunityName.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s51ON"
+                                        text="#{row.bindings.OpportunityName.attributeValue}"
+                                        shortDesc="#{bindings.TargetedProductTitlesTable.hints.OpportunityName.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Opportunity"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s51OpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="#{bindings.s51OpportunityName.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s51OpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s51PTPCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetPriority" rowHeader="false"
+                                 helpTopicId="RBH_S51TARGETPRIORITY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.TargetPriority.label}"
+                                          showRequired="#{bindings.TargetedProductTitlesTable.hints.TargetPriority.mandatory}"
+                                          id="ol27"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s51PTP"
+                                            value="#{row.bindings.TargetPriority.inputValue}"
+                                            label="#{bindings.TargetedProductTitlesTable.hints.TargetPriority.label}"
+                                            required="#{bindings.TargetedProductTitlesTable.hints.TargetPriority.mandatory}"
+                                            readOnly="#{((pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y')))) or ((!pageFlowScope.TargetedProductTitlesTable.newRow) and (!((jhsUserRoles['PM,GCA,ADMIN']) and (bindings.PrdTargetableFlagtmp.inputValue == 'Y'))))}"
+                                            shortDesc="#{bindings.TargetedProductTitlesTable.hints.TargetPriority.tooltip}">
+                          <f:selectItems value="#{row.bindings.TargetPriority.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s51NSCol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="NegotiationStage"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51NEGOTIATIONSTAGE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.NegotiationStage.label}"
+                                          id="ol28"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s51NS"
+                                            value="#{row.bindings.NegotiationStage.inputValue}"
+                                            label="#{bindings.TargetedProductTitlesTable.hints.NegotiationStage.label}"
+                                            required="#{bindings.TargetedProductTitlesTable.hints.NegotiationStage.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.TargetedProductTitlesTable.hints.NegotiationStage.tooltip}">
+                          <f:selectItems value="#{row.bindings.NegotiationStage.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s51OANCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="OpportunityAccountName"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51OPPORTUNITYACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.OpportunityAccountName.label}"
+                                          id="ol29"/>
+                        </f:facet>
+                        <af:inputText id="s51OAN"
+                                      value="#{row.bindings.OpportunityAccountName.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.OpportunityAccountName.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.OpportunityAccountName.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.OpportunityAccountName.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.OpportunityAccountName.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.OpportunityAccountName.tooltip}">
+                          <f:validator binding="#{row.bindings.OpportunityAccountName.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51AllianceManagerCol" sortable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="AllianceManager"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51ALLIANCEMANAGER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.AllianceManager.label}"
+                                          id="ol30"/>
+                        </f:facet>
+                        <af:inputText id="s51AllianceManager"
+                                      value="#{row.bindings.AllianceManager.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.AllianceManager.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.AllianceManager.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.AllianceManager.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.AllianceManager.displayWidth}"
+                                      maximumLength="240" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.AllianceManager.tooltip}">
+                          <f:validator binding="#{row.bindings.AllianceManager.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S51CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.CreatedBy.label}"
+                                          id="ol31"/>
+                        </f:facet>
+                        <af:inputText id="s51CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.CreatedBy.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S51CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.CreatedDate.label}"
+                                          id="ol32"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id2">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s51CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.CreatedDate.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s51LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S51LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedBy.label}"
+                                          id="ol33"/>
+                        </f:facet>
+                        <af:inputText id="s51LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s51LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S51LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedDate.label}"
+                                          id="ol34"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id3">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s51LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetedProductTitlesTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_TARGETEDFORMATS']}"
+                               partialTriggers=" PrdTopLc s52DeleteDialog qsAreas52SearchOptions s52PC:s52Arm s52PC:s52delrmTM s52PC:s52Arl s52PC:s52Tab:s52delrm s52PC:s52Tab:s52delrl"
+                               id="s52TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s52TopLc"
+                                   partialTriggers=" PrdTopLc s52DeleteDialog qsAreas52SearchOptions s52PC:s52Arm s52PC:s52delrmTM s52PC:s52Arl s52PC:s52Tab:s52delrm s52PC:s52Tab:s52delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp5"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas52"
+                                     rendered="#{!pageFlowScope.createModes.CreateTargetedFormats and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas52SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.TargetedFormatsIteratorPrmTargetedFormatViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.TargetedFormatsIteratorPrmTargetedFormatViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.TargetedFormatsIteratorPrmTargetedFormatViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl3">
+                  <af:panelCollection id="s52PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu8">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu9">
+                          <af:group id="s52tbb"
+                                    rendered="#{ bindings.TargetedFormatsIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstTargetedFormats.execute}"
+                                                id="s52First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousTargetedFormats.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s52Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextTargetedFormats.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s52Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastTargetedFormats.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s52Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s52Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.TargetedFormatsTable.addRow}"
+                                            rendered="#{ (bindings.ProductsIterator.viewObject!=null and bindings.ProductsIterator.viewObject.currentRow!=null) and (jhsUserRoles['PM,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s52delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['ADMIN']}">
+                          <af:showPopupBehavior popupId="::s52DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi2">
+                          <af:exportCollectionActionListener exportedId="s52Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetedFormats.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar3">
+                        <!-- Also create CreateTargetedFormats bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s52Arl" immediate="false"
+                                             rendered="#{ (bindings.ProductsIterator.viewObject!=null and bindings.ProductsIterator.viewObject.currentRow!=null) and (jhsUserRoles['PM,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.TargetedFormatsTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl6"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s52Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetedFormats.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s52Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.TargetedFormatsIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s52Tab" contentDelivery="immediate"
+                              value="#{bindings.TargetedFormatsTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.TargetedFormatsTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.TargetedFormatsTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.TargetedFormatsTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.TargetedFormatsTable.rangeSize}"
+                              autoHeightRows="#{bindings.TargetedFormatsTable.estimatedRowCount lt 5 ? 5 : bindings.TargetedFormatsTable.estimatedRowCount lt bindings.TargetedFormatsTable.rangeSize ? bindings.TargetedFormatsTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.TargetedFormatsTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.TargetedFormatsIteratorPrmTargetedFormatViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.TargetedFormatsIteratorPrmTargetedFormatViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.TargetedFormatsTable.table}"
+                              partialTriggers=":::qsAreas52SearchOptions :::s52PC ::s52First ::s52Previous ::s52Next ::s52Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_TARGETEDFORMATS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s52TablePopup" childCreation="deferred">
+                          <af:menu id="menu10">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu11"></af:menu>
+                            <af:commandMenuItem id="s52delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s52DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s52ActionColumn" width="20" align="center"
+                                 headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl4">
+                          <af:commandImageLink id="s52delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s52DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s52TFCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="TargetedFormat" rowHeader="false"
+                                 helpTopicId="RBH_S52TARGETEDFORMAT"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedFormatsTable.hints.TargetedFormat.label}"
+                                          showRequired="#{bindings.TargetedFormatsTable.hints.TargetedFormat.mandatory}"
+                                          id="ol35"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s52TF"
+                                            value="#{row.bindings.TargetedFormat.inputValue}"
+                                            label="#{bindings.TargetedFormatsTable.hints.TargetedFormat.label}"
+                                            required="#{bindings.TargetedFormatsTable.hints.TargetedFormat.mandatory}"
+                                            readOnly="#{((pageFlowScope.TargetedFormatsTable.newRow) and (!(jhsUserRoles['PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetedFormatsTable.newRow) and (!(jhsUserRoles['PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.TargetedFormatsTable.hints.TargetedFormat.tooltip}">
+                          <f:selectItems value="#{row.bindings.TargetedFormat.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s52CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S52CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedFormatsTable.hints.CreatedBy.label}"
+                                          id="ol36"/>
+                        </f:facet>
+                        <af:inputText id="s52CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.TargetedFormatsTable.hints.CreatedBy.label}"
+                                      required="#{bindings.TargetedFormatsTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.TargetedFormatsTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.TargetedFormatsTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.TargetedFormatsTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s52CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S52CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedFormatsTable.hints.CreatedDate.label}"
+                                          id="ol37"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id4">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s52CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.TargetedFormatsTable.hints.CreatedDate.label}"
+                                      required="#{bindings.TargetedFormatsTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetedFormatsTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s52LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S52LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedFormatsTable.hints.LastUpdatedBy.label}"
+                                          id="ol38"/>
+                        </f:facet>
+                        <af:inputText id="s52LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.TargetedFormatsTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.TargetedFormatsTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.TargetedFormatsTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.TargetedFormatsTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.TargetedFormatsTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s52LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S52LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetedFormatsTable.hints.LastUpdatedDate.label}"
+                                          id="ol39"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id5">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s52LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.TargetedFormatsTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.TargetedFormatsTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetedFormatsTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_PRODUCTMANAGER']}"
+                               partialTriggers=" PrdTopLc qsAreas53SearchOptions"
+                               id="s53TopLcSdi"
+                               rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN, RO']}"
+                               disabled="#{!jhsUserRoles['AM,AST,PM,GCA,ADMIN, RO']}">
+              <af:panelGroupLayout layout="vertical" id="s53TopLc"
+                                   partialTriggers=" PrdTopLc qsAreas53SearchOptions"
+                                   rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN, RO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp6"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas53"
+                                     rendered="#{!pageFlowScope.createModes.CreateProductManager and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas53SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.ProductManagerIteratorPrmProductProductManagerViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.ProductManagerIteratorPrmProductProductManagerViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.ProductManagerIteratorPrmProductProductManagerViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl5">
+                  <af:panelCollection id="s53PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu12">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu13">
+                          <af:group id="s53tbb"
+                                    rendered="#{ bindings.ProductManagerIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstProductManager.execute}"
+                                                id="s53First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousProductManager.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s53Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextProductManager.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s53Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastProductManager.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s53Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi3">
+                          <af:exportCollectionActionListener exportedId="s53Tab"
+                                                             type="excelHTML"
+                                                             filename="ProductManager.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar4">
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl7"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s53Tab"
+                                                             type="excelHTML"
+                                                             filename="ProductManager.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s53Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.ProductManagerIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s53Tab" contentDelivery="immediate"
+                              value="#{bindings.ProductManagerTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.ProductManagerTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.ProductManagerTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.ProductManagerTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.ProductManagerTable.rangeSize}"
+                              autoHeightRows="#{bindings.ProductManagerTable.estimatedRowCount lt 5 ? 5 : bindings.ProductManagerTable.estimatedRowCount lt bindings.ProductManagerTable.rangeSize ? bindings.ProductManagerTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.ProductManagerTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.ProductManagerIteratorPrmProductProductManagerViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.ProductManagerIteratorPrmProductProductManagerViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.ProductManagerTable.table}"
+                              partialTriggers=":::qsAreas53SearchOptions :::s53PC ::s53First ::s53Previous ::s53Next ::s53Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_PRODUCTMANAGER']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s53TablePopup" childCreation="deferred">
+                          <af:menu id="menu14">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu15"></af:menu>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+          </af:panelTabbed>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="PrdDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="PrdDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_PRODUCT: #{bindings.PrdName.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteProducts.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s51DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s51DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_TARGETEDPRODUCTTITLE:#{pageFlowScope.TargetedProductTitlesTable.currentRowAttributeValues.CatalogNumber}']} "
+                           id="ot1"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteTargetedProductTitles.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="jhsLovPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher"
+                  binding="#{pageFlowScope.jhsLovPopup.component}">
+          <af:dialog modal="true" title="#{pageFlowScope.LovItemBean.lovTitle}"
+                     type="none" id="dialog1" resize="on"
+                     stretchChildren="first"
+                     contentWidth="#{pageFlowScope.LovItemBean.lovWidth}"
+                     contentHeight="#{pageFlowScope.LovItemBean.lovHeight}">
+            <af:region value="#{bindings.LovTaskFlow.regionModel}"
+                       id="region0"/>
+            <f:facet name="buttonBar">
+              <af:group id="g0">
+                <af:commandButton textAndAccessKey="#{nls['OK_BUTTON_LABEL']}"
+                                  id="cb0" partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.handleLovSelection}"/>
+                <af:commandButton textAndAccessKey="#{nls['CANCEL']}" id="cb1"
+                                  partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.cancelLov}"/>
+              </af:group>
+            </f:facet>
+          </af:dialog>
+          <af:clientListener method="popupClosedListener" type="popupClosed"/>
+          <af:serverListener type="serverPopupClosed"
+                             method="#{pageFlowScope.LovItemBean.cancelLov}"/>
+        </af:popup>
+        <af:popup id="s52DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s52DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_TARGETEDFORMAT:#{pageFlowScope.TargetedFormatsTable.currentRowAttributeValues.TargetedFormat}']} "
+                           id="ot4"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteTargetedFormats.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

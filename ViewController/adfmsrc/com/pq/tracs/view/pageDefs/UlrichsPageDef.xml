@@ -1,0 +1,930 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="UlrichsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, ADMIN, RO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="UlrichsIterator" Binds="TraxUlrichsTitleView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="-1"/>
+    <searchRegion id="UlrichsIteratorTraxUlrichsTitleViewCriteriaQuery"
+                  Binds="UlrichsIterator"
+                  Criteria="TraxUlrichsTitleViewCriteria"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="Title"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <searchRegion id="UlrichsIteratorTraxUlrichsTitleQuickQueryQuery"
+                  Binds="UlrichsIterator" Criteria="TraxUlrichsTitleQuickQuery"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="Title"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryUlrichsInvoke" Binds="ExecuteQueryUlrichs"
+                  Refresh="renderModel" RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="UlrichsCatalogedTitlesIterator"
+              Binds="TraxUlrichsTitleRelationView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <iterator id="UlrichsPublisherIterator" Binds="TraxUlrichsPublisherView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsPublisherIteratorQuery"
+                  Binds="UlrichsPublisherIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Publisher"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="UlrichsClassificationIterator"
+              Binds="TraxUlrichsClassificationView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsClassificationIteratorQuery"
+                  Binds="UlrichsClassificationIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Type"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="UlrichsSubjectIterator" Binds="TraxUlrichsSubjectView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsSubjectIteratorQuery"
+                  Binds="UlrichsSubjectIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Subject"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="UlrichsVariantTitleIterator"
+              Binds="TraxUlrichsVariantTitleView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsVariantTitleIteratorQuery"
+                  Binds="UlrichsVariantTitleIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Type"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="UlrichsEditorIterator" Binds="TraxUlrichsEditorView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsEditorIteratorQuery" Binds="UlrichsEditorIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="UlrichsLanguageIterator" Binds="TraxUlrichsLanguageView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsLanguageIteratorQuery"
+                  Binds="UlrichsLanguageIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Language"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="UlrichsAbstractIndexIterator"
+              Binds="TraxUlrichsAbstractIndexView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsAbstractIndexIteratorQuery"
+                  Binds="UlrichsAbstractIndexIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="AbstractIndex"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="UlrichsOnlineVendorIterator"
+              Binds="TraxUlrichsOnlineVendorView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsOnlineVendorIteratorQuery"
+                  Binds="UlrichsOnlineVendorIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Vendor"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="UlrichsWireServiceIterator"
+              Binds="TraxUlrichsWireServiceView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UlrichsWireServiceIteratorQuery"
+                  Binds="UlrichsWireServiceIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="WireService"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteQueryUlrichs" IterBinding="UlrichsIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="UlrUlrichsSerialId" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="UlrichsSerialId"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="UlrLinkedTitleFlag" IterBinding="UlrichsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="LinkedTitleFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="UlrTitle" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrSubTitle" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="SubTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrCountryCode" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="CountryCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrExplanationOfTitleAcronym"
+                     IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="ExplanationOfTitleAcronym"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrYearFirstPublished" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="YearFirstPublished"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrFrequency" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="Frequency"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrBibliographicNotes" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="BibliographicNotes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrVariantTitleCataloging"
+                     IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="VariantTitleCataloging"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrPublisherSubdivision" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="PublisherSubdivision"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrParentPublisher" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="ParentPublisher"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrCoPublisher" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="CoPublisher"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrNewspaperOwnership" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="NewspaperOwnership"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrWebAddressUrl" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="WebAddressUrl"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrRefereedSerialFlag" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="RefereedSerialFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrNumberOfAnnotationRecords"
+                     IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="NumberOfAnnotationRecords"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrAnnotation" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="Annotation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrSpecialIndex" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="SpecialIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrRecordNumber" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="RecordNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrStatusCode" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="StatusCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrPrimaryPmClass" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="PrimaryPmClass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrSecondaryPmClass" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="SecondaryPmClass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrRightsContactName" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="RightsContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrOpenAccessIndicator" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="OpenAccessIndicator"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrAvailableOnlineFlag" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="AvailableOnlineFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrFormat" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="Format"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="UlrCreateAsTarget" DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="createTargetFromUlrichs"
+                  ReturnName="PrmAppModuleDataControl.methodResults.createTargetFromUlrichs_PrmAppModuleDataControl_dataProvider_createTargetFromUlrichs_result"
+                  IsViewObjectMethod="false"/>
+    <attributeValues id="UlrCreatedBy" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrCreatedDate" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrLastUpdatedBy" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrLastUpdatedDate" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrIssn" IterBinding="UlrichsIterator">
+      <AttrNames>
+        <Item Value="Issn"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsTable" IterBinding="UlrichsIterator">
+      <nodeDefinition Name="Ulrichs"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsTitleView">
+        <AttrNames>
+          <Item Value="UlrichsSerialId"/>
+          <Item Value="LinkedTitleFlag"/>
+          <Item Value="Title"/>
+          <Item Value="SubTitle"/>
+          <Item Value="CountryCode"/>
+          <Item Value="ExplanationOfTitleAcronym"/>
+          <Item Value="YearFirstPublished"/>
+          <Item Value="Frequency"/>
+          <Item Value="BibliographicNotes"/>
+          <Item Value="VariantTitleCataloging"/>
+          <Item Value="PublisherSubdivision"/>
+          <Item Value="ParentPublisher"/>
+          <Item Value="CoPublisher"/>
+          <Item Value="NewspaperOwnership"/>
+          <Item Value="WebAddressUrl"/>
+          <Item Value="RefereedSerialFlag"/>
+          <Item Value="NumberOfAnnotationRecords"/>
+          <Item Value="Annotation"/>
+          <Item Value="SpecialIndex"/>
+          <Item Value="RecordNumber"/>
+          <Item Value="StatusCode"/>
+          <Item Value="PrimaryPmClass"/>
+          <Item Value="SecondaryPmClass"/>
+          <Item Value="RightsContactName"/>
+          <Item Value="OpenAccessIndicator"/>
+          <Item Value="AvailableOnlineFlag"/>
+          <Item Value="Format"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="Issn"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichs" IterBinding="UlrichsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUlrichs" IterBinding="UlrichsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUlrichs" IterBinding="UlrichsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichs" IterBinding="UlrichsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichs" IterBinding="UlrichsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr" NDValue="#{pageFlowScope.rowKeyStrUlrichs}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="UlrichsCatalogedTitlesTitleId"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="TitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesContentOwnerId"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesTargetTrackingNo"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesCatalogNumber"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesLongTitle"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesContentOwnerNo"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesContentOwnerName"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesContentOwnerSite"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerSite"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="UlrichsCatalogedTitlesPrimaryFlag"
+            IterBinding="UlrichsCatalogedTitlesIterator" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="UlrichsCatalogedTitlesCreatedBy"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesCreatedDate"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesLastUpdatedBy"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UlrichsCatalogedTitlesLastUpdatedDate"
+                     IterBinding="UlrichsCatalogedTitlesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsCatalogedTitlesTable"
+          IterBinding="UlrichsCatalogedTitlesIterator">
+      <nodeDefinition Name="UlrichsCatalogedTitles"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsTitleRelationView">
+        <AttrNames>
+          <Item Value="TitleId"/>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="ContentOwnerNo"/>
+          <Item Value="ContentOwnerName"/>
+          <Item Value="ContentOwnerSite"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsCatalogedTitles"
+            IterBinding="UlrichsCatalogedTitlesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUlrichsCatalogedTitles"
+            IterBinding="UlrichsCatalogedTitlesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUlrichsCatalogedTitles"
+            IterBinding="UlrichsCatalogedTitlesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichsCatalogedTitles"
+            IterBinding="UlrichsCatalogedTitlesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsCatalogedTitles"
+            IterBinding="UlrichsCatalogedTitlesIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsCatalogedTitles}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s72Publisher" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="Publisher"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72ParallelName"
+                     IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="ParallelName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72PublisherType"
+                     IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="PublisherType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72Address" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="Address"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72ZipCode" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="ZipCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72Country" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="Country"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72Email" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="Email"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72AltEmail" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="AltEmail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72Phone" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="Phone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72AltPhone" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="AltPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72TollFreePhone"
+                     IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="TollFreePhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72AltTollFreePhone"
+                     IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="AltTollFreePhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72Fax" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="Fax"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72AltFax" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="AltFax"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72Website" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="Website"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72AltWebsite" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="AltWebsite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s72CreatedDate" IterBinding="UlrichsPublisherIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsPublisherTable" IterBinding="UlrichsPublisherIterator">
+      <nodeDefinition Name="UlrichsPublisher"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsPublisherView">
+        <AttrNames>
+          <Item Value="Publisher"/>
+          <Item Value="ParallelName"/>
+          <Item Value="PublisherType"/>
+          <Item Value="Address"/>
+          <Item Value="ZipCode"/>
+          <Item Value="Country"/>
+          <Item Value="Email"/>
+          <Item Value="AltEmail"/>
+          <Item Value="Phone"/>
+          <Item Value="AltPhone"/>
+          <Item Value="TollFreePhone"/>
+          <Item Value="AltTollFreePhone"/>
+          <Item Value="Fax"/>
+          <Item Value="AltFax"/>
+          <Item Value="Website"/>
+          <Item Value="AltWebsite"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsPublisher" IterBinding="UlrichsPublisherIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUlrichsPublisher" IterBinding="UlrichsPublisherIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUlrichsPublisher" IterBinding="UlrichsPublisherIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichsPublisher" IterBinding="UlrichsPublisherIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsPublisher"
+            IterBinding="UlrichsPublisherIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsPublisher}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s70Type" IterBinding="UlrichsClassificationIterator">
+      <AttrNames>
+        <Item Value="Type"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s70Classification"
+                     IterBinding="UlrichsClassificationIterator">
+      <AttrNames>
+        <Item Value="Classification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s70CreatedDate"
+                     IterBinding="UlrichsClassificationIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsClassificationTable"
+          IterBinding="UlrichsClassificationIterator">
+      <nodeDefinition Name="UlrichsClassification"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsClassificationView">
+        <AttrNames>
+          <Item Value="Type"/>
+          <Item Value="Classification"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsClassification"
+            IterBinding="UlrichsClassificationIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUlrichsClassification"
+            IterBinding="UlrichsClassificationIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUlrichsClassification"
+            IterBinding="UlrichsClassificationIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichsClassification"
+            IterBinding="UlrichsClassificationIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsClassification"
+            IterBinding="UlrichsClassificationIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsClassification}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s71Subject" IterBinding="UlrichsSubjectIterator">
+      <AttrNames>
+        <Item Value="Subject"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s71CreatedDate" IterBinding="UlrichsSubjectIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsSubjectTable" IterBinding="UlrichsSubjectIterator">
+      <nodeDefinition Name="UlrichsSubject"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsSubjectView">
+        <AttrNames>
+          <Item Value="Subject"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsSubject" IterBinding="UlrichsSubjectIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUlrichsSubject" IterBinding="UlrichsSubjectIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUlrichsSubject" IterBinding="UlrichsSubjectIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichsSubject" IterBinding="UlrichsSubjectIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsSubject"
+            IterBinding="UlrichsSubjectIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsSubject}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s73Type" IterBinding="UlrichsVariantTitleIterator">
+      <AttrNames>
+        <Item Value="Type"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s73Title" IterBinding="UlrichsVariantTitleIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s73CreatedDate"
+                     IterBinding="UlrichsVariantTitleIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsVariantTitleTable"
+          IterBinding="UlrichsVariantTitleIterator">
+      <nodeDefinition Name="UlrichsVariantTitle"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsVariantTitleView">
+        <AttrNames>
+          <Item Value="Type"/>
+          <Item Value="Title"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsVariantTitle"
+            IterBinding="UlrichsVariantTitleIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousUlrichsVariantTitle"
+            IterBinding="UlrichsVariantTitleIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextUlrichsVariantTitle"
+            IterBinding="UlrichsVariantTitleIterator" RequiresUpdateModel="true"
+            Action="next"/>
+    <action id="LastUlrichsVariantTitle"
+            IterBinding="UlrichsVariantTitleIterator" RequiresUpdateModel="true"
+            Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsVariantTitle"
+            IterBinding="UlrichsVariantTitleIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsVariantTitle}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s74PrimaryFlag" IterBinding="UlrichsEditorIterator">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s74Name" IterBinding="UlrichsEditorIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s74JobTitle" IterBinding="UlrichsEditorIterator">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s74CreatedDate" IterBinding="UlrichsEditorIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsEditorTable" IterBinding="UlrichsEditorIterator">
+      <nodeDefinition Name="UlrichsEditor"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsEditorView">
+        <AttrNames>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="Name"/>
+          <Item Value="JobTitle"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsEditor" IterBinding="UlrichsEditorIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUlrichsEditor" IterBinding="UlrichsEditorIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUlrichsEditor" IterBinding="UlrichsEditorIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichsEditor" IterBinding="UlrichsEditorIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsEditor"
+            IterBinding="UlrichsEditorIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsEditor}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s75Language" IterBinding="UlrichsLanguageIterator">
+      <AttrNames>
+        <Item Value="Language"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s75IsoCode" IterBinding="UlrichsLanguageIterator">
+      <AttrNames>
+        <Item Value="IsoCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s75Content" IterBinding="UlrichsLanguageIterator">
+      <AttrNames>
+        <Item Value="Content"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s75CreatedDate" IterBinding="UlrichsLanguageIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsLanguageTable" IterBinding="UlrichsLanguageIterator">
+      <nodeDefinition Name="UlrichsLanguage"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsLanguageView">
+        <AttrNames>
+          <Item Value="Language"/>
+          <Item Value="IsoCode"/>
+          <Item Value="Content"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsLanguage" IterBinding="UlrichsLanguageIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUlrichsLanguage" IterBinding="UlrichsLanguageIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUlrichsLanguage" IterBinding="UlrichsLanguageIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichsLanguage" IterBinding="UlrichsLanguageIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsLanguage"
+            IterBinding="UlrichsLanguageIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsLanguage}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s76AbstractIndex"
+                     IterBinding="UlrichsAbstractIndexIterator">
+      <AttrNames>
+        <Item Value="AbstractIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s76CreatedDate"
+                     IterBinding="UlrichsAbstractIndexIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsAbstractIndexTable"
+          IterBinding="UlrichsAbstractIndexIterator">
+      <nodeDefinition Name="UlrichsAbstractIndex"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsAbstractIndexView">
+        <AttrNames>
+          <Item Value="AbstractIndex"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsAbstractIndex"
+            IterBinding="UlrichsAbstractIndexIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUlrichsAbstractIndex"
+            IterBinding="UlrichsAbstractIndexIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUlrichsAbstractIndex"
+            IterBinding="UlrichsAbstractIndexIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichsAbstractIndex"
+            IterBinding="UlrichsAbstractIndexIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsAbstractIndex"
+            IterBinding="UlrichsAbstractIndexIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsAbstractIndex}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s77Vendor" IterBinding="UlrichsOnlineVendorIterator">
+      <AttrNames>
+        <Item Value="Vendor"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s77CreatedDate"
+                     IterBinding="UlrichsOnlineVendorIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsOnlineVendorTable"
+          IterBinding="UlrichsOnlineVendorIterator">
+      <nodeDefinition Name="UlrichsOnlineVendor"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsOnlineVendorView">
+        <AttrNames>
+          <Item Value="Vendor"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsOnlineVendor"
+            IterBinding="UlrichsOnlineVendorIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousUlrichsOnlineVendor"
+            IterBinding="UlrichsOnlineVendorIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextUlrichsOnlineVendor"
+            IterBinding="UlrichsOnlineVendorIterator" RequiresUpdateModel="true"
+            Action="next"/>
+    <action id="LastUlrichsOnlineVendor"
+            IterBinding="UlrichsOnlineVendorIterator" RequiresUpdateModel="true"
+            Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsOnlineVendor"
+            IterBinding="UlrichsOnlineVendorIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsOnlineVendor}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="s78WireService"
+                     IterBinding="UlrichsWireServiceIterator">
+      <AttrNames>
+        <Item Value="WireService"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s78CreatedDate"
+                     IterBinding="UlrichsWireServiceIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UlrichsWireServiceTable" IterBinding="UlrichsWireServiceIterator">
+      <nodeDefinition Name="UlrichsWireService"
+                      DefName="com.pq.tracs.model.vo.TraxUlrichsWireServiceView">
+        <AttrNames>
+          <Item Value="WireService"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUlrichsWireService"
+            IterBinding="UlrichsWireServiceIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousUlrichsWireService"
+            IterBinding="UlrichsWireServiceIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextUlrichsWireService" IterBinding="UlrichsWireServiceIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUlrichsWireService" IterBinding="UlrichsWireServiceIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyUlrichsWireService"
+            IterBinding="UlrichsWireServiceIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUlrichsWireService}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="TargetedProductLookupSingleTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-lov-taskflow-template.xml</document>
+      <id id="__1">jhs-lov-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartTargetedProductLookupSingle</default-activity>
+    <data-control-scope id="__3">
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__4">
+      <name id="__5">rowKeyStrTargetedProductLookupSingle</name>
+      <value id="__6">#{pageFlowScope.rowKeyStrTargetedProductLookupSingle}</value>
+      <class id="__7">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name id="__9">rowKeyValueTargetedProductLookupSingle</name>
+      <value id="__10">#{pageFlowScope.rowKeyValueTargetedProductLookupSingle}</value>
+      <class id="__11">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__12">
+      <name id="__13">rowKeyTargetedProductLookupSingle</name>
+      <value id="__14">#{pageFlowScope.rowKeyTargetedProductLookupSingle}</value>
+      <class id="__15">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__16">
+      <name id="__17">altKeyNameTargetedProductLookupSingle</name>
+      <value id="__18">#{pageFlowScope.altKeyNameTargetedProductLookupSingle}</value>
+      <class id="__19">java.lang.String</class>
+    </input-parameter-definition>
+    <return-value-definition id="__20">
+      <name>LovValidationRow</name>
+      <value>#{pageFlowScope.LovValidationRow}</value>
+    </return-value-definition>
+    <managed-bean id="__21">
+      <managed-bean-name id="__22">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__23">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__24">pageFlow</managed-bean-scope>
+      <managed-property id="__25">
+        <property-name id="__26">initializeParentContextEntries</property-name>
+        <map-entries id="__27">
+          <map-entry id="__28">
+            <key id="__29">jhsCurrentGroupName</key>
+            <value id="__30">TargetedProductLookupSingle</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__31">
+      <managed-bean-name id="__32">TargetedProductLookupSingleDefaultValues</managed-bean-name>
+      <managed-bean-class id="__33">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__34">pageFlow</managed-bean-scope>
+      <managed-property id="__35">
+        <property-name id="__36">iteratorBinding</property-name>
+        <value id="__37">#{data.TargetedProductLookupSinglePageDef.TargetedProductLookupSingleIterator}</value>
+      </managed-property>
+      <managed-property id="__38">
+        <property-name id="__39">defaultValues</property-name>
+        <map-entries id="__40">
+          <map-entry id="__41">
+            <key id="__42">TargetableFlag</key>
+            <value id="__43">Y</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__44">
+        <property-name id="__45">actionResult</property-name>
+        <value id="__46">CreateTargetedProductLookupSingle</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__47">
+      <managed-bean-name id="__48">searchTargetedProductLookupSingle</managed-bean-name>
+      <managed-bean-class id="__49">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__50">pageFlow</managed-bean-scope>
+      <managed-property id="__51">
+        <property-name id="__52">bindings</property-name>
+        <value id="__53">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__54">
+        <property-name id="__55">searchBinding</property-name>
+        <value id="__56">#{'#{bindings.advancedSearchTargetedProductLookupSingle}'}</value>
+      </managed-property>
+      <managed-property id="__57">
+        <property-name id="__58">searchItem</property-name>
+        <value id="__59">TargetedProductLookupSingleName</value>
+      </managed-property>
+      <managed-property id="__60">
+        <property-name id="__61">dataCollection</property-name>
+        <value id="__62">PrmTargetedProductLOV</value>
+      </managed-property>
+      <managed-property id="__63">
+        <property-name id="__64">operators</property-name>
+        <map-entries id="__65"></map-entries>
+      </managed-property>
+      <managed-property id="__66">
+        <property-name id="__67">itemAttributes</property-name>
+        <map-entries id="__68">
+          <map-entry id="__69">
+            <key id="__70">TargetedProductLookupSingleId</key>
+            <value id="__71">Id</value>
+          </map-entry>
+          <map-entry id="__72">
+            <key id="__73">TargetedProductLookupSinglePrdId</key>
+            <value id="__74">PrdId</value>
+          </map-entry>
+          <map-entry id="__75">
+            <key id="__76">TargetedProductLookupSingleName</key>
+            <value id="__77">Name</value>
+          </map-entry>
+          <map-entry id="__78">
+            <key id="__79">TargetedProductLookupSingleProductFamily</key>
+            <value id="__80">ProductFamily</value>
+          </map-entry>
+          <map-entry id="__81">
+            <key id="__82">TargetedProductLookupSingleProductManager</key>
+            <value id="__83">ProductManager</value>
+          </map-entry>
+          <map-entry id="__84">
+            <key id="__85">TargetedProductLookupSingleTargetableFlag</key>
+            <value id="__86">TargetableFlag</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__87">
+      <managed-bean-name id="__88">TargetedProductLookupSinglePage</managed-bean-name>
+      <managed-bean-class id="__89">oracle.jheadstart.controller.jsf.bean.LovPageBean</managed-bean-class>
+      <managed-bean-scope id="__90">pageFlow</managed-bean-scope>
+      <managed-property id="__91">
+        <property-name id="__92">multiSelect</property-name>
+        <value id="__93">false</value>
+      </managed-property>
+      <managed-property id="__94">
+        <property-name id="__95">lovItemBean</property-name>
+        <value id="__96">#{pageFlowScope.lovItemBeanRef}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__97">
+      <managed-bean-name id="__98">TargetedProductLookupSingleTable</managed-bean-name>
+      <managed-bean-class id="__99">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__100">pageFlow</managed-bean-scope>
+      <managed-property id="__101">
+        <property-name id="__102">name</property-name>
+        <value id="__103">TargetedProductLookupSingleTable</value>
+      </managed-property>
+      <managed-property id="__104">
+        <property-name id="__105">rangeBindingExpr</property-name>
+        <value id="__106">#{'#{bindings.TargetedProductLookupSingleTable}'}</value>
+      </managed-property>
+      <managed-property id="__107">
+        <property-name id="__108">createNewRowAtTop</property-name>
+        <value id="__109">true</value>
+      </managed-property>
+      <managed-property id="__110">
+        <property-name id="__111">defaultValuesBean</property-name>
+        <value id="__112">#{pageFlowScope.TargetedProductLookupSingleDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__113">
+        <property-name id="__114">lovPage</property-name>
+        <value id="__115">#{pageFlowScope.TargetedProductLookupSinglePage}</value>
+      </managed-property>
+      <managed-property id="__116">
+        <property-name id="__117">focusItemId</property-name>
+        <value id="__118">TargetedProductLookupSinglePrdId</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartTargetedProductLookupSingle">
+      <case id="__119">
+        <expression id="__120">#{pageFlowScope.lovItemBeanRef.validationStarted}</expression>
+        <outcome id="__121">DoValidation</outcome>
+      </case>
+      <case id="__122">
+        <expression id="__123">#{pageFlowScope.lovItemBeanRef.lovSearchValue!=null}</expression>
+        <outcome id="__124">PreQueryUsingSearchValue</outcome>
+      </case>
+      <case id="__125">
+        <expression id="__126">#{pageFlowScope.rowKeyStrTargetedProductLookupSingle!=null
+                               or
+                               pageFlowScope.rowKeyValueTargetedProductLookupSingle!=null
+                               or
+                               pageFlowScope.rowKeyTargetedProductLookupSingle!=null}</expression>
+        <outcome id="__127">SetCurrentRowTargetedProductLookupSingle</outcome>
+      </case>
+      <case id="__128">
+        <expression id="__129">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__130">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__131">clearSearchCriteria</default-outcome>
+    </router>
+    <method-call id="ClearSearchCriteria">
+      <method id="__132">#{pageFlowScope.searchTargetedProductLookupSingle.clearSearchCriteriaAndRequery}</method>
+      <outcome id="__133">
+        <fixed-outcome id="__134">firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="PreQueryUsingSearchValue">
+      <method id="__135">#{pageFlowScope.searchTargetedProductLookupSingle.quickSearch}</method>
+      <parameter>
+        <value id="__136">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__137">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__138">
+        <fixed-outcome>firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="DoValidation">
+      <method id="__139">#{pageFlowScope.searchTargetedProductLookupSingle.quickSearch}</method>
+      <parameter>
+        <value id="__140">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__141">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__142">
+        <fixed-outcome>DoneTargetedProductLookupSingleReturn</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowTargetedProductLookupSingle">
+      <method id="__143">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__144">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__145">#{bindings.TargetedProductLookupSingleIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__146">java.lang.String</class>
+        <value id="__147">#{pageFlowScope.rowKeyStrTargetedProductLookupSingle}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__148">java.lang.Object</class>
+        <value id="__149">#{pageFlowScope.rowKeyValueTargetedProductLookupSingle}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__150">oracle.jbo.Key</class>
+        <value id="__151">#{pageFlowScope.rowKeyTargetedProductLookupSingle}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__152">java.lang.String</class>
+        <value id="__153">#{pageFlowScope.altKeyNameTargetedProductLookupSingle}</value>
+      </parameter>
+      <outcome id="__154">
+        <fixed-outcome id="__155">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelTargetedProductLookupSingleReturn">
+      <outcome id="__156">
+        <name id="__157">CancelTargetedProductLookupSingle</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneTargetedProductLookupSingleReturn">
+      <outcome id="__158">
+        <name id="__159">DoneTargetedProductLookupSingle</name>
+      </outcome>
+    </task-flow-return>
+    <view id="TargetedProductLookupSingleTable">
+      <page id="__160">/pages/TargetedProductLookupSingleTable.jsff</page>
+    </view>
+    <control-flow-rule id="__161">
+      <from-activity-id id="__162">*</from-activity-id>
+      <control-flow-case id="__163">
+        <from-outcome id="__164">SetCurrentRowTargetedProductLookupSingle</from-outcome>
+        <to-activity-id id="__165">SetCurrentRowTargetedProductLookupSingle</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__166">
+        <from-outcome id="__167">firstPage</from-outcome>
+        <to-activity-id id="__168">TargetedProductLookupSingleTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__169">
+        <from-outcome id="__170">deepLinkPage</from-outcome>
+        <to-activity-id id="__171">TargetedProductLookupSingleTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__172">
+        <from-outcome id="__173">TargetedProductLookupSingleTableBreadcrumb</from-outcome>
+        <to-activity-id id="__174">TargetedProductLookupSingleTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__175">
+        <from-outcome id="__176">Cancel</from-outcome>
+        <to-activity-id id="__177">StartTargetedProductLookupSingle</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__178">
+        <from-outcome id="__179">CancelTargetedProductLookupSingleReturn</from-outcome>
+        <to-activity-id id="__180">CancelTargetedProductLookupSingleReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__181">
+        <from-outcome id="__182">DoneTargetedProductLookupSingleReturn</from-outcome>
+        <to-activity-id id="__183">DoneTargetedProductLookupSingleReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__184">
+      <from-activity-id id="__185">*</from-activity-id>
+      <control-flow-case id="__186">
+        <from-outcome id="__187">clearSearchCriteria</from-outcome>
+        <to-activity-id id="__188">ClearSearchCriteria</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__189">
+        <from-outcome id="__190">PreQueryUsingSearchValue</from-outcome>
+        <to-activity-id id="__191">PreQueryUsingSearchValue</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__192">
+        <from-outcome id="__193">DoValidation</from-outcome>
+        <to-activity-id id="__194">DoValidation</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__195">
+    <managed-bean-name id="__196">TargetedProductLookupSingleTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__197">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__198">pageFlow</managed-bean-scope>
+    <managed-property id="__199">
+      <property-name id="__200">params</property-name>
+      <property-class id="__201">java.util.Map</property-class>
+      <map-entries id="__202">
+        <map-entry id="__203">
+          <key id="__204">parentContext</key>
+          <value id="__205">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__206">
+      <property-name id="__207">name</property-name>
+      <value id="__208">TargetedProductLookupSingle</value>
+    </managed-property>
+    <managed-property id="__209">
+      <property-name id="__210">taskFlowId</property-name>
+      <value id="__211">/WEB-INF/adfc-config-TargetedProductLookupSingle.xml#TargetedProductLookupSingleTaskFlow</value>
+    </managed-property>
+    <managed-property id="__212">
+      <property-name id="__213">tabUniqueIdentifier</property-name>
+      <value id="__214">TargetedProductLookupSingle</value>
+    </managed-property>
+    <managed-property id="__215">
+      <property-name id="__216">label</property-name>
+      <value id="__217">Products</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__218">
+    <managed-bean-name id="__219">TargetedProductLookupSingleQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__220">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__221">request</managed-bean-scope>
+    <managed-property id="__222">
+      <property-name id="__223">namedParamDefs</property-name>
+      <map-entries id="__224">
+        <map-entry id="__225">
+          <key id="__226">targetable</key>
+          <value id="__227">#{'1'}</value>
+        </map-entry>
+        <map-entry id="__228">
+          <key id="__229">not_targetable</key>
+          <value id="__230">#{'0'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

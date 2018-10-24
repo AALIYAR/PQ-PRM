@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="AccountLookupTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-lov-taskflow-template.xml</document>
+      <id id="__1">jhs-lov-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartAccountLookup</default-activity>
+    <data-control-scope id="__3">
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__4">
+      <name id="__5">rowKeyStrAccountLookup</name>
+      <value id="__6">#{pageFlowScope.rowKeyStrAccountLookup}</value>
+      <class id="__7">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name id="__9">rowKeyValueAccountLookup</name>
+      <value id="__10">#{pageFlowScope.rowKeyValueAccountLookup}</value>
+      <class id="__11">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__12">
+      <name id="__13">rowKeyAccountLookup</name>
+      <value id="__14">#{pageFlowScope.rowKeyAccountLookup}</value>
+      <class id="__15">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__16">
+      <name id="__17">altKeyNameAccountLookup</name>
+      <value id="__18">#{pageFlowScope.altKeyNameAccountLookup}</value>
+      <class id="__19">java.lang.String</class>
+    </input-parameter-definition>
+    <return-value-definition id="__20">
+      <name>LovValidationRow</name>
+      <value>#{pageFlowScope.LovValidationRow}</value>
+    </return-value-definition>
+    <managed-bean id="__21">
+      <managed-bean-name id="__22">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__23">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__24">pageFlow</managed-bean-scope>
+      <managed-property id="__25">
+        <property-name id="__26">initializeParentContextEntries</property-name>
+        <map-entries id="__27">
+          <map-entry id="__28">
+            <key id="__29">jhsCurrentGroupName</key>
+            <value id="__30">AccountLookup</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__31">
+      <managed-bean-name id="__32">AccountLookupDefaultValues</managed-bean-name>
+      <managed-bean-class id="__33">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__34">pageFlow</managed-bean-scope>
+      <managed-property id="__35">
+        <property-name id="__36">iteratorBinding</property-name>
+        <value id="__37">#{data.AccountLookupPageDef.AccountLookupIterator}</value>
+      </managed-property>
+      <managed-property id="__38">
+        <property-name id="__39">defaultValues</property-name>
+        <map-entries id="__40">
+          <map-entry id="__41">
+            <key id="__42">PoolFlag</key>
+            <value id="__43">N</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__44">
+        <property-name id="__45">actionResult</property-name>
+        <value id="__46">CreateAccountLookup</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__47">
+      <managed-bean-name id="__48">searchAccountLookup</managed-bean-name>
+      <managed-bean-class id="__49">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__50">pageFlow</managed-bean-scope>
+      <managed-property id="__51">
+        <property-name id="__52">bindings</property-name>
+        <value id="__53">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__54">
+        <property-name id="__55">searchBinding</property-name>
+        <value id="__56">#{'#{bindings.advancedSearchAccountLookup}'}</value>
+      </managed-property>
+      <managed-property id="__57">
+        <property-name id="__58">searchItem</property-name>
+        <value id="__59">AccountLookupName</value>
+      </managed-property>
+      <managed-property id="__60">
+        <property-name id="__61">dataCollection</property-name>
+        <value id="__62">AccountLookupView1</value>
+      </managed-property>
+      <managed-property id="__63">
+        <property-name id="__64">operators</property-name>
+        <map-entries id="__65"></map-entries>
+      </managed-property>
+      <managed-property id="__66">
+        <property-name id="__67">itemAttributes</property-name>
+        <map-entries id="__68">
+          <map-entry id="__69">
+            <key id="__70">AccountLookupId</key>
+            <value id="__71">Id</value>
+          </map-entry>
+          <map-entry id="__72">
+            <key id="__73">AccountLookupContentOwnerNo</key>
+            <value id="__74">ContentOwnerNo</value>
+          </map-entry>
+          <map-entry id="__75">
+            <key id="__76">AccountLookupName</key>
+            <value id="__77">Name</value>
+          </map-entry>
+          <map-entry id="__78">
+            <key id="__79">AccountLookupSite</key>
+            <value id="__80">Site</value>
+          </map-entry>
+          <map-entry id="__81">
+            <key id="__82">AccountLookupKeyAccountLevel</key>
+            <value id="__83">KeyAccountLevel</value>
+          </map-entry>
+          <map-entry id="__84">
+            <key id="__85">AccountLookupAllianceManager</key>
+            <value id="__86">AllianceManager</value>
+          </map-entry>
+          <map-entry id="__87">
+            <key id="__88">AccountLookupPoolFlag</key>
+            <value id="__89">PoolFlag</value>
+          </map-entry>
+          <map-entry id="__90">
+            <key id="__91">AccountLookupOpenOpps</key>
+            <value id="__92">OpenOpps</value>
+          </map-entry>
+          <map-entry id="__93">
+            <key id="__94">AccountLookupTargetedTitles</key>
+            <value id="__95">TargetedTitles</value>
+          </map-entry>
+          <map-entry id="__96">
+            <key id="__97">AccountLookupCampaignName</key>
+            <value id="__98">CampaignName</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__99">
+      <managed-bean-name id="__100">AccountLookupPage</managed-bean-name>
+      <managed-bean-class id="__101">oracle.jheadstart.controller.jsf.bean.LovPageBean</managed-bean-class>
+      <managed-bean-scope id="__102">pageFlow</managed-bean-scope>
+      <managed-property id="__103">
+        <property-name id="__104">multiSelect</property-name>
+        <value id="__105">true</value>
+      </managed-property>
+      <managed-property id="__106">
+        <property-name id="__107">lovItemBean</property-name>
+        <value id="__108">#{pageFlowScope.lovItemBeanRef}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__109">
+      <managed-bean-name id="__110">AccountLookupTable</managed-bean-name>
+      <managed-bean-class id="__111">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__112">pageFlow</managed-bean-scope>
+      <managed-property id="__113">
+        <property-name id="__114">name</property-name>
+        <value id="__115">AccountLookupTable</value>
+      </managed-property>
+      <managed-property id="__116">
+        <property-name id="__117">rangeBindingExpr</property-name>
+        <value id="__118">#{'#{bindings.AccountLookupTable}'}</value>
+      </managed-property>
+      <managed-property id="__119">
+        <property-name id="__120">createNewRowAtTop</property-name>
+        <value id="__121">true</value>
+      </managed-property>
+      <managed-property id="__122">
+        <property-name id="__123">defaultValuesBean</property-name>
+        <value id="__124">#{pageFlowScope.AccountLookupDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__125">
+        <property-name id="__126">lovPage</property-name>
+        <value id="__127">#{pageFlowScope.AccountLookupPage}</value>
+      </managed-property>
+      <managed-property id="__128">
+        <property-name id="__129">focusItemId</property-name>
+        <value id="__130">AccountLookupContentOwnerNo</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__131">
+      <managed-bean-name id="__132">AccountLookupPoolFlagcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__133">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__134">request</managed-bean-scope>
+      <managed-property id="__135">
+        <property-name id="__136">binding</property-name>
+        <value id="__137">#{bindings.AccountLookupPoolFlag}</value>
+      </managed-property>
+      <managed-property id="__138">
+        <property-name id="__139">tableBean</property-name>
+        <value id="__140">#{pageFlowScope.AccountLookupTable}</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartAccountLookup">
+      <case id="__141">
+        <expression id="__142">#{pageFlowScope.lovItemBeanRef.validationStarted}</expression>
+        <outcome id="__143">DoValidation</outcome>
+      </case>
+      <case id="__144">
+        <expression id="__145">#{pageFlowScope.lovItemBeanRef.lovSearchValue!=null}</expression>
+        <outcome id="__146">PreQueryUsingSearchValue</outcome>
+      </case>
+      <case id="__147">
+        <expression id="__148">#{pageFlowScope.rowKeyStrAccountLookup!=null or
+                               pageFlowScope.rowKeyValueAccountLookup!=null or
+                               pageFlowScope.rowKeyAccountLookup!=null}</expression>
+        <outcome id="__149">SetCurrentRowAccountLookup</outcome>
+      </case>
+      <case id="__150">
+        <expression id="__151">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__152">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__153">clearSearchCriteria</default-outcome>
+    </router>
+    <method-call id="ClearSearchCriteria">
+      <method id="__154">#{pageFlowScope.searchAccountLookup.clearSearchCriteriaAndRequery}</method>
+      <outcome id="__155">
+        <fixed-outcome id="__156">firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="PreQueryUsingSearchValue">
+      <method id="__157">#{pageFlowScope.searchAccountLookup.quickSearch}</method>
+      <parameter>
+        <value id="__158">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__159">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__160">
+        <fixed-outcome>firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="DoValidation">
+      <method id="__161">#{pageFlowScope.searchAccountLookup.quickSearch}</method>
+      <parameter>
+        <value id="__162">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__163">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__164">
+        <fixed-outcome>DoneAccountLookupReturn</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowAccountLookup">
+      <method id="__165">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__166">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__167">#{bindings.AccountLookupIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__168">java.lang.String</class>
+        <value id="__169">#{pageFlowScope.rowKeyStrAccountLookup}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__170">java.lang.Object</class>
+        <value id="__171">#{pageFlowScope.rowKeyValueAccountLookup}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__172">oracle.jbo.Key</class>
+        <value id="__173">#{pageFlowScope.rowKeyAccountLookup}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__174">java.lang.String</class>
+        <value id="__175">#{pageFlowScope.altKeyNameAccountLookup}</value>
+      </parameter>
+      <outcome id="__176">
+        <fixed-outcome id="__177">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelAccountLookupReturn">
+      <outcome id="__178">
+        <name id="__179">CancelAccountLookup</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneAccountLookupReturn">
+      <outcome id="__180">
+        <name id="__181">DoneAccountLookup</name>
+      </outcome>
+    </task-flow-return>
+    <view id="AccountLookupTable">
+      <page id="__182">/pages/AccountLookupTable.jsff</page>
+    </view>
+    <control-flow-rule id="__183">
+      <from-activity-id id="__184">*</from-activity-id>
+      <control-flow-case id="__185">
+        <from-outcome id="__186">SetCurrentRowAccountLookup</from-outcome>
+        <to-activity-id id="__187">SetCurrentRowAccountLookup</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__188">
+        <from-outcome id="__189">firstPage</from-outcome>
+        <to-activity-id id="__190">AccountLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__191">
+        <from-outcome id="__192">deepLinkPage</from-outcome>
+        <to-activity-id id="__193">AccountLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__194">
+        <from-outcome id="__195">AccountLookupTableBreadcrumb</from-outcome>
+        <to-activity-id id="__196">AccountLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__197">
+        <from-outcome id="__198">Cancel</from-outcome>
+        <to-activity-id id="__199">StartAccountLookup</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__200">
+        <from-outcome id="__201">CancelAccountLookupReturn</from-outcome>
+        <to-activity-id id="__202">CancelAccountLookupReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__203">
+        <from-outcome id="__204">DoneAccountLookupReturn</from-outcome>
+        <to-activity-id id="__205">DoneAccountLookupReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__206">
+      <from-activity-id id="__207">*</from-activity-id>
+      <control-flow-case id="__208">
+        <from-outcome id="__209">clearSearchCriteria</from-outcome>
+        <to-activity-id id="__210">ClearSearchCriteria</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__211">
+        <from-outcome id="__212">PreQueryUsingSearchValue</from-outcome>
+        <to-activity-id id="__213">PreQueryUsingSearchValue</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__214">
+        <from-outcome id="__215">DoValidation</from-outcome>
+        <to-activity-id id="__216">DoValidation</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__217">
+    <managed-bean-name id="__218">AccountLookupTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__219">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__220">pageFlow</managed-bean-scope>
+    <managed-property id="__221">
+      <property-name id="__222">params</property-name>
+      <property-class id="__223">java.util.Map</property-class>
+      <map-entries id="__224">
+        <map-entry id="__225">
+          <key id="__226">parentContext</key>
+          <value id="__227">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__228">
+      <property-name id="__229">name</property-name>
+      <value id="__230">AccountLookup</value>
+    </managed-property>
+    <managed-property id="__231">
+      <property-name id="__232">taskFlowId</property-name>
+      <value id="__233">/WEB-INF/adfc-config-AccountLookup.xml#AccountLookupTaskFlow</value>
+    </managed-property>
+    <managed-property id="__234">
+      <property-name id="__235">tabUniqueIdentifier</property-name>
+      <value id="__236">AccountLookup</value>
+    </managed-property>
+    <managed-property id="__237">
+      <property-name id="__238">label</property-name>
+      <value id="__239">Accounts</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

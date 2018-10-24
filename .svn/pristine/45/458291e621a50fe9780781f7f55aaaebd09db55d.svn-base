@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ProductsTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartProducts</default-activity>
+    <input-parameter-definition id="__3">
+      <name id="__4">createProducts</name>
+      <value id="__5">#{pageFlowScope.createProducts}</value>
+      <class id="__6">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyStrProducts</name>
+      <value id="__9">#{pageFlowScope.rowKeyStrProducts}</value>
+      <class id="__10">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyValueProducts</name>
+      <value id="__13">#{pageFlowScope.rowKeyValueProducts}</value>
+      <class id="__14">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">rowKeyProducts</name>
+      <value id="__17">#{pageFlowScope.rowKeyProducts}</value>
+      <class id="__18">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name id="__20">altKeyNameProducts</name>
+      <value id="__21">#{pageFlowScope.altKeyNameProducts}</value>
+      <class id="__22">java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__23">
+      <managed-bean-name id="__24">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__25">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__26">pageFlow</managed-bean-scope>
+      <managed-property id="__27">
+        <property-name id="__28">initializeParentContextEntries</property-name>
+        <map-entries id="__29">
+          <map-entry id="__30">
+            <key id="__31">jhsCurrentGroupName</key>
+            <value id="__32">Products</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__33">
+      <managed-bean-name id="__34">ProductsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__35">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__36">pageFlow</managed-bean-scope>
+      <managed-property id="__37">
+        <property-name id="__38">iteratorBinding</property-name>
+        <value id="__39">#{data.ProductsPageDef.ProductsIterator}</value>
+      </managed-property>
+      <managed-property id="__40">
+        <property-name id="__41">defaultValues</property-name>
+        <map-entries id="__42">
+          <map-entry id="__43">
+            <key id="__44">TargetableFlag</key>
+            <value id="__45">Y</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__46">
+        <property-name id="__47">actionResult</property-name>
+        <value id="__48">CreateProducts</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__49">
+      <managed-bean-name id="__50">ProductTitlesDefaultValues</managed-bean-name>
+      <managed-bean-class id="__51">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__52">pageFlow</managed-bean-scope>
+      <managed-property id="__53">
+        <property-name id="__54">iteratorBinding</property-name>
+        <value id="__55">#{data.ProductsPageDef.ProductTitlesIterator}</value>
+      </managed-property>
+      <managed-property id="__56">
+        <property-name id="__57">defaultValues</property-name>
+        <map-entries id="__58">
+          <map-entry id="__59">
+            <key id="__60">PeerReviewFlag</key>
+            <value id="__61">N</value>
+          </map-entry>
+          <map-entry id="__62">
+            <key id="__63">ActiveFlag</key>
+            <value id="__64">Y</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__65">
+        <property-name id="__66">actionResult</property-name>
+        <value id="__67">CreateProductTitles</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__68">
+      <managed-bean-name id="__69">TargetedProductTitlesDefaultValues</managed-bean-name>
+      <managed-bean-class id="__70">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__71">pageFlow</managed-bean-scope>
+      <managed-property id="__72">
+        <property-name id="__73">iteratorBinding</property-name>
+        <value id="__74">#{data.ProductsPageDef.TargetedProductTitlesIterator}</value>
+      </managed-property>
+      <managed-property id="__75">
+        <property-name id="__76">defaultValues</property-name>
+        <map-entries id="__77">
+          <map-entry id="__78">
+            <key id="__79">AiTargetingFlag</key>
+            <value id="__80">N</value>
+          </map-entry>
+          <map-entry id="__81">
+            <key id="__82">AddedDate</key>
+            <value id="__83">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__84">
+        <property-name id="__85">actionResult</property-name>
+        <value id="__86">CreateTargetedProductTitles</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__87">
+      <managed-bean-name id="__88">ProductManagerDefaultValues</managed-bean-name>
+      <managed-bean-class id="__89">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__90">pageFlow</managed-bean-scope>
+      <managed-property id="__91">
+        <property-name id="__92">iteratorBinding</property-name>
+        <value id="__93">#{data.ProductsPageDef.ProductManagerIterator}</value>
+      </managed-property>
+      <managed-property id="__94">
+        <property-name id="__95">defaultValues</property-name>
+        <map-entries id="__96">
+          <map-entry id="__97">
+            <key id="__98">AddedDate</key>
+            <value id="__99">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__100">
+        <property-name id="__101">actionResult</property-name>
+        <value id="__102">CreateProductManager</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__103">
+      <managed-bean-name id="__104">CreateProducts</managed-bean-name>
+      <managed-bean-class id="__105">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__106">request</managed-bean-scope>
+      <managed-property id="__107">
+        <property-name id="__108">createBinding</property-name>
+        <value id="__109">#{bindings.CreateProducts}</value>
+      </managed-property>
+      <managed-property id="__110">
+        <property-name id="__111">defaultValuesBean</property-name>
+        <value id="__112">#{pageFlowScope.ProductsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__113">
+        <property-name id="__114">successOutcome</property-name>
+        <value id="__115">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__116">
+        <property-name id="__117">failureOutcome</property-name>
+        <value id="__118">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__119">
+      <managed-bean-name id="__120">jhsRollback</managed-bean-name>
+      <managed-bean-class id="__121">oracle.jheadstart.controller.jsf.bean.RollbackBean</managed-bean-class>
+      <managed-bean-scope id="__122">request</managed-bean-scope>
+      <managed-property id="__123">
+        <property-name id="__124">rollbackBinding</property-name>
+        <value id="__125">#{bindings.Rollback}</value>
+      </managed-property>
+      <managed-property id="__126">
+        <property-name id="__127">successOutcome</property-name>
+        <value id="__128">Cancel</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__129">
+      <managed-bean-name id="__130">searchProducts</managed-bean-name>
+      <managed-bean-class id="__131">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__132">pageFlow</managed-bean-scope>
+      <managed-property id="__133">
+        <property-name id="__134">bindings</property-name>
+        <value id="__135">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__136">
+        <property-name id="__137">searchBinding</property-name>
+        <value id="__138">#{'#{bindings.advancedSearchProducts}'}</value>
+      </managed-property>
+      <managed-property id="__139">
+        <property-name id="__140">searchItem</property-name>
+        <value id="__141">PrdName</value>
+      </managed-property>
+      <managed-property id="__142">
+        <property-name id="__143">dataCollection</property-name>
+        <value id="__144">PrmTargetedProductView1</value>
+      </managed-property>
+      <managed-property id="__145">
+        <property-name id="__146">operators</property-name>
+        <map-entries id="__147"></map-entries>
+      </managed-property>
+      <managed-property id="__148">
+        <property-name id="__149">itemAttributes</property-name>
+        <map-entries id="__150">
+          <map-entry id="__151">
+            <key id="__152">PrdPrdId</key>
+            <value id="__153">PrdId</value>
+          </map-entry>
+          <map-entry id="__154">
+            <key id="__155">PrdName</key>
+            <value id="__156">Name</value>
+          </map-entry>
+          <map-entry id="__157">
+            <key id="__158">PrdShortName</key>
+            <value id="__159">ShortName</value>
+          </map-entry>
+          <map-entry id="__160">
+            <key id="__161">PrdProductFamily</key>
+            <value id="__162">ProductFamily</value>
+          </map-entry>
+          <map-entry id="__163">
+            <key id="__164">PrdProductManager</key>
+            <value id="__165">ProductManager</value>
+          </map-entry>
+          <map-entry id="__166">
+            <key id="__167">PrdTargetableFlag</key>
+            <value id="__168">TargetableFlag</value>
+          </map-entry>
+          <map-entry id="__169">
+            <key id="__170">PrdProductType</key>
+            <value id="__171">ProductType</value>
+          </map-entry>
+          <map-entry id="__172">
+            <key id="__173">PrdCreatedBy</key>
+            <value id="__174">CreatedBy</value>
+          </map-entry>
+          <map-entry id="__175">
+            <key id="__176">PrdCreatedDate</key>
+            <value id="__177">CreatedDate</value>
+          </map-entry>
+          <map-entry id="__178">
+            <key id="__179">PrdLastUpdatedBy</key>
+            <value id="__180">LastUpdatedBy</value>
+          </map-entry>
+          <map-entry id="__181">
+            <key id="__182">PrdLastUpdatedDate</key>
+            <value id="__183">LastUpdatedDate</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__184">
+      <managed-bean-name id="__185">ProductsTable</managed-bean-name>
+      <managed-bean-class id="__186">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__187">pageFlow</managed-bean-scope>
+      <managed-property id="__188">
+        <property-name id="__189">name</property-name>
+        <value id="__190">ProductsTable</value>
+      </managed-property>
+      <managed-property id="__191">
+        <property-name id="__192">rangeBindingExpr</property-name>
+        <value id="__193">#{'#{bindings.ProductsTable}'}</value>
+      </managed-property>
+      <managed-property id="__194">
+        <property-name id="__195">createNewRowAtTop</property-name>
+        <value id="__196">true</value>
+      </managed-property>
+      <managed-property id="__197">
+        <property-name id="__198">defaultValuesBean</property-name>
+        <value id="__199">#{pageFlowScope.ProductsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__200">
+        <property-name id="__201">focusItemId</property-name>
+        <value id="__202">PrdPI</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__203">
+      <managed-bean-name id="__204">PrdTargetableFlagcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__205">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__206">request</managed-bean-scope>
+      <managed-property id="__207">
+        <property-name id="__208">binding</property-name>
+        <value id="__209">#{bindings.PrdTargetableFlag}</value>
+      </managed-property>
+      <managed-property id="__210">
+        <property-name id="__211">tableBean</property-name>
+        <value id="__212">#{pageFlowScope.ProductsTable}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__213">
+      <managed-bean-name id="__214">PrdTargetableFlagDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__215">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__216">application</managed-bean-scope>
+      <managed-property id="__217">
+        <property-name id="__218">itemsToClear</property-name>
+        <list-entries id="__219">
+          <value id="__220">PrdTFt</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__221">
+        <property-name id="__222">componentsToRefresh</property-name>
+        <list-entries id="__223">
+          <value id="__224">PrdTFt</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__225">
+      <managed-bean-name id="__226">PrdProductTypeDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__227">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__228">application</managed-bean-scope>
+      <managed-property id="__229">
+        <property-name id="__230">itemsToClear</property-name>
+        <list-entries id="__231">
+          <value id="__232">PrdPTt</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__233">
+        <property-name id="__234">componentsToRefresh</property-name>
+        <list-entries id="__235">
+          <value id="__236">PrdPTt</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__237">
+      <managed-bean-name id="__238">DeleteProducts</managed-bean-name>
+      <managed-bean-class id="__239">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__240">request</managed-bean-scope>
+      <managed-property id="__241">
+        <property-name id="__242">deleteBinding</property-name>
+        <value id="__243">#{bindings.DeleteProducts}</value>
+      </managed-property>
+      <managed-property id="__244">
+        <property-name id="__245">commitBean</property-name>
+        <value id="__246">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__247">
+      <managed-bean-name id="__248">SaveProducts</managed-bean-name>
+      <managed-bean-class id="__249">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__250">request</managed-bean-scope>
+      <managed-property id="__251">
+        <property-name id="__252">commitBinding</property-name>
+        <value id="__253">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__254">
+        <property-name id="__255">successOutcome</property-name>
+        <value id="__256">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__257">
+      <managed-bean-name id="__258">ProductTitlesTable</managed-bean-name>
+      <managed-bean-class id="__259">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__260">pageFlow</managed-bean-scope>
+      <managed-property id="__261">
+        <property-name id="__262">name</property-name>
+        <value id="__263">ProductTitlesTable</value>
+      </managed-property>
+      <managed-property id="__264">
+        <property-name id="__265">rangeBindingExpr</property-name>
+        <value id="__266">#{'#{bindings.ProductTitlesTable}'}</value>
+      </managed-property>
+      <managed-property id="__267">
+        <property-name id="__268">createNewRowAtTop</property-name>
+        <value id="__269">true</value>
+      </managed-property>
+      <managed-property id="__270">
+        <property-name id="__271">defaultValuesBean</property-name>
+        <value id="__272">#{pageFlowScope.ProductTitlesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__273">
+        <property-name id="__274">focusItemId</property-name>
+        <value id="__275">s50TTN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__276">
+      <managed-bean-name id="__277">s50PeerReviewFlagcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__278">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__279">request</managed-bean-scope>
+      <managed-property id="__280">
+        <property-name id="__281">binding</property-name>
+        <value id="__282">#{bindings.s50PeerReviewFlag}</value>
+      </managed-property>
+      <managed-property id="__283">
+        <property-name id="__284">tableBean</property-name>
+        <value id="__285">#{pageFlowScope.ProductTitlesTable}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__286">
+      <managed-bean-name id="__287">TargetedProductTitlesTable</managed-bean-name>
+      <managed-bean-class id="__288">com.pq.tracs.view.beans.TableMultiDeleteBean</managed-bean-class>
+      <managed-bean-scope id="__289">pageFlow</managed-bean-scope>
+      <managed-property id="__290">
+        <property-name id="__291">name</property-name>
+        <value id="__292">TargetedProductTitlesTable</value>
+      </managed-property>
+      <managed-property id="__293">
+        <property-name id="__294">rangeBindingExpr</property-name>
+        <value id="__295">#{'#{bindings.TargetedProductTitlesTable}'}</value>
+      </managed-property>
+      <managed-property id="__296">
+        <property-name id="__297">createNewRowAtTop</property-name>
+        <value id="__298">true</value>
+      </managed-property>
+      <managed-property id="__299">
+        <property-name id="__300">defaultValuesBean</property-name>
+        <value id="__301">#{pageFlowScope.TargetedProductTitlesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__302">
+        <property-name id="__303">focusItemId</property-name>
+        <value id="__304">s51TTN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__305">
+      <managed-bean-name id="__306">DeleteTargetedProductTitles</managed-bean-name>
+      <managed-bean-class id="__307">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__308">request</managed-bean-scope>
+      <managed-property id="__309">
+        <property-name id="__310">deleteBinding</property-name>
+        <value id="__311">#{bindings.DeleteTargetedProductTitles}</value>
+      </managed-property>
+      <managed-property id="__312">
+        <property-name id="__313">commitBean</property-name>
+        <value id="__314">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__315">
+      <managed-bean-name id="__316">CreateTargetedProductTitles</managed-bean-name>
+      <managed-bean-class id="__317">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__318">request</managed-bean-scope>
+      <managed-property id="__319">
+        <property-name id="__320">createBinding</property-name>
+        <value id="__321">#{bindings.CreateTargetedProductTitles}</value>
+      </managed-property>
+      <managed-property id="__322">
+        <property-name id="__323">defaultValuesBean</property-name>
+        <value id="__324">#{pageFlowScope.TargetedProductTitlesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__325">
+        <property-name id="__326">successOutcome</property-name>
+        <value id="__327">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__328">
+        <property-name id="__329">failureOutcome</property-name>
+        <value id="__330">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__331">
+      <managed-bean-name id="__332">s51TargetTrackingNoLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__333">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__334">pageFlow</managed-bean-scope>
+      <managed-property id="__335">
+        <property-name id="__336">iterBindingExpr</property-name>
+        <value id="__337">#{'#{bindings.TargetedProductTitlesIterator}'}</value>
+      </managed-property>
+      <managed-property id="__338">
+        <property-name id="__339">lovFieldBindingExpr</property-name>
+        <value id="__340">#{'#{row.bindings.TargetTrackingNo}'}</value>
+      </managed-property>
+      <managed-property id="__341">
+        <property-name id="__342">copyToModel</property-name>
+        <value id="__343">true</value>
+      </managed-property>
+      <managed-property id="__344">
+        <property-name id="__345">tableBean</property-name>
+        <value id="__346">#{pageFlowScope.TargetedProductTitlesTable}</value>
+      </managed-property>
+      <managed-property id="__347">
+        <property-name id="__348">lovSearchItem</property-name>
+        <value id="__349">TitleLookupTargetTrackingNo</value>
+      </managed-property>
+      <managed-property id="__350">
+        <property-name id="__351">lovTitleExpr</property-name>
+        <value id="__352">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.TargetedProductTitlesTable.hints.TargetTrackingNo.label}"}</value>
+      </managed-property>
+      <managed-property id="__353">
+        <property-name id="__354">lovWidth</property-name>
+        <value id="__355">1000</value>
+      </managed-property>
+      <managed-property id="__356">
+        <property-name id="__357">lovHeight</property-name>
+        <value id="__358">500</value>
+      </managed-property>
+      <managed-property id="__359">
+        <property-name id="__360">lovTaskFlowIdString</property-name>
+        <value id="__361">/WEB-INF/adfc-config-TitleLookup.xml#TitleLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__362">
+        <property-name id="__363">lovParams</property-name>
+        <map-entries id="__364"></map-entries>
+      </managed-property>
+      <managed-property id="__365">
+        <property-name id="__366">returnItemValues</property-name>
+        <map-entries id="__367">
+          <map-entry id="__368">
+            <key id="__369">Id</key>
+            <value id="__370">s51TitleId</value>
+          </map-entry>
+          <map-entry id="__371">
+            <key id="__372">TargetTrackingNo</key>
+            <value id="__373">s51TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__374">
+            <key id="__375">CatalogNumber</key>
+            <value id="__376">s51CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__377">
+            <key id="__378">LongTitle</key>
+            <value id="__379">s51LongTitle</value>
+          </map-entry>
+          <map-entry id="__380">
+            <key id="__381">Author</key>
+            <value id="__382">s51Author</value>
+          </map-entry>
+          <map-entry id="__383">
+            <key id="__384">AccountName</key>
+            <value id="__385">s51AccountName</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__386">
+        <property-name id="__387">returnAttributeValues</property-name>
+        <map-entries id="__388">
+          <map-entry id="__389">
+            <key id="__390">Id</key>
+            <value id="__391">TitleId</value>
+          </map-entry>
+          <map-entry id="__392">
+            <key id="__393">TargetTrackingNo</key>
+            <value id="__394">TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__395">
+            <key id="__396">CatalogNumber</key>
+            <value id="__397">CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__398">
+            <key id="__399">LongTitle</key>
+            <value id="__400">LongTitle</value>
+          </map-entry>
+          <map-entry id="__401">
+            <key id="__402">Author</key>
+            <value id="__403">Author</value>
+          </map-entry>
+          <map-entry id="__404">
+            <key id="__405">AccountName</key>
+            <value id="__406">Name</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__407">
+        <property-name id="__408">itemsToClear</property-name>
+        <list-entries id="__409"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__410">
+      <managed-bean-name id="__411">s51AiTargetingFlagcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__412">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__413">request</managed-bean-scope>
+      <managed-property id="__414">
+        <property-name id="__415">binding</property-name>
+        <value id="__416">#{bindings.s51AiTargetingFlag}</value>
+      </managed-property>
+      <managed-property id="__417">
+        <property-name id="__418">tableBean</property-name>
+        <value id="__419">#{pageFlowScope.TargetedProductTitlesTable}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__420">
+      <managed-bean-name id="__421">TargetedFormatsTable</managed-bean-name>
+      <managed-bean-class id="__422">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__423">pageFlow</managed-bean-scope>
+      <managed-property id="__424">
+        <property-name id="__425">name</property-name>
+        <value id="__426">TargetedFormatsTable</value>
+      </managed-property>
+      <managed-property id="__427">
+        <property-name id="__428">rangeBindingExpr</property-name>
+        <value id="__429">#{'#{bindings.TargetedFormatsTable}'}</value>
+      </managed-property>
+      <managed-property id="__430">
+        <property-name id="__431">createNewRowAtTop</property-name>
+        <value id="__432">true</value>
+      </managed-property>
+      <managed-property id="__433">
+        <property-name id="__434">focusItemId</property-name>
+        <value id="__435">s52TF</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__436">
+      <managed-bean-name id="__437">DeleteTargetedFormats</managed-bean-name>
+      <managed-bean-class id="__438">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__439">request</managed-bean-scope>
+      <managed-property id="__440">
+        <property-name id="__441">deleteBinding</property-name>
+        <value id="__442">#{bindings.DeleteTargetedFormats}</value>
+      </managed-property>
+      <managed-property id="__443">
+        <property-name id="__444">commitBean</property-name>
+        <value id="__445">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__446">
+      <managed-bean-name id="__447">CreateTargetedFormats</managed-bean-name>
+      <managed-bean-class id="__448">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__449">request</managed-bean-scope>
+      <managed-property id="__450">
+        <property-name id="__451">createBinding</property-name>
+        <value id="__452">#{bindings.CreateTargetedFormats}</value>
+      </managed-property>
+      <managed-property id="__453">
+        <property-name id="__454">successOutcome</property-name>
+        <value id="__455">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__456">
+        <property-name id="__457">failureOutcome</property-name>
+        <value id="__458">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__459">
+      <managed-bean-name id="__460">ProductManagerTable</managed-bean-name>
+      <managed-bean-class id="__461">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__462">pageFlow</managed-bean-scope>
+      <managed-property id="__463">
+        <property-name id="__464">name</property-name>
+        <value id="__465">ProductManagerTable</value>
+      </managed-property>
+      <managed-property id="__466">
+        <property-name id="__467">rangeBindingExpr</property-name>
+        <value id="__468">#{'#{bindings.ProductManagerTable}'}</value>
+      </managed-property>
+      <managed-property id="__469">
+        <property-name id="__470">createNewRowAtTop</property-name>
+        <value id="__471">true</value>
+      </managed-property>
+      <managed-property id="__472">
+        <property-name id="__473">defaultValuesBean</property-name>
+        <value id="__474">#{pageFlowScope.ProductManagerDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__475">
+        <property-name id="__476">focusItemId</property-name>
+        <value id="__477">s53ProductManager</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__478">
+      <managed-bean-name id="__479">DeleteProductManager</managed-bean-name>
+      <managed-bean-class id="__480">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__481">request</managed-bean-scope>
+      <managed-property id="__482">
+        <property-name id="__483">deleteBinding</property-name>
+        <value id="__484">#{bindings.DeleteProductManager}</value>
+      </managed-property>
+      <managed-property id="__485">
+        <property-name id="__486">commitBean</property-name>
+        <value id="__487">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__488">
+      <managed-bean-name id="__489">CreateProductManager</managed-bean-name>
+      <managed-bean-class id="__490">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__491">request</managed-bean-scope>
+      <managed-property id="__492">
+        <property-name id="__493">createBinding</property-name>
+        <value id="__494">#{bindings.CreateProductManager}</value>
+      </managed-property>
+      <managed-property id="__495">
+        <property-name id="__496">defaultValuesBean</property-name>
+        <value id="__497">#{pageFlowScope.ProductManagerDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__498">
+        <property-name id="__499">successOutcome</property-name>
+        <value id="__500">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__501">
+        <property-name id="__502">failureOutcome</property-name>
+        <value id="__503">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__504">
+      <managed-bean-name id="__505">s53ProductManagerLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__506">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__507">pageFlow</managed-bean-scope>
+      <managed-property id="__508">
+        <property-name id="__509">iterBindingExpr</property-name>
+        <value id="__510">#{'#{bindings.ProductManagerIterator}'}</value>
+      </managed-property>
+      <managed-property id="__511">
+        <property-name id="__512">lovFieldBindingExpr</property-name>
+        <value id="__513">#{'#{row.bindings.ProductManager}'}</value>
+      </managed-property>
+      <managed-property id="__514">
+        <property-name id="__515">copyToModel</property-name>
+        <value id="__516">true</value>
+      </managed-property>
+      <managed-property id="__517">
+        <property-name id="__518">tableBean</property-name>
+        <value id="__519">#{pageFlowScope.ProductManagerTable}</value>
+      </managed-property>
+      <managed-property id="__520">
+        <property-name id="__521">lovSearchItem</property-name>
+        <value id="__522">PMLookupDisplayName</value>
+      </managed-property>
+      <managed-property id="__523">
+        <property-name id="__524">lovTitleExpr</property-name>
+        <value id="__525">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.ProductManagerTable.hints.ProductManager.label}"}</value>
+      </managed-property>
+      <managed-property id="__526">
+        <property-name id="__527">lovWidth</property-name>
+        <value id="__528">1000</value>
+      </managed-property>
+      <managed-property id="__529">
+        <property-name id="__530">lovHeight</property-name>
+        <value id="__531">500</value>
+      </managed-property>
+      <managed-property id="__532">
+        <property-name id="__533">lovTaskFlowIdString</property-name>
+        <value id="__534">/WEB-INF/adfc-config-PMLookup.xml#PMLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__535">
+        <property-name id="__536">lovParams</property-name>
+        <map-entries id="__537"></map-entries>
+      </managed-property>
+      <managed-property id="__538">
+        <property-name id="__539">returnItemValues</property-name>
+        <map-entries id="__540">
+          <map-entry id="__541">
+            <key id="__542">DisplayName</key>
+            <value id="__543">s53ProductManager</value>
+          </map-entry>
+          <map-entry id="__544">
+            <key id="__545">Id</key>
+            <value id="__546">s53PrmUserId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__547">
+        <property-name id="__548">returnAttributeValues</property-name>
+        <map-entries id="__549">
+          <map-entry id="__550">
+            <key id="__551">DisplayName</key>
+            <value id="__552">ProductManager</value>
+          </map-entry>
+          <map-entry id="__553">
+            <key id="__554">Id</key>
+            <value id="__555">PrmUserId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__556">
+        <property-name id="__557">itemsToClear</property-name>
+        <list-entries id="__558"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <router id="StartProducts">
+      <case id="__559">
+        <expression id="__560">#{pageFlowScope.createProducts!=null}</expression>
+        <outcome id="__561">createProducts</outcome>
+      </case>
+      <case id="__562">
+        <expression id="__563">#{pageFlowScope.rowKeyStrProducts!=null or
+                               pageFlowScope.rowKeyValueProducts!=null or
+                               pageFlowScope.rowKeyProducts!=null}</expression>
+        <outcome id="__564">SetCurrentRowProducts</outcome>
+      </case>
+      <case id="__565">
+        <expression id="__566">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__567">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__568">firstPage</default-outcome>
+    </router>
+    <method-call id="CreateProducts">
+      <method id="__569">#{CreateProducts.execute}</method>
+      <!-- execute condition param -->
+      <parameter>
+        <class id="__570">java.lang.Object</class>
+        <value id="__571">#{pageFlowScope.createProducts}</value>
+      </parameter>
+      <outcome id="__572">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowProducts">
+      <method id="__573">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__574">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__575">#{bindings.ProductsIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__576">java.lang.String</class>
+        <value id="__577">#{pageFlowScope.rowKeyStrProducts}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__578">java.lang.Object</class>
+        <value id="__579">#{pageFlowScope.rowKeyValueProducts}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__580">oracle.jbo.Key</class>
+        <value id="__581">#{pageFlowScope.rowKeyProducts}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__582">java.lang.String</class>
+        <value id="__583">#{pageFlowScope.altKeyNameProducts}</value>
+      </parameter>
+      <outcome id="__584">
+        <fixed-outcome id="__585">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelProductsReturn">
+      <outcome id="__586">
+        <name id="__587">CancelProducts</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneProductsReturn">
+      <outcome id="__588">
+        <name id="__589">DoneProducts</name>
+      </outcome>
+    </task-flow-return>
+    <view id="ProductsTable">
+      <page id="__590">/pages/ProductsTable.jsff</page>
+    </view>
+    <view id="Products">
+      <page id="__591">/pages/Products.jsff</page>
+    </view>
+    <control-flow-rule id="__592">
+      <from-activity-id id="__593">*</from-activity-id>
+      <control-flow-case id="__594">
+        <from-outcome id="__595">SetCurrentRowProducts</from-outcome>
+        <to-activity-id id="__596">SetCurrentRowProducts</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__597">
+        <from-outcome id="__598">firstPage</from-outcome>
+        <to-activity-id id="__599">ProductsTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__600">
+        <from-outcome id="__601">deepLinkPage</from-outcome>
+        <to-activity-id id="__602">Products</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__603">
+        <from-outcome id="__604">ProductsTableBreadcrumb</from-outcome>
+        <to-activity-id id="__605">ProductsTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__606">
+        <from-outcome id="__607">ProductsBreadcrumb</from-outcome>
+        <to-activity-id id="__608">Products</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__609">
+        <from-outcome id="__610">Cancel</from-outcome>
+        <to-activity-id id="__611">StartProducts</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__612">
+        <from-outcome id="__613">CancelProductsReturn</from-outcome>
+        <to-activity-id id="__614">CancelProductsReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__615">
+        <from-outcome id="__616">DoneProductsReturn</from-outcome>
+        <to-activity-id id="__617">DoneProductsReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__618">
+      <from-activity-id id="__619">ProductsTable</from-activity-id>
+      <control-flow-case id="__620">
+        <from-outcome id="__621">CreatePrd</from-outcome>
+        <to-activity-id id="__622">Products</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__623">
+        <from-outcome id="__624">ProductsDetails</from-outcome>
+        <to-activity-id id="__625">Products</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__626">
+      <from-activity-id id="__627">*</from-activity-id>
+      <control-flow-case id="__628">
+        <from-outcome id="__629">createProducts</from-outcome>
+        <to-activity-id id="__630">CreateProducts</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__631">
+    <managed-bean-name id="__632">ProductsTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__633">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__634">pageFlow</managed-bean-scope>
+    <managed-property id="__635">
+      <property-name id="__636">params</property-name>
+      <property-class id="__637">java.util.Map</property-class>
+      <map-entries id="__638">
+        <map-entry id="__639">
+          <key id="__640">parentContext</key>
+          <value id="__641">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__642">
+      <property-name id="__643">name</property-name>
+      <value id="__644">Products</value>
+    </managed-property>
+    <managed-property id="__645">
+      <property-name id="__646">taskFlowId</property-name>
+      <value id="__647">/WEB-INF/adfc-config-Products.xml#ProductsTaskFlow</value>
+    </managed-property>
+    <managed-property id="__648">
+      <property-name id="__649">tabUniqueIdentifier</property-name>
+      <value id="__650">Products</value>
+    </managed-property>
+    <managed-property id="__651">
+      <property-name id="__652">label</property-name>
+      <value id="__653">Products</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__654">
+    <managed-bean-name id="__655">ProductsQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__656">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__657">request</managed-bean-scope>
+    <managed-property id="__658">
+      <property-name id="__659">namedParamDefs</property-name>
+      <map-entries id="__660">
+        <map-entry id="__661">
+          <key id="__662">targetable</key>
+          <value id="__663">#{'1'}</value>
+        </map-entry>
+        <map-entry id="__664">
+          <key id="__665">not_targetable</key>
+          <value id="__666">#{'1'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

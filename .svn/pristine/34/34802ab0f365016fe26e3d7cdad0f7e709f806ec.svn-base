@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="PMDashboardPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'PM'}"/>
+  </parameters>
+  <executables>
+    <invokeAction id="applyBindParamsPMDashboardInvoke"
+                  Binds="applyBindParamsPMDashboard" Refresh="always"/>
+    <iterator id="PMDashboardIterator" Binds="PMDashboardUserView"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <invokeAction id="ExecuteQueryPMDashboardInvoke"
+                  Binds="ExecuteQueryPMDashboard" Refresh="renderModel"
+                  RefreshCondition="#{true}"/>
+    <variableIterator id="variables">
+      <variable Name="PMDashboardRowKeyVar" Type="java.lang.String"
+                DefaultValue="#{bindings.PMDashboardIterator.currentRowKeyString}"/>
+    </variableIterator>
+    <invokeAction id="applyBindParamsNewOpportunitiesDashboardInvoke"
+                  Binds="applyBindParamsNewOpportunitiesDashboard"
+                  Refresh="always"/>
+    <iterator id="NewOpportunitiesDashboardIterator"
+              Binds="RecentOpportunitiesDashboardView2"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="NewOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery"
+                  Binds="NewOpportunitiesDashboardIterator"
+                  Criteria="RecentOpportunitiesDashboardViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="OpportunityName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="ExecuteQueryNewOpportunitiesDashboardInvoke"
+                  Binds="ExecuteQueryNewOpportunitiesDashboard"
+                  Refresh="renderModel" RefreshCondition="#{jhsPageChanged}"/>
+    <iterator id="ExpiringTitlesDashboardIterator"
+              Binds="PMExpiringTitleDashboardView2"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="ExpiringTitlesDashboardIteratorPMExpiringTitleDashboardViewCriteriaQuery"
+                  Binds="ExpiringTitlesDashboardIterator"
+                  Criteria="PMExpiringTitleDashboardViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ProductName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="ExecuteQueryExpiringTitlesDashboardInvoke"
+                  Binds="ExecuteQueryExpiringTitlesDashboard"
+                  Refresh="renderModel" RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="applyBindParamsContentEvalDashboardInvoke"
+                  Binds="applyBindParamsContentEvalDashboard" Refresh="always"/>
+    <iterator id="ContentEvalDashboardIterator"
+              Binds="PMContentEvalDashboardView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="ContentEvalDashboardIteratorPMContentEvalDashboardViewCriteriaQuery"
+                  Binds="ContentEvalDashboardIterator"
+                  Criteria="PMContentEvalDashboardViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="GroupName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="ExecuteQueryContentEvalDashboardInvoke"
+                  Binds="ExecuteQueryContentEvalDashboard" Refresh="renderModel"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="applyBindParamsAutoAddDashboardInvoke"
+                  Binds="applyBindParamsAutoAddDashboard" Refresh="always"/>
+    <iterator id="AutoAddDashboardIterator" Binds="PMContentEvalDashboardView2"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="AutoAddDashboardIteratorPMContentEvalDashboardViewCriteriaQuery"
+                  Binds="AutoAddDashboardIterator"
+                  Criteria="PMContentEvalDashboardViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="GroupName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="ExecuteQueryAutoAddDashboardInvoke"
+                  Binds="ExecuteQueryAutoAddDashboard" Refresh="renderModel"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="applyBindParamsAAndIDashboardInvoke"
+                  Binds="applyBindParamsAAndIDashboard" Refresh="always"/>
+    <iterator id="AAndIDashboardIterator" Binds="PMContentEvalDashboardView3"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="AAndIDashboardIteratorPMContentEvalDashboardViewCriteriaQuery"
+                  Binds="AAndIDashboardIterator"
+                  Criteria="PMContentEvalDashboardViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="GroupName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="ExecuteQueryAAndIDashboardInvoke"
+                  Binds="ExecuteQueryAAndIDashboard" Refresh="renderModel"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="applyBindParamsOtherDashboardInvoke"
+                  Binds="applyBindParamsOtherDashboard" Refresh="always"/>
+    <iterator id="OtherDashboardIterator" Binds="PMContentEvalDashboardView4"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="OtherDashboardIteratorPMContentEvalDashboardViewCriteriaQuery"
+                  Binds="OtherDashboardIterator"
+                  Criteria="PMContentEvalDashboardViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="GroupName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="ExecuteQueryOtherDashboardInvoke"
+                  Binds="ExecuteQueryOtherDashboard" Refresh="renderModel"
+                  RefreshCondition="#{jhsPageChanged}"/>
+  </executables>
+  <bindings>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsPMDashboard"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="PMDashboardUserView"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{PMDashboardQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="ExecuteQueryPMDashboard" IterBinding="PMDashboardIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="PMDUser" IterBinding="PMDashboardIterator">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="FirstPMDashboard" IterBinding="PMDashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousPMDashboard" IterBinding="PMDashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextPMDashboard" IterBinding="PMDashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastPMDashboard" IterBinding="PMDashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <attributeValues id="PMDashboardRowKey" IterBinding="variables">
+      <AttrNames>
+        <Item Value="PMDashboardRowKeyVar"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="SetCurrentRowWithKeyPMDashboard"
+            IterBinding="PMDashboardIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr" NDValue="#{bindings.PMDashboardRowKey}"
+                 NDType="java.lang.String"/>
+    </action>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsNewOpportunitiesDashboard"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="RecentOpportunitiesDashboardView2"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{NewOpportunitiesDashboardQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="ExecuteQueryNewOpportunitiesDashboard"
+            IterBinding="NewOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="NODId" IterBinding="NewOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NODOpportunityNo"
+                     IterBinding="NewOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="OpportunityNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NODOpportunityName"
+                     IterBinding="NewOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="OpportunityName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="NewOpportunitiesDashboardIterator"
+          id="NODCurrentStatus" Uses="LOV_CurrentStatus" StaticList="false"/>
+    <attributeValues id="NODAccountManager"
+                     IterBinding="NewOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NODAccountName"
+                     IterBinding="NewOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="NODCreatedDate"
+                     IterBinding="NewOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="NewOpportunitiesDashboardTable"
+          IterBinding="NewOpportunitiesDashboardIterator">
+      <nodeDefinition Name="NewOpportunitiesDashboard"
+                      DefName="com.pq.tracs.model.ro.RecentOpportunitiesDashboardView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="OpportunityNo"/>
+          <Item Value="OpportunityName"/>
+          <Item Value="CurrentStatus"/>
+          <Item Value="AccountManager"/>
+          <Item Value="AccountName"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstNewOpportunitiesDashboard"
+            IterBinding="NewOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousNewOpportunitiesDashboard"
+            IterBinding="NewOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextNewOpportunitiesDashboard"
+            IterBinding="NewOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastNewOpportunitiesDashboard"
+            IterBinding="NewOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyNewOpportunitiesDashboard"
+            IterBinding="NewOpportunitiesDashboardIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrNewOpportunitiesDashboard}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="ExecuteQueryExpiringTitlesDashboard"
+            IterBinding="ExpiringTitlesDashboardIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="ETDProductId"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="ProductId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDTitleId"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="TitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDContractId"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDPrdId"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="PrdId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDProductName"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="ProductName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDTargetTrackingNo"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDCatalogNumber"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDLongTitle"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDContractNumber"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="ContractNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ETDExpirationDate"
+                     IterBinding="ExpiringTitlesDashboardIterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ExpiringTitlesDashboardTable"
+          IterBinding="ExpiringTitlesDashboardIterator">
+      <nodeDefinition Name="ExpiringTitlesDashboard"
+                      DefName="com.pq.tracs.model.ro.PMExpiringTitleDashboardView">
+        <AttrNames>
+          <Item Value="ProductId"/>
+          <Item Value="TitleId"/>
+          <Item Value="ContractId"/>
+          <Item Value="PrdId"/>
+          <Item Value="ProductName"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="ContractNumber"/>
+          <Item Value="ExpirationDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstExpiringTitlesDashboard"
+            IterBinding="ExpiringTitlesDashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousExpiringTitlesDashboard"
+            IterBinding="ExpiringTitlesDashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextExpiringTitlesDashboard"
+            IterBinding="ExpiringTitlesDashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastExpiringTitlesDashboard"
+            IterBinding="ExpiringTitlesDashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyExpiringTitlesDashboard"
+            IterBinding="ExpiringTitlesDashboardIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrExpiringTitlesDashboard}"
+                 NDType="java.lang.String"/>
+    </action>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsContentEvalDashboard"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="PMContentEvalDashboardView1"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{ContentEvalDashboardQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="ExecuteQueryContentEvalDashboard"
+            IterBinding="ContentEvalDashboardIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="CEDId" IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDGroupId" IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="GroupId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDAccountId"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDTargetTrackingNo"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDCatalogNumber"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDTitle" IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDAddedDate"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDGroupName"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDAccountNo"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDAccountName"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDOpenAccess"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="OpenAccess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CEDExternalIndexes"
+                     IterBinding="ContentEvalDashboardIterator">
+      <AttrNames>
+        <Item Value="ExternalIndexes"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ContentEvalDashboardTable"
+          IterBinding="ContentEvalDashboardIterator">
+      <nodeDefinition Name="ContentEvalDashboard"
+                      DefName="com.pq.tracs.model.ro.PMContentEvalDashboardView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="GroupId"/>
+          <Item Value="AccountId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="Title"/>
+          <Item Value="AddedDate"/>
+          <Item Value="GroupName"/>
+          <Item Value="AccountNo"/>
+          <Item Value="AccountName"/>
+          <Item Value="OpenAccess"/>
+          <Item Value="ExternalIndexes"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstContentEvalDashboard"
+            IterBinding="ContentEvalDashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousContentEvalDashboard"
+            IterBinding="ContentEvalDashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextContentEvalDashboard"
+            IterBinding="ContentEvalDashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastContentEvalDashboard"
+            IterBinding="ContentEvalDashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyContentEvalDashboard"
+            IterBinding="ContentEvalDashboardIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrContentEvalDashboard}"
+                 NDType="java.lang.String"/>
+    </action>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsAutoAddDashboard"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="PMContentEvalDashboardView2"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{AutoAddDashboardQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="ExecuteQueryAutoAddDashboard"
+            IterBinding="AutoAddDashboardIterator" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues id="AADId" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADGroupId" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="GroupId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADAccountId" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADTargetTrackingNo"
+                     IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADCatalogNumber"
+                     IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADTitle" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADAddedDate" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADGroupName" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADAccountNo" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADAccountName" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADOpenAccess" IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="OpenAccess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AADExternalIndexes"
+                     IterBinding="AutoAddDashboardIterator">
+      <AttrNames>
+        <Item Value="ExternalIndexes"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AutoAddDashboardTable" IterBinding="AutoAddDashboardIterator">
+      <nodeDefinition Name="AutoAddDashboard"
+                      DefName="com.pq.tracs.model.ro.PMContentEvalDashboardView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="GroupId"/>
+          <Item Value="AccountId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="Title"/>
+          <Item Value="AddedDate"/>
+          <Item Value="GroupName"/>
+          <Item Value="AccountNo"/>
+          <Item Value="AccountName"/>
+          <Item Value="OpenAccess"/>
+          <Item Value="ExternalIndexes"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAutoAddDashboard" IterBinding="AutoAddDashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAutoAddDashboard" IterBinding="AutoAddDashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAutoAddDashboard" IterBinding="AutoAddDashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAutoAddDashboard" IterBinding="AutoAddDashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAutoAddDashboard"
+            IterBinding="AutoAddDashboardIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAutoAddDashboard}"
+                 NDType="java.lang.String"/>
+    </action>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsAAndIDashboard"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="PMContentEvalDashboardView3"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{AAndIDashboardQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="ExecuteQueryAAndIDashboard" IterBinding="AAndIDashboardIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="AIDId" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDGroupId" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="GroupId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDAccountId" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDTargetTrackingNo"
+                     IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDCatalogNumber" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDTitle" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDAddedDate" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDGroupName" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDAccountNo" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDAccountName" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDOpenAccess" IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="OpenAccess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AIDExternalIndexes"
+                     IterBinding="AAndIDashboardIterator">
+      <AttrNames>
+        <Item Value="ExternalIndexes"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AAndIDashboardTable" IterBinding="AAndIDashboardIterator">
+      <nodeDefinition Name="AAndIDashboard"
+                      DefName="com.pq.tracs.model.ro.PMContentEvalDashboardView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="GroupId"/>
+          <Item Value="AccountId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="Title"/>
+          <Item Value="AddedDate"/>
+          <Item Value="GroupName"/>
+          <Item Value="AccountNo"/>
+          <Item Value="AccountName"/>
+          <Item Value="OpenAccess"/>
+          <Item Value="ExternalIndexes"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAAndIDashboard" IterBinding="AAndIDashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAAndIDashboard" IterBinding="AAndIDashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAAndIDashboard" IterBinding="AAndIDashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAAndIDashboard" IterBinding="AAndIDashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAAndIDashboard"
+            IterBinding="AAndIDashboardIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAAndIDashboard}"
+                 NDType="java.lang.String"/>
+    </action>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsOtherDashboard"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="PMContentEvalDashboardView4"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{OtherDashboardQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="ExecuteQueryOtherDashboard" IterBinding="OtherDashboardIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="OEDId" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDGroupId" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="GroupId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDAccountId" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDTargetTrackingNo"
+                     IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDCatalogNumber" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDTitle" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDAddedDate" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDGroupName" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDAccountNo" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDAccountName" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDOpenAccess" IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="OpenAccess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="OEDExternalIndexes"
+                     IterBinding="OtherDashboardIterator">
+      <AttrNames>
+        <Item Value="ExternalIndexes"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="OtherDashboardTable" IterBinding="OtherDashboardIterator">
+      <nodeDefinition Name="OtherDashboard"
+                      DefName="com.pq.tracs.model.ro.PMContentEvalDashboardView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="GroupId"/>
+          <Item Value="AccountId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="Title"/>
+          <Item Value="AddedDate"/>
+          <Item Value="GroupName"/>
+          <Item Value="AccountNo"/>
+          <Item Value="AccountName"/>
+          <Item Value="OpenAccess"/>
+          <Item Value="ExternalIndexes"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstOtherDashboard" IterBinding="OtherDashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousOtherDashboard" IterBinding="OtherDashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextOtherDashboard" IterBinding="OtherDashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastOtherDashboard" IterBinding="OtherDashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyOtherDashboard"
+            IterBinding="OtherDashboardIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrOtherDashboard}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

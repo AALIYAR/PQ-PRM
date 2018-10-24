@@ -1,0 +1,366 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="AMLookupTopLc"
+                             partialTriggers="">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_AMLOOKUP']}"
+                          helpTopicId="RBH_AMLOOKUP">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0"></af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2"></af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:subform id="AMLookupSbf"
+                        rendered="#{!pageFlowScope.createModes.CreateAMLookup and !pageFlowScope.hideSearchArea}"
+                        defaultCommand="AMLookupQuickSearchButton">
+              <af:panelGroupLayout id="searchAreaAMLookup" partialTriggers="">
+                <f:attribute name="JhsIgnoreChanges" value="true"/>
+                <af:panelGroupLayout id="qsAreaAMLookup"
+                                     rendered="#{pageFlowScope.searchAMLookup.quickSearchMode}"
+                                     layout="horizontal">
+                  <af:selectOneChoice id="qsSelectAMLookup"
+                                      label="#{nls['FILTER_BY']}"
+                                      value="#{pageFlowScope.searchAMLookup.searchItem}"
+                                      autoSubmit="true" immediate="true"
+                                      valueChangeListener="#{pageFlowScope.searchAMLookup.searchItemChanged}">
+                    <af:selectItem label="#{bindings.AMLookupTable.hints.Id.label}"
+                                   value="AMLookupId" id="si0"/>
+                    <af:selectItem label="#{bindings.AMLookupTable.hints.Username.label}"
+                                   value="AMLookupUsername" id="si1"/>
+                    <af:selectItem label="#{bindings.AMLookupTable.hints.FirstName.label}"
+                                   value="AMLookupFirstName" id="si2"/>
+                    <af:selectItem label="#{bindings.AMLookupTable.hints.LastName.label}"
+                                   value="AMLookupLastName" id="si3"/>
+                    <af:selectItem label="#{bindings.AMLookupTable.hints.StartDate.label}"
+                                   value="AMLookupStartDate" id="si4"/>
+                    <af:selectItem label="#{bindings.AMLookupTable.hints.EndDate.label}"
+                                   value="AMLookupEndDate" id="si5"/>
+                    <af:selectItem label="#{bindings.AMLookupTable.hints.DisplayName.label}"
+                                   value="AMLookupDisplayName" id="si6"/>
+                  </af:selectOneChoice>
+                  <af:spacer width="4" id="qsAreaAMLookupSpacer1"/>
+                  <af:panelGroupLayout partialTriggers="qsSelectAMLookup"
+                                       id="qsAreaAMLookuppanelGroupLayout">
+                    <af:switcher facetName="#{pageFlowScope.searchAMLookup.searchItem}"
+                                 id="qsAreaAMLookupSwitcher">
+                      <f:facet name="AMLookupId">
+                        <af:inputText id="QuickSearchAMLookupId"
+                                      value="#{pageFlowScope.searchAMLookup.searchText}"
+                                      label="#{bindings.AMLookupTable.hints.Id.label}"
+                                      shortDesc="#{bindings.AMLookupId.hints.tooltip}"
+                                      helpTopicId="RBH_AMLOOKUPID" simple="true"
+                                      columns="#{bindings.AMLookupId.hints.displayWidth}"
+                                      maximumLength="4000">
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.AMLookupId.format}"/>
+                        </af:inputText>
+                      </f:facet>
+                      <f:facet name="AMLookupUsername">
+                        <af:inputText id="QuickSearchAMLookupUsername"
+                                      value="#{pageFlowScope.searchAMLookup.searchText}"
+                                      label="#{bindings.AMLookupTable.hints.Username.label}"
+                                      shortDesc="#{bindings.AMLookupTable.hints.Username.tooltip}"
+                                      helpTopicId="RBH_AMLOOKUPUSERNAME"
+                                      simple="true"
+                                      columns="#{bindings.AMLookupTable.hints.Username.displayWidth}"
+                                      maximumLength="4000"></af:inputText>
+                      </f:facet>
+                      <f:facet name="AMLookupFirstName">
+                        <af:inputText id="QuickSearchAMLookupFirstName"
+                                      value="#{pageFlowScope.searchAMLookup.searchText}"
+                                      label="#{bindings.AMLookupTable.hints.FirstName.label}"
+                                      shortDesc="#{bindings.AMLookupTable.hints.FirstName.tooltip}"
+                                      helpTopicId="RBH_AMLOOKUPFIRSTNAME"
+                                      simple="true"
+                                      columns="#{bindings.AMLookupTable.hints.FirstName.displayWidth}"
+                                      maximumLength="4000"></af:inputText>
+                      </f:facet>
+                      <f:facet name="AMLookupLastName">
+                        <af:inputText id="QuickSearchAMLookupLastName"
+                                      value="#{pageFlowScope.searchAMLookup.searchText}"
+                                      label="#{bindings.AMLookupTable.hints.LastName.label}"
+                                      shortDesc="#{bindings.AMLookupTable.hints.LastName.tooltip}"
+                                      helpTopicId="RBH_AMLOOKUPLASTNAME"
+                                      simple="true"
+                                      columns="#{bindings.AMLookupTable.hints.LastName.displayWidth}"
+                                      maximumLength="4000"></af:inputText>
+                      </f:facet>
+                      <f:facet name="AMLookupStartDate">
+                        <af:inputDate id="QuickSearchAMLookupStartDate"
+                                      value="#{pageFlowScope.searchAMLookup.searchText}"
+                                      label="#{bindings.AMLookupTable.hints.StartDate.label}"
+                                      shortDesc="#{bindings.AMLookupTable.hints.StartDate.tooltip}"
+                                      helpTopicId="RBH_AMLOOKUPSTARTDATE"
+                                      simple="true">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </f:facet>
+                      <f:facet name="AMLookupEndDate">
+                        <af:inputDate id="QuickSearchAMLookupEndDate"
+                                      value="#{pageFlowScope.searchAMLookup.searchText}"
+                                      label="#{bindings.AMLookupTable.hints.EndDate.label}"
+                                      shortDesc="#{bindings.AMLookupTable.hints.EndDate.tooltip}"
+                                      helpTopicId="RBH_AMLOOKUPENDDATE"
+                                      simple="true">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </f:facet>
+                      <f:facet name="AMLookupDisplayName">
+                        <af:inputText id="QuickSearchAMLookupDisplayName"
+                                      value="#{pageFlowScope.searchAMLookup.searchText}"
+                                      label="#{bindings.AMLookupTable.hints.DisplayName.label}"
+                                      shortDesc="#{bindings.AMLookupTable.hints.DisplayName.tooltip}"
+                                      helpTopicId="RBH_AMLOOKUPDISPLAYNAME"
+                                      simple="true"
+                                      columns="#{bindings.AMLookupTable.hints.DisplayName.displayWidth}"
+                                      maximumLength="4000"></af:inputText>
+                      </f:facet>
+                    </af:switcher>
+                  </af:panelGroupLayout>
+                  <af:spacer width="4" id="qsAreaAMLookupSpacer2"/>
+                  <af:commandImageLink action="#{pageFlowScope.searchAMLookup.quickSearch}"
+                                       shortDesc="#{nls['FILTER_BY']}"
+                                       icon="/jheadstart/images/go_ena.png"
+                                       id="AMLookupQuickSearchButton"/>
+                </af:panelGroupLayout>
+              </af:panelGroupLayout>
+            </af:subform>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="AMLookupPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:group id="AMLookuptbb"
+                              rendered="#{ bindings.AMLookupIterator.currentRow!=null }">
+                      <af:commandMenuItem actionListener="#{bindings.FirstAMLookup.execute}"
+                                          id="AMLookupFirst"
+                                          partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousAMLookup.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="AMLookupPrevious"
+                                          partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextAMLookup.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="AMLookupNext"
+                                          partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastAMLookup.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="AMLookupLast"
+                                          partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandToolbarButton text="Print" id="AMLookupPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.AMLookupIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="AMLookupTab" contentDelivery="immediate"
+                        value="#{bindings.AMLookupTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.AMLookupPage.selectionListener}"
+                        selectedRowKeys="#{pageFlowScope.AMLookupPage.selectedRowKeySet}"
+                        rowDisclosureListener="#{pageFlowScope.AMLookupTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.AMLookupTable.rangeSize}"
+                        autoHeightRows="#{bindings.AMLookupTable.estimatedRowCount lt 5 ? 5 : bindings.AMLookupTable.estimatedRowCount lt bindings.AMLookupTable.rangeSize ? bindings.AMLookupTable.estimatedRowCount : 0 }"
+                        fetchSize="#{bindings.AMLookupTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.AMLookupIteratorQuery.processQuery}"
+                        filterModel="#{bindings.AMLookupIteratorQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.AMLookupPage.lovTable}"
+                        partialTriggers=" :::AMLookupPC ::AMLookupFirst ::AMLookupPrevious ::AMLookupNext ::AMLookupLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_AMLOOKUP']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="AMLookupTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="AMLookupUsernameCol" sortable="true"
+                           filterable="true" noWrap="true" width="240"
+                           sortProperty="Username" rowHeader="false"
+                           helpTopicId="RBH_AMLOOKUPUSERNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AMLookupTable.hints.Username.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="AMLookupUsername"
+                                value="#{row.bindings.Username.inputValue}"
+                                label="#{bindings.AMLookupTable.hints.Username.label}"
+                                required="#{bindings.AMLookupTable.hints.Username.mandatory}"
+                                rows="#{bindings.AMLookupTable.hints.Username.displayHeight}"
+                                columns="#{bindings.AMLookupTable.hints.Username.displayWidth}"
+                                maximumLength="240" readOnly="true"
+                                shortDesc="#{bindings.AMLookupTable.hints.Username.tooltip}">
+                    <f:validator binding="#{row.bindings.Username.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AMLookupFirstNameCol" sortable="true"
+                           filterable="true" noWrap="true" width="500"
+                           sortProperty="FirstName" rowHeader="false"
+                           helpTopicId="RBH_AMLOOKUPFIRSTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AMLookupTable.hints.FirstName.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:inputText id="AMLookupFirstName"
+                                value="#{row.bindings.FirstName.inputValue}"
+                                label="#{bindings.AMLookupTable.hints.FirstName.label}"
+                                required="#{bindings.AMLookupTable.hints.FirstName.mandatory}"
+                                rows="#{bindings.AMLookupTable.hints.FirstName.displayHeight}"
+                                columns="#{bindings.AMLookupTable.hints.FirstName.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.AMLookupTable.hints.FirstName.tooltip}">
+                    <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AMLookupLastNameCol" sortable="true"
+                           filterable="true" noWrap="true" width="500"
+                           sortProperty="LastName" rowHeader="false"
+                           helpTopicId="RBH_AMLOOKUPLASTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AMLookupTable.hints.LastName.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:inputText id="AMLookupLastName"
+                                value="#{row.bindings.LastName.inputValue}"
+                                label="#{bindings.AMLookupTable.hints.LastName.label}"
+                                required="#{bindings.AMLookupTable.hints.LastName.mandatory}"
+                                rows="#{bindings.AMLookupTable.hints.LastName.displayHeight}"
+                                columns="#{bindings.AMLookupTable.hints.LastName.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.AMLookupTable.hints.LastName.tooltip}">
+                    <f:validator binding="#{row.bindings.LastName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AMLookupStartDateCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="StartDate" rowHeader="false"
+                           helpTopicId="RBH_AMLOOKUPSTARTDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AMLookupTable.hints.StartDate.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.StartDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="AMLookupStartDate"
+                                value="#{row.bindings.StartDate.inputValue}"
+                                label="#{bindings.AMLookupTable.hints.StartDate.label}"
+                                required="#{bindings.AMLookupTable.hints.StartDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.AMLookupTable.hints.StartDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="AMLookupEndDateCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="EndDate" rowHeader="false"
+                           helpTopicId="RBH_AMLOOKUPENDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AMLookupTable.hints.EndDate.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.EndDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="AMLookupEndDate"
+                                value="#{row.bindings.EndDate.inputValue}"
+                                label="#{bindings.AMLookupTable.hints.EndDate.label}"
+                                required="#{bindings.AMLookupTable.hints.EndDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.AMLookupTable.hints.EndDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="AMLookupDisplayNameCol" sortable="true"
+                           filterable="true" noWrap="true" width="500"
+                           sortProperty="DisplayName" rowHeader="false"
+                           helpTopicId="RBH_AMLOOKUPDISPLAYNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AMLookupTable.hints.DisplayName.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:inputText id="AMLookupDisplayName"
+                                value="#{row.bindings.DisplayName.inputValue}"
+                                label="#{bindings.AMLookupTable.hints.DisplayName.label}"
+                                required="#{bindings.AMLookupTable.hints.DisplayName.mandatory}"
+                                rows="#{bindings.AMLookupTable.hints.DisplayName.displayHeight}"
+                                columns="#{bindings.AMLookupTable.hints.DisplayName.displayWidth}"
+                                maximumLength="240" readOnly="true"
+                                shortDesc="#{bindings.AMLookupTable.hints.DisplayName.tooltip}">
+                    <f:validator binding="#{row.bindings.DisplayName.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

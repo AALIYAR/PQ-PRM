@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TraxImportResultsView"
+  Version="11.1.1.61.92"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.pq.tracs.model.vo.PRMView"
+  FetchMode="FETCH_AS_NEEDED"
+  FetchSize="25"
+  PageIterMode="Partial"
+  UseGlueCode="false"
+  OrderBy="ROW_NUMBER"
+  RangeSize="20">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.pq.tracs.model.vo.TraxImportResultsView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery>
+    <![CDATA[SELECT TraxImportDataParse.ID, 
+       TraxImportDataParse.IMPORT_FILE_ID, 
+       TraxImportDataParse.TITLE_ID, 
+       TraxImportDataParse.ROW_NUMBER, 
+       TraxImportDataParse.TITLE_TYPE, 
+       TraxImportDataParse.TITLE AS TITLE1, 
+       TraxImportDataParse.ISSN, 
+       Title.LONG_TITLE, 
+       Title.ID AS ID1, 
+       Title.TARGET_TRACKING_NO, 
+       Title.CATALOG_NUMBER, 
+       case when TraxImportDataParse.title_id = Target.TITLE_ID then 'Y' else 'N' end as target_flag
+FROM TRACS.TRAX_IMPORT_DATA_PARSE TraxImportDataParse
+    LEFT OUTER JOIN TRAX_TITLE Title 
+        ON (TraxImportDataParse.TITLE_ID = Title.ID)
+    left outer join trax_import_file ImportFile 
+        on TraxImportDataParse.IMPORT_FILE_ID = ImportFile.ID
+    left outer join prm_target_group_title Target 
+        on TraxImportDataParse.title_id = Target.TITLE_ID 
+        AND Target.PRM_TARGET_GROUP_ID = ImportFile.TARGET_GROUP_ID]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="TraxImportDataParse"
+    Entity="com.pq.tracs.model.eo.TraxImportDataParse"/>
+  <EntityUsage
+    Name="TraxTitle"
+    Entity="com.pq.tracs.model.eo.TraxTitle"
+    Association="com.pq.tracs.model.ao.TitleToImportDataParseAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.TitleToImportDataParseAssoc.TraxTitle"
+    SourceUsage="com.pq.tracs.model.vo.TraxImportResultsView.TraxImportDataParse"
+    ReadOnly="true"
+    Reference="true"
+    DeleteParticipant="false"
+    JoinType="INNER JOIN">
+    <DesignTime>
+      <AttrArray Name="_srcAttributes">
+        <Item Value="com.pq.tracs.model.eo.TraxImportDataParse.TitleId"/>
+      </AttrArray>
+      <AttrArray Name="_dstAttributes">
+        <Item Value="com.pq.tracs.model.eo.TraxTitle.Id"/>
+      </AttrArray>
+    </DesignTime>
+  </EntityUsage>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="TraxImportDataParse"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="ImportFileId"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ImportFileId"
+    EntityUsage="TraxImportDataParse"
+    AliasName="IMPORT_FILE_ID"/>
+  <ViewAttribute
+    Name="TitleId"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="TitleId"
+    EntityUsage="TraxImportDataParse"
+    AliasName="TITLE_ID"/>
+  <ViewAttribute
+    Name="RowNumber"
+    PrecisionRule="true"
+    EntityAttrName="RowNumber"
+    EntityUsage="TraxImportDataParse"
+    AliasName="ROW_NUMBER"/>
+  <ViewAttribute
+    Name="TitleType"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="TitleType"
+    EntityUsage="TraxImportDataParse"
+    AliasName="TITLE_TYPE"/>
+  <ViewAttribute
+    Name="Title1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="800"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TITLE1"
+    Expression="TITLE1"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="800"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Issn"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="Issn"
+    EntityUsage="TraxImportDataParse"
+    AliasName="ISSN"/>
+  <ViewAttribute
+    Name="LongTitle"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LongTitle"
+    EntityUsage="TraxTitle"
+    AliasName="LONG_TITLE"/>
+  <ViewAttribute
+    Name="Id1"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="TraxTitle"
+    AliasName="ID1"/>
+  <ViewAttribute
+    Name="TargetTrackingNo"
+    PrecisionRule="true"
+    EntityAttrName="TargetTrackingNo"
+    EntityUsage="TraxTitle"
+    AliasName="TARGET_TRACKING_NO"
+    IsUpdateable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxImportResultsView.TargetTrackingNo_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CatalogNumber"
+    IsUnique="true"
+    PrecisionRule="true"
+    EntityAttrName="CatalogNumber"
+    EntityUsage="TraxTitle"
+    AliasName="CATALOG_NUMBER"/>
+  <ViewAttribute
+    Name="TargetFlag"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    AliasName="TARGET_FLAG"
+    Expression="TARGET_FLAG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxImportResultsView.TargetFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TitleRecordId"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    AliasName="TITLE_RECORD_ID"
+    IsPersistent="false"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="$none$"
+    SQLType="$none$"/>
+  <ViewAttribute
+    Name="Title"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    AliasName="TITLE"
+    IsPersistent="false"
+    Type="java.lang.String"
+    ColumnType="$none$"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="OnlineIssn"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    AliasName="ONLINE_ISSN"
+    IsPersistent="false"
+    Type="java.lang.String"
+    ColumnType="$none$"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Isbn"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    AliasName="ISBN"
+    IsPersistent="false"
+    Type="java.lang.String"
+    ColumnType="$none$"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="AccountNo"
+    PrecisionRule="true"
+    AliasName="ACCOUNT_NO"
+    IsPersistent="false"
+    Type="java.lang.String"
+    ColumnType="$none$"
+    SQLType="VARCHAR"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TitleProducts"
+  Version="11.1.1.59.23"
+  DBObjectType="view"
+  DBObjectName="PRM_TITLE_PRODUCT"
+  AliasName="TitleProducts"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.pq.tracs.model.eo.PrmBaseEntity">
+  <DesignTime>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="TitleId"
+    IsUpdateable="false"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="TITLE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TITLE_PRODUCT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PrdId"
+    IsUpdateable="false"
+    IsNotNull="true"
+    Precision="15"
+    Scale="0"
+    ColumnName="PRD_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TITLE_PRODUCT"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TitleRecordId"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="TITLE_RECORD_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TITLE_PRODUCT">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Key
+    Name="TitleproductsPrimaryKey"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TITLEPRODUCTS_PRIMARY_KEY"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.TitleProducts.TitleId"/>
+      <Item Value="com.pq.tracs.model.eo.TitleProducts.PrdId"/>
+    </AttrArray>
+  </Key>
+</Entity>

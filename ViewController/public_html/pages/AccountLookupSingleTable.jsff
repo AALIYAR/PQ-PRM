@@ -1,0 +1,446 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="AccountLookupSingleTopLc"
+                             partialTriggers="">
+        <f:facet name="top">
+          <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+          <af:group id="g0">
+            <af:panelHeader id="ph0"
+                            text="#{nls['TABLE_TITLE_ACCOUNTLOOKUPSINGLE']}"
+                            helpTopicId="RBH_ACCOUNTLOOKUPSINGLE">
+              <f:facet name="toolbar">
+                <af:toolbox id="tbox0">
+                  <af:toolbar id="tbar0">
+                    <af:group id="gr0"></af:group>
+                    <af:group id="gr1"></af:group>
+                    <af:group id="gr2"></af:group>
+                  </af:toolbar>
+                </af:toolbox>
+              </f:facet>
+              <f:facet name="context"></f:facet>
+              <af:subform id="AccountLookupSingleSbf"
+                          rendered="#{!pageFlowScope.createModes.CreateAccountLookupSingle and !pageFlowScope.hideSearchArea}"
+                          defaultCommand="AccountLookupSingleQuickSearchButton">
+                <af:panelGroupLayout id="searchAreaAccountLookupSingle"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:panelGroupLayout id="qsAreaAccountLookupSingle"
+                                       rendered="#{pageFlowScope.searchAccountLookupSingle.quickSearchMode}"
+                                       layout="horizontal">
+                    <af:selectOneChoice id="qsSelectAccountLookupSingle"
+                                        label="#{nls['FILTER_BY']}"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchItem}"
+                                        autoSubmit="true" immediate="true"
+                                        valueChangeListener="#{pageFlowScope.searchAccountLookupSingle.searchItemChanged}">
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.Id.label}"
+                                     value="AccountLookupSingleId" id="si0"/>
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.label}"
+                                     value="AccountLookupSingleContentOwnerNo"
+                                     id="si1"/>
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.Name.label}"
+                                     value="AccountLookupSingleName" id="si2"/>
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.Site.label}"
+                                     value="AccountLookupSingleSite" id="si3"/>
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.label}"
+                                     value="AccountLookupSingleKeyAccountLevel"
+                                     id="si4"/>
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.PoolFlag.label}"
+                                     value="AccountLookupSinglePoolFlag"
+                                     id="si5"/>
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.OpenOpps.label}"
+                                     value="AccountLookupSingleOpenOpps"
+                                     id="si6"/>
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.label}"
+                                     value="AccountLookupSingleTargetedTitles"
+                                     id="si7"/>
+                      <af:selectItem label="#{bindings.AccountLookupSingleTable.hints.CampaignName.label}"
+                                     value="AccountLookupSingleCampaignName"
+                                     id="si8"/>
+                    </af:selectOneChoice>
+                    <af:spacer width="4" id="qsAreaAccountLookupSingleSpacer1"/>
+                    <af:panelGroupLayout partialTriggers="qsSelectAccountLookupSingle"
+                                         id="qsAreaAccountLookupSinglepanelGroupLayout">
+                      <af:switcher facetName="#{pageFlowScope.searchAccountLookupSingle.searchItem}"
+                                   id="qsAreaAccountLookupSingleSwitcher">
+                        <f:facet name="AccountLookupSingleId">
+                          <af:inputText id="QuickSearchAccountLookupSingleId"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                        label="#{bindings.AccountLookupSingleTable.hints.Id.label}"
+                                        shortDesc="#{bindings.AccountLookupSingleId.hints.tooltip}"
+                                        helpTopicId="RBH_ACCOUNTLOOKUPSINGLEID"
+                                        simple="true"
+                                        columns="#{bindings.AccountLookupSingleId.hints.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.AccountLookupSingleId.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="AccountLookupSingleContentOwnerNo">
+                          <af:inputText id="QuickSearchAccountLookupSingleContentOwnerNo"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                        label="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.label}"
+                                        shortDesc="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.tooltip}"
+                                        helpTopicId="RBH_ACCOUNTLOOKUPSINGLECONTENTOWNERNO"
+                                        simple="true"
+                                        columns="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="AccountLookupSingleName">
+                          <af:inputText id="QuickSearchAccountLookupSingleName"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                        label="#{bindings.AccountLookupSingleTable.hints.Name.label}"
+                                        shortDesc="#{bindings.AccountLookupSingleTable.hints.Name.tooltip}"
+                                        helpTopicId="RBH_ACCOUNTLOOKUPSINGLENAME"
+                                        simple="true"
+                                        columns="#{bindings.AccountLookupSingleTable.hints.Name.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="AccountLookupSingleSite">
+                          <af:inputText id="QuickSearchAccountLookupSingleSite"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                        label="#{bindings.AccountLookupSingleTable.hints.Site.label}"
+                                        shortDesc="#{bindings.AccountLookupSingleTable.hints.Site.tooltip}"
+                                        helpTopicId="RBH_ACCOUNTLOOKUPSINGLESITE"
+                                        simple="true"
+                                        columns="#{bindings.AccountLookupSingleTable.hints.Site.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="AccountLookupSingleKeyAccountLevel">
+                          <af:inputText id="QuickSearchAccountLookupSingleKeyAccountLevel"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                        label="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.label}"
+                                        shortDesc="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.tooltip}"
+                                        helpTopicId="RBH_ACCOUNTLOOKUPSINGLEKEYACCOUNTLEVEL"
+                                        simple="true"
+                                        columns="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="AccountLookupSinglePoolFlag">
+                          <af:selectOneChoice id="QuickSearchAccountLookupSinglePoolFlag"
+                                              value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                              label="#{bindings.AccountLookupSingleTable.hints.PoolFlag.label}"
+                                              shortDesc="#{bindings.AccountLookupSingleTable.hints.PoolFlag.tooltip}"
+                                              helpTopicId="RBH_ACCOUNTLOOKUPSINGLEPOOLFLAG"
+                                              unselectedLabel="" simple="true">
+                            <af:selectItem id="si9" value="Y" label="Yes"/>
+                            <af:selectItem id="si10" value="N" label="No"/>
+                          </af:selectOneChoice>
+                        </f:facet>
+                        <f:facet name="AccountLookupSingleOpenOpps">
+                          <af:inputText id="QuickSearchAccountLookupSingleOpenOpps"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                        label="#{bindings.AccountLookupSingleTable.hints.OpenOpps.label}"
+                                        shortDesc="#{bindings.AccountLookupSingleTable.hints.OpenOpps.tooltip}"
+                                        helpTopicId="RBH_ACCOUNTLOOKUPSINGLEOPENOPPS"
+                                        simple="true"
+                                        columns="#{bindings.AccountLookupSingleTable.hints.OpenOpps.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.AccountLookupSingleTable.hints.OpenOpps.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="AccountLookupSingleTargetedTitles">
+                          <af:inputText id="QuickSearchAccountLookupSingleTargetedTitles"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                        label="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.label}"
+                                        shortDesc="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.tooltip}"
+                                        helpTopicId="RBH_ACCOUNTLOOKUPSINGLETARGETEDTITLES"
+                                        simple="true"
+                                        columns="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="AccountLookupSingleCampaignName">
+                          <af:inputText id="QuickSearchAccountLookupSingleCampaignName"
+                                        value="#{pageFlowScope.searchAccountLookupSingle.searchText}"
+                                        label="#{bindings.AccountLookupSingleTable.hints.CampaignName.label}"
+                                        shortDesc="#{bindings.AccountLookupSingleTable.hints.CampaignName.tooltip}"
+                                        helpTopicId="RBH_ACCOUNTLOOKUPSINGLECAMPAIGNNAME"
+                                        simple="true"
+                                        columns="#{bindings.AccountLookupSingleTable.hints.CampaignName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                      </af:switcher>
+                    </af:panelGroupLayout>
+                    <af:spacer width="4" id="qsAreaAccountLookupSingleSpacer2"/>
+                    <af:commandImageLink action="#{pageFlowScope.searchAccountLookupSingle.quickSearch}"
+                                         shortDesc="#{nls['FILTER_BY']}"
+                                         icon="/jheadstart/images/go_ena.png"
+                                         id="AccountLookupSingleQuickSearchButton"/>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:subform>
+            </af:panelHeader>
+            <af:spacer width="10" height="10" id="sp0"/>
+          </af:group>
+          <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+        </f:facet>
+        <f:facet name="center">
+          <af:panelStretchLayout topHeight="0" id="psl0">
+            <f:facet name="top"></f:facet>
+            <f:facet name="center">
+              <af:panelCollection id="AccountLookupSinglePC" featuresOff=" "
+                                  styleClass="AFStretchWidth">
+                <f:facet name="menus">
+                  <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                           id="menu0">
+                    <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                             id="menu1">
+                      <af:group id="AccountLookupSingletbb"
+                                rendered="#{ bindings.AccountLookupSingleIterator.currentRow!=null }">
+                        <af:commandMenuItem actionListener="#{bindings.FirstAccountLookupSingle.execute}"
+                                            id="AccountLookupSingleFirst"
+                                            partialSubmit="true"
+                                            icon="/afr/shuttleleftall_ena.png"
+                                            textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.PreviousAccountLookupSingle.execute}"
+                                            icon="/afr/shuttleleft_ena.png"
+                                            textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                            id="AccountLookupSinglePrevious"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.NextAccountLookupSingle.execute}"
+                                            icon="/afr/shuttleright_ena.png"
+                                            textAndAccessKey="#{nls['NEXT_ROW']}"
+                                            id="AccountLookupSingleNext"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.LastAccountLookupSingle.execute}"
+                                            icon="/afr/shuttlerightall_ena.png"
+                                            textAndAccessKey="#{nls['LAST_ROW']}"
+                                            id="AccountLookupSingleLast"
+                                            partialSubmit="true"></af:commandMenuItem>
+                      </af:group>
+                    </af:menu>
+                  </af:menu>
+                </f:facet>
+                <f:facet name="toolbar">
+                  <af:toolbar id="tbar1">
+                    <af:commandToolbarButton text="Print"
+                                             id="AccountLookupSinglePrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar">
+                  <af:toolbar>
+                    <af:outputText value="#{bindings.AccountLookupSingleIterator.estimatedRowCount} rows found"/>
+                  </af:toolbar>
+                </f:facet>
+                <af:table id="AccountLookupSingleTab"
+                          contentDelivery="immediate"
+                          value="#{bindings.AccountLookupSingleTable.collectionModel}"
+                          columnStretching="blank" rowBandingInterval="0"
+                          editingMode="editAll" columnSelection="multiple"
+                          contextMenuSelect="true" rowSelection="single"
+                          selectionListener="#{pageFlowScope.AccountLookupSinglePage.selectionListener}"
+                          selectedRowKeys="#{pageFlowScope.AccountLookupSinglePage.selectedRowKeySet}"
+                          rowDisclosureListener="#{pageFlowScope.AccountLookupSingleTable.discloseRow}"
+                          var="row" varStatus="status"
+                          fetchSize="#{bindings.AccountLookupSingleTable.rangeSize}"
+                          emptyText="#{nls['NO_ROWS_FOUND']}"
+                          queryListener="#{bindings.AccountLookupSingleIteratorAccountLookupViewCriteriaQuery.processQuery}"
+                          filterModel="#{bindings.AccountLookupSingleIteratorAccountLookupViewCriteriaQuery.queryDescriptor}"
+                          filterVisible="true"
+                          binding="#{pageFlowScope.AccountLookupSinglePage.lovTable}"
+                          partialTriggers=" :::AccountLookupSinglePC ::AccountLookupSingleFirst ::AccountLookupSinglePrevious ::AccountLookupSingleNext ::AccountLookupSingleLast"
+                          styleClass="AFStretchWidth"
+                          summary="#{nls['TABLE_TITLE_ACCOUNTLOOKUPSINGLE']}">
+                  <f:facet name="contextMenu">
+                    <af:popup id="AccountLookupSingleTablePopup"
+                              childCreation="deferred">
+                      <af:menu id="menu2">
+                        <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                      </af:menu>
+                    </af:popup>
+                  </f:facet>
+                  <af:column id="AccountLookupSingleContentOwnerNoCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="100" sortProperty="ContentOwnerNo"
+                             rowHeader="false"
+                             helpTopicId="RBH_ACCOUNTLOOKUPSINGLECONTENTOWNERNO"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.label}"
+                                      id="ol0"/>
+                    </f:facet>
+                    <af:inputText id="AccountLookupSingleContentOwnerNo"
+                                  value="#{row.bindings.ContentOwnerNo.inputValue}"
+                                  label="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.label}"
+                                  required="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.mandatory}"
+                                  rows="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.displayHeight}"
+                                  columns="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.displayWidth}"
+                                  maximumLength="20" readOnly="true"
+                                  shortDesc="#{bindings.AccountLookupSingleTable.hints.ContentOwnerNo.tooltip}">
+                      <f:validator binding="#{row.bindings.ContentOwnerNo.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="AccountLookupSingleNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="Name" rowHeader="false"
+                             helpTopicId="RBH_ACCOUNTLOOKUPSINGLENAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.AccountLookupSingleTable.hints.Name.label}"
+                                      id="ol1"/>
+                    </f:facet>
+                    <af:inputText id="AccountLookupSingleName"
+                                  value="#{row.bindings.Name.inputValue}"
+                                  label="#{bindings.AccountLookupSingleTable.hints.Name.label}"
+                                  required="#{bindings.AccountLookupSingleTable.hints.Name.mandatory}"
+                                  rows="#{bindings.AccountLookupSingleTable.hints.Name.displayHeight}"
+                                  columns="#{bindings.AccountLookupSingleTable.hints.Name.displayWidth}"
+                                  maximumLength="400" readOnly="true"
+                                  shortDesc="#{bindings.AccountLookupSingleTable.hints.Name.tooltip}">
+                      <f:validator binding="#{row.bindings.Name.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="AccountLookupSingleSiteCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="Site" rowHeader="false"
+                             helpTopicId="RBH_ACCOUNTLOOKUPSINGLESITE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.AccountLookupSingleTable.hints.Site.label}"
+                                      id="ol2"/>
+                    </f:facet>
+                    <af:inputText id="AccountLookupSingleSite"
+                                  value="#{row.bindings.Site.inputValue}"
+                                  label="#{bindings.AccountLookupSingleTable.hints.Site.label}"
+                                  required="#{bindings.AccountLookupSingleTable.hints.Site.mandatory}"
+                                  rows="#{bindings.AccountLookupSingleTable.hints.Site.displayHeight}"
+                                  columns="#{bindings.AccountLookupSingleTable.hints.Site.displayWidth}"
+                                  maximumLength="400" readOnly="true"
+                                  shortDesc="#{bindings.AccountLookupSingleTable.hints.Site.tooltip}">
+                      <f:validator binding="#{row.bindings.Site.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="AccountLookupSingleKeyAccountLevelCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="100" sortProperty="KeyAccountLevel"
+                             rowHeader="false"
+                             helpTopicId="RBH_ACCOUNTLOOKUPSINGLEKEYACCOUNTLEVEL"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.label}"
+                                      id="ol3"/>
+                    </f:facet>
+                    <af:inputText id="AccountLookupSingleKeyAccountLevel"
+                                  value="#{row.bindings.KeyAccountLevel.inputValue}"
+                                  label="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.label}"
+                                  required="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.mandatory}"
+                                  rows="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.displayHeight}"
+                                  columns="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.displayWidth}"
+                                  maximumLength="5" readOnly="true"
+                                  shortDesc="#{bindings.AccountLookupSingleTable.hints.KeyAccountLevel.tooltip}">
+                      <f:validator binding="#{row.bindings.KeyAccountLevel.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="AccountLookupSinglePoolFlagCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="PoolFlag" align="center"
+                             rowHeader="false"
+                             helpTopicId="RBH_ACCOUNTLOOKUPSINGLEPOOLFLAG"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.AccountLookupSingleTable.hints.PoolFlag.label}"
+                                      id="ol4"/>
+                    </f:facet>
+                    <af:selectBooleanCheckbox id="AccountLookupSinglePoolFlag"
+                                              label="#{bindings.AccountLookupSingleTable.hints.PoolFlag.label}"
+                                              value="#{AccountLookupSinglePoolFlagcheckboxInTable.value}"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.AccountLookupSingleTable.hints.PoolFlag.tooltip}"></af:selectBooleanCheckbox>
+                  </af:column>
+                  <af:column id="AccountLookupSingleOpenOppsCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="OpenOpps" rowHeader="false"
+                             helpTopicId="RBH_ACCOUNTLOOKUPSINGLEOPENOPPS"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.AccountLookupSingleTable.hints.OpenOpps.label}"
+                                      id="ol5"/>
+                    </f:facet>
+                    <af:inputText id="AccountLookupSingleOpenOpps"
+                                  value="#{row.bindings.OpenOpps.inputValue}"
+                                  label="#{bindings.AccountLookupSingleTable.hints.OpenOpps.label}"
+                                  required="#{bindings.AccountLookupSingleTable.hints.OpenOpps.mandatory}"
+                                  rows="#{bindings.AccountLookupSingleTable.hints.OpenOpps.displayHeight}"
+                                  columns="#{bindings.AccountLookupSingleTable.hints.OpenOpps.displayWidth}"
+                                  readOnly="true"
+                                  shortDesc="#{bindings.AccountLookupSingleTable.hints.OpenOpps.tooltip}">
+                      <f:validator binding="#{row.bindings.OpenOpps.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.AccountLookupSingleTable.hints.OpenOpps.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="AccountLookupSingleTargetedTitlesCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="100" sortProperty="TargetedTitles"
+                             rowHeader="false"
+                             helpTopicId="RBH_ACCOUNTLOOKUPSINGLETARGETEDTITLES"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.label}"
+                                      id="ol6"/>
+                    </f:facet>
+                    <af:inputText id="AccountLookupSingleTargetedTitles"
+                                  value="#{row.bindings.TargetedTitles.inputValue}"
+                                  label="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.label}"
+                                  required="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.mandatory}"
+                                  rows="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.displayHeight}"
+                                  columns="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.displayWidth}"
+                                  readOnly="true"
+                                  shortDesc="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.tooltip}">
+                      <f:validator binding="#{row.bindings.TargetedTitles.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.AccountLookupSingleTable.hints.TargetedTitles.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="AccountLookupSingleCampaignNameCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="240" sortProperty="CampaignName"
+                             rowHeader="false"
+                             helpTopicId="RBH_ACCOUNTLOOKUPSINGLECAMPAIGNNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.AccountLookupSingleTable.hints.CampaignName.label}"
+                                      id="ol7"/>
+                    </f:facet>
+                    <af:inputText id="AccountLookupSingleCampaignName"
+                                  value="#{row.bindings.CampaignName.inputValue}"
+                                  label="#{bindings.AccountLookupSingleTable.hints.CampaignName.label}"
+                                  required="#{bindings.AccountLookupSingleTable.hints.CampaignName.mandatory}"
+                                  rows="#{bindings.AccountLookupSingleTable.hints.CampaignName.displayHeight}"
+                                  columns="#{bindings.AccountLookupSingleTable.hints.CampaignName.displayWidth}"
+                                  maximumLength="400" readOnly="true"
+                                  shortDesc="#{bindings.AccountLookupSingleTable.hints.CampaignName.tooltip}">
+                      <f:validator binding="#{row.bindings.CampaignName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </f:facet>
+          </af:panelStretchLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

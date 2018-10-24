@@ -1,0 +1,1023 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="CntTopLc"
+                             partialTriggers=" CntCancelButton0 asAreaCntSearchOptions qsAreaCntSearchOptions"
+                             rendered="#{jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO, BSSRO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_CONTRACT']}"
+                          helpTopicId="RBH_CONTRACT">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0"></af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="CntCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:panelGroupLayout id="modelSearchAreaCnt"
+                                 rendered="#{!pageFlowScope.createModes.CreateContract and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreaCntSearchOptions:qsButtonCnt qsAreaCntSearchOptions:asButtonCnt ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreaCntSearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.ContractIteratorTraxContractViewCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.ContractIteratorTraxContractViewCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.ContractIteratorTraxContractViewCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.ContractIteratorTraxContractViewCriteriaQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchContract.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonCnt"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchContract.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreaCntSearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.ContractIteratorTraxContractQuickQueryQuery.queryDescriptor}"
+                             model="#{bindings.ContractIteratorTraxContractQuickQueryQuery.queryModel}"
+                             queryListener="#{bindings.ContractIteratorTraxContractQuickQueryQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchContract.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonCnt"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchContract.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="CntPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="ContractDetails"></af:commandMenuItem>
+                    <af:group id="Cnttbb"
+                              rendered="#{ (bindings.ContractIterator.viewObject!=null and bindings.ContractIterator.viewObject.currentRow!=null)}">
+                      <af:commandMenuItem actionListener="#{bindings.FirstContract.execute}"
+                                          id="CntFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousContract.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="CntPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextContract.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="CntNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastContract.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="CntLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="CntTab"
+                                                       type="excelHTML"
+                                                       filename="Contract.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="CntTab"
+                                                       type="excelHTML"
+                                                       filename="Contract.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="CntPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.ContractIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="CntTab" contentDelivery="immediate"
+                        value="#{bindings.ContractTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.ContractTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.ContractTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.ContractTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.ContractTable.rangeSize}"
+                        autoHeightRows="#{bindings.ContractTable.estimatedRowCount}"
+                        fetchSize="#{bindings.ContractTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.ContractIteratorTraxContractQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.ContractIteratorTraxContractQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.ContractTable.table}"
+                        partialTriggers=":::qsAreaCntSearchOptions :::asAreaCntSearchOptions :::CntPC ::CntFirst ::CntPrevious ::CntNext ::CntLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_CONTRACT']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="CntTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="ContractDetails"></af:commandMenuItem>
+                      </af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="CntCNCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="ContractNumber" rowHeader="false"
+                           helpTopicId="RBH_CNTCONTRACTNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.ContractNumber.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="cl1"
+                                value="#{row.bindings.ContractNumber.inputValue}"
+                                label="#{bindings.ContractTable.hints.ContractNumber.label}"
+                                required="#{bindings.ContractTable.hints.ContractNumber.mandatory}"
+                                rows="#{bindings.ContractTable.hints.ContractNumber.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.ContractNumber.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.ContractNumber.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.ContractNumber.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2"
+                                  shortDesc="#{bindings.ContractTable.hints.ContractNumber.tooltip}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="ContractDetails"
+                                  text="#{row.ContractNumber}"></af:commandLink>
+                </af:column>
+                <af:column id="CntANoCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="AccountNumber" rowHeader="false"
+                           helpTopicId="RBH_CNTACCOUNTNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.AccountNumber.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:inputText id="CntANo"
+                                value="#{row.bindings.AccountNumber.inputValue}"
+                                label="#{bindings.ContractTable.hints.AccountNumber.label}"
+                                required="#{bindings.ContractTable.hints.AccountNumber.mandatory}"
+                                rows="#{bindings.ContractTable.hints.AccountNumber.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.AccountNumber.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.AccountNumber.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ContractTable.hints.AccountNumber.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntANmCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="AccountName"
+                           rowHeader="false" helpTopicId="RBH_CNTACCOUNTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.AccountName.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:inputText id="cl3"
+                                value="#{row.bindings.AccountName.inputValue}"
+                                label="#{bindings.ContractTable.hints.AccountName.label}"
+                                required="#{bindings.ContractTable.hints.AccountName.mandatory}"
+                                rows="#{bindings.ContractTable.hints.AccountName.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.AccountName.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.AccountName.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="CntANm"
+                                  text="#{row.bindings.AccountName.attributeValue}"
+                                  shortDesc="#{bindings.ContractTable.hints.AccountName.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Accounts"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.CntContentOwnerId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Acct. - #{bindings.CntAccountNumber.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.CntContentOwnerId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="CntAStCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="AccountSite"
+                           rowHeader="false" helpTopicId="RBH_CNTACCOUNTSITE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.AccountSite.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:inputText id="CntASt"
+                                value="#{row.bindings.AccountSite.inputValue}"
+                                label="#{bindings.ContractTable.hints.AccountSite.label}"
+                                required="#{bindings.ContractTable.hints.AccountSite.mandatory}"
+                                rows="#{bindings.ContractTable.hints.AccountSite.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.AccountSite.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.AccountSite.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntNtCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Note"
+                           rowHeader="false" helpTopicId="RBH_CNTNOTE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Note.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:inputText id="CntNt"
+                                value="#{row.bindings.Note.inputValue}"
+                                label="#{bindings.ContractTable.hints.Note.label}"
+                                required="#{bindings.ContractTable.hints.Note.mandatory}"
+                                rows="#{bindings.ContractTable.hints.Note.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.Note.displayWidth}"
+                                maximumLength="4000" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.Note.tooltip}">
+                    <f:validator binding="#{row.bindings.Note.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntFmCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Form"
+                           rowHeader="false" helpTopicId="RBH_CNTFORM"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Form.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntFm"
+                                      value="#{row.bindings.Form.inputValue}"
+                                      label="#{bindings.ContractTable.hints.Form.label}"
+                                      required="#{bindings.ContractTable.hints.Form.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.Form.tooltip}">
+                    <f:selectItems value="#{row.bindings.Form.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntStCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Status"
+                           rowHeader="false" helpTopicId="RBH_CNTSTATUS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Status.label}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntSt"
+                                      value="#{row.bindings.Status.inputValue}"
+                                      label="#{bindings.ContractTable.hints.Status.label}"
+                                      required="#{bindings.ContractTable.hints.Status.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.Status.tooltip}">
+                    <f:selectItems value="#{row.bindings.Status.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntTyCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Type"
+                           rowHeader="false" helpTopicId="RBH_CNTTYPE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Type.label}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntTy"
+                                      value="#{row.bindings.Type.inputValue}"
+                                      label="#{bindings.ContractTable.hints.Type.label}"
+                                      required="#{bindings.ContractTable.hints.Type.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.Type.tooltip}">
+                    <f:selectItems value="#{row.bindings.Type.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntDivCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Division"
+                           rowHeader="false" helpTopicId="RBH_CNTDIVISION"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Division.label}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntDiv"
+                                      value="#{row.bindings.Division.inputValue}"
+                                      label="#{bindings.ContractTable.hints.Division.label}"
+                                      required="#{bindings.ContractTable.hints.Division.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.Division.tooltip}">
+                    <f:selectItems value="#{row.bindings.Division.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntCSPCol" sortable="true" filterable="true"
+                           noWrap="true" width="228"
+                           sortProperty="CompSubsToProvide" rowHeader="false"
+                           helpTopicId="RBH_CNTCOMPSUBSTOPROVIDE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.CompSubsToProvide.label}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <af:inputText id="CntCSP"
+                                value="#{row.bindings.CompSubsToProvide.inputValue}"
+                                label="#{bindings.ContractTable.hints.CompSubsToProvide.label}"
+                                required="#{bindings.ContractTable.hints.CompSubsToProvide.mandatory}"
+                                rows="#{bindings.ContractTable.hints.CompSubsToProvide.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.CompSubsToProvide.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.CompSubsToProvide.tooltip}">
+                    <f:validator binding="#{row.bindings.CompSubsToProvide.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ContractTable.hints.CompSubsToProvide.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntFCSCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="FormatOfCompSubs" rowHeader="false"
+                           helpTopicId="RBH_CNTFORMATOFCOMPSUBS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.FormatOfCompSubs.label}"
+                                    id="ol10"/>
+                  </f:facet>
+                  <af:inputText id="CntFCS"
+                                value="#{row.bindings.FormatOfCompSubs.inputValue}"
+                                label="#{bindings.ContractTable.hints.FormatOfCompSubs.label}"
+                                required="#{bindings.ContractTable.hints.FormatOfCompSubs.mandatory}"
+                                rows="#{bindings.ContractTable.hints.FormatOfCompSubs.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.FormatOfCompSubs.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.FormatOfCompSubs.tooltip}">
+                    <f:validator binding="#{row.bindings.FormatOfCompSubs.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntEfDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="EffectiveDate" rowHeader="false"
+                           helpTopicId="RBH_CNTEFFECTIVEDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.EffectiveDate.label}"
+                                    id="ol11"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.EffectiveDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CntEfD"
+                                value="#{row.bindings.EffectiveDate.inputValue}"
+                                label="#{bindings.ContractTable.hints.EffectiveDate.label}"
+                                required="#{bindings.ContractTable.hints.EffectiveDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.EffectiveDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CntExDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ExpirationDate" rowHeader="false"
+                           helpTopicId="RBH_CNTEXPIRATIONDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.ExpirationDate.label}"
+                                    id="ol12"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.ExpirationDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CntExD"
+                                value="#{row.bindings.ExpirationDate.inputValue}"
+                                label="#{bindings.ContractTable.hints.ExpirationDate.label}"
+                                required="#{bindings.ContractTable.hints.ExpirationDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.ExpirationDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CntTLCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="TermLength"
+                           rowHeader="false" helpTopicId="RBH_CNTTERMLENGTH"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.TermLength.label}"
+                                    id="ol13"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntTL"
+                                      value="#{row.bindings.TermLength.inputValue}"
+                                      label="#{bindings.ContractTable.hints.TermLength.label}"
+                                      required="#{bindings.ContractTable.hints.TermLength.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.TermLength.tooltip}">
+                    <f:selectItems value="#{row.bindings.TermLength.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntCNTCol" sortable="true" filterable="true"
+                           noWrap="true" width="228"
+                           sortProperty="CancellationNoticeTerm"
+                           rowHeader="false"
+                           helpTopicId="RBH_CNTCANCELLATIONNOTICETERM"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.CancellationNoticeTerm.label}"
+                                    id="ol14"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntCNT"
+                                      value="#{row.bindings.CancellationNoticeTerm.inputValue}"
+                                      label="#{bindings.ContractTable.hints.CancellationNoticeTerm.label}"
+                                      required="#{bindings.ContractTable.hints.CancellationNoticeTerm.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.CancellationNoticeTerm.tooltip}">
+                    <f:selectItems value="#{row.bindings.CancellationNoticeTerm.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntRDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="RolloverDate"
+                           rowHeader="false" helpTopicId="RBH_CNTROLLOVERDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.RolloverDate.label}"
+                                    id="ol15"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.RolloverDate}"
+                                  id="id2">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CntRD"
+                                value="#{row.bindings.RolloverDate.inputValue}"
+                                label="#{bindings.ContractTable.hints.RolloverDate.label}"
+                                required="#{bindings.ContractTable.hints.RolloverDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.RolloverDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CntCnDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="CancellationDate" rowHeader="false"
+                           helpTopicId="RBH_CNTCANCELLATIONDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.CancellationDate.label}"
+                                    id="ol16"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CancellationDate}"
+                                  id="id3">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CntCnD"
+                                value="#{row.bindings.CancellationDate.inputValue}"
+                                label="#{bindings.ContractTable.hints.CancellationDate.label}"
+                                required="#{bindings.ContractTable.hints.CancellationDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.CancellationDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CntCEDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="CancellationEffectiveDate"
+                           rowHeader="false"
+                           helpTopicId="RBH_CNTCANCELLATIONEFFECTIVEDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.CancellationEffectiveDate.label}"
+                                    id="ol17"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CancellationEffectiveDate}"
+                                  id="id4">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CntCED"
+                                value="#{row.bindings.CancellationEffectiveDate.inputValue}"
+                                label="#{bindings.ContractTable.hints.CancellationEffectiveDate.label}"
+                                required="#{bindings.ContractTable.hints.CancellationEffectiveDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.CancellationEffectiveDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CntCnRCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="CancellationReason" rowHeader="false"
+                           helpTopicId="RBH_CNTCANCELLATIONREASON"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.CancellationReason.label}"
+                                    id="ol18"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntCnR"
+                                      value="#{row.bindings.CancellationReason.inputValue}"
+                                      label="#{bindings.ContractTable.hints.CancellationReason.label}"
+                                      required="#{bindings.ContractTable.hints.CancellationReason.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.CancellationReason.tooltip}">
+                    <f:selectItems value="#{row.bindings.CancellationReason.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntARFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="AutoRenewsFlag" rowHeader="false"
+                           helpTopicId="RBH_CNTAUTORENEWSFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.AutoRenewsFlag.label}"
+                                    id="ol19"/>
+                  </f:facet>
+                  <af:inputText id="CntARF"
+                                value="#{row.bindings.AutoRenewsFlag.inputValue}"
+                                label="#{bindings.ContractTable.hints.AutoRenewsFlag.label}"
+                                required="#{bindings.ContractTable.hints.AutoRenewsFlag.mandatory}"
+                                rows="#{bindings.ContractTable.hints.AutoRenewsFlag.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.AutoRenewsFlag.displayWidth}"
+                                maximumLength="1" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.AutoRenewsFlag.tooltip}">
+                    <f:validator binding="#{row.bindings.AutoRenewsFlag.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntProblematicPublisherCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="ProblematicPublisher" align="center"
+                           rowHeader="false"
+                           helpTopicId="RBH_CNTPROBLEMATICPUBLISHER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.ProblematicPublisher.label}"
+                                    id="ol20"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="CntProblematicPublisher"
+                                            label="#{bindings.ContractTable.hints.ProblematicPublisher.label}"
+                                            value="#{CntProblematicPublishercheckboxInTable.value}"
+                                            readOnly="true" disabled="true"
+                                            shortDesc="#{bindings.ContractTable.hints.ProblematicPublisher.tooltip}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="CntSigCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Signatory"
+                           rowHeader="false" helpTopicId="RBH_CNTSIGNATORY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Signatory.label}"
+                                    id="ol21"/>
+                  </f:facet>
+                  <af:inputText id="CntSig"
+                                value="#{row.bindings.Signatory.inputValue}"
+                                label="#{bindings.ContractTable.hints.Signatory.label}"
+                                required="#{bindings.ContractTable.hints.Signatory.mandatory}"
+                                rows="#{bindings.ContractTable.hints.Signatory.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.Signatory.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.Signatory.tooltip}">
+                    <f:validator binding="#{row.bindings.Signatory.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntCSDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ContractSignedDate" rowHeader="false"
+                           helpTopicId="RBH_CNTCONTRACTSIGNEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.ContractSignedDate.label}"
+                                    id="ol22"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.ContractSignedDate}"
+                                  id="id5">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CntCSD"
+                                value="#{row.bindings.ContractSignedDate.inputValue}"
+                                label="#{bindings.ContractTable.hints.ContractSignedDate.label}"
+                                required="#{bindings.ContractTable.hints.ContractSignedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.ContractSignedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CntARTCol" sortable="true" filterable="true"
+                           noWrap="true" width="228"
+                           sortProperty="AutoRenewTermMonths" rowHeader="false"
+                           helpTopicId="RBH_CNTAUTORENEWTERMMONTHS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.AutoRenewTermMonths.label}"
+                                    id="ol23"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntART"
+                                      value="#{row.bindings.AutoRenewTermMonths.inputValue}"
+                                      label="#{bindings.ContractTable.hints.AutoRenewTermMonths.label}"
+                                      required="#{bindings.ContractTable.hints.AutoRenewTermMonths.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.AutoRenewTermMonths.tooltip}">
+                    <f:selectItems value="#{row.bindings.AutoRenewTermMonths.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntExcCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Exclusivity"
+                           rowHeader="false" helpTopicId="RBH_CNTEXCLUSIVITY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Exclusivity.label}"
+                                    id="ol24"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntExc"
+                                      value="#{row.bindings.Exclusivity.inputValue}"
+                                      label="#{bindings.ContractTable.hints.Exclusivity.label}"
+                                      required="#{bindings.ContractTable.hints.Exclusivity.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.Exclusivity.tooltip}">
+                    <f:selectItems value="#{row.bindings.Exclusivity.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntCMOCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="ContentMasterOwner" rowHeader="false"
+                           helpTopicId="RBH_CNTCONTENTMASTEROWNER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.ContentMasterOwner.label}"
+                                    id="ol25"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntCMO"
+                                      value="#{row.bindings.ContentMasterOwner.inputValue}"
+                                      label="#{bindings.ContractTable.hints.ContentMasterOwner.label}"
+                                      required="#{bindings.ContractTable.hints.ContentMasterOwner.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.ContentMasterOwner.tooltip}">
+                    <f:selectItems value="#{row.bindings.ContentMasterOwner.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntRtRCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="RightsToBeRetained" rowHeader="false"
+                           helpTopicId="RBH_CNTRIGHTSTOBERETAINED"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.RightsToBeRetained.label}"
+                                    id="ol26"/>
+                  </f:facet>
+                  <af:inputText id="CntRtR"
+                                value="#{row.bindings.RightsToBeRetained.inputValue}"
+                                label="#{bindings.ContractTable.hints.RightsToBeRetained.label}"
+                                required="#{bindings.ContractTable.hints.RightsToBeRetained.mandatory}"
+                                rows="#{bindings.ContractTable.hints.RightsToBeRetained.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.RightsToBeRetained.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.RightsToBeRetained.tooltip}">
+                    <f:validator binding="#{row.bindings.RightsToBeRetained.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntNFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="NoteFlag"
+                           rowHeader="false" helpTopicId="RBH_CNTNOTEFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.NoteFlag.label}"
+                                    id="ol27"/>
+                  </f:facet>
+                  <af:inputText id="CntNF"
+                                value="#{row.bindings.NoteFlag.inputValue}"
+                                label="#{bindings.ContractTable.hints.NoteFlag.label}"
+                                required="#{bindings.ContractTable.hints.NoteFlag.mandatory}"
+                                rows="#{bindings.ContractTable.hints.NoteFlag.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.NoteFlag.displayWidth}"
+                                maximumLength="1" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.NoteFlag.tooltip}">
+                    <f:validator binding="#{row.bindings.NoteFlag.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntROCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="RelationshipOwner" rowHeader="false"
+                           helpTopicId="RBH_CNTRELATIONSHIPOWNER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.RelationshipOwner.label}"
+                                    id="ol28"/>
+                  </f:facet>
+                  <af:inputText id="CntRO"
+                                value="#{row.bindings.RelationshipOwner.inputValue}"
+                                label="#{bindings.ContractTable.hints.RelationshipOwner.label}"
+                                required="#{bindings.ContractTable.hints.RelationshipOwner.mandatory}"
+                                rows="#{bindings.ContractTable.hints.RelationshipOwner.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.RelationshipOwner.displayWidth}"
+                                maximumLength="100" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.RelationshipOwner.tooltip}">
+                    <f:validator binding="#{row.bindings.RelationshipOwner.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntAutoAddCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="AutoAdd"
+                           rowHeader="false" helpTopicId="RBH_CNTAUTOADD"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.AutoAdd.label}"
+                                    id="ol29"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntAutoAdd"
+                                      value="#{row.bindings.AutoAdd.inputValue}"
+                                      label="#{bindings.ContractTable.hints.AutoAdd.label}"
+                                      required="#{bindings.ContractTable.hints.AutoAdd.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.AutoAdd.tooltip}">
+                    <f:selectItems value="#{row.bindings.AutoAdd.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntAssignmentCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="Assignment" rowHeader="false"
+                           helpTopicId="RBH_CNTASSIGNMENT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Assignment.label}"
+                                    id="ol30"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntAssignment"
+                                      value="#{row.bindings.Assignment.inputValue}"
+                                      label="#{bindings.ContractTable.hints.Assignment.label}"
+                                      required="#{bindings.ContractTable.hints.Assignment.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.Assignment.tooltip}">
+                    <f:selectItems value="#{row.bindings.Assignment.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntRoyaltyBearingCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="RoyaltyBearing" rowHeader="false"
+                           helpTopicId="RBH_CNTROYALTYBEARING"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.RoyaltyBearing.label}"
+                                    id="ol31"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntRoyaltyBearing"
+                                      value="#{row.bindings.RoyaltyBearing.inputValue}"
+                                      label="#{bindings.ContractTable.hints.RoyaltyBearing.label}"
+                                      required="#{bindings.ContractTable.hints.RoyaltyBearing.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.RoyaltyBearing.tooltip}">
+                    <f:selectItems value="#{row.bindings.RoyaltyBearing.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntGuaranteeCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="Guarantee" align="center"
+                           rowHeader="false" helpTopicId="RBH_CNTGUARANTEE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Guarantee.label}"
+                                    id="ol32"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="CntGuarantee"
+                                            label="#{bindings.ContractTable.hints.Guarantee.label}"
+                                            value="#{CntGuaranteecheckboxInTable.value}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.ContractTable.hints.Guarantee.tooltip}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="CntFairTreatmentClauseCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="FairTreatmentClause" rowHeader="false"
+                           helpTopicId="RBH_CNTFAIRTREATMENTCLAUSE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.FairTreatmentClause.label}"
+                                    id="ol33"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntFairTreatmentClause"
+                                      value="#{row.bindings.FairTreatmentClause.inputValue}"
+                                      label="#{bindings.ContractTable.hints.FairTreatmentClause.label}"
+                                      required="#{bindings.ContractTable.hints.FairTreatmentClause.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.FairTreatmentClause.tooltip}">
+                    <f:selectItems value="#{row.bindings.FairTreatmentClause.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntIssueEditionCoverageCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="IssueEditionCoverage" rowHeader="false"
+                           helpTopicId="RBH_CNTISSUEEDITIONCOVERAGE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.IssueEditionCoverage.label}"
+                                    id="ol34"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntIssueEditionCoverage"
+                                      value="#{row.bindings.IssueEditionCoverage.inputValue}"
+                                      label="#{bindings.ContractTable.hints.IssueEditionCoverage.label}"
+                                      required="#{bindings.ContractTable.hints.IssueEditionCoverage.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.IssueEditionCoverage.tooltip}">
+                    <f:selectItems value="#{row.bindings.IssueEditionCoverage.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntCompleteContentSetCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="CompleteContentSet" rowHeader="false"
+                           helpTopicId="RBH_CNTCOMPLETECONTENTSET"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.CompleteContentSet.label}"
+                                    id="ol35"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntCompleteContentSet"
+                                      value="#{row.bindings.CompleteContentSet.inputValue}"
+                                      label="#{bindings.ContractTable.hints.CompleteContentSet.label}"
+                                      required="#{bindings.ContractTable.hints.CompleteContentSet.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.CompleteContentSet.tooltip}">
+                    <f:selectItems value="#{row.bindings.CompleteContentSet.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntWarrantyAndIndemnificationCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="WarrantyAndIndemnification"
+                           rowHeader="false"
+                           helpTopicId="RBH_CNTWARRANTYANDINDEMNIFICATION"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.WarrantyAndIndemnification.label}"
+                                    id="ol36"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntWarrantyAndIndemnification"
+                                      value="#{row.bindings.WarrantyAndIndemnification.inputValue}"
+                                      label="#{bindings.ContractTable.hints.WarrantyAndIndemnification.label}"
+                                      required="#{bindings.ContractTable.hints.WarrantyAndIndemnification.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.WarrantyAndIndemnification.tooltip}">
+                    <f:selectItems value="#{row.bindings.WarrantyAndIndemnification.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntGovernanceCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="Governance" rowHeader="false"
+                           helpTopicId="RBH_CNTGOVERNANCE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.Governance.label}"
+                                    id="ol37"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CntGovernance"
+                                      value="#{row.bindings.Governance.inputValue}"
+                                      label="#{bindings.ContractTable.hints.Governance.label}"
+                                      required="#{bindings.ContractTable.hints.Governance.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContractTable.hints.Governance.tooltip}">
+                    <f:selectItems value="#{row.bindings.Governance.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CntCBCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="CreatedBy"
+                           rowHeader="false" helpTopicId="RBH_CNTCREATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.CreatedBy.label}"
+                                    id="ol38"/>
+                  </f:facet>
+                  <af:inputText id="CntCB"
+                                value="#{row.bindings.CreatedBy.inputValue}"
+                                label="#{bindings.ContractTable.hints.CreatedBy.label}"
+                                required="#{bindings.ContractTable.hints.CreatedBy.mandatory}"
+                                rows="#{bindings.ContractTable.hints.CreatedBy.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.CreatedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.CreatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntCDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CreatedDate"
+                           rowHeader="false" helpTopicId="RBH_CNTCREATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.CreatedDate.label}"
+                                    id="ol39"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                  id="id6">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CntCD"
+                                value="#{row.bindings.CreatedDate.inputValue}"
+                                label="#{bindings.ContractTable.hints.CreatedDate.label}"
+                                required="#{bindings.ContractTable.hints.CreatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.CreatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CntLUBCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="LastUpdatedBy" rowHeader="false"
+                           helpTopicId="RBH_CNTLASTUPDATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.LastUpdatedBy.label}"
+                                    id="ol40"/>
+                  </f:facet>
+                  <af:inputText id="CntLUB"
+                                value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.ContractTable.hints.LastUpdatedBy.label}"
+                                required="#{bindings.ContractTable.hints.LastUpdatedBy.mandatory}"
+                                rows="#{bindings.ContractTable.hints.LastUpdatedBy.displayHeight}"
+                                columns="#{bindings.ContractTable.hints.LastUpdatedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.LastUpdatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CntLUDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="LastUpdatedDate" rowHeader="false"
+                           helpTopicId="RBH_CNTLASTUPDATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ContractTable.hints.LastUpdatedDate.label}"
+                                    id="ol41"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                  id="id7">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CntLUD"
+                                value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                label="#{bindings.ContractTable.hints.LastUpdatedDate.label}"
+                                required="#{bindings.ContractTable.hints.LastUpdatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ContractTable.hints.LastUpdatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

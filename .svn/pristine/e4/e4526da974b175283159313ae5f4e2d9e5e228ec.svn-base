@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="EventsTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartEvents</default-activity>
+    <input-parameter-definition id="__3">
+      <name id="__4">createEvents</name>
+      <value id="__5">#{pageFlowScope.createEvents}</value>
+      <class id="__6">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyStrEvents</name>
+      <value id="__9">#{pageFlowScope.rowKeyStrEvents}</value>
+      <class id="__10">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyValueEvents</name>
+      <value id="__13">#{pageFlowScope.rowKeyValueEvents}</value>
+      <class id="__14">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">rowKeyEvents</name>
+      <value id="__17">#{pageFlowScope.rowKeyEvents}</value>
+      <class id="__18">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name id="__20">altKeyNameEvents</name>
+      <value id="__21">#{pageFlowScope.altKeyNameEvents}</value>
+      <class id="__22">java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__23">
+      <managed-bean-name id="__24">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__25">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__26">pageFlow</managed-bean-scope>
+      <managed-property id="__27">
+        <property-name id="__28">initializeParentContextEntries</property-name>
+        <map-entries id="__29">
+          <map-entry id="__30">
+            <key id="__31">jhsCurrentGroupName</key>
+            <value id="__32">Events</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__33">
+      <managed-bean-name id="__34">EventUsersDefaultValues</managed-bean-name>
+      <managed-bean-class id="__35">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__36">pageFlow</managed-bean-scope>
+      <managed-property id="__37">
+        <property-name id="__38">iteratorBinding</property-name>
+        <value id="__39">#{data.EventsPageDef.EventUsersIterator}</value>
+      </managed-property>
+      <managed-property id="__40">
+        <property-name id="__41">defaultValues</property-name>
+        <map-entries id="__42">
+          <map-entry id="__43">
+            <key id="__44">UserType</key>
+            <value id="__45">Owner</value>
+          </map-entry>
+          <map-entry id="__46">
+            <key id="__47">AddDate</key>
+            <value id="__48">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__49">
+        <property-name id="__50">actionResult</property-name>
+        <value id="__51">CreateEventUsers</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__52">
+      <managed-bean-name id="__53">EventAttachmentsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__54">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__55">pageFlow</managed-bean-scope>
+      <managed-property id="__56">
+        <property-name id="__57">iteratorBinding</property-name>
+        <value id="__58">#{data.EventsPageDef.EventAttachmentsIterator}</value>
+      </managed-property>
+      <managed-property id="__59">
+        <property-name id="__60">defaultValues</property-name>
+        <map-entries id="__61">
+          <map-entry id="__62">
+            <key id="__63">AttachmentType</key>
+            <value id="__64">File</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__65">
+        <property-name id="__66">actionResult</property-name>
+        <value id="__67">CreateEventAttachments</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__68">
+      <managed-bean-name id="__69">CreateEvents</managed-bean-name>
+      <managed-bean-class id="__70">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__71">request</managed-bean-scope>
+      <managed-property id="__72">
+        <property-name id="__73">createBinding</property-name>
+        <value id="__74">#{bindings.CreateEvents}</value>
+      </managed-property>
+      <managed-property id="__75">
+        <property-name id="__76">successOutcome</property-name>
+        <value id="__77">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__78">
+        <property-name id="__79">failureOutcome</property-name>
+        <value id="__80">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__81">
+      <managed-bean-name id="__82">SaveEvents</managed-bean-name>
+      <managed-bean-class id="__83">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__84">request</managed-bean-scope>
+      <managed-property id="__85">
+        <property-name id="__86">commitBinding</property-name>
+        <value id="__87">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__88">
+        <property-name id="__89">successOutcome</property-name>
+        <value id="__90">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__91">
+      <managed-bean-name id="__92">jhsRollback</managed-bean-name>
+      <managed-bean-class id="__93">oracle.jheadstart.controller.jsf.bean.RollbackBean</managed-bean-class>
+      <managed-bean-scope id="__94">request</managed-bean-scope>
+      <managed-property id="__95">
+        <property-name id="__96">rollbackBinding</property-name>
+        <value id="__97">#{bindings.Rollback}</value>
+      </managed-property>
+      <managed-property id="__98">
+        <property-name id="__99">successOutcome</property-name>
+        <value id="__100">Cancel</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__101">
+      <managed-bean-name id="__102">searchEvents</managed-bean-name>
+      <managed-bean-class id="__103">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__104">pageFlow</managed-bean-scope>
+      <managed-property id="__105">
+        <property-name id="__106">bindings</property-name>
+        <value id="__107">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__108">
+        <property-name id="__109">searchBinding</property-name>
+        <value id="__110">#{'#{bindings.advancedSearchEvents}'}</value>
+      </managed-property>
+      <managed-property id="__111">
+        <property-name id="__112">searchItem</property-name>
+        <value id="__113">EvtEventName</value>
+      </managed-property>
+      <managed-property id="__114">
+        <property-name id="__115">dataCollection</property-name>
+        <value id="__116">TraxEventView1</value>
+      </managed-property>
+      <managed-property id="__117">
+        <property-name id="__118">operators</property-name>
+        <map-entries id="__119"></map-entries>
+      </managed-property>
+      <managed-property id="__120">
+        <property-name id="__121">itemAttributes</property-name>
+        <map-entries id="__122">
+          <map-entry id="__123">
+            <key id="__124">EvtEventType</key>
+            <value id="__125">EventType</value>
+          </map-entry>
+          <map-entry id="__126">
+            <key id="__127">EvtEventName</key>
+            <value id="__128">EventName</value>
+          </map-entry>
+          <map-entry id="__129">
+            <key id="__130">EvtEventDate</key>
+            <value id="__131">EventDate</value>
+          </map-entry>
+          <map-entry id="__132">
+            <key id="__133">EvtDescription</key>
+            <value id="__134">Description</value>
+          </map-entry>
+          <map-entry id="__135">
+            <key id="__136">EvtNote</key>
+            <value id="__137">Note</value>
+          </map-entry>
+          <map-entry id="__138">
+            <key id="__139">EvtCreatedBy</key>
+            <value id="__140">CreatedBy</value>
+          </map-entry>
+          <map-entry id="__141">
+            <key id="__142">EvtCreatedDate</key>
+            <value id="__143">CreatedDate</value>
+          </map-entry>
+          <map-entry id="__144">
+            <key id="__145">EvtLastUpdatedBy</key>
+            <value id="__146">LastUpdatedBy</value>
+          </map-entry>
+          <map-entry id="__147">
+            <key id="__148">EvtLastUpdatedDate</key>
+            <value id="__149">LastUpdatedDate</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__150">
+      <managed-bean-name id="__151">EventsTable</managed-bean-name>
+      <managed-bean-class id="__152">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__153">pageFlow</managed-bean-scope>
+      <managed-property id="__154">
+        <property-name id="__155">name</property-name>
+        <value id="__156">EventsTable</value>
+      </managed-property>
+      <managed-property id="__157">
+        <property-name id="__158">rangeBindingExpr</property-name>
+        <value id="__159">#{'#{bindings.EventsTable}'}</value>
+      </managed-property>
+      <managed-property id="__160">
+        <property-name id="__161">createNewRowAtTop</property-name>
+        <value id="__162">true</value>
+      </managed-property>
+      <managed-property id="__163">
+        <property-name id="__164">focusItemId</property-name>
+        <value id="__165">EvtETy</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__166">
+      <managed-bean-name id="__167">DeleteEvents</managed-bean-name>
+      <managed-bean-class id="__168">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__169">request</managed-bean-scope>
+      <managed-property id="__170">
+        <property-name id="__171">deleteBinding</property-name>
+        <value id="__172">#{bindings.DeleteEvents}</value>
+      </managed-property>
+      <managed-property id="__173">
+        <property-name id="__174">commitBean</property-name>
+        <value id="__175">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__176">
+      <managed-bean-name id="__177">EventUsersTable</managed-bean-name>
+      <managed-bean-class id="__178">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__179">pageFlow</managed-bean-scope>
+      <managed-property id="__180">
+        <property-name id="__181">name</property-name>
+        <value id="__182">EventUsersTable</value>
+      </managed-property>
+      <managed-property id="__183">
+        <property-name id="__184">rangeBindingExpr</property-name>
+        <value id="__185">#{'#{bindings.EventUsersTable}'}</value>
+      </managed-property>
+      <managed-property id="__186">
+        <property-name id="__187">createNewRowAtTop</property-name>
+        <value id="__188">true</value>
+      </managed-property>
+      <managed-property id="__189">
+        <property-name id="__190">defaultValuesBean</property-name>
+        <value id="__191">#{pageFlowScope.EventUsersDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__192">
+        <property-name id="__193">focusItemId</property-name>
+        <value id="__194">sb0UNm</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__195">
+      <managed-bean-name id="__196">DeleteEventUsers</managed-bean-name>
+      <managed-bean-class id="__197">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__198">request</managed-bean-scope>
+      <managed-property id="__199">
+        <property-name id="__200">deleteBinding</property-name>
+        <value id="__201">#{bindings.DeleteEventUsers}</value>
+      </managed-property>
+      <managed-property id="__202">
+        <property-name id="__203">commitBean</property-name>
+        <value id="__204">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__205">
+      <managed-bean-name id="__206">CreateEventUsers</managed-bean-name>
+      <managed-bean-class id="__207">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__208">request</managed-bean-scope>
+      <managed-property id="__209">
+        <property-name id="__210">createBinding</property-name>
+        <value id="__211">#{bindings.CreateEventUsers}</value>
+      </managed-property>
+      <managed-property id="__212">
+        <property-name id="__213">defaultValuesBean</property-name>
+        <value id="__214">#{pageFlowScope.EventUsersDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__215">
+        <property-name id="__216">successOutcome</property-name>
+        <value id="__217">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__218">
+        <property-name id="__219">failureOutcome</property-name>
+        <value id="__220">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__221">
+      <managed-bean-name id="__222">sb0UsernameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__223">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__224">pageFlow</managed-bean-scope>
+      <managed-property id="__225">
+        <property-name id="__226">iterBindingExpr</property-name>
+        <value id="__227">#{'#{bindings.EventUsersIterator}'}</value>
+      </managed-property>
+      <managed-property id="__228">
+        <property-name id="__229">lovFieldBindingExpr</property-name>
+        <value id="__230">#{'#{row.bindings.Username}'}</value>
+      </managed-property>
+      <managed-property id="__231">
+        <property-name id="__232">copyToModel</property-name>
+        <value id="__233">true</value>
+      </managed-property>
+      <managed-property id="__234">
+        <property-name id="__235">tableBean</property-name>
+        <value id="__236">#{pageFlowScope.EventUsersTable}</value>
+      </managed-property>
+      <managed-property id="__237">
+        <property-name id="__238">lovSearchItem</property-name>
+        <value id="__239">UsersLookupUsername</value>
+      </managed-property>
+      <managed-property id="__240">
+        <property-name id="__241">lovTitleExpr</property-name>
+        <value id="__242">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.EventUsersTable.hints.Username.label}"}</value>
+      </managed-property>
+      <managed-property id="__243">
+        <property-name id="__244">lovWidth</property-name>
+        <value id="__245">1000</value>
+      </managed-property>
+      <managed-property id="__246">
+        <property-name id="__247">lovHeight</property-name>
+        <value id="__248">500</value>
+      </managed-property>
+      <managed-property id="__249">
+        <property-name id="__250">lovTaskFlowIdString</property-name>
+        <value id="__251">/WEB-INF/adfc-config-UsersLookup.xml#UsersLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__252">
+        <property-name id="__253">lovParams</property-name>
+        <map-entries id="__254"></map-entries>
+      </managed-property>
+      <managed-property id="__255">
+        <property-name id="__256">returnItemValues</property-name>
+        <map-entries id="__257">
+          <map-entry id="__258">
+            <key id="__259">Username</key>
+            <value id="__260">sb0Username</value>
+          </map-entry>
+          <map-entry id="__261">
+            <key id="__262">Id</key>
+            <value id="__263">sb0JhsUsersId</value>
+          </map-entry>
+          <map-entry id="__264">
+            <key id="__265">DisplayName</key>
+            <value id="__266">sb0DisplayName</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__267">
+        <property-name id="__268">returnAttributeValues</property-name>
+        <map-entries id="__269">
+          <map-entry id="__270">
+            <key id="__271">Username</key>
+            <value id="__272">Username</value>
+          </map-entry>
+          <map-entry id="__273">
+            <key id="__274">Id</key>
+            <value id="__275">JhsUsersId</value>
+          </map-entry>
+          <map-entry id="__276">
+            <key id="__277">DisplayName</key>
+            <value id="__278">DisplayName</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__279">
+        <property-name id="__280">itemsToClear</property-name>
+        <list-entries id="__281"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__282">
+      <managed-bean-name id="__283">CreateEventAttachments</managed-bean-name>
+      <managed-bean-class id="__284">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__285">request</managed-bean-scope>
+      <managed-property id="__286">
+        <property-name id="__287">createBinding</property-name>
+        <value id="__288">#{bindings.CreateEventAttachments}</value>
+      </managed-property>
+      <managed-property id="__289">
+        <property-name id="__290">defaultValuesBean</property-name>
+        <value id="__291">#{pageFlowScope.EventAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__292">
+        <property-name id="__293">successOutcome</property-name>
+        <value id="__294">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__295">
+        <property-name id="__296">failureOutcome</property-name>
+        <value id="__297">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__298">
+      <managed-bean-name id="__299">EventAttachmentsTable</managed-bean-name>
+      <managed-bean-class id="__300">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__301">pageFlow</managed-bean-scope>
+      <managed-property id="__302">
+        <property-name id="__303">name</property-name>
+        <value id="__304">EventAttachmentsTable</value>
+      </managed-property>
+      <managed-property id="__305">
+        <property-name id="__306">rangeBindingExpr</property-name>
+        <value id="__307">#{'#{bindings.EventAttachmentsTable}'}</value>
+      </managed-property>
+      <managed-property id="__308">
+        <property-name id="__309">createNewRowAtTop</property-name>
+        <value id="__310">true</value>
+      </managed-property>
+      <managed-property id="__311">
+        <property-name id="__312">defaultValuesBean</property-name>
+        <value id="__313">#{pageFlowScope.EventAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__314">
+        <property-name id="__315">focusItemId</property-name>
+        <value id="__316">sb1ADL</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__317">
+      <managed-bean-name id="__318">sb1AttachmentDLFileHandlerInTable</managed-bean-name>
+      <managed-bean-class id="__319">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__320">request</managed-bean-scope>
+      <managed-property id="__321">
+        <property-name id="__322">valueBinding</property-name>
+        <value id="__323">#{bindings.sb1AttachmentDL}</value>
+      </managed-property>
+      <managed-property id="__324">
+        <property-name id="__325">tableBean</property-name>
+        <value id="__326">#{pageFlowScope.EventAttachmentsTable}</value>
+      </managed-property>
+      <managed-property id="__327">
+        <property-name id="__328">fileNameWhenEmpty</property-name>
+        <value id="__329">#{'#{bindings.sb1AttachmentDL.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__330">
+      <managed-bean-name id="__331">SaveEventAttachments</managed-bean-name>
+      <managed-bean-class id="__332">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__333">request</managed-bean-scope>
+      <managed-property id="__334">
+        <property-name id="__335">commitBinding</property-name>
+        <value id="__336">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__337">
+        <property-name id="__338">successOutcome</property-name>
+        <value id="__339">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__340">
+      <managed-bean-name id="__341">sb1AttachmentFileHandlerBean</managed-bean-name>
+      <managed-bean-class id="__342">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__343">request</managed-bean-scope>
+      <managed-property id="__344">
+        <property-name id="__345">valueBinding</property-name>
+        <value id="__346">#{bindings.sb1Attachment}</value>
+      </managed-property>
+      <managed-property id="__347">
+        <property-name id="__348">fileNameWhenEmpty</property-name>
+        <value id="__349">#{'#{bindings.sb1Attachment.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__350">
+      <managed-bean-name id="__351">sb1AttachmentDLFileHandlerBean</managed-bean-name>
+      <managed-bean-class id="__352">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__353">request</managed-bean-scope>
+      <managed-property id="__354">
+        <property-name id="__355">valueBinding</property-name>
+        <value id="__356">#{bindings.sb1AttachmentDL}</value>
+      </managed-property>
+      <managed-property id="__357">
+        <property-name id="__358">fileNameWhenEmpty</property-name>
+        <value id="__359">#{'#{bindings.sb1AttachmentDL.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartEvents">
+      <case id="__360">
+        <expression id="__361">#{pageFlowScope.createEvents!=null}</expression>
+        <outcome id="__362">createEvents</outcome>
+      </case>
+      <case id="__363">
+        <expression id="__364">#{pageFlowScope.rowKeyStrEvents!=null or
+                               pageFlowScope.rowKeyValueEvents!=null or
+                               pageFlowScope.rowKeyEvents!=null}</expression>
+        <outcome id="__365">SetCurrentRowEvents</outcome>
+      </case>
+      <case id="__366">
+        <expression id="__367">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__368">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__369">firstPage</default-outcome>
+    </router>
+    <method-call id="CreateEvents">
+      <method id="__370">#{CreateEvents.execute}</method>
+      <!-- execute condition param -->
+      <parameter>
+        <class id="__371">java.lang.Object</class>
+        <value id="__372">#{pageFlowScope.createEvents}</value>
+      </parameter>
+      <outcome id="__373">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowEvents">
+      <method id="__374">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__375">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__376">#{bindings.EventsIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__377">java.lang.String</class>
+        <value id="__378">#{pageFlowScope.rowKeyStrEvents}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__379">java.lang.Object</class>
+        <value id="__380">#{pageFlowScope.rowKeyValueEvents}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__381">oracle.jbo.Key</class>
+        <value id="__382">#{pageFlowScope.rowKeyEvents}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__383">java.lang.String</class>
+        <value id="__384">#{pageFlowScope.altKeyNameEvents}</value>
+      </parameter>
+      <outcome id="__385">
+        <fixed-outcome id="__386">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelEventsReturn">
+      <outcome id="__387">
+        <name id="__388">CancelEvents</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneEventsReturn">
+      <outcome id="__389">
+        <name id="__390">DoneEvents</name>
+      </outcome>
+    </task-flow-return>
+    <view id="EventsTable">
+      <page id="__391">/pages/EventsTable.jsff</page>
+    </view>
+    <view id="Events">
+      <page id="__392">/pages/Events.jsff</page>
+    </view>
+    <view id="EventAttachments">
+      <page id="__393">/pages/EventAttachments.jsff</page>
+    </view>
+    <control-flow-rule id="__394">
+      <from-activity-id id="__395">*</from-activity-id>
+      <control-flow-case id="__396">
+        <from-outcome id="__397">SetCurrentRowEvents</from-outcome>
+        <to-activity-id id="__398">SetCurrentRowEvents</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__399">
+        <from-outcome id="__400">firstPage</from-outcome>
+        <to-activity-id id="__401">EventsTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__402">
+        <from-outcome id="__403">deepLinkPage</from-outcome>
+        <to-activity-id id="__404">Events</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__405">
+        <from-outcome id="__406">EventsTableBreadcrumb</from-outcome>
+        <to-activity-id id="__407">EventsTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__408">
+        <from-outcome id="__409">EventsBreadcrumb</from-outcome>
+        <to-activity-id id="__410">Events</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__411">
+        <from-outcome id="__412">EventAttachmentsBreadcrumb</from-outcome>
+        <to-activity-id id="__413">EventAttachments</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__414">
+        <from-outcome id="__415">Cancel</from-outcome>
+        <to-activity-id id="__416">StartEvents</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__417">
+        <from-outcome id="__418">CancelEventsReturn</from-outcome>
+        <to-activity-id id="__419">CancelEventsReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__420">
+        <from-outcome id="__421">DoneEventsReturn</from-outcome>
+        <to-activity-id id="__422">DoneEventsReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__423">
+      <from-activity-id id="__424">EventsTable</from-activity-id>
+      <control-flow-case id="__425">
+        <from-outcome id="__426">CreateEvt</from-outcome>
+        <to-activity-id id="__427">Events</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__428">
+        <from-outcome id="__429">EventsDetails</from-outcome>
+        <to-activity-id id="__430">Events</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__431">
+      <from-activity-id id="__432">Events</from-activity-id>
+      <control-flow-case id="__433">
+        <from-outcome id="__434">Createsb1</from-outcome>
+        <to-activity-id id="__435">EventAttachments</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__436">
+        <from-outcome id="__437">EventAttachmentsDetails</from-outcome>
+        <to-activity-id id="__438">EventAttachments</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__439">
+      <from-activity-id id="__440">*</from-activity-id>
+      <control-flow-case id="__441">
+        <from-outcome id="__442">createEvents</from-outcome>
+        <to-activity-id id="__443">CreateEvents</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__444">
+    <managed-bean-name id="__445">EventsTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__446">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__447">pageFlow</managed-bean-scope>
+    <managed-property id="__448">
+      <property-name id="__449">params</property-name>
+      <property-class id="__450">java.util.Map</property-class>
+      <map-entries id="__451">
+        <map-entry id="__452">
+          <key id="__453">parentContext</key>
+          <value id="__454">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__455">
+      <property-name id="__456">name</property-name>
+      <value id="__457">Events</value>
+    </managed-property>
+    <managed-property id="__458">
+      <property-name id="__459">taskFlowId</property-name>
+      <value id="__460">/WEB-INF/adfc-config-Events.xml#EventsTaskFlow</value>
+    </managed-property>
+    <managed-property id="__461">
+      <property-name id="__462">tabUniqueIdentifier</property-name>
+      <value id="__463">Events</value>
+    </managed-property>
+    <managed-property id="__464">
+      <property-name id="__465">label</property-name>
+      <value id="__466">Events</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

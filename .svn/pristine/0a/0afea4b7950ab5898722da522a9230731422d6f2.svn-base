@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="RoyaltyContactLookupPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <invokeAction id="applyBindParamsRoyaltyContactLookupInvoke"
+                  Binds="applyBindParamsRoyaltyContactLookup" Refresh="always"/>
+    <iterator id="RoyaltyContactLookupIterator" Binds="RoyaltyContactLookup"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="RoyaltyContactLookupIteratorQuery"
+                  Binds="RoyaltyContactLookupIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="FirstName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsRoyaltyContactLookup"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="RoyaltyContactLookup"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{RoyaltyContactLookupQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <attributeValues id="RoyaltyContactLookupId"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupContactName"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="ContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupJobTitle"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupJobRole"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="JobRole"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupFirstName"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupMiddleName"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupLastName"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupTitle"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupGender"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RoyaltyContactLookupPronunciation"
+                     IterBinding="RoyaltyContactLookupIterator">
+      <AttrNames>
+        <Item Value="Pronunciation"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="RoyaltyContactLookupTable"
+          IterBinding="RoyaltyContactLookupIterator">
+      <nodeDefinition Name="RoyaltyContactLookup"
+                      DefName="com.pq.tracs.model.lookup.ContentOwnerContactLookup">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContactName"/>
+          <Item Value="JobTitle"/>
+          <Item Value="JobRole"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleName"/>
+          <Item Value="LastName"/>
+          <Item Value="Title"/>
+          <Item Value="Gender"/>
+          <Item Value="Pronunciation"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstRoyaltyContactLookup"
+            IterBinding="RoyaltyContactLookupIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousRoyaltyContactLookup"
+            IterBinding="RoyaltyContactLookupIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextRoyaltyContactLookup"
+            IterBinding="RoyaltyContactLookupIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastRoyaltyContactLookup"
+            IterBinding="RoyaltyContactLookupIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchRoyaltyContactLookup"
+                  IterBinding="RoyaltyContactLookupIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchRoyaltyContactLookup.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchRoyaltyContactLookup.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchRoyaltyContactLookup.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyRoyaltyContactLookup"
+            IterBinding="RoyaltyContactLookupIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrRoyaltyContactLookup}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

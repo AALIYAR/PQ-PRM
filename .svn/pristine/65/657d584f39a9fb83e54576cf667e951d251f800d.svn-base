@@ -1,0 +1,957 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="EvtTopLc"
+                             partialTriggers=" EvtDeleteDialog Evtfbb EvtNewButton EvtDelB EvtSaveButton0 EvtCancelButton0 EvtSaveButton1 EvtCancelButton1"
+                             rendered="#{jhsUserRoles['AM, PM, GCA, AST, ADMIN, RO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateEvents ? nls['INSERT_TITLE_EVENTS'] :  (jhsUserRoles['AM,AST,PM,GCA,ADMIN'] ? nls['EDIT_TITLE_EVENT: #{bindings.EvtEventName.inputValue}'] : nls['VIEW_TITLE_EVENT: #{bindings.EvtEventName.inputValue}'])  }"
+                          helpTopicId="RBH_EVENTS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="Evtfbb" layout="horizontal"
+                                       rendered="#{ (bindings.EventsIterator.viewObject!=null and bindings.EventsIterator.viewObject.currentRow!=null) and bindings.EventsIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateEvents and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="EvtFirst EvtPrevious EvtNext EvtLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstEvents.execute}"
+                                             id="EvtFirst" partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousEvents.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="EvtPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1} / #{bindings.EventsIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextEvents.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="EvtNext" partialSubmit="true"
+                                             rendered="#{bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1 lt bindings.EventsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1 lt bindings.EventsIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastEvents.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="EvtLast" partialSubmit="true"
+                                             rendered="#{bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1 lt bindings.EventsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.EventsIterator.rangeStart+bindings.EventsIterator.currentRowIndexInRange+1 lt bindings.EventsIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateEvents.execute}"
+                                             action="CreateEvt"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_EVENTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateEvents and (true) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             id="EvtNewButton"></af:commandToolbarButton>
+                    <af:commandToolbarButton action="DeleteEvents"
+                                             partialSubmit="true"
+                                             icon="/jheadstart/images/deleteRow.png"
+                                             shortDesc="#{nls['DELETE_BUTTON_LABEL_EVENTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateEvents and  (bindings.EventsIterator.viewObject!=null and bindings.EventsIterator.viewObject.currentRow!=null)  and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             immediate="true" id="EvtDelB">
+                      <af:showPopupBehavior popupId="EvtDeletePopup"/>
+                    </af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="EvtPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveEvents.execute}"
+                                      rendered="#{!pageFlowScope.hideSaveButton}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="EvtSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="EvtCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.EventsIterator.findMode!='true'}"
+                       id="EvtSw" defaultFacet="hasRows"
+                       facetName="#{( (bindings.EventsIterator.viewObject!=null and bindings.EventsIterator.viewObject.currentRow!=null)) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp" id="EvtNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="EvtFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="4"
+                                    id="EvtFI">
+                  <af:selectOneChoice id="EvtETy"
+                                      value="#{bindings.EvtEventType.inputValue}"
+                                      label="#{bindings.EvtEventType.hints.label}"
+                                      required="#{bindings.EvtEventType.hints.mandatory}"
+                                      readOnly="#{((pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.EvtEventType.hints.tooltip}"
+                                      helpTopicId="RBH_EVTEVENTTYPE">
+                    <f:selectItems value="#{bindings.EvtEventType.items}"/>
+                  </af:selectOneChoice>
+                  <af:inputText id="EvtENm"
+                                value="#{bindings.EvtEventName.inputValue}"
+                                label="#{bindings.EvtEventName.hints.label}"
+                                required="#{bindings.EvtEventName.hints.mandatory}"
+                                rows="#{bindings.EvtEventName.hints.displayHeight}"
+                                columns="#{bindings.EvtEventName.hints.displayWidth}"
+                                maximumLength="200"
+                                readOnly="#{((pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.EvtEventName.hints.tooltip}"
+                                helpTopicId="RBH_EVTEVENTNAME">
+                    <f:validator binding="#{bindings.EvtEventName.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="EvtED"
+                                value="#{bindings.EvtEventDate.inputValue}"
+                                label="#{bindings.EvtEventDate.hints.label}"
+                                required="#{bindings.EvtEventDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.EvtEventDate.hints.tooltip}"
+                                helpTopicId="RBH_EVTEVENTDATE">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="EvtDes"
+                                value="#{bindings.EvtDescription.inputValue}"
+                                label="#{bindings.EvtDescription.hints.label}"
+                                required="#{bindings.EvtDescription.hints.mandatory}"
+                                rows="#{bindings.EvtDescription.hints.displayHeight}"
+                                columns="#{bindings.EvtDescription.hints.displayWidth}"
+                                maximumLength="4000"
+                                readOnly="#{((pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.EvtDescription.hints.tooltip}"
+                                helpTopicId="RBH_EVTDESCRIPTION">
+                    <f:validator binding="#{bindings.EvtDescription.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="EvtNt"
+                                value="#{bindings.EvtNote.inputValue}"
+                                label="#{bindings.EvtNote.hints.label}"
+                                required="#{bindings.EvtNote.hints.mandatory}"
+                                rows="#{bindings.EvtNote.hints.displayHeight}"
+                                columns="#{bindings.EvtNote.hints.displayWidth}"
+                                maximumLength="4000"
+                                readOnly="#{((pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateEvents) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.EvtNote.hints.tooltip}"
+                                helpTopicId="RBH_EVTNOTE">
+                    <f:validator binding="#{bindings.EvtNote.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="EvtCB"
+                                value="#{bindings.EvtCreatedBy.inputValue}"
+                                label="#{bindings.EvtCreatedBy.hints.label}"
+                                required="#{bindings.EvtCreatedBy.hints.mandatory}"
+                                rows="#{bindings.EvtCreatedBy.hints.displayHeight}"
+                                columns="#{bindings.EvtCreatedBy.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.EvtCreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_EVTCREATEDBY">
+                    <f:validator binding="#{bindings.EvtCreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="EvtCD"
+                                value="#{bindings.EvtCreatedDate.inputValue}"
+                                label="#{bindings.EvtCreatedDate.hints.label}"
+                                required="#{bindings.EvtCreatedDate.hints.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.EvtCreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_EVTCREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="EvtLUB"
+                                value="#{bindings.EvtLastUpdatedBy.inputValue}"
+                                label="#{bindings.EvtLastUpdatedBy.hints.label}"
+                                required="#{bindings.EvtLastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.EvtLastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.EvtLastUpdatedBy.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.EvtLastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_EVTLASTUPDATEDBY">
+                    <f:validator binding="#{bindings.EvtLastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="EvtLUD"
+                                value="#{bindings.EvtLastUpdatedDate.inputValue}"
+                                label="#{bindings.EvtLastUpdatedDate.hints.label}"
+                                required="#{bindings.EvtLastUpdatedDate.hints.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.EvtLastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_EVTLASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" " helpTopicId="RBH_EVENTS">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveEvents.execute}"
+                                            rendered="#{!pageFlowScope.hideSaveButton}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="EvtSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="EvtCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+          <af:panelGroupLayout id="pgl0" layout="vertical">
+            <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+            <af:panelGroupLayout layout="vertical" id="sb0TopLc"
+                                 partialTriggers=" EvtTopLc sb0DeleteDialog qsAreasb0SearchOptions sb0PC:sb0Arm sb0PC:sb0delrmTM sb0PC:sb0Arl sb0PC:sb0Tab:sb0delrm sb0PC:sb0Tab:sb0delrl"
+                                 rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <f:facet name="separator">
+                <af:spacer width="10" height="10" id="sp3"/>
+              </f:facet>
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:group id="g0">
+                <af:panelGroupLayout id="modelSearchAreasb0"
+                                     rendered="#{!pageFlowScope.createModes.CreateEventUsers and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreasb0SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.EventUsersIteratorQuery.queryDescriptor}"
+                                 model="#{bindings.EventUsersIteratorQuery.queryModel}"
+                                 queryListener="#{bindings.EventUsersIteratorQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+              </af:group>
+              <af:panelGroupLayout layout="vertical" id="pgl1">
+                <af:panelCollection id="sb0PC" featuresOff=" "
+                                    styleClass="AFStretchWidth">
+                  <f:facet name="menus">
+                    <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                             id="menu0">
+                      <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                               id="menu1">
+                        <af:group id="sb0tbb"
+                                  rendered="#{ bindings.EventUsersIterator.currentRow!=null }">
+                          <af:commandMenuItem actionListener="#{bindings.FirstEventUsers.execute}"
+                                              id="sb0First" partialSubmit="true"
+                                              icon="/afr/shuttleleftall_ena.png"
+                                              textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                          <af:commandMenuItem actionListener="#{bindings.PreviousEventUsers.execute}"
+                                              icon="/afr/shuttleleft_ena.png"
+                                              textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                              id="sb0Previous"
+                                              partialSubmit="true"></af:commandMenuItem>
+                          <af:commandMenuItem actionListener="#{bindings.NextEventUsers.execute}"
+                                              icon="/afr/shuttleright_ena.png"
+                                              textAndAccessKey="#{nls['NEXT_ROW']}"
+                                              id="sb0Next" partialSubmit="true"></af:commandMenuItem>
+                          <af:commandMenuItem actionListener="#{bindings.LastEventUsers.execute}"
+                                              icon="/afr/shuttlerightall_ena.png"
+                                              textAndAccessKey="#{nls['LAST_ROW']}"
+                                              id="sb0Last" partialSubmit="true"></af:commandMenuItem>
+                        </af:group>
+                      </af:menu>
+                      <af:commandMenuItem id="sb0Arm"
+                                          textAndAccessKey="#{nls['ADD_ROW']}"
+                                          immediate="false"
+                                          icon="/jheadstart/images/addRow.png"
+                                          partialSubmit="true"
+                                          actionListener="#{pageFlowScope.EventUsersTable.addRow}"
+                                          rendered="#{ (bindings.EventsIterator.viewObject!=null and bindings.EventsIterator.viewObject.currentRow!=null) }"></af:commandMenuItem>
+                      <af:commandMenuItem id="sb0delrmTM"
+                                          textAndAccessKey="#{nls['DELETE_ROW']}"
+                                          icon="/jheadstart/images/deleteRow.png"
+                                          partialSubmit="true" immediate="true">
+                        <af:showPopupBehavior popupId="::sb0DeletePopup"/>
+                      </af:commandMenuItem>
+                      <af:commandMenuItem partialSubmit="true"
+                                          textAndAccessKey="#{nls['EXPORT']}"
+                                          icon="/jheadstart/images/excel.png"
+                                          immediate="true" id="cmi0">
+                        <af:exportCollectionActionListener exportedId="sb0Tab"
+                                                           type="excelHTML"
+                                                           filename="EventUsers.xls"/>
+                      </af:commandMenuItem>
+                    </af:menu>
+                  </f:facet>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="tbar1">
+                      <!-- Also create CreateEventUsers bean so we can start table group in create mode as well -->
+                      <af:commandImageLink id="sb0Arl" immediate="false"
+                                           rendered="#{ (bindings.EventsIterator.viewObject!=null and bindings.EventsIterator.viewObject.currentRow!=null) }"
+                                           partialSubmit="true"
+                                           actionListener="#{pageFlowScope.EventUsersTable.addRow}"
+                                           shortDesc="#{nls['ADD_ROW']}"
+                                           icon="/jheadstart/images/addRow.png"/>
+                      <af:commandImageLink immediate="true" partialSubmit="true"
+                                           id="cl0" shortDesc="#{nls['EXPORT']}"
+                                           icon="/jheadstart/images/excel.png">
+                        <af:exportCollectionActionListener exportedId="sb0Tab"
+                                                           type="excelHTML"
+                                                           filename="EventUsers.xls"/>
+                      </af:commandImageLink>
+                      <af:commandToolbarButton text="Print" id="sb0Print"
+                                               shortDesc="Opens a new tab with printer friendly format.">
+                        <af:showPrintablePageBehavior/>
+                      </af:commandToolbarButton>
+                    </af:toolbar>
+                  </f:facet>
+                  <f:facet name="statusbar">
+                    <af:toolbar>
+                      <af:outputText value="#{bindings.EventUsersIterator.estimatedRowCount} rows found"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <af:table id="sb0Tab" contentDelivery="immediate"
+                            value="#{bindings.EventUsersTable.collectionModel}"
+                            columnStretching="blank" rowBandingInterval="0"
+                            editingMode="editAll" columnSelection="multiple"
+                            contextMenuSelect="true" rowSelection="single"
+                            selectionListener="#{pageFlowScope.EventUsersTable.makeCurrent}"
+                            selectedRowKeys="#{pageFlowScope.EventUsersTable.selectedRow}"
+                            rowDisclosureListener="#{pageFlowScope.EventUsersTable.discloseRow}"
+                            var="row" varStatus="status"
+                            rows="#{bindings.EventUsersTable.rangeSize}"
+                            autoHeightRows="#{bindings.EventUsersTable.estimatedRowCount lt 5 ? 5 : bindings.EventUsersTable.estimatedRowCount lt bindings.EventUsersTable.rangeSize ? bindings.EventUsersTable.estimatedRowCount : 0 }"
+                            fetchSize="#{bindings.EventUsersTable.rangeSize}"
+                            emptyText="#{nls['NO_ROWS_FOUND']}"
+                            queryListener="#{bindings.EventUsersIteratorQuery.processQuery}"
+                            filterModel="#{bindings.EventUsersIteratorQuery.queryDescriptor}"
+                            filterVisible="true"
+                            binding="#{pageFlowScope.EventUsersTable.table}"
+                            partialTriggers=":::qsAreasb0SearchOptions :::sb0PC ::sb0First ::sb0Previous ::sb0Next ::sb0Last"
+                            styleClass="AFStretchWidth"
+                            summary="#{nls['TABLE_TITLE_EVENTUSERS']}">
+                    <f:facet name="contextMenu">
+                      <af:popup id="sb0TablePopup" childCreation="deferred">
+                        <af:menu id="menu2">
+                          <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                          <af:commandMenuItem id="sb0delrm"
+                                              textAndAccessKey="#{nls['DELETE_ROW']}"
+                                              icon="/jheadstart/images/deleteRow.png"
+                                              partialSubmit="true"
+                                              immediate="true">
+                            <af:showPopupBehavior popupId=":::sb0DeletePopup"/>
+                          </af:commandMenuItem>
+                        </af:menu>
+                      </af:popup>
+                    </f:facet>
+                    <af:column id="sb0ActionColumn" frozen="true" width="20"
+                               align="center" headerText=" ">
+                      <af:panelGroupLayout layout="horizontal" id="pgl2">
+                        <af:commandImageLink id="sb0delrl" partialSubmit="true"
+                                             immediate="true"
+                                             shortDesc="#{nls['DELETE_ROW']}"
+                                             icon="/jheadstart/images/deleteRow.png">
+                          <af:showPopupBehavior popupId=":::sb0DeletePopup"/>
+                        </af:commandImageLink>
+                      </af:panelGroupLayout>
+                    </af:column>
+                    <af:column id="sb0UNmCol" sortable="true" filterable="true"
+                               noWrap="true" width="140" sortProperty="Username"
+                               rowHeader="false" helpTopicId="RBH_SB0USERNAME"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.Username.label}"
+                                        showRequired="#{bindings.EventUsersTable.hints.Username.mandatory}"
+                                        id="ol0"/>
+                      </f:facet>
+                      <af:panelGroupLayout id="sb0UsernamePgl"
+                                           layout="horizontal">
+                        <af:inputText id="sb0UNm"
+                                      label="#{bindings.EventUsersTable.hints.Username.label}"
+                                      columns="#{bindings.EventUsersTable.hints.Username.displayWidth}"
+                                      maximumLength="40"
+                                      shortDesc="#{bindings.EventUsersTable.hints.Username.tooltip}"
+                                      value="#{row.bindings.Username.inputValue}"
+                                      autoSubmit="true"
+                                      valueChangeListener="#{pageFlowScope.sb0UsernameLovItemInTable.validateWithLov}"
+                                      binding="#{pageFlowScope.sb0UsernameLovItemInTable.lovField}"
+                                      simple="true">
+                          <f:validator binding="#{row.bindings.Username.validator}"/>
+                        </af:inputText>
+                        <af:commandLink immediate="true" partialSubmit="true"
+                                        id="cl1"
+                                        actionListener="#{pageFlowScope.sb0UsernameLovItemInTable.lovIconClicked}">
+                          <af:image source="/jheadstart/images/lov.png"
+                                    id="sb0UsernameIcon"
+                                    clientComponent="true"/>
+                        </af:commandLink>
+                        <af:commandButton text="hidden" id="cb2"
+                                          rendered="false"
+                                          action="#{pageFlowScope.sb0UsernameLovItemInTable.validationAction}"
+                                          binding="#{pageFlowScope.sb0UsernameLovItemInTable.validationButton}"/>
+                      </af:panelGroupLayout>
+                    </af:column>
+                    <af:column id="sb0DNCol" sortable="true" filterable="true"
+                               noWrap="true" width="240"
+                               sortProperty="DisplayName" rowHeader="false"
+                               helpTopicId="RBH_SB0DISPLAYNAME"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.DisplayName.label}"
+                                        id="ol1"/>
+                      </f:facet>
+                      <af:inputText id="sb0DN"
+                                    value="#{row.bindings.DisplayName.inputValue}"
+                                    label="#{bindings.EventUsersTable.hints.DisplayName.label}"
+                                    required="#{bindings.EventUsersTable.hints.DisplayName.mandatory}"
+                                    rows="#{bindings.EventUsersTable.hints.DisplayName.displayHeight}"
+                                    columns="#{bindings.EventUsersTable.hints.DisplayName.displayWidth}"
+                                    maximumLength="200" readOnly="true"
+                                    shortDesc="#{bindings.EventUsersTable.hints.DisplayName.tooltip}">
+                        <f:validator binding="#{row.bindings.DisplayName.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column id="sb0UTyCol" sortable="true" filterable="true"
+                               noWrap="true" width="120" sortProperty="UserType"
+                               rowHeader="false" helpTopicId="RBH_SB0USERTYPE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.UserType.label}"
+                                        showRequired="#{bindings.EventUsersTable.hints.UserType.mandatory}"
+                                        id="ol2"/>
+                      </f:facet>
+                      <af:selectOneChoice id="sb0UTy"
+                                          value="#{row.bindings.UserType.inputValue}"
+                                          label="#{bindings.EventUsersTable.hints.UserType.label}"
+                                          required="#{bindings.EventUsersTable.hints.UserType.mandatory}"
+                                          shortDesc="#{bindings.EventUsersTable.hints.UserType.tooltip}">
+                        <f:selectItems value="#{row.bindings.UserType.items}"/>
+                      </af:selectOneChoice>
+                    </af:column>
+                    <af:column id="sb0ADCol" sortable="true" filterable="true"
+                               noWrap="true" width="100" sortProperty="AddDate"
+                               rowHeader="false" helpTopicId="RBH_SB0ADDDATE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.AddDate.label}"
+                                        showRequired="#{bindings.EventUsersTable.hints.AddDate.mandatory}"
+                                        id="ol3"/>
+                      </f:facet>
+                      <f:facet name="filter">
+                        <af:inputDate value="#{status.filterCriteria.AddDate}"
+                                      id="id0">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </f:facet>
+                      <af:inputDate id="sb0AD"
+                                    value="#{row.bindings.AddDate.inputValue}"
+                                    label="#{bindings.EventUsersTable.hints.AddDate.label}"
+                                    required="#{bindings.EventUsersTable.hints.AddDate.mandatory}"
+                                    shortDesc="#{bindings.EventUsersTable.hints.AddDate.tooltip}">
+                        <af:convertDateTime pattern="#{nls.datepattern}"/>
+                      </af:inputDate>
+                    </af:column>
+                    <af:column id="sb0RDCol" sortable="true" filterable="true"
+                               noWrap="true" width="100"
+                               sortProperty="RemovedDate" rowHeader="false"
+                               helpTopicId="RBH_SB0REMOVEDDATE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.RemovedDate.label}"
+                                        showRequired="#{bindings.EventUsersTable.hints.RemovedDate.mandatory}"
+                                        id="ol4"/>
+                      </f:facet>
+                      <f:facet name="filter">
+                        <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                      id="id1">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </f:facet>
+                      <af:inputDate id="sb0RD"
+                                    value="#{row.bindings.RemovedDate.inputValue}"
+                                    label="#{bindings.EventUsersTable.hints.RemovedDate.label}"
+                                    required="#{bindings.EventUsersTable.hints.RemovedDate.mandatory}"
+                                    shortDesc="#{bindings.EventUsersTable.hints.RemovedDate.tooltip}">
+                        <af:convertDateTime pattern="#{nls.datepattern}"/>
+                      </af:inputDate>
+                    </af:column>
+                    <af:column id="sb0CBCol" sortable="true" filterable="true"
+                               noWrap="true" width="120"
+                               sortProperty="CreatedBy" rowHeader="false"
+                               helpTopicId="RBH_SB0CREATEDBY"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.CreatedBy.label}"
+                                        id="ol5"/>
+                      </f:facet>
+                      <af:inputText id="sb0CB"
+                                    value="#{row.bindings.CreatedBy.inputValue}"
+                                    label="#{bindings.EventUsersTable.hints.CreatedBy.label}"
+                                    required="#{bindings.EventUsersTable.hints.CreatedBy.mandatory}"
+                                    rows="#{bindings.EventUsersTable.hints.CreatedBy.displayHeight}"
+                                    columns="#{bindings.EventUsersTable.hints.CreatedBy.displayWidth}"
+                                    maximumLength="20" readOnly="true"
+                                    shortDesc="#{bindings.EventUsersTable.hints.CreatedBy.tooltip}">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column id="sb0CDCol" sortable="true" filterable="true"
+                               noWrap="true" width="100"
+                               sortProperty="CreatedDate" rowHeader="false"
+                               helpTopicId="RBH_SB0CREATEDDATE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.CreatedDate.label}"
+                                        id="ol6"/>
+                      </f:facet>
+                      <f:facet name="filter">
+                        <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                      id="id2">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </f:facet>
+                      <af:inputDate id="sb0CD"
+                                    value="#{row.bindings.CreatedDate.inputValue}"
+                                    label="#{bindings.EventUsersTable.hints.CreatedDate.label}"
+                                    required="#{bindings.EventUsersTable.hints.CreatedDate.mandatory}"
+                                    readOnly="true"
+                                    shortDesc="#{bindings.EventUsersTable.hints.CreatedDate.tooltip}">
+                        <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                      </af:inputDate>
+                    </af:column>
+                    <af:column id="sb0LUBCol" sortable="true" filterable="true"
+                               noWrap="true" width="120"
+                               sortProperty="LastUpdatedBy" rowHeader="false"
+                               helpTopicId="RBH_SB0LASTUPDATEDBY"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.LastUpdatedBy.label}"
+                                        id="ol7"/>
+                      </f:facet>
+                      <af:inputText id="sb0LUB"
+                                    value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                    label="#{bindings.EventUsersTable.hints.LastUpdatedBy.label}"
+                                    required="#{bindings.EventUsersTable.hints.LastUpdatedBy.mandatory}"
+                                    rows="#{bindings.EventUsersTable.hints.LastUpdatedBy.displayHeight}"
+                                    columns="#{bindings.EventUsersTable.hints.LastUpdatedBy.displayWidth}"
+                                    maximumLength="20" readOnly="true"
+                                    shortDesc="#{bindings.EventUsersTable.hints.LastUpdatedBy.tooltip}">
+                        <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column id="sb0LUDCol" sortable="true" filterable="true"
+                               noWrap="true" width="100"
+                               sortProperty="LastUpdatedDate" rowHeader="false"
+                               helpTopicId="RBH_SB0LASTUPDATEDDATE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventUsersTable.hints.LastUpdatedDate.label}"
+                                        id="ol8"/>
+                      </f:facet>
+                      <f:facet name="filter">
+                        <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                      id="id3">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </f:facet>
+                      <af:inputDate id="sb0LUD"
+                                    value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                    label="#{bindings.EventUsersTable.hints.LastUpdatedDate.label}"
+                                    required="#{bindings.EventUsersTable.hints.LastUpdatedDate.mandatory}"
+                                    readOnly="true"
+                                    shortDesc="#{bindings.EventUsersTable.hints.LastUpdatedDate.tooltip}">
+                        <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                      </af:inputDate>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </af:panelGroupLayout>
+            <af:panelGroupLayout layout="vertical" id="sb1TopLc"
+                                 partialTriggers=" EvtTopLc"
+                                 rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <f:facet name="separator">
+                <af:spacer width="10" height="10" id="sp4"/>
+              </f:facet>
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelHeader id="ph2"
+                              text="#{nls['TABLE_TITLE_EVENTATTACHMENTS']}"
+                              helpTopicId="RBH_EVENTATTACHMENTS">
+                <f:facet name="toolbar">
+                  <af:toolbox id="tbox1">
+                    <af:toolbar id="tbar2">
+                      <af:group id="gr4">
+                        <af:commandButton actionListener="#{CreateEventAttachments.execute}"
+                                          action="Createsb1"
+                                          textAndAccessKey="#{nls['NEW_BUTTON_LABEL_EVENTATTACHMENTS']}"
+                                          rendered="#{ (bindings.EventsIterator.viewObject!=null and bindings.EventsIterator.viewObject.currentRow!=null) }"
+                                          id="sb1NewButton"></af:commandButton>
+                      </af:group>
+                      <af:group id="gr5"></af:group>
+                    </af:toolbar>
+                  </af:toolbox>
+                </f:facet>
+                <f:facet name="context"></f:facet>
+              </af:panelHeader>
+              <af:panelGroupLayout layout="vertical" id="pgl3">
+                <af:panelCollection id="sb1PC" featuresOff=" "
+                                    styleClass="AFStretchWidth">
+                  <f:facet name="menus">
+                    <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                             id="menu4">
+                      <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                               id="menu5">
+                        <af:commandMenuItem id="mi0"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="EventAttachmentsDetails"></af:commandMenuItem>
+                        <af:group id="sb1tbb"
+                                  rendered="#{ bindings.EventAttachmentsIterator.currentRow!=null }">
+                          <af:commandMenuItem actionListener="#{bindings.FirstEventAttachments.execute}"
+                                              id="sb1First" partialSubmit="true"
+                                              icon="/afr/shuttleleftall_ena.png"
+                                              textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                          <af:commandMenuItem actionListener="#{bindings.PreviousEventAttachments.execute}"
+                                              icon="/afr/shuttleleft_ena.png"
+                                              textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                              id="sb1Previous"
+                                              partialSubmit="true"></af:commandMenuItem>
+                          <af:commandMenuItem actionListener="#{bindings.NextEventAttachments.execute}"
+                                              icon="/afr/shuttleright_ena.png"
+                                              textAndAccessKey="#{nls['NEXT_ROW']}"
+                                              id="sb1Next" partialSubmit="true"></af:commandMenuItem>
+                          <af:commandMenuItem actionListener="#{bindings.LastEventAttachments.execute}"
+                                              icon="/afr/shuttlerightall_ena.png"
+                                              textAndAccessKey="#{nls['LAST_ROW']}"
+                                              id="sb1Last" partialSubmit="true"></af:commandMenuItem>
+                        </af:group>
+                      </af:menu>
+                    </af:menu>
+                  </f:facet>
+                  <f:facet name="toolbar">
+                    <af:toolbar id="tbar3">
+                      <af:commandToolbarButton text="Print" id="sb1Print"
+                                               shortDesc="Opens a new tab with printer friendly format.">
+                        <af:showPrintablePageBehavior/>
+                      </af:commandToolbarButton>
+                    </af:toolbar>
+                  </f:facet>
+                  <f:facet name="statusbar">
+                    <af:toolbar>
+                      <af:outputText value="#{bindings.EventAttachmentsIterator.estimatedRowCount} rows found"/>
+                    </af:toolbar>
+                  </f:facet>
+                  <af:table id="sb1Tab" contentDelivery="immediate"
+                            value="#{bindings.EventAttachmentsTable.collectionModel}"
+                            columnStretching="blank" rowBandingInterval="0"
+                            editingMode="editAll" columnSelection="multiple"
+                            contextMenuSelect="true" rowSelection="single"
+                            selectionListener="#{pageFlowScope.EventAttachmentsTable.makeCurrent}"
+                            selectedRowKeys="#{pageFlowScope.EventAttachmentsTable.selectedRow}"
+                            rowDisclosureListener="#{pageFlowScope.EventAttachmentsTable.discloseRow}"
+                            var="row" varStatus="status"
+                            rows="#{bindings.EventAttachmentsTable.rangeSize}"
+                            autoHeightRows="#{bindings.EventAttachmentsTable.estimatedRowCount lt 5 ? 5 : bindings.EventAttachmentsTable.estimatedRowCount lt bindings.EventAttachmentsTable.rangeSize ? bindings.EventAttachmentsTable.estimatedRowCount : 0 }"
+                            fetchSize="#{bindings.EventAttachmentsTable.rangeSize}"
+                            emptyText="#{nls['NO_ROWS_FOUND']}"
+                            binding="#{pageFlowScope.EventAttachmentsTable.table}"
+                            partialTriggers=" :::sb1PC ::sb1First ::sb1Previous ::sb1Next ::sb1Last"
+                            styleClass="AFStretchWidth"
+                            summary="#{nls['TABLE_TITLE_EVENTATTACHMENTS']}">
+                    <f:facet name="contextMenu">
+                      <af:popup id="sb1TablePopup" childCreation="deferred">
+                        <af:menu id="menu6">
+                          <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu7">
+                            <af:commandMenuItem id="mi1"
+                                                textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                                action="EventAttachmentsDetails"></af:commandMenuItem>
+                          </af:menu>
+                        </af:menu>
+                      </af:popup>
+                    </f:facet>
+                    <af:column id="sb1ActionColumn" width="20" align="center"
+                               headerText=" ">
+                      <af:panelGroupLayout layout="horizontal" id="pgl4">
+                        <af:commandLink action="EventAttachmentsDetails"
+                                        id="sb1Gtd">
+                          <af:image shortDesc="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                    source="/jheadstart/images/editRow.png"
+                                    id="im0"/>
+                        </af:commandLink>
+                      </af:panelGroupLayout>
+                    </af:column>
+                    <af:column id="sb1ADLCol" noWrap="true" width="100"
+                               rowHeader="false"
+                               helpTopicId="RBH_SB1ATTACHMENTDL"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="Download File" id="ol9"/>
+                      </f:facet>
+                      <af:commandLink id="sb1ADL"
+                                      rendered="#{sb1AttachmentDLFileHandlerInTable.fileExist}"
+                                      shortDesc="#{bindings.EventAttachmentsTable.hints.Attachment.tooltip}">
+                        <af:outputText id="ot4"
+                                       value="#{sb1AttachmentDLFileHandlerInTable.fileName}"/>
+                        <af:fileDownloadActionListener contentType="#{sb1AttachmentDLFileHandlerInTable.contentType}"
+                                                       filename="#{sb1AttachmentDLFileHandlerInTable.fileName}"
+                                                       method="#{sb1AttachmentDLFileHandlerInTable.downloadFile}"/>
+                      </af:commandLink>
+                    </af:column>
+                    <af:column id="sb1ATyCol" sortable="true" noWrap="true"
+                               width="120" sortProperty="AttachmentType"
+                               rowHeader="false"
+                               helpTopicId="RBH_SB1ATTACHMENTTYPE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventAttachmentsTable.hints.AttachmentType.label}"
+                                        id="ol10"/>
+                      </f:facet>
+                      <af:inputText id="sb1ATy"
+                                    value="#{row.bindings.AttachmentType.inputValue}"
+                                    label="#{bindings.EventAttachmentsTable.hints.AttachmentType.label}"
+                                    required="#{bindings.EventAttachmentsTable.hints.AttachmentType.mandatory}"
+                                    rows="#{bindings.EventAttachmentsTable.hints.AttachmentType.displayHeight}"
+                                    columns="#{bindings.EventAttachmentsTable.hints.AttachmentType.displayWidth}"
+                                    maximumLength="20" readOnly="true"
+                                    shortDesc="#{bindings.EventAttachmentsTable.hints.AttachmentType.tooltip}">
+                        <f:validator binding="#{row.bindings.AttachmentType.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column id="sb1DesCol" sortable="true" noWrap="true"
+                               width="260" sortProperty="Description"
+                               rowHeader="false"
+                               helpTopicId="RBH_SB1DESCRIPTION"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventAttachmentsTable.hints.Description.label}"
+                                        id="ol11"/>
+                      </f:facet>
+                      <af:panelLabelAndMessage shortDesc="#{bindings.EventAttachmentsTable.hints.Description.tooltip}">
+                        <af:inputText id="sb1Des"
+                                      value="#{row.bindings.Description.inputValue}"
+                                      label="#{bindings.EventAttachmentsTable.hints.Description.label}"
+                                      required="#{bindings.EventAttachmentsTable.hints.Description.mandatory}"
+                                      rows="#{bindings.EventAttachmentsTable.hints.Description.displayHeight}"
+                                      columns="#{bindings.EventAttachmentsTable.hints.Description.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      autoSubmit="true" simple="true"
+                                      partialTriggers="sb1DescriptionEditorLink sb1DescriptionEditorText">
+                          <f:validator binding="#{row.bindings.Description.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="sb1DescriptionEditorLink"
+                                        rendered="false" immediate="true"
+                                        partialSubmit="true">
+                          <af:showPopupBehavior popupId="sb1DescriptionPopup"/>
+                          <af:image source="/jheadstart/images/editor.gif"
+                                    id="sb1DescriptionIcon"
+                                    clientComponent="true"/>
+                        </af:commandLink>
+                      </af:panelLabelAndMessage>
+                      <af:popup id="sb1DescriptionPopup"
+                                contentDelivery="lazyUncached"
+                                eventContext="launcher"
+                                childCreation="deferred">
+                        <af:dialog modal="true" resize="on" title="Text Editor"
+                                   id="dialog1">
+                          <af:inputText rows="10" columns="100"
+                                        value="#{row.bindings.Description.inputValue}"
+                                        simple="true" maximumLength="4000"
+                                        id="sb1DescriptionEditorText"/>
+                        </af:dialog>
+                      </af:popup>
+                    </af:column>
+                    <af:column id="sb1FSCol" sortable="true" noWrap="true"
+                               width="100" sortProperty="FileSize" align="right"
+                               rowHeader="false" helpTopicId="RBH_SB1FILESIZE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventAttachmentsTable.hints.FileSize.label}"
+                                        id="ol12"/>
+                      </f:facet>
+                      <af:inputText id="sb1FS"
+                                    value="#{row.bindings.FileSize.inputValue}"
+                                    label="#{bindings.EventAttachmentsTable.hints.FileSize.label}"
+                                    required="#{bindings.EventAttachmentsTable.hints.FileSize.mandatory}"
+                                    rows="#{bindings.EventAttachmentsTable.hints.FileSize.displayHeight}"
+                                    columns="#{bindings.EventAttachmentsTable.hints.FileSize.displayWidth}"
+                                    maximumLength="38" readOnly="true"
+                                    shortDesc="#{bindings.EventAttachmentsTable.hints.FileSize.tooltip}">
+                        <f:validator binding="#{row.bindings.FileSize.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.EventAttachmentsTable.hints.FileSize.format}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column id="sb1CBCol" sortable="true" noWrap="true"
+                               width="120" sortProperty="CreatedBy"
+                               rowHeader="false" helpTopicId="RBH_SB1CREATEDBY"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventAttachmentsTable.hints.CreatedBy.label}"
+                                        id="ol13"/>
+                      </f:facet>
+                      <af:inputText id="sb1CB"
+                                    value="#{row.bindings.CreatedBy.inputValue}"
+                                    label="#{bindings.EventAttachmentsTable.hints.CreatedBy.label}"
+                                    required="#{bindings.EventAttachmentsTable.hints.CreatedBy.mandatory}"
+                                    rows="#{bindings.EventAttachmentsTable.hints.CreatedBy.displayHeight}"
+                                    columns="#{bindings.EventAttachmentsTable.hints.CreatedBy.displayWidth}"
+                                    maximumLength="40" readOnly="true"
+                                    shortDesc="#{bindings.EventAttachmentsTable.hints.CreatedBy.tooltip}">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column id="sb1CDCol" sortable="true" noWrap="true"
+                               width="100" sortProperty="CreatedDate"
+                               rowHeader="false"
+                               helpTopicId="RBH_SB1CREATEDDATE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventAttachmentsTable.hints.CreatedDate.label}"
+                                        id="ol14"/>
+                      </f:facet>
+                      <af:inputDate id="sb1CD"
+                                    value="#{row.bindings.CreatedDate.inputValue}"
+                                    label="#{bindings.EventAttachmentsTable.hints.CreatedDate.label}"
+                                    required="#{bindings.EventAttachmentsTable.hints.CreatedDate.mandatory}"
+                                    readOnly="true"
+                                    shortDesc="#{bindings.EventAttachmentsTable.hints.CreatedDate.tooltip}">
+                        <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                      </af:inputDate>
+                    </af:column>
+                    <af:column id="sb1LUBCol" sortable="true" noWrap="true"
+                               width="120" sortProperty="LastUpdatedBy"
+                               rowHeader="false"
+                               helpTopicId="RBH_SB1LASTUPDATEDBY"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventAttachmentsTable.hints.LastUpdatedBy.label}"
+                                        id="ol15"/>
+                      </f:facet>
+                      <af:inputText id="sb1LUB"
+                                    value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                    label="#{bindings.EventAttachmentsTable.hints.LastUpdatedBy.label}"
+                                    required="#{bindings.EventAttachmentsTable.hints.LastUpdatedBy.mandatory}"
+                                    rows="#{bindings.EventAttachmentsTable.hints.LastUpdatedBy.displayHeight}"
+                                    columns="#{bindings.EventAttachmentsTable.hints.LastUpdatedBy.displayWidth}"
+                                    maximumLength="40" readOnly="true"
+                                    shortDesc="#{bindings.EventAttachmentsTable.hints.LastUpdatedBy.tooltip}">
+                        <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                      </af:inputText>
+                    </af:column>
+                    <af:column id="sb1LUDCol" sortable="true" noWrap="true"
+                               width="100" sortProperty="LastUpdatedDate"
+                               rowHeader="false"
+                               helpTopicId="RBH_SB1LASTUPDATEDDATE"
+                               filterFeatures="caseInsensitive">
+                      <f:facet name="header">
+                        <af:outputLabel value="#{bindings.EventAttachmentsTable.hints.LastUpdatedDate.label}"
+                                        id="ol16"/>
+                      </f:facet>
+                      <af:inputDate id="sb1LUD"
+                                    value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                    label="#{bindings.EventAttachmentsTable.hints.LastUpdatedDate.label}"
+                                    required="#{bindings.EventAttachmentsTable.hints.LastUpdatedDate.mandatory}"
+                                    readOnly="true"
+                                    shortDesc="#{bindings.EventAttachmentsTable.hints.LastUpdatedDate.tooltip}">
+                        <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                      </af:inputDate>
+                    </af:column>
+                  </af:table>
+                </af:panelCollection>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </af:panelGroupLayout>
+            <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+          </af:panelGroupLayout>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="EvtDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="EvtDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_EVENT: #{bindings.EvtEventName.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteEvents.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="sb0DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="sb0DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_EVENTUSER:#{pageFlowScope.EventUsersTable.currentRowAttributeValues.DisplayName}']} "
+                           id="ot1"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteEventUsers.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="jhsLovPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher"
+                  binding="#{pageFlowScope.jhsLovPopup.component}">
+          <af:dialog modal="true" title="#{pageFlowScope.LovItemBean.lovTitle}"
+                     type="none" id="dialog0" resize="on"
+                     stretchChildren="first"
+                     contentWidth="#{pageFlowScope.LovItemBean.lovWidth}"
+                     contentHeight="#{pageFlowScope.LovItemBean.lovHeight}">
+            <af:region value="#{bindings.LovTaskFlow.regionModel}"
+                       id="region0"/>
+            <f:facet name="buttonBar">
+              <af:group id="g1">
+                <af:commandButton textAndAccessKey="#{nls['OK_BUTTON_LABEL']}"
+                                  id="cb0" partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.handleLovSelection}"/>
+                <af:commandButton textAndAccessKey="#{nls['CANCEL']}" id="cb1"
+                                  partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.cancelLov}"/>
+              </af:group>
+            </f:facet>
+          </af:dialog>
+          <af:clientListener method="popupClosedListener" type="popupClosed"/>
+          <af:serverListener type="serverPopupClosed"
+                             method="#{pageFlowScope.LovItemBean.cancelLov}"/>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

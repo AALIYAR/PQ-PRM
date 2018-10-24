@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TraxRoyaltyInformationView"
+  Version="11.1.1.61.92"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.pq.tracs.model.vo.PRMView"
+  PageIterMode="Partial"
+  UseGlueCode="false"
+  FetchMode="FETCH_AS_NEEDED">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access|VarAccess"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="CurrencyLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Currency']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="GuaranteeFrequencyLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Guarantee Frequency']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PaymentFrequencyLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Payment Frequency']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PaymentTermLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Payment Term']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Currency"
+    ListVOName="CurrencyLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Currency"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PaymentFrequency"
+    ListVOName="PaymentFrequencyLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PaymentFrequency"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_GuaranteeFrequency"
+    ListVOName="GuaranteeFrequencyLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="GuaranteeFrequency"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_InterimPaymentTermDays"
+    ListVOName="PaymentTermLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="InterimPaymentTermDays"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AnnualPaymentTermDays"
+    ListVOName="PaymentTermLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AnnualPaymentTermDays"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT TraxRoyaltyInformation.ID, 
+       TraxRoyaltyInformation.CONTRACT_ID, 
+       TraxRoyaltyInformation.ROYALTY_CONTACT_ID, 
+       TraxRoyaltyInformation.CURRENCY, 
+       TraxRoyaltyInformation.PAYMENT_FREQUENCY, 
+       TraxRoyaltyInformation.PAYMENT_TERM, 
+       TraxRoyaltyInformation.INTERIM_PAYMENT_TERM_DAYS, 
+       TraxRoyaltyInformation.ANNUAL_PAYMENT_TERM_DAYS, 
+       TraxRoyaltyInformation.GUARANTEE_FREQUENCY, 
+       TraxRoyaltyInformation.PAID_ON_BILLING_FLAG, 
+       TraxRoyaltyInformation.ADVANCE_ROYALTY_AMOUNT, 
+       TraxRoyaltyInformation.ADVANCE_FREQUENCY_COMMENTS, 
+       TraxRoyaltyInformation.LICENSE_DATA_DELIVERY_FEE, 
+       TraxRoyaltyInformation.LICENSE_FEE_DUE_DATE, 
+       TraxRoyaltyInformation.ONE_TIME_SIGNING_BONUS, 
+       TraxRoyaltyInformation.SIGNING_BONUS_DUE_DATE, 
+       TraxRoyaltyInformation.CREATED_BY, 
+       TraxRoyaltyInformation.CREATED_DATE, 
+       TraxRoyaltyInformation.LAST_UPDATED_BY, 
+       TraxRoyaltyInformation.LAST_UPDATED_DATE,
+       concat(TraxContact.First_Name,concat(' ',TraxContact.Last_Name)) ROYALTY_CONTACT
+FROM TRAX_ROYALTY_INFORMATION TraxRoyaltyInformation
+    LEFT OUTER JOIN TRAX_CONTACT TraxContact
+        ON TraxRoyaltyInformation.ROYALTY_CONTACT_ID = TraxContact.ID]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="TraxRoyaltyInformation"
+    Entity="com.pq.tracs.model.eo.TraxRoyaltyInformation"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="ContractId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ContractId"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="CONTRACT_ID"/>
+  <ViewAttribute
+    Name="RoyaltyContactId"
+    PrecisionRule="true"
+    EntityAttrName="RoyaltyContactId"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="ROYALTY_CONTACT_ID"/>
+  <ViewAttribute
+    Name="Currency"
+    PrecisionRule="true"
+    EntityAttrName="Currency"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="CURRENCY"
+    LOVName="LOV_Currency">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PaymentFrequency"
+    PrecisionRule="true"
+    EntityAttrName="PaymentFrequency"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="PAYMENT_FREQUENCY"
+    LOVName="LOV_PaymentFrequency">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.PaymentFrequency_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PaymentTerm"
+    PrecisionRule="true"
+    EntityAttrName="PaymentTerm"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="PAYMENT_TERM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.PaymentTerm_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InterimPaymentTermDays"
+    PrecisionRule="true"
+    EntityAttrName="InterimPaymentTermDays"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="INTERIM_PAYMENT_TERM_DAYS"
+    LOVName="LOV_InterimPaymentTermDays">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.InterimPaymentTermDays_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnnualPaymentTermDays"
+    PrecisionRule="true"
+    EntityAttrName="AnnualPaymentTermDays"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="ANNUAL_PAYMENT_TERM_DAYS"
+    LOVName="LOV_AnnualPaymentTermDays">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.AnnualPaymentTermDays_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="GuaranteeFrequency"
+    PrecisionRule="true"
+    EntityAttrName="GuaranteeFrequency"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="GUARANTEE_FREQUENCY"
+    LOVName="LOV_GuaranteeFrequency">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.GuaranteeFrequency_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PaidOnBillingFlag"
+    PrecisionRule="true"
+    EntityAttrName="PaidOnBillingFlag"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="PAID_ON_BILLING_FLAG">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.PaidOnBillingFlag_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AdvanceRoyaltyAmount"
+    PrecisionRule="true"
+    EntityAttrName="AdvanceRoyaltyAmount"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="ADVANCE_ROYALTY_AMOUNT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.AdvanceRoyaltyAmount_LABEL"/>
+        <DISPLAYWIDTH
+          Value="15"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AdvanceFrequencyComments"
+    PrecisionRule="true"
+    EntityAttrName="AdvanceFrequencyComments"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="ADVANCE_FREQUENCY_COMMENTS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.AdvanceFrequencyComments_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LicenseDataDeliveryFee"
+    PrecisionRule="true"
+    EntityAttrName="LicenseDataDeliveryFee"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="LICENSE_DATA_DELIVERY_FEE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.LicenseDataDeliveryFee_LABEL"/>
+        <DISPLAYWIDTH
+          Value="15"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LicenseFeeDueDate"
+    PrecisionRule="true"
+    EntityAttrName="LicenseFeeDueDate"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="LICENSE_FEE_DUE_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.LicenseFeeDueDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OneTimeSigningBonus"
+    PrecisionRule="true"
+    EntityAttrName="OneTimeSigningBonus"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="ONE_TIME_SIGNING_BONUS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.OneTimeSigningBonus_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="SigningBonusDueDate"
+    PrecisionRule="true"
+    EntityAttrName="SigningBonusDueDate"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="SIGNING_BONUS_DUE_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.SigningBonusDueDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="CREATED_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.CreatedBy_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="CREATED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.CreatedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="LAST_UPDATED_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.LastUpdatedBy_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedDate"
+    IsUpdateable="false"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedDate"
+    EntityUsage="TraxRoyaltyInformation"
+    AliasName="LAST_UPDATED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.LastUpdatedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RoyaltyContact"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ROYALTY_CONTACT"
+    Expression="ROYALTY_CONTACT"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.TraxRoyaltyInformationView.RoyaltyContact_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

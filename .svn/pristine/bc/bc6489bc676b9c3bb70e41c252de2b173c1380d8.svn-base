@@ -1,0 +1,2996 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="OpportunityTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartOpportunity</default-activity>
+    <input-parameter-definition id="__3">
+      <name id="__4">createOpportunity</name>
+      <value id="__5">#{pageFlowScope.createOpportunity}</value>
+      <class id="__6">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyStrOpportunity</name>
+      <value id="__9">#{pageFlowScope.rowKeyStrOpportunity}</value>
+      <class id="__10">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyValueOpportunity</name>
+      <value id="__13">#{pageFlowScope.rowKeyValueOpportunity}</value>
+      <class id="__14">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">rowKeyOpportunity</name>
+      <value id="__17">#{pageFlowScope.rowKeyOpportunity}</value>
+      <class id="__18">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name id="__20">altKeyNameOpportunity</name>
+      <value id="__21">#{pageFlowScope.altKeyNameOpportunity}</value>
+      <class id="__22">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__23">
+      <name id="__24">hideNewButton</name>
+      <value id="__25">#{pageFlowScope.hideNewButton}</value>
+    </input-parameter-definition>
+    <managed-bean id="__26">
+      <managed-bean-name id="__27">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__28">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__29">pageFlow</managed-bean-scope>
+      <managed-property id="__30">
+        <property-name id="__31">initializeParentContextEntries</property-name>
+        <map-entries id="__32">
+          <map-entry id="__33">
+            <key id="__34">jhsCurrentGroupName</key>
+            <value id="__35">Opportunity</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__36">
+      <managed-bean-name id="__37">OpportunityDefaultValues</managed-bean-name>
+      <managed-bean-class id="__38">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__39">pageFlow</managed-bean-scope>
+      <managed-property id="__40">
+        <property-name id="__41">iteratorBinding</property-name>
+        <value id="__42">#{data.OpportunityPageDef.OpportunityIterator}</value>
+      </managed-property>
+      <managed-property id="__43">
+        <property-name id="__44">defaultValues</property-name>
+        <map-entries id="__45">
+          <map-entry id="__46">
+            <key id="__47">ExclusivitySoughtObtained</key>
+            <value id="__48">N</value>
+          </map-entry>
+          <map-entry id="__49">
+            <key id="__50">SummonDeepIndexingFlag</key>
+            <value id="__51">N</value>
+          </map-entry>
+          <map-entry id="__52">
+            <key id="__53">AutoAddTargetsFlag</key>
+            <value id="__54">Y</value>
+          </map-entry>
+          <map-entry id="__55">
+            <key id="__56">OpenAccessFlag</key>
+            <value id="__57">N</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__58">
+        <property-name id="__59">actionResult</property-name>
+        <value id="__60">CreateOpportunity</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__61">
+      <managed-bean-name id="__62">OpportunityTargetsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__63">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__64">pageFlow</managed-bean-scope>
+      <managed-property id="__65">
+        <property-name id="__66">iteratorBinding</property-name>
+        <value id="__67">#{data.OpportunityPageDef.OpportunityTargetsIterator}</value>
+      </managed-property>
+      <managed-property id="__68">
+        <property-name id="__69">defaultValues</property-name>
+        <map-entries id="__70">
+          <map-entry id="__71">
+            <key id="__72">AiTargetingFlag</key>
+            <value id="__73">N</value>
+          </map-entry>
+          <map-entry id="__74">
+            <key id="__75">AddedDate</key>
+            <value id="__76">$CURRENT_DATE$</value>
+          </map-entry>
+          <map-entry id="__77">
+            <key id="__78">AddedDate1</key>
+            <value id="__79">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__80">
+        <property-name id="__81">actionResult</property-name>
+        <value id="__82">CreateOpportunityTargets</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__83">
+      <managed-bean-name id="__84">OpportunityActivitiesDefaultValues</managed-bean-name>
+      <managed-bean-class id="__85">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__86">pageFlow</managed-bean-scope>
+      <managed-property id="__87">
+        <property-name id="__88">iteratorBinding</property-name>
+        <value id="__89">#{data.OpportunityPageDef.OpportunityActivitiesIterator}</value>
+      </managed-property>
+      <managed-property id="__90">
+        <property-name id="__91">defaultValues</property-name>
+        <map-entries id="__92">
+          <map-entry id="__93">
+            <key id="__94">Status</key>
+            <value id="__95">Open</value>
+          </map-entry>
+          <map-entry id="__96">
+            <key id="__97">PrimaryFlag</key>
+            <value id="__98">Y</value>
+          </map-entry>
+          <map-entry id="__99">
+            <key id="__100">AddedDate</key>
+            <value id="__101">$CURRENT_DATE$</value>
+          </map-entry>
+          <map-entry id="__102">
+            <key id="__103">AddDate</key>
+            <value id="__104">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__105">
+        <property-name id="__106">actionResult</property-name>
+        <value id="__107">CreateOpportunityActivities</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__108">
+      <managed-bean-name id="__109">OpportunityAttachmentsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__110">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__111">pageFlow</managed-bean-scope>
+      <managed-property id="__112">
+        <property-name id="__113">iteratorBinding</property-name>
+        <value id="__114">#{data.OpportunityPageDef.OpportunityAttachmentsIterator}</value>
+      </managed-property>
+      <managed-property id="__115">
+        <property-name id="__116">defaultValues</property-name>
+        <map-entries id="__117">
+          <map-entry id="__118">
+            <key id="__119">AttachmentType</key>
+            <value id="__120">File</value>
+          </map-entry>
+          <map-entry id="__121">
+            <key id="__122">AttachmentSubType</key>
+            <value id="__123">File</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__124">
+        <property-name id="__125">actionResult</property-name>
+        <value id="__126">CreateOpportunityAttachments</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__127">
+      <managed-bean-name id="__128">OpportunityAllianceMgrsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__129">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__130">pageFlow</managed-bean-scope>
+      <managed-property id="__131">
+        <property-name id="__132">iteratorBinding</property-name>
+        <value id="__133">#{data.OpportunityPageDef.OpportunityAllianceMgrsIterator}</value>
+      </managed-property>
+      <managed-property id="__134">
+        <property-name id="__135">defaultValues</property-name>
+        <map-entries id="__136">
+          <map-entry id="__137">
+            <key id="__138">StartDate</key>
+            <value id="__139">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__140">
+        <property-name id="__141">actionResult</property-name>
+        <value id="__142">CreateOpportunityAllianceMgrs</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__143">
+      <managed-bean-name id="__144">OpportunityAgreementDataDefaultValues</managed-bean-name>
+      <managed-bean-class id="__145">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__146">pageFlow</managed-bean-scope>
+      <managed-property id="__147">
+        <property-name id="__148">iteratorBinding</property-name>
+        <value id="__149">#{data.OpportunityPageDef.OpportunityAgreementDataIterator}</value>
+      </managed-property>
+      <managed-property id="__150">
+        <property-name id="__151">defaultValues</property-name>
+        <map-entries id="__152">
+          <map-entry id="__153">
+            <key id="__154">AutoRenewal</key>
+            <value id="__155">N</value>
+          </map-entry>
+          <map-entry id="__156">
+            <key id="__157">RoyaltyBearing</key>
+            <value id="__158">Y</value>
+          </map-entry>
+          <map-entry id="__159">
+            <key id="__160">FairTreatmentClause</key>
+            <value id="__161">Y</value>
+          </map-entry>
+          <map-entry id="__162">
+            <key id="__163">IssueEditionCoverage</key>
+            <value id="__164">Y</value>
+          </map-entry>
+          <map-entry id="__165">
+            <key id="__166">CompleteContentSet</key>
+            <value id="__167">Y</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__168">
+        <property-name id="__169">actionResult</property-name>
+        <value id="__170">CreateOpportunityAgreementData</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__171">
+      <managed-bean-name id="__172">AgreementDataAttachmentsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__173">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__174">pageFlow</managed-bean-scope>
+      <managed-property id="__175">
+        <property-name id="__176">iteratorBinding</property-name>
+        <value id="__177">#{data.OpportunityPageDef.AgreementDataAttachmentsIterator}</value>
+      </managed-property>
+      <managed-property id="__178">
+        <property-name id="__179">defaultValues</property-name>
+        <map-entries id="__180">
+          <map-entry id="__181">
+            <key id="__182">AttachmentType</key>
+            <value id="__183">File</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__184">
+        <property-name id="__185">actionResult</property-name>
+        <value id="__186">CreateAgreementDataAttachments</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__187">
+      <managed-bean-name id="__188">OpportunityTargetAssignmentDefaultValues</managed-bean-name>
+      <managed-bean-class id="__189">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__190">pageFlow</managed-bean-scope>
+      <managed-property id="__191">
+        <property-name id="__192">iteratorBinding</property-name>
+        <value id="__193">#{data.OpportunityPageDef.OpportunityTargetAssignmentIterator}</value>
+      </managed-property>
+      <managed-property id="__194">
+        <property-name id="__195">defaultValues</property-name>
+        <map-entries id="__196">
+          <map-entry id="__197">
+            <key id="__198">AddedDate</key>
+            <value id="__199">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__200">
+        <property-name id="__201">actionResult</property-name>
+        <value id="__202">CreateOpportunityTargetAssignment</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__203">
+      <managed-bean-name id="__204">CreateOpportunity</managed-bean-name>
+      <managed-bean-class id="__205">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__206">request</managed-bean-scope>
+      <managed-property id="__207">
+        <property-name id="__208">createBinding</property-name>
+        <value id="__209">#{bindings.CreateOpportunity}</value>
+      </managed-property>
+      <managed-property id="__210">
+        <property-name id="__211">defaultValuesBean</property-name>
+        <value id="__212">#{pageFlowScope.OpportunityDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__213">
+        <property-name id="__214">successOutcome</property-name>
+        <value id="__215">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__216">
+        <property-name id="__217">failureOutcome</property-name>
+        <value id="__218">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__219">
+      <managed-bean-name id="__220">SaveOpportunity</managed-bean-name>
+      <managed-bean-class id="__221">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__222">request</managed-bean-scope>
+      <managed-property id="__223">
+        <property-name id="__224">commitBinding</property-name>
+        <value id="__225">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__226">
+        <property-name id="__227">successOutcome</property-name>
+        <value id="__228">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__229">
+      <managed-bean-name id="__230">jhsRollback</managed-bean-name>
+      <managed-bean-class id="__231">oracle.jheadstart.controller.jsf.bean.RollbackBean</managed-bean-class>
+      <managed-bean-scope id="__232">request</managed-bean-scope>
+      <managed-property id="__233">
+        <property-name id="__234">rollbackBinding</property-name>
+        <value id="__235">#{bindings.Rollback}</value>
+      </managed-property>
+      <managed-property id="__236">
+        <property-name id="__237">successOutcome</property-name>
+        <value id="__238">Cancel</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__239">
+      <managed-bean-name id="__240">searchOpportunity</managed-bean-name>
+      <managed-bean-class id="__241">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__242">pageFlow</managed-bean-scope>
+      <managed-property id="__243">
+        <property-name id="__244">bindings</property-name>
+        <value id="__245">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__246">
+        <property-name id="__247">searchBinding</property-name>
+        <value id="__248">#{'#{bindings.advancedSearchOpportunity}'}</value>
+      </managed-property>
+      <managed-property id="__249">
+        <property-name id="__250">searchItem</property-name>
+        <value id="__251">OppName</value>
+      </managed-property>
+      <managed-property id="__252">
+        <property-name id="__253">dataCollection</property-name>
+        <value id="__254">PrmOpportunityView1</value>
+      </managed-property>
+      <managed-property id="__255">
+        <property-name id="__256">operators</property-name>
+        <map-entries id="__257"></map-entries>
+      </managed-property>
+      <managed-property id="__258">
+        <property-name id="__259">itemAttributes</property-name>
+        <map-entries id="__260">
+          <map-entry id="__261">
+            <key id="__262">OppId</key>
+            <value id="__263">Id</value>
+          </map-entry>
+          <map-entry id="__264">
+            <key id="__265">OppContentOwnerId</key>
+            <value id="__266">ContentOwnerId</value>
+          </map-entry>
+          <map-entry id="__267">
+            <key id="__268">OppAccountid</key>
+            <value id="__269">Accountid</value>
+          </map-entry>
+          <map-entry id="__270">
+            <key id="__271">OppOpportunityNo</key>
+            <value id="__272">OpportunityNo</value>
+          </map-entry>
+          <map-entry id="__273">
+            <key id="__274">OppName</key>
+            <value id="__275">Name</value>
+          </map-entry>
+          <map-entry id="__276">
+            <key id="__277">OppOpportunityType</key>
+            <value id="__278">OpportunityType</value>
+          </map-entry>
+          <map-entry id="__279">
+            <key id="__280">OppAccountNumber</key>
+            <value id="__281">AccountNumber</value>
+          </map-entry>
+          <map-entry id="__282">
+            <key id="__283">OppAccountnameLink</key>
+            <value id="__284">Accountname</value>
+          </map-entry>
+          <map-entry id="__285">
+            <key id="__286">OppAccountname</key>
+            <value id="__287">Accountname</value>
+          </map-entry>
+          <map-entry id="__288">
+            <key id="__289">OppAccountSite</key>
+            <value id="__290">AccountSite</value>
+          </map-entry>
+          <map-entry id="__291">
+            <key id="__292">OppCity</key>
+            <value id="__293">City</value>
+          </map-entry>
+          <map-entry id="__294">
+            <key id="__295">OppCountry</key>
+            <value id="__296">Country</value>
+          </map-entry>
+          <map-entry id="__297">
+            <key id="__298">OppAllianceManager</key>
+            <value id="__299">AllianceManager</value>
+          </map-entry>
+          <map-entry id="__300">
+            <key id="__301">OppDescriptionTable</key>
+            <value id="__302">Description</value>
+          </map-entry>
+          <map-entry id="__303">
+            <key id="__304">OppDescription</key>
+            <value id="__305">Description</value>
+          </map-entry>
+          <map-entry id="__306">
+            <key id="__307">OppSummaryTable</key>
+            <value id="__308">Summary</value>
+          </map-entry>
+          <map-entry id="__309">
+            <key id="__310">OppSummary</key>
+            <value id="__311">Summary</value>
+          </map-entry>
+          <map-entry id="__312">
+            <key id="__313">OppCurrentStatus1</key>
+            <value id="__314">CurrentStatus1</value>
+          </map-entry>
+          <map-entry id="__315">
+            <key id="__316">OppReasonLost1</key>
+            <value id="__317">ReasonLost1</value>
+          </map-entry>
+          <map-entry id="__318">
+            <key id="__319">OppProbabilityPct</key>
+            <value id="__320">ProbabilityPct</value>
+          </map-entry>
+          <map-entry id="__321">
+            <key id="__322">OppPriority</key>
+            <value id="__323">Priority</value>
+          </map-entry>
+          <map-entry id="__324">
+            <key id="__325">OppExpectedPipelines</key>
+            <value id="__326">ExpectedPipelines</value>
+          </map-entry>
+          <map-entry id="__327">
+            <key id="__328">OppEstimatedCloseQuarter</key>
+            <value id="__329">EstimatedCloseQuarter</value>
+          </map-entry>
+          <map-entry id="__330">
+            <key id="__331">OppAgreementReceivedDate</key>
+            <value id="__332">AgreementReceivedDate</value>
+          </map-entry>
+          <map-entry id="__333">
+            <key id="__334">OppExclusivitySoughtObtained</key>
+            <value id="__335">ExclusivitySoughtObtained</value>
+          </map-entry>
+          <map-entry id="__336">
+            <key id="__337">OppDocumentSigned</key>
+            <value id="__338">DocumentSigned</value>
+          </map-entry>
+          <map-entry id="__339">
+            <key id="__340">OppSummonDeepIndexingFlag</key>
+            <value id="__341">SummonDeepIndexingFlag</value>
+          </map-entry>
+          <map-entry id="__342">
+            <key id="__343">OppCurrentPreStatus</key>
+            <value id="__344">CurrentPreStatus</value>
+          </map-entry>
+          <map-entry id="__345">
+            <key id="__346">OppCurrentCatalogingStatus</key>
+            <value id="__347">CurrentCatalogingStatus</value>
+          </map-entry>
+          <map-entry id="__348">
+            <key id="__349">OppCurrentAgreementStatus</key>
+            <value id="__350">CurrentAgreementStatus</value>
+          </map-entry>
+          <map-entry id="__351">
+            <key id="__352">OppAutoAddTargetsFlag</key>
+            <value id="__353">AutoAddTargetsFlag</value>
+          </map-entry>
+          <map-entry id="__354">
+            <key id="__355">OppOpenAccessFlag</key>
+            <value id="__356">OpenAccessFlag</value>
+          </map-entry>
+          <map-entry id="__357">
+            <key id="__358">OppCreatedBy</key>
+            <value id="__359">CreatedBy</value>
+          </map-entry>
+          <map-entry id="__360">
+            <key id="__361">OppCreatedDate</key>
+            <value id="__362">CreatedDate</value>
+          </map-entry>
+          <map-entry id="__363">
+            <key id="__364">OppLastUpdatedBy</key>
+            <value id="__365">LastUpdatedBy</value>
+          </map-entry>
+          <map-entry id="__366">
+            <key id="__367">OppLastUpdatedDate</key>
+            <value id="__368">LastUpdatedDate</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__369">
+      <managed-bean-name id="__370">OpportunityTable</managed-bean-name>
+      <managed-bean-class id="__371">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__372">pageFlow</managed-bean-scope>
+      <managed-property id="__373">
+        <property-name id="__374">name</property-name>
+        <value id="__375">OpportunityTable</value>
+      </managed-property>
+      <managed-property id="__376">
+        <property-name id="__377">rangeBindingExpr</property-name>
+        <value id="__378">#{'#{bindings.OpportunityTable}'}</value>
+      </managed-property>
+      <managed-property id="__379">
+        <property-name id="__380">createNewRowAtTop</property-name>
+        <value id="__381">true</value>
+      </managed-property>
+      <managed-property id="__382">
+        <property-name id="__383">defaultValuesBean</property-name>
+        <value id="__384">#{pageFlowScope.OpportunityDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__385">
+        <property-name id="__386">focusItemId</property-name>
+        <value id="__387">OppOpportunityNo</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__388">
+      <managed-bean-name id="__389">OppCurrentStatus1DependsOnItem</managed-bean-name>
+      <managed-bean-class id="__390">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__391">application</managed-bean-scope>
+      <managed-property id="__392">
+        <property-name id="__393">itemsToClear</property-name>
+        <list-entries id="__394">
+          <value id="__395">OppReasonLost1</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__396">
+        <property-name id="__397">componentsToRefresh</property-name>
+        <list-entries id="__398">
+          <value id="__399">OppReasonLost1</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__400">
+      <managed-bean-name id="__401">OppExclusivitySoughtObtainedcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__402">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__403">request</managed-bean-scope>
+      <managed-property id="__404">
+        <property-name id="__405">binding</property-name>
+        <value id="__406">#{bindings.OppExclusivitySoughtObtained}</value>
+      </managed-property>
+      <managed-property id="__407">
+        <property-name id="__408">tableBean</property-name>
+        <value id="__409">#{pageFlowScope.OpportunityTable}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__410">
+      <managed-bean-name id="__411">OppOpenAccessFlagcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__412">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__413">request</managed-bean-scope>
+      <managed-property id="__414">
+        <property-name id="__415">binding</property-name>
+        <value id="__416">#{bindings.OppOpenAccessFlag}</value>
+      </managed-property>
+      <managed-property id="__417">
+        <property-name id="__418">tableBean</property-name>
+        <value id="__419">#{pageFlowScope.OpportunityTable}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__420">
+      <managed-bean-name id="__421">DeleteOpportunity</managed-bean-name>
+      <managed-bean-class id="__422">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__423">request</managed-bean-scope>
+      <managed-property id="__424">
+        <property-name id="__425">deleteBinding</property-name>
+        <value id="__426">#{bindings.DeleteOpportunity}</value>
+      </managed-property>
+      <managed-property id="__427">
+        <property-name id="__428">commitBean</property-name>
+        <value id="__429">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__430">
+      <managed-bean-name id="__431">OppAccountnameLovItem</managed-bean-name>
+      <managed-bean-class id="__432">oracle.jheadstart.controller.jsf.bean.LovItemBean</managed-bean-class>
+      <managed-bean-scope id="__433">pageFlow</managed-bean-scope>
+      <managed-property id="__434">
+        <property-name id="__435">iterBindingExpr</property-name>
+        <value id="__436">#{'#{bindings.OpportunityIterator}'}</value>
+      </managed-property>
+      <managed-property id="__437">
+        <property-name id="__438">lovFieldBindingExpr</property-name>
+        <value id="__439">#{'#{bindings.OppAccountname}'}</value>
+      </managed-property>
+      <managed-property id="__440">
+        <property-name id="__441">copyToModel</property-name>
+        <value id="__442">true</value>
+      </managed-property>
+      <managed-property id="__443">
+        <property-name id="__444">lovSearchItem</property-name>
+        <value id="__445">AccountLookupSingleName</value>
+      </managed-property>
+      <managed-property id="__446">
+        <property-name id="__447">lovTitleExpr</property-name>
+        <value id="__448">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.OpportunityTable.hints.Accountname.label}"}</value>
+      </managed-property>
+      <managed-property id="__449">
+        <property-name id="__450">lovWidth</property-name>
+        <value id="__451">1000</value>
+      </managed-property>
+      <managed-property id="__452">
+        <property-name id="__453">lovHeight</property-name>
+        <value id="__454">500</value>
+      </managed-property>
+      <managed-property id="__455">
+        <property-name id="__456">lovTaskFlowIdString</property-name>
+        <value id="__457">/WEB-INF/adfc-config-AccountLookupSingle.xml#AccountLookupSingleTaskFlow</value>
+      </managed-property>
+      <managed-property id="__458">
+        <property-name id="__459">lovParams</property-name>
+        <map-entries id="__460"></map-entries>
+      </managed-property>
+      <managed-property id="__461">
+        <property-name id="__462">returnItemValues</property-name>
+        <map-entries id="__463">
+          <map-entry id="__464">
+            <key id="__465">Name</key>
+            <value id="__466">OppAccountname</value>
+          </map-entry>
+          <map-entry id="__467">
+            <key id="__468">Id</key>
+            <value id="__469">OppContentOwnerId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__470">
+        <property-name id="__471">returnAttributeValues</property-name>
+        <map-entries id="__472">
+          <map-entry id="__473">
+            <key id="__474">Name</key>
+            <value id="__475">Accountname</value>
+          </map-entry>
+          <map-entry id="__476">
+            <key id="__477">Id</key>
+            <value id="__478">ContentOwnerId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__479">
+        <property-name id="__480">itemsToClear</property-name>
+        <list-entries id="__481"></list-entries>
+      </managed-property>
+      <managed-property id="__482">
+        <property-name id="__483">componentsToRefresh</property-name>
+        <list-entries id="__484"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__485">
+      <managed-bean-name id="__486">OppDescriptionDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__487">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__488">application</managed-bean-scope>
+      <managed-property id="__489">
+        <property-name id="__490">itemsToClear</property-name>
+        <list-entries id="__491"></list-entries>
+      </managed-property>
+      <managed-property id="__492">
+        <property-name id="__493">componentsToRefresh</property-name>
+        <list-entries id="__494">
+          <value id="__495">OppDes</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__496">
+      <managed-bean-name id="__497">OppCurrentStatusDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__498">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__499">application</managed-bean-scope>
+      <managed-property id="__500">
+        <property-name id="__501">itemsToClear</property-name>
+        <list-entries id="__502">
+          <value id="__503">OppRL</value>
+          <value id="__504">OppARD</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__505">
+        <property-name id="__506">componentsToRefresh</property-name>
+        <list-entries id="__507">
+          <value id="__508">OppRL</value>
+          <value id="__509">OppARD</value>
+          <value id="__510">OppCPS</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__511">
+      <managed-bean-name id="__512">searchOpportunityTargets</managed-bean-name>
+      <managed-bean-class id="__513">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__514">pageFlow</managed-bean-scope>
+      <managed-property id="__515">
+        <property-name id="__516">bindings</property-name>
+        <value id="__517">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__518">
+        <property-name id="__519">searchBinding</property-name>
+        <value id="__520">#{'#{bindings.advancedSearchOpportunityTargets}'}</value>
+      </managed-property>
+      <managed-property id="__521">
+        <property-name id="__522">searchItem</property-name>
+        <value id="__523">s20LongTitle</value>
+      </managed-property>
+      <managed-property id="__524">
+        <property-name id="__525">dataCollection</property-name>
+        <value id="__526">PrmOpportunityTargetView1</value>
+      </managed-property>
+      <managed-property id="__527">
+        <property-name id="__528">operators</property-name>
+        <map-entries id="__529"></map-entries>
+      </managed-property>
+      <managed-property id="__530">
+        <property-name id="__531">itemAttributes</property-name>
+        <map-entries id="__532">
+          <map-entry id="__533">
+            <key id="__534">s20TargetTrackingNo</key>
+            <value id="__535">TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__536">
+            <key id="__537">s20CatalogNumber</key>
+            <value id="__538">CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__539">
+            <key id="__540">s20CatalogRoot</key>
+            <value id="__541">CatalogRoot</value>
+          </map-entry>
+          <map-entry id="__542">
+            <key id="__543">s20LongTitle</key>
+            <value id="__544">LongTitle</value>
+          </map-entry>
+          <map-entry id="__545">
+            <key id="__546">s20ShortTitle</key>
+            <value id="__547">ShortTitle</value>
+          </map-entry>
+          <map-entry id="__548">
+            <key id="__549">s20TargetStatus</key>
+            <value id="__550">TargetStatus</value>
+          </map-entry>
+          <map-entry id="__551">
+            <key id="__552">s20PrdId</key>
+            <value id="__553">PrdId</value>
+          </map-entry>
+          <map-entry id="__554">
+            <key id="__555">s20ProductName</key>
+            <value id="__556">ProductName</value>
+          </map-entry>
+          <map-entry id="__557">
+            <key id="__558">s20TargetPriority</key>
+            <value id="__559">TargetPriority</value>
+          </map-entry>
+          <map-entry id="__560">
+            <key id="__561">s20TargetType</key>
+            <value id="__562">TargetType</value>
+          </map-entry>
+          <map-entry id="__563">
+            <key id="__564">s20AiTargetingFlag</key>
+            <value id="__565">AiTargetingFlag</value>
+          </map-entry>
+          <map-entry id="__566">
+            <key id="__567">s20AccountName</key>
+            <value id="__568">AccountName</value>
+          </map-entry>
+          <map-entry id="__569">
+            <key id="__570">s20AddedDate</key>
+            <value id="__571">AddedDate</value>
+          </map-entry>
+          <map-entry id="__572">
+            <key id="__573">s20RemovedDate</key>
+            <value id="__574">RemovedDate</value>
+          </map-entry>
+          <map-entry id="__575">
+            <key id="__576">s20GroupName</key>
+            <value id="__577">GroupName</value>
+          </map-entry>
+          <map-entry id="__578">
+            <key id="__579">s20CreatedBy</key>
+            <value id="__580">CreatedBy</value>
+          </map-entry>
+          <map-entry id="__581">
+            <key id="__582">s20CreatedDate</key>
+            <value id="__583">CreatedDate</value>
+          </map-entry>
+          <map-entry id="__584">
+            <key id="__585">s20LastUpdatedBy</key>
+            <value id="__586">LastUpdatedBy</value>
+          </map-entry>
+          <map-entry id="__587">
+            <key id="__588">s20LastUpdatedDate</key>
+            <value id="__589">LastUpdatedDate</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__590">
+      <managed-bean-name id="__591">OpportunityTargetsTable</managed-bean-name>
+      <managed-bean-class id="__592">com.pq.tracs.view.beans.OpportunityTargetsTableBean</managed-bean-class>
+      <managed-bean-scope id="__593">pageFlow</managed-bean-scope>
+      <managed-property id="__594">
+        <property-name id="__595">name</property-name>
+        <value id="__596">OpportunityTargetsTable</value>
+      </managed-property>
+      <managed-property id="__597">
+        <property-name id="__598">rangeBindingExpr</property-name>
+        <value id="__599">#{'#{bindings.OpportunityTargetsTable}'}</value>
+      </managed-property>
+      <managed-property id="__600">
+        <property-name id="__601">createNewRowAtTop</property-name>
+        <value id="__602">true</value>
+      </managed-property>
+      <managed-property id="__603">
+        <property-name id="__604">defaultValuesBean</property-name>
+        <value id="__605">#{pageFlowScope.OpportunityTargetsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__606">
+        <property-name id="__607">focusItemId</property-name>
+        <value id="__608">s20TTN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__609">
+      <managed-bean-name id="__610">DeleteOpportunityTargets</managed-bean-name>
+      <managed-bean-class id="__611">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__612">request</managed-bean-scope>
+      <managed-property id="__613">
+        <property-name id="__614">deleteBinding</property-name>
+        <value id="__615">#{bindings.DeleteOpportunityTargets}</value>
+      </managed-property>
+      <managed-property id="__616">
+        <property-name id="__617">commitBean</property-name>
+        <value id="__618">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__619">
+      <managed-bean-name id="__620">CreateOpportunityTargets</managed-bean-name>
+      <managed-bean-class id="__621">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__622">request</managed-bean-scope>
+      <managed-property id="__623">
+        <property-name id="__624">createBinding</property-name>
+        <value id="__625">#{bindings.CreateOpportunityTargets}</value>
+      </managed-property>
+      <managed-property id="__626">
+        <property-name id="__627">defaultValuesBean</property-name>
+        <value id="__628">#{pageFlowScope.OpportunityTargetsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__629">
+        <property-name id="__630">successOutcome</property-name>
+        <value id="__631">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__632">
+        <property-name id="__633">failureOutcome</property-name>
+        <value id="__634">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__635">
+      <managed-bean-name id="__636">s20TargetTrackingNoLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__637">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__638">pageFlow</managed-bean-scope>
+      <managed-property id="__639">
+        <property-name id="__640">iterBindingExpr</property-name>
+        <value id="__641">#{'#{bindings.OpportunityTargetsIterator}'}</value>
+      </managed-property>
+      <managed-property id="__642">
+        <property-name id="__643">lovFieldBindingExpr</property-name>
+        <value id="__644">#{'#{row.bindings.TargetTrackingNo}'}</value>
+      </managed-property>
+      <managed-property id="__645">
+        <property-name id="__646">copyToModel</property-name>
+        <value id="__647">true</value>
+      </managed-property>
+      <managed-property id="__648">
+        <property-name id="__649">tableBean</property-name>
+        <value id="__650">#{pageFlowScope.OpportunityTargetsTable}</value>
+      </managed-property>
+      <managed-property id="__651">
+        <property-name id="__652">lovSearchItem</property-name>
+        <value id="__653">TitleLookupTargetTrackingNo</value>
+      </managed-property>
+      <managed-property id="__654">
+        <property-name id="__655">lovTitleExpr</property-name>
+        <value id="__656">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.OpportunityTargetsTable.hints.TargetTrackingNo.label}"}</value>
+      </managed-property>
+      <managed-property id="__657">
+        <property-name id="__658">lovWidth</property-name>
+        <value id="__659">1000</value>
+      </managed-property>
+      <managed-property id="__660">
+        <property-name id="__661">lovHeight</property-name>
+        <value id="__662">500</value>
+      </managed-property>
+      <managed-property id="__663">
+        <property-name id="__664">lovTaskFlowIdString</property-name>
+        <value id="__665">/WEB-INF/adfc-config-TitleLookup.xml#TitleLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__666">
+        <property-name id="__667">lovParams</property-name>
+        <map-entries id="__668"></map-entries>
+      </managed-property>
+      <managed-property id="__669">
+        <property-name id="__670">returnItemValues</property-name>
+        <map-entries id="__671">
+          <map-entry id="__672">
+            <key id="__673">Id</key>
+            <value id="__674">s20TitleId</value>
+          </map-entry>
+          <map-entry id="__675">
+            <key id="__676">TargetTrackingNo</key>
+            <value id="__677">s20TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__678">
+            <key id="__679">CatalogNumber</key>
+            <value id="__680">s20CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__681">
+            <key id="__682">CatalogRoot</key>
+            <value id="__683">s20CatalogRoot</value>
+          </map-entry>
+          <map-entry id="__684">
+            <key id="__685">LongTitle</key>
+            <value id="__686">s20LongTitle</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__687">
+        <property-name id="__688">returnAttributeValues</property-name>
+        <map-entries id="__689">
+          <map-entry id="__690">
+            <key id="__691">Id</key>
+            <value id="__692">TitleId</value>
+          </map-entry>
+          <map-entry id="__693">
+            <key id="__694">TargetTrackingNo</key>
+            <value id="__695">TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__696">
+            <key id="__697">CatalogNumber</key>
+            <value id="__698">CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__699">
+            <key id="__700">CatalogRoot</key>
+            <value id="__701">CatalogRoot</value>
+          </map-entry>
+          <map-entry id="__702">
+            <key id="__703">LongTitle</key>
+            <value id="__704">LongTitle</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__705">
+        <property-name id="__706">itemsToClear</property-name>
+        <list-entries id="__707"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__708">
+      <managed-bean-name id="__709">s20ProductNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__710">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__711">pageFlow</managed-bean-scope>
+      <managed-property id="__712">
+        <property-name id="__713">iterBindingExpr</property-name>
+        <value id="__714">#{'#{bindings.OpportunityTargetsIterator}'}</value>
+      </managed-property>
+      <managed-property id="__715">
+        <property-name id="__716">lovFieldBindingExpr</property-name>
+        <value id="__717">#{'#{row.bindings.ProductName}'}</value>
+      </managed-property>
+      <managed-property id="__718">
+        <property-name id="__719">copyToModel</property-name>
+        <value id="__720">true</value>
+      </managed-property>
+      <managed-property id="__721">
+        <property-name id="__722">tableBean</property-name>
+        <value id="__723">#{pageFlowScope.OpportunityTargetsTable}</value>
+      </managed-property>
+      <managed-property id="__724">
+        <property-name id="__725">lovSearchItem</property-name>
+        <value id="__726">TargetedProductLookupSingleName</value>
+      </managed-property>
+      <managed-property id="__727">
+        <property-name id="__728">lovTitleExpr</property-name>
+        <value id="__729">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.OpportunityTargetsTable.hints.ProductName.label}"}</value>
+      </managed-property>
+      <managed-property id="__730">
+        <property-name id="__731">lovWidth</property-name>
+        <value id="__732">1000</value>
+      </managed-property>
+      <managed-property id="__733">
+        <property-name id="__734">lovHeight</property-name>
+        <value id="__735">500</value>
+      </managed-property>
+      <managed-property id="__736">
+        <property-name id="__737">lovTaskFlowIdString</property-name>
+        <value id="__738">/WEB-INF/adfc-config-TargetedProductLookupSingle.xml#TargetedProductLookupSingleTaskFlow</value>
+      </managed-property>
+      <managed-property id="__739">
+        <property-name id="__740">lovParams</property-name>
+        <map-entries id="__741"></map-entries>
+      </managed-property>
+      <managed-property id="__742">
+        <property-name id="__743">returnItemValues</property-name>
+        <map-entries id="__744">
+          <map-entry id="__745">
+            <key id="__746">Name</key>
+            <value id="__747">s20ProductName</value>
+          </map-entry>
+          <map-entry id="__748">
+            <key id="__749">Id</key>
+            <value id="__750">s20PrmTargetedProductId</value>
+          </map-entry>
+          <map-entry id="__751">
+            <key id="__752">PrdId</key>
+            <value id="__753">s20PrdId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__754">
+        <property-name id="__755">returnAttributeValues</property-name>
+        <map-entries id="__756">
+          <map-entry id="__757">
+            <key id="__758">Name</key>
+            <value id="__759">ProductName</value>
+          </map-entry>
+          <map-entry id="__760">
+            <key id="__761">Id</key>
+            <value id="__762">PrmTargetedProductId</value>
+          </map-entry>
+          <map-entry id="__763">
+            <key id="__764">PrdId</key>
+            <value id="__765">PrdId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__766">
+        <property-name id="__767">itemsToClear</property-name>
+        <list-entries id="__768"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__769">
+      <managed-bean-name id="__770">s20AiTargetingFlagcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__771">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__772">request</managed-bean-scope>
+      <managed-property id="__773">
+        <property-name id="__774">binding</property-name>
+        <value id="__775">#{bindings.s20AiTargetingFlag}</value>
+      </managed-property>
+      <managed-property id="__776">
+        <property-name id="__777">tableBean</property-name>
+        <value id="__778">#{pageFlowScope.OpportunityTargetsTable}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__779">
+      <managed-bean-name id="__780">OpportunityActivitiesTable</managed-bean-name>
+      <managed-bean-class id="__781">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__782">pageFlow</managed-bean-scope>
+      <managed-property id="__783">
+        <property-name id="__784">name</property-name>
+        <value id="__785">OpportunityActivitiesTable</value>
+      </managed-property>
+      <managed-property id="__786">
+        <property-name id="__787">rangeBindingExpr</property-name>
+        <value id="__788">#{'#{bindings.OpportunityActivitiesTable}'}</value>
+      </managed-property>
+      <managed-property id="__789">
+        <property-name id="__790">createNewRowAtTop</property-name>
+        <value id="__791">true</value>
+      </managed-property>
+      <managed-property id="__792">
+        <property-name id="__793">defaultValuesBean</property-name>
+        <value id="__794">#{pageFlowScope.OpportunityActivitiesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__795">
+        <property-name id="__796">focusItemId</property-name>
+        <value id="__797">s21Ty</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__798">
+      <managed-bean-name id="__799">DeleteOpportunityActivities</managed-bean-name>
+      <managed-bean-class id="__800">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__801">request</managed-bean-scope>
+      <managed-property id="__802">
+        <property-name id="__803">deleteBinding</property-name>
+        <value id="__804">#{bindings.DeleteOpportunityActivities}</value>
+      </managed-property>
+      <managed-property id="__805">
+        <property-name id="__806">commitBean</property-name>
+        <value id="__807">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__808">
+      <managed-bean-name id="__809">CreateOpportunityActivities</managed-bean-name>
+      <managed-bean-class id="__810">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__811">request</managed-bean-scope>
+      <managed-property id="__812">
+        <property-name id="__813">createBinding</property-name>
+        <value id="__814">#{bindings.CreateOpportunityActivities}</value>
+      </managed-property>
+      <managed-property id="__815">
+        <property-name id="__816">defaultValuesBean</property-name>
+        <value id="__817">#{pageFlowScope.OpportunityActivitiesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__818">
+        <property-name id="__819">successOutcome</property-name>
+        <value id="__820">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__821">
+        <property-name id="__822">failureOutcome</property-name>
+        <value id="__823">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__824">
+      <managed-bean-name id="__825">s21TypeDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__826">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__827">application</managed-bean-scope>
+      <managed-property id="__828">
+        <property-name id="__829">itemsToClear</property-name>
+        <list-entries id="__830">
+          <value id="__831">s21STy</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__832">
+        <property-name id="__833">componentsToRefresh</property-name>
+        <list-entries id="__834">
+          <value id="__835">s21STy</value>
+          <value id="__836">s21EL</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__837">
+      <managed-bean-name id="__838">s21OwnerLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__839">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__840">pageFlow</managed-bean-scope>
+      <managed-property id="__841">
+        <property-name id="__842">iterBindingExpr</property-name>
+        <value id="__843">#{'#{bindings.OpportunityActivitiesIterator}'}</value>
+      </managed-property>
+      <managed-property id="__844">
+        <property-name id="__845">lovFieldBindingExpr</property-name>
+        <value id="__846">#{'#{row.bindings.Owner}'}</value>
+      </managed-property>
+      <managed-property id="__847">
+        <property-name id="__848">copyToModel</property-name>
+        <value id="__849">true</value>
+      </managed-property>
+      <managed-property id="__850">
+        <property-name id="__851">tableBean</property-name>
+        <value id="__852">#{pageFlowScope.OpportunityActivitiesTable}</value>
+      </managed-property>
+      <managed-property id="__853">
+        <property-name id="__854">lovSearchItem</property-name>
+        <value id="__855">UsersLookupSingleDisplayName</value>
+      </managed-property>
+      <managed-property id="__856">
+        <property-name id="__857">lovTitleExpr</property-name>
+        <value id="__858">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.OpportunityActivitiesTable.hints.Owner.label}"}</value>
+      </managed-property>
+      <managed-property id="__859">
+        <property-name id="__860">lovWidth</property-name>
+        <value id="__861">1000</value>
+      </managed-property>
+      <managed-property id="__862">
+        <property-name id="__863">lovHeight</property-name>
+        <value id="__864">500</value>
+      </managed-property>
+      <managed-property id="__865">
+        <property-name id="__866">lovTaskFlowIdString</property-name>
+        <value id="__867">/WEB-INF/adfc-config-UsersLookupSingle.xml#UsersLookupSingleTaskFlow</value>
+      </managed-property>
+      <managed-property id="__868">
+        <property-name id="__869">lovParams</property-name>
+        <map-entries id="__870"></map-entries>
+      </managed-property>
+      <managed-property id="__871">
+        <property-name id="__872">returnItemValues</property-name>
+        <map-entries id="__873">
+          <map-entry id="__874">
+            <key id="__875">DisplayName</key>
+            <value id="__876">s21Owner</value>
+          </map-entry>
+          <map-entry id="__877">
+            <key id="__878">Id</key>
+            <value id="__879">s21JhsUsersId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__880">
+        <property-name id="__881">returnAttributeValues</property-name>
+        <map-entries id="__882">
+          <map-entry id="__883">
+            <key id="__884">DisplayName</key>
+            <value id="__885">Owner</value>
+          </map-entry>
+          <map-entry id="__886">
+            <key id="__887">Id</key>
+            <value id="__888">JhsUsersId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__889">
+        <property-name id="__890">itemsToClear</property-name>
+        <list-entries id="__891"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__892">
+      <managed-bean-name id="__893">s21ContactNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__894">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__895">pageFlow</managed-bean-scope>
+      <managed-property id="__896">
+        <property-name id="__897">iterBindingExpr</property-name>
+        <value id="__898">#{'#{bindings.OpportunityActivitiesIterator}'}</value>
+      </managed-property>
+      <managed-property id="__899">
+        <property-name id="__900">lovFieldBindingExpr</property-name>
+        <value id="__901">#{'#{row.bindings.ContactName}'}</value>
+      </managed-property>
+      <managed-property id="__902">
+        <property-name id="__903">copyToModel</property-name>
+        <value id="__904">true</value>
+      </managed-property>
+      <managed-property id="__905">
+        <property-name id="__906">tableBean</property-name>
+        <value id="__907">#{pageFlowScope.OpportunityActivitiesTable}</value>
+      </managed-property>
+      <managed-property id="__908">
+        <property-name id="__909">lovSearchItem</property-name>
+        <value id="__910">ContactLookupLoVContactName</value>
+      </managed-property>
+      <managed-property id="__911">
+        <property-name id="__912">lovTitleExpr</property-name>
+        <value id="__913">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.OpportunityActivitiesTable.hints.ContactName.label}"}</value>
+      </managed-property>
+      <managed-property id="__914">
+        <property-name id="__915">lovWidth</property-name>
+        <value id="__916">1000</value>
+      </managed-property>
+      <managed-property id="__917">
+        <property-name id="__918">lovHeight</property-name>
+        <value id="__919">500</value>
+      </managed-property>
+      <managed-property id="__920">
+        <property-name id="__921">lovTaskFlowIdString</property-name>
+        <value id="__922">/WEB-INF/adfc-config-ContactLookupLoV.xml#ContactLookupLoVTaskFlow</value>
+      </managed-property>
+      <managed-property id="__923">
+        <property-name id="__924">lovParams</property-name>
+        <map-entries id="__925"></map-entries>
+      </managed-property>
+      <managed-property id="__926">
+        <property-name id="__927">returnItemValues</property-name>
+        <map-entries id="__928">
+          <map-entry id="__929">
+            <key id="__930">ContactName</key>
+            <value id="__931">s21ContactName</value>
+          </map-entry>
+          <map-entry id="__932">
+            <key id="__933">Id</key>
+            <value id="__934">s21ContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__935">
+        <property-name id="__936">returnAttributeValues</property-name>
+        <map-entries id="__937">
+          <map-entry id="__938">
+            <key id="__939">ContactName</key>
+            <value id="__940">ContactName</value>
+          </map-entry>
+          <map-entry id="__941">
+            <key id="__942">Id</key>
+            <value id="__943">ContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__944">
+        <property-name id="__945">itemsToClear</property-name>
+        <list-entries id="__946"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__947">
+      <managed-bean-name id="__948">CreateOpportunityAttachments</managed-bean-name>
+      <managed-bean-class id="__949">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__950">request</managed-bean-scope>
+      <managed-property id="__951">
+        <property-name id="__952">createBinding</property-name>
+        <value id="__953">#{bindings.CreateOpportunityAttachments}</value>
+      </managed-property>
+      <managed-property id="__954">
+        <property-name id="__955">defaultValuesBean</property-name>
+        <value id="__956">#{pageFlowScope.OpportunityAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__957">
+        <property-name id="__958">successOutcome</property-name>
+        <value id="__959">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__960">
+        <property-name id="__961">failureOutcome</property-name>
+        <value id="__962">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__963">
+      <managed-bean-name id="__964">OpportunityAttachmentsTable</managed-bean-name>
+      <managed-bean-class id="__965">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__966">pageFlow</managed-bean-scope>
+      <managed-property id="__967">
+        <property-name id="__968">name</property-name>
+        <value id="__969">OpportunityAttachmentsTable</value>
+      </managed-property>
+      <managed-property id="__970">
+        <property-name id="__971">rangeBindingExpr</property-name>
+        <value id="__972">#{'#{bindings.OpportunityAttachmentsTable}'}</value>
+      </managed-property>
+      <managed-property id="__973">
+        <property-name id="__974">createNewRowAtTop</property-name>
+        <value id="__975">true</value>
+      </managed-property>
+      <managed-property id="__976">
+        <property-name id="__977">defaultValuesBean</property-name>
+        <value id="__978">#{pageFlowScope.OpportunityAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__979">
+        <property-name id="__980">focusItemId</property-name>
+        <value id="__981">s22Nm</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__982">
+      <managed-bean-name id="__983">DeleteOpportunityAttachments</managed-bean-name>
+      <managed-bean-class id="__984">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__985">request</managed-bean-scope>
+      <managed-property id="__986">
+        <property-name id="__987">deleteBinding</property-name>
+        <value id="__988">#{bindings.DeleteOpportunityAttachments}</value>
+      </managed-property>
+      <managed-property id="__989">
+        <property-name id="__990">commitBean</property-name>
+        <value id="__991">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__992">
+      <managed-bean-name id="__993">s22NameDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__994">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__995">application</managed-bean-scope>
+      <managed-property id="__996">
+        <property-name id="__997">itemsToClear</property-name>
+        <list-entries id="__998"></list-entries>
+      </managed-property>
+      <managed-property id="__999">
+        <property-name id="__1000">componentsToRefresh</property-name>
+        <list-entries id="__1001">
+          <value id="__1002">s22ADL</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1003">
+      <managed-bean-name id="__1004">s22AttachmentDLFileHandlerInTable</managed-bean-name>
+      <managed-bean-class id="__1005">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__1006">request</managed-bean-scope>
+      <managed-property id="__1007">
+        <property-name id="__1008">valueBinding</property-name>
+        <value id="__1009">#{bindings.s22AttachmentDL}</value>
+      </managed-property>
+      <managed-property id="__1010">
+        <property-name id="__1011">tableBean</property-name>
+        <value id="__1012">#{pageFlowScope.OpportunityAttachmentsTable}</value>
+      </managed-property>
+      <managed-property id="__1013">
+        <property-name id="__1014">fileNameWhenEmpty</property-name>
+        <value id="__1015">#{'#{bindings.s22AttachmentDL.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1016">
+      <managed-bean-name id="__1017">OpportunityStatusTable</managed-bean-name>
+      <managed-bean-class id="__1018">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__1019">pageFlow</managed-bean-scope>
+      <managed-property id="__1020">
+        <property-name id="__1021">name</property-name>
+        <value id="__1022">OpportunityStatusTable</value>
+      </managed-property>
+      <managed-property id="__1023">
+        <property-name id="__1024">rangeBindingExpr</property-name>
+        <value id="__1025">#{'#{bindings.OpportunityStatusTable}'}</value>
+      </managed-property>
+      <managed-property id="__1026">
+        <property-name id="__1027">createNewRowAtTop</property-name>
+        <value id="__1028">true</value>
+      </managed-property>
+      <managed-property id="__1029">
+        <property-name id="__1030">focusItemId</property-name>
+        <value id="__1031">s23SC</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1032">
+      <managed-bean-name id="__1033">DeleteOpportunityStatus</managed-bean-name>
+      <managed-bean-class id="__1034">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__1035">request</managed-bean-scope>
+      <managed-property id="__1036">
+        <property-name id="__1037">deleteBinding</property-name>
+        <value id="__1038">#{bindings.DeleteOpportunityStatus}</value>
+      </managed-property>
+      <managed-property id="__1039">
+        <property-name id="__1040">commitBean</property-name>
+        <value id="__1041">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1042">
+      <managed-bean-name id="__1043">OpportunityAllianceMgrsTable</managed-bean-name>
+      <managed-bean-class id="__1044">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__1045">pageFlow</managed-bean-scope>
+      <managed-property id="__1046">
+        <property-name id="__1047">name</property-name>
+        <value id="__1048">OpportunityAllianceMgrsTable</value>
+      </managed-property>
+      <managed-property id="__1049">
+        <property-name id="__1050">rangeBindingExpr</property-name>
+        <value id="__1051">#{'#{bindings.OpportunityAllianceMgrsTable}'}</value>
+      </managed-property>
+      <managed-property id="__1052">
+        <property-name id="__1053">createNewRowAtTop</property-name>
+        <value id="__1054">true</value>
+      </managed-property>
+      <managed-property id="__1055">
+        <property-name id="__1056">defaultValuesBean</property-name>
+        <value id="__1057">#{pageFlowScope.OpportunityAllianceMgrsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__1058">
+        <property-name id="__1059">focusItemId</property-name>
+        <value id="__1060">s24AllianceManager</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1061">
+      <managed-bean-name id="__1062">DeleteOpportunityAllianceMgrs</managed-bean-name>
+      <managed-bean-class id="__1063">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__1064">request</managed-bean-scope>
+      <managed-property id="__1065">
+        <property-name id="__1066">deleteBinding</property-name>
+        <value id="__1067">#{bindings.DeleteOpportunityAllianceMgrs}</value>
+      </managed-property>
+      <managed-property id="__1068">
+        <property-name id="__1069">commitBean</property-name>
+        <value id="__1070">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1071">
+      <managed-bean-name id="__1072">CreateOpportunityAllianceMgrs</managed-bean-name>
+      <managed-bean-class id="__1073">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__1074">request</managed-bean-scope>
+      <managed-property id="__1075">
+        <property-name id="__1076">createBinding</property-name>
+        <value id="__1077">#{bindings.CreateOpportunityAllianceMgrs}</value>
+      </managed-property>
+      <managed-property id="__1078">
+        <property-name id="__1079">defaultValuesBean</property-name>
+        <value id="__1080">#{pageFlowScope.OpportunityAllianceMgrsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__1081">
+        <property-name id="__1082">successOutcome</property-name>
+        <value id="__1083">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__1084">
+        <property-name id="__1085">failureOutcome</property-name>
+        <value id="__1086">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1087">
+      <managed-bean-name id="__1088">s24AllianceManagerLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__1089">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1090">pageFlow</managed-bean-scope>
+      <managed-property id="__1091">
+        <property-name id="__1092">iterBindingExpr</property-name>
+        <value id="__1093">#{'#{bindings.OpportunityAllianceMgrsIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1094">
+        <property-name id="__1095">lovFieldBindingExpr</property-name>
+        <value id="__1096">#{'#{row.bindings.AllianceManager}'}</value>
+      </managed-property>
+      <managed-property id="__1097">
+        <property-name id="__1098">copyToModel</property-name>
+        <value id="__1099">true</value>
+      </managed-property>
+      <managed-property id="__1100">
+        <property-name id="__1101">tableBean</property-name>
+        <value id="__1102">#{pageFlowScope.OpportunityAllianceMgrsTable}</value>
+      </managed-property>
+      <managed-property id="__1103">
+        <property-name id="__1104">lovSearchItem</property-name>
+        <value id="__1105">AMLookupDisplayName</value>
+      </managed-property>
+      <managed-property id="__1106">
+        <property-name id="__1107">lovTitleExpr</property-name>
+        <value id="__1108">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAllianceMgrsTable.hints.AllianceManager.label}"}</value>
+      </managed-property>
+      <managed-property id="__1109">
+        <property-name id="__1110">lovWidth</property-name>
+        <value id="__1111">1000</value>
+      </managed-property>
+      <managed-property id="__1112">
+        <property-name id="__1113">lovHeight</property-name>
+        <value id="__1114">500</value>
+      </managed-property>
+      <managed-property id="__1115">
+        <property-name id="__1116">lovTaskFlowIdString</property-name>
+        <value id="__1117">/WEB-INF/adfc-config-AMLookup.xml#AMLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1118">
+        <property-name id="__1119">lovParams</property-name>
+        <map-entries id="__1120"></map-entries>
+      </managed-property>
+      <managed-property id="__1121">
+        <property-name id="__1122">returnItemValues</property-name>
+        <map-entries id="__1123">
+          <map-entry id="__1124">
+            <key id="__1125">DisplayName</key>
+            <value id="__1126">s24AllianceManager</value>
+          </map-entry>
+          <map-entry id="__1127">
+            <key id="__1128">Id</key>
+            <value id="__1129">s24PrmAllianceManagerId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1130">
+        <property-name id="__1131">returnAttributeValues</property-name>
+        <map-entries id="__1132">
+          <map-entry id="__1133">
+            <key id="__1134">DisplayName</key>
+            <value id="__1135">AllianceManager</value>
+          </map-entry>
+          <map-entry id="__1136">
+            <key id="__1137">Id</key>
+            <value id="__1138">PrmAllianceManagerId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1139">
+        <property-name id="__1140">itemsToClear</property-name>
+        <list-entries id="__1141"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1142">
+      <managed-bean-name id="__1143">CreateOpportunityAgreementData</managed-bean-name>
+      <managed-bean-class id="__1144">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__1145">request</managed-bean-scope>
+      <managed-property id="__1146">
+        <property-name id="__1147">createBinding</property-name>
+        <value id="__1148">#{bindings.CreateOpportunityAgreementData}</value>
+      </managed-property>
+      <managed-property id="__1149">
+        <property-name id="__1150">defaultValuesBean</property-name>
+        <value id="__1151">#{pageFlowScope.OpportunityAgreementDataDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__1152">
+        <property-name id="__1153">successOutcome</property-name>
+        <value id="__1154">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__1155">
+        <property-name id="__1156">failureOutcome</property-name>
+        <value id="__1157">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1158">
+      <managed-bean-name id="__1159">OpportunityAgreementDataTable</managed-bean-name>
+      <managed-bean-class id="__1160">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__1161">pageFlow</managed-bean-scope>
+      <managed-property id="__1162">
+        <property-name id="__1163">name</property-name>
+        <value id="__1164">OpportunityAgreementDataTable</value>
+      </managed-property>
+      <managed-property id="__1165">
+        <property-name id="__1166">rangeBindingExpr</property-name>
+        <value id="__1167">#{'#{bindings.OpportunityAgreementDataTable}'}</value>
+      </managed-property>
+      <managed-property id="__1168">
+        <property-name id="__1169">createNewRowAtTop</property-name>
+        <value id="__1170">true</value>
+      </managed-property>
+      <managed-property id="__1171">
+        <property-name id="__1172">defaultValuesBean</property-name>
+        <value id="__1173">#{pageFlowScope.OpportunityAgreementDataDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__1174">
+        <property-name id="__1175">focusItemId</property-name>
+        <value id="__1176">s25TN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1177">
+      <managed-bean-name id="__1178">s25TemplateNameDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__1179">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__1180">application</managed-bean-scope>
+      <managed-property id="__1181">
+        <property-name id="__1182">itemsToClear</property-name>
+        <list-entries id="__1183">
+          <value id="__1184">s25TI</value>
+          <value id="__1185">s25Fo</value>
+          <value id="__1186">s25St</value>
+          <value id="__1187">s25Ty</value>
+          <value id="__1188">s25Div</value>
+          <value id="__1189">s25TL</value>
+          <value id="__1190">s25CNT</value>
+          <value id="__1191">s25ART</value>
+          <value id="__1192">s25RtR</value>
+          <value id="__1193">s25Exc</value>
+          <value id="__1194">s25CMO</value>
+          <value id="__1195">s25AutoAdd</value>
+          <value id="__1196">s25Assign</value>
+          <value id="__1197">s25RoyalBear</value>
+          <value id="__1198">s25FairTreat</value>
+          <value id="__1199">s25IssueCove</value>
+          <value id="__1200">s25CompSet</value>
+          <value id="__1201">s25WarrIndem</value>
+          <value id="__1202">s25Govern</value>
+          <value id="__1203">s25ExD</value>
+          <value id="__1204">s25AR</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__1205">
+        <property-name id="__1206">componentsToRefresh</property-name>
+        <list-entries id="__1207">
+          <value id="__1208">s25TI</value>
+          <value id="__1209">s25Fo</value>
+          <value id="__1210">s25St</value>
+          <value id="__1211">s25Ty</value>
+          <value id="__1212">s25Div</value>
+          <value id="__1213">s25TL</value>
+          <value id="__1214">s25CNT</value>
+          <value id="__1215">s25ART</value>
+          <value id="__1216">s25RtR</value>
+          <value id="__1217">s25Exc</value>
+          <value id="__1218">s25CMO</value>
+          <value id="__1219">s25AutoAdd</value>
+          <value id="__1220">s25Assign</value>
+          <value id="__1221">s25RoyalBear</value>
+          <value id="__1222">s25FairTreat</value>
+          <value id="__1223">s25IssueCove</value>
+          <value id="__1224">s25CompSet</value>
+          <value id="__1225">s25WarrIndem</value>
+          <value id="__1226">s25Govern</value>
+          <value id="__1227">s25ExD</value>
+          <value id="__1228">s25AR</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1229">
+      <managed-bean-name id="__1230">s25EffectiveDateDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__1231">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__1232">application</managed-bean-scope>
+      <managed-property id="__1233">
+        <property-name id="__1234">itemsToClear</property-name>
+        <list-entries id="__1235">
+          <value id="__1236">s25ExD</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__1237">
+        <property-name id="__1238">componentsToRefresh</property-name>
+        <list-entries id="__1239">
+          <value id="__1240">s25ExD</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1241">
+      <managed-bean-name id="__1242">s25TermLengthDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__1243">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__1244">application</managed-bean-scope>
+      <managed-property id="__1245">
+        <property-name id="__1246">itemsToClear</property-name>
+        <list-entries id="__1247">
+          <value id="__1248">s25ExD</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__1249">
+        <property-name id="__1250">componentsToRefresh</property-name>
+        <list-entries id="__1251">
+          <value id="__1252">s25ExD</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1253">
+      <managed-bean-name id="__1254">s25AutoRenewalcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__1255">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__1256">request</managed-bean-scope>
+      <managed-property id="__1257">
+        <property-name id="__1258">binding</property-name>
+        <value id="__1259">#{bindings.s25AutoRenewal}</value>
+      </managed-property>
+      <managed-property id="__1260">
+        <property-name id="__1261">tableBean</property-name>
+        <value id="__1262">#{pageFlowScope.OpportunityAgreementDataTable}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1263">
+      <managed-bean-name id="__1264">s25AutoRenewTermMonthsDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__1265">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__1266">application</managed-bean-scope>
+      <managed-property id="__1267">
+        <property-name id="__1268">itemsToClear</property-name>
+        <list-entries id="__1269">
+          <value id="__1270">s25AR</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__1271">
+        <property-name id="__1272">componentsToRefresh</property-name>
+        <list-entries id="__1273">
+          <value id="__1274">s25AR</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1275">
+      <managed-bean-name id="__1276">s25AgreementNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__1277">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1278">pageFlow</managed-bean-scope>
+      <managed-property id="__1279">
+        <property-name id="__1280">iterBindingExpr</property-name>
+        <value id="__1281">#{'#{bindings.OpportunityAgreementDataIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1282">
+        <property-name id="__1283">lovFieldBindingExpr</property-name>
+        <value id="__1284">#{'#{row.bindings.AgreementName}'}</value>
+      </managed-property>
+      <managed-property id="__1285">
+        <property-name id="__1286">copyToModel</property-name>
+        <value id="__1287">true</value>
+      </managed-property>
+      <managed-property id="__1288">
+        <property-name id="__1289">tableBean</property-name>
+        <value id="__1290">#{pageFlowScope.OpportunityAgreementDataTable}</value>
+      </managed-property>
+      <managed-property id="__1291">
+        <property-name id="__1292">lovSearchItem</property-name>
+        <value id="__1293">AgreementContactLookupContactName</value>
+      </managed-property>
+      <managed-property id="__1294">
+        <property-name id="__1295">lovTitleExpr</property-name>
+        <value id="__1296">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAgreementDataTable.hints.AgreementName.label}"}</value>
+      </managed-property>
+      <managed-property id="__1297">
+        <property-name id="__1298">lovWidth</property-name>
+        <value id="__1299">1000</value>
+      </managed-property>
+      <managed-property id="__1300">
+        <property-name id="__1301">lovHeight</property-name>
+        <value id="__1302">500</value>
+      </managed-property>
+      <managed-property id="__1303">
+        <property-name id="__1304">lovTaskFlowIdString</property-name>
+        <value id="__1305">/WEB-INF/adfc-config-AgreementContactLookup.xml#AgreementContactLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1306">
+        <property-name id="__1307">lovParams</property-name>
+        <map-entries id="__1308">
+          <map-entry id="__1309">
+            <key id="__1310">CurrentContentOwner</key>
+            <value id="__1311">#{'#{bindings.s25ContentOwnerId.inputValue}'}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1312">
+        <property-name id="__1313">returnItemValues</property-name>
+        <map-entries id="__1314">
+          <map-entry id="__1315">
+            <key id="__1316">ContactName</key>
+            <value id="__1317">s25AgreementName</value>
+          </map-entry>
+          <map-entry id="__1318">
+            <key id="__1319">Id</key>
+            <value id="__1320">s25AgreementContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1321">
+        <property-name id="__1322">returnAttributeValues</property-name>
+        <map-entries id="__1323">
+          <map-entry id="__1324">
+            <key id="__1325">ContactName</key>
+            <value id="__1326">AgreementName</value>
+          </map-entry>
+          <map-entry id="__1327">
+            <key id="__1328">Id</key>
+            <value id="__1329">AgreementContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1330">
+        <property-name id="__1331">itemsToClear</property-name>
+        <list-entries id="__1332"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1333">
+      <managed-bean-name id="__1334">s25QaNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__1335">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1336">pageFlow</managed-bean-scope>
+      <managed-property id="__1337">
+        <property-name id="__1338">iterBindingExpr</property-name>
+        <value id="__1339">#{'#{bindings.OpportunityAgreementDataIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1340">
+        <property-name id="__1341">lovFieldBindingExpr</property-name>
+        <value id="__1342">#{'#{row.bindings.QaName}'}</value>
+      </managed-property>
+      <managed-property id="__1343">
+        <property-name id="__1344">copyToModel</property-name>
+        <value id="__1345">true</value>
+      </managed-property>
+      <managed-property id="__1346">
+        <property-name id="__1347">tableBean</property-name>
+        <value id="__1348">#{pageFlowScope.OpportunityAgreementDataTable}</value>
+      </managed-property>
+      <managed-property id="__1349">
+        <property-name id="__1350">lovSearchItem</property-name>
+        <value id="__1351">QAContactLookupContactName</value>
+      </managed-property>
+      <managed-property id="__1352">
+        <property-name id="__1353">lovTitleExpr</property-name>
+        <value id="__1354">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAgreementDataTable.hints.QaName.label}"}</value>
+      </managed-property>
+      <managed-property id="__1355">
+        <property-name id="__1356">lovWidth</property-name>
+        <value id="__1357">1000</value>
+      </managed-property>
+      <managed-property id="__1358">
+        <property-name id="__1359">lovHeight</property-name>
+        <value id="__1360">500</value>
+      </managed-property>
+      <managed-property id="__1361">
+        <property-name id="__1362">lovTaskFlowIdString</property-name>
+        <value id="__1363">/WEB-INF/adfc-config-QAContactLookup.xml#QAContactLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1364">
+        <property-name id="__1365">lovParams</property-name>
+        <map-entries id="__1366">
+          <map-entry id="__1367">
+            <key id="__1368">CurrentContentOwner</key>
+            <value id="__1369">#{'#{bindings.s25ContentOwnerId.inputValue}'}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1370">
+        <property-name id="__1371">returnItemValues</property-name>
+        <map-entries id="__1372">
+          <map-entry id="__1373">
+            <key id="__1374">ContactName</key>
+            <value id="__1375">s25QaName</value>
+          </map-entry>
+          <map-entry id="__1376">
+            <key id="__1377">Id</key>
+            <value id="__1378">s25QaContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1379">
+        <property-name id="__1380">returnAttributeValues</property-name>
+        <map-entries id="__1381">
+          <map-entry id="__1382">
+            <key id="__1383">ContactName</key>
+            <value id="__1384">QaName</value>
+          </map-entry>
+          <map-entry id="__1385">
+            <key id="__1386">Id</key>
+            <value id="__1387">QaContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1388">
+        <property-name id="__1389">itemsToClear</property-name>
+        <list-entries id="__1390"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1391">
+      <managed-bean-name id="__1392">s25RoyaltyNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__1393">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1394">pageFlow</managed-bean-scope>
+      <managed-property id="__1395">
+        <property-name id="__1396">iterBindingExpr</property-name>
+        <value id="__1397">#{'#{bindings.OpportunityAgreementDataIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1398">
+        <property-name id="__1399">lovFieldBindingExpr</property-name>
+        <value id="__1400">#{'#{row.bindings.RoyaltyName}'}</value>
+      </managed-property>
+      <managed-property id="__1401">
+        <property-name id="__1402">copyToModel</property-name>
+        <value id="__1403">true</value>
+      </managed-property>
+      <managed-property id="__1404">
+        <property-name id="__1405">tableBean</property-name>
+        <value id="__1406">#{pageFlowScope.OpportunityAgreementDataTable}</value>
+      </managed-property>
+      <managed-property id="__1407">
+        <property-name id="__1408">lovSearchItem</property-name>
+        <value id="__1409">RoyaltyContactLookupContactName</value>
+      </managed-property>
+      <managed-property id="__1410">
+        <property-name id="__1411">lovTitleExpr</property-name>
+        <value id="__1412">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAgreementDataTable.hints.RoyaltyName.label}"}</value>
+      </managed-property>
+      <managed-property id="__1413">
+        <property-name id="__1414">lovWidth</property-name>
+        <value id="__1415">1000</value>
+      </managed-property>
+      <managed-property id="__1416">
+        <property-name id="__1417">lovHeight</property-name>
+        <value id="__1418">500</value>
+      </managed-property>
+      <managed-property id="__1419">
+        <property-name id="__1420">lovTaskFlowIdString</property-name>
+        <value id="__1421">/WEB-INF/adfc-config-RoyaltyContactLookup.xml#RoyaltyContactLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1422">
+        <property-name id="__1423">lovParams</property-name>
+        <map-entries id="__1424">
+          <map-entry id="__1425">
+            <key id="__1426">CurrentContentOwner</key>
+            <value id="__1427">#{'#{bindings.s25ContentOwnerId.inputValue}'}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1428">
+        <property-name id="__1429">returnItemValues</property-name>
+        <map-entries id="__1430">
+          <map-entry id="__1431">
+            <key id="__1432">ContactName</key>
+            <value id="__1433">s25RoyaltyName</value>
+          </map-entry>
+          <map-entry id="__1434">
+            <key id="__1435">Id</key>
+            <value id="__1436">s25RoyaltyContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1437">
+        <property-name id="__1438">returnAttributeValues</property-name>
+        <map-entries id="__1439">
+          <map-entry id="__1440">
+            <key id="__1441">ContactName</key>
+            <value id="__1442">RoyaltyName</value>
+          </map-entry>
+          <map-entry id="__1443">
+            <key id="__1444">Id</key>
+            <value id="__1445">RoyaltyContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1446">
+        <property-name id="__1447">itemsToClear</property-name>
+        <list-entries id="__1448"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1449">
+      <managed-bean-name id="__1450">s25TechnicalNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__1451">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1452">pageFlow</managed-bean-scope>
+      <managed-property id="__1453">
+        <property-name id="__1454">iterBindingExpr</property-name>
+        <value id="__1455">#{'#{bindings.OpportunityAgreementDataIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1456">
+        <property-name id="__1457">lovFieldBindingExpr</property-name>
+        <value id="__1458">#{'#{row.bindings.TechnicalName}'}</value>
+      </managed-property>
+      <managed-property id="__1459">
+        <property-name id="__1460">copyToModel</property-name>
+        <value id="__1461">true</value>
+      </managed-property>
+      <managed-property id="__1462">
+        <property-name id="__1463">tableBean</property-name>
+        <value id="__1464">#{pageFlowScope.OpportunityAgreementDataTable}</value>
+      </managed-property>
+      <managed-property id="__1465">
+        <property-name id="__1466">lovSearchItem</property-name>
+        <value id="__1467">TechnicalContactLookupContactName</value>
+      </managed-property>
+      <managed-property id="__1468">
+        <property-name id="__1469">lovTitleExpr</property-name>
+        <value id="__1470">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAgreementDataTable.hints.TechnicalName.label}"}</value>
+      </managed-property>
+      <managed-property id="__1471">
+        <property-name id="__1472">lovWidth</property-name>
+        <value id="__1473">1000</value>
+      </managed-property>
+      <managed-property id="__1474">
+        <property-name id="__1475">lovHeight</property-name>
+        <value id="__1476">500</value>
+      </managed-property>
+      <managed-property id="__1477">
+        <property-name id="__1478">lovTaskFlowIdString</property-name>
+        <value id="__1479">/WEB-INF/adfc-config-TechnicalContactLookup.xml#TechnicalContactLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1480">
+        <property-name id="__1481">lovParams</property-name>
+        <map-entries id="__1482">
+          <map-entry id="__1483">
+            <key id="__1484">CurrentContentOwner</key>
+            <value id="__1485">#{'#{bindings.s25ContentOwnerId.inputValue}'}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1486">
+        <property-name id="__1487">returnItemValues</property-name>
+        <map-entries id="__1488">
+          <map-entry id="__1489">
+            <key id="__1490">ContactName</key>
+            <value id="__1491">s25TechnicalName</value>
+          </map-entry>
+          <map-entry id="__1492">
+            <key id="__1493">Id</key>
+            <value id="__1494">s25TechnicalContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1495">
+        <property-name id="__1496">returnAttributeValues</property-name>
+        <map-entries id="__1497">
+          <map-entry id="__1498">
+            <key id="__1499">ContactName</key>
+            <value id="__1500">TechnicalName</value>
+          </map-entry>
+          <map-entry id="__1501">
+            <key id="__1502">Id</key>
+            <value id="__1503">TechnicalContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1504">
+        <property-name id="__1505">itemsToClear</property-name>
+        <list-entries id="__1506"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1507">
+      <managed-bean-name id="__1508">OpportunityTargetAssignmentTable</managed-bean-name>
+      <managed-bean-class id="__1509">com.pq.tracs.view.beans.OpportunityTargetsTableBean</managed-bean-class>
+      <managed-bean-scope id="__1510">pageFlow</managed-bean-scope>
+      <managed-property id="__1511">
+        <property-name id="__1512">name</property-name>
+        <value id="__1513">OpportunityTargetAssignmentTable</value>
+      </managed-property>
+      <managed-property id="__1514">
+        <property-name id="__1515">rangeBindingExpr</property-name>
+        <value id="__1516">#{'#{bindings.OpportunityTargetAssignmentTable}'}</value>
+      </managed-property>
+      <managed-property id="__1517">
+        <property-name id="__1518">createNewRowAtTop</property-name>
+        <value id="__1519">true</value>
+      </managed-property>
+      <managed-property id="__1520">
+        <property-name id="__1521">defaultValuesBean</property-name>
+        <value id="__1522">#{pageFlowScope.OpportunityTargetAssignmentDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__1523">
+        <property-name id="__1524">focusItemId</property-name>
+        <value id="__1525">s26TTN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1526">
+      <managed-bean-name id="__1527">DeleteOpportunityTargetAssignment</managed-bean-name>
+      <managed-bean-class id="__1528">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__1529">request</managed-bean-scope>
+      <managed-property id="__1530">
+        <property-name id="__1531">deleteBinding</property-name>
+        <value id="__1532">#{bindings.DeleteOpportunityTargetAssignment}</value>
+      </managed-property>
+      <managed-property id="__1533">
+        <property-name id="__1534">commitBean</property-name>
+        <value id="__1535">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1536">
+      <managed-bean-name id="__1537">CreateOpportunityTargetAssignment</managed-bean-name>
+      <managed-bean-class id="__1538">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__1539">request</managed-bean-scope>
+      <managed-property id="__1540">
+        <property-name id="__1541">createBinding</property-name>
+        <value id="__1542">#{bindings.CreateOpportunityTargetAssignment}</value>
+      </managed-property>
+      <managed-property id="__1543">
+        <property-name id="__1544">defaultValuesBean</property-name>
+        <value id="__1545">#{pageFlowScope.OpportunityTargetAssignmentDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__1546">
+        <property-name id="__1547">successOutcome</property-name>
+        <value id="__1548">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__1549">
+        <property-name id="__1550">failureOutcome</property-name>
+        <value id="__1551">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1552">
+      <managed-bean-name id="__1553">s26TargetTrackingNoLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__1554">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1555">pageFlow</managed-bean-scope>
+      <managed-property id="__1556">
+        <property-name id="__1557">iterBindingExpr</property-name>
+        <value id="__1558">#{'#{bindings.OpportunityTargetAssignmentIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1559">
+        <property-name id="__1560">lovFieldBindingExpr</property-name>
+        <value id="__1561">#{'#{row.bindings.TargetTrackingNo}'}</value>
+      </managed-property>
+      <managed-property id="__1562">
+        <property-name id="__1563">copyToModel</property-name>
+        <value id="__1564">true</value>
+      </managed-property>
+      <managed-property id="__1565">
+        <property-name id="__1566">tableBean</property-name>
+        <value id="__1567">#{pageFlowScope.OpportunityTargetAssignmentTable}</value>
+      </managed-property>
+      <managed-property id="__1568">
+        <property-name id="__1569">lovSearchItem</property-name>
+        <value id="__1570">TargetedProductTitleLookupTargetTrackingNo</value>
+      </managed-property>
+      <managed-property id="__1571">
+        <property-name id="__1572">lovTitleExpr</property-name>
+        <value id="__1573">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityTargetAssignmentTable.hints.TargetTrackingNo.label}"}</value>
+      </managed-property>
+      <managed-property id="__1574">
+        <property-name id="__1575">lovWidth</property-name>
+        <value id="__1576">1000</value>
+      </managed-property>
+      <managed-property id="__1577">
+        <property-name id="__1578">lovHeight</property-name>
+        <value id="__1579">500</value>
+      </managed-property>
+      <managed-property id="__1580">
+        <property-name id="__1581">lovTaskFlowIdString</property-name>
+        <value id="__1582">/WEB-INF/adfc-config-TargetedProductTitleLookup.xml#TargetedProductTitleLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1583">
+        <property-name id="__1584">lovParams</property-name>
+        <map-entries id="__1585"></map-entries>
+      </managed-property>
+      <managed-property id="__1586">
+        <property-name id="__1587">returnItemValues</property-name>
+        <map-entries id="__1588">
+          <map-entry id="__1589">
+            <key id="__1590">TargetTrackingNo</key>
+            <value id="__1591">s26TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__1592">
+            <key id="__1593">CatalogNumber</key>
+            <value id="__1594">s26CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__1595">
+            <key id="__1596">LongTitle</key>
+            <value id="__1597">s26LongTitle</value>
+          </map-entry>
+          <map-entry id="__1598">
+            <key id="__1599">Id</key>
+            <value id="__1600">s26PrmTargetedProductTitleId</value>
+          </map-entry>
+          <map-entry id="__1601">
+            <key id="__1602">PrdId</key>
+            <value id="__1603">s26PrdId</value>
+          </map-entry>
+          <map-entry id="__1604">
+            <key id="__1605">ProductName</key>
+            <value id="__1606">s26ProductName</value>
+          </map-entry>
+          <map-entry id="__1607">
+            <key id="__1608">TargetGroup</key>
+            <value id="__1609">s26GroupName</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1610">
+        <property-name id="__1611">returnAttributeValues</property-name>
+        <map-entries id="__1612">
+          <map-entry id="__1613">
+            <key id="__1614">TargetTrackingNo</key>
+            <value id="__1615">TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__1616">
+            <key id="__1617">CatalogNumber</key>
+            <value id="__1618">CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__1619">
+            <key id="__1620">LongTitle</key>
+            <value id="__1621">LongTitle</value>
+          </map-entry>
+          <map-entry id="__1622">
+            <key id="__1623">Id</key>
+            <value id="__1624">PrmTargetedProductTitleId</value>
+          </map-entry>
+          <map-entry id="__1625">
+            <key id="__1626">PrdId</key>
+            <value id="__1627">PrdId</value>
+          </map-entry>
+          <map-entry id="__1628">
+            <key id="__1629">ProductName</key>
+            <value id="__1630">ProductName</value>
+          </map-entry>
+          <map-entry id="__1631">
+            <key id="__1632">TargetGroup</key>
+            <value id="__1633">GroupName</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1634">
+        <property-name id="__1635">itemsToClear</property-name>
+        <list-entries id="__1636"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1637">
+      <managed-bean-name id="__1638">SaveOpportunityAttachments</managed-bean-name>
+      <managed-bean-class id="__1639">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__1640">request</managed-bean-scope>
+      <managed-property id="__1641">
+        <property-name id="__1642">commitBinding</property-name>
+        <value id="__1643">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__1644">
+        <property-name id="__1645">successOutcome</property-name>
+        <value id="__1646">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1647">
+      <managed-bean-name id="__1648">s22AttachmentFileHandlerBean</managed-bean-name>
+      <managed-bean-class id="__1649">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__1650">request</managed-bean-scope>
+      <managed-property id="__1651">
+        <property-name id="__1652">valueBinding</property-name>
+        <value id="__1653">#{bindings.s22Attachment}</value>
+      </managed-property>
+      <managed-property id="__1654">
+        <property-name id="__1655">fileNameWhenEmpty</property-name>
+        <value id="__1656">#{'#{bindings.s22Attachment.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1657">
+      <managed-bean-name id="__1658">s22AttachmentDLFileHandlerBean</managed-bean-name>
+      <managed-bean-class id="__1659">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__1660">request</managed-bean-scope>
+      <managed-property id="__1661">
+        <property-name id="__1662">valueBinding</property-name>
+        <value id="__1663">#{bindings.s22AttachmentDL}</value>
+      </managed-property>
+      <managed-property id="__1664">
+        <property-name id="__1665">fileNameWhenEmpty</property-name>
+        <value id="__1666">#{'#{bindings.s22AttachmentDL.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1667">
+      <managed-bean-name id="__1668">DeleteOpportunityAgreementData</managed-bean-name>
+      <managed-bean-class id="__1669">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__1670">request</managed-bean-scope>
+      <managed-property id="__1671">
+        <property-name id="__1672">deleteBinding</property-name>
+        <value id="__1673">#{bindings.DeleteOpportunityAgreementData}</value>
+      </managed-property>
+      <managed-property id="__1674">
+        <property-name id="__1675">commitBean</property-name>
+        <value id="__1676">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1677">
+      <managed-bean-name id="__1678">SaveOpportunityAgreementData</managed-bean-name>
+      <managed-bean-class id="__1679">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__1680">request</managed-bean-scope>
+      <managed-property id="__1681">
+        <property-name id="__1682">commitBinding</property-name>
+        <value id="__1683">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__1684">
+        <property-name id="__1685">successOutcome</property-name>
+        <value id="__1686">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1687">
+      <managed-bean-name id="__1688">s25AgreementNameLovItem</managed-bean-name>
+      <managed-bean-class id="__1689">oracle.jheadstart.controller.jsf.bean.LovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1690">pageFlow</managed-bean-scope>
+      <managed-property id="__1691">
+        <property-name id="__1692">iterBindingExpr</property-name>
+        <value id="__1693">#{'#{bindings.OpportunityAgreementDataIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1694">
+        <property-name id="__1695">lovFieldBindingExpr</property-name>
+        <value id="__1696">#{'#{bindings.s25AgreementName}'}</value>
+      </managed-property>
+      <managed-property id="__1697">
+        <property-name id="__1698">copyToModel</property-name>
+        <value id="__1699">true</value>
+      </managed-property>
+      <managed-property id="__1700">
+        <property-name id="__1701">lovSearchItem</property-name>
+        <value id="__1702">AgreementContactLookupContactName</value>
+      </managed-property>
+      <managed-property id="__1703">
+        <property-name id="__1704">lovTitleExpr</property-name>
+        <value id="__1705">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAgreementDataTable.hints.AgreementName.label}"}</value>
+      </managed-property>
+      <managed-property id="__1706">
+        <property-name id="__1707">lovWidth</property-name>
+        <value id="__1708">1000</value>
+      </managed-property>
+      <managed-property id="__1709">
+        <property-name id="__1710">lovHeight</property-name>
+        <value id="__1711">500</value>
+      </managed-property>
+      <managed-property id="__1712">
+        <property-name id="__1713">lovTaskFlowIdString</property-name>
+        <value id="__1714">/WEB-INF/adfc-config-AgreementContactLookup.xml#AgreementContactLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1715">
+        <property-name id="__1716">lovParams</property-name>
+        <map-entries id="__1717">
+          <map-entry id="__1718">
+            <key id="__1719">CurrentContentOwner</key>
+            <value id="__1720">#{'#{bindings.s25ContentOwnerId.inputValue}'}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1721">
+        <property-name id="__1722">returnItemValues</property-name>
+        <map-entries id="__1723">
+          <map-entry id="__1724">
+            <key id="__1725">ContactName</key>
+            <value id="__1726">s25AgreementName</value>
+          </map-entry>
+          <map-entry id="__1727">
+            <key id="__1728">Id</key>
+            <value id="__1729">s25AgreementContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1730">
+        <property-name id="__1731">returnAttributeValues</property-name>
+        <map-entries id="__1732">
+          <map-entry id="__1733">
+            <key id="__1734">ContactName</key>
+            <value id="__1735">AgreementName</value>
+          </map-entry>
+          <map-entry id="__1736">
+            <key id="__1737">Id</key>
+            <value id="__1738">AgreementContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1739">
+        <property-name id="__1740">itemsToClear</property-name>
+        <list-entries id="__1741"></list-entries>
+      </managed-property>
+      <managed-property id="__1742">
+        <property-name id="__1743">componentsToRefresh</property-name>
+        <list-entries id="__1744"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1745">
+      <managed-bean-name id="__1746">s25QaNameLovItem</managed-bean-name>
+      <managed-bean-class id="__1747">oracle.jheadstart.controller.jsf.bean.LovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1748">pageFlow</managed-bean-scope>
+      <managed-property id="__1749">
+        <property-name id="__1750">iterBindingExpr</property-name>
+        <value id="__1751">#{'#{bindings.OpportunityAgreementDataIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1752">
+        <property-name id="__1753">lovFieldBindingExpr</property-name>
+        <value id="__1754">#{'#{bindings.s25QaName}'}</value>
+      </managed-property>
+      <managed-property id="__1755">
+        <property-name id="__1756">copyToModel</property-name>
+        <value id="__1757">true</value>
+      </managed-property>
+      <managed-property id="__1758">
+        <property-name id="__1759">lovSearchItem</property-name>
+        <value id="__1760">QAContactLookupContactName</value>
+      </managed-property>
+      <managed-property id="__1761">
+        <property-name id="__1762">lovTitleExpr</property-name>
+        <value id="__1763">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAgreementDataTable.hints.QaName.label}"}</value>
+      </managed-property>
+      <managed-property id="__1764">
+        <property-name id="__1765">lovWidth</property-name>
+        <value id="__1766">1000</value>
+      </managed-property>
+      <managed-property id="__1767">
+        <property-name id="__1768">lovHeight</property-name>
+        <value id="__1769">500</value>
+      </managed-property>
+      <managed-property id="__1770">
+        <property-name id="__1771">lovTaskFlowIdString</property-name>
+        <value id="__1772">/WEB-INF/adfc-config-QAContactLookup.xml#QAContactLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1773">
+        <property-name id="__1774">lovParams</property-name>
+        <map-entries id="__1775">
+          <map-entry id="__1776">
+            <key id="__1777">CurrentContentOwner</key>
+            <value id="__1778">#{'#{bindings.s25ContentOwnerId.inputValue}'}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1779">
+        <property-name id="__1780">returnItemValues</property-name>
+        <map-entries id="__1781">
+          <map-entry id="__1782">
+            <key id="__1783">ContactName</key>
+            <value id="__1784">s25QaName</value>
+          </map-entry>
+          <map-entry id="__1785">
+            <key id="__1786">Id</key>
+            <value id="__1787">s25QaContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1788">
+        <property-name id="__1789">returnAttributeValues</property-name>
+        <map-entries id="__1790">
+          <map-entry id="__1791">
+            <key id="__1792">ContactName</key>
+            <value id="__1793">QaName</value>
+          </map-entry>
+          <map-entry id="__1794">
+            <key id="__1795">Id</key>
+            <value id="__1796">QaContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1797">
+        <property-name id="__1798">itemsToClear</property-name>
+        <list-entries id="__1799"></list-entries>
+      </managed-property>
+      <managed-property id="__1800">
+        <property-name id="__1801">componentsToRefresh</property-name>
+        <list-entries id="__1802"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1803">
+      <managed-bean-name id="__1804">s25RoyaltyNameLovItem</managed-bean-name>
+      <managed-bean-class id="__1805">oracle.jheadstart.controller.jsf.bean.LovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1806">pageFlow</managed-bean-scope>
+      <managed-property id="__1807">
+        <property-name id="__1808">iterBindingExpr</property-name>
+        <value id="__1809">#{'#{bindings.OpportunityAgreementDataIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1810">
+        <property-name id="__1811">lovFieldBindingExpr</property-name>
+        <value id="__1812">#{'#{bindings.s25RoyaltyName}'}</value>
+      </managed-property>
+      <managed-property id="__1813">
+        <property-name id="__1814">copyToModel</property-name>
+        <value id="__1815">true</value>
+      </managed-property>
+      <managed-property id="__1816">
+        <property-name id="__1817">lovSearchItem</property-name>
+        <value id="__1818">RoyaltyContactLookupContactName</value>
+      </managed-property>
+      <managed-property id="__1819">
+        <property-name id="__1820">lovTitleExpr</property-name>
+        <value id="__1821">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAgreementDataTable.hints.RoyaltyName.label}"}</value>
+      </managed-property>
+      <managed-property id="__1822">
+        <property-name id="__1823">lovWidth</property-name>
+        <value id="__1824">1000</value>
+      </managed-property>
+      <managed-property id="__1825">
+        <property-name id="__1826">lovHeight</property-name>
+        <value id="__1827">500</value>
+      </managed-property>
+      <managed-property id="__1828">
+        <property-name id="__1829">lovTaskFlowIdString</property-name>
+        <value id="__1830">/WEB-INF/adfc-config-RoyaltyContactLookup.xml#RoyaltyContactLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1831">
+        <property-name id="__1832">lovParams</property-name>
+        <map-entries id="__1833">
+          <map-entry id="__1834">
+            <key id="__1835">CurrentContentOwner</key>
+            <value id="__1836">#{'#{bindings.s25ContentOwnerId.inputValue}'}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1837">
+        <property-name id="__1838">returnItemValues</property-name>
+        <map-entries id="__1839">
+          <map-entry id="__1840">
+            <key id="__1841">ContactName</key>
+            <value id="__1842">s25RoyaltyName</value>
+          </map-entry>
+          <map-entry id="__1843">
+            <key id="__1844">Id</key>
+            <value id="__1845">s25RoyaltyContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1846">
+        <property-name id="__1847">returnAttributeValues</property-name>
+        <map-entries id="__1848">
+          <map-entry id="__1849">
+            <key id="__1850">ContactName</key>
+            <value id="__1851">RoyaltyName</value>
+          </map-entry>
+          <map-entry id="__1852">
+            <key id="__1853">Id</key>
+            <value id="__1854">RoyaltyContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1855">
+        <property-name id="__1856">itemsToClear</property-name>
+        <list-entries id="__1857"></list-entries>
+      </managed-property>
+      <managed-property id="__1858">
+        <property-name id="__1859">componentsToRefresh</property-name>
+        <list-entries id="__1860"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1861">
+      <managed-bean-name id="__1862">s25TechnicalNameLovItem</managed-bean-name>
+      <managed-bean-class id="__1863">oracle.jheadstart.controller.jsf.bean.LovItemBean</managed-bean-class>
+      <managed-bean-scope id="__1864">pageFlow</managed-bean-scope>
+      <managed-property id="__1865">
+        <property-name id="__1866">iterBindingExpr</property-name>
+        <value id="__1867">#{'#{bindings.OpportunityAgreementDataIterator}'}</value>
+      </managed-property>
+      <managed-property id="__1868">
+        <property-name id="__1869">lovFieldBindingExpr</property-name>
+        <value id="__1870">#{'#{bindings.s25TechnicalName}'}</value>
+      </managed-property>
+      <managed-property id="__1871">
+        <property-name id="__1872">copyToModel</property-name>
+        <value id="__1873">true</value>
+      </managed-property>
+      <managed-property id="__1874">
+        <property-name id="__1875">lovSearchItem</property-name>
+        <value id="__1876">TechnicalContactLookupContactName</value>
+      </managed-property>
+      <managed-property id="__1877">
+        <property-name id="__1878">lovTitleExpr</property-name>
+        <value id="__1879">#{"#{nls['SEARCH_AND_SELECT']}
+                           #{bindings.OpportunityAgreementDataTable.hints.TechnicalName.label}"}</value>
+      </managed-property>
+      <managed-property id="__1880">
+        <property-name id="__1881">lovWidth</property-name>
+        <value id="__1882">1000</value>
+      </managed-property>
+      <managed-property id="__1883">
+        <property-name id="__1884">lovHeight</property-name>
+        <value id="__1885">500</value>
+      </managed-property>
+      <managed-property id="__1886">
+        <property-name id="__1887">lovTaskFlowIdString</property-name>
+        <value id="__1888">/WEB-INF/adfc-config-TechnicalContactLookup.xml#TechnicalContactLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__1889">
+        <property-name id="__1890">lovParams</property-name>
+        <map-entries id="__1891">
+          <map-entry id="__1892">
+            <key id="__1893">CurrentContentOwner</key>
+            <value id="__1894">#{'#{bindings.s25ContentOwnerId.inputValue}'}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1895">
+        <property-name id="__1896">returnItemValues</property-name>
+        <map-entries id="__1897">
+          <map-entry id="__1898">
+            <key id="__1899">ContactName</key>
+            <value id="__1900">s25TechnicalName</value>
+          </map-entry>
+          <map-entry id="__1901">
+            <key id="__1902">Id</key>
+            <value id="__1903">s25TechnicalContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1904">
+        <property-name id="__1905">returnAttributeValues</property-name>
+        <map-entries id="__1906">
+          <map-entry id="__1907">
+            <key id="__1908">ContactName</key>
+            <value id="__1909">TechnicalName</value>
+          </map-entry>
+          <map-entry id="__1910">
+            <key id="__1911">Id</key>
+            <value id="__1912">TechnicalContactId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__1913">
+        <property-name id="__1914">itemsToClear</property-name>
+        <list-entries id="__1915"></list-entries>
+      </managed-property>
+      <managed-property id="__1916">
+        <property-name id="__1917">componentsToRefresh</property-name>
+        <list-entries id="__1918"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1919">
+      <managed-bean-name id="__1920">CreateAgreementDataAttachments</managed-bean-name>
+      <managed-bean-class id="__1921">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__1922">request</managed-bean-scope>
+      <managed-property id="__1923">
+        <property-name id="__1924">createBinding</property-name>
+        <value id="__1925">#{bindings.CreateAgreementDataAttachments}</value>
+      </managed-property>
+      <managed-property id="__1926">
+        <property-name id="__1927">defaultValuesBean</property-name>
+        <value id="__1928">#{pageFlowScope.AgreementDataAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__1929">
+        <property-name id="__1930">successOutcome</property-name>
+        <value id="__1931">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__1932">
+        <property-name id="__1933">failureOutcome</property-name>
+        <value id="__1934">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1935">
+      <managed-bean-name id="__1936">searchAgreementDataAttachments</managed-bean-name>
+      <managed-bean-class id="__1937">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__1938">pageFlow</managed-bean-scope>
+      <managed-property id="__1939">
+        <property-name id="__1940">bindings</property-name>
+        <value id="__1941">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__1942">
+        <property-name id="__1943">searchBinding</property-name>
+        <value id="__1944">#{'#{bindings.advancedSearchAgreementDataAttachments}'}</value>
+      </managed-property>
+      <managed-property id="__1945">
+        <property-name id="__1946">searchItem</property-name>
+        <value id="__1947">s250Name</value>
+      </managed-property>
+      <managed-property id="__1948">
+        <property-name id="__1949">dataCollection</property-name>
+        <value id="__1950">PrmAgreementDataAttachmentView1</value>
+      </managed-property>
+      <managed-property id="__1951">
+        <property-name id="__1952">operators</property-name>
+        <map-entries id="__1953"></map-entries>
+      </managed-property>
+      <managed-property id="__1954">
+        <property-name id="__1955">itemAttributes</property-name>
+        <map-entries id="__1956">
+          <map-entry id="__1957">
+            <key id="__1958">s250Name</key>
+            <value id="__1959">Name</value>
+          </map-entry>
+          <map-entry id="__1960">
+            <key id="__1961">s250AttachmentType</key>
+            <value id="__1962">AttachmentType</value>
+          </map-entry>
+          <map-entry id="__1963">
+            <key id="__1964">s250Description</key>
+            <value id="__1965">Description</value>
+          </map-entry>
+          <map-entry id="__1966">
+            <key id="__1967">s250FileSize</key>
+            <value id="__1968">FileSize</value>
+          </map-entry>
+          <map-entry id="__1969">
+            <key id="__1970">s250CreatedBy</key>
+            <value id="__1971">CreatedBy</value>
+          </map-entry>
+          <map-entry id="__1972">
+            <key id="__1973">s250CreatedDate</key>
+            <value id="__1974">CreatedDate</value>
+          </map-entry>
+          <map-entry id="__1975">
+            <key id="__1976">s250LastUpdatedBy</key>
+            <value id="__1977">LastUpdatedBy</value>
+          </map-entry>
+          <map-entry id="__1978">
+            <key id="__1979">s250LastUpdatedDate</key>
+            <value id="__1980">LastUpdatedDate</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__1981">
+      <managed-bean-name id="__1982">AgreementDataAttachmentsTable</managed-bean-name>
+      <managed-bean-class id="__1983">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__1984">pageFlow</managed-bean-scope>
+      <managed-property id="__1985">
+        <property-name id="__1986">name</property-name>
+        <value id="__1987">AgreementDataAttachmentsTable</value>
+      </managed-property>
+      <managed-property id="__1988">
+        <property-name id="__1989">rangeBindingExpr</property-name>
+        <value id="__1990">#{'#{bindings.AgreementDataAttachmentsTable}'}</value>
+      </managed-property>
+      <managed-property id="__1991">
+        <property-name id="__1992">createNewRowAtTop</property-name>
+        <value id="__1993">true</value>
+      </managed-property>
+      <managed-property id="__1994">
+        <property-name id="__1995">defaultValuesBean</property-name>
+        <value id="__1996">#{pageFlowScope.AgreementDataAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__1997">
+        <property-name id="__1998">focusItemId</property-name>
+        <value id="__1999">s250Nm</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__2000">
+      <managed-bean-name id="__2001">DeleteAgreementDataAttachments</managed-bean-name>
+      <managed-bean-class id="__2002">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__2003">request</managed-bean-scope>
+      <managed-property id="__2004">
+        <property-name id="__2005">deleteBinding</property-name>
+        <value id="__2006">#{bindings.DeleteAgreementDataAttachments}</value>
+      </managed-property>
+      <managed-property id="__2007">
+        <property-name id="__2008">commitBean</property-name>
+        <value id="__2009">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__2010">
+      <managed-bean-name id="__2011">s250AttachmentDLFileHandlerInTable</managed-bean-name>
+      <managed-bean-class id="__2012">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__2013">request</managed-bean-scope>
+      <managed-property id="__2014">
+        <property-name id="__2015">valueBinding</property-name>
+        <value id="__2016">#{bindings.s250AttachmentDL}</value>
+      </managed-property>
+      <managed-property id="__2017">
+        <property-name id="__2018">tableBean</property-name>
+        <value id="__2019">#{pageFlowScope.AgreementDataAttachmentsTable}</value>
+      </managed-property>
+      <managed-property id="__2020">
+        <property-name id="__2021">fileNameWhenEmpty</property-name>
+        <value id="__2022">#{'#{bindings.s250AttachmentDL.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__2023">
+      <managed-bean-name id="__2024">SaveAgreementDataAttachments</managed-bean-name>
+      <managed-bean-class id="__2025">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__2026">request</managed-bean-scope>
+      <managed-property id="__2027">
+        <property-name id="__2028">commitBinding</property-name>
+        <value id="__2029">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__2030">
+        <property-name id="__2031">successOutcome</property-name>
+        <value id="__2032">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__2033">
+      <managed-bean-name id="__2034">s250AttachmentFileHandlerBean</managed-bean-name>
+      <managed-bean-class id="__2035">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__2036">request</managed-bean-scope>
+      <managed-property id="__2037">
+        <property-name id="__2038">valueBinding</property-name>
+        <value id="__2039">#{bindings.s250Attachment}</value>
+      </managed-property>
+      <managed-property id="__2040">
+        <property-name id="__2041">fileNameWhenEmpty</property-name>
+        <value id="__2042">#{'#{bindings.s250Attachment.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__2043">
+      <managed-bean-name id="__2044">s250AttachmentDLFileHandlerBean</managed-bean-name>
+      <managed-bean-class id="__2045">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__2046">request</managed-bean-scope>
+      <managed-property id="__2047">
+        <property-name id="__2048">valueBinding</property-name>
+        <value id="__2049">#{bindings.s250AttachmentDL}</value>
+      </managed-property>
+      <managed-property id="__2050">
+        <property-name id="__2051">fileNameWhenEmpty</property-name>
+        <value id="__2052">#{'#{bindings.s250AttachmentDL.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartOpportunity">
+      <case id="__2053">
+        <expression id="__2054">#{pageFlowScope.createOpportunity!=null}</expression>
+        <outcome id="__2055">createOpportunity</outcome>
+      </case>
+      <case id="__2056">
+        <expression id="__2057">#{pageFlowScope.rowKeyStrOpportunity!=null or
+                                pageFlowScope.rowKeyValueOpportunity!=null or
+                                pageFlowScope.rowKeyOpportunity!=null}</expression>
+        <outcome id="__2058">SetCurrentRowOpportunity</outcome>
+      </case>
+      <case id="__2059">
+        <expression id="__2060">#{pageFlowScope.isDeepLink!=null and
+                                pageFlowScope.isDeepLink}</expression>
+        <outcome id="__2061">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__2062">firstPage</default-outcome>
+    </router>
+    <method-call id="CreateOpportunity">
+      <method id="__2063">#{CreateOpportunity.execute}</method>
+      <!-- execute condition param -->
+      <parameter>
+        <class id="__2064">java.lang.Object</class>
+        <value id="__2065">#{pageFlowScope.createOpportunity}</value>
+      </parameter>
+      <outcome id="__2066">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowOpportunity">
+      <method id="__2067">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__2068">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__2069">#{bindings.OpportunityIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__2070">java.lang.String</class>
+        <value id="__2071">#{pageFlowScope.rowKeyStrOpportunity}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__2072">java.lang.Object</class>
+        <value id="__2073">#{pageFlowScope.rowKeyValueOpportunity}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__2074">oracle.jbo.Key</class>
+        <value id="__2075">#{pageFlowScope.rowKeyOpportunity}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__2076">java.lang.String</class>
+        <value id="__2077">#{pageFlowScope.altKeyNameOpportunity}</value>
+      </parameter>
+      <outcome id="__2078">
+        <fixed-outcome id="__2079">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelOpportunityReturn">
+      <outcome id="__2080">
+        <name id="__2081">CancelOpportunity</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneOpportunityReturn">
+      <outcome id="__2082">
+        <name id="__2083">DoneOpportunity</name>
+      </outcome>
+    </task-flow-return>
+    <view id="OpportunityTable">
+      <page id="__2084">/pages/OpportunityTable.jsff</page>
+    </view>
+    <view id="Opportunity">
+      <page id="__2085">/pages/Opportunity.jsff</page>
+    </view>
+    <view id="OpportunityAttachments">
+      <page id="__2086">/pages/OpportunityAttachments.jsff</page>
+    </view>
+    <view id="OpportunityAgreementData">
+      <page id="__2087">/pages/OpportunityAgreementData.jsff</page>
+    </view>
+    <view id="AgreementDataAttachments">
+      <page id="__2088">/pages/AgreementDataAttachments.jsff</page>
+    </view>
+    <control-flow-rule id="__2089">
+      <from-activity-id id="__2090">*</from-activity-id>
+      <control-flow-case id="__2091">
+        <from-outcome id="__2092">SetCurrentRowOpportunity</from-outcome>
+        <to-activity-id id="__2093">SetCurrentRowOpportunity</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2094">
+        <from-outcome id="__2095">firstPage</from-outcome>
+        <to-activity-id id="__2096">OpportunityTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2097">
+        <from-outcome id="__2098">deepLinkPage</from-outcome>
+        <to-activity-id id="__2099">Opportunity</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2100">
+        <from-outcome id="__2101">OpportunityTableBreadcrumb</from-outcome>
+        <to-activity-id id="__2102">OpportunityTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2103">
+        <from-outcome id="__2104">OpportunityBreadcrumb</from-outcome>
+        <to-activity-id id="__2105">Opportunity</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2106">
+        <from-outcome id="__2107">OpportunityAttachmentsBreadcrumb</from-outcome>
+        <to-activity-id id="__2108">OpportunityAttachments</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2109">
+        <from-outcome id="__2110">OpportunityAgreementDataBreadcrumb</from-outcome>
+        <to-activity-id id="__2111">OpportunityAgreementData</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2112">
+        <from-outcome id="__2113">AgreementDataAttachmentsBreadcrumb</from-outcome>
+        <to-activity-id id="__2114">AgreementDataAttachments</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2115">
+        <from-outcome id="__2116">Cancel</from-outcome>
+        <to-activity-id id="__2117">StartOpportunity</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2118">
+        <from-outcome id="__2119">CancelOpportunityReturn</from-outcome>
+        <to-activity-id id="__2120">CancelOpportunityReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2121">
+        <from-outcome id="__2122">DoneOpportunityReturn</from-outcome>
+        <to-activity-id id="__2123">DoneOpportunityReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2124">
+      <from-activity-id id="__2125">OpportunityTable</from-activity-id>
+      <control-flow-case id="__2126">
+        <from-outcome id="__2127">CreateOpp</from-outcome>
+        <to-activity-id id="__2128">Opportunity</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2129">
+        <from-outcome id="__2130">OpportunityDetails</from-outcome>
+        <to-activity-id id="__2131">Opportunity</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2132">
+      <from-activity-id id="__2133">Opportunity</from-activity-id>
+      <control-flow-case id="__2134">
+        <from-outcome id="__2135">Creates22</from-outcome>
+        <to-activity-id id="__2136">OpportunityAttachments</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2137">
+        <from-outcome id="__2138">OpportunityAttachmentsDetails</from-outcome>
+        <to-activity-id id="__2139">OpportunityAttachments</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2140">
+        <from-outcome id="__2141">Creates25</from-outcome>
+        <to-activity-id id="__2142">OpportunityAgreementData</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2143">
+        <from-outcome id="__2144">OpportunityAgreementDataDetails</from-outcome>
+        <to-activity-id id="__2145">OpportunityAgreementData</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2146">
+      <from-activity-id id="__2147">OpportunityAgreementData</from-activity-id>
+      <control-flow-case id="__2148">
+        <from-outcome id="__2149">Creates250</from-outcome>
+        <to-activity-id id="__2150">AgreementDataAttachments</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__2151">
+        <from-outcome id="__2152">AgreementDataAttachmentsDetails</from-outcome>
+        <to-activity-id id="__2153">AgreementDataAttachments</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__2154">
+      <from-activity-id id="__2155">*</from-activity-id>
+      <control-flow-case id="__2156">
+        <from-outcome id="__2157">createOpportunity</from-outcome>
+        <to-activity-id id="__2158">CreateOpportunity</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__2159">
+    <managed-bean-name id="__2160">OpportunityTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__2161">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__2162">pageFlow</managed-bean-scope>
+    <managed-property id="__2163">
+      <property-name id="__2164">params</property-name>
+      <property-class id="__2165">java.util.Map</property-class>
+      <map-entries id="__2166">
+        <map-entry id="__2167">
+          <key id="__2168">parentContext</key>
+          <value id="__2169">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+        <map-entry id="__2170">
+          <key id="__2171">hideNewButton</key>
+          <value id="__2172">false</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__2173">
+      <property-name id="__2174">name</property-name>
+      <value id="__2175">Opportunity</value>
+    </managed-property>
+    <managed-property id="__2176">
+      <property-name id="__2177">taskFlowId</property-name>
+      <value id="__2178">/WEB-INF/adfc-config-Opportunity.xml#OpportunityTaskFlow</value>
+    </managed-property>
+    <managed-property id="__2179">
+      <property-name id="__2180">tabUniqueIdentifier</property-name>
+      <value id="__2181">Opportunity</value>
+    </managed-property>
+    <managed-property id="__2182">
+      <property-name id="__2183">label</property-name>
+      <value id="__2184">Opportunities</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

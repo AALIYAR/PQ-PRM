@@ -1,0 +1,2148 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="ConTopLc"
+                             partialTriggers=" ConDeleteDialog Confbb ConNewButton ConDelB ConSaveButton0 ConCancelButton0 ConSaveButton1 ConCancelButton1"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateContacts ? nls['INSERT_TITLE_CONTACTS'] :  (jhsUserRoles['AM,AST,PM,GCA,ADMIN'] ? nls['EDIT_TITLE_CONTACT: #{bindings.ConFirstName.inputValue}'] : nls['VIEW_TITLE_CONTACT: #{bindings.ConFirstName.inputValue}'])  }"
+                          helpTopicId="RBH_CONTACTS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="Confbb" layout="horizontal"
+                                       rendered="#{ (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null) and bindings.ContactsIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateContacts and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="ConFirst ConPrevious ConNext ConLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstContacts.execute}"
+                                             id="ConFirst" partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousContacts.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="ConPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1} / #{bindings.ContactsIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextContacts.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="ConNext" partialSubmit="true"
+                                             rendered="#{bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1 lt bindings.ContactsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1 lt bindings.ContactsIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastContacts.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="ConLast" partialSubmit="true"
+                                             rendered="#{bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1 lt bindings.ContactsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.ContactsIterator.rangeStart+bindings.ContactsIterator.currentRowIndexInRange+1 lt bindings.ContactsIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateContacts.execute}"
+                                             action="CreateCon"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_CONTACTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateContacts and (true) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             id="ConNewButton"></af:commandToolbarButton>
+                    <af:commandToolbarButton action="DeleteContacts"
+                                             partialSubmit="true"
+                                             icon="/jheadstart/images/deleteRow.png"
+                                             shortDesc="#{nls['DELETE_BUTTON_LABEL_CONTACTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateContacts and  (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null)  and (jhsUserRoles['GCA,ADMIN'])}"
+                                             immediate="true" id="ConDelB">
+                      <af:showPopupBehavior popupId="ConDeletePopup"/>
+                    </af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="ConPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveContacts.execute}"
+                                      rendered="#{((((((((((jhsUserRoles['AM,AST,PM,GCA,ADMIN']) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="ConSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="ConCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.ContactsIterator.findMode!='true'}"
+                       id="ConSw" defaultFacet="hasRows"
+                       facetName="#{( (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null)) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp" id="ConNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="ConFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="4"
+                                    id="ConFI">
+                  <af:inputText id="ConFN"
+                                value="#{bindings.ConFirstName.inputValue}"
+                                label="#{bindings.ConFirstName.hints.label}"
+                                required="#{bindings.ConFirstName.hints.mandatory}"
+                                rows="#{bindings.ConFirstName.hints.displayHeight}"
+                                columns="#{bindings.ConFirstName.hints.displayWidth}"
+                                maximumLength="100"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConFirstName.hints.tooltip}"
+                                helpTopicId="RBH_CONFIRSTNAME">
+                    <f:validator binding="#{bindings.ConFirstName.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConMN"
+                                value="#{bindings.ConMiddleName.inputValue}"
+                                label="#{bindings.ConMiddleName.hints.label}"
+                                required="#{bindings.ConMiddleName.hints.mandatory}"
+                                rows="#{bindings.ConMiddleName.hints.displayHeight}"
+                                columns="#{bindings.ConMiddleName.hints.displayWidth}"
+                                maximumLength="40"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConMiddleName.hints.tooltip}"
+                                helpTopicId="RBH_CONMIDDLENAME">
+                    <f:validator binding="#{bindings.ConMiddleName.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConLN"
+                                value="#{bindings.ConLastName.inputValue}"
+                                label="#{bindings.ConLastName.hints.label}"
+                                required="#{bindings.ConLastName.hints.mandatory}"
+                                rows="#{bindings.ConLastName.hints.displayHeight}"
+                                columns="#{bindings.ConLastName.hints.displayWidth}"
+                                maximumLength="100"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConLastName.hints.tooltip}"
+                                helpTopicId="RBH_CONLASTNAME">
+                    <f:validator binding="#{bindings.ConLastName.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConTTl"
+                                value="#{bindings.ConTitle.inputValue}"
+                                label="#{bindings.ConTitle.hints.label}"
+                                required="#{bindings.ConTitle.hints.mandatory}"
+                                rows="#{bindings.ConTitle.hints.displayHeight}"
+                                columns="#{bindings.ConTitle.hints.displayWidth}"
+                                maximumLength="20"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConTitle.hints.tooltip}"
+                                helpTopicId="RBH_CONTITLE">
+                    <f:validator binding="#{bindings.ConTitle.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConGd"
+                                value="#{bindings.ConGender.inputValue}"
+                                label="#{bindings.ConGender.hints.label}"
+                                required="#{bindings.ConGender.hints.mandatory}"
+                                rows="#{bindings.ConGender.hints.displayHeight}"
+                                columns="#{bindings.ConGender.hints.displayWidth}"
+                                maximumLength="10"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConGender.hints.tooltip}"
+                                helpTopicId="RBH_CONGENDER">
+                    <f:validator binding="#{bindings.ConGender.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConPrn"
+                                value="#{bindings.ConPronunciation.inputValue}"
+                                label="#{bindings.ConPronunciation.hints.label}"
+                                required="#{bindings.ConPronunciation.hints.mandatory}"
+                                rows="#{bindings.ConPronunciation.hints.displayHeight}"
+                                columns="#{bindings.ConPronunciation.hints.displayWidth}"
+                                maximumLength="400"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConPronunciation.hints.tooltip}"
+                                helpTopicId="RBH_CONPRONUNCIATION">
+                    <f:validator binding="#{bindings.ConPronunciation.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConJT"
+                                value="#{bindings.ConJobTitle.inputValue}"
+                                label="#{bindings.ConJobTitle.hints.label}"
+                                required="#{bindings.ConJobTitle.hints.mandatory}"
+                                rows="#{bindings.ConJobTitle.hints.displayHeight}"
+                                columns="#{bindings.ConJobTitle.hints.displayWidth}"
+                                maximumLength="4000"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConJobTitle.hints.tooltip}"
+                                helpTopicId="RBH_CONJOBTITLE">
+                    <f:validator binding="#{bindings.ConJobTitle.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConJR"
+                                value="#{bindings.ConJobRole.inputValue}"
+                                label="#{bindings.ConJobRole.hints.label}"
+                                required="#{bindings.ConJobRole.hints.mandatory}"
+                                rows="#{bindings.ConJobRole.hints.displayHeight}"
+                                columns="#{bindings.ConJobRole.hints.displayWidth}"
+                                maximumLength="100"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConJobRole.hints.tooltip}"
+                                helpTopicId="RBH_CONJOBROLE">
+                    <f:validator binding="#{bindings.ConJobRole.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConANo"
+                                value="#{bindings.ConAccountNumber.inputValue}"
+                                label="#{bindings.ConAccountNumber.hints.label}"
+                                required="#{bindings.ConAccountNumber.hints.mandatory}"
+                                rows="#{bindings.ConAccountNumber.hints.displayHeight}"
+                                columns="#{bindings.ConAccountNumber.hints.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.ConAccountNumber.hints.tooltip}"
+                                helpTopicId="RBH_CONACCOUNTNUMBER">
+                    <f:validator binding="#{bindings.ConAccountNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ConAccountNumber.format}"/>
+                  </af:inputText>
+                  <af:inputText id="ConAccountNameNpr"
+                                value="#{bindings.ConAccountName.inputValue}"
+                                label="#{bindings.ConAccountName.hints.label}"
+                                required="#{bindings.ConAccountName.hints.mandatory}"
+                                rows="#{bindings.ConAccountName.hints.displayHeight}"
+                                columns="#{bindings.ConAccountName.hints.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}"
+                                shortDesc="#{bindings.ConAccountName.hints.tooltip}"
+                                helpTopicId="RBH_CONACCOUNTNAME">
+                    <f:validator binding="#{bindings.ConAccountName.validator}"/>
+                  </af:inputText>
+                  <af:panelLabelAndMessage id="ConAccountNamePlm"
+                                           label="#{bindings.ConAccountName.hints.label}"
+                                           shortDesc="#{bindings.ConAccountName.hints.tooltip}"
+                                           helpTopicId="RBH_CONACCOUNTNAME"
+                                           rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:commandLink id="ConANm"
+                                    text="#{bindings.ConAccountName.attributeValue}"
+                                    shortDesc="#{bindings.ConAccountName.hints.tooltip}"
+                                    action="LaunchTab">
+                      <af:setActionListener from="Accounts"
+                                            to="#{jhsDynTabLauncher.taskFlowName}"/>
+                      <af:setActionListener from="#{bindings.ConAccountId.inputValue}"
+                                            to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                      <af:setActionListener from="Account - #{bindings.ConAccountNumber.inputValue}"
+                                            to="#{jhsDynTabLauncher.label}"/>
+                      <af:setActionListener from="#{bindings.ConAccountId.inputValue}"
+                                            to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                      <af:setActionListener from="#{jhsDynTabLauncher}"
+                                            to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                    </af:commandLink>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl0" valign="top"
+                                           layout="horizontal"></af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="ConASt"
+                                value="#{bindings.ConAccountSite.inputValue}"
+                                label="#{bindings.ConAccountSite.hints.label}"
+                                required="#{bindings.ConAccountSite.hints.mandatory}"
+                                rows="#{bindings.ConAccountSite.hints.displayHeight}"
+                                columns="#{bindings.ConAccountSite.hints.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.ConAccountSite.hints.tooltip}"
+                                helpTopicId="RBH_CONACCOUNTSITE">
+                    <f:validator binding="#{bindings.ConAccountSite.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConWP"
+                                value="#{bindings.ConWorkPhone.inputValue}"
+                                label="#{bindings.ConWorkPhone.hints.label}"
+                                required="#{bindings.ConWorkPhone.hints.mandatory}"
+                                rows="#{bindings.ConWorkPhone.hints.displayHeight}"
+                                columns="#{bindings.ConWorkPhone.hints.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.ConWorkPhone.hints.tooltip}"
+                                helpTopicId="RBH_CONWORKPHONE">
+                    <f:validator binding="#{bindings.ConWorkPhone.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConWE"
+                                value="#{bindings.ConWorkEmail.inputValue}"
+                                label="#{bindings.ConWorkEmail.hints.label}"
+                                required="#{bindings.ConWorkEmail.hints.mandatory}"
+                                rows="#{bindings.ConWorkEmail.hints.displayHeight}"
+                                columns="#{bindings.ConWorkEmail.hints.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.ConWorkEmail.hints.tooltip}"
+                                helpTopicId="RBH_CONWORKEMAIL">
+                    <f:validator binding="#{bindings.ConWorkEmail.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConCP"
+                                value="#{bindings.ConCellPhone.inputValue}"
+                                label="#{bindings.ConCellPhone.hints.label}"
+                                required="#{bindings.ConCellPhone.hints.mandatory}"
+                                rows="#{bindings.ConCellPhone.hints.displayHeight}"
+                                columns="#{bindings.ConCellPhone.hints.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.ConCellPhone.hints.tooltip}"
+                                helpTopicId="RBH_CONCELLPHONE">
+                    <f:validator binding="#{bindings.ConCellPhone.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConWF"
+                                value="#{bindings.ConWorkFax.inputValue}"
+                                label="#{bindings.ConWorkFax.hints.label}"
+                                required="#{bindings.ConWorkFax.hints.mandatory}"
+                                rows="#{bindings.ConWorkFax.hints.displayHeight}"
+                                columns="#{bindings.ConWorkFax.hints.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.ConWorkFax.hints.tooltip}"
+                                helpTopicId="RBH_CONWORKFAX">
+                    <f:validator binding="#{bindings.ConWorkFax.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="ConTZ"
+                                value="#{bindings.ConTimezone.inputValue}"
+                                label="#{bindings.ConTimezone.hints.label}"
+                                required="#{bindings.ConTimezone.hints.mandatory}"
+                                rows="#{bindings.ConTimezone.hints.displayHeight}"
+                                columns="#{bindings.ConTimezone.hints.displayWidth}"
+                                maximumLength="40"
+                                readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.ConTimezone.hints.tooltip}"
+                                helpTopicId="RBH_CONTIMEZONE">
+                    <f:validator binding="#{bindings.ConTimezone.validator}"/>
+                  </af:inputText>
+                  <af:selectBooleanCheckbox id="ConSNF"
+                                            value="#{bindings.ConSendNewsletterFlag.inputValue}"
+                                            label="#{bindings.ConSendNewsletterFlag.hints.label}"
+                                            readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ConSendNewsletterFlag.hints.tooltip}"
+                                            helpTopicId="RBH_CONSENDNEWSLETTERFLAG"></af:selectBooleanCheckbox>
+                  <af:selectBooleanCheckbox id="ConNMF"
+                                            value="#{bindings.ConNeverMailFlag.inputValue}"
+                                            label="#{bindings.ConNeverMailFlag.hints.label}"
+                                            readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ConNeverMailFlag.hints.tooltip}"
+                                            helpTopicId="RBH_CONNEVERMAILFLAG"></af:selectBooleanCheckbox>
+                  <af:selectBooleanCheckbox id="ConNEF"
+                                            value="#{bindings.ConNeverEmailFlag.inputValue}"
+                                            label="#{bindings.ConNeverEmailFlag.hints.label}"
+                                            readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ConNeverEmailFlag.hints.tooltip}"
+                                            helpTopicId="RBH_CONNEVEREMAILFLAG"></af:selectBooleanCheckbox>
+                  <af:selectBooleanCheckbox id="ConNCF"
+                                            value="#{bindings.ConNeverCallFlag.inputValue}"
+                                            label="#{bindings.ConNeverCallFlag.hints.label}"
+                                            readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ConNeverCallFlag.hints.tooltip}"
+                                            helpTopicId="RBH_CONNEVERCALLFLAG"></af:selectBooleanCheckbox>
+                  <af:selectBooleanCheckbox id="ConAF"
+                                            value="#{bindings.ConActiveFlag.inputValue}"
+                                            label="#{bindings.ConActiveFlag.hints.label}"
+                                            readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ConActiveFlag.hints.tooltip}"
+                                            helpTopicId="RBH_CONACTIVEFLAG"></af:selectBooleanCheckbox>
+                  <af:popup id="hoverPopup0">
+                    <af:noteWindow>
+                      <af:outputText value="#{bindings.ConNotes.inputValue}"/>
+                    </af:noteWindow>
+                  </af:popup>
+                  <af:panelLabelAndMessage label="#{bindings.ConNotes.hints.label}"
+                                           shortDesc="#{bindings.ConNotes.hints.tooltip}"
+                                           helpTopicId="RBH_CONNOTES"
+                                           showRequired="#{bindings.ConNotes.hints.mandatory}"
+                                           id="ConNotesLabel">
+                    <af:inputText id="ConNotes"
+                                  value="#{bindings.ConNotes.inputValue}"
+                                  required="#{bindings.ConNotes.hints.mandatory}"
+                                  rows="#{bindings.ConNotes.hints.displayHeight}"
+                                  columns="#{bindings.ConNotes.hints.displayWidth}"
+                                  maximumLength="4000"
+                                  readOnly="#{((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                  autoSubmit="true" simple="true"
+                                  partialTriggers="ConNotesEditorLink ConNotesEditorText">
+                      <f:validator binding="#{bindings.ConNotes.validator}"/>
+                      <af:showPopupBehavior popupId="hoverPopup0"
+                                            triggerType="mouseHover"
+                                            align="endAfter"/>
+                    </af:inputText>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl1" valign="top"
+                                           layout="horizontal">
+                        <af:commandLink id="ConNotesEditorLink"
+                                        rendered="#{!(((pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateContacts) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))))}"
+                                        immediate="true" partialSubmit="true">
+                          <af:showPopupBehavior popupId="ConNotesPopup"/>
+                          <af:image source="/jheadstart/images/editor.gif"
+                                    id="ConNotesIcon" clientComponent="true"/>
+                        </af:commandLink>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="ConCB"
+                                value="#{bindings.ConCreatedBy.inputValue}"
+                                label="#{bindings.ConCreatedBy.hints.label}"
+                                required="#{bindings.ConCreatedBy.hints.mandatory}"
+                                rows="#{bindings.ConCreatedBy.hints.displayHeight}"
+                                columns="#{bindings.ConCreatedBy.hints.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ConCreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_CONCREATEDBY">
+                    <f:validator binding="#{bindings.ConCreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="ConCD"
+                                value="#{bindings.ConCreatedDate.inputValue}"
+                                label="#{bindings.ConCreatedDate.hints.label}"
+                                required="#{bindings.ConCreatedDate.hints.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ConCreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_CONCREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="ConLUB"
+                                value="#{bindings.ConLastUpdatedBy.inputValue}"
+                                label="#{bindings.ConLastUpdatedBy.hints.label}"
+                                required="#{bindings.ConLastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.ConLastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.ConLastUpdatedBy.hints.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ConLastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_CONLASTUPDATEDBY">
+                    <f:validator binding="#{bindings.ConLastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="ConLUD"
+                                value="#{bindings.ConLastUpdatedDate.inputValue}"
+                                label="#{bindings.ConLastUpdatedDate.hints.label}"
+                                required="#{bindings.ConLastUpdatedDate.hints.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ConLastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_CONLASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" " helpTopicId="RBH_CONTACTS">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveContacts.execute}"
+                                            rendered="#{((((((((((jhsUserRoles['AM,AST,PM,GCA,ADMIN']) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) or (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="ConSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="ConCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+          <af:panelTabbed position="above" childCreation="lazy" id="pst0"
+                          dimensionsFrom="auto" styleClass="AFStretchWidth">
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_CONTACTMETHODS']}"
+                               partialTriggers=" ConTopLc s10DeleteDialog qsAreas10SearchOptions s10PC:s10Arm s10PC:s10delrmTM s10PC:s10Arl s10PC:s10Tab:s10delrm s10PC:s10Tab:s10delrl"
+                               id="s10TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s10TopLc"
+                                   partialTriggers=" ConTopLc s10DeleteDialog qsAreas10SearchOptions s10PC:s10Arm s10PC:s10delrmTM s10PC:s10Arl s10PC:s10Tab:s10delrm s10PC:s10Tab:s10delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp3"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas10"
+                                     rendered="#{!pageFlowScope.createModes.CreateContactMethods and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas10SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.ContactMethodsIteratorTraxContactMethodViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.ContactMethodsIteratorTraxContactMethodViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.ContactMethodsIteratorTraxContactMethodViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl2">
+                  <af:panelCollection id="s10PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu0">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu1">
+                          <af:group id="s10tbb"
+                                    rendered="#{ bindings.ContactMethodsIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstContactMethods.execute}"
+                                                id="s10First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousContactMethods.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s10Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextContactMethods.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s10Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastContactMethods.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s10Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s10Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.ContactMethodsTable.addRow}"
+                                            rendered="#{ (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s10delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s10DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi0">
+                          <af:exportCollectionActionListener exportedId="s10Tab"
+                                                             type="excelHTML"
+                                                             filename="ContactMethods.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar1">
+                        <!-- Also create CreateContactMethods bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s10Arl" immediate="false"
+                                             rendered="#{ (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.ContactMethodsTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl0"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s10Tab"
+                                                             type="excelHTML"
+                                                             filename="ContactMethods.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s10Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.ContactMethodsIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s10Tab" contentDelivery="immediate"
+                              value="#{bindings.ContactMethodsTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.ContactMethodsTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.ContactMethodsTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.ContactMethodsTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.ContactMethodsTable.rangeSize}"
+                              autoHeightRows="#{bindings.ContactMethodsTable.estimatedRowCount lt 5 ? 5 : bindings.ContactMethodsTable.estimatedRowCount lt bindings.ContactMethodsTable.rangeSize ? bindings.ContactMethodsTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.ContactMethodsTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.ContactMethodsIteratorTraxContactMethodViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.ContactMethodsIteratorTraxContactMethodViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.ContactMethodsTable.table}"
+                              partialTriggers=":::qsAreas10SearchOptions :::s10PC ::s10First ::s10Previous ::s10Next ::s10Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_CONTACTMETHODS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s10TablePopup" childCreation="deferred">
+                          <af:menu id="menu2">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu3"></af:menu>
+                            <af:commandMenuItem id="s10delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s10DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s10ActionColumn" frozen="true" width="20"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl3">
+                          <af:commandImageLink id="s10delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s10DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s10CMCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="ContactMethod" rowHeader="false"
+                                 helpTopicId="RBH_S10CONTACTMETHOD"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.ContactMethod.label}"
+                                          showRequired="#{bindings.ContactMethodsTable.hints.ContactMethod.mandatory}"
+                                          id="ol0"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s10CM"
+                                            value="#{row.bindings.ContactMethod.inputValue}"
+                                            label="#{bindings.ContactMethodsTable.hints.ContactMethod.label}"
+                                            required="#{bindings.ContactMethodsTable.hints.ContactMethod.mandatory}"
+                                            readOnly="#{((pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ContactMethodsTable.hints.ContactMethod.tooltip}"
+                                            autoSubmit="true"
+                                            valueChangeListener="#{s10ContactMethodDependsOnItem.updateModelValue}">
+                          <f:selectItems value="#{row.bindings.ContactMethod.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s10MSTCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="ContactMethodSubType"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S10CONTACTMETHODSUBTYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.ContactMethodSubType.label}"
+                                          showRequired="#{bindings.ContactMethodsTable.hints.ContactMethodSubType.mandatory}"
+                                          id="ol1"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s10MST"
+                                            value="#{row.bindings.ContactMethodSubType.inputValue}"
+                                            label="#{bindings.ContactMethodsTable.hints.ContactMethodSubType.label}"
+                                            required="#{bindings.ContactMethodsTable.hints.ContactMethodSubType.mandatory}"
+                                            readOnly="#{((pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ContactMethodsTable.hints.ContactMethodSubType.tooltip}">
+                          <f:selectItems value="#{row.bindings.ContactMethodSubType.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s10CD1Col" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="ContactDetail1" rowHeader="false"
+                                 helpTopicId="RBH_S10CONTACTDETAIL1"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.ContactDetail1.label}"
+                                          showRequired="#{bindings.ContactMethodsTable.hints.ContactDetail1.mandatory}"
+                                          id="ol2"/>
+                        </f:facet>
+                        <af:inputText id="s10CD1"
+                                      value="#{row.bindings.ContactDetail1.inputValue}"
+                                      label="#{bindings.ContactMethodsTable.hints.ContactDetail1.label}"
+                                      required="#{bindings.ContactMethodsTable.hints.ContactDetail1.mandatory}"
+                                      rows="#{bindings.ContactMethodsTable.hints.ContactDetail1.displayHeight}"
+                                      columns="#{bindings.ContactMethodsTable.hints.ContactDetail1.displayWidth}"
+                                      maximumLength="255"
+                                      readOnly="#{((pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.ContactMethodsTable.hints.ContactDetail1.tooltip}">
+                          <f:validator binding="#{row.bindings.ContactDetail1.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s10CD2Col" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="ContactDetail2" rowHeader="false"
+                                 helpTopicId="RBH_S10CONTACTDETAIL2"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.ContactDetail2.label}"
+                                          showRequired="#{bindings.ContactMethodsTable.hints.ContactDetail2.mandatory}"
+                                          id="ol3"/>
+                        </f:facet>
+                        <af:inputText id="s10CD2"
+                                      value="#{row.bindings.ContactDetail2.inputValue}"
+                                      label="#{bindings.ContactMethodsTable.hints.ContactDetail2.label}"
+                                      required="#{bindings.ContactMethodsTable.hints.ContactDetail2.mandatory}"
+                                      rows="#{bindings.ContactMethodsTable.hints.ContactDetail2.displayHeight}"
+                                      columns="#{bindings.ContactMethodsTable.hints.ContactDetail2.displayWidth}"
+                                      maximumLength="200"
+                                      readOnly="#{((pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.ContactMethodsTable.hints.ContactDetail2.tooltip}">
+                          <f:validator binding="#{row.bindings.ContactDetail2.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s10CMNCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="ContactMethodNote"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S10CONTACTMETHODNOTE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.ContactMethodNote.label}"
+                                          showRequired="#{bindings.ContactMethodsTable.hints.ContactMethodNote.mandatory}"
+                                          id="ol4"/>
+                        </f:facet>
+                        <af:inputText id="s10CMN"
+                                      value="#{row.bindings.ContactMethodNote.inputValue}"
+                                      label="#{bindings.ContactMethodsTable.hints.ContactMethodNote.label}"
+                                      required="#{bindings.ContactMethodsTable.hints.ContactMethodNote.mandatory}"
+                                      rows="#{bindings.ContactMethodsTable.hints.ContactMethodNote.displayHeight}"
+                                      columns="#{bindings.ContactMethodsTable.hints.ContactMethodNote.displayWidth}"
+                                      maximumLength="4000"
+                                      readOnly="#{((pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.ContactMethodsTable.hints.ContactMethodNote.tooltip}">
+                          <f:validator binding="#{row.bindings.ContactMethodNote.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s10PFCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="PrimaryFlag" align="center"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S10PRIMARYFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.PrimaryFlag.label}"
+                                          showRequired="#{bindings.ContactMethodsTable.hints.PrimaryFlag.mandatory}"
+                                          id="ol5"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="s10PF"
+                                                  label="#{bindings.ContactMethodsTable.hints.PrimaryFlag.label}"
+                                                  value="#{s10PrimaryFlagcheckboxInTable.value}"
+                                                  readOnly="#{((pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactMethodsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                                  shortDesc="#{bindings.ContactMethodsTable.hints.PrimaryFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="s10CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S10CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.CreatedBy.label}"
+                                          id="ol6"/>
+                        </f:facet>
+                        <af:inputText id="s10CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.ContactMethodsTable.hints.CreatedBy.label}"
+                                      required="#{bindings.ContactMethodsTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.ContactMethodsTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.ContactMethodsTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ContactMethodsTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s10CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S10CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.CreatedDate.label}"
+                                          id="ol7"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id0">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s10CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.ContactMethodsTable.hints.CreatedDate.label}"
+                                      required="#{bindings.ContactMethodsTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContactMethodsTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s10LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S10LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.LastUpdatedBy.label}"
+                                          id="ol8"/>
+                        </f:facet>
+                        <af:inputText id="s10LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.ContactMethodsTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.ContactMethodsTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.ContactMethodsTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.ContactMethodsTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ContactMethodsTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s10LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S10LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactMethodsTable.hints.LastUpdatedDate.label}"
+                                          id="ol9"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id1">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s10LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.ContactMethodsTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.ContactMethodsTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContactMethodsTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_CONTACTCONTENTOWNERS']}"
+                               partialTriggers=" ConTopLc s11DeleteDialog qsAreas11SearchOptions s11PC:s11Arm s11PC:s11delrmTM s11PC:s11Arl s11PC:s11Tab:s11delrm s11PC:s11Tab:s11delrl"
+                               id="s11TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s11TopLc"
+                                   partialTriggers=" ConTopLc s11DeleteDialog qsAreas11SearchOptions s11PC:s11Arm s11PC:s11delrmTM s11PC:s11Arl s11PC:s11Tab:s11delrm s11PC:s11Tab:s11delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp4"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas11"
+                                     rendered="#{!pageFlowScope.createModes.CreateContactContentOwners and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas11SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.ContactContentOwnersIteratorQuery.queryDescriptor}"
+                                 model="#{bindings.ContactContentOwnersIteratorQuery.queryModel}"
+                                 queryListener="#{bindings.ContactContentOwnersIteratorQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl4">
+                  <af:panelCollection id="s11PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu4">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu5">
+                          <af:group id="s11tbb"
+                                    rendered="#{ bindings.ContactContentOwnersIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstContactContentOwners.execute}"
+                                                id="s11First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousContactContentOwners.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s11Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextContactContentOwners.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s11Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastContactContentOwners.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s11Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s11Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.ContactContentOwnersTable.addRow}"
+                                            rendered="#{ (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s11delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['AST,GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s11DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi1">
+                          <af:exportCollectionActionListener exportedId="s11Tab"
+                                                             type="excelHTML"
+                                                             filename="ContactContentOwners.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar2">
+                        <!-- Also create CreateContactContentOwners bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s11Arl" immediate="false"
+                                             rendered="#{ (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.ContactContentOwnersTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl1"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s11Tab"
+                                                             type="excelHTML"
+                                                             filename="ContactContentOwners.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s11Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.ContactContentOwnersIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s11Tab" contentDelivery="immediate"
+                              value="#{bindings.ContactContentOwnersTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.ContactContentOwnersTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.ContactContentOwnersTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.ContactContentOwnersTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.ContactContentOwnersTable.rangeSize}"
+                              autoHeightRows="#{bindings.ContactContentOwnersTable.estimatedRowCount lt 5 ? 5 : bindings.ContactContentOwnersTable.estimatedRowCount lt bindings.ContactContentOwnersTable.rangeSize ? bindings.ContactContentOwnersTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.ContactContentOwnersTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.ContactContentOwnersIteratorQuery.processQuery}"
+                              filterModel="#{bindings.ContactContentOwnersIteratorQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.ContactContentOwnersTable.table}"
+                              partialTriggers=":::qsAreas11SearchOptions :::s11PC ::s11First ::s11Previous ::s11Next ::s11Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_CONTACTCONTENTOWNERS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s11TablePopup" childCreation="deferred">
+                          <af:menu id="menu6">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu7"></af:menu>
+                            <af:commandMenuItem id="s11delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['AST,GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s11DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s11ActionColumn" frozen="true" width="20"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl5">
+                          <af:commandImageLink id="s11delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['AST,GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s11DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s11NmCol" sortable="true" filterable="true"
+                                 noWrap="true" width="260" sortProperty="Name"
+                                 rowHeader="false" helpTopicId="RBH_S11NAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.Name.label}"
+                                          showRequired="#{bindings.ContactContentOwnersTable.hints.Name.mandatory}"
+                                          id="ol10"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s11NamePgl"
+                                             layout="horizontal">
+                          <af:inputText id="s11Nm"
+                                        label="#{bindings.ContactContentOwnersTable.hints.Name.label}"
+                                        readOnly="#{((pageFlowScope.ContactContentOwnersTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactContentOwnersTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                        columns="#{bindings.ContactContentOwnersTable.hints.Name.displayWidth}"
+                                        maximumLength="400"
+                                        shortDesc="#{bindings.ContactContentOwnersTable.hints.Name.tooltip}"
+                                        value="#{pageFlowScope.s11NameLovItemInTable.lovFieldValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s11NameLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s11NameLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.Name.validator}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.ContactContentOwnersTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactContentOwnersTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))))}"
+                                          id="cl2"
+                                          actionListener="#{pageFlowScope.s11NameLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s11NameIcon" clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb2"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s11NameLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s11NameLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s11CONCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="ContentOwnerNo" rowHeader="false"
+                                 helpTopicId="RBH_S11CONTENTOWNERNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.ContentOwnerNo.label}"
+                                          id="ol11"/>
+                        </f:facet>
+                        <af:inputText id="cl3"
+                                      value="#{row.bindings.ContentOwnerNo.inputValue}"
+                                      label="#{bindings.ContactContentOwnersTable.hints.ContentOwnerNo.label}"
+                                      required="#{bindings.ContactContentOwnersTable.hints.ContentOwnerNo.mandatory}"
+                                      rows="#{bindings.ContactContentOwnersTable.hints.ContentOwnerNo.displayHeight}"
+                                      columns="#{bindings.ContactContentOwnersTable.hints.ContentOwnerNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ContactContentOwnersTable.hints.ContentOwnerNo.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.ContentOwnerNo.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s11CON"
+                                        text="#{row.bindings.ContentOwnerNo.attributeValue}"
+                                        shortDesc="#{bindings.ContactContentOwnersTable.hints.ContentOwnerNo.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Accounts"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s11ContentOwnerId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Acct. - #{bindings.s11ContentOwnerNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s11ContentOwnerId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s11StCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240" sortProperty="Site"
+                                 rowHeader="false" helpTopicId="RBH_S11SITE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.Site.label}"
+                                          id="ol12"/>
+                        </f:facet>
+                        <af:inputText id="s11St"
+                                      value="#{row.bindings.Site.inputValue}"
+                                      label="#{bindings.ContactContentOwnersTable.hints.Site.label}"
+                                      required="#{bindings.ContactContentOwnersTable.hints.Site.mandatory}"
+                                      rows="#{bindings.ContactContentOwnersTable.hints.Site.displayHeight}"
+                                      columns="#{bindings.ContactContentOwnersTable.hints.Site.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.ContactContentOwnersTable.hints.Site.tooltip}">
+                          <f:validator binding="#{row.bindings.Site.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s11PFCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="PrimaryFlag" align="center"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S11PRIMARYFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.PrimaryFlag.label}"
+                                          showRequired="#{bindings.ContactContentOwnersTable.hints.PrimaryFlag.mandatory}"
+                                          id="ol13"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="s11PF"
+                                                  label="#{bindings.ContactContentOwnersTable.hints.PrimaryFlag.label}"
+                                                  value="#{s11PrimaryFlagcheckboxInTable.value}"
+                                                  readOnly="#{((pageFlowScope.ContactContentOwnersTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactContentOwnersTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                                  shortDesc="#{bindings.ContactContentOwnersTable.hints.PrimaryFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="s11ActiveFlagCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="ActiveFlag" align="center"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S11ACTIVEFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.ActiveFlag.label}"
+                                          showRequired="#{bindings.ContactContentOwnersTable.hints.ActiveFlag.mandatory}"
+                                          id="ol14"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="s11ActiveFlag"
+                                                  label="#{bindings.ContactContentOwnersTable.hints.ActiveFlag.label}"
+                                                  value="#{s11ActiveFlagcheckboxInTable.value}"
+                                                  readOnly="#{((pageFlowScope.ContactContentOwnersTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactContentOwnersTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                                  shortDesc="#{bindings.ContactContentOwnersTable.hints.ActiveFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="s11CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S11CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.CreatedBy.label}"
+                                          id="ol15"/>
+                        </f:facet>
+                        <af:inputText id="s11CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.ContactContentOwnersTable.hints.CreatedBy.label}"
+                                      required="#{bindings.ContactContentOwnersTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.ContactContentOwnersTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.ContactContentOwnersTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ContactContentOwnersTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s11CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S11CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.CreatedDate.label}"
+                                          id="ol16"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id2">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s11CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.ContactContentOwnersTable.hints.CreatedDate.label}"
+                                      required="#{bindings.ContactContentOwnersTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContactContentOwnersTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s11LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S11LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.LastUpdatedBy.label}"
+                                          id="ol17"/>
+                        </f:facet>
+                        <af:inputText id="s11LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.ContactContentOwnersTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.ContactContentOwnersTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.ContactContentOwnersTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.ContactContentOwnersTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ContactContentOwnersTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s11LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S11LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactContentOwnersTable.hints.LastUpdatedDate.label}"
+                                          id="ol18"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id3">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s11LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.ContactContentOwnersTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.ContactContentOwnersTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContactContentOwnersTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_CONTACTACTIVITIES']}"
+                               partialTriggers=" ConTopLc asAreas12SearchOptions qsAreas12SearchOptions s12PC:s12Arm s12PC:s12Arl"
+                               id="s12TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}">
+              <af:panelGroupLayout layout="vertical" id="s12TopLc"
+                                   partialTriggers=" ConTopLc asAreas12SearchOptions qsAreas12SearchOptions s12PC:s12Arm s12PC:s12Arl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp5"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas12"
+                                     rendered="#{!pageFlowScope.createModes.CreateContactActivities and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers=" asAreas12SearchOptions:qsButtons12 qsAreas12SearchOptions:asButtons12 ">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:query id="asAreas12SearchOptions"
+                            headerText="#{nls['ADVANCED_SEARCH']}"
+                            disclosed="true"
+                            value="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.queryDescriptor}"
+                            model="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.queryModel}"
+                            queryListener="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.processQuery}"
+                            queryOperationListener="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.processQueryOperation}"
+                            rendered="#{!pageFlowScope.searchContactActivities.quickSearchMode}"
+                            rows="1" labelAlignment="top" maxColumns="4">
+                    <f:facet name="toolbar">
+                      <af:commandButton partialSubmit="true" id="qsButtons12"
+                                        immediate="true"
+                                        textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                        action="#{pageFlowScope.searchContactActivities.switchToQuickSearchMode}"/>
+                    </f:facet>
+                  </af:query>
+                  <af:quickQuery id="qsAreas12SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.processQuery}"
+                                 rendered="#{pageFlowScope.searchContactActivities.quickSearchMode}">
+                    <f:facet name="end">
+                      <af:commandLink id="asButtons12"
+                                      textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                      partialSubmit="true" immediate="true"
+                                      action="#{pageFlowScope.searchContactActivities.switchToAdvancedSearchMode}"/>
+                    </f:facet>
+                  </af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl6">
+                  <af:panelCollection id="s12PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu8">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu9">
+                          <af:group id="s12tbb"
+                                    rendered="#{ bindings.ContactActivitiesIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstContactActivities.execute}"
+                                                id="s12First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousContactActivities.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s12Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextContactActivities.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s12Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastContactActivities.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s12Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s12Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.ContactActivitiesTable.addRow}"
+                                            rendered="#{ (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi2">
+                          <af:exportCollectionActionListener exportedId="s12Tab"
+                                                             type="excelHTML"
+                                                             filename="ContactActivities.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar3">
+                        <!-- Also create CreateContactActivities bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s12Arl" immediate="false"
+                                             rendered="#{ (bindings.ContactsIterator.viewObject!=null and bindings.ContactsIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.ContactActivitiesTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl4"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s12Tab"
+                                                             type="excelHTML"
+                                                             filename="ContactActivities.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s12Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.ContactActivitiesIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s12Tab" contentDelivery="immediate"
+                              value="#{bindings.ContactActivitiesTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.ContactActivitiesTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.ContactActivitiesTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.ContactActivitiesTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.ContactActivitiesTable.rangeSize}"
+                              autoHeightRows="#{bindings.ContactActivitiesTable.estimatedRowCount lt 5 ? 5 : bindings.ContactActivitiesTable.estimatedRowCount lt bindings.ContactActivitiesTable.rangeSize ? bindings.ContactActivitiesTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.ContactActivitiesTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.ContactActivitiesIteratorTraxActivityViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.ContactActivitiesTable.table}"
+                              partialTriggers=":::qsAreas12SearchOptions :::asAreas12SearchOptions :::s12PC ::s12First ::s12Previous ::s12Next ::s12Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_CONTACTACTIVITIES']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s12TablePopup" childCreation="deferred">
+                          <af:menu id="menu10">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu11"></af:menu>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s12TpCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120" sortProperty="Type"
+                                 rowHeader="false" helpTopicId="RBH_S12TYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.Type.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.Type.mandatory}"
+                                          id="ol19"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s12Tp"
+                                            value="#{row.bindings.Type.inputValue}"
+                                            label="#{bindings.ContactActivitiesTable.hints.Type.label}"
+                                            required="#{bindings.ContactActivitiesTable.hints.Type.mandatory}"
+                                            readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ContactActivitiesTable.hints.Type.tooltip}"
+                                            autoSubmit="true"
+                                            valueChangeListener="#{s12TypeDependsOnItem.updateModelValue}">
+                          <f:selectItems value="#{row.bindings.Type.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s12STpCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="SubType" rowHeader="false"
+                                 helpTopicId="RBH_S12SUBTYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.SubType.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.SubType.mandatory}"
+                                          id="ol20"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s12STp"
+                                            value="#{row.bindings.SubType.inputValue}"
+                                            label="#{bindings.ContactActivitiesTable.hints.SubType.label}"
+                                            required="#{bindings.ContactActivitiesTable.hints.SubType.mandatory}"
+                                            readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ContactActivitiesTable.hints.SubType.tooltip}">
+                          <f:selectItems value="#{row.bindings.SubType.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s12ELCol" noWrap="true" width="30"
+                                 rowHeader="false" helpTopicId="RBH_S12EDITLINK"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="Edit" id="ol21"/>
+                        </f:facet>
+                        <af:inputText id="cl5" value="" label="Edit"
+                                      required="false" columns="5"
+                                      maximumLength="5" readOnly="true"
+                                      disabled="#{row.bindings.Type.attributeValue == null}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}"></af:inputText>
+                        <af:commandLink id="s12EL" text="Edit"
+                                        disabled="#{row.bindings.Type.attributeValue == null}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Activities"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s12Id.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Activity"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s12Id.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueActivities}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s12DesCol" sortable="true"
+                                 filterable="true" noWrap="true" width="260"
+                                 sortProperty="Description" rowHeader="false"
+                                 helpTopicId="RBH_S12DESCRIPTION"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.Description.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.Description.mandatory}"
+                                          id="ol22"/>
+                        </f:facet>
+                        <af:panelLabelAndMessage shortDesc="#{bindings.ContactActivitiesTable.hints.Description.tooltip}">
+                          <af:inputText id="s12Des"
+                                        value="#{row.bindings.Description.inputValue}"
+                                        label="#{bindings.ContactActivitiesTable.hints.Description.label}"
+                                        required="#{bindings.ContactActivitiesTable.hints.Description.mandatory}"
+                                        rows="#{bindings.ContactActivitiesTable.hints.Description.displayHeight}"
+                                        columns="#{bindings.ContactActivitiesTable.hints.Description.displayWidth}"
+                                        maximumLength="4000"
+                                        readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                        autoSubmit="true" simple="true"
+                                        partialTriggers="s12DescriptionEditorLink s12DescriptionEditorText">
+                            <f:validator binding="#{row.bindings.Description.validator}"/>
+                          </af:inputText>
+                          <af:commandLink id="s12DescriptionEditorLink"
+                                          rendered="#{!(((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))))}"
+                                          immediate="true" partialSubmit="true">
+                            <af:showPopupBehavior popupId="s12DescriptionPopup"/>
+                            <af:image source="/jheadstart/images/editor.gif"
+                                      id="s12DescriptionIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                        </af:panelLabelAndMessage>
+                        <af:popup id="s12DescriptionPopup"
+                                  contentDelivery="lazyUncached"
+                                  eventContext="launcher"
+                                  childCreation="deferred">
+                          <af:dialog modal="true" resize="on"
+                                     title="Text Editor" id="dialog2">
+                            <af:inputText rows="10" columns="100"
+                                          value="#{row.bindings.Description.inputValue}"
+                                          simple="true" maximumLength="4000"
+                                          id="s12DescriptionEditorText"/>
+                          </af:dialog>
+                        </af:popup>
+                      </af:column>
+                      <af:column id="s12StatusCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="Status" rowHeader="false"
+                                 helpTopicId="RBH_S12STATUS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.Status.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.Status.mandatory}"
+                                          id="ol23"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s12Status"
+                                            value="#{row.bindings.Status.inputValue}"
+                                            label="#{bindings.ContactActivitiesTable.hints.Status.label}"
+                                            required="#{bindings.ContactActivitiesTable.hints.Status.mandatory}"
+                                            readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ContactActivitiesTable.hints.Status.tooltip}">
+                          <f:selectItems value="#{row.bindings.Status.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s12PriCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="Priority" rowHeader="false"
+                                 helpTopicId="RBH_S12PRIORITY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.Priority.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.Priority.mandatory}"
+                                          id="ol24"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s12Pri"
+                                            value="#{row.bindings.Priority.inputValue}"
+                                            label="#{bindings.ContactActivitiesTable.hints.Priority.label}"
+                                            required="#{bindings.ContactActivitiesTable.hints.Priority.mandatory}"
+                                            readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.ContactActivitiesTable.hints.Priority.tooltip}">
+                          <f:selectItems value="#{row.bindings.Priority.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s12ASDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="ActualStartDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S12ACTUALSTARTDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.ActualStartDate.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.ActualStartDate.mandatory}"
+                                          id="ol25"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.ActualStartDate}"
+                                        id="id4">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s12ASD"
+                                      value="#{row.bindings.ActualStartDate.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.ActualStartDate.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.ActualStartDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.ActualStartDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s12CoDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="CompletionDate" rowHeader="false"
+                                 helpTopicId="RBH_S12COMPLETIONDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.CompletionDate.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.CompletionDate.mandatory}"
+                                          id="ol26"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CompletionDate}"
+                                        id="id5">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s12CoD"
+                                      value="#{row.bindings.CompletionDate.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.CompletionDate.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.CompletionDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.CompletionDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s12DDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="DueDate" rowHeader="false"
+                                 helpTopicId="RBH_S12DUEDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.DueDate.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.DueDate.mandatory}"
+                                          id="ol27"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.DueDate}"
+                                        id="id6">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s12DD"
+                                      value="#{row.bindings.DueDate.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.DueDate.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.DueDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.DueDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s12ESDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="ExpectedStartDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S12EXPECTEDSTARTDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.ExpectedStartDate.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.ExpectedStartDate.mandatory}"
+                                          id="ol28"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.ExpectedStartDate}"
+                                        id="id7">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s12ESD"
+                                      value="#{row.bindings.ExpectedStartDate.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.ExpectedStartDate.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.ExpectedStartDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.ExpectedStartDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s12HSCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="HoursSpent" align="right"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S12HOURSSPENT"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.HoursSpent.label}"
+                                          showRequired="#{bindings.ContactActivitiesTable.hints.HoursSpent.mandatory}"
+                                          id="ol29"/>
+                        </f:facet>
+                        <af:inputText id="s12HS"
+                                      value="#{row.bindings.HoursSpent.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.HoursSpent.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.HoursSpent.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.HoursSpent.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.HoursSpent.displayWidth}"
+                                      maximumLength="8"
+                                      readOnly="#{((pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.ContactActivitiesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.HoursSpent.tooltip}">
+                          <f:validator binding="#{row.bindings.HoursSpent.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ContactActivitiesTable.hints.HoursSpent.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12CONCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="ContentOwnerNo" align="right"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S12CONTENTOWNERNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.ContentOwnerNo.label}"
+                                          id="ol30"/>
+                        </f:facet>
+                        <af:inputText id="s12CON"
+                                      value="#{row.bindings.ContentOwnerNo.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.ContentOwnerNo.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.ContentOwnerNo.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.ContentOwnerNo.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.ContentOwnerNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.ContentOwnerNo.tooltip}">
+                          <f:validator binding="#{row.bindings.ContentOwnerNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ContactActivitiesTable.hints.ContentOwnerNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12ANCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240"
+                                 sortProperty="AccountName" rowHeader="false"
+                                 helpTopicId="RBH_S12ACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.AccountName.label}"
+                                          id="ol31"/>
+                        </f:facet>
+                        <af:inputText id="cl6"
+                                      value="#{row.bindings.AccountName.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.AccountName.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.AccountName.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.AccountName.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.AccountName.displayWidth}"
+                                      maximumLength="255" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.AccountName.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s12AN"
+                                        text="#{row.bindings.AccountName.attributeValue}"
+                                        shortDesc="#{bindings.ContactActivitiesTable.hints.AccountName.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Accounts"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s12AccountId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Account - #{bindings.s12ContentOwnerNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s12AccountId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s12ASCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240"
+                                 sortProperty="AccountSite" rowHeader="false"
+                                 helpTopicId="RBH_S12ACCOUNTSITE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.AccountSite.label}"
+                                          id="ol32"/>
+                        </f:facet>
+                        <af:inputText id="s12AS"
+                                      value="#{row.bindings.AccountSite.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.AccountSite.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.AccountSite.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.AccountSite.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.AccountSite.displayWidth}"
+                                      maximumLength="255" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.AccountSite.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12OpportunityNoCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="OpportunityNo" rowHeader="false"
+                                 helpTopicId="RBH_S12OPPORTUNITYNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.OpportunityNo.label}"
+                                          id="ol33"/>
+                        </f:facet>
+                        <af:inputText id="s12OpportunityNo"
+                                      value="#{row.bindings.OpportunityNo.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.OpportunityNo.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.OpportunityNo.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.OpportunityNo.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.OpportunityNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.OpportunityNo.tooltip}">
+                          <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ContactActivitiesTable.hints.OpportunityNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12ONCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240"
+                                 sortProperty="OpportunityName"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S12OPPORTUNITYNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.OpportunityName.label}"
+                                          id="ol34"/>
+                        </f:facet>
+                        <af:inputText id="cl7"
+                                      value="#{row.bindings.OpportunityName.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.OpportunityName.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.OpportunityName.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.OpportunityName.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.OpportunityName.displayWidth}"
+                                      maximumLength="200" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.OpportunityName.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s12ON"
+                                        text="#{row.bindings.OpportunityName.attributeValue}"
+                                        shortDesc="#{bindings.ContactActivitiesTable.hints.OpportunityName.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Opportunity"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s12OpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Opp. - #{bindings.s12OpportunityName.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s12OpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s12CNCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="ContractNumber" rowHeader="false"
+                                 helpTopicId="RBH_S12CONTRACTNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.ContractNumber.label}"
+                                          id="ol35"/>
+                        </f:facet>
+                        <af:inputText id="cl8"
+                                      value="#{row.bindings.ContractNumber.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.ContractNumber.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.ContractNumber.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.ContractNumber.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.ContractNumber.displayWidth}"
+                                      maximumLength="50" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.ContractNumber.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.ContractNumber.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s12CN"
+                                        text="#{row.bindings.ContractNumber.attributeValue}"
+                                        shortDesc="#{bindings.ContactActivitiesTable.hints.ContractNumber.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Contract"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s12ContractId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Contract - #{bindings.s12ContractNumber.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s12ContractId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueContract}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s12TTNCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetTrackingNo" align="right"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S12TARGETTRACKINGNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.TargetTrackingNo.label}"
+                                          id="ol36"/>
+                        </f:facet>
+                        <af:inputText id="cl9"
+                                      value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.TargetTrackingNo.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.TargetTrackingNo.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.TargetTrackingNo.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.TargetTrackingNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.TargetTrackingNo.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ContactActivitiesTable.hints.TargetTrackingNo.format}"/>
+                        </af:inputText>
+                        <af:commandLink id="s12TTN"
+                                        text="#{row.bindings.TargetTrackingNo.attributeValue}"
+                                        shortDesc="#{bindings.ContactActivitiesTable.hints.TargetTrackingNo.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Titles"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s12TitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Title - #{bindings.s12TargetTrackingNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s12TitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s12CatCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="CatalogNumber" rowHeader="false"
+                                 helpTopicId="RBH_S12CATALOGNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.CatalogNumber.label}"
+                                          id="ol37"/>
+                        </f:facet>
+                        <af:inputText id="s12Cat"
+                                      value="#{row.bindings.CatalogNumber.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.CatalogNumber.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.CatalogNumber.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.CatalogNumber.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.CatalogNumber.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.CatalogNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12LTCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240"
+                                 sortProperty="LongTitle" rowHeader="false"
+                                 helpTopicId="RBH_S12LONGTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.LongTitle.label}"
+                                          id="ol38"/>
+                        </f:facet>
+                        <af:inputText id="s12LT"
+                                      value="#{row.bindings.LongTitle.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.LongTitle.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.LongTitle.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.LongTitle.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.LongTitle.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.LongTitle.tooltip}">
+                          <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12STCol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="ShortTitle" rowHeader="false"
+                                 helpTopicId="RBH_S12SHORTTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.ShortTitle.label}"
+                                          id="ol39"/>
+                        </f:facet>
+                        <af:inputText id="s12ST"
+                                      value="#{row.bindings.ShortTitle.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.ShortTitle.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.ShortTitle.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.ShortTitle.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.ShortTitle.displayWidth}"
+                                      maximumLength="30" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.ShortTitle.tooltip}">
+                          <f:validator binding="#{row.bindings.ShortTitle.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12DNCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="DisplayName" rowHeader="false"
+                                 helpTopicId="RBH_S12DISPLAYNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.DisplayName.label}"
+                                          id="ol40"/>
+                        </f:facet>
+                        <af:inputText id="s12DN"
+                                      value="#{row.bindings.DisplayName.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.DisplayName.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.DisplayName.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.DisplayName.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.DisplayName.displayWidth}"
+                                      maximumLength="100" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.DisplayName.tooltip}">
+                          <f:validator binding="#{row.bindings.DisplayName.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12OwnCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="Owner" rowHeader="false"
+                                 helpTopicId="RBH_S12OWNER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.Owner.label}"
+                                          id="ol41"/>
+                        </f:facet>
+                        <af:inputText id="s12Own"
+                                      value="#{row.bindings.Owner.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.Owner.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.Owner.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.Owner.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.Owner.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.Owner.tooltip}">
+                          <f:validator binding="#{row.bindings.Owner.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S12CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.CreatedBy.label}"
+                                          id="ol42"/>
+                        </f:facet>
+                        <af:inputText id="s12CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.CreatedBy.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S12CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.CreatedDate.label}"
+                                          id="ol43"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id8">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s12CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.CreatedDate.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s12LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S12LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.LastUpdatedBy.label}"
+                                          id="ol44"/>
+                        </f:facet>
+                        <af:inputText id="s12LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.ContactActivitiesTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.ContactActivitiesTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s12LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S12LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ContactActivitiesTable.hints.LastUpdatedDate.label}"
+                                          id="ol45"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id9">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s12LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.ContactActivitiesTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.ContactActivitiesTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ContactActivitiesTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+          </af:panelTabbed>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="ConDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="ConDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_CONTACT: #{bindings.ConFirstName.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteContacts.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="ConNotesPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher" childCreation="deferred">
+          <af:dialog modal="true" resize="on" title="Text Editor" id="dialog0">
+            <af:inputText rows="10" columns="100"
+                          value="#{bindings.ConNotes.inputValue}" simple="true"
+                          maximumLength="4000" id="ConNotesEditorText"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s10DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s10DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_CONTACTMETHOD:#{pageFlowScope.ContactMethodsTable.currentRowAttributeValues.ContactMethod}']} "
+                           id="ot1"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteContactMethods.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s11DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s11DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_CONTACTCONTENTOWNER:#{pageFlowScope.ContactContentOwnersTable.currentRowAttributeValues.Name}']} "
+                           id="ot4"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteContactContentOwners.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="jhsLovPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher"
+                  binding="#{pageFlowScope.jhsLovPopup.component}">
+          <af:dialog modal="true" title="#{pageFlowScope.LovItemBean.lovTitle}"
+                     type="none" id="dialog1" resize="on"
+                     stretchChildren="first"
+                     contentWidth="#{pageFlowScope.LovItemBean.lovWidth}"
+                     contentHeight="#{pageFlowScope.LovItemBean.lovHeight}">
+            <af:region value="#{bindings.LovTaskFlow.regionModel}"
+                       id="region0"/>
+            <f:facet name="buttonBar">
+              <af:group id="g0">
+                <af:commandButton textAndAccessKey="#{nls['OK_BUTTON_LABEL']}"
+                                  id="cb0" partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.handleLovSelection}"/>
+                <af:commandButton textAndAccessKey="#{nls['CANCEL']}" id="cb1"
+                                  partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.cancelLov}"/>
+              </af:group>
+            </f:facet>
+          </af:dialog>
+          <af:clientListener method="popupClosedListener" type="popupClosed"/>
+          <af:serverListener type="serverPopupClosed"
+                             method="#{pageFlowScope.LovItemBean.cancelLov}"/>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

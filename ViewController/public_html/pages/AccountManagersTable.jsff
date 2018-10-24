@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="AMgTopLc"
+                             partialTriggers=" AMgDeleteDialog AMgSaveButton0 AMgCancelButton0 asAreaAMgSearchOptions qsAreaAMgSearchOptions AMgPC:AMgArm AMgPC:AMgdelrmTM AMgPC:AMgArl AMgPC:AMgTab:AMgdelrm AMgPC:AMgTab:AMgdelrl"
+                             rendered="#{jhsUserRoles['AST, GCA, ADMIN']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_ACCOUNTMANAGERS']}"
+                          helpTopicId="RBH_ACCOUNTMANAGERS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0">
+                    <af:commandButton actionListener="#{CreateAccountManagers.execute}"
+                                      action="CreateAMg"
+                                      textAndAccessKey="#{nls['NEW_BUTTON_LABEL_ACCOUNTMANAGERS']}"
+                                      rendered="#{(true) and (jhsUserRoles['AST,GCA,ADMIN'])}"
+                                      id="AMgNewButton"></af:commandButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton action="#{SaveAccountManagers.execute}"
+                                      rendered="#{(((jhsUserRoles['AST,GCA,ADMIN']) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="AMgSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="AMgCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:panelGroupLayout id="modelSearchAreaAMg"
+                                 rendered="#{!pageFlowScope.createModes.CreateAccountManagers and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreaAMgSearchOptions:qsButtonAMg qsAreaAMgSearchOptions:asButtonAMg ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreaAMgSearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.AccountManagersIteratorPrmAllianceManagerViewCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.AccountManagersIteratorPrmAllianceManagerViewCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.AccountManagersIteratorPrmAllianceManagerViewCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.AccountManagersIteratorPrmAllianceManagerViewCriteriaQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchAccountManagers.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonAMg"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchAccountManagers.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreaAMgSearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.AccountManagersIteratorPrmAllianceManagerQuickQueryQuery.queryDescriptor}"
+                             model="#{bindings.AccountManagersIteratorPrmAllianceManagerQuickQueryQuery.queryModel}"
+                             queryListener="#{bindings.AccountManagersIteratorPrmAllianceManagerQuickQueryQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchAccountManagers.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonAMg"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchAccountManagers.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="AMgPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="AccountManagersDetails"></af:commandMenuItem>
+                    <af:group id="AMgtbb"
+                              rendered="#{ bindings.AccountManagersIterator.currentRow!=null }">
+                      <af:commandMenuItem actionListener="#{bindings.FirstAccountManagers.execute}"
+                                          id="AMgFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousAccountManagers.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="AMgPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextAccountManagers.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="AMgNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastAccountManagers.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="AMgLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem id="AMgArm"
+                                      textAndAccessKey="#{nls['ADD_ROW']}"
+                                      immediate="false"
+                                      icon="/jheadstart/images/addRow.png"
+                                      partialSubmit="true"
+                                      actionListener="#{pageFlowScope.AccountManagersTable.addRow}"
+                                      rendered="#{(true) and (jhsUserRoles['AST,GCA,ADMIN'])}"></af:commandMenuItem>
+                  <af:commandMenuItem id="AMgdelrmTM"
+                                      textAndAccessKey="#{nls['DELETE_ROW']}"
+                                      icon="/jheadstart/images/deleteRow.png"
+                                      partialSubmit="true" immediate="true"
+                                      rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                    <af:showPopupBehavior popupId="::AMgDeletePopup"/>
+                  </af:commandMenuItem>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="AMgTab"
+                                                       type="excelHTML"
+                                                       filename="AccountManagers.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <!-- Also create CreateAccountManagers bean so we can start table group in create mode as well -->
+                  <af:commandImageLink id="AMgArl" immediate="false"
+                                       rendered="#{(true) and (jhsUserRoles['AST,GCA,ADMIN'])}"
+                                       partialSubmit="true"
+                                       actionListener="#{pageFlowScope.AccountManagersTable.addRow}"
+                                       shortDesc="#{nls['ADD_ROW']}"
+                                       icon="/jheadstart/images/addRow.png"/>
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="AMgTab"
+                                                       type="excelHTML"
+                                                       filename="AccountManagers.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="AMgPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.AccountManagersIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="AMgTab" contentDelivery="immediate"
+                        value="#{bindings.AccountManagersTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.AccountManagersTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.AccountManagersTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.AccountManagersTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.AccountManagersTable.rangeSize}"
+                        autoHeightRows="#{bindings.AccountManagersTable.estimatedRowCount}"
+                        fetchSize="#{bindings.AccountManagersTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.AccountManagersIteratorPrmAllianceManagerQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.AccountManagersIteratorPrmAllianceManagerQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.AccountManagersTable.table}"
+                        partialTriggers=":::qsAreaAMgSearchOptions :::asAreaAMgSearchOptions :::AMgPC ::AMgFirst ::AMgPrevious ::AMgNext ::AMgLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_ACCOUNTMANAGERS']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="AMgTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="AccountManagersDetails"></af:commandMenuItem>
+                      </af:menu>
+                      <af:commandMenuItem id="AMgdelrm"
+                                          textAndAccessKey="#{nls['DELETE_ROW']}"
+                                          icon="/jheadstart/images/deleteRow.png"
+                                          partialSubmit="true" immediate="true"
+                                          rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                        <af:showPopupBehavior popupId=":::AMgDeletePopup"/>
+                      </af:commandMenuItem>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="AMgActionColumn" width="20" align="center"
+                           headerText=" ">
+                  <af:panelGroupLayout layout="horizontal" id="pgl1">
+                    <af:commandImageLink id="AMgdelrl" partialSubmit="true"
+                                         immediate="true"
+                                         rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                         shortDesc="#{nls['DELETE_ROW']}"
+                                         icon="/jheadstart/images/deleteRow.png">
+                      <af:showPopupBehavior popupId=":::AMgDeletePopup"/>
+                    </af:commandImageLink>
+                  </af:panelGroupLayout>
+                </af:column>
+                <af:column id="AMgUNmCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="Username"
+                           rowHeader="false" helpTopicId="RBH_AMGUSERNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountManagersTable.hints.Username.label}"
+                                    showRequired="#{bindings.AccountManagersTable.hints.Username.mandatory}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputListOfValues id="AMgUNm"
+                                        value="#{row.bindings.Username.inputValue}"
+                                        label="#{bindings.AccountManagersTable.hints.Username.label}"
+                                        popupTitle="#{nls['SEARCH_AND_SELECT']} #{bindings.AccountManagersTable.hints.Username.label}"
+                                        searchDesc="#{nls['SEARCH_AND_SELECT']} #{bindings.AccountManagersTable.hints.Username.label}"
+                                        required="#{bindings.AccountManagersTable.hints.Username.mandatory}"
+                                        columns="#{bindings.AccountManagersTable.hints.Username.displayWidth}"
+                                        maximumLength="240"
+                                        readOnly="#{((pageFlowScope.AccountManagersTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.AccountManagersTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                        shortDesc="#{bindings.AccountManagersTable.hints.Username.tooltip}"
+                                        model="#{row.bindings.Username.listOfValuesModel}">
+                    <f:validator binding="#{row.bindings.Username.validator}"/>
+                  </af:inputListOfValues>
+                </af:column>
+                <af:column id="AMgUTyCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="UserType"
+                           rowHeader="false" helpTopicId="RBH_AMGUSERTYPE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountManagersTable.hints.UserType.label}"
+                                    showRequired="#{bindings.AccountManagersTable.hints.UserType.mandatory}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:selectOneChoice id="AMgUTy"
+                                      value="#{row.bindings.UserType.inputValue}"
+                                      label="#{bindings.AccountManagersTable.hints.UserType.label}"
+                                      required="#{bindings.AccountManagersTable.hints.UserType.mandatory}"
+                                      readOnly="#{((pageFlowScope.AccountManagersTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.AccountManagersTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.AccountManagersTable.hints.UserType.tooltip}"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{row.bindings.UserType.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="AMgFNmCol" sortable="true" filterable="true"
+                           noWrap="true" width="180" sortProperty="FirstName"
+                           rowHeader="false" helpTopicId="RBH_AMGFIRSTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountManagersTable.hints.FirstName.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:inputText id="AMgFNm"
+                                value="#{row.bindings.FirstName.inputValue}"
+                                label="#{bindings.AccountManagersTable.hints.FirstName.label}"
+                                required="#{bindings.AccountManagersTable.hints.FirstName.mandatory}"
+                                rows="#{bindings.AccountManagersTable.hints.FirstName.displayHeight}"
+                                columns="#{bindings.AccountManagersTable.hints.FirstName.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.AccountManagersTable.hints.FirstName.tooltip}">
+                    <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AMgLNmCol" sortable="true" filterable="true"
+                           noWrap="true" width="180" sortProperty="LastName"
+                           rowHeader="false" helpTopicId="RBH_AMGLASTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountManagersTable.hints.LastName.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:inputText id="AMgLNm"
+                                value="#{row.bindings.LastName.inputValue}"
+                                label="#{bindings.AccountManagersTable.hints.LastName.label}"
+                                required="#{bindings.AccountManagersTable.hints.LastName.mandatory}"
+                                rows="#{bindings.AccountManagersTable.hints.LastName.displayHeight}"
+                                columns="#{bindings.AccountManagersTable.hints.LastName.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.AccountManagersTable.hints.LastName.tooltip}">
+                    <f:validator binding="#{row.bindings.LastName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AMgDNmCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="DisplayName"
+                           rowHeader="false" helpTopicId="RBH_AMGDISPLAYNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountManagersTable.hints.DisplayName.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:inputText id="cl1"
+                                value="#{row.bindings.DisplayName.inputValue}"
+                                label="#{bindings.AccountManagersTable.hints.DisplayName.label}"
+                                required="#{bindings.AccountManagersTable.hints.DisplayName.mandatory}"
+                                rows="#{bindings.AccountManagersTable.hints.DisplayName.displayHeight}"
+                                columns="#{bindings.AccountManagersTable.hints.DisplayName.displayWidth}"
+                                maximumLength="240" readOnly="true"
+                                shortDesc="#{bindings.AccountManagersTable.hints.DisplayName.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.DisplayName.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2"
+                                  shortDesc="#{bindings.AccountManagersTable.hints.DisplayName.tooltip}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="AccountManagersDetails"
+                                  text="#{row.DisplayName}"></af:commandLink>
+                </af:column>
+                <af:column id="AMgSDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="StartDate"
+                           rowHeader="false" helpTopicId="RBH_AMGSTARTDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountManagersTable.hints.StartDate.label}"
+                                    showRequired="#{bindings.AccountManagersTable.hints.StartDate.mandatory}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.StartDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="AMgSD"
+                                value="#{row.bindings.StartDate.inputValue}"
+                                label="#{bindings.AccountManagersTable.hints.StartDate.label}"
+                                required="#{bindings.AccountManagersTable.hints.StartDate.mandatory}"
+                                readOnly="#{((pageFlowScope.AccountManagersTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.AccountManagersTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.AccountManagersTable.hints.StartDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="AMgEDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="EndDate"
+                           rowHeader="false" helpTopicId="RBH_AMGENDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountManagersTable.hints.EndDate.label}"
+                                    showRequired="#{bindings.AccountManagersTable.hints.EndDate.mandatory}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.EndDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="AMgED"
+                                value="#{row.bindings.EndDate.inputValue}"
+                                label="#{bindings.AccountManagersTable.hints.EndDate.label}"
+                                required="#{bindings.AccountManagersTable.hints.EndDate.mandatory}"
+                                readOnly="#{((pageFlowScope.AccountManagersTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.AccountManagersTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.AccountManagersTable.hints.EndDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="AMgDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="AMgDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_ACCOUNTMANAGER:#{pageFlowScope.AccountManagersTable.currentRowAttributeValues.DisplayName}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteAccountManagers.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

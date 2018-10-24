@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="TechnicalContactLookupTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-lov-taskflow-template.xml</document>
+      <id id="__1">jhs-lov-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartTechnicalContactLookup</default-activity>
+    <data-control-scope id="__3">
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__4">
+      <name id="__5">rowKeyStrTechnicalContactLookup</name>
+      <value id="__6">#{pageFlowScope.rowKeyStrTechnicalContactLookup}</value>
+      <class id="__7">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name id="__9">rowKeyValueTechnicalContactLookup</name>
+      <value id="__10">#{pageFlowScope.rowKeyValueTechnicalContactLookup}</value>
+      <class id="__11">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__12">
+      <name id="__13">rowKeyTechnicalContactLookup</name>
+      <value id="__14">#{pageFlowScope.rowKeyTechnicalContactLookup}</value>
+      <class id="__15">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__16">
+      <name id="__17">altKeyNameTechnicalContactLookup</name>
+      <value id="__18">#{pageFlowScope.altKeyNameTechnicalContactLookup}</value>
+      <class id="__19">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__20">
+      <name id="__21">CurrentContentOwner</name>
+      <value id="__22">#{pageFlowScope.CurrentContentOwner}</value>
+    </input-parameter-definition>
+    <return-value-definition id="__23">
+      <name>LovValidationRow</name>
+      <value>#{pageFlowScope.LovValidationRow}</value>
+    </return-value-definition>
+    <managed-bean id="__24">
+      <managed-bean-name id="__25">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__26">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__27">pageFlow</managed-bean-scope>
+      <managed-property id="__28">
+        <property-name id="__29">initializeParentContextEntries</property-name>
+        <map-entries id="__30">
+          <map-entry id="__31">
+            <key id="__32">jhsCurrentGroupName</key>
+            <value id="__33">TechnicalContactLookup</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__34">
+      <managed-bean-name id="__35">searchTechnicalContactLookup</managed-bean-name>
+      <managed-bean-class id="__36">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__37">pageFlow</managed-bean-scope>
+      <managed-property id="__38">
+        <property-name id="__39">bindings</property-name>
+        <value id="__40">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__41">
+        <property-name id="__42">searchBinding</property-name>
+        <value id="__43">#{'#{bindings.advancedSearchTechnicalContactLookup}'}</value>
+      </managed-property>
+      <managed-property id="__44">
+        <property-name id="__45">searchItem</property-name>
+        <value id="__46">TechnicalContactLookupFirstName</value>
+      </managed-property>
+      <managed-property id="__47">
+        <property-name id="__48">dataCollection</property-name>
+        <value id="__49">TechnicalContactLookup</value>
+      </managed-property>
+      <managed-property id="__50">
+        <property-name id="__51">operators</property-name>
+        <map-entries id="__52"></map-entries>
+      </managed-property>
+      <managed-property id="__53">
+        <property-name id="__54">itemAttributes</property-name>
+        <map-entries id="__55">
+          <map-entry id="__56">
+            <key id="__57">TechnicalContactLookupContactName</key>
+            <value id="__58">ContactName</value>
+          </map-entry>
+          <map-entry id="__59">
+            <key id="__60">TechnicalContactLookupJobTitle</key>
+            <value id="__61">JobTitle</value>
+          </map-entry>
+          <map-entry id="__62">
+            <key id="__63">TechnicalContactLookupJobRole</key>
+            <value id="__64">JobRole</value>
+          </map-entry>
+          <map-entry id="__65">
+            <key id="__66">TechnicalContactLookupFirstName</key>
+            <value id="__67">FirstName</value>
+          </map-entry>
+          <map-entry id="__68">
+            <key id="__69">TechnicalContactLookupMiddleName</key>
+            <value id="__70">MiddleName</value>
+          </map-entry>
+          <map-entry id="__71">
+            <key id="__72">TechnicalContactLookupLastName</key>
+            <value id="__73">LastName</value>
+          </map-entry>
+          <map-entry id="__74">
+            <key id="__75">TechnicalContactLookupTitle</key>
+            <value id="__76">Title</value>
+          </map-entry>
+          <map-entry id="__77">
+            <key id="__78">TechnicalContactLookupGender</key>
+            <value id="__79">Gender</value>
+          </map-entry>
+          <map-entry id="__80">
+            <key id="__81">TechnicalContactLookupPronunciation</key>
+            <value id="__82">Pronunciation</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__83">
+      <managed-bean-name id="__84">TechnicalContactLookupPage</managed-bean-name>
+      <managed-bean-class id="__85">oracle.jheadstart.controller.jsf.bean.LovPageBean</managed-bean-class>
+      <managed-bean-scope id="__86">pageFlow</managed-bean-scope>
+      <managed-property id="__87">
+        <property-name id="__88">multiSelect</property-name>
+        <value id="__89">false</value>
+      </managed-property>
+      <managed-property id="__90">
+        <property-name id="__91">lovItemBean</property-name>
+        <value id="__92">#{pageFlowScope.lovItemBeanRef}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__93">
+      <managed-bean-name id="__94">TechnicalContactLookupTable</managed-bean-name>
+      <managed-bean-class id="__95">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__96">pageFlow</managed-bean-scope>
+      <managed-property id="__97">
+        <property-name id="__98">name</property-name>
+        <value id="__99">TechnicalContactLookupTable</value>
+      </managed-property>
+      <managed-property id="__100">
+        <property-name id="__101">rangeBindingExpr</property-name>
+        <value id="__102">#{'#{bindings.TechnicalContactLookupTable}'}</value>
+      </managed-property>
+      <managed-property id="__103">
+        <property-name id="__104">createNewRowAtTop</property-name>
+        <value id="__105">true</value>
+      </managed-property>
+      <managed-property id="__106">
+        <property-name id="__107">lovPage</property-name>
+        <value id="__108">#{pageFlowScope.TechnicalContactLookupPage}</value>
+      </managed-property>
+      <managed-property id="__109">
+        <property-name id="__110">focusItemId</property-name>
+        <value id="__111">TechnicalContactLookupContactName</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartTechnicalContactLookup">
+      <case id="__112">
+        <expression id="__113">#{pageFlowScope.lovItemBeanRef.validationStarted}</expression>
+        <outcome id="__114">DoValidation</outcome>
+      </case>
+      <case id="__115">
+        <expression id="__116">#{pageFlowScope.lovItemBeanRef.lovSearchValue!=null}</expression>
+        <outcome id="__117">PreQueryUsingSearchValue</outcome>
+      </case>
+      <case id="__118">
+        <expression id="__119">#{pageFlowScope.rowKeyStrTechnicalContactLookup!=null
+                               or
+                               pageFlowScope.rowKeyValueTechnicalContactLookup!=null
+                               or
+                               pageFlowScope.rowKeyTechnicalContactLookup!=null}</expression>
+        <outcome id="__120">SetCurrentRowTechnicalContactLookup</outcome>
+      </case>
+      <case id="__121">
+        <expression id="__122">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__123">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__124">clearSearchCriteria</default-outcome>
+    </router>
+    <method-call id="ClearSearchCriteria">
+      <method id="__125">#{pageFlowScope.searchTechnicalContactLookup.clearSearchCriteriaAndRequery}</method>
+      <outcome id="__126">
+        <fixed-outcome id="__127">firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="PreQueryUsingSearchValue">
+      <method id="__128">#{pageFlowScope.searchTechnicalContactLookup.quickSearch}</method>
+      <parameter>
+        <value id="__129">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__130">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__131">
+        <fixed-outcome>firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="DoValidation">
+      <method id="__132">#{pageFlowScope.searchTechnicalContactLookup.quickSearch}</method>
+      <parameter>
+        <value id="__133">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__134">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__135">
+        <fixed-outcome>DoneTechnicalContactLookupReturn</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowTechnicalContactLookup">
+      <method id="__136">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__137">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__138">#{bindings.TechnicalContactLookupIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__139">java.lang.String</class>
+        <value id="__140">#{pageFlowScope.rowKeyStrTechnicalContactLookup}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__141">java.lang.Object</class>
+        <value id="__142">#{pageFlowScope.rowKeyValueTechnicalContactLookup}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__143">oracle.jbo.Key</class>
+        <value id="__144">#{pageFlowScope.rowKeyTechnicalContactLookup}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__145">java.lang.String</class>
+        <value id="__146">#{pageFlowScope.altKeyNameTechnicalContactLookup}</value>
+      </parameter>
+      <outcome id="__147">
+        <fixed-outcome id="__148">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelTechnicalContactLookupReturn">
+      <outcome id="__149">
+        <name id="__150">CancelTechnicalContactLookup</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneTechnicalContactLookupReturn">
+      <outcome id="__151">
+        <name id="__152">DoneTechnicalContactLookup</name>
+      </outcome>
+    </task-flow-return>
+    <view id="TechnicalContactLookupTable">
+      <page id="__153">/pages/TechnicalContactLookupTable.jsff</page>
+    </view>
+    <control-flow-rule id="__154">
+      <from-activity-id id="__155">*</from-activity-id>
+      <control-flow-case id="__156">
+        <from-outcome id="__157">SetCurrentRowTechnicalContactLookup</from-outcome>
+        <to-activity-id id="__158">SetCurrentRowTechnicalContactLookup</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__159">
+        <from-outcome id="__160">firstPage</from-outcome>
+        <to-activity-id id="__161">TechnicalContactLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__162">
+        <from-outcome id="__163">deepLinkPage</from-outcome>
+        <to-activity-id id="__164">TechnicalContactLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__165">
+        <from-outcome id="__166">TechnicalContactLookupTableBreadcrumb</from-outcome>
+        <to-activity-id id="__167">TechnicalContactLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__168">
+        <from-outcome id="__169">Cancel</from-outcome>
+        <to-activity-id id="__170">StartTechnicalContactLookup</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__171">
+        <from-outcome id="__172">CancelTechnicalContactLookupReturn</from-outcome>
+        <to-activity-id id="__173">CancelTechnicalContactLookupReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__174">
+        <from-outcome id="__175">DoneTechnicalContactLookupReturn</from-outcome>
+        <to-activity-id id="__176">DoneTechnicalContactLookupReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__177">
+      <from-activity-id id="__178">*</from-activity-id>
+      <control-flow-case id="__179">
+        <from-outcome id="__180">clearSearchCriteria</from-outcome>
+        <to-activity-id id="__181">ClearSearchCriteria</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__182">
+        <from-outcome id="__183">PreQueryUsingSearchValue</from-outcome>
+        <to-activity-id id="__184">PreQueryUsingSearchValue</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__185">
+        <from-outcome id="__186">DoValidation</from-outcome>
+        <to-activity-id id="__187">DoValidation</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__188">
+    <managed-bean-name id="__189">TechnicalContactLookupTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__190">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__191">pageFlow</managed-bean-scope>
+    <managed-property id="__192">
+      <property-name id="__193">params</property-name>
+      <property-class id="__194">java.util.Map</property-class>
+      <map-entries id="__195">
+        <map-entry id="__196">
+          <key id="__197">parentContext</key>
+          <value id="__198">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+        <map-entry id="__199">
+          <key id="__200">CurrentContentOwner</key>
+          <value id="__201"></value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__202">
+      <property-name id="__203">name</property-name>
+      <value id="__204">TechnicalContactLookup</value>
+    </managed-property>
+    <managed-property id="__205">
+      <property-name id="__206">taskFlowId</property-name>
+      <value id="__207">/WEB-INF/adfc-config-TechnicalContactLookup.xml#TechnicalContactLookupTaskFlow</value>
+    </managed-property>
+    <managed-property id="__208">
+      <property-name id="__209">tabUniqueIdentifier</property-name>
+      <value id="__210">TechnicalContactLookup</value>
+    </managed-property>
+    <managed-property id="__211">
+      <property-name id="__212">label</property-name>
+      <value id="__213">Contacts</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__214">
+    <managed-bean-name id="__215">TechnicalContactLookupQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__216">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__217">request</managed-bean-scope>
+    <managed-property id="__218">
+      <property-name id="__219">namedParamDefs</property-name>
+      <map-entries id="__220">
+        <map-entry id="__221">
+          <key id="__222">content_owner_id</key>
+          <value id="__223">#{'#{pageFlowScope.CurrentContentOwner}'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="AccountLookupSinglePageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <iterator id="AccountLookupSingleIterator" Binds="AccountLookupView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="50"/>
+    <searchRegion id="AccountLookupSingleIteratorAccountLookupViewCriteriaQuery"
+                  Binds="AccountLookupSingleIterator"
+                  Criteria="AccountLookupViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <attributeValues id="AccountLookupSingleId"
+                     IterBinding="AccountLookupSingleIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccountLookupSingleContentOwnerNo"
+                     IterBinding="AccountLookupSingleIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccountLookupSingleName"
+                     IterBinding="AccountLookupSingleIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccountLookupSingleSite"
+                     IterBinding="AccountLookupSingleIterator">
+      <AttrNames>
+        <Item Value="Site"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccountLookupSingleKeyAccountLevel"
+                     IterBinding="AccountLookupSingleIterator">
+      <AttrNames>
+        <Item Value="KeyAccountLevel"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="AccountLookupSinglePoolFlag"
+            IterBinding="AccountLookupSingleIterator" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PoolFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="AccountLookupSingleOpenOpps"
+                     IterBinding="AccountLookupSingleIterator">
+      <AttrNames>
+        <Item Value="OpenOpps"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccountLookupSingleTargetedTitles"
+                     IterBinding="AccountLookupSingleIterator">
+      <AttrNames>
+        <Item Value="TargetedTitles"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AccountLookupSingleCampaignName"
+                     IterBinding="AccountLookupSingleIterator">
+      <AttrNames>
+        <Item Value="CampaignName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountLookupSingleTable"
+          IterBinding="AccountLookupSingleIterator">
+      <nodeDefinition Name="AccountLookupSingle"
+                      DefName="com.pq.tracs.model.lookup.AccountLookupView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContentOwnerNo"/>
+          <Item Value="Name"/>
+          <Item Value="Site"/>
+          <Item Value="KeyAccountLevel"/>
+          <Item Value="PoolFlag"/>
+          <Item Value="OpenOpps"/>
+          <Item Value="TargetedTitles"/>
+          <Item Value="CampaignName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountLookupSingle"
+            IterBinding="AccountLookupSingleIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousAccountLookupSingle"
+            IterBinding="AccountLookupSingleIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextAccountLookupSingle"
+            IterBinding="AccountLookupSingleIterator" RequiresUpdateModel="true"
+            Action="next"/>
+    <action id="LastAccountLookupSingle"
+            IterBinding="AccountLookupSingleIterator" RequiresUpdateModel="true"
+            Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchAccountLookupSingle"
+                  IterBinding="AccountLookupSingleIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchAccountLookupSingle.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchAccountLookupSingle.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchAccountLookupSingle.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyAccountLookupSingle"
+            IterBinding="AccountLookupSingleIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountLookupSingle}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

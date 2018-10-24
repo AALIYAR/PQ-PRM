@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="ImportsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'PI, ADMIN, AM, AST, PM'}"/>
+  </parameters>
+  <executables>
+    <iterator id="ImportsIterator" Binds="TraxImportFileView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="15"/>
+    <searchRegion id="ImportsIteratorTraxImportFileViewCriteriaQuery"
+                  Binds="ImportsIterator" Criteria="TraxImportFileViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="FileName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <searchRegion id="ImportsIteratorTraxImportFileQuickQueryQuery"
+                  Binds="ImportsIterator" Criteria="TraxImportFileQuickQuery"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="FileName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryImportsInvoke" Binds="ExecuteQueryImports"
+                  Refresh="renderModel" RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="ParseResultsIterator" Binds="TraxImportDataParseView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="ParseResultsIteratorQuery" Binds="ParseResultsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Title"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryParseResultsInvoke"
+                  Binds="ExecuteQueryParseResults" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="PotentialMatchesIterator"
+              Binds="TraxImportPotentialMatchView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="PotentialMatchesIteratorQuery"
+                  Binds="PotentialMatchesIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Title"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryPotentialMatchesInvoke"
+                  Binds="ExecuteQueryPotentialMatches" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="ValidationMessagesIterator"
+              Binds="TraxImportValidationMessageView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="ValidationMessagesIteratorQuery"
+                  Binds="ValidationMessagesIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="MessageType"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="ImportResultsIterator" Binds="TraxImportResultsView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="ImportResultsIteratorQuery" Binds="ImportResultsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="TitleId"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryImportResultsInvoke"
+                  Binds="ExecuteQueryImportResults" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteQueryImports" IterBinding="ImportsIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="ImportsId" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsTargetGroupId" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="TargetGroupId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsGroupId" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="GroupId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsImportNumber" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ImportNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsFileName" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="FileName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ImportsIterator" id="ImportsImportType"
+          Uses="LOV_ImportType" StaticList="false"/>
+    <attributeValues id="ImportsImportTypeCheck" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ImportTypeCheck"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsImportStatus" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ImportStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsImportFile" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ImportFile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsImportFileDL" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ImportFile"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsParsedRowCount" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ParsedRowCount"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="ImportsStartValidate"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="validateImportData"
+                  ReturnName="PrmAppModuleDataControl.methodResults.validateImportData_PrmAppModuleDataControl_dataProvider_validateImportData_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="pFileId" NDValue="#{bindings.ImportsId.inputValue}"
+                 NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <attributeValues id="ImportsPotentialMatchCount"
+                     IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="PotentialMatchCount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsValidatedRowCount"
+                     IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ValidatedRowCount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsValidationWarningCount"
+                     IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ValidationWarningCount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsValidationErrorCount"
+                     IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ValidationErrorCount"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="ImportsStartImport" DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="saveImportData"
+                  ReturnName="PrmAppModuleDataControl.methodResults.saveImportData_PrmAppModuleDataControl_dataProvider_saveImportData_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="pFileId" NDValue="#{bindings.ImportsId.inputValue}"
+                 NDType="oracle.jbo.domain.Number"/>
+    </methodAction>
+    <attributeValues id="ImportsImportedRowCount" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ImportedRowCount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsGroupName" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsGroupType" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="GroupType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsImportNote" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="ImportNote"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsCreatedBy" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsCreatedDate" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsLastUpdatedBy" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportsLastUpdatedDate" IterBinding="ImportsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ImportsTable" IterBinding="ImportsIterator">
+      <nodeDefinition Name="Imports"
+                      DefName="com.pq.tracs.model.vo.TraxImportFileView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="TargetGroupId"/>
+          <Item Value="GroupId"/>
+          <Item Value="ImportNumber"/>
+          <Item Value="FileName"/>
+          <Item Value="ImportType"/>
+          <Item Value="ImportTypeCheck"/>
+          <Item Value="ImportStatus"/>
+          <Item Value="ImportFile"/>
+          <Item Value="ImportFile"/>
+          <Item Value="ImportFile"/>
+          <Item Value="ImportFile"/>
+          <Item Value="ParsedRowCount"/>
+          <Item Value="PotentialMatchCount"/>
+          <Item Value="ValidatedRowCount"/>
+          <Item Value="ValidationWarningCount"/>
+          <Item Value="ValidationErrorCount"/>
+          <Item Value="ImportedRowCount"/>
+          <Item Value="GroupName"/>
+          <Item Value="GroupType"/>
+          <Item Value="ImportNote"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstImports" IterBinding="ImportsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousImports" IterBinding="ImportsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextImports" IterBinding="ImportsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastImports" IterBinding="ImportsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyImports" IterBinding="ImportsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr" NDValue="#{pageFlowScope.rowKeyStrImports}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateImports" IterBinding="ImportsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteImports" IterBinding="ImportsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryParseResults" IterBinding="ParseResultsIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="ParseResultsRowNumber"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="RowNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsTitle" IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsIssn" IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="Issn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsOnlineIssn"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="OnlineIssn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsIsbn" IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="Isbn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsSubjects"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="Subjects"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsLanguages"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="Languages"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsPublicationStartYear"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="PublicationStartYear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsPublicationCity"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="PublicationCity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsPrimaryPmClass"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="PrimaryPmClass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsPeerReview"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="PeerReview"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsOpenAccess"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="OpenAccess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsAccountNo"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="AccountNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsPublisher"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="Publisher"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsSubjectType"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="SubjectType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsCatalogingSourceUrl"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="CatalogingSourceUrl"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ParseResultsIterator" id="ParseResultsValidationStatus"
+          Uses="LOV_ValidationStatus" StaticList="false"/>
+    <attributeValues id="ParseResultsCreatedBy"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ParseResultsCreatedDate"
+                     IterBinding="ParseResultsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ParseResultsTable" IterBinding="ParseResultsIterator">
+      <nodeDefinition Name="ParseResults"
+                      DefName="com.pq.tracs.model.vo.TraxImportDataParseView">
+        <AttrNames>
+          <Item Value="RowNumber"/>
+          <Item Value="Title"/>
+          <Item Value="Issn"/>
+          <Item Value="OnlineIssn"/>
+          <Item Value="Isbn"/>
+          <Item Value="Subjects"/>
+          <Item Value="Languages"/>
+          <Item Value="PublicationStartYear"/>
+          <Item Value="PublicationCity"/>
+          <Item Value="PrimaryPmClass"/>
+          <Item Value="PeerReview"/>
+          <Item Value="OpenAccess"/>
+          <Item Value="AccountNo"/>
+          <Item Value="Publisher"/>
+          <Item Value="SubjectType"/>
+          <Item Value="CatalogingSourceUrl"/>
+          <Item Value="ValidationStatus"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstParseResults" IterBinding="ParseResultsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousParseResults" IterBinding="ParseResultsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextParseResults" IterBinding="ParseResultsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastParseResults" IterBinding="ParseResultsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyParseResults"
+            IterBinding="ParseResultsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrParseResults}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="DeleteParseResults" IterBinding="ParseResultsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryPotentialMatches"
+            IterBinding="PotentialMatchesIterator" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues id="PotentialMatchesId"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesParseID"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="ParseID"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesTitleId"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="TitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesUlrichsTitleId"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="UlrichsTitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesContractId"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesOpportunityId"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="OpportunityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesRowNumber"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="RowNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="PotentialMatchesUseUlrichsFlag"
+            IterBinding="PotentialMatchesIterator" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="UseUlrichsFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="PotentialMatchesIgnoreMatchFlag"
+            IterBinding="PotentialMatchesIterator" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="IgnoreMatchFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="PotentialMatchesIgnoreRecordFlag"
+            IterBinding="PotentialMatchesIterator" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="IgnoreRecordFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="PotentialMatchesParseTitle"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="ParseTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesParseIssn"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="ParseIssn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesMatchedBy"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="MatchedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesTargetTrackingNo"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesCatalogNumber"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesUlrichsSerialId"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="UlrichsSerialId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesTitleType"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="TitleType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesTitle"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesClassification"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="Classification"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesContractNumber"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="ContractNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesOpportunityNo"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="OpportunityNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesOpportunityName"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="OpportunityName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesCreatedBy"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesCreatedDate"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesLastUpdatedBy"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="PotentialMatchesLastUpdatedDate"
+                     IterBinding="PotentialMatchesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="PotentialMatchesTable" IterBinding="PotentialMatchesIterator">
+      <nodeDefinition Name="PotentialMatches"
+                      DefName="com.pq.tracs.model.vo.TraxImportPotentialMatchView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ParseID"/>
+          <Item Value="TitleId"/>
+          <Item Value="UlrichsTitleId"/>
+          <Item Value="ContractId"/>
+          <Item Value="OpportunityId"/>
+          <Item Value="RowNumber"/>
+          <Item Value="UseUlrichsFlag"/>
+          <Item Value="IgnoreMatchFlag"/>
+          <Item Value="IgnoreRecordFlag"/>
+          <Item Value="ParseTitle"/>
+          <Item Value="ParseIssn"/>
+          <Item Value="MatchedBy"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="UlrichsSerialId"/>
+          <Item Value="TitleType"/>
+          <Item Value="Title"/>
+          <Item Value="Classification"/>
+          <Item Value="ContractNumber"/>
+          <Item Value="OpportunityNo"/>
+          <Item Value="OpportunityName"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstPotentialMatches" IterBinding="PotentialMatchesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousPotentialMatches" IterBinding="PotentialMatchesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextPotentialMatches" IterBinding="PotentialMatchesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastPotentialMatches" IterBinding="PotentialMatchesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyPotentialMatches"
+            IterBinding="PotentialMatchesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrPotentialMatches}"
+                 NDType="java.lang.String"/>
+    </action>
+    <attributeValues id="ValidationMessagesRowNumber"
+                     IterBinding="ValidationMessagesIterator">
+      <AttrNames>
+        <Item Value="RowNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ValidationMessagesTitle"
+                     IterBinding="ValidationMessagesIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ValidationMessagesIssn"
+                     IterBinding="ValidationMessagesIterator">
+      <AttrNames>
+        <Item Value="Issn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ValidationMessagesMessageType"
+                     IterBinding="ValidationMessagesIterator">
+      <AttrNames>
+        <Item Value="MessageType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ValidationMessagesMessage"
+                     IterBinding="ValidationMessagesIterator">
+      <AttrNames>
+        <Item Value="Message"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ValidationMessagesCreatedBy"
+                     IterBinding="ValidationMessagesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ValidationMessagesCreatedDate"
+                     IterBinding="ValidationMessagesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ValidationMessagesTable" IterBinding="ValidationMessagesIterator">
+      <nodeDefinition Name="ValidationMessages"
+                      DefName="com.pq.tracs.model.vo.TraxImportValidationMessageView">
+        <AttrNames>
+          <Item Value="RowNumber"/>
+          <Item Value="Title"/>
+          <Item Value="Issn"/>
+          <Item Value="MessageType"/>
+          <Item Value="Message"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstValidationMessages"
+            IterBinding="ValidationMessagesIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousValidationMessages"
+            IterBinding="ValidationMessagesIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextValidationMessages" IterBinding="ValidationMessagesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastValidationMessages" IterBinding="ValidationMessagesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyValidationMessages"
+            IterBinding="ValidationMessagesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrValidationMessages}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="ExecuteQueryImportResults" IterBinding="ImportResultsIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="ImportResultsTitleId"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="TitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsRowNumber"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="RowNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsTitleType"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="TitleType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsTitle"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsIssn" IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="Issn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsOnlineIssn"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="OnlineIssn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsIsbn" IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="Isbn"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsAccountNo"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="AccountNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsTargetTrackingNo"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsCatalogNumber"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ImportResultsLongTitle"
+                     IterBinding="ImportResultsIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="ImportResultsTargetFlag" IterBinding="ImportResultsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="TargetFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree id="ImportResultsTable" IterBinding="ImportResultsIterator">
+      <nodeDefinition Name="ImportResults"
+                      DefName="com.pq.tracs.model.vo.TraxImportResultsView">
+        <AttrNames>
+          <Item Value="TitleId"/>
+          <Item Value="RowNumber"/>
+          <Item Value="TitleType"/>
+          <Item Value="Title"/>
+          <Item Value="Issn"/>
+          <Item Value="OnlineIssn"/>
+          <Item Value="Isbn"/>
+          <Item Value="AccountNo"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="TargetFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstImportResults" IterBinding="ImportResultsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousImportResults" IterBinding="ImportResultsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextImportResults" IterBinding="ImportResultsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastImportResults" IterBinding="ImportResultsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyImportResults"
+            IterBinding="ImportResultsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrImportResults}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

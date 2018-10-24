@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="EventAttachmentsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="bindingContainersToPrepare" value="#{'EventsPageDef'}"/>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, RO, ADMIN, BSSRO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="EventAttachmentsIterator" Binds="TraxEventAttachmentView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+  </executables>
+  <bindings>
+    <attributeValues id="sb1Name" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1Attachment" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1AttachmentDL"
+                     IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1AttachmentType"
+                     IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="AttachmentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1Description" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1FileSize" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="FileSize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1CreatedBy" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1CreatedDate" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1LastUpdatedBy"
+                     IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1LastUpdatedDate"
+                     IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="EventAttachmentsTable" IterBinding="EventAttachmentsIterator">
+      <nodeDefinition Name="EventAttachments"
+                      DefName="com.pq.tracs.model.vo.TraxEventAttachmentView">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="AttachmentType"/>
+          <Item Value="Description"/>
+          <Item Value="FileSize"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyEventAttachments"
+            IterBinding="EventAttachmentsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrEventAttachments}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

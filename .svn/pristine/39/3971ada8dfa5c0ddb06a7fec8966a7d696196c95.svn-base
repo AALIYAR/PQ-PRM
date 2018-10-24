@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="TitleLookupPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <iterator id="TitleLookupIterator" Binds="TitleLookup"
+              DataControl="PrmAppModuleDataControl" RangeSize="50"
+              RefreshCondition="#{pageFlowScope.searchTitleLookup.emptyRowSetCreated}"/>
+    <searchRegion id="TitleLookupIteratorTitleLookupViewCriteriaQuery"
+                  Binds="TitleLookupIterator" Criteria="TitleLookupViewCriteria"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="LongTitle"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <attributeValues id="TitleLookupId" IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupContentOwnerId"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupTargetTrackingNo"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupCatalogNumber"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupLongTitle"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupCurrentCatalogNumber"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="CurrentCatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupContentOwnerNo"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupAccountName"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupAccountSite"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupProductLine"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="ProductLine"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupCatalogRoot"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="CatalogRoot"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupCatalogSuffix"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="CatalogSuffix"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupShortTitle"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="ShortTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupAuthor" IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="Author"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupFilmAvailability"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="FilmAvailability"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupBibliographicStatus"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="BibliographicStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupPublicationStartYear"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="PublicationStartYear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupPublicationEndYear"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="PublicationEndYear"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupExercisingRights"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="ExercisingRights"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupPrimaryPmClass"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="PrimaryPmClass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupSecondaryPmClass"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="SecondaryPmClass"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupContentType"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="ContentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupSubContentType"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="SubContentType"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="TitleLookupPeerReviewFlag" IterBinding="TitleLookupIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PeerReviewFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="TitleLookupOpenAccess"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="OpenAccess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupActiveFlag"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="ActiveFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupSubject" IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="Subject"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupSubjectCode"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="SubjectCode"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupSubjectType"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="SubjectType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TitleLookupCurrentCatalogId"
+                     IterBinding="TitleLookupIterator">
+      <AttrNames>
+        <Item Value="CurrentCatalogId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="TitleLookupTable" IterBinding="TitleLookupIterator">
+      <nodeDefinition Name="TitleLookup"
+                      DefName="com.pq.tracs.model.lookup.TitleLookupView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="CurrentCatalogNumber"/>
+          <Item Value="ContentOwnerNo"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountSite"/>
+          <Item Value="ProductLine"/>
+          <Item Value="CatalogRoot"/>
+          <Item Value="CatalogSuffix"/>
+          <Item Value="ShortTitle"/>
+          <Item Value="Author"/>
+          <Item Value="FilmAvailability"/>
+          <Item Value="BibliographicStatus"/>
+          <Item Value="PublicationStartYear"/>
+          <Item Value="PublicationEndYear"/>
+          <Item Value="ExercisingRights"/>
+          <Item Value="PrimaryPmClass"/>
+          <Item Value="SecondaryPmClass"/>
+          <Item Value="ContentType"/>
+          <Item Value="SubContentType"/>
+          <Item Value="PeerReviewFlag"/>
+          <Item Value="OpenAccess"/>
+          <Item Value="ActiveFlag"/>
+          <Item Value="Subject"/>
+          <Item Value="SubjectCode"/>
+          <Item Value="SubjectType"/>
+          <Item Value="CurrentCatalogId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTitleLookup" IterBinding="TitleLookupIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousTitleLookup" IterBinding="TitleLookupIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextTitleLookup" IterBinding="TitleLookupIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastTitleLookup" IterBinding="TitleLookupIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchTitleLookup"
+                  IterBinding="TitleLookupIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchTitleLookup.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchTitleLookup.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchTitleLookup.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyTitleLookup"
+            IterBinding="TitleLookupIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTitleLookup}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

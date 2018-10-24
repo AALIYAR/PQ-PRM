@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html">
+  <af:componentDef>
+    <af:panelGroupLayout id="modelSearchAreaPrd"
+                         rendered="#{!pageFlowScope.createModes.CreateProducts and !pageFlowScope.hideSearchArea}"
+                         partialTriggers=" asAreaPrdSearchOptions:qsButtonPrd qsAreaPrdSearchOptions:asButtonPrd ">
+      <f:attribute name="JhsIgnoreChanges" value="true"/>
+      <af:query id="asAreaPrdSearchOptions"
+                headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                value="#{bindings.ProductsIteratorPrmTargetedProductViewCriteriaQuery.queryDescriptor}"
+                model="#{bindings.ProductsIteratorPrmTargetedProductViewCriteriaQuery.queryModel}"
+                queryListener="#{bindings.ProductsIteratorPrmTargetedProductViewCriteriaQuery.processQuery}"
+                queryOperationListener="#{bindings.ProductsIteratorPrmTargetedProductViewCriteriaQuery.processQueryOperation}"
+                rendered="#{!pageFlowScope.searchProducts.quickSearchMode}"
+                rows="1" labelAlignment="top" maxColumns="4">
+        <f:facet name="toolbar">
+          <af:commandButton partialSubmit="true" id="qsButtonPrd"
+                            immediate="true"
+                            textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                            action="#{pageFlowScope.searchProducts.switchToQuickSearchMode}"/>
+        </f:facet>
+      </af:query>
+      <af:quickQuery id="qsAreaPrdSearchOptions" label="#{nls['FILTER_BY']}"
+                     value="#{bindings.ProductsIteratorPrmTargetedProductQuickQueryQuery.queryDescriptor}"
+                     model="#{bindings.ProductsIteratorPrmTargetedProductQuickQueryQuery.queryModel}"
+                     queryListener="#{bindings.ProductsIteratorPrmTargetedProductQuickQueryQuery.processQuery}"
+                     rendered="#{pageFlowScope.searchProducts.quickSearchMode}">
+        <f:facet name="end">
+          <af:commandLink id="asButtonPrd"
+                          textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                          partialSubmit="true" immediate="true"
+                          action="#{pageFlowScope.searchProducts.switchToAdvancedSearchMode}"/>
+        </f:facet>
+      </af:quickQuery>
+    </af:panelGroupLayout>
+  </af:componentDef>
+</jsp:root>
+

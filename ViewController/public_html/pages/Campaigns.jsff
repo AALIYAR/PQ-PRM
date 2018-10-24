@@ -1,0 +1,2145 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="CamTopLc"
+                             partialTriggers=" CamDeleteDialog Camfbb CamNewButton CamDelB CamSaveButton0 CamCancelButton0 CamSaveButton1 CamCancelButton1"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateCampaigns ? nls['INSERT_TITLE_CAMPAIGNS'] :  (jhsUserRoles['AM,AST,GCA,ADMIN'] ? nls['EDIT_TITLE_CAMPAIGN: #{bindings.CamCampaignName.inputValue}'] : nls['VIEW_TITLE_CAMPAIGN: #{bindings.CamCampaignName.inputValue}'])  }"
+                          helpTopicId="RBH_CAMPAIGNS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="Camfbb" layout="horizontal"
+                                       rendered="#{ bindings.CampaignsIterator.currentRow!=null  and bindings.CampaignsIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateCampaigns and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="CamFirst CamPrevious CamNext CamLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstCampaigns.execute}"
+                                             id="CamFirst" partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousCampaigns.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="CamPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1} / #{bindings.CampaignsIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextCampaigns.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="CamNext" partialSubmit="true"
+                                             rendered="#{bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1 lt bindings.CampaignsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1 lt bindings.CampaignsIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastCampaigns.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="CamLast" partialSubmit="true"
+                                             rendered="#{bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1 lt bindings.CampaignsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.CampaignsIterator.rangeStart+bindings.CampaignsIterator.currentRowIndexInRange+1 lt bindings.CampaignsIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateCampaigns.execute}"
+                                             action="CreateCam"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_CAMPAIGNS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateCampaigns and (true) and (jhsUserRoles['GCA,ADMIN'])}"
+                                             id="CamNewButton"></af:commandToolbarButton>
+                    <af:commandToolbarButton action="DeleteCampaigns"
+                                             partialSubmit="true"
+                                             icon="/jheadstart/images/deleteRow.png"
+                                             shortDesc="#{nls['DELETE_BUTTON_LABEL_CAMPAIGNS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateCampaigns and  bindings.CampaignsIterator.currentRow!=null   and (jhsUserRoles['GCA,ADMIN'])}"
+                                             immediate="true" id="CamDelB">
+                      <af:showPopupBehavior popupId="CamDeletePopup"/>
+                    </af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="CamPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveCampaigns.execute}"
+                                      rendered="#{((((((((((((((jhsUserRoles['GCA,ADMIN']) or (jhsUserRoles['AM,AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="CamSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="CamCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.CampaignsIterator.findMode!='true'}"
+                       id="CamSw" defaultFacet="hasRows"
+                       facetName="#{( bindings.CampaignsIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp" id="CamNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="CamFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="4"
+                                    id="CamFI">
+                  <af:inputText id="CamCNm"
+                                value="#{bindings.CamCampaignName.inputValue}"
+                                label="#{bindings.CamCampaignName.hints.label}"
+                                required="#{bindings.CamCampaignName.hints.mandatory}"
+                                rows="#{bindings.CamCampaignName.hints.displayHeight}"
+                                columns="#{bindings.CamCampaignName.hints.displayWidth}"
+                                maximumLength="400"
+                                readOnly="#{((pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.CamCampaignName.hints.tooltip}"
+                                helpTopicId="RBH_CAMCAMPAIGNNAME">
+                    <f:validator binding="#{bindings.CamCampaignName.validator}"/>
+                  </af:inputText>
+                  <af:selectOneChoice id="CamCTy"
+                                      value="#{bindings.CamCampaignType.inputValue}"
+                                      label="#{bindings.CamCampaignType.hints.label}"
+                                      required="#{bindings.CamCampaignType.hints.mandatory}"
+                                      readOnly="#{((pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CamCampaignType.hints.tooltip}"
+                                      helpTopicId="RBH_CAMCAMPAIGNTYPE">
+                    <f:selectItems value="#{bindings.CamCampaignType.items}"/>
+                  </af:selectOneChoice>
+                  <af:popup id="hoverPopup0">
+                    <af:noteWindow>
+                      <af:outputText value="#{bindings.CamCampaignDescription.inputValue}"/>
+                    </af:noteWindow>
+                  </af:popup>
+                  <af:panelLabelAndMessage label="#{bindings.CamCampaignDescription.hints.label}"
+                                           shortDesc="#{bindings.CamCampaignDescription.hints.tooltip}"
+                                           helpTopicId="RBH_CAMCAMPAIGNDESCRIPTION"
+                                           showRequired="#{bindings.CamCampaignDescription.hints.mandatory}"
+                                           id="CamCampaignDescriptionLabel">
+                    <af:inputText id="CamCDs"
+                                  value="#{bindings.CamCampaignDescription.inputValue}"
+                                  required="#{bindings.CamCampaignDescription.hints.mandatory}"
+                                  rows="#{bindings.CamCampaignDescription.hints.displayHeight}"
+                                  columns="#{bindings.CamCampaignDescription.hints.displayWidth}"
+                                  maximumLength="4000"
+                                  readOnly="#{((pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                                  autoSubmit="true" simple="true"
+                                  partialTriggers="CamCampaignDescriptionEditorLink CamCampaignDescriptionEditorText">
+                      <f:validator binding="#{bindings.CamCampaignDescription.validator}"/>
+                      <af:showPopupBehavior popupId="hoverPopup0"
+                                            triggerType="mouseHover"
+                                            align="endAfter"/>
+                    </af:inputText>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl0" valign="top"
+                                           layout="horizontal">
+                        <af:commandLink id="CamCampaignDescriptionEditorLink"
+                                        rendered="#{!(((pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))))}"
+                                        immediate="true" partialSubmit="true">
+                          <af:showPopupBehavior popupId="CamCampaignDescriptionPopup"/>
+                          <af:image source="/jheadstart/images/editor.gif"
+                                    id="CamCampaignDescriptionIcon"
+                                    clientComponent="true"/>
+                        </af:commandLink>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputDate id="CamSD"
+                                value="#{bindings.CamStartDate.inputValue}"
+                                label="#{bindings.CamStartDate.hints.label}"
+                                required="#{bindings.CamStartDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.CamStartDate.hints.tooltip}"
+                                helpTopicId="RBH_CAMSTARTDATE">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                  <af:inputDate id="CamED"
+                                value="#{bindings.CamEndDate.inputValue}"
+                                label="#{bindings.CamEndDate.hints.label}"
+                                required="#{bindings.CamEndDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.CamEndDate.hints.tooltip}"
+                                helpTopicId="RBH_CAMENDDATE">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                  <af:selectBooleanCheckbox id="CamAF"
+                                            value="#{bindings.CamActiveFlag.inputValue}"
+                                            label="#{bindings.CamActiveFlag.hints.label}"
+                                            readOnly="#{((pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateCampaigns) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.CamActiveFlag.hints.tooltip}"
+                                            helpTopicId="RBH_CAMACTIVEFLAG"></af:selectBooleanCheckbox>
+                  <af:inputText id="CamCB"
+                                value="#{bindings.CamCreatedBy.inputValue}"
+                                label="#{bindings.CamCreatedBy.hints.label}"
+                                required="#{bindings.CamCreatedBy.hints.mandatory}"
+                                rows="#{bindings.CamCreatedBy.hints.displayHeight}"
+                                columns="#{bindings.CamCreatedBy.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.CamCreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_CAMCREATEDBY">
+                    <f:validator binding="#{bindings.CamCreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="CamCD"
+                                value="#{bindings.CamCreatedDate.inputValue}"
+                                label="#{bindings.CamCreatedDate.hints.label}"
+                                required="#{bindings.CamCreatedDate.hints.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.CamCreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_CAMCREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="CamLUB"
+                                value="#{bindings.CamLastUpdatedBy.inputValue}"
+                                label="#{bindings.CamLastUpdatedBy.hints.label}"
+                                required="#{bindings.CamLastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.CamLastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.CamLastUpdatedBy.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.CamLastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_CAMLASTUPDATEDBY">
+                    <f:validator binding="#{bindings.CamLastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="CamLUD"
+                                value="#{bindings.CamLastUpdatedDate.inputValue}"
+                                label="#{bindings.CamLastUpdatedDate.hints.label}"
+                                required="#{bindings.CamLastUpdatedDate.hints.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.CamLastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_CAMLASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" " helpTopicId="RBH_CAMPAIGNS">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveCampaigns.execute}"
+                                            rendered="#{((((((((((((((jhsUserRoles['GCA,ADMIN']) or (jhsUserRoles['AM,AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="CamSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="CamCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+          <af:panelTabbed position="above" childCreation="lazy" id="pst0"
+                          dimensionsFrom="auto" styleClass="AFStretchWidth">
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_CAMPAIGNOPPORTUNITIES']}"
+                               partialTriggers=" CamTopLc s90DeleteDialog qsAreas90SearchOptions s90PC:s90Arm s90PC:s90delrmTM s90PC:s90Arl s90PC:s90Tab:s90delrm s90PC:s90Tab:s90delrl"
+                               id="s90TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s90TopLc"
+                                   partialTriggers=" CamTopLc s90DeleteDialog qsAreas90SearchOptions s90PC:s90Arm s90PC:s90delrmTM s90PC:s90Arl s90PC:s90Tab:s90delrm s90PC:s90Tab:s90delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp3"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas90"
+                                     rendered="#{!pageFlowScope.createModes.CreateCampaignOpportunities and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas90SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.CampaignOpportunitiesIteratorPrmCampaignOpportunityViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.CampaignOpportunitiesIteratorPrmCampaignOpportunityViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.CampaignOpportunitiesIteratorPrmCampaignOpportunityViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl1">
+                  <af:panelCollection id="s90PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu0">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu1">
+                          <af:group id="s90tbb"
+                                    rendered="#{ bindings.CampaignOpportunitiesIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstCampaignOpportunities.execute}"
+                                                id="s90First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousCampaignOpportunities.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s90Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextCampaignOpportunities.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s90Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastCampaignOpportunities.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s90Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s90Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.CampaignOpportunitiesTable.addRow}"
+                                            rendered="#{ bindings.CampaignsIterator.currentRow!=null  and (jhsUserRoles['AST,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s90delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s90DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi0">
+                          <af:exportCollectionActionListener exportedId="s90Tab"
+                                                             type="excelHTML"
+                                                             filename="CampaignOpportunities.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar1">
+                        <!-- Also create CreateCampaignOpportunities bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s90Arl" immediate="false"
+                                             rendered="#{ bindings.CampaignsIterator.currentRow!=null  and (jhsUserRoles['AST,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.CampaignOpportunitiesTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl0"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s90Tab"
+                                                             type="excelHTML"
+                                                             filename="CampaignOpportunities.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s90Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.CampaignOpportunitiesIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s90Tab" contentDelivery="immediate"
+                              value="#{bindings.CampaignOpportunitiesTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.CampaignOpportunitiesTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.CampaignOpportunitiesTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.CampaignOpportunitiesTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.CampaignOpportunitiesTable.rangeSize}"
+                              autoHeightRows="#{bindings.CampaignOpportunitiesTable.estimatedRowCount lt 5 ? 5 : bindings.CampaignOpportunitiesTable.estimatedRowCount lt bindings.CampaignOpportunitiesTable.rangeSize ? bindings.CampaignOpportunitiesTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.CampaignOpportunitiesTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.CampaignOpportunitiesIteratorPrmCampaignOpportunityViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.CampaignOpportunitiesIteratorPrmCampaignOpportunityViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.CampaignOpportunitiesTable.table}"
+                              partialTriggers=":::qsAreas90SearchOptions :::s90PC ::s90First ::s90Previous ::s90Next ::s90Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_CAMPAIGNOPPORTUNITIES']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s90TablePopup" childCreation="deferred">
+                          <af:menu id="menu2">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu3"></af:menu>
+                            <af:commandMenuItem id="s90delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s90DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s90ActionColumn" frozen="true" width="20"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl2">
+                          <af:commandImageLink id="s90delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s90DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s90OpportunityNoCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="OpportunityNo" rowHeader="false"
+                                 helpTopicId="RBH_S90OPPORTUNITYNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.OpportunityNo.label}"
+                                          id="ol0"/>
+                        </f:facet>
+                        <af:inputText id="s90OpportunityNo"
+                                      value="#{row.bindings.OpportunityNo.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.OpportunityNo.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.OpportunityNo.mandatory}"
+                                      rows="#{bindings.CampaignOpportunitiesTable.hints.OpportunityNo.displayHeight}"
+                                      columns="#{bindings.CampaignOpportunitiesTable.hints.OpportunityNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.OpportunityNo.tooltip}"
+                                      autoSubmit="true"
+                                      valueChangeListener="#{s90OpportunityNoDependsOnItem.updateModelValue}">
+                          <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.CampaignOpportunitiesTable.hints.OpportunityNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s90ONmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="260"
+                                 sortProperty="OpportunityName"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S90OPPORUNITYNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.OpportunityName.label}"
+                                          showRequired="#{bindings.CampaignOpportunitiesTable.hints.OpportunityName.mandatory}"
+                                          id="ol1"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s90OpporunityNamePgl"
+                                             layout="horizontal">
+                          <af:inputText id="s90ONm"
+                                        label="#{bindings.CampaignOpportunitiesTable.hints.OpportunityName.label}"
+                                        readOnly="#{((pageFlowScope.CampaignOpportunitiesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignOpportunitiesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                        columns="#{bindings.CampaignOpportunitiesTable.hints.OpportunityName.displayWidth}"
+                                        maximumLength="200"
+                                        shortDesc="#{bindings.CampaignOpportunitiesTable.hints.OpportunityName.tooltip}"
+                                        value="#{row.bindings.OpportunityName.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s90OpporunityNameLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s90OpporunityNameLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.CampaignOpportunitiesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignOpportunitiesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))))}"
+                                          id="cl1"
+                                          actionListener="#{pageFlowScope.s90OpporunityNameLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s90OpporunityNameIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb2"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s90OpporunityNameLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s90OpporunityNameLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s90ELCol" noWrap="true" width="30"
+                                 rowHeader="false" helpTopicId="RBH_S90EDITLINK"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="Edit" id="ol2"/>
+                        </f:facet>
+                        <af:inputText id="cl2" value="" label="Edit"
+                                      required="false" columns="5"
+                                      maximumLength="5" readOnly="true"
+                                      disabled="#{row.bindings.OpportunityNo.attributeValue == null}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}"></af:inputText>
+                        <af:commandLink id="s90EL" text="Edit"
+                                        disabled="#{row.bindings.OpportunityNo.attributeValue == null}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Opportunity"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s90PrmOpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="#{bindings.s90OpportunityName.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s90PrmOpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s90OTyCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="OpportunityType"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S90OPPORTUNITYTYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.OpportunityType.label}"
+                                          id="ol3"/>
+                        </f:facet>
+                        <af:inputText id="s90OTy"
+                                      value="#{row.bindings.OpportunityType.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.OpportunityType.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.OpportunityType.mandatory}"
+                                      rows="#{bindings.CampaignOpportunitiesTable.hints.OpportunityType.displayHeight}"
+                                      columns="#{bindings.CampaignOpportunitiesTable.hints.OpportunityType.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.OpportunityType.tooltip}">
+                          <f:validator binding="#{row.bindings.OpportunityType.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s90ANmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="AccountName" rowHeader="false"
+                                 helpTopicId="RBH_S90ACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.AccountName.label}"
+                                          id="ol4"/>
+                        </f:facet>
+                        <af:inputText id="s90ANm"
+                                      value="#{row.bindings.AccountName.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.AccountName.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.AccountName.mandatory}"
+                                      rows="#{bindings.CampaignOpportunitiesTable.hints.AccountName.displayHeight}"
+                                      columns="#{bindings.CampaignOpportunitiesTable.hints.AccountName.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.AccountName.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s90AStCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="AccountSite" rowHeader="false"
+                                 helpTopicId="RBH_S90SITE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.AccountSite.label}"
+                                          id="ol5"/>
+                        </f:facet>
+                        <af:inputText id="s90ASt"
+                                      value="#{row.bindings.AccountSite.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.AccountSite.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.AccountSite.mandatory}"
+                                      rows="#{bindings.CampaignOpportunitiesTable.hints.AccountSite.displayHeight}"
+                                      columns="#{bindings.CampaignOpportunitiesTable.hints.AccountSite.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.AccountSite.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s90ADCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="AddedDate" rowHeader="false"
+                                 helpTopicId="RBH_S90ADDEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.AddedDate.label}"
+                                          showRequired="#{bindings.CampaignOpportunitiesTable.hints.AddedDate.mandatory}"
+                                          id="ol6"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                        id="id0">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s90AD"
+                                      value="#{row.bindings.AddedDate.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.AddedDate.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.AddedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.CampaignOpportunitiesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignOpportunitiesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.AddedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s90RDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="RemovedDate" rowHeader="false"
+                                 helpTopicId="RBH_S90REMOVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.RemovedDate.label}"
+                                          showRequired="#{bindings.CampaignOpportunitiesTable.hints.RemovedDate.mandatory}"
+                                          id="ol7"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                        id="id1">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s90RD"
+                                      value="#{row.bindings.RemovedDate.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.RemovedDate.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.RemovedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.CampaignOpportunitiesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignOpportunitiesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.RemovedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s90OpportunityStatusCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="OpportunityStatus"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S90OPPORTUNITYSTATUS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.OpportunityStatus.label}"
+                                          id="ol8"/>
+                        </f:facet>
+                        <af:inputText id="s90OpportunityStatus"
+                                      value="#{row.bindings.OpportunityStatus.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.OpportunityStatus.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.OpportunityStatus.mandatory}"
+                                      rows="#{bindings.CampaignOpportunitiesTable.hints.OpportunityStatus.displayHeight}"
+                                      columns="#{bindings.CampaignOpportunitiesTable.hints.OpportunityStatus.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      disabled="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.OpportunityStatus.tooltip}">
+                          <f:validator binding="#{row.bindings.OpportunityStatus.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s90ARDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="AgreementReceivedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S90AGREEMENTRECEIVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.AgreementReceivedDate.label}"
+                                          id="ol9"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AgreementReceivedDate}"
+                                        id="id2">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s90ARD"
+                                      value="#{row.bindings.AgreementReceivedDate.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.AgreementReceivedDate.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.AgreementReceivedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.AgreementReceivedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s90ReasonLostCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="ReasonLost" rowHeader="false"
+                                 helpTopicId="RBH_S90REASONLOST"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.ReasonLost.label}"
+                                          id="ol10"/>
+                        </f:facet>
+                        <af:inputText id="s90ReasonLost"
+                                      value="#{row.bindings.ReasonLost.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.ReasonLost.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.ReasonLost.mandatory}"
+                                      rows="#{bindings.CampaignOpportunitiesTable.hints.ReasonLost.displayHeight}"
+                                      columns="#{bindings.CampaignOpportunitiesTable.hints.ReasonLost.displayWidth}"
+                                      maximumLength="80" readOnly="true"
+                                      disabled="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.ReasonLost.tooltip}">
+                          <f:validator binding="#{row.bindings.ReasonLost.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s90AllianceManagerCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="AllianceManager"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S90ALLIANCEMANAGER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.AllianceManager.label}"
+                                          id="ol11"/>
+                        </f:facet>
+                        <af:inputText id="s90AllianceManager"
+                                      value="#{row.bindings.AllianceManager.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.AllianceManager.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.AllianceManager.mandatory}"
+                                      rows="#{bindings.CampaignOpportunitiesTable.hints.AllianceManager.displayHeight}"
+                                      columns="#{bindings.CampaignOpportunitiesTable.hints.AllianceManager.displayWidth}"
+                                      maximumLength="101" readOnly="true"
+                                      disabled="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.AllianceManager.tooltip}">
+                          <f:validator binding="#{row.bindings.AllianceManager.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s90AccountProductDisciplineCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="180"
+                                 sortProperty="AccountProductDiscipline"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S90ACCOUNTPRODUCTDISCIPLINE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignOpportunitiesTable.hints.AccountProductDiscipline.label}"
+                                          id="ol12"/>
+                        </f:facet>
+                        <af:inputText id="s90AccountProductDiscipline"
+                                      value="#{row.bindings.AccountProductDiscipline.inputValue}"
+                                      label="#{bindings.CampaignOpportunitiesTable.hints.AccountProductDiscipline.label}"
+                                      required="#{bindings.CampaignOpportunitiesTable.hints.AccountProductDiscipline.mandatory}"
+                                      rows="#{bindings.CampaignOpportunitiesTable.hints.AccountProductDiscipline.displayHeight}"
+                                      columns="#{bindings.CampaignOpportunitiesTable.hints.AccountProductDiscipline.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      disabled="true"
+                                      shortDesc="#{bindings.CampaignOpportunitiesTable.hints.AccountProductDiscipline.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountProductDiscipline.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_CAMPAIGNACCOUNTS']}"
+                               partialTriggers=" CamTopLc s91DeleteDialog qsAreas91SearchOptions s91PC:s91Arm s91PC:s91duprmTM s91PC:s91delrmTM s91PC:s91Arl s91PC:s91Tab:s91duprm s91PC:s91Tab:s91delrm s91PC:s91Tab:s91delrl s91PC:s91Tab:s91duprl"
+                               id="s91TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s91TopLc"
+                                   partialTriggers=" CamTopLc s91DeleteDialog qsAreas91SearchOptions s91PC:s91Arm s91PC:s91duprmTM s91PC:s91delrmTM s91PC:s91Arl s91PC:s91Tab:s91duprm s91PC:s91Tab:s91delrm s91PC:s91Tab:s91delrl s91PC:s91Tab:s91duprl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp4"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas91"
+                                     rendered="#{!pageFlowScope.createModes.CreateCampaignAccounts and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas91SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.CampaignAccountsIteratorPrmCampaignAccountViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.CampaignAccountsIteratorPrmCampaignAccountViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.CampaignAccountsIteratorPrmCampaignAccountViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl3">
+                  <af:panelCollection id="s91PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu4">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu5">
+                          <af:group id="s91tbb"
+                                    rendered="#{ bindings.CampaignAccountsIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstCampaignAccounts.execute}"
+                                                id="s91First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousCampaignAccounts.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s91Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextCampaignAccounts.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s91Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastCampaignAccounts.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s91Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s91Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.CampaignAccountsTable.addRow}"
+                                            rendered="#{ bindings.CampaignsIterator.currentRow!=null  and (jhsUserRoles['AST,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s91duprmTM"
+                                            textAndAccessKey="#{nls['DUPLICATE_ROW']}"
+                                            immediate="true"
+                                            icon="/jheadstart/images/duplicateRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.CampaignAccountsTable.duplicateRow}"
+                                            rendered="#{jhsUserRoles['AST,GCA,ADMIN']}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s91delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s91DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi1">
+                          <af:exportCollectionActionListener exportedId="s91Tab"
+                                                             type="excelHTML"
+                                                             filename="CampaignAccounts.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar2">
+                        <!-- Also create CreateCampaignAccounts bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s91Arl" immediate="false"
+                                             rendered="#{ bindings.CampaignsIterator.currentRow!=null  and (jhsUserRoles['AST,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.CampaignAccountsTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl3"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s91Tab"
+                                                             type="excelHTML"
+                                                             filename="CampaignAccounts.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s91Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.CampaignAccountsIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s91Tab" contentDelivery="immediate"
+                              value="#{bindings.CampaignAccountsTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.CampaignAccountsTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.CampaignAccountsTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.CampaignAccountsTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.CampaignAccountsTable.rangeSize}"
+                              autoHeightRows="#{bindings.CampaignAccountsTable.estimatedRowCount lt 5 ? 5 : bindings.CampaignAccountsTable.estimatedRowCount lt bindings.CampaignAccountsTable.rangeSize ? bindings.CampaignAccountsTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.CampaignAccountsTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.CampaignAccountsIteratorPrmCampaignAccountViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.CampaignAccountsIteratorPrmCampaignAccountViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.CampaignAccountsTable.table}"
+                              partialTriggers=":::qsAreas91SearchOptions :::s91PC ::s91First ::s91Previous ::s91Next ::s91Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_CAMPAIGNACCOUNTS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s91TablePopup" childCreation="deferred">
+                          <af:menu id="menu6">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu7"></af:menu>
+                            <af:commandMenuItem id="s91duprm"
+                                                textAndAccessKey="#{nls['DUPLICATE_ROW']}"
+                                                immediate="true"
+                                                icon="/jheadstart/images/duplicateRow.png"
+                                                partialSubmit="true"
+                                                actionListener="#{pageFlowScope.CampaignAccountsTable.duplicateRow}"
+                                                rendered="#{jhsUserRoles['AST,GCA,ADMIN']}"></af:commandMenuItem>
+                            <af:commandMenuItem id="s91delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s91DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s91ActionColumn" frozen="true" width="40"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl4">
+                          <af:commandImageLink id="s91delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s91DeletePopup"/>
+                          </af:commandImageLink>
+                          <af:commandImageLink id="s91duprl" immediate="true"
+                                               partialSubmit="true"
+                                               actionListener="#{pageFlowScope.CampaignAccountsTable.duplicateRow}"
+                                               rendered="#{jhsUserRoles['AST,GCA,ADMIN']}"
+                                               shortDesc="#{nls['DUPLICATE_ROW']}"
+                                               icon="/jheadstart/images/duplicateRow.png"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s91ANmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="260"
+                                 sortProperty="AccountName" rowHeader="false"
+                                 helpTopicId="RBH_S91ACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignAccountsTable.hints.AccountName.label}"
+                                          showRequired="#{bindings.CampaignAccountsTable.hints.AccountName.mandatory}"
+                                          id="ol13"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s91AccountNamePgl"
+                                             layout="horizontal">
+                          <af:inputText id="s91ANm"
+                                        label="#{bindings.CampaignAccountsTable.hints.AccountName.label}"
+                                        readOnly="#{((pageFlowScope.CampaignAccountsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignAccountsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                        columns="#{bindings.CampaignAccountsTable.hints.AccountName.displayWidth}"
+                                        maximumLength="400"
+                                        shortDesc="#{bindings.CampaignAccountsTable.hints.AccountName.tooltip}"
+                                        value="#{row.bindings.AccountName.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s91AccountNameLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s91AccountNameLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.CampaignAccountsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignAccountsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))))}"
+                                          id="cl4"
+                                          actionListener="#{pageFlowScope.s91AccountNameLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s91AccountNameIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb5"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s91AccountNameLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s91AccountNameLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s91ELCol" noWrap="true" width="30"
+                                 rowHeader="false" helpTopicId="RBH_S91EDITLINK"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="Edit" id="ol14"/>
+                        </f:facet>
+                        <af:inputText id="cl5" value="" label="Edit"
+                                      required="false" columns="5"
+                                      maximumLength="5" readOnly="true"
+                                      disabled="#{row.bindings.AccountName.attributeValue == null}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}"></af:inputText>
+                        <af:commandLink id="s91EL" text="Edit"
+                                        disabled="#{row.bindings.AccountName.attributeValue == null}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Accounts"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s91ContentOwnerId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="#{bindings.s91AccountName.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s91ContentOwnerId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s91AStCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="AccountSite" rowHeader="false"
+                                 helpTopicId="RBH_S91ACCOUNTSITE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignAccountsTable.hints.AccountSite.label}"
+                                          id="ol15"/>
+                        </f:facet>
+                        <af:inputText id="s91ASt"
+                                      value="#{row.bindings.AccountSite.inputValue}"
+                                      label="#{bindings.CampaignAccountsTable.hints.AccountSite.label}"
+                                      required="#{bindings.CampaignAccountsTable.hints.AccountSite.mandatory}"
+                                      rows="#{bindings.CampaignAccountsTable.hints.AccountSite.displayHeight}"
+                                      columns="#{bindings.CampaignAccountsTable.hints.AccountSite.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.CampaignAccountsTable.hints.AccountSite.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s91ADCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="AddedDate" rowHeader="false"
+                                 helpTopicId="RBH_S91ADDEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignAccountsTable.hints.AddedDate.label}"
+                                          showRequired="#{bindings.CampaignAccountsTable.hints.AddedDate.mandatory}"
+                                          id="ol16"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                        id="id3">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s91AD"
+                                      value="#{row.bindings.AddedDate.inputValue}"
+                                      label="#{bindings.CampaignAccountsTable.hints.AddedDate.label}"
+                                      required="#{bindings.CampaignAccountsTable.hints.AddedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.CampaignAccountsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignAccountsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CampaignAccountsTable.hints.AddedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s91RDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="RemovedDate" rowHeader="false"
+                                 helpTopicId="RBH_S91REMOVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignAccountsTable.hints.RemovedDate.label}"
+                                          showRequired="#{bindings.CampaignAccountsTable.hints.RemovedDate.mandatory}"
+                                          id="ol17"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                        id="id4">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s91RD"
+                                      value="#{row.bindings.RemovedDate.inputValue}"
+                                      label="#{bindings.CampaignAccountsTable.hints.RemovedDate.label}"
+                                      required="#{bindings.CampaignAccountsTable.hints.RemovedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.CampaignAccountsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignAccountsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CampaignAccountsTable.hints.RemovedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s91CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S91CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignAccountsTable.hints.CreatedBy.label}"
+                                          id="ol18"/>
+                        </f:facet>
+                        <af:inputText id="s91CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.CampaignAccountsTable.hints.CreatedBy.label}"
+                                      required="#{bindings.CampaignAccountsTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.CampaignAccountsTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.CampaignAccountsTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignAccountsTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s91CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S91CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignAccountsTable.hints.CreatedDate.label}"
+                                          id="ol19"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id5">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s91CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.CampaignAccountsTable.hints.CreatedDate.label}"
+                                      required="#{bindings.CampaignAccountsTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.CampaignAccountsTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s91LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S91LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignAccountsTable.hints.LastUpdatedBy.label}"
+                                          id="ol20"/>
+                        </f:facet>
+                        <af:inputText id="s91LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.CampaignAccountsTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.CampaignAccountsTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.CampaignAccountsTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.CampaignAccountsTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignAccountsTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s91LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S91LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignAccountsTable.hints.LastUpdatedDate.label}"
+                                          id="ol21"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id6">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s91LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.CampaignAccountsTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.CampaignAccountsTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.CampaignAccountsTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_CAMPAIGNTITLES']}"
+                               partialTriggers=" CamTopLc s92DeleteDialog qsAreas92SearchOptions s92PC:s92Arm s92PC:s92delrmTM s92PC:s92Arl s92PC:s92Tab:s92delrm s92PC:s92Tab:s92delrl"
+                               id="s92TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s92TopLc"
+                                   partialTriggers=" CamTopLc s92DeleteDialog qsAreas92SearchOptions s92PC:s92Arm s92PC:s92delrmTM s92PC:s92Arl s92PC:s92Tab:s92delrm s92PC:s92Tab:s92delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp5"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas92"
+                                     rendered="#{!pageFlowScope.createModes.CreateCampaignTitles and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas92SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.CampaignTitlesIteratorPrmCampaignTitleViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.CampaignTitlesIteratorPrmCampaignTitleViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.CampaignTitlesIteratorPrmCampaignTitleViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl5">
+                  <af:panelCollection id="s92PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu8">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu9">
+                          <af:group id="s92tbb"
+                                    rendered="#{ bindings.CampaignTitlesIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstCampaignTitles.execute}"
+                                                id="s92First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousCampaignTitles.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s92Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextCampaignTitles.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s92Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastCampaignTitles.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s92Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s92Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.CampaignTitlesTable.addRow}"
+                                            rendered="#{ bindings.CampaignsIterator.currentRow!=null  and (jhsUserRoles['AST,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s92delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s92DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi2">
+                          <af:exportCollectionActionListener exportedId="s92Tab"
+                                                             type="excelHTML"
+                                                             filename="CampaignTitles.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar3">
+                        <!-- Also create CreateCampaignTitles bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s92Arl" immediate="false"
+                                             rendered="#{ bindings.CampaignsIterator.currentRow!=null  and (jhsUserRoles['AST,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.CampaignTitlesTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl6"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s92Tab"
+                                                             type="excelHTML"
+                                                             filename="CampaignTitles.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s92Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.CampaignTitlesIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s92Tab" contentDelivery="immediate"
+                              value="#{bindings.CampaignTitlesTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.CampaignTitlesTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.CampaignTitlesTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.CampaignTitlesTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.CampaignTitlesTable.rangeSize}"
+                              autoHeightRows="#{bindings.CampaignTitlesTable.estimatedRowCount lt 5 ? 5 : bindings.CampaignTitlesTable.estimatedRowCount lt bindings.CampaignTitlesTable.rangeSize ? bindings.CampaignTitlesTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.CampaignTitlesTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.CampaignTitlesIteratorPrmCampaignTitleViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.CampaignTitlesIteratorPrmCampaignTitleViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.CampaignTitlesTable.table}"
+                              partialTriggers=":::qsAreas92SearchOptions :::s92PC ::s92First ::s92Previous ::s92Next ::s92Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_CAMPAIGNTITLES']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s92TablePopup" childCreation="deferred">
+                          <af:menu id="menu10">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu11"></af:menu>
+                            <af:commandMenuItem id="s92delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s92DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s92ActionColumn" frozen="true" width="20"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl6">
+                          <af:commandImageLink id="s92delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s92DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s92TTNCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetTrackingNo"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S92TARGETTRACKINGNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.TargetTrackingNo.label}"
+                                          showRequired="#{bindings.CampaignTitlesTable.hints.TargetTrackingNo.mandatory}"
+                                          id="ol22"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s92TargetTrackingNoPgl"
+                                             layout="horizontal">
+                          <af:inputText id="s92TTN"
+                                        label="#{bindings.CampaignTitlesTable.hints.TargetTrackingNo.label}"
+                                        readOnly="#{((pageFlowScope.CampaignTitlesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignTitlesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                        columns="#{bindings.CampaignTitlesTable.hints.TargetTrackingNo.displayWidth}"
+                                        maximumLength="20"
+                                        shortDesc="#{bindings.CampaignTitlesTable.hints.TargetTrackingNo.tooltip}"
+                                        value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s92TargetTrackingNoLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s92TargetTrackingNoLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.CampaignTitlesTable.hints.TargetTrackingNo.format}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.CampaignTitlesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignTitlesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))))}"
+                                          id="cl7"
+                                          actionListener="#{pageFlowScope.s92TargetTrackingNoLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s92TargetTrackingNoIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb8"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s92TargetTrackingNoLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s92TargetTrackingNoLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s92ELCol" noWrap="true" width="30"
+                                 rowHeader="false" helpTopicId="RBH_S92EDITLINK"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="Edit" id="ol23"/>
+                        </f:facet>
+                        <af:inputText id="cl8" value="" label="Edit"
+                                      required="false" columns="5"
+                                      maximumLength="5" readOnly="true"
+                                      disabled="#{row.bindings.TargetTrackingNo.attributeValue == null}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}"></af:inputText>
+                        <af:commandLink id="s92EL" text="Edit"
+                                        disabled="#{row.bindings.TargetTrackingNo.attributeValue == null}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Titles"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s92TitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Title - #{bindings.s92TargetTrackingNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s92TitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s92CNCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CatalogNumber" rowHeader="false"
+                                 helpTopicId="RBH_S92CATALOGNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.CatalogNumber.label}"
+                                          id="ol24"/>
+                        </f:facet>
+                        <af:inputText id="s92CN"
+                                      value="#{row.bindings.CatalogNumber.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.CatalogNumber.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.CatalogNumber.mandatory}"
+                                      rows="#{bindings.CampaignTitlesTable.hints.CatalogNumber.displayHeight}"
+                                      columns="#{bindings.CampaignTitlesTable.hints.CatalogNumber.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.CatalogNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s92TtlCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="LongTitle" rowHeader="false"
+                                 helpTopicId="RBH_S92LONGTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.LongTitle.label}"
+                                          id="ol25"/>
+                        </f:facet>
+                        <af:inputText id="s92Ttl"
+                                      value="#{row.bindings.LongTitle.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.LongTitle.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.LongTitle.mandatory}"
+                                      rows="#{bindings.CampaignTitlesTable.hints.LongTitle.displayHeight}"
+                                      columns="#{bindings.CampaignTitlesTable.hints.LongTitle.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.LongTitle.tooltip}">
+                          <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s92ANoCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="AccountNo" rowHeader="false"
+                                 helpTopicId="RBH_S92ACCOUNTNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.AccountNo.label}"
+                                          id="ol26"/>
+                        </f:facet>
+                        <af:inputText id="s92ANo"
+                                      value="#{row.bindings.AccountNo.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.AccountNo.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.AccountNo.mandatory}"
+                                      rows="#{bindings.CampaignTitlesTable.hints.AccountNo.displayHeight}"
+                                      columns="#{bindings.CampaignTitlesTable.hints.AccountNo.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.AccountNo.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountNo.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s92ANmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="AccountName" rowHeader="false"
+                                 helpTopicId="RBH_S92ACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.AccountName.label}"
+                                          id="ol27"/>
+                        </f:facet>
+                        <af:inputText id="s92ANm"
+                                      value="#{row.bindings.AccountName.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.AccountName.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.AccountName.mandatory}"
+                                      rows="#{bindings.CampaignTitlesTable.hints.AccountName.displayHeight}"
+                                      columns="#{bindings.CampaignTitlesTable.hints.AccountName.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.AccountName.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s92ADCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="AddedDate" rowHeader="false"
+                                 helpTopicId="RBH_S92ADDEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.AddedDate.label}"
+                                          showRequired="#{bindings.CampaignTitlesTable.hints.AddedDate.mandatory}"
+                                          id="ol28"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                        id="id7">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s92AD"
+                                      value="#{row.bindings.AddedDate.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.AddedDate.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.AddedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.CampaignTitlesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignTitlesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.AddedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s92RDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="RemovedDate" rowHeader="false"
+                                 helpTopicId="RBH_S92REMOVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.RemovedDate.label}"
+                                          showRequired="#{bindings.CampaignTitlesTable.hints.RemovedDate.mandatory}"
+                                          id="ol29"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                        id="id8">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s92RD"
+                                      value="#{row.bindings.RemovedDate.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.RemovedDate.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.RemovedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.CampaignTitlesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignTitlesTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.RemovedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s92CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S92CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.CreatedBy.label}"
+                                          id="ol30"/>
+                        </f:facet>
+                        <af:inputText id="s92CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.CreatedBy.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.CampaignTitlesTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.CampaignTitlesTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s92CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S92CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.CreatedDate.label}"
+                                          id="ol31"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id9">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s92CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.CreatedDate.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s92LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S92LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.LastUpdatedBy.label}"
+                                          id="ol32"/>
+                        </f:facet>
+                        <af:inputText id="s92LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.CampaignTitlesTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.CampaignTitlesTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s92LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S92LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.LastUpdatedDate.label}"
+                                          id="ol33"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id10">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s92LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s92ExternalIndexCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="ExternalIndex" rowHeader="false"
+                                 helpTopicId="RBH_S92EXTERNALINDEX"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignTitlesTable.hints.ExternalIndex.label}"
+                                          id="ol34"/>
+                        </f:facet>
+                        <af:inputText id="s92ExternalIndex"
+                                      value="#{row.bindings.ExternalIndex.inputValue}"
+                                      label="#{bindings.CampaignTitlesTable.hints.ExternalIndex.label}"
+                                      required="#{bindings.CampaignTitlesTable.hints.ExternalIndex.mandatory}"
+                                      rows="#{bindings.CampaignTitlesTable.hints.ExternalIndex.displayHeight}"
+                                      columns="#{bindings.CampaignTitlesTable.hints.ExternalIndex.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.CampaignTitlesTable.hints.ExternalIndex.tooltip}">
+                          <f:validator binding="#{row.bindings.ExternalIndex.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_CAMPAIGNPRODUCTS']}"
+                               partialTriggers=" CamTopLc s93DeleteDialog qsAreas93SearchOptions s93PC:s93Arm s93PC:s93delrmTM s93PC:s93Arl s93PC:s93Tab:s93delrm s93PC:s93Tab:s93delrl"
+                               id="s93TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s93TopLc"
+                                   partialTriggers=" CamTopLc s93DeleteDialog qsAreas93SearchOptions s93PC:s93Arm s93PC:s93delrmTM s93PC:s93Arl s93PC:s93Tab:s93delrm s93PC:s93Tab:s93delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp6"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas93"
+                                     rendered="#{!pageFlowScope.createModes.CreateCampaignProducts and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas93SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.CampaignProductsIteratorPrmCampaignProductViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.CampaignProductsIteratorPrmCampaignProductViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.CampaignProductsIteratorPrmCampaignProductViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl7">
+                  <af:panelCollection id="s93PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu12">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu13">
+                          <af:group id="s93tbb"
+                                    rendered="#{ bindings.CampaignProductsIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstCampaignProducts.execute}"
+                                                id="s93First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousCampaignProducts.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s93Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextCampaignProducts.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s93Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastCampaignProducts.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s93Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s93Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.CampaignProductsTable.addRow}"
+                                            rendered="#{ bindings.CampaignsIterator.currentRow!=null  and (jhsUserRoles['AST,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s93delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s93DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi3">
+                          <af:exportCollectionActionListener exportedId="s93Tab"
+                                                             type="excelHTML"
+                                                             filename="CampaignProducts.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar4">
+                        <!-- Also create CreateCampaignProducts bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s93Arl" immediate="false"
+                                             rendered="#{ bindings.CampaignsIterator.currentRow!=null  and (jhsUserRoles['AST,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.CampaignProductsTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl9"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s93Tab"
+                                                             type="excelHTML"
+                                                             filename="CampaignProducts.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s93Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.CampaignProductsIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s93Tab" contentDelivery="immediate"
+                              value="#{bindings.CampaignProductsTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.CampaignProductsTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.CampaignProductsTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.CampaignProductsTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.CampaignProductsTable.rangeSize}"
+                              autoHeightRows="#{bindings.CampaignProductsTable.estimatedRowCount lt 5 ? 5 : bindings.CampaignProductsTable.estimatedRowCount lt bindings.CampaignProductsTable.rangeSize ? bindings.CampaignProductsTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.CampaignProductsTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.CampaignProductsIteratorPrmCampaignProductViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.CampaignProductsIteratorPrmCampaignProductViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.CampaignProductsTable.table}"
+                              partialTriggers=":::qsAreas93SearchOptions :::s93PC ::s93First ::s93Previous ::s93Next ::s93Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_CAMPAIGNPRODUCTS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s93TablePopup" childCreation="deferred">
+                          <af:menu id="menu14">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu15"></af:menu>
+                            <af:commandMenuItem id="s93delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s93DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s93ActionColumn" frozen="true" width="20"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl8">
+                          <af:commandImageLink id="s93delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s93DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s93PNmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="260"
+                                 sortProperty="ProductName" rowHeader="false"
+                                 helpTopicId="RBH_S93PRODUCTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.ProductName.label}"
+                                          showRequired="#{bindings.CampaignProductsTable.hints.ProductName.mandatory}"
+                                          id="ol35"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s93ProductNamePgl"
+                                             layout="horizontal">
+                          <af:inputText id="s93PNm"
+                                        label="#{bindings.CampaignProductsTable.hints.ProductName.label}"
+                                        readOnly="#{((pageFlowScope.CampaignProductsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignProductsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                        columns="#{bindings.CampaignProductsTable.hints.ProductName.displayWidth}"
+                                        maximumLength="200"
+                                        shortDesc="#{bindings.CampaignProductsTable.hints.ProductName.tooltip}"
+                                        value="#{row.bindings.ProductName.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s93ProductNameLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s93ProductNameLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.ProductName.validator}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.CampaignProductsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignProductsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))))}"
+                                          id="cl10"
+                                          actionListener="#{pageFlowScope.s93ProductNameLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s93ProductNameIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb11"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s93ProductNameLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s93ProductNameLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s93ELCol" noWrap="true" width="30"
+                                 rowHeader="false" helpTopicId="RBH_S93EDITLINK"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="Edit" id="ol36"/>
+                        </f:facet>
+                        <af:inputText id="cl11" value="" label="Edit"
+                                      required="false" columns="5"
+                                      maximumLength="5" readOnly="true"
+                                      disabled="#{row.bindings.ProductName.attributeValue == null}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}"></af:inputText>
+                        <af:commandLink id="s93EL" text="Edit"
+                                        disabled="#{row.bindings.ProductName.attributeValue == null}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Products"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s93PrmTargetedProductId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="#{bindings.s93ProductName.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s93PrmTargetedProductId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueProducts}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s93PICol" sortable="true" filterable="true"
+                                 noWrap="true" width="100" sortProperty="PrdId"
+                                 rowHeader="false" helpTopicId="RBH_S93PRDID"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.PrdId.label}"
+                                          id="ol37"/>
+                        </f:facet>
+                        <af:inputText id="s93PI"
+                                      value="#{row.bindings.PrdId.inputValue}"
+                                      label="#{bindings.CampaignProductsTable.hints.PrdId.label}"
+                                      required="#{bindings.CampaignProductsTable.hints.PrdId.mandatory}"
+                                      rows="#{bindings.CampaignProductsTable.hints.PrdId.displayHeight}"
+                                      columns="#{bindings.CampaignProductsTable.hints.PrdId.displayWidth}"
+                                      maximumLength="15" readOnly="true"
+                                      shortDesc="#{bindings.CampaignProductsTable.hints.PrdId.tooltip}">
+                          <f:validator binding="#{row.bindings.PrdId.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.CampaignProductsTable.hints.PrdId.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s93PFmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="ProductFamily" rowHeader="false"
+                                 helpTopicId="RBH_S93PRODUCTFAMILY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.ProductFamily.label}"
+                                          id="ol38"/>
+                        </f:facet>
+                        <af:inputText id="s93PFm"
+                                      value="#{row.bindings.ProductFamily.inputValue}"
+                                      label="#{bindings.CampaignProductsTable.hints.ProductFamily.label}"
+                                      required="#{bindings.CampaignProductsTable.hints.ProductFamily.mandatory}"
+                                      rows="#{bindings.CampaignProductsTable.hints.ProductFamily.displayHeight}"
+                                      columns="#{bindings.CampaignProductsTable.hints.ProductFamily.displayWidth}"
+                                      maximumLength="80" readOnly="true"
+                                      shortDesc="#{bindings.CampaignProductsTable.hints.ProductFamily.tooltip}">
+                          <f:validator binding="#{row.bindings.ProductFamily.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s93ADCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="AddedDate" rowHeader="false"
+                                 helpTopicId="RBH_S93ADDEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.AddedDate.label}"
+                                          showRequired="#{bindings.CampaignProductsTable.hints.AddedDate.mandatory}"
+                                          id="ol39"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                        id="id11">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s93AD"
+                                      value="#{row.bindings.AddedDate.inputValue}"
+                                      label="#{bindings.CampaignProductsTable.hints.AddedDate.label}"
+                                      required="#{bindings.CampaignProductsTable.hints.AddedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.CampaignProductsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignProductsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CampaignProductsTable.hints.AddedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s93RemovedDateCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="RemovedDate" rowHeader="false"
+                                 helpTopicId="RBH_S93REMOVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.RemovedDate.label}"
+                                          showRequired="#{bindings.CampaignProductsTable.hints.RemovedDate.mandatory}"
+                                          id="ol40"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                        id="id12">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s93RemovedDate"
+                                      value="#{row.bindings.RemovedDate.inputValue}"
+                                      label="#{bindings.CampaignProductsTable.hints.RemovedDate.label}"
+                                      required="#{bindings.CampaignProductsTable.hints.RemovedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.CampaignProductsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.CampaignProductsTable.newRow) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.CampaignProductsTable.hints.RemovedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s93CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S93CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.CreatedBy.label}"
+                                          id="ol41"/>
+                        </f:facet>
+                        <af:inputText id="s93CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.CampaignProductsTable.hints.CreatedBy.label}"
+                                      required="#{bindings.CampaignProductsTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.CampaignProductsTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.CampaignProductsTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignProductsTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s93CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S93CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.CreatedDate.label}"
+                                          id="ol42"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id13">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s93CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.CampaignProductsTable.hints.CreatedDate.label}"
+                                      required="#{bindings.CampaignProductsTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.CampaignProductsTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s93LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S93LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.LastUpdatedBy.label}"
+                                          id="ol43"/>
+                        </f:facet>
+                        <af:inputText id="s93LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.CampaignProductsTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.CampaignProductsTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.CampaignProductsTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.CampaignProductsTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.CampaignProductsTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s93LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S93LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.CampaignProductsTable.hints.LastUpdatedDate.label}"
+                                          id="ol44"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id14">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s93LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.CampaignProductsTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.CampaignProductsTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.CampaignProductsTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+          </af:panelTabbed>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="CamDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="CamDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_CAMPAIGN: #{bindings.CamCampaignName.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteCampaigns.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="CamCampaignDescriptionPopup"
+                  contentDelivery="lazyUncached" eventContext="launcher"
+                  childCreation="deferred">
+          <af:dialog modal="true" resize="on" title="Text Editor" id="dialog0">
+            <af:inputText rows="10" columns="100"
+                          value="#{bindings.CamCampaignDescription.inputValue}"
+                          simple="true" maximumLength="4000"
+                          id="CamCampaignDescriptionEditorText"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s90DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s90DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_CAMPAIGNOPPORTUNITIE:#{pageFlowScope.CampaignOpportunitiesTable.currentRowAttributeValues.OpportunityName}']} "
+                           id="ot1"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteCampaignOpportunities.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="jhsLovPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher"
+                  binding="#{pageFlowScope.jhsLovPopup.component}">
+          <af:dialog modal="true" title="#{pageFlowScope.LovItemBean.lovTitle}"
+                     type="none" id="dialog1" resize="on"
+                     stretchChildren="first"
+                     contentWidth="#{pageFlowScope.LovItemBean.lovWidth}"
+                     contentHeight="#{pageFlowScope.LovItemBean.lovHeight}">
+            <af:region value="#{bindings.LovTaskFlow.regionModel}"
+                       id="region0"/>
+            <f:facet name="buttonBar">
+              <af:group id="g0">
+                <af:commandButton textAndAccessKey="#{nls['OK_BUTTON_LABEL']}"
+                                  id="cb0" partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.handleLovSelection}"/>
+                <af:commandButton textAndAccessKey="#{nls['CANCEL']}" id="cb1"
+                                  partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.cancelLov}"/>
+              </af:group>
+            </f:facet>
+          </af:dialog>
+          <af:clientListener method="popupClosedListener" type="popupClosed"/>
+          <af:serverListener type="serverPopupClosed"
+                             method="#{pageFlowScope.LovItemBean.cancelLov}"/>
+        </af:popup>
+        <af:popup id="s91DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s91DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_CAMPAIGNACCOUNT:#{pageFlowScope.CampaignAccountsTable.currentRowAttributeValues.AccountName}']} "
+                           id="ot4"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteCampaignAccounts.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s92DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s92DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_CAMPAIGNTITLE:#{pageFlowScope.CampaignTitlesTable.currentRowAttributeValues.TargetTrackingNo}']} "
+                           id="ot7"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteCampaignTitles.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s93DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s93DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_CAMPAIGNPRODUCT:#{pageFlowScope.CampaignProductsTable.currentRowAttributeValues.ProductName}']} "
+                           id="ot10"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteCampaignProducts.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

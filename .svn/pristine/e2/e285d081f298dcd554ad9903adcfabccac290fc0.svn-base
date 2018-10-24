@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PrmAccountRoyalty"
+  Version="11.1.1.59.23"
+  DBObjectType="table"
+  DBObjectName="PRM_ACCOUNT_ROYALTY"
+  AliasName="PrmAccountRoyalty"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.pq.tracs.model.eo.PrmBaseEntity">
+  <DesignTime>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_superClass" Value="com.pq.tracs.model.eo.PrmBaseEntity"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_ACCOUNT_ROYALTY"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ContentOwnerId"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="CONTENT_OWNER_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_ACCOUNT_ROYALTY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Year"
+    Precision="38"
+    Scale="0"
+    ColumnName="YEAR"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_ACCOUNT_ROYALTY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RoyaltyAmt"
+    Precision="15"
+    Scale="2"
+    ColumnName="ROYALTY_AMT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_ACCOUNT_ROYALTY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="GuaranteeAmt"
+    Precision="15"
+    Scale="2"
+    ColumnName="GUARANTEE_AMT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_ACCOUNT_ROYALTY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AdvanceAmt"
+    Precision="15"
+    Scale="2"
+    ColumnName="ADVANCE_AMT"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_ACCOUNT_ROYALTY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_ACCOUNT_ROYALTY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    IsUpdateable="while_insert"
+    IsNotNull="true"
+    ColumnName="CREATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_ACCOUNT_ROYALTY"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_ACCOUNT_ROYALTY">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedDate"
+    IsNotNull="true"
+    ColumnName="LAST_UPDATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_ACCOUNT_ROYALTY"
+    RetrievedOnInsert="true"
+    ChangeIndicator="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <AccessorAttribute
+    Name="TraxContentOwner"
+    Association="com.pq.tracs.model.ao.ContentOwnerToRoyaltiesFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.ContentOwnerToRoyaltiesFkAssoc.TraxContentOwner"
+    AssociationOtherEnd="com.pq.tracs.model.ao.ContentOwnerToRoyaltiesFkAssoc.PrmAccountRoyalty"
+    Type="com.pq.tracs.model.eo.PrmBaseEntity"
+    IsUpdateable="true"/>
+  <Key
+    Name="PrmAccountRoyaltiesPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRM_ACCOUNT_ROYALTIES_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmAccountRoyalty.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0058136">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0058136"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmAccountRoyalty.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0058137">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0058137"/>
+      <Attr Name="_checkCondition" Value='"CONTENT_OWNER_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmAccountRoyalty.ContentOwnerId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0058138">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0058138"/>
+      <Attr Name="_checkCondition" Value='"CREATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmAccountRoyalty.CreatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0058139">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0058139"/>
+      <Attr Name="_checkCondition" Value='"CREATED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmAccountRoyalty.CreatedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0058140">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0058140"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmAccountRoyalty.LastUpdatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0058141">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0058141"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmAccountRoyalty.LastUpdatedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="PrmAccountRoyaltiesFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PUBLISHER_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="PRM_ACCOUNT_ROYALTIES_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmAccountRoyalty.ContentOwnerId"/>
+    </AttrArray>
+  </Key>
+</Entity>

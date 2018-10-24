@@ -1,0 +1,11 @@
+#macro (PRODUCT_TITLE)
+${JHS.nls('Publisher Relationship Management','PRODUCT_TITLE')}#end
+
+#macro (COPYRIGHT_NOTICE)
+${JHS.nls('Copyright ProQuest, 2011','COPYRIGHT_NOTICE')}#end
+
+#macro (PAGE_TEMPLATE_BOTTOM_LEFT)
+${JHS.nls('','PAGE_TEMPLATE_BOTTOM_LEFT')}#end
+
+#macro (PAGE_TEMPLATE_BOTTOM_RIGHT)
+${JHS.nls('','PAGE_TEMPLATE_BOTTOM_RIGHT')}#end

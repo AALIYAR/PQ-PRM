@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="ContractAttachmentsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="bindingContainersToPrepare" value="#{'ContractPageDef'}"/>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, RO, ADMIN, BSSRO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="ContractAttachmentsIterator"
+              Binds="TraxContractAttachmentView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+  </executables>
+  <bindings>
+    <attributeValues id="s37Name" IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37Attachment"
+                     IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37AttachmentDL"
+                     IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37AttachmentType"
+                     IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="AttachmentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37Description"
+                     IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37FileSize" IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="FileSize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37CreatedBy"
+                     IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37CreatedDate"
+                     IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37LastUpdatedBy"
+                     IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s37LastUpdatedDate"
+                     IterBinding="ContractAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ContractAttachmentsTable"
+          IterBinding="ContractAttachmentsIterator">
+      <nodeDefinition Name="ContractAttachments"
+                      DefName="com.pq.tracs.model.vo.TraxContractAttachmentView">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="AttachmentType"/>
+          <Item Value="Description"/>
+          <Item Value="FileSize"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstContractAttachments"
+            IterBinding="ContractAttachmentsIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousContractAttachments"
+            IterBinding="ContractAttachmentsIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextContractAttachments"
+            IterBinding="ContractAttachmentsIterator" RequiresUpdateModel="true"
+            Action="next"/>
+    <action id="LastContractAttachments"
+            IterBinding="ContractAttachmentsIterator" RequiresUpdateModel="true"
+            Action="last"/>
+    <action id="SetCurrentRowWithKeyContractAttachments"
+            IterBinding="ContractAttachmentsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrContractAttachments}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateContractAttachments"
+            IterBinding="ContractAttachmentsIterator" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

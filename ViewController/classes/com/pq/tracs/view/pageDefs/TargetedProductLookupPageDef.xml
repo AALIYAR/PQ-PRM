@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="TargetedProductLookupPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, ADMIN, RO'}"/>
+  </parameters>
+  <executables>
+    <invokeAction id="applyBindParamsTargetedProductLookupInvoke"
+                  Binds="applyBindParamsTargetedProductLookup"
+                  Refresh="always"/>
+    <iterator id="TargetedProductLookupIterator" Binds="PrmTargetedProductLOV"
+              DataControl="PrmAppModuleDataControl" RangeSize="50"/>
+    <searchRegion id="TargetedProductLookupIteratorPrmTargetedProductViewCriteriaQuery"
+                  Binds="TargetedProductLookupIterator"
+                  Criteria="PrmTargetedProductViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsTargetedProductLookup"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="PrmTargetedProductLOV"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{TargetedProductLookupQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <attributeValues id="TargetedProductLookupId"
+                     IterBinding="TargetedProductLookupIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TargetedProductLookupPrdId"
+                     IterBinding="TargetedProductLookupIterator">
+      <AttrNames>
+        <Item Value="PrdId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TargetedProductLookupName"
+                     IterBinding="TargetedProductLookupIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TargetedProductLookupProductFamily"
+                     IterBinding="TargetedProductLookupIterator">
+      <AttrNames>
+        <Item Value="ProductFamily"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TargetedProductLookupProductManager"
+                     IterBinding="TargetedProductLookupIterator">
+      <AttrNames>
+        <Item Value="ProductManager"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="TargetedProductLookupTargetableFlag"
+            IterBinding="TargetedProductLookupIterator" DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="TargetableFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <tree id="TargetedProductLookupTable"
+          IterBinding="TargetedProductLookupIterator">
+      <nodeDefinition Name="TargetedProductLookup"
+                      DefName="com.pq.tracs.model.vo.PrmTargetedProductView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="PrdId"/>
+          <Item Value="Name"/>
+          <Item Value="ProductFamily"/>
+          <Item Value="ProductManager"/>
+          <Item Value="TargetableFlag"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTargetedProductLookup"
+            IterBinding="TargetedProductLookupIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousTargetedProductLookup"
+            IterBinding="TargetedProductLookupIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextTargetedProductLookup"
+            IterBinding="TargetedProductLookupIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastTargetedProductLookup"
+            IterBinding="TargetedProductLookupIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchTargetedProductLookup"
+                  IterBinding="TargetedProductLookupIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchTargetedProductLookup.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchTargetedProductLookup.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchTargetedProductLookup.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyTargetedProductLookup"
+            IterBinding="TargetedProductLookupIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTargetedProductLookup}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

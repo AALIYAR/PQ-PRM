@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="ContactsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, ADMIN, RO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="ContactsIterator" Binds="TraxContactView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="-1"/>
+    <searchRegion id="ContactsIteratorTraxContactViewCriteriaQuery"
+                  Binds="ContactsIterator" Criteria="TraxContactViewCriteria"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="FirstName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <searchRegion id="ContactsIteratorTraxContactQuickQueryQuery"
+                  Binds="ContactsIterator" Criteria="TraxContactQuickQuery"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="FirstName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryContactsInvoke" Binds="ExecuteQueryContacts"
+                  Refresh="renderModel" RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="ContactMethodsIterator" Binds="TraxContactMethodView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="ContactMethodsIteratorTraxContactMethodViewCriteriaQuery"
+                  Binds="ContactMethodsIterator"
+                  Criteria="TraxContactMethodViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ContactMethod"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryContactMethodsInvoke"
+                  Binds="ExecuteQueryContactMethods" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="ContactContentOwnersIterator"
+              Binds="TraxContactContentOwnerView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="ContactContentOwnersIteratorQuery"
+                  Binds="ContactContentOwnersIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="ContactActivitiesIterator" Binds="TraxActivityView2"
+              DataControl="PrmAppModuleDataControl" RangeSize="7"/>
+    <searchRegion id="ContactActivitiesIteratorTraxActivityViewCriteriaQuery"
+                  Binds="ContactActivitiesIterator"
+                  Criteria="TraxActivityViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Type"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryContactActivitiesInvoke"
+                  Binds="ExecuteQueryContactActivities" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <variableIterator id="variables">
+      <variable Name="s12EditLinkVar" Type="String"/>
+    </variableIterator>
+    <taskFlow id="LovTaskFlow"
+              taskFlowId="#{pageFlowScope.jhsLovTaskFlowManager.currentTaskFlowId}"
+              activation="deferred"
+              parametersMap="#{pageFlowScope.jhsLovTaskFlowManager.currentParamMap}"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteQueryContacts" IterBinding="ContactsIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="ConAccountId" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConFirstName" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConMiddleName" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConLastName" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConTitle" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConGender" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConPronunciation" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="Pronunciation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConJobTitle" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConJobRole" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="JobRole"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConAccountNumber" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="AccountNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConAccountName" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConAccountSite" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConWorkPhone" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="WorkPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConWorkEmail" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="WorkEmail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConCellPhone" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="CellPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConWorkFax" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="WorkFax"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConTimezone" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="Timezone"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="ConSendNewsletterFlag" IterBinding="ContactsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="SendNewsletterFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="ConNeverMailFlag" IterBinding="ContactsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="NeverMailFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="ConNeverEmailFlag" IterBinding="ContactsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="NeverEmailFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="ConNeverCallFlag" IterBinding="ContactsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="NeverCallFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="ConActiveFlag" IterBinding="ContactsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ActiveFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="ConNotes" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConCreatedBy" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConCreatedDate" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConLastUpdatedBy" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ConLastUpdatedDate" IterBinding="ContactsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ContactsTable" IterBinding="ContactsIterator">
+      <nodeDefinition Name="Contacts"
+                      DefName="com.pq.tracs.model.vo.TraxContactView">
+        <AttrNames>
+          <Item Value="AccountId"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleName"/>
+          <Item Value="LastName"/>
+          <Item Value="Title"/>
+          <Item Value="Gender"/>
+          <Item Value="Pronunciation"/>
+          <Item Value="JobTitle"/>
+          <Item Value="JobRole"/>
+          <Item Value="AccountNumber"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountSite"/>
+          <Item Value="WorkPhone"/>
+          <Item Value="WorkEmail"/>
+          <Item Value="CellPhone"/>
+          <Item Value="WorkFax"/>
+          <Item Value="Timezone"/>
+          <Item Value="SendNewsletterFlag"/>
+          <Item Value="NeverMailFlag"/>
+          <Item Value="NeverEmailFlag"/>
+          <Item Value="NeverCallFlag"/>
+          <Item Value="ActiveFlag"/>
+          <Item Value="Notes"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstContacts" IterBinding="ContactsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousContacts" IterBinding="ContactsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextContacts" IterBinding="ContactsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastContacts" IterBinding="ContactsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyContacts" IterBinding="ContactsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr" NDValue="#{pageFlowScope.rowKeyStrContacts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateContacts" IterBinding="ContactsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteContacts" IterBinding="ContactsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryContactMethods" IterBinding="ContactMethodsIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <list IterBinding="ContactMethodsIterator" id="s10ContactMethod"
+          Uses="LOV_ContactMethod" StaticList="false"/>
+    <list IterBinding="ContactMethodsIterator" id="s10ContactMethodSubType"
+          Uses="LOV_ContactMethodSubType" StaticList="false"/>
+    <attributeValues id="s10ContactDetail1"
+                     IterBinding="ContactMethodsIterator">
+      <AttrNames>
+        <Item Value="ContactDetail1"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s10ContactDetail2"
+                     IterBinding="ContactMethodsIterator">
+      <AttrNames>
+        <Item Value="ContactDetail2"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s10ContactMethodNote"
+                     IterBinding="ContactMethodsIterator">
+      <AttrNames>
+        <Item Value="ContactMethodNote"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="s10PrimaryFlag" IterBinding="ContactMethodsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="s10CreatedBy" IterBinding="ContactMethodsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s10CreatedDate" IterBinding="ContactMethodsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s10LastUpdatedBy" IterBinding="ContactMethodsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s10LastUpdatedDate"
+                     IterBinding="ContactMethodsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ContactMethodsTable" IterBinding="ContactMethodsIterator">
+      <nodeDefinition Name="ContactMethods"
+                      DefName="com.pq.tracs.model.vo.TraxContactMethodView">
+        <AttrNames>
+          <Item Value="ContactMethod"/>
+          <Item Value="ContactMethodSubType"/>
+          <Item Value="ContactDetail1"/>
+          <Item Value="ContactDetail2"/>
+          <Item Value="ContactMethodNote"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstContactMethods" IterBinding="ContactMethodsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousContactMethods" IterBinding="ContactMethodsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextContactMethods" IterBinding="ContactMethodsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastContactMethods" IterBinding="ContactMethodsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyContactMethods"
+            IterBinding="ContactMethodsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrContactMethods}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateContactMethods" IterBinding="ContactMethodsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteContactMethods" IterBinding="ContactMethodsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="s11ContentOwnerId"
+                     IterBinding="ContactContentOwnersIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s11Name" IterBinding="ContactContentOwnersIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s11ContentOwnerNo"
+                     IterBinding="ContactContentOwnersIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s11Site" IterBinding="ContactContentOwnersIterator">
+      <AttrNames>
+        <Item Value="Site"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="s11PrimaryFlag" IterBinding="ContactContentOwnersIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="PrimaryFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <button id="s11ActiveFlag" IterBinding="ContactContentOwnersIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ActiveFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="s11CreatedBy"
+                     IterBinding="ContactContentOwnersIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s11CreatedDate"
+                     IterBinding="ContactContentOwnersIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s11LastUpdatedBy"
+                     IterBinding="ContactContentOwnersIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s11LastUpdatedDate"
+                     IterBinding="ContactContentOwnersIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ContactContentOwnersTable"
+          IterBinding="ContactContentOwnersIterator">
+      <nodeDefinition Name="ContactContentOwners"
+                      DefName="com.pq.tracs.model.vo.TraxContactContentOwnerView">
+        <AttrNames>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="Name"/>
+          <Item Value="ContentOwnerNo"/>
+          <Item Value="Site"/>
+          <Item Value="PrimaryFlag"/>
+          <Item Value="ActiveFlag"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstContactContentOwners"
+            IterBinding="ContactContentOwnersIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousContactContentOwners"
+            IterBinding="ContactContentOwnersIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextContactContentOwners"
+            IterBinding="ContactContentOwnersIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastContactContentOwners"
+            IterBinding="ContactContentOwnersIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyContactContentOwners"
+            IterBinding="ContactContentOwnersIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrContactContentOwners}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateContactContentOwners"
+            IterBinding="ContactContentOwnersIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteContactContentOwners"
+            IterBinding="ContactContentOwnersIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryContactActivities"
+            IterBinding="ContactActivitiesIterator" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues id="s12Id" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContactActivitiesIterator" id="s12Type" Uses="LOV_Type"
+          StaticList="false"/>
+    <list IterBinding="ContactActivitiesIterator" id="s12SubType"
+          Uses="LOV_SubType" StaticList="false"/>
+    <attributeValues id="s12EditLink" IterBinding="variables">
+      <AttrNames>
+        <Item Value="s12EditLinkVar"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12Description"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="ContactActivitiesIterator" id="s12Status"
+          Uses="LOV_Status" StaticList="false"/>
+    <list IterBinding="ContactActivitiesIterator" id="s12Priority"
+          Uses="LOV_Priority" StaticList="false"/>
+    <attributeValues id="s12ActualStartDate"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="ActualStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12CompletionDate"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="CompletionDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12DueDate" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="DueDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12ExpectedStartDate"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="ExpectedStartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12HoursSpent" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="HoursSpent"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12Notes" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12AccountId" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12ContentOwnerNo"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12AccountName"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12AccountSite"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12OpportunityId"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12OpportunityNo"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12OpportunityName"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12ContractId" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12ContractNumber"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="ContractNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12TitleId" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="TitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12TargetTrackingNo"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12CatalogNumber"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12LongTitle" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12ShortTitle" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="ShortTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12UserId" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12DisplayName"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12Owner" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="Owner"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12CreatedBy" IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12CreatedDate"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12LastUpdatedBy"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s12LastUpdatedDate"
+                     IterBinding="ContactActivitiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ContactActivitiesTable" IterBinding="ContactActivitiesIterator">
+      <nodeDefinition Name="ContactActivities"
+                      DefName="com.pq.tracs.model.vo.TraxActivityView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Type"/>
+          <Item Value="SubType"/>
+          <Item Value="Description"/>
+          <Item Value="Status"/>
+          <Item Value="Priority"/>
+          <Item Value="ActualStartDate"/>
+          <Item Value="CompletionDate"/>
+          <Item Value="DueDate"/>
+          <Item Value="ExpectedStartDate"/>
+          <Item Value="HoursSpent"/>
+          <Item Value="Notes"/>
+          <Item Value="AccountId"/>
+          <Item Value="ContentOwnerNo"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountSite"/>
+          <Item Value="OpportunityId"/>
+          <Item Value="OpportunityNo"/>
+          <Item Value="OpportunityName"/>
+          <Item Value="ContractId"/>
+          <Item Value="ContractNumber"/>
+          <Item Value="TitleId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="ShortTitle"/>
+          <Item Value="UserId"/>
+          <Item Value="DisplayName"/>
+          <Item Value="Owner"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstContactActivities" IterBinding="ContactActivitiesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousContactActivities"
+            IterBinding="ContactActivitiesIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextContactActivities" IterBinding="ContactActivitiesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastContactActivities" IterBinding="ContactActivitiesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyContactActivities"
+            IterBinding="ContactActivitiesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrContactActivities}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateContactActivities" IterBinding="ContactActivitiesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

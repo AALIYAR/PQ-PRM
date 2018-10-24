@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Application name="PRM" asfVersion="1.0" templatesBaseDir="\templates\" viewPackage="com.pq.tracs.view" viewType="adfFaces" nlsBundle="com.pq.tracs.view.ApplicationResources" xmlns="http://www.oracle.com/jheadstart/applicationStructure" securityType="customjhs" authorizationType="custom" onlineHelpProvider="oracle.adf.view.rich.help.ResourceBundleHelpProvider" generateSkinSwitcher="false" defaultDisplayWidth="30" maxTableWidth="1200" pageTemplate="/common/pageTemplates/JhsDynamicTabsPageTemplate.jspx" dataControlScope="isolated" useDynamicTabs="true" useGroupPermissions="false" showMessagesInline="true">
+    <ServiceDefinitionRef location="PrmAppModuleServiceDefinition.xml" name="PrmAppModule"/>
+    <Templates>
+        <TemplateBinding templateIdentifier="JHS_PAGE_TEMPLATE" templateFile="prm_templates/misc/file/jhsPageTemplate.vm"/>
+        <TemplateBinding templateIdentifier="LOGIN_PAGE" templateFile="prm_templates/misc/file/loginPage.vm"/>
+        <TemplateBinding templateIdentifier="JHS_COMMON_BEANS" templateFile="prm_templates/misc/facesConfig/jhsCommonBeans.vm"/>
+        <TemplateBinding templateIdentifier="XML_ROOT_MENU_MODEL" templateFile="prm_templates/misc/menu/xmlRootMenuModel.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_GROUP" templateFile="prm_templates/pageComponent/tableGroup.vm"/>
+        <TemplateBinding templateIdentifier="FILE_HANDLER_BEAN" templateFile="prm_templates/misc/facesConfig/fileHandlerBean.vm"/>
+        <TemplateBinding templateIdentifier="FILE_HANDLER_IN_TABLE_BEAN" templateFile="prm_templates/misc/facesConfig/fileHandlerInTableBean.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_EXPORT_LINK" templateFile="prm_templates/button/tableExportLink.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_EXPORT_MENU_ITEM" templateFile="prm_templates/button/tableExportMenuItem.vm"/>
+        <TemplateBinding templateIdentifier="FORM_GROUP" templateFile="prm_templates/pageComponent/formGroup.vm"/>
+        <TemplateBinding templateIdentifier="SAVE_BUTTON" templateFile="prm_templates/button/saveButton.vm"/>
+        <TemplateBinding templateIdentifier="WIZARD_CANCEL_BUTTON" templateFile="prm_templates/button/wizardCancelButton.vm"/>
+        <TemplateBinding templateIdentifier="FORM_EDITOR" templateFile="prm_templates/item/form/formEditor.vm"/>
+        <TemplateBinding templateIdentifier="FORM_GROUP_LINK" templateFile="prm_templates/item/form/formGroupLink.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_GROUP_LINK" templateFile="prm_templates/item/table/tableGroupLink.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_BEAN" templateFile="prm_templates/misc/facesConfig/prmTableBean.vm"/>
+        <TemplateBinding templateIdentifier="LOV_ITEM_IN_TABLE_BEAN" templateFile="prm_templates/misc/facesConfig/lovItemInTableBean.vm"/>
+        <TemplateBinding templateIdentifier="NEW_BUTTON_NOT_IN_FORM_LAYOUT" templateFile="prm_templates/button/newButtonNotInFormLayout.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_LOV_ITEM" templateFile="prm_templates/item/table/prmTableLovItem.vm"/>
+        <TemplateBinding templateIdentifier="DYNAMIC_TABS_BEANS" templateFile="prm_templates/misc/facesConfig/prmDynamicTabsBeans.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_COLUMN" templateFile="prm_templates/item/table/tableColumn.vm"/>
+        <TemplateBinding templateIdentifier="GROUP_TOOLBAR" templateFile="prm_templates/pageComponent/groupToolbar.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_TOOLBAR" templateFile="prm_templates/pageComponent/tableToolbar.vm"/>
+        <TemplateBinding templateIdentifier="MODEL_QUICK_SEARCH_REGION" templateFile="prm_templates/search/modelQuickSearchRegion.vm"/>
+        <TemplateBinding templateIdentifier="TABLE_FORM_HYPERLINK" templateFile="prm_templates/item/table/tableFormHyperlink.vm"/>
+    </Templates>
+</Application>

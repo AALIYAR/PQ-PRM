@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="GCADashboardTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartGCADashboard</default-activity>
+    <input-parameter-definition id="__3">
+      <name id="__4">rowKeyStrGCADashboard</name>
+      <value id="__5">#{pageFlowScope.rowKeyStrGCADashboard}</value>
+      <class id="__6">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyValueGCADashboard</name>
+      <value id="__9">#{pageFlowScope.rowKeyValueGCADashboard}</value>
+      <class id="__10">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyGCADashboard</name>
+      <value id="__13">#{pageFlowScope.rowKeyGCADashboard}</value>
+      <class id="__14">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">altKeyNameGCADashboard</name>
+      <value id="__17">#{pageFlowScope.altKeyNameGCADashboard}</value>
+      <class id="__18">java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__19">
+      <managed-bean-name id="__20">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__21">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__22">pageFlow</managed-bean-scope>
+      <managed-property id="__23">
+        <property-name id="__24">initializeParentContextEntries</property-name>
+        <map-entries id="__25">
+          <map-entry id="__26">
+            <key id="__27">jhsCurrentGroupName</key>
+            <value id="__28">GCADashboard</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__29">
+      <managed-bean-name id="__30">RecentOpportunitiesDashboardTable</managed-bean-name>
+      <managed-bean-class id="__31">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__32">pageFlow</managed-bean-scope>
+      <managed-property id="__33">
+        <property-name id="__34">name</property-name>
+        <value id="__35">RecentOpportunitiesDashboardTable</value>
+      </managed-property>
+      <managed-property id="__36">
+        <property-name id="__37">rangeBindingExpr</property-name>
+        <value id="__38">#{'#{bindings.RecentOpportunitiesDashboardTable}'}</value>
+      </managed-property>
+      <managed-property id="__39">
+        <property-name id="__40">createNewRowAtTop</property-name>
+        <value id="__41">true</value>
+      </managed-property>
+      <managed-property id="__42">
+        <property-name id="__43">focusItemId</property-name>
+        <value id="__44">RODOpportunityNo</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartGCADashboard">
+      <case id="__45">
+        <expression id="__46">#{pageFlowScope.rowKeyStrGCADashboard!=null or
+                              pageFlowScope.rowKeyValueGCADashboard!=null or
+                              pageFlowScope.rowKeyGCADashboard!=null}</expression>
+        <outcome id="__47">SetCurrentRowGCADashboard</outcome>
+      </case>
+      <case id="__48">
+        <expression id="__49">#{pageFlowScope.isDeepLink!=null and
+                              pageFlowScope.isDeepLink}</expression>
+        <outcome id="__50">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__51">firstPage</default-outcome>
+    </router>
+    <method-call id="SetCurrentRowGCADashboard">
+      <method id="__52">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__53">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__54">#{bindings.GCADashboardIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__55">java.lang.String</class>
+        <value id="__56">#{pageFlowScope.rowKeyStrGCADashboard}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__57">java.lang.Object</class>
+        <value id="__58">#{pageFlowScope.rowKeyValueGCADashboard}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__59">oracle.jbo.Key</class>
+        <value id="__60">#{pageFlowScope.rowKeyGCADashboard}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__61">java.lang.String</class>
+        <value id="__62">#{pageFlowScope.altKeyNameGCADashboard}</value>
+      </parameter>
+      <outcome id="__63">
+        <fixed-outcome id="__64">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelGCADashboardReturn">
+      <outcome id="__65">
+        <name id="__66">CancelGCADashboard</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneGCADashboardReturn">
+      <outcome id="__67">
+        <name id="__68">DoneGCADashboard</name>
+      </outcome>
+    </task-flow-return>
+    <view id="GCADashboard">
+      <page id="__69">/pages/GCADashboard.jsff</page>
+    </view>
+    <control-flow-rule id="__70">
+      <from-activity-id id="__71">*</from-activity-id>
+      <control-flow-case id="__72">
+        <from-outcome id="__73">SetCurrentRowGCADashboard</from-outcome>
+        <to-activity-id id="__74">SetCurrentRowGCADashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__75">
+        <from-outcome id="__76">firstPage</from-outcome>
+        <to-activity-id id="__77">GCADashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__78">
+        <from-outcome id="__79">deepLinkPage</from-outcome>
+        <to-activity-id id="__80">GCADashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__81">
+        <from-outcome id="__82">GCADashboardBreadcrumb</from-outcome>
+        <to-activity-id id="__83">GCADashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__84">
+        <from-outcome id="__85">Cancel</from-outcome>
+        <to-activity-id id="__86">StartGCADashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__87">
+        <from-outcome id="__88">CancelGCADashboardReturn</from-outcome>
+        <to-activity-id id="__89">CancelGCADashboardReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__90">
+        <from-outcome id="__91">DoneGCADashboardReturn</from-outcome>
+        <to-activity-id id="__92">DoneGCADashboardReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__93">
+    <managed-bean-name id="__94">GCADashboardTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__95">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__96">pageFlow</managed-bean-scope>
+    <managed-property id="__97">
+      <property-name id="__98">params</property-name>
+      <property-class id="__99">java.util.Map</property-class>
+      <map-entries id="__100">
+        <map-entry id="__101">
+          <key id="__102">parentContext</key>
+          <value id="__103">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__104">
+      <property-name id="__105">name</property-name>
+      <value id="__106">GCADashboard</value>
+    </managed-property>
+    <managed-property id="__107">
+      <property-name id="__108">taskFlowId</property-name>
+      <value id="__109">/WEB-INF/adfc-config-GCADashboard.xml#GCADashboardTaskFlow</value>
+    </managed-property>
+    <managed-property id="__110">
+      <property-name id="__111">tabUniqueIdentifier</property-name>
+      <value id="__112">GCADashboard</value>
+    </managed-property>
+    <managed-property id="__113">
+      <property-name id="__114">label</property-name>
+      <value id="__115">GCA Dashboard</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__116">
+    <managed-bean-name id="__117">GCADashboardQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__118">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__119">request</managed-bean-scope>
+    <managed-property id="__120">
+      <property-name id="__121">namedParamDefs</property-name>
+      <map-entries id="__122">
+        <map-entry id="__123">
+          <key id="__124">username</key>
+          <value id="__125">#{'#{jhsUser.userId}'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__126">
+    <managed-bean-name id="__127">RecentOpportunitiesDashboardQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__128">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__129">request</managed-bean-scope>
+    <managed-property id="__130">
+      <property-name id="__131">namedParamDefs</property-name>
+      <map-entries id="__132">
+        <map-entry id="__133">
+          <key id="__134">uname</key>
+          <value id="__135">#{'#{jhsUser.userId}'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

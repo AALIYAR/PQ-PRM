@@ -1,0 +1,1110 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="CampaignsTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartCampaigns</default-activity>
+    <input-parameter-definition id="__3">
+      <name id="__4">createCampaigns</name>
+      <value id="__5">#{pageFlowScope.createCampaigns}</value>
+      <class id="__6">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyStrCampaigns</name>
+      <value id="__9">#{pageFlowScope.rowKeyStrCampaigns}</value>
+      <class id="__10">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyValueCampaigns</name>
+      <value id="__13">#{pageFlowScope.rowKeyValueCampaigns}</value>
+      <class id="__14">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">rowKeyCampaigns</name>
+      <value id="__17">#{pageFlowScope.rowKeyCampaigns}</value>
+      <class id="__18">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name id="__20">altKeyNameCampaigns</name>
+      <value id="__21">#{pageFlowScope.altKeyNameCampaigns}</value>
+      <class id="__22">java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__23">
+      <managed-bean-name id="__24">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__25">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__26">pageFlow</managed-bean-scope>
+      <managed-property id="__27">
+        <property-name id="__28">initializeParentContextEntries</property-name>
+        <map-entries id="__29">
+          <map-entry id="__30">
+            <key id="__31">jhsCurrentGroupName</key>
+            <value id="__32">Campaigns</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__33">
+      <managed-bean-name id="__34">CampaignsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__35">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__36">pageFlow</managed-bean-scope>
+      <managed-property id="__37">
+        <property-name id="__38">iteratorBinding</property-name>
+        <value id="__39">#{data.CampaignsPageDef.CampaignsIterator}</value>
+      </managed-property>
+      <managed-property id="__40">
+        <property-name id="__41">defaultValues</property-name>
+        <map-entries id="__42">
+          <map-entry id="__43">
+            <key id="__44">ActiveFlag</key>
+            <value id="__45">Y</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__46">
+        <property-name id="__47">actionResult</property-name>
+        <value id="__48">CreateCampaigns</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__49">
+      <managed-bean-name id="__50">CampaignOpportunitiesDefaultValues</managed-bean-name>
+      <managed-bean-class id="__51">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__52">pageFlow</managed-bean-scope>
+      <managed-property id="__53">
+        <property-name id="__54">iteratorBinding</property-name>
+        <value id="__55">#{data.CampaignsPageDef.CampaignOpportunitiesIterator}</value>
+      </managed-property>
+      <managed-property id="__56">
+        <property-name id="__57">defaultValues</property-name>
+        <map-entries id="__58">
+          <map-entry id="__59">
+            <key id="__60">AddedDate</key>
+            <value id="__61">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__62">
+        <property-name id="__63">actionResult</property-name>
+        <value id="__64">CreateCampaignOpportunities</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__65">
+      <managed-bean-name id="__66">CampaignAccountsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__67">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__68">pageFlow</managed-bean-scope>
+      <managed-property id="__69">
+        <property-name id="__70">iteratorBinding</property-name>
+        <value id="__71">#{data.CampaignsPageDef.CampaignAccountsIterator}</value>
+      </managed-property>
+      <managed-property id="__72">
+        <property-name id="__73">defaultValues</property-name>
+        <map-entries id="__74">
+          <map-entry id="__75">
+            <key id="__76">AddedDate</key>
+            <value id="__77">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__78">
+        <property-name id="__79">actionResult</property-name>
+        <value id="__80">CreateCampaignAccounts</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__81">
+      <managed-bean-name id="__82">CampaignTitlesDefaultValues</managed-bean-name>
+      <managed-bean-class id="__83">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__84">pageFlow</managed-bean-scope>
+      <managed-property id="__85">
+        <property-name id="__86">iteratorBinding</property-name>
+        <value id="__87">#{data.CampaignsPageDef.CampaignTitlesIterator}</value>
+      </managed-property>
+      <managed-property id="__88">
+        <property-name id="__89">defaultValues</property-name>
+        <map-entries id="__90">
+          <map-entry id="__91">
+            <key id="__92">AddedDate</key>
+            <value id="__93">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__94">
+        <property-name id="__95">actionResult</property-name>
+        <value id="__96">CreateCampaignTitles</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__97">
+      <managed-bean-name id="__98">CampaignProductsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__99">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__100">pageFlow</managed-bean-scope>
+      <managed-property id="__101">
+        <property-name id="__102">iteratorBinding</property-name>
+        <value id="__103">#{data.CampaignsPageDef.CampaignProductsIterator}</value>
+      </managed-property>
+      <managed-property id="__104">
+        <property-name id="__105">defaultValues</property-name>
+        <map-entries id="__106">
+          <map-entry id="__107">
+            <key id="__108">AddedDate</key>
+            <value id="__109">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__110">
+        <property-name id="__111">actionResult</property-name>
+        <value id="__112">CreateCampaignProducts</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__113">
+      <managed-bean-name id="__114">CreateCampaigns</managed-bean-name>
+      <managed-bean-class id="__115">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__116">request</managed-bean-scope>
+      <managed-property id="__117">
+        <property-name id="__118">createBinding</property-name>
+        <value id="__119">#{bindings.CreateCampaigns}</value>
+      </managed-property>
+      <managed-property id="__120">
+        <property-name id="__121">defaultValuesBean</property-name>
+        <value id="__122">#{pageFlowScope.CampaignsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__123">
+        <property-name id="__124">successOutcome</property-name>
+        <value id="__125">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__126">
+        <property-name id="__127">failureOutcome</property-name>
+        <value id="__128">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__129">
+      <managed-bean-name id="__130">jhsRollback</managed-bean-name>
+      <managed-bean-class id="__131">oracle.jheadstart.controller.jsf.bean.RollbackBean</managed-bean-class>
+      <managed-bean-scope id="__132">request</managed-bean-scope>
+      <managed-property id="__133">
+        <property-name id="__134">rollbackBinding</property-name>
+        <value id="__135">#{bindings.Rollback}</value>
+      </managed-property>
+      <managed-property id="__136">
+        <property-name id="__137">successOutcome</property-name>
+        <value id="__138">Cancel</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__139">
+      <managed-bean-name id="__140">searchCampaigns</managed-bean-name>
+      <managed-bean-class id="__141">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__142">pageFlow</managed-bean-scope>
+      <managed-property id="__143">
+        <property-name id="__144">bindings</property-name>
+        <value id="__145">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__146">
+        <property-name id="__147">searchBinding</property-name>
+        <value id="__148">#{'#{bindings.advancedSearchCampaigns}'}</value>
+      </managed-property>
+      <managed-property id="__149">
+        <property-name id="__150">searchItem</property-name>
+        <value id="__151">CamCampaignName</value>
+      </managed-property>
+      <managed-property id="__152">
+        <property-name id="__153">dataCollection</property-name>
+        <value id="__154">PrmCampaignView1</value>
+      </managed-property>
+      <managed-property id="__155">
+        <property-name id="__156">operators</property-name>
+        <map-entries id="__157"></map-entries>
+      </managed-property>
+      <managed-property id="__158">
+        <property-name id="__159">itemAttributes</property-name>
+        <map-entries id="__160">
+          <map-entry id="__161">
+            <key id="__162">CamCampaignName</key>
+            <value id="__163">CampaignName</value>
+          </map-entry>
+          <map-entry id="__164">
+            <key id="__165">CamCampaignType</key>
+            <value id="__166">CampaignType</value>
+          </map-entry>
+          <map-entry id="__167">
+            <key id="__168">CamCampaignDescription</key>
+            <value id="__169">CampaignDescription</value>
+          </map-entry>
+          <map-entry id="__170">
+            <key id="__171">CamStartDate</key>
+            <value id="__172">StartDate</value>
+          </map-entry>
+          <map-entry id="__173">
+            <key id="__174">CamEndDate</key>
+            <value id="__175">EndDate</value>
+          </map-entry>
+          <map-entry id="__176">
+            <key id="__177">CamActiveFlag</key>
+            <value id="__178">ActiveFlag</value>
+          </map-entry>
+          <map-entry id="__179">
+            <key id="__180">CamCreatedBy</key>
+            <value id="__181">CreatedBy</value>
+          </map-entry>
+          <map-entry id="__182">
+            <key id="__183">CamCreatedDate</key>
+            <value id="__184">CreatedDate</value>
+          </map-entry>
+          <map-entry id="__185">
+            <key id="__186">CamLastUpdatedBy</key>
+            <value id="__187">LastUpdatedBy</value>
+          </map-entry>
+          <map-entry id="__188">
+            <key id="__189">CamLastUpdatedDate</key>
+            <value id="__190">LastUpdatedDate</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__191">
+      <managed-bean-name id="__192">CampaignsTable</managed-bean-name>
+      <managed-bean-class id="__193">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__194">pageFlow</managed-bean-scope>
+      <managed-property id="__195">
+        <property-name id="__196">name</property-name>
+        <value id="__197">CampaignsTable</value>
+      </managed-property>
+      <managed-property id="__198">
+        <property-name id="__199">rangeBindingExpr</property-name>
+        <value id="__200">#{'#{bindings.CampaignsTable}'}</value>
+      </managed-property>
+      <managed-property id="__201">
+        <property-name id="__202">createNewRowAtTop</property-name>
+        <value id="__203">true</value>
+      </managed-property>
+      <managed-property id="__204">
+        <property-name id="__205">defaultValuesBean</property-name>
+        <value id="__206">#{pageFlowScope.CampaignsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__207">
+        <property-name id="__208">focusItemId</property-name>
+        <value id="__209">CamCNm</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__210">
+      <managed-bean-name id="__211">CamActiveFlagcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__212">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__213">request</managed-bean-scope>
+      <managed-property id="__214">
+        <property-name id="__215">binding</property-name>
+        <value id="__216">#{bindings.CamActiveFlag}</value>
+      </managed-property>
+      <managed-property id="__217">
+        <property-name id="__218">tableBean</property-name>
+        <value id="__219">#{pageFlowScope.CampaignsTable}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__220">
+      <managed-bean-name id="__221">DeleteCampaigns</managed-bean-name>
+      <managed-bean-class id="__222">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__223">request</managed-bean-scope>
+      <managed-property id="__224">
+        <property-name id="__225">deleteBinding</property-name>
+        <value id="__226">#{bindings.DeleteCampaigns}</value>
+      </managed-property>
+      <managed-property id="__227">
+        <property-name id="__228">commitBean</property-name>
+        <value id="__229">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__230">
+      <managed-bean-name id="__231">SaveCampaigns</managed-bean-name>
+      <managed-bean-class id="__232">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__233">request</managed-bean-scope>
+      <managed-property id="__234">
+        <property-name id="__235">commitBinding</property-name>
+        <value id="__236">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__237">
+        <property-name id="__238">successOutcome</property-name>
+        <value id="__239">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__240">
+      <managed-bean-name id="__241">CampaignOpportunitiesTable</managed-bean-name>
+      <managed-bean-class id="__242">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__243">pageFlow</managed-bean-scope>
+      <managed-property id="__244">
+        <property-name id="__245">name</property-name>
+        <value id="__246">CampaignOpportunitiesTable</value>
+      </managed-property>
+      <managed-property id="__247">
+        <property-name id="__248">rangeBindingExpr</property-name>
+        <value id="__249">#{'#{bindings.CampaignOpportunitiesTable}'}</value>
+      </managed-property>
+      <managed-property id="__250">
+        <property-name id="__251">createNewRowAtTop</property-name>
+        <value id="__252">true</value>
+      </managed-property>
+      <managed-property id="__253">
+        <property-name id="__254">defaultValuesBean</property-name>
+        <value id="__255">#{pageFlowScope.CampaignOpportunitiesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__256">
+        <property-name id="__257">focusItemId</property-name>
+        <value id="__258">s90OpportunityNo</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__259">
+      <managed-bean-name id="__260">DeleteCampaignOpportunities</managed-bean-name>
+      <managed-bean-class id="__261">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__262">request</managed-bean-scope>
+      <managed-property id="__263">
+        <property-name id="__264">deleteBinding</property-name>
+        <value id="__265">#{bindings.DeleteCampaignOpportunities}</value>
+      </managed-property>
+      <managed-property id="__266">
+        <property-name id="__267">commitBean</property-name>
+        <value id="__268">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__269">
+      <managed-bean-name id="__270">CreateCampaignOpportunities</managed-bean-name>
+      <managed-bean-class id="__271">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__272">request</managed-bean-scope>
+      <managed-property id="__273">
+        <property-name id="__274">createBinding</property-name>
+        <value id="__275">#{bindings.CreateCampaignOpportunities}</value>
+      </managed-property>
+      <managed-property id="__276">
+        <property-name id="__277">defaultValuesBean</property-name>
+        <value id="__278">#{pageFlowScope.CampaignOpportunitiesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__279">
+        <property-name id="__280">successOutcome</property-name>
+        <value id="__281">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__282">
+        <property-name id="__283">failureOutcome</property-name>
+        <value id="__284">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__285">
+      <managed-bean-name id="__286">s90OpportunityNoDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__287">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__288">application</managed-bean-scope>
+      <managed-property id="__289">
+        <property-name id="__290">itemsToClear</property-name>
+        <list-entries id="__291"></list-entries>
+      </managed-property>
+      <managed-property id="__292">
+        <property-name id="__293">componentsToRefresh</property-name>
+        <list-entries id="__294">
+          <value id="__295">s90EL</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__296">
+      <managed-bean-name id="__297">s90OpporunityNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__298">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__299">pageFlow</managed-bean-scope>
+      <managed-property id="__300">
+        <property-name id="__301">iterBindingExpr</property-name>
+        <value id="__302">#{'#{bindings.CampaignOpportunitiesIterator}'}</value>
+      </managed-property>
+      <managed-property id="__303">
+        <property-name id="__304">lovFieldBindingExpr</property-name>
+        <value id="__305">#{'#{row.bindings.OpportunityName}'}</value>
+      </managed-property>
+      <managed-property id="__306">
+        <property-name id="__307">copyToModel</property-name>
+        <value id="__308">true</value>
+      </managed-property>
+      <managed-property id="__309">
+        <property-name id="__310">tableBean</property-name>
+        <value id="__311">#{pageFlowScope.CampaignOpportunitiesTable}</value>
+      </managed-property>
+      <managed-property id="__312">
+        <property-name id="__313">lovSearchItem</property-name>
+        <value id="__314">OpportunityLookupName</value>
+      </managed-property>
+      <managed-property id="__315">
+        <property-name id="__316">lovTitleExpr</property-name>
+        <value id="__317">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.CampaignOpportunitiesTable.hints.OpportunityName.label}"}</value>
+      </managed-property>
+      <managed-property id="__318">
+        <property-name id="__319">lovWidth</property-name>
+        <value id="__320">1000</value>
+      </managed-property>
+      <managed-property id="__321">
+        <property-name id="__322">lovHeight</property-name>
+        <value id="__323">500</value>
+      </managed-property>
+      <managed-property id="__324">
+        <property-name id="__325">lovTaskFlowIdString</property-name>
+        <value id="__326">/WEB-INF/adfc-config-OpportunityLookup.xml#OpportunityLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__327">
+        <property-name id="__328">lovParams</property-name>
+        <map-entries id="__329"></map-entries>
+      </managed-property>
+      <managed-property id="__330">
+        <property-name id="__331">returnItemValues</property-name>
+        <map-entries id="__332">
+          <map-entry id="__333">
+            <key id="__334">Id</key>
+            <value id="__335">s90PrmOpportunityId</value>
+          </map-entry>
+          <map-entry id="__336">
+            <key id="__337">Name</key>
+            <value id="__338">s90OpporunityName</value>
+          </map-entry>
+          <map-entry id="__339">
+            <key id="__340">OpportunityType</key>
+            <value id="__341">s90OpportunityType</value>
+          </map-entry>
+          <map-entry id="__342">
+            <key id="__343">Accountname</key>
+            <value id="__344">s90AccountName</value>
+          </map-entry>
+          <map-entry id="__345">
+            <key id="__346">OpportunityNo</key>
+            <value id="__347">s90OpportunityNo</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__348">
+        <property-name id="__349">returnAttributeValues</property-name>
+        <map-entries id="__350">
+          <map-entry id="__351">
+            <key id="__352">Id</key>
+            <value id="__353">PrmOpportunityId</value>
+          </map-entry>
+          <map-entry id="__354">
+            <key id="__355">Name</key>
+            <value id="__356">OpportunityName</value>
+          </map-entry>
+          <map-entry id="__357">
+            <key id="__358">OpportunityType</key>
+            <value id="__359">OpportunityType</value>
+          </map-entry>
+          <map-entry id="__360">
+            <key id="__361">Accountname</key>
+            <value id="__362">AccountName</value>
+          </map-entry>
+          <map-entry id="__363">
+            <key id="__364">OpportunityNo</key>
+            <value id="__365">OpportunityNo</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__366">
+        <property-name id="__367">itemsToClear</property-name>
+        <list-entries id="__368"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__369">
+      <managed-bean-name id="__370">CampaignAccountsTable</managed-bean-name>
+      <managed-bean-class id="__371">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__372">pageFlow</managed-bean-scope>
+      <managed-property id="__373">
+        <property-name id="__374">name</property-name>
+        <value id="__375">CampaignAccountsTable</value>
+      </managed-property>
+      <managed-property id="__376">
+        <property-name id="__377">rangeBindingExpr</property-name>
+        <value id="__378">#{'#{bindings.CampaignAccountsTable}'}</value>
+      </managed-property>
+      <managed-property id="__379">
+        <property-name id="__380">createNewRowAtTop</property-name>
+        <value id="__381">true</value>
+      </managed-property>
+      <managed-property id="__382">
+        <property-name id="__383">defaultValuesBean</property-name>
+        <value id="__384">#{pageFlowScope.CampaignAccountsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__385">
+        <property-name id="__386">focusItemId</property-name>
+        <value id="__387">s91ANm</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__388">
+      <managed-bean-name id="__389">DeleteCampaignAccounts</managed-bean-name>
+      <managed-bean-class id="__390">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__391">request</managed-bean-scope>
+      <managed-property id="__392">
+        <property-name id="__393">deleteBinding</property-name>
+        <value id="__394">#{bindings.DeleteCampaignAccounts}</value>
+      </managed-property>
+      <managed-property id="__395">
+        <property-name id="__396">commitBean</property-name>
+        <value id="__397">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__398">
+      <managed-bean-name id="__399">CreateCampaignAccounts</managed-bean-name>
+      <managed-bean-class id="__400">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__401">request</managed-bean-scope>
+      <managed-property id="__402">
+        <property-name id="__403">createBinding</property-name>
+        <value id="__404">#{bindings.CreateCampaignAccounts}</value>
+      </managed-property>
+      <managed-property id="__405">
+        <property-name id="__406">defaultValuesBean</property-name>
+        <value id="__407">#{pageFlowScope.CampaignAccountsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__408">
+        <property-name id="__409">successOutcome</property-name>
+        <value id="__410">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__411">
+        <property-name id="__412">failureOutcome</property-name>
+        <value id="__413">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__414">
+      <managed-bean-name id="__415">s91AccountNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__416">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__417">pageFlow</managed-bean-scope>
+      <managed-property id="__418">
+        <property-name id="__419">iterBindingExpr</property-name>
+        <value id="__420">#{'#{bindings.CampaignAccountsIterator}'}</value>
+      </managed-property>
+      <managed-property id="__421">
+        <property-name id="__422">lovFieldBindingExpr</property-name>
+        <value id="__423">#{'#{row.bindings.AccountName}'}</value>
+      </managed-property>
+      <managed-property id="__424">
+        <property-name id="__425">copyToModel</property-name>
+        <value id="__426">true</value>
+      </managed-property>
+      <managed-property id="__427">
+        <property-name id="__428">tableBean</property-name>
+        <value id="__429">#{pageFlowScope.CampaignAccountsTable}</value>
+      </managed-property>
+      <managed-property id="__430">
+        <property-name id="__431">lovSearchItem</property-name>
+        <value id="__432">AccountLookupName</value>
+      </managed-property>
+      <managed-property id="__433">
+        <property-name id="__434">lovTitleExpr</property-name>
+        <value id="__435">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.CampaignAccountsTable.hints.AccountName.label}"}</value>
+      </managed-property>
+      <managed-property id="__436">
+        <property-name id="__437">lovWidth</property-name>
+        <value id="__438">1000</value>
+      </managed-property>
+      <managed-property id="__439">
+        <property-name id="__440">lovHeight</property-name>
+        <value id="__441">500</value>
+      </managed-property>
+      <managed-property id="__442">
+        <property-name id="__443">lovTaskFlowIdString</property-name>
+        <value id="__444">/WEB-INF/adfc-config-AccountLookup.xml#AccountLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__445">
+        <property-name id="__446">lovParams</property-name>
+        <map-entries id="__447"></map-entries>
+      </managed-property>
+      <managed-property id="__448">
+        <property-name id="__449">returnItemValues</property-name>
+        <map-entries id="__450">
+          <map-entry id="__451">
+            <key id="__452">Name</key>
+            <value id="__453">s91AccountName</value>
+          </map-entry>
+          <map-entry id="__454">
+            <key id="__455">Id</key>
+            <value id="__456">s91ContentOwnerId</value>
+          </map-entry>
+          <map-entry id="__457">
+            <key id="__458">Site</key>
+            <value id="__459">s91AccountSite</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__460">
+        <property-name id="__461">returnAttributeValues</property-name>
+        <map-entries id="__462">
+          <map-entry id="__463">
+            <key id="__464">Name</key>
+            <value id="__465">AccountName</value>
+          </map-entry>
+          <map-entry id="__466">
+            <key id="__467">Id</key>
+            <value id="__468">ContentOwnerId</value>
+          </map-entry>
+          <map-entry id="__469">
+            <key id="__470">Site</key>
+            <value id="__471">AccountSite</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__472">
+        <property-name id="__473">itemsToClear</property-name>
+        <list-entries id="__474"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__475">
+      <managed-bean-name id="__476">CampaignTitlesTable</managed-bean-name>
+      <managed-bean-class id="__477">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__478">pageFlow</managed-bean-scope>
+      <managed-property id="__479">
+        <property-name id="__480">name</property-name>
+        <value id="__481">CampaignTitlesTable</value>
+      </managed-property>
+      <managed-property id="__482">
+        <property-name id="__483">rangeBindingExpr</property-name>
+        <value id="__484">#{'#{bindings.CampaignTitlesTable}'}</value>
+      </managed-property>
+      <managed-property id="__485">
+        <property-name id="__486">createNewRowAtTop</property-name>
+        <value id="__487">true</value>
+      </managed-property>
+      <managed-property id="__488">
+        <property-name id="__489">defaultValuesBean</property-name>
+        <value id="__490">#{pageFlowScope.CampaignTitlesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__491">
+        <property-name id="__492">focusItemId</property-name>
+        <value id="__493">s92TTN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__494">
+      <managed-bean-name id="__495">DeleteCampaignTitles</managed-bean-name>
+      <managed-bean-class id="__496">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__497">request</managed-bean-scope>
+      <managed-property id="__498">
+        <property-name id="__499">deleteBinding</property-name>
+        <value id="__500">#{bindings.DeleteCampaignTitles}</value>
+      </managed-property>
+      <managed-property id="__501">
+        <property-name id="__502">commitBean</property-name>
+        <value id="__503">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__504">
+      <managed-bean-name id="__505">CreateCampaignTitles</managed-bean-name>
+      <managed-bean-class id="__506">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__507">request</managed-bean-scope>
+      <managed-property id="__508">
+        <property-name id="__509">createBinding</property-name>
+        <value id="__510">#{bindings.CreateCampaignTitles}</value>
+      </managed-property>
+      <managed-property id="__511">
+        <property-name id="__512">defaultValuesBean</property-name>
+        <value id="__513">#{pageFlowScope.CampaignTitlesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__514">
+        <property-name id="__515">successOutcome</property-name>
+        <value id="__516">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__517">
+        <property-name id="__518">failureOutcome</property-name>
+        <value id="__519">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__520">
+      <managed-bean-name id="__521">s92TargetTrackingNoLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__522">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__523">pageFlow</managed-bean-scope>
+      <managed-property id="__524">
+        <property-name id="__525">iterBindingExpr</property-name>
+        <value id="__526">#{'#{bindings.CampaignTitlesIterator}'}</value>
+      </managed-property>
+      <managed-property id="__527">
+        <property-name id="__528">lovFieldBindingExpr</property-name>
+        <value id="__529">#{'#{row.bindings.TargetTrackingNo}'}</value>
+      </managed-property>
+      <managed-property id="__530">
+        <property-name id="__531">copyToModel</property-name>
+        <value id="__532">true</value>
+      </managed-property>
+      <managed-property id="__533">
+        <property-name id="__534">tableBean</property-name>
+        <value id="__535">#{pageFlowScope.CampaignTitlesTable}</value>
+      </managed-property>
+      <managed-property id="__536">
+        <property-name id="__537">lovSearchItem</property-name>
+        <value id="__538">TitleLookupTargetTrackingNo</value>
+      </managed-property>
+      <managed-property id="__539">
+        <property-name id="__540">lovTitleExpr</property-name>
+        <value id="__541">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.CampaignTitlesTable.hints.TargetTrackingNo.label}"}</value>
+      </managed-property>
+      <managed-property id="__542">
+        <property-name id="__543">lovWidth</property-name>
+        <value id="__544">1000</value>
+      </managed-property>
+      <managed-property id="__545">
+        <property-name id="__546">lovHeight</property-name>
+        <value id="__547">500</value>
+      </managed-property>
+      <managed-property id="__548">
+        <property-name id="__549">lovTaskFlowIdString</property-name>
+        <value id="__550">/WEB-INF/adfc-config-TitleLookup.xml#TitleLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__551">
+        <property-name id="__552">lovParams</property-name>
+        <map-entries id="__553"></map-entries>
+      </managed-property>
+      <managed-property id="__554">
+        <property-name id="__555">returnItemValues</property-name>
+        <map-entries id="__556">
+          <map-entry id="__557">
+            <key id="__558">TargetTrackingNo</key>
+            <value id="__559">s92TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__560">
+            <key id="__561">Id</key>
+            <value id="__562">s92TitleId</value>
+          </map-entry>
+          <map-entry id="__563">
+            <key id="__564">CatalogNumber</key>
+            <value id="__565">s92CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__566">
+            <key id="__567">LongTitle</key>
+            <value id="__568">s92LongTitle</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__569">
+        <property-name id="__570">returnAttributeValues</property-name>
+        <map-entries id="__571">
+          <map-entry id="__572">
+            <key id="__573">TargetTrackingNo</key>
+            <value id="__574">TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__575">
+            <key id="__576">Id</key>
+            <value id="__577">TitleId</value>
+          </map-entry>
+          <map-entry id="__578">
+            <key id="__579">CatalogNumber</key>
+            <value id="__580">CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__581">
+            <key id="__582">LongTitle</key>
+            <value id="__583">LongTitle</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__584">
+        <property-name id="__585">itemsToClear</property-name>
+        <list-entries id="__586"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__587">
+      <managed-bean-name id="__588">CampaignProductsTable</managed-bean-name>
+      <managed-bean-class id="__589">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__590">pageFlow</managed-bean-scope>
+      <managed-property id="__591">
+        <property-name id="__592">name</property-name>
+        <value id="__593">CampaignProductsTable</value>
+      </managed-property>
+      <managed-property id="__594">
+        <property-name id="__595">rangeBindingExpr</property-name>
+        <value id="__596">#{'#{bindings.CampaignProductsTable}'}</value>
+      </managed-property>
+      <managed-property id="__597">
+        <property-name id="__598">createNewRowAtTop</property-name>
+        <value id="__599">true</value>
+      </managed-property>
+      <managed-property id="__600">
+        <property-name id="__601">defaultValuesBean</property-name>
+        <value id="__602">#{pageFlowScope.CampaignProductsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__603">
+        <property-name id="__604">focusItemId</property-name>
+        <value id="__605">s93PNm</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__606">
+      <managed-bean-name id="__607">DeleteCampaignProducts</managed-bean-name>
+      <managed-bean-class id="__608">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__609">request</managed-bean-scope>
+      <managed-property id="__610">
+        <property-name id="__611">deleteBinding</property-name>
+        <value id="__612">#{bindings.DeleteCampaignProducts}</value>
+      </managed-property>
+      <managed-property id="__613">
+        <property-name id="__614">commitBean</property-name>
+        <value id="__615">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__616">
+      <managed-bean-name id="__617">CreateCampaignProducts</managed-bean-name>
+      <managed-bean-class id="__618">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__619">request</managed-bean-scope>
+      <managed-property id="__620">
+        <property-name id="__621">createBinding</property-name>
+        <value id="__622">#{bindings.CreateCampaignProducts}</value>
+      </managed-property>
+      <managed-property id="__623">
+        <property-name id="__624">defaultValuesBean</property-name>
+        <value id="__625">#{pageFlowScope.CampaignProductsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__626">
+        <property-name id="__627">successOutcome</property-name>
+        <value id="__628">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__629">
+        <property-name id="__630">failureOutcome</property-name>
+        <value id="__631">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__632">
+      <managed-bean-name id="__633">s93ProductNameLovItemInTable</managed-bean-name>
+      <managed-bean-class id="__634">com.pq.tracs.view.beans.PrmLovItemBean</managed-bean-class>
+      <managed-bean-scope id="__635">pageFlow</managed-bean-scope>
+      <managed-property id="__636">
+        <property-name id="__637">iterBindingExpr</property-name>
+        <value id="__638">#{'#{bindings.CampaignProductsIterator}'}</value>
+      </managed-property>
+      <managed-property id="__639">
+        <property-name id="__640">lovFieldBindingExpr</property-name>
+        <value id="__641">#{'#{row.bindings.ProductName}'}</value>
+      </managed-property>
+      <managed-property id="__642">
+        <property-name id="__643">copyToModel</property-name>
+        <value id="__644">true</value>
+      </managed-property>
+      <managed-property id="__645">
+        <property-name id="__646">tableBean</property-name>
+        <value id="__647">#{pageFlowScope.CampaignProductsTable}</value>
+      </managed-property>
+      <managed-property id="__648">
+        <property-name id="__649">lovSearchItem</property-name>
+        <value id="__650">TargetedProductLookupName</value>
+      </managed-property>
+      <managed-property id="__651">
+        <property-name id="__652">lovTitleExpr</property-name>
+        <value id="__653">#{"#{nls['SEARCH_AND_SELECT']}
+                          #{bindings.CampaignProductsTable.hints.ProductName.label}"}</value>
+      </managed-property>
+      <managed-property id="__654">
+        <property-name id="__655">lovWidth</property-name>
+        <value id="__656">1000</value>
+      </managed-property>
+      <managed-property id="__657">
+        <property-name id="__658">lovHeight</property-name>
+        <value id="__659">500</value>
+      </managed-property>
+      <managed-property id="__660">
+        <property-name id="__661">lovTaskFlowIdString</property-name>
+        <value id="__662">/WEB-INF/adfc-config-TargetedProductLookup.xml#TargetedProductLookupTaskFlow</value>
+      </managed-property>
+      <managed-property id="__663">
+        <property-name id="__664">lovParams</property-name>
+        <map-entries id="__665"></map-entries>
+      </managed-property>
+      <managed-property id="__666">
+        <property-name id="__667">returnItemValues</property-name>
+        <map-entries id="__668">
+          <map-entry id="__669">
+            <key id="__670">Name</key>
+            <value id="__671">s93ProductName</value>
+          </map-entry>
+          <map-entry id="__672">
+            <key id="__673">Id</key>
+            <value id="__674">s93PrmTargetedProductId</value>
+          </map-entry>
+          <map-entry id="__675">
+            <key id="__676">PrdId</key>
+            <value id="__677">s93PrdId</value>
+          </map-entry>
+          <map-entry id="__678">
+            <key id="__679">ProductFamily</key>
+            <value id="__680">s93ProductFamily</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__681">
+        <property-name id="__682">returnAttributeValues</property-name>
+        <map-entries id="__683">
+          <map-entry id="__684">
+            <key id="__685">Name</key>
+            <value id="__686">ProductName</value>
+          </map-entry>
+          <map-entry id="__687">
+            <key id="__688">Id</key>
+            <value id="__689">PrmTargetedProductId</value>
+          </map-entry>
+          <map-entry id="__690">
+            <key id="__691">PrdId</key>
+            <value id="__692">PrdId</value>
+          </map-entry>
+          <map-entry id="__693">
+            <key id="__694">ProductFamily</key>
+            <value id="__695">ProductFamily</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__696">
+        <property-name id="__697">itemsToClear</property-name>
+        <list-entries id="__698"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <router id="StartCampaigns">
+      <case id="__699">
+        <expression id="__700">#{pageFlowScope.createCampaigns!=null}</expression>
+        <outcome id="__701">createCampaigns</outcome>
+      </case>
+      <case id="__702">
+        <expression id="__703">#{pageFlowScope.rowKeyStrCampaigns!=null or
+                               pageFlowScope.rowKeyValueCampaigns!=null or
+                               pageFlowScope.rowKeyCampaigns!=null}</expression>
+        <outcome id="__704">SetCurrentRowCampaigns</outcome>
+      </case>
+      <case id="__705">
+        <expression id="__706">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__707">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__708">firstPage</default-outcome>
+    </router>
+    <method-call id="CreateCampaigns">
+      <method id="__709">#{CreateCampaigns.execute}</method>
+      <!-- execute condition param -->
+      <parameter>
+        <class id="__710">java.lang.Object</class>
+        <value id="__711">#{pageFlowScope.createCampaigns}</value>
+      </parameter>
+      <outcome id="__712">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowCampaigns">
+      <method id="__713">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__714">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__715">#{bindings.CampaignsIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__716">java.lang.String</class>
+        <value id="__717">#{pageFlowScope.rowKeyStrCampaigns}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__718">java.lang.Object</class>
+        <value id="__719">#{pageFlowScope.rowKeyValueCampaigns}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__720">oracle.jbo.Key</class>
+        <value id="__721">#{pageFlowScope.rowKeyCampaigns}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__722">java.lang.String</class>
+        <value id="__723">#{pageFlowScope.altKeyNameCampaigns}</value>
+      </parameter>
+      <outcome id="__724">
+        <fixed-outcome id="__725">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelCampaignsReturn">
+      <outcome id="__726">
+        <name id="__727">CancelCampaigns</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneCampaignsReturn">
+      <outcome id="__728">
+        <name id="__729">DoneCampaigns</name>
+      </outcome>
+    </task-flow-return>
+    <view id="CampaignsTable">
+      <page id="__730">/pages/CampaignsTable.jsff</page>
+    </view>
+    <view id="Campaigns">
+      <page id="__731">/pages/Campaigns.jsff</page>
+    </view>
+    <control-flow-rule id="__732">
+      <from-activity-id id="__733">*</from-activity-id>
+      <control-flow-case id="__734">
+        <from-outcome id="__735">SetCurrentRowCampaigns</from-outcome>
+        <to-activity-id id="__736">SetCurrentRowCampaigns</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__737">
+        <from-outcome id="__738">firstPage</from-outcome>
+        <to-activity-id id="__739">CampaignsTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__740">
+        <from-outcome id="__741">deepLinkPage</from-outcome>
+        <to-activity-id id="__742">Campaigns</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__743">
+        <from-outcome id="__744">CampaignsTableBreadcrumb</from-outcome>
+        <to-activity-id id="__745">CampaignsTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__746">
+        <from-outcome id="__747">CampaignsBreadcrumb</from-outcome>
+        <to-activity-id id="__748">Campaigns</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__749">
+        <from-outcome id="__750">Cancel</from-outcome>
+        <to-activity-id id="__751">StartCampaigns</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__752">
+        <from-outcome id="__753">CancelCampaignsReturn</from-outcome>
+        <to-activity-id id="__754">CancelCampaignsReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__755">
+        <from-outcome id="__756">DoneCampaignsReturn</from-outcome>
+        <to-activity-id id="__757">DoneCampaignsReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__758">
+      <from-activity-id id="__759">CampaignsTable</from-activity-id>
+      <control-flow-case id="__760">
+        <from-outcome id="__761">CreateCam</from-outcome>
+        <to-activity-id id="__762">Campaigns</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__763">
+        <from-outcome id="__764">CampaignsDetails</from-outcome>
+        <to-activity-id id="__765">Campaigns</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__766">
+      <from-activity-id id="__767">*</from-activity-id>
+      <control-flow-case id="__768">
+        <from-outcome id="__769">createCampaigns</from-outcome>
+        <to-activity-id id="__770">CreateCampaigns</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__771">
+    <managed-bean-name id="__772">CampaignsTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__773">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__774">pageFlow</managed-bean-scope>
+    <managed-property id="__775">
+      <property-name id="__776">params</property-name>
+      <property-class id="__777">java.util.Map</property-class>
+      <map-entries id="__778">
+        <map-entry id="__779">
+          <key id="__780">parentContext</key>
+          <value id="__781">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__782">
+      <property-name id="__783">name</property-name>
+      <value id="__784">Campaigns</value>
+    </managed-property>
+    <managed-property id="__785">
+      <property-name id="__786">taskFlowId</property-name>
+      <value id="__787">/WEB-INF/adfc-config-Campaigns.xml#CampaignsTaskFlow</value>
+    </managed-property>
+    <managed-property id="__788">
+      <property-name id="__789">tabUniqueIdentifier</property-name>
+      <value id="__790">Campaigns</value>
+    </managed-property>
+    <managed-property id="__791">
+      <property-name id="__792">label</property-name>
+      <value id="__793">Campaigns</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

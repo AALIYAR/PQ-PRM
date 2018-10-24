@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="ContactLookupLoVPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <iterator id="ContactLookupLoVIterator" Binds="TraxContactLOV"
+              DataControl="PrmAppModuleDataControl" RangeSize="50"/>
+    <searchRegion id="ContactLookupLoVIteratorTraxContactViewCriteriaQuery"
+                  Binds="ContactLookupLoVIterator"
+                  Criteria="TraxContactViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="FirstName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <attributeValues id="ContactLookupLoVId"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVFirstName"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVMiddleName"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVLastName"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVTitle"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVGender"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVPronunciation"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="Pronunciation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVJobTitle"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVJobRole"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="JobRole"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVContactName"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="ContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVWorkPhone"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="WorkPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContactLookupLoVWorkEmail"
+                     IterBinding="ContactLookupLoVIterator">
+      <AttrNames>
+        <Item Value="WorkEmail"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ContactLookupLoVTable" IterBinding="ContactLookupLoVIterator">
+      <nodeDefinition Name="ContactLookupLoV"
+                      DefName="com.pq.tracs.model.vo.TraxContactView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleName"/>
+          <Item Value="LastName"/>
+          <Item Value="Title"/>
+          <Item Value="Gender"/>
+          <Item Value="Pronunciation"/>
+          <Item Value="JobTitle"/>
+          <Item Value="JobRole"/>
+          <Item Value="ContactName"/>
+          <Item Value="WorkPhone"/>
+          <Item Value="WorkEmail"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstContactLookupLoV" IterBinding="ContactLookupLoVIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousContactLookupLoV" IterBinding="ContactLookupLoVIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextContactLookupLoV" IterBinding="ContactLookupLoVIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastContactLookupLoV" IterBinding="ContactLookupLoVIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchContactLookupLoV"
+                  IterBinding="ContactLookupLoVIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchContactLookupLoV.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchContactLookupLoV.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchContactLookupLoV.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyContactLookupLoV"
+            IterBinding="ContactLookupLoVIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrContactLookupLoV}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

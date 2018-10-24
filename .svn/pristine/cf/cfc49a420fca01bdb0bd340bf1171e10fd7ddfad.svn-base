@@ -1,0 +1,1475 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="AMgTopLc"
+                             partialTriggers=" AMgDeleteDialog AMgfbb AMgNewButton AMgDelB AMgSaveButton0 AMgCancelButton0 AMgSaveButton1 AMgCancelButton1"
+                             rendered="#{jhsUserRoles['AST, GCA, ADMIN']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateAccountManagers ? nls['INSERT_TITLE_ACCOUNTMANAGERS'] :  (jhsUserRoles['AST,GCA,ADMIN'] ? nls['EDIT_TITLE_ACCOUNTMANAGER: #{bindings.AMgDisplayName.inputValue}'] : nls['VIEW_TITLE_ACCOUNTMANAGER: #{bindings.AMgDisplayName.inputValue}'])  }"
+                          helpTopicId="RBH_ACCOUNTMANAGERS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="AMgfbb" layout="horizontal"
+                                       rendered="#{ bindings.AccountManagersIterator.currentRow!=null  and bindings.AccountManagersIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateAccountManagers and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="AMgFirst AMgPrevious AMgNext AMgLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstAccountManagers.execute}"
+                                             id="AMgFirst" partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousAccountManagers.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="AMgPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1} / #{bindings.AccountManagersIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextAccountManagers.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="AMgNext" partialSubmit="true"
+                                             rendered="#{bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1 lt bindings.AccountManagersIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1 lt bindings.AccountManagersIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastAccountManagers.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="AMgLast" partialSubmit="true"
+                                             rendered="#{bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1 lt bindings.AccountManagersIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.AccountManagersIterator.rangeStart+bindings.AccountManagersIterator.currentRowIndexInRange+1 lt bindings.AccountManagersIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateAccountManagers.execute}"
+                                             action="CreateAMg"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_ACCOUNTMANAGERS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateAccountManagers and (true) and (jhsUserRoles['AST,GCA,ADMIN'])}"
+                                             id="AMgNewButton"></af:commandToolbarButton>
+                    <af:commandToolbarButton action="DeleteAccountManagers"
+                                             partialSubmit="true"
+                                             icon="/jheadstart/images/deleteRow.png"
+                                             shortDesc="#{nls['DELETE_BUTTON_LABEL_ACCOUNTMANAGERS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateAccountManagers and  bindings.AccountManagersIterator.currentRow!=null   and (jhsUserRoles['GCA,ADMIN'])}"
+                                             immediate="true" id="AMgDelB">
+                      <af:showPopupBehavior popupId="AMgDeletePopup"/>
+                    </af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="AMgPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveAccountManagers.execute}"
+                                      rendered="#{(((((((((((jhsUserRoles['AST,GCA,ADMIN']) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="AMgSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="AMgCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.AccountManagersIterator.findMode!='true'}"
+                       id="AMgSw" defaultFacet="hasRows"
+                       facetName="#{( bindings.AccountManagersIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp" id="AMgNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="AMgFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="4"
+                                    id="AMgFI">
+                  <af:inputListOfValues id="AMgUNm"
+                                        popupTitle="#{nls['SEARCH_AND_SELECT']} #{bindings.AccountManagersTable.hints.Username.label}"
+                                        searchDesc="#{nls['SEARCH_AND_SELECT']} #{bindings.AccountManagersTable.hints.Username.label}"
+                                        value="#{bindings.AMgUsername.inputValue}"
+                                        label="#{bindings.AMgUsername.hints.label}"
+                                        required="#{bindings.AMgUsername.hints.mandatory}"
+                                        columns="#{bindings.AMgUsername.hints.displayWidth}"
+                                        maximumLength="240"
+                                        readOnly="#{((pageFlowScope.createModes.CreateAccountManagers) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAccountManagers) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                        shortDesc="#{bindings.AMgUsername.hints.tooltip}"
+                                        helpTopicId="RBH_AMGUSERNAME"
+                                        model="#{bindings.AMgUsername.listOfValuesModel}">
+                    <f:validator binding="#{bindings.AMgUsername.validator}"/>
+                  </af:inputListOfValues>
+                  <af:selectOneChoice id="AMgUTy"
+                                      value="#{bindings.AMgUserType.inputValue}"
+                                      label="#{bindings.AMgUserType.hints.label}"
+                                      required="#{bindings.AMgUserType.hints.mandatory}"
+                                      readOnly="#{((pageFlowScope.createModes.CreateAccountManagers) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAccountManagers) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.AMgUserType.hints.tooltip}"
+                                      helpTopicId="RBH_AMGUSERTYPE"
+                                      autoSubmit="true">
+                    <f:selectItems value="#{bindings.AMgUserType.items}"/>
+                  </af:selectOneChoice>
+                  <af:inputText id="AMgFNm"
+                                value="#{bindings.AMgFirstName.inputValue}"
+                                label="#{bindings.AMgFirstName.hints.label}"
+                                required="#{bindings.AMgFirstName.hints.mandatory}"
+                                rows="#{bindings.AMgFirstName.hints.displayHeight}"
+                                columns="#{bindings.AMgFirstName.hints.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.AMgFirstName.hints.tooltip}"
+                                helpTopicId="RBH_AMGFIRSTNAME">
+                    <f:validator binding="#{bindings.AMgFirstName.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="AMgLNm"
+                                value="#{bindings.AMgLastName.inputValue}"
+                                label="#{bindings.AMgLastName.hints.label}"
+                                required="#{bindings.AMgLastName.hints.mandatory}"
+                                rows="#{bindings.AMgLastName.hints.displayHeight}"
+                                columns="#{bindings.AMgLastName.hints.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.AMgLastName.hints.tooltip}"
+                                helpTopicId="RBH_AMGLASTNAME">
+                    <f:validator binding="#{bindings.AMgLastName.validator}"/>
+                  </af:inputText>
+                  <af:inputText id="AMgDNm"
+                                value="#{bindings.AMgDisplayName.inputValue}"
+                                label="#{bindings.AMgDisplayName.hints.label}"
+                                required="#{bindings.AMgDisplayName.hints.mandatory}"
+                                rows="#{bindings.AMgDisplayName.hints.displayHeight}"
+                                columns="#{bindings.AMgDisplayName.hints.displayWidth}"
+                                maximumLength="240" readOnly="true"
+                                shortDesc="#{bindings.AMgDisplayName.hints.tooltip}"
+                                helpTopicId="RBH_AMGDISPLAYNAME">
+                    <f:validator binding="#{bindings.AMgDisplayName.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="AMgSD"
+                                value="#{bindings.AMgStartDate.inputValue}"
+                                label="#{bindings.AMgStartDate.hints.label}"
+                                required="#{bindings.AMgStartDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateAccountManagers) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAccountManagers) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.AMgStartDate.hints.tooltip}"
+                                helpTopicId="RBH_AMGSTARTDATE">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                  <af:inputDate id="AMgED"
+                                value="#{bindings.AMgEndDate.inputValue}"
+                                label="#{bindings.AMgEndDate.hints.label}"
+                                required="#{bindings.AMgEndDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateAccountManagers) and (!(jhsUserRoles['AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAccountManagers) and (!(jhsUserRoles['AST,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.AMgEndDate.hints.tooltip}"
+                                helpTopicId="RBH_AMGENDDATE">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="AMgCB"
+                                value="#{bindings.AMgCreatedBy.inputValue}"
+                                label="#{bindings.AMgCreatedBy.hints.label}"
+                                required="#{bindings.AMgCreatedBy.hints.mandatory}"
+                                rows="#{bindings.AMgCreatedBy.hints.displayHeight}"
+                                columns="#{bindings.AMgCreatedBy.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.AMgCreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_AMGCREATEDBY">
+                    <f:validator binding="#{bindings.AMgCreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="AMgCD"
+                                value="#{bindings.AMgCreatedDate.inputValue}"
+                                label="#{bindings.AMgCreatedDate.hints.label}"
+                                required="#{bindings.AMgCreatedDate.hints.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.AMgCreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_AMGCREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="AMgLUB"
+                                value="#{bindings.AMgLastUpdatedBy.inputValue}"
+                                label="#{bindings.AMgLastUpdatedBy.hints.label}"
+                                required="#{bindings.AMgLastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.AMgLastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.AMgLastUpdatedBy.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.AMgLastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_AMGLASTUPDATEDBY">
+                    <f:validator binding="#{bindings.AMgLastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="AMgLUD"
+                                value="#{bindings.AMgLastUpdatedDate.inputValue}"
+                                label="#{bindings.AMgLastUpdatedDate.hints.label}"
+                                required="#{bindings.AMgLastUpdatedDate.hints.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.AMgLastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_AMGLASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" "
+                                helpTopicId="RBH_ACCOUNTMANAGERS">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveAccountManagers.execute}"
+                                            rendered="#{(((((((((((jhsUserRoles['AST,GCA,ADMIN']) or (jhsUserRoles['AST,GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) or (jhsUserRoles['GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="AMgSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="AMgCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+                <af:panelTabbed position="above" childCreation="lazy"
+                                dimensionsFrom="auto" inlineStyle="    "
+                                partialTriggers=" AMgPC:AMgTab:AMgUTy"
+                                id="AMgRegionsTabs">
+                  <af:showDetailItem stretchChildren="first"
+                                     textAndAccessKey="Accounts"
+                                     rendered="#{true and jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO'] and (bindings.AMgUserType.attributeValue == &quot;AM&quot;)}"
+                                     disabled="#{!(true and jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO'] and (bindings.AMgUserType.attributeValue == &quot;AM&quot;))}"
+                                     partialTriggers=" AMgPC:AMgTab:AMgUTy"
+                                     id="AMgRegionsAllianceManagerAccountsTab">
+                    <af:panelGroupLayout id="pgl0" layout="scroll">
+                      <af:panelGroupLayout layout="vertical" id="sa0TopLc"
+                                           partialTriggers=" AMgTopLc sa0DeleteDialog qsAreasa0SearchOptions sa0PC:sa0Arm sa0PC:sa0delrmTM sa0PC:sa0Arl sa0PC:sa0Tab:sa0delrm sa0PC:sa0Tab:sa0delrl"
+                                           rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                        <f:facet name="separator">
+                          <af:spacer width="10" height="10" id="sp3"/>
+                        </f:facet>
+                        <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                        <af:group id="g0">
+                          <af:panelGroupLayout id="modelSearchAreasa0"
+                                               rendered="#{!pageFlowScope.createModes.CreateAllianceManagerAccounts and !pageFlowScope.hideSearchArea}"
+                                               partialTriggers="">
+                            <f:attribute name="JhsIgnoreChanges" value="true"/>
+                            <af:quickQuery id="qsAreasa0SearchOptions"
+                                           label="#{nls['FILTER_BY']}"
+                                           value="#{bindings.AllianceManagerAccountsIteratorPrmAllianceManagerAccountViewCriteriaQuery.queryDescriptor}"
+                                           model="#{bindings.AllianceManagerAccountsIteratorPrmAllianceManagerAccountViewCriteriaQuery.queryModel}"
+                                           queryListener="#{bindings.AllianceManagerAccountsIteratorPrmAllianceManagerAccountViewCriteriaQuery.processQuery}"></af:quickQuery>
+                          </af:panelGroupLayout>
+                        </af:group>
+                        <af:panelGroupLayout layout="vertical" id="pgl1">
+                          <af:panelCollection id="sa0PC" featuresOff=" "
+                                              styleClass="AFStretchWidth">
+                            <f:facet name="menus">
+                              <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                       id="menu0">
+                                <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu1">
+                                  <af:group id="sa0tbb"
+                                            rendered="#{ bindings.AllianceManagerAccountsIterator.currentRow!=null }">
+                                    <af:commandMenuItem actionListener="#{bindings.FirstAllianceManagerAccounts.execute}"
+                                                        id="sa0First"
+                                                        partialSubmit="true"
+                                                        icon="/afr/shuttleleftall_ena.png"
+                                                        textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.PreviousAllianceManagerAccounts.execute}"
+                                                        icon="/afr/shuttleleft_ena.png"
+                                                        textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                        id="sa0Previous"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.NextAllianceManagerAccounts.execute}"
+                                                        icon="/afr/shuttleright_ena.png"
+                                                        textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                        id="sa0Next"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.LastAllianceManagerAccounts.execute}"
+                                                        icon="/afr/shuttlerightall_ena.png"
+                                                        textAndAccessKey="#{nls['LAST_ROW']}"
+                                                        id="sa0Last"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                  </af:group>
+                                </af:menu>
+                                <af:commandMenuItem id="sa0Arm"
+                                                    textAndAccessKey="#{nls['ADD_ROW']}"
+                                                    immediate="false"
+                                                    icon="/jheadstart/images/addRow.png"
+                                                    partialSubmit="true"
+                                                    actionListener="#{pageFlowScope.AllianceManagerAccountsTable.addRow}"
+                                                    rendered="#{ bindings.AccountManagersIterator.currentRow!=null  and (jhsUserRoles['GCA,ADMIN'])}"></af:commandMenuItem>
+                                <af:commandMenuItem id="sa0delrmTM"
+                                                    textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                    icon="/jheadstart/images/deleteRow.png"
+                                                    partialSubmit="true"
+                                                    immediate="true"
+                                                    rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                                  <af:showPopupBehavior popupId="::sa0DeletePopup"/>
+                                </af:commandMenuItem>
+                                <af:commandMenuItem partialSubmit="true"
+                                                    textAndAccessKey="#{nls['EXPORT']}"
+                                                    icon="/jheadstart/images/excel.png"
+                                                    immediate="true" id="cmi0">
+                                  <af:exportCollectionActionListener exportedId="sa0Tab"
+                                                                     type="excelHTML"
+                                                                     filename="AllianceManagerAccounts.xls"/>
+                                </af:commandMenuItem>
+                              </af:menu>
+                            </f:facet>
+                            <f:facet name="toolbar">
+                              <af:toolbar id="tbar1">
+                                <!-- Also create CreateAllianceManagerAccounts bean so we can start table group in create mode as well -->
+                                <af:commandImageLink id="sa0Arl"
+                                                     immediate="false"
+                                                     rendered="#{ bindings.AccountManagersIterator.currentRow!=null  and (jhsUserRoles['GCA,ADMIN'])}"
+                                                     partialSubmit="true"
+                                                     actionListener="#{pageFlowScope.AllianceManagerAccountsTable.addRow}"
+                                                     shortDesc="#{nls['ADD_ROW']}"
+                                                     icon="/jheadstart/images/addRow.png"/>
+                                <af:commandImageLink immediate="true"
+                                                     partialSubmit="true"
+                                                     id="cl0"
+                                                     shortDesc="#{nls['EXPORT']}"
+                                                     icon="/jheadstart/images/excel.png">
+                                  <af:exportCollectionActionListener exportedId="sa0Tab"
+                                                                     type="excelHTML"
+                                                                     filename="AllianceManagerAccounts.xls"/>
+                                </af:commandImageLink>
+                                <af:commandToolbarButton text="Print"
+                                                         id="sa0Print"
+                                                         shortDesc="Opens a new tab with printer friendly format.">
+                                  <af:showPrintablePageBehavior/>
+                                </af:commandToolbarButton>
+                                <af:popup id="noSelectionPopup0"
+                                          binding="#{pageFlowScope.AllianceManagerAccountsTable.noSelectionPopup}">
+                                  <af:dialog modal="true" type="cancel"
+                                             title="Select Targets First">
+                                    <af:outputText value="You must select at least one row."/>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="reAssignPopup0"
+                                          binding="#{pageFlowScope.AllianceManagerAccountsTable.reAssignPopup}">
+                                  <af:dialog modal="true" type="okCancel"
+                                             title="Set Values"
+                                             dialogListener="#{pageFlowScope.AllianceManagerAccountsTable.handleOk}">
+                                    <af:outputText value="Any changes will be applied to all selected accounts."/>
+                                    <af:selectOneChoice value="#{pageFlowScope.AllianceManagerAccountsTable.newAM}"
+                                                        label="Alliance Manager"
+                                                        required="false"
+                                                        shortDesc="#{bindings.ReassignAllianceManagerLookup.hints.tooltip}"
+                                                        id="amAccountSelect0">
+                                      <f:selectItems value="#{bindings.ReassignAllianceManagerLookup.items}"
+                                                     id="amAccountItems0"/>
+                                    </af:selectOneChoice>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:commandButton id="sa0RAS"
+                                                  textAndAccessKey="Re-Assign"
+                                                  actionListener="#{pageFlowScope.AllianceManagerAccountsTable.reAssignAccounts}"></af:commandButton>
+                              </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar">
+                              <af:toolbar>
+                                <af:outputText value="#{bindings.AllianceManagerAccountsIterator.estimatedRowCount} rows found"/>
+                              </af:toolbar>
+                            </f:facet>
+                            <af:table id="sa0Tab" contentDelivery="immediate"
+                                      value="#{bindings.AllianceManagerAccountsTable.collectionModel}"
+                                      columnStretching="blank"
+                                      rowBandingInterval="0"
+                                      editingMode="editAll"
+                                      columnSelection="multiple"
+                                      contextMenuSelect="true"
+                                      selectionListener="#{bindings.AllianceManagerAccountsTable.collectionModel.makeCurrent}"
+                                      rowSelection="multiple"
+                                      rowDisclosureListener="#{pageFlowScope.AllianceManagerAccountsTable.discloseRow}"
+                                      var="row" varStatus="status"
+                                      rows="#{bindings.AllianceManagerAccountsTable.rangeSize}"
+                                      autoHeightRows="#{bindings.AllianceManagerAccountsTable.estimatedRowCount lt 5 ? 5 : bindings.AllianceManagerAccountsTable.estimatedRowCount lt bindings.AllianceManagerAccountsTable.rangeSize ? bindings.AllianceManagerAccountsTable.estimatedRowCount : 0 }"
+                                      fetchSize="#{bindings.AllianceManagerAccountsTable.rangeSize}"
+                                      emptyText="#{nls['NO_ROWS_FOUND']}"
+                                      queryListener="#{bindings.AllianceManagerAccountsIteratorPrmAllianceManagerAccountViewCriteriaQuery.processQuery}"
+                                      filterModel="#{bindings.AllianceManagerAccountsIteratorPrmAllianceManagerAccountViewCriteriaQuery.queryDescriptor}"
+                                      filterVisible="true"
+                                      binding="#{pageFlowScope.AllianceManagerAccountsTable.table}"
+                                      partialTriggers=":::qsAreasa0SearchOptions :::sa0PC ::sa0First ::sa0Previous ::sa0Next ::sa0Last"
+                                      styleClass="AFStretchWidth"
+                                      summary="#{nls['TABLE_TITLE_ALLIANCEMANAGERACCOUNTS']}">
+                              <f:facet name="contextMenu">
+                                <af:popup id="sa0TablePopup"
+                                          childCreation="deferred">
+                                  <af:menu id="menu2">
+                                    <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                             id="menu3"></af:menu>
+                                    <af:commandMenuItem id="sa0delrm"
+                                                        textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                        icon="/jheadstart/images/deleteRow.png"
+                                                        partialSubmit="true"
+                                                        immediate="true"
+                                                        rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                                      <af:showPopupBehavior popupId=":::sa0DeletePopup"/>
+                                    </af:commandMenuItem>
+                                  </af:menu>
+                                </af:popup>
+                              </f:facet>
+                              <af:column id="sa0ActionColumn" width="20"
+                                         align="center" headerText=" ">
+                                <af:panelGroupLayout layout="horizontal"
+                                                     id="pgl2">
+                                  <af:commandImageLink id="sa0delrl"
+                                                       partialSubmit="true"
+                                                       immediate="true"
+                                                       rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                                       shortDesc="#{nls['DELETE_ROW']}"
+                                                       icon="/jheadstart/images/deleteRow.png">
+                                    <af:showPopupBehavior popupId=":::sa0DeletePopup"/>
+                                  </af:commandImageLink>
+                                </af:panelGroupLayout>
+                              </af:column>
+                              <af:column id="sa0ANmCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="240" sortProperty="AccountName"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA0ACCOUNTNAME"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerAccountsTable.hints.AccountName.label}"
+                                                  showRequired="#{bindings.AllianceManagerAccountsTable.hints.AccountName.mandatory}"
+                                                  id="ol0"/>
+                                </f:facet>
+                                <af:inputListOfValues id="sa0ANm"
+                                                      value="#{row.bindings.AccountName.inputValue}"
+                                                      label="#{bindings.AllianceManagerAccountsTable.hints.AccountName.label}"
+                                                      popupTitle="#{nls['SEARCH_AND_SELECT']} #{bindings.AllianceManagerAccountsTable.hints.AccountName.label}"
+                                                      searchDesc="#{nls['SEARCH_AND_SELECT']} #{bindings.AllianceManagerAccountsTable.hints.AccountName.label}"
+                                                      required="#{bindings.AllianceManagerAccountsTable.hints.AccountName.mandatory}"
+                                                      columns="#{bindings.AllianceManagerAccountsTable.hints.AccountName.displayWidth}"
+                                                      maximumLength="400"
+                                                      readOnly="#{((pageFlowScope.AllianceManagerAccountsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.AllianceManagerAccountsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                                      shortDesc="#{bindings.AllianceManagerAccountsTable.hints.AccountName.tooltip}"
+                                                      autoSubmit="true"
+                                                      valueChangeListener="#{sa0AccountNameDependsOnItem.updateModelValue}"
+                                                      model="#{row.bindings.AccountName.listOfValuesModel}">
+                                  <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                                </af:inputListOfValues>
+                              </af:column>
+                              <af:column id="sa0ANoCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="100"
+                                         sortProperty="AccountNumber"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA0ACCOUNTNUMBER"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerAccountsTable.hints.AccountNumber.label}"
+                                                  id="ol1"/>
+                                </f:facet>
+                                <af:inputText id="sa0ANo"
+                                              value="#{row.bindings.AccountNumber.inputValue}"
+                                              label="#{bindings.AllianceManagerAccountsTable.hints.AccountNumber.label}"
+                                              required="#{bindings.AllianceManagerAccountsTable.hints.AccountNumber.mandatory}"
+                                              rows="#{bindings.AllianceManagerAccountsTable.hints.AccountNumber.displayHeight}"
+                                              columns="#{bindings.AllianceManagerAccountsTable.hints.AccountNumber.displayWidth}"
+                                              maximumLength="38" readOnly="true"
+                                              shortDesc="#{bindings.AllianceManagerAccountsTable.hints.AccountNumber.tooltip}">
+                                  <f:validator binding="#{row.bindings.AccountNumber.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.AllianceManagerAccountsTable.hints.AccountNumber.format}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa0AStCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="240" sortProperty="AccountSite"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA0ACCOUNTSITE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerAccountsTable.hints.AccountSite.label}"
+                                                  id="ol2"/>
+                                </f:facet>
+                                <af:inputText id="sa0ASt"
+                                              value="#{row.bindings.AccountSite.inputValue}"
+                                              label="#{bindings.AllianceManagerAccountsTable.hints.AccountSite.label}"
+                                              required="#{bindings.AllianceManagerAccountsTable.hints.AccountSite.mandatory}"
+                                              rows="#{bindings.AllianceManagerAccountsTable.hints.AccountSite.displayHeight}"
+                                              columns="#{bindings.AllianceManagerAccountsTable.hints.AccountSite.displayWidth}"
+                                              maximumLength="400"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.AllianceManagerAccountsTable.hints.AccountSite.tooltip}">
+                                  <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa0SDCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="100" sortProperty="StartDate"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA0STARTDATE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerAccountsTable.hints.StartDate.label}"
+                                                  showRequired="#{bindings.AllianceManagerAccountsTable.hints.StartDate.mandatory}"
+                                                  id="ol3"/>
+                                </f:facet>
+                                <f:facet name="filter">
+                                  <af:inputDate value="#{status.filterCriteria.StartDate}"
+                                                id="id0">
+                                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                  </af:inputDate>
+                                </f:facet>
+                                <af:inputDate id="sa0SD"
+                                              value="#{row.bindings.StartDate.inputValue}"
+                                              label="#{bindings.AllianceManagerAccountsTable.hints.StartDate.label}"
+                                              required="#{bindings.AllianceManagerAccountsTable.hints.StartDate.mandatory}"
+                                              readOnly="#{((pageFlowScope.AllianceManagerAccountsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.AllianceManagerAccountsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                              shortDesc="#{bindings.AllianceManagerAccountsTable.hints.StartDate.tooltip}">
+                                  <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                </af:inputDate>
+                              </af:column>
+                              <af:column id="sa0EDCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="100" sortProperty="EndDate"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA0ENDDATE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerAccountsTable.hints.EndDate.label}"
+                                                  showRequired="#{bindings.AllianceManagerAccountsTable.hints.EndDate.mandatory}"
+                                                  id="ol4"/>
+                                </f:facet>
+                                <f:facet name="filter">
+                                  <af:inputDate value="#{status.filterCriteria.EndDate}"
+                                                id="id1">
+                                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                  </af:inputDate>
+                                </f:facet>
+                                <af:inputDate id="sa0ED"
+                                              value="#{row.bindings.EndDate.inputValue}"
+                                              label="#{bindings.AllianceManagerAccountsTable.hints.EndDate.label}"
+                                              required="#{bindings.AllianceManagerAccountsTable.hints.EndDate.mandatory}"
+                                              readOnly="#{((pageFlowScope.AllianceManagerAccountsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.AllianceManagerAccountsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                              shortDesc="#{bindings.AllianceManagerAccountsTable.hints.EndDate.tooltip}">
+                                  <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                </af:inputDate>
+                              </af:column>
+                            </af:table>
+                          </af:panelCollection>
+                        </af:panelGroupLayout>
+                        <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem stretchChildren="first"
+                                     textAndAccessKey="Opportunities"
+                                     rendered="#{true and jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO'] and (bindings.AMgUserType.attributeValue == &quot;AM&quot;)}"
+                                     disabled="#{!(true and jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO'] and (bindings.AMgUserType.attributeValue == &quot;AM&quot;))}"
+                                     partialTriggers=" AMgPC:AMgTab:AMgUTy"
+                                     id="AMgRegionsAllianceManagerOpportunitiesTab">
+                    <af:panelGroupLayout id="pgl3" layout="scroll">
+                      <af:panelGroupLayout layout="vertical" id="sa1TopLc"
+                                           partialTriggers=" AMgTopLc sa1DeleteDialog qsAreasa1SearchOptions sa1PC:sa1Arm sa1PC:sa1delrmTM sa1PC:sa1Arl sa1PC:sa1Tab:sa1delrm sa1PC:sa1Tab:sa1delrl"
+                                           rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                        <f:facet name="separator">
+                          <af:spacer width="10" height="10" id="sp4"/>
+                        </f:facet>
+                        <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                        <af:group id="g1">
+                          <af:panelGroupLayout id="modelSearchAreasa1"
+                                               rendered="#{!pageFlowScope.createModes.CreateAllianceManagerOpportunities and !pageFlowScope.hideSearchArea}"
+                                               partialTriggers="">
+                            <f:attribute name="JhsIgnoreChanges" value="true"/>
+                            <af:quickQuery id="qsAreasa1SearchOptions"
+                                           label="#{nls['FILTER_BY']}"
+                                           value="#{bindings.AllianceManagerOpportunitiesIteratorPrmAllianceManagerOpportunityViewCriteriaQuery.queryDescriptor}"
+                                           model="#{bindings.AllianceManagerOpportunitiesIteratorPrmAllianceManagerOpportunityViewCriteriaQuery.queryModel}"
+                                           queryListener="#{bindings.AllianceManagerOpportunitiesIteratorPrmAllianceManagerOpportunityViewCriteriaQuery.processQuery}"></af:quickQuery>
+                          </af:panelGroupLayout>
+                        </af:group>
+                        <af:panelGroupLayout layout="vertical" id="pgl4">
+                          <af:panelCollection id="sa1PC" featuresOff=" "
+                                              styleClass="AFStretchWidth">
+                            <f:facet name="menus">
+                              <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                       id="menu4">
+                                <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu5">
+                                  <af:group id="sa1tbb"
+                                            rendered="#{ bindings.AllianceManagerOpportunitiesIterator.currentRow!=null }">
+                                    <af:commandMenuItem actionListener="#{bindings.FirstAllianceManagerOpportunities.execute}"
+                                                        id="sa1First"
+                                                        partialSubmit="true"
+                                                        icon="/afr/shuttleleftall_ena.png"
+                                                        textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.PreviousAllianceManagerOpportunities.execute}"
+                                                        icon="/afr/shuttleleft_ena.png"
+                                                        textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                        id="sa1Previous"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.NextAllianceManagerOpportunities.execute}"
+                                                        icon="/afr/shuttleright_ena.png"
+                                                        textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                        id="sa1Next"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.LastAllianceManagerOpportunities.execute}"
+                                                        icon="/afr/shuttlerightall_ena.png"
+                                                        textAndAccessKey="#{nls['LAST_ROW']}"
+                                                        id="sa1Last"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                  </af:group>
+                                </af:menu>
+                                <af:commandMenuItem id="sa1Arm"
+                                                    textAndAccessKey="#{nls['ADD_ROW']}"
+                                                    immediate="false"
+                                                    icon="/jheadstart/images/addRow.png"
+                                                    partialSubmit="true"
+                                                    actionListener="#{pageFlowScope.AllianceManagerOpportunitiesTable.addRow}"
+                                                    rendered="#{ bindings.AccountManagersIterator.currentRow!=null  and (jhsUserRoles['GCA,ADMIN'])}"></af:commandMenuItem>
+                                <af:commandMenuItem id="sa1delrmTM"
+                                                    textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                    icon="/jheadstart/images/deleteRow.png"
+                                                    partialSubmit="true"
+                                                    immediate="true"
+                                                    rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                                  <af:showPopupBehavior popupId="::sa1DeletePopup"/>
+                                </af:commandMenuItem>
+                                <af:commandMenuItem partialSubmit="true"
+                                                    textAndAccessKey="#{nls['EXPORT']}"
+                                                    icon="/jheadstart/images/excel.png"
+                                                    immediate="true" id="cmi1">
+                                  <af:exportCollectionActionListener exportedId="sa1Tab"
+                                                                     type="excelHTML"
+                                                                     filename="AllianceManagerOpportunities.xls"/>
+                                </af:commandMenuItem>
+                              </af:menu>
+                            </f:facet>
+                            <f:facet name="toolbar">
+                              <af:toolbar id="tbar2">
+                                <!-- Also create CreateAllianceManagerOpportunities bean so we can start table group in create mode as well -->
+                                <af:commandImageLink id="sa1Arl"
+                                                     immediate="false"
+                                                     rendered="#{ bindings.AccountManagersIterator.currentRow!=null  and (jhsUserRoles['GCA,ADMIN'])}"
+                                                     partialSubmit="true"
+                                                     actionListener="#{pageFlowScope.AllianceManagerOpportunitiesTable.addRow}"
+                                                     shortDesc="#{nls['ADD_ROW']}"
+                                                     icon="/jheadstart/images/addRow.png"/>
+                                <af:commandImageLink immediate="true"
+                                                     partialSubmit="true"
+                                                     id="cl1"
+                                                     shortDesc="#{nls['EXPORT']}"
+                                                     icon="/jheadstart/images/excel.png">
+                                  <af:exportCollectionActionListener exportedId="sa1Tab"
+                                                                     type="excelHTML"
+                                                                     filename="AllianceManagerOpportunities.xls"/>
+                                </af:commandImageLink>
+                                <af:commandToolbarButton text="Print"
+                                                         id="sa1Print"
+                                                         shortDesc="Opens a new tab with printer friendly format.">
+                                  <af:showPrintablePageBehavior/>
+                                </af:commandToolbarButton>
+                                <af:popup id="noSelectionPopup1"
+                                          binding="#{pageFlowScope.AllianceManagerOpportunitiesTable.noSelectionPopup}">
+                                  <af:dialog modal="true" type="cancel"
+                                             title="Select Targets First">
+                                    <af:outputText value="You must select at least one row."/>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="reAssignPopup1"
+                                          binding="#{pageFlowScope.AllianceManagerOpportunitiesTable.reAssignPopup}">
+                                  <af:dialog modal="true" type="okCancel"
+                                             title="Set Values"
+                                             dialogListener="#{pageFlowScope.AllianceManagerOpportunitiesTable.handleOk}">
+                                    <af:outputText value="Any changes will be applied to all selected opportunities."/>
+                                    <af:selectOneChoice value="#{pageFlowScope.AllianceManagerOpportunitiesTable.newAM}"
+                                                        label="Alliance Manager"
+                                                        required="false"
+                                                        shortDesc="#{bindings.ReassignAllianceManagerLookup.hints.tooltip}"
+                                                        id="amAccountSelect1">
+                                      <f:selectItems value="#{bindings.ReassignAllianceManagerLookup.items}"
+                                                     id="amAccountItems1"/>
+                                    </af:selectOneChoice>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:commandButton id="sa1RAS"
+                                                  textAndAccessKey="Re-Assign"
+                                                  actionListener="#{pageFlowScope.AllianceManagerOpportunitiesTable.reAssignAccounts}"></af:commandButton>
+                              </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar">
+                              <af:toolbar>
+                                <af:outputText value="#{bindings.AllianceManagerOpportunitiesIterator.estimatedRowCount} rows found"/>
+                              </af:toolbar>
+                            </f:facet>
+                            <af:table id="sa1Tab" contentDelivery="immediate"
+                                      value="#{bindings.AllianceManagerOpportunitiesTable.collectionModel}"
+                                      columnStretching="blank"
+                                      rowBandingInterval="0"
+                                      editingMode="editAll"
+                                      columnSelection="multiple"
+                                      contextMenuSelect="true"
+                                      selectionListener="#{bindings.AllianceManagerOpportunitiesTable.collectionModel.makeCurrent}"
+                                      rowSelection="multiple"
+                                      rowDisclosureListener="#{pageFlowScope.AllianceManagerOpportunitiesTable.discloseRow}"
+                                      var="row" varStatus="status"
+                                      rows="#{bindings.AllianceManagerOpportunitiesTable.rangeSize}"
+                                      autoHeightRows="#{bindings.AllianceManagerOpportunitiesTable.estimatedRowCount lt 5 ? 5 : bindings.AllianceManagerOpportunitiesTable.estimatedRowCount lt bindings.AllianceManagerOpportunitiesTable.rangeSize ? bindings.AllianceManagerOpportunitiesTable.estimatedRowCount : 0 }"
+                                      fetchSize="#{bindings.AllianceManagerOpportunitiesTable.rangeSize}"
+                                      emptyText="#{nls['NO_ROWS_FOUND']}"
+                                      queryListener="#{bindings.AllianceManagerOpportunitiesIteratorPrmAllianceManagerOpportunityViewCriteriaQuery.processQuery}"
+                                      filterModel="#{bindings.AllianceManagerOpportunitiesIteratorPrmAllianceManagerOpportunityViewCriteriaQuery.queryDescriptor}"
+                                      filterVisible="true"
+                                      binding="#{pageFlowScope.AllianceManagerOpportunitiesTable.table}"
+                                      partialTriggers=":::qsAreasa1SearchOptions :::sa1PC ::sa1First ::sa1Previous ::sa1Next ::sa1Last"
+                                      styleClass="AFStretchWidth"
+                                      summary="#{nls['TABLE_TITLE_ALLIANCEMANAGEROPPORTUNITIES']}">
+                              <f:facet name="contextMenu">
+                                <af:popup id="sa1TablePopup"
+                                          childCreation="deferred">
+                                  <af:menu id="menu6">
+                                    <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                             id="menu7"></af:menu>
+                                    <af:commandMenuItem id="sa1delrm"
+                                                        textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                        icon="/jheadstart/images/deleteRow.png"
+                                                        partialSubmit="true"
+                                                        immediate="true"
+                                                        rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                                      <af:showPopupBehavior popupId=":::sa1DeletePopup"/>
+                                    </af:commandMenuItem>
+                                  </af:menu>
+                                </af:popup>
+                              </f:facet>
+                              <af:column id="sa1ActionColumn" width="20"
+                                         align="center" headerText=" ">
+                                <af:panelGroupLayout layout="horizontal"
+                                                     id="pgl5">
+                                  <af:commandImageLink id="sa1delrl"
+                                                       partialSubmit="true"
+                                                       immediate="true"
+                                                       rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                                       shortDesc="#{nls['DELETE_ROW']}"
+                                                       icon="/jheadstart/images/deleteRow.png">
+                                    <af:showPopupBehavior popupId=":::sa1DeletePopup"/>
+                                  </af:commandImageLink>
+                                </af:panelGroupLayout>
+                              </af:column>
+                              <af:column id="sa1OpportunityNoCol"
+                                         sortable="true" filterable="true"
+                                         noWrap="true" width="100"
+                                         sortProperty="OpportunityNo"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA1OPPORTUNITYNO"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityNo.label}"
+                                                  id="ol5"/>
+                                </f:facet>
+                                <af:inputText id="sa1OpportunityNo"
+                                              value="#{row.bindings.OpportunityNo.inputValue}"
+                                              label="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityNo.label}"
+                                              required="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityNo.mandatory}"
+                                              rows="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityNo.displayHeight}"
+                                              columns="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityNo.displayWidth}"
+                                              maximumLength="38" readOnly="true"
+                                              shortDesc="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityNo.tooltip}">
+                                  <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityNo.format}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa1ONmCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="240"
+                                         sortProperty="OpportunityName"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA1OPPORTUNITYNAME"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityName.label}"
+                                                  showRequired="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityName.mandatory}"
+                                                  id="ol6"/>
+                                </f:facet>
+                                <af:inputListOfValues id="sa1ONm"
+                                                      value="#{row.bindings.OpportunityName.inputValue}"
+                                                      label="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityName.label}"
+                                                      popupTitle="#{nls['SEARCH_AND_SELECT']} #{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityName.label}"
+                                                      searchDesc="#{nls['SEARCH_AND_SELECT']} #{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityName.label}"
+                                                      required="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityName.mandatory}"
+                                                      columns="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityName.displayWidth}"
+                                                      maximumLength="200"
+                                                      readOnly="#{((pageFlowScope.AllianceManagerOpportunitiesTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.AllianceManagerOpportunitiesTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                                      shortDesc="#{bindings.AllianceManagerOpportunitiesTable.hints.OpportunityName.tooltip}"
+                                                      autoSubmit="true"
+                                                      valueChangeListener="#{sa1OpportunityNameDependsOnItem.updateModelValue}"
+                                                      model="#{row.bindings.OpportunityName.listOfValuesModel}">
+                                  <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                                </af:inputListOfValues>
+                              </af:column>
+                              <af:column id="sa1CStCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="120"
+                                         sortProperty="CurrentStatus"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA1CURRENTSTATUS"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerOpportunitiesTable.hints.CurrentStatus.label}"
+                                                  id="ol7"/>
+                                </f:facet>
+                                <af:inputText id="sa1CSt"
+                                              value="#{row.bindings.CurrentStatus.inputValue}"
+                                              label="#{bindings.AllianceManagerOpportunitiesTable.hints.CurrentStatus.label}"
+                                              required="#{bindings.AllianceManagerOpportunitiesTable.hints.CurrentStatus.mandatory}"
+                                              rows="#{bindings.AllianceManagerOpportunitiesTable.hints.CurrentStatus.displayHeight}"
+                                              columns="#{bindings.AllianceManagerOpportunitiesTable.hints.CurrentStatus.displayWidth}"
+                                              maximumLength="20" readOnly="true"
+                                              shortDesc="#{bindings.AllianceManagerOpportunitiesTable.hints.CurrentStatus.tooltip}">
+                                  <f:validator binding="#{row.bindings.CurrentStatus.validator}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa1ANoCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="100"
+                                         sortProperty="AccountNumber"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA1ACCOUNTNUMBER"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountNumber.label}"
+                                                  id="ol8"/>
+                                </f:facet>
+                                <af:inputText id="sa1ANo"
+                                              value="#{row.bindings.AccountNumber.inputValue}"
+                                              label="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountNumber.label}"
+                                              required="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountNumber.mandatory}"
+                                              rows="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountNumber.displayHeight}"
+                                              columns="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountNumber.displayWidth}"
+                                              maximumLength="38" readOnly="true"
+                                              shortDesc="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountNumber.tooltip}">
+                                  <f:validator binding="#{row.bindings.AccountNumber.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountNumber.format}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa1ANmCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="180" sortProperty="AccountName"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA1ACCOUNTNAME"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountName.label}"
+                                                  id="ol9"/>
+                                </f:facet>
+                                <af:inputText id="sa1ANm"
+                                              value="#{row.bindings.AccountName.inputValue}"
+                                              label="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountName.label}"
+                                              required="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountName.mandatory}"
+                                              rows="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountName.displayHeight}"
+                                              columns="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountName.displayWidth}"
+                                              maximumLength="400"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountName.tooltip}">
+                                  <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa1AStCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="180" sortProperty="AccountSite"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA1ACCOUNTSITE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountSite.label}"
+                                                  id="ol10"/>
+                                </f:facet>
+                                <af:inputText id="sa1ASt"
+                                              value="#{row.bindings.AccountSite.inputValue}"
+                                              label="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountSite.label}"
+                                              required="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountSite.mandatory}"
+                                              rows="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountSite.displayHeight}"
+                                              columns="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountSite.displayWidth}"
+                                              maximumLength="400"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.AllianceManagerOpportunitiesTable.hints.AccountSite.tooltip}">
+                                  <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa1SDCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="100" sortProperty="StartDate"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA1STARTDATE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerOpportunitiesTable.hints.StartDate.label}"
+                                                  showRequired="#{bindings.AllianceManagerOpportunitiesTable.hints.StartDate.mandatory}"
+                                                  id="ol11"/>
+                                </f:facet>
+                                <f:facet name="filter">
+                                  <af:inputDate value="#{status.filterCriteria.StartDate}"
+                                                id="id2">
+                                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                  </af:inputDate>
+                                </f:facet>
+                                <af:inputDate id="sa1SD"
+                                              value="#{row.bindings.StartDate.inputValue}"
+                                              label="#{bindings.AllianceManagerOpportunitiesTable.hints.StartDate.label}"
+                                              required="#{bindings.AllianceManagerOpportunitiesTable.hints.StartDate.mandatory}"
+                                              readOnly="#{((pageFlowScope.AllianceManagerOpportunitiesTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.AllianceManagerOpportunitiesTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                              shortDesc="#{bindings.AllianceManagerOpportunitiesTable.hints.StartDate.tooltip}">
+                                  <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                </af:inputDate>
+                              </af:column>
+                              <af:column id="sa1EDCol" sortable="true"
+                                         filterable="true" noWrap="true"
+                                         width="100" sortProperty="EndDate"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA1ENDDATE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.AllianceManagerOpportunitiesTable.hints.EndDate.label}"
+                                                  showRequired="#{bindings.AllianceManagerOpportunitiesTable.hints.EndDate.mandatory}"
+                                                  id="ol12"/>
+                                </f:facet>
+                                <f:facet name="filter">
+                                  <af:inputDate value="#{status.filterCriteria.EndDate}"
+                                                id="id3">
+                                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                  </af:inputDate>
+                                </f:facet>
+                                <af:inputDate id="sa1ED"
+                                              value="#{row.bindings.EndDate.inputValue}"
+                                              label="#{bindings.AllianceManagerOpportunitiesTable.hints.EndDate.label}"
+                                              required="#{bindings.AllianceManagerOpportunitiesTable.hints.EndDate.mandatory}"
+                                              readOnly="#{((pageFlowScope.AllianceManagerOpportunitiesTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.AllianceManagerOpportunitiesTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                              shortDesc="#{bindings.AllianceManagerOpportunitiesTable.hints.EndDate.tooltip}">
+                                  <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                </af:inputDate>
+                              </af:column>
+                            </af:table>
+                          </af:panelCollection>
+                        </af:panelGroupLayout>
+                        <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem stretchChildren="first"
+                                     textAndAccessKey="Products"
+                                     rendered="#{true and jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO'] and (bindings.AMgUserType.attributeValue == &quot;PM&quot;)}"
+                                     disabled="#{!(true and jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO'] and (bindings.AMgUserType.attributeValue == &quot;PM&quot;))}"
+                                     partialTriggers=" AMgPC:AMgTab:AMgUTy"
+                                     id="AMgRegionsProductManagerProductsTab">
+                    <af:panelGroupLayout id="pgl6" layout="scroll">
+                      <af:panelGroupLayout layout="vertical" id="sa2TopLc"
+                                           partialTriggers=" AMgTopLc sa2DeleteDialog qsAreasa2SearchOptions sa2PC:sa2Arm sa2PC:sa2delrmTM sa2PC:sa2Arl sa2PC:sa2Tab:sa2delrm sa2PC:sa2Tab:sa2delrl"
+                                           rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                        <f:facet name="separator">
+                          <af:spacer width="10" height="10" id="sp5"/>
+                        </f:facet>
+                        <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                        <af:group id="g2">
+                          <af:panelGroupLayout id="modelSearchAreasa2"
+                                               rendered="#{!pageFlowScope.createModes.CreateProductManagerProducts and !pageFlowScope.hideSearchArea}"
+                                               partialTriggers="">
+                            <f:attribute name="JhsIgnoreChanges" value="true"/>
+                            <af:quickQuery id="qsAreasa2SearchOptions"
+                                           label="#{nls['FILTER_BY']}"
+                                           value="#{bindings.ProductManagerProductsIteratorQuery.queryDescriptor}"
+                                           model="#{bindings.ProductManagerProductsIteratorQuery.queryModel}"
+                                           queryListener="#{bindings.ProductManagerProductsIteratorQuery.processQuery}"></af:quickQuery>
+                          </af:panelGroupLayout>
+                        </af:group>
+                        <af:panelGroupLayout layout="vertical" id="pgl7">
+                          <af:panelCollection id="sa2PC" featuresOff=" "
+                                              styleClass="AFStretchWidth">
+                            <f:facet name="menus">
+                              <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                       id="menu8">
+                                <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu9">
+                                  <af:group id="sa2tbb"
+                                            rendered="#{ bindings.ProductManagerProductsIterator.currentRow!=null }">
+                                    <af:commandMenuItem actionListener="#{bindings.FirstProductManagerProducts.execute}"
+                                                        id="sa2First"
+                                                        partialSubmit="true"
+                                                        icon="/afr/shuttleleftall_ena.png"
+                                                        textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.PreviousProductManagerProducts.execute}"
+                                                        icon="/afr/shuttleleft_ena.png"
+                                                        textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                        id="sa2Previous"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.NextProductManagerProducts.execute}"
+                                                        icon="/afr/shuttleright_ena.png"
+                                                        textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                        id="sa2Next"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                    <af:commandMenuItem actionListener="#{bindings.LastProductManagerProducts.execute}"
+                                                        icon="/afr/shuttlerightall_ena.png"
+                                                        textAndAccessKey="#{nls['LAST_ROW']}"
+                                                        id="sa2Last"
+                                                        partialSubmit="true"></af:commandMenuItem>
+                                  </af:group>
+                                </af:menu>
+                                <af:commandMenuItem id="sa2Arm"
+                                                    textAndAccessKey="#{nls['ADD_ROW']}"
+                                                    immediate="false"
+                                                    icon="/jheadstart/images/addRow.png"
+                                                    partialSubmit="true"
+                                                    actionListener="#{pageFlowScope.ProductManagerProductsTable.addRow}"
+                                                    rendered="#{ bindings.AccountManagersIterator.currentRow!=null  and (jhsUserRoles['GCA,ADMIN'])}"></af:commandMenuItem>
+                                <af:commandMenuItem id="sa2delrmTM"
+                                                    textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                    icon="/jheadstart/images/deleteRow.png"
+                                                    partialSubmit="true"
+                                                    immediate="true"
+                                                    rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                                  <af:showPopupBehavior popupId="::sa2DeletePopup"/>
+                                </af:commandMenuItem>
+                                <af:commandMenuItem partialSubmit="true"
+                                                    textAndAccessKey="#{nls['EXPORT']}"
+                                                    icon="/jheadstart/images/excel.png"
+                                                    immediate="true" id="cmi2">
+                                  <af:exportCollectionActionListener exportedId="sa2Tab"
+                                                                     type="excelHTML"
+                                                                     filename="ProductManagerProducts.xls"/>
+                                </af:commandMenuItem>
+                              </af:menu>
+                            </f:facet>
+                            <f:facet name="toolbar">
+                              <af:toolbar id="tbar3">
+                                <!-- Also create CreateProductManagerProducts bean so we can start table group in create mode as well -->
+                                <af:commandImageLink id="sa2Arl"
+                                                     immediate="false"
+                                                     rendered="#{ bindings.AccountManagersIterator.currentRow!=null  and (jhsUserRoles['GCA,ADMIN'])}"
+                                                     partialSubmit="true"
+                                                     actionListener="#{pageFlowScope.ProductManagerProductsTable.addRow}"
+                                                     shortDesc="#{nls['ADD_ROW']}"
+                                                     icon="/jheadstart/images/addRow.png"/>
+                                <af:commandImageLink immediate="true"
+                                                     partialSubmit="true"
+                                                     id="cl2"
+                                                     shortDesc="#{nls['EXPORT']}"
+                                                     icon="/jheadstart/images/excel.png">
+                                  <af:exportCollectionActionListener exportedId="sa2Tab"
+                                                                     type="excelHTML"
+                                                                     filename="ProductManagerProducts.xls"/>
+                                </af:commandImageLink>
+                                <af:commandToolbarButton text="Print"
+                                                         id="sa2Print"
+                                                         shortDesc="Opens a new tab with printer friendly format.">
+                                  <af:showPrintablePageBehavior/>
+                                </af:commandToolbarButton>
+                                <af:popup id="noSelectionPopup2"
+                                          binding="#{pageFlowScope.ProductManagerProductsTable.noSelectionPopup}">
+                                  <af:dialog modal="true" type="cancel"
+                                             title="Select Targets First">
+                                    <af:outputText value="You must select at least one row."/>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:popup id="reAssignPopup2"
+                                          binding="#{pageFlowScope.ProductManagerProductsTable.reAssignPopup}">
+                                  <af:dialog modal="true" type="okCancel"
+                                             title="Set Values"
+                                             dialogListener="#{pageFlowScope.ProductManagerProductsTable.handleOk}">
+                                    <af:outputText value="Any changes will be applied to all selected products."/>
+                                    <af:selectOneChoice value="#{pageFlowScope.ProductManagerProductsTable.newAM}"
+                                                        label="Product Manager"
+                                                        required="false"
+                                                        shortDesc="#{bindings.ReassignProductManagerLookup.hints.tooltip}"
+                                                        id="amAccountSelect2">
+                                      <f:selectItems value="#{bindings.ReassignProductManagerLookup.items}"
+                                                     id="amAccountItems2"/>
+                                    </af:selectOneChoice>
+                                  </af:dialog>
+                                </af:popup>
+                                <af:commandButton id="sa2RAS"
+                                                  textAndAccessKey="Re-Assign"
+                                                  actionListener="#{pageFlowScope.ProductManagerProductsTable.reAssignAccounts}"></af:commandButton>
+                              </af:toolbar>
+                            </f:facet>
+                            <f:facet name="statusbar">
+                              <af:toolbar>
+                                <af:outputText value="#{bindings.ProductManagerProductsIterator.estimatedRowCount} rows found"/>
+                              </af:toolbar>
+                            </f:facet>
+                            <af:table id="sa2Tab" contentDelivery="immediate"
+                                      value="#{bindings.ProductManagerProductsTable.collectionModel}"
+                                      columnStretching="blank"
+                                      rowBandingInterval="0"
+                                      editingMode="editAll"
+                                      columnSelection="multiple"
+                                      contextMenuSelect="true"
+                                      selectionListener="#{bindings.ProductManagerProductsTable.collectionModel.makeCurrent}"
+                                      rowSelection="multiple"
+                                      rowDisclosureListener="#{pageFlowScope.ProductManagerProductsTable.discloseRow}"
+                                      var="row" varStatus="status"
+                                      rows="#{bindings.ProductManagerProductsTable.rangeSize}"
+                                      autoHeightRows="#{bindings.ProductManagerProductsTable.estimatedRowCount lt 5 ? 5 : bindings.ProductManagerProductsTable.estimatedRowCount lt bindings.ProductManagerProductsTable.rangeSize ? bindings.ProductManagerProductsTable.estimatedRowCount : 0 }"
+                                      fetchSize="#{bindings.ProductManagerProductsTable.rangeSize}"
+                                      emptyText="#{nls['NO_ROWS_FOUND']}"
+                                      queryListener="#{bindings.ProductManagerProductsIteratorQuery.processQuery}"
+                                      binding="#{pageFlowScope.ProductManagerProductsTable.table}"
+                                      partialTriggers=":::qsAreasa2SearchOptions :::sa2PC ::sa2First ::sa2Previous ::sa2Next ::sa2Last"
+                                      styleClass="AFStretchWidth"
+                                      summary="#{nls['TABLE_TITLE_PRODUCTMANAGERPRODUCTS']}">
+                              <f:facet name="contextMenu">
+                                <af:popup id="sa2TablePopup"
+                                          childCreation="deferred">
+                                  <af:menu id="menu10">
+                                    <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                             id="menu11"></af:menu>
+                                    <af:commandMenuItem id="sa2delrm"
+                                                        textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                        icon="/jheadstart/images/deleteRow.png"
+                                                        partialSubmit="true"
+                                                        immediate="true"
+                                                        rendered="#{jhsUserRoles['GCA,ADMIN']}">
+                                      <af:showPopupBehavior popupId=":::sa2DeletePopup"/>
+                                    </af:commandMenuItem>
+                                  </af:menu>
+                                </af:popup>
+                              </f:facet>
+                              <af:column id="sa2ActionColumn" frozen="true"
+                                         width="20" align="center"
+                                         headerText=" ">
+                                <af:panelGroupLayout layout="horizontal"
+                                                     id="pgl8">
+                                  <af:commandImageLink id="sa2delrl"
+                                                       partialSubmit="true"
+                                                       immediate="true"
+                                                       rendered="#{jhsUserRoles['GCA,ADMIN']}"
+                                                       shortDesc="#{nls['DELETE_ROW']}"
+                                                       icon="/jheadstart/images/deleteRow.png">
+                                    <af:showPopupBehavior popupId=":::sa2DeletePopup"/>
+                                  </af:commandImageLink>
+                                </af:panelGroupLayout>
+                              </af:column>
+                              <af:column id="sa2NmCol" sortable="true"
+                                         noWrap="true" width="260"
+                                         sortProperty="Name" rowHeader="false"
+                                         helpTopicId="RBH_SA2NAME"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.Name.label}"
+                                                  showRequired="#{bindings.ProductManagerProductsTable.hints.Name.mandatory}"
+                                                  id="ol13"/>
+                                </f:facet>
+                                <af:panelGroupLayout id="sa2NamePgl"
+                                                     layout="horizontal">
+                                  <af:inputText id="sa2Nm"
+                                                label="#{bindings.ProductManagerProductsTable.hints.Name.label}"
+                                                readOnly="#{((pageFlowScope.ProductManagerProductsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.ProductManagerProductsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                                columns="#{bindings.ProductManagerProductsTable.hints.Name.displayWidth}"
+                                                maximumLength="400"
+                                                shortDesc="#{bindings.ProductManagerProductsTable.hints.Name.tooltip}"
+                                                value="#{row.bindings.Name.inputValue}"
+                                                autoSubmit="true"
+                                                valueChangeListener="#{pageFlowScope.sa2NameLovItemInTable.validateWithLov}"
+                                                binding="#{pageFlowScope.sa2NameLovItemInTable.lovField}"
+                                                simple="true">
+                                    <f:validator binding="#{row.bindings.Name.validator}"/>
+                                  </af:inputText>
+                                  <af:commandLink immediate="true"
+                                                  partialSubmit="true"
+                                                  rendered="#{!(((pageFlowScope.ProductManagerProductsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.ProductManagerProductsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))))}"
+                                                  id="cl3"
+                                                  actionListener="#{pageFlowScope.sa2NameLovItemInTable.lovIconClicked}">
+                                    <af:image source="/jheadstart/images/lov.png"
+                                              id="sa2NameIcon"
+                                              clientComponent="true"/>
+                                  </af:commandLink>
+                                  <af:commandButton text="hidden" id="cb2"
+                                                    rendered="false"
+                                                    action="#{pageFlowScope.sa2NameLovItemInTable.validationAction}"
+                                                    binding="#{pageFlowScope.sa2NameLovItemInTable.validationButton}"/>
+                                </af:panelGroupLayout>
+                              </af:column>
+                              <af:column id="sa2PICol" sortable="true"
+                                         noWrap="true" width="100"
+                                         sortProperty="PrdId" rowHeader="false"
+                                         helpTopicId="RBH_SA2PRDID"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.PrdId.label}"
+                                                  id="ol14"/>
+                                </f:facet>
+                                <af:inputText id="sa2PI"
+                                              value="#{row.bindings.PrdId.inputValue}"
+                                              label="#{bindings.ProductManagerProductsTable.hints.PrdId.label}"
+                                              required="#{bindings.ProductManagerProductsTable.hints.PrdId.mandatory}"
+                                              rows="#{bindings.ProductManagerProductsTable.hints.PrdId.displayHeight}"
+                                              columns="#{bindings.ProductManagerProductsTable.hints.PrdId.displayWidth}"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.ProductManagerProductsTable.hints.PrdId.tooltip}">
+                                  <f:validator binding="#{row.bindings.PrdId.validator}"/>
+                                  <af:convertNumber groupingUsed="false"
+                                                    pattern="#{bindings.ProductManagerProductsTable.hints.PrdId.format}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa2PFmCol" sortable="true"
+                                         noWrap="true" width="240"
+                                         sortProperty="ProductFamily"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA2PRODUCTFAMILY"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.ProductFamily.label}"
+                                                  id="ol15"/>
+                                </f:facet>
+                                <af:inputText id="sa2PFm"
+                                              value="#{row.bindings.ProductFamily.inputValue}"
+                                              label="#{bindings.ProductManagerProductsTable.hints.ProductFamily.label}"
+                                              required="#{bindings.ProductManagerProductsTable.hints.ProductFamily.mandatory}"
+                                              rows="#{bindings.ProductManagerProductsTable.hints.ProductFamily.displayHeight}"
+                                              columns="#{bindings.ProductManagerProductsTable.hints.ProductFamily.displayWidth}"
+                                              maximumLength="100"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.ProductManagerProductsTable.hints.ProductFamily.tooltip}">
+                                  <f:validator binding="#{row.bindings.ProductFamily.validator}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa2ADCol" sortable="true"
+                                         noWrap="true" width="100"
+                                         sortProperty="AddedDate"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA2ADDEDDATE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.AddedDate.label}"
+                                                  showRequired="#{bindings.ProductManagerProductsTable.hints.AddedDate.mandatory}"
+                                                  id="ol16"/>
+                                </f:facet>
+                                <af:inputDate id="sa2AD"
+                                              value="#{row.bindings.AddedDate.inputValue}"
+                                              label="#{bindings.ProductManagerProductsTable.hints.AddedDate.label}"
+                                              required="#{bindings.ProductManagerProductsTable.hints.AddedDate.mandatory}"
+                                              readOnly="#{((pageFlowScope.ProductManagerProductsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.ProductManagerProductsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                              shortDesc="#{bindings.ProductManagerProductsTable.hints.AddedDate.tooltip}">
+                                  <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                </af:inputDate>
+                              </af:column>
+                              <af:column id="sa2RDCol" sortable="true"
+                                         noWrap="true" width="100"
+                                         sortProperty="RemovedDate"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA2REMOVEDDATE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.RemovedDate.label}"
+                                                  showRequired="#{bindings.ProductManagerProductsTable.hints.RemovedDate.mandatory}"
+                                                  id="ol17"/>
+                                </f:facet>
+                                <af:inputDate id="sa2RD"
+                                              value="#{row.bindings.RemovedDate.inputValue}"
+                                              label="#{bindings.ProductManagerProductsTable.hints.RemovedDate.label}"
+                                              required="#{bindings.ProductManagerProductsTable.hints.RemovedDate.mandatory}"
+                                              readOnly="#{((pageFlowScope.ProductManagerProductsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN']))) or ((!pageFlowScope.ProductManagerProductsTable.newRow) and (!(jhsUserRoles['GCA,ADMIN'])))}"
+                                              shortDesc="#{bindings.ProductManagerProductsTable.hints.RemovedDate.tooltip}">
+                                  <af:convertDateTime pattern="#{nls.datepattern}"/>
+                                </af:inputDate>
+                              </af:column>
+                              <af:column id="sa2CBCol" sortable="true"
+                                         noWrap="true" width="120"
+                                         sortProperty="CreatedBy"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA2CREATEDBY"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.CreatedBy.label}"
+                                                  id="ol18"/>
+                                </f:facet>
+                                <af:inputText id="sa2CB"
+                                              value="#{row.bindings.CreatedBy.inputValue}"
+                                              label="#{bindings.ProductManagerProductsTable.hints.CreatedBy.label}"
+                                              required="#{bindings.ProductManagerProductsTable.hints.CreatedBy.mandatory}"
+                                              rows="#{bindings.ProductManagerProductsTable.hints.CreatedBy.displayHeight}"
+                                              columns="#{bindings.ProductManagerProductsTable.hints.CreatedBy.displayWidth}"
+                                              maximumLength="20" readOnly="true"
+                                              shortDesc="#{bindings.ProductManagerProductsTable.hints.CreatedBy.tooltip}">
+                                  <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa2CDCol" sortable="true"
+                                         noWrap="true" width="100"
+                                         sortProperty="CreatedDate"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA2CREATEDDATE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.CreatedDate.label}"
+                                                  id="ol19"/>
+                                </f:facet>
+                                <af:inputDate id="sa2CD"
+                                              value="#{row.bindings.CreatedDate.inputValue}"
+                                              label="#{bindings.ProductManagerProductsTable.hints.CreatedDate.label}"
+                                              required="#{bindings.ProductManagerProductsTable.hints.CreatedDate.mandatory}"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.ProductManagerProductsTable.hints.CreatedDate.tooltip}">
+                                  <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                                </af:inputDate>
+                              </af:column>
+                              <af:column id="sa2LUBCol" sortable="true"
+                                         noWrap="true" width="120"
+                                         sortProperty="LastUpdatedBy"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA2LASTUPDATEDBY"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.LastUpdatedBy.label}"
+                                                  id="ol20"/>
+                                </f:facet>
+                                <af:inputText id="sa2LUB"
+                                              value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                              label="#{bindings.ProductManagerProductsTable.hints.LastUpdatedBy.label}"
+                                              required="#{bindings.ProductManagerProductsTable.hints.LastUpdatedBy.mandatory}"
+                                              rows="#{bindings.ProductManagerProductsTable.hints.LastUpdatedBy.displayHeight}"
+                                              columns="#{bindings.ProductManagerProductsTable.hints.LastUpdatedBy.displayWidth}"
+                                              maximumLength="20" readOnly="true"
+                                              shortDesc="#{bindings.ProductManagerProductsTable.hints.LastUpdatedBy.tooltip}">
+                                  <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                                </af:inputText>
+                              </af:column>
+                              <af:column id="sa2LUDCol" sortable="true"
+                                         noWrap="true" width="100"
+                                         sortProperty="LastUpdatedDate"
+                                         rowHeader="false"
+                                         helpTopicId="RBH_SA2LASTUPDATEDDATE"
+                                         filterFeatures="caseInsensitive">
+                                <f:facet name="header">
+                                  <af:outputLabel value="#{bindings.ProductManagerProductsTable.hints.LastUpdatedDate.label}"
+                                                  id="ol21"/>
+                                </f:facet>
+                                <af:inputDate id="sa2LUD"
+                                              value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                              label="#{bindings.ProductManagerProductsTable.hints.LastUpdatedDate.label}"
+                                              required="#{bindings.ProductManagerProductsTable.hints.LastUpdatedDate.mandatory}"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.ProductManagerProductsTable.hints.LastUpdatedDate.tooltip}">
+                                  <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                                </af:inputDate>
+                              </af:column>
+                            </af:table>
+                          </af:panelCollection>
+                        </af:panelGroupLayout>
+                        <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+                      </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                </af:panelTabbed>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="AMgDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="AMgDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_ACCOUNTMANAGER: #{bindings.AMgDisplayName.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteAccountManagers.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="sa0DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="sa0DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_ALLIANCEMANAGERACCOUNT:#{pageFlowScope.AllianceManagerAccountsTable.currentRowAttributeValues.AccountName}']} "
+                           id="ot1"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteAllianceManagerAccounts.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="sa1DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="sa1DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_ALLIANCEMANAGEROPPORTUNITIE:#{pageFlowScope.AllianceManagerOpportunitiesTable.currentRowAttributeValues.OpportunityName}']} "
+                           id="ot4"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteAllianceManagerOpportunities.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="sa2DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="sa2DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_PRODUCTMANAGERPRODUCT:#{pageFlowScope.ProductManagerProductsTable.currentRowAttributeValues.Name}']} "
+                           id="ot7"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteProductManagerProducts.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="jhsLovPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher"
+                  binding="#{pageFlowScope.jhsLovPopup.component}">
+          <af:dialog modal="true" title="#{pageFlowScope.LovItemBean.lovTitle}"
+                     type="none" id="dialog0" resize="on"
+                     stretchChildren="first"
+                     contentWidth="#{pageFlowScope.LovItemBean.lovWidth}"
+                     contentHeight="#{pageFlowScope.LovItemBean.lovHeight}">
+            <af:region value="#{bindings.LovTaskFlow.regionModel}"
+                       id="region0"/>
+            <f:facet name="buttonBar">
+              <af:group id="g3">
+                <af:commandButton textAndAccessKey="#{nls['OK_BUTTON_LABEL']}"
+                                  id="cb0" partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.handleLovSelection}"/>
+                <af:commandButton textAndAccessKey="#{nls['CANCEL']}" id="cb1"
+                                  partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.cancelLov}"/>
+              </af:group>
+            </f:facet>
+          </af:dialog>
+          <af:clientListener method="popupClosedListener" type="popupClosed"/>
+          <af:serverListener type="serverPopupClosed"
+                             method="#{pageFlowScope.LovItemBean.cancelLov}"/>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

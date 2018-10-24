@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="PrdTopLc"
+                             partialTriggers=" PrdCancelButton0 PrdSAI:asAreaPrdSearchOptions PrdSAI:qsAreaPrdSearchOptions"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO, PA']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_PRODUCTS']}"
+                          helpTopicId="RBH_PRODUCTS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0">
+                    <af:commandButton actionListener="#{CreateProducts.execute}"
+                                      action="CreatePrd"
+                                      textAndAccessKey="#{nls['NEW_BUTTON_LABEL_PRODUCTS']}"
+                                      rendered="#{(true) and (jhsUserRoles['ADMIN, PA'])}"
+                                      id="PrdNewButton"></af:commandButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="PrdCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:declarativeComponent id="PrdSAI"
+                                     viewId="/includes/ProductsSearch.jsff"/>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="PrdPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="ProductsDetails"></af:commandMenuItem>
+                    <af:group id="Prdtbb"
+                              rendered="#{ (bindings.ProductsIterator.viewObject!=null and bindings.ProductsIterator.viewObject.currentRow!=null)}">
+                      <af:commandMenuItem actionListener="#{bindings.FirstProducts.execute}"
+                                          id="PrdFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousProducts.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="PrdPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextProducts.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="PrdNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastProducts.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="PrdLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="PrdTab"
+                                                       type="excelHTML"
+                                                       filename="Products.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="PrdTab"
+                                                       type="excelHTML"
+                                                       filename="Products.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="PrdPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.ProductsIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="PrdTab" contentDelivery="immediate"
+                        value="#{bindings.ProductsTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.ProductsTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.ProductsTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.ProductsTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.ProductsTable.rangeSize}"
+                        autoHeightRows="#{bindings.ProductsTable.estimatedRowCount}"
+                        fetchSize="#{bindings.ProductsTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.ProductsIteratorPrmTargetedProductQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.ProductsIteratorPrmTargetedProductQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.ProductsTable.table}"
+                        partialTriggers=":::qsAreaPrdSearchOptions :::asAreaPrdSearchOptions :::PrdPC ::PrdFirst ::PrdPrevious ::PrdNext ::PrdLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_PRODUCTS']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="PrdTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="ProductsDetails"></af:commandMenuItem>
+                      </af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="PrdPICol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="PrdId"
+                           align="right" rowHeader="false"
+                           helpTopicId="RBH_PRDPRDID"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.PrdId.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="PrdPI"
+                                value="#{row.bindings.PrdId.inputValue}"
+                                label="#{bindings.ProductsTable.hints.PrdId.label}"
+                                required="#{bindings.ProductsTable.hints.PrdId.mandatory}"
+                                rows="#{bindings.ProductsTable.hints.PrdId.displayHeight}"
+                                columns="#{bindings.ProductsTable.hints.PrdId.displayWidth}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.PrdId.tooltip}">
+                    <f:validator binding="#{row.bindings.PrdId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ProductsTable.hints.PrdId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="PrdNmCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Name"
+                           rowHeader="false" helpTopicId="RBH_PRDNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.Name.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:inputText id="cl1" value="#{row.bindings.Name.inputValue}"
+                                label="#{bindings.ProductsTable.hints.Name.label}"
+                                required="#{bindings.ProductsTable.hints.Name.mandatory}"
+                                rows="#{bindings.ProductsTable.hints.Name.displayHeight}"
+                                columns="40" maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.Name.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.Name.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2"
+                                  shortDesc="#{bindings.ProductsTable.hints.Name.tooltip}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="ProductsDetails" text="#{row.Name}"></af:commandLink>
+                </af:column>
+                <af:column id="PrdShrtNmCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="ShortName"
+                           rowHeader="false" helpTopicId="RBH_PRDSHORTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.ShortName.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:inputText id="PrdShrtNm"
+                                value="#{row.bindings.ShortName.inputValue}"
+                                label="#{bindings.ProductsTable.hints.ShortName.label}"
+                                required="#{bindings.ProductsTable.hints.ShortName.mandatory}"
+                                rows="#{bindings.ProductsTable.hints.ShortName.displayHeight}"
+                                columns="40" maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.ShortName.tooltip}">
+                    <f:validator binding="#{row.bindings.ShortName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="PrdPFCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="ProductFamily" rowHeader="false"
+                           helpTopicId="RBH_PRDPRODUCTFAMILY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.ProductFamily.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:inputText id="PrdPF"
+                                value="#{row.bindings.ProductFamily.inputValue}"
+                                label="#{bindings.ProductsTable.hints.ProductFamily.label}"
+                                required="#{bindings.ProductsTable.hints.ProductFamily.mandatory}"
+                                rows="#{bindings.ProductsTable.hints.ProductFamily.displayHeight}"
+                                columns="40" maximumLength="100" readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.ProductFamily.tooltip}">
+                    <f:validator binding="#{row.bindings.ProductFamily.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="PrdPMCol" sortable="true" filterable="true"
+                           noWrap="true" width="180"
+                           sortProperty="ProductManager" rowHeader="false"
+                           helpTopicId="RBH_PRDPRODUCTMANAGER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.ProductManager.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:inputText id="PrdPM"
+                                value="#{row.bindings.ProductManager.inputValue}"
+                                label="#{bindings.ProductsTable.hints.ProductManager.label}"
+                                required="#{bindings.ProductsTable.hints.ProductManager.mandatory}"
+                                rows="#{bindings.ProductsTable.hints.ProductManager.displayHeight}"
+                                columns="#{bindings.ProductsTable.hints.ProductManager.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.ProductManager.tooltip}">
+                    <f:validator binding="#{row.bindings.ProductManager.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="PrdTFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="TargetableFlag" align="center"
+                           rowHeader="false" helpTopicId="RBH_PRDTARGETABLEFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.TargetableFlag.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="PrdTF"
+                                            label="#{bindings.ProductsTable.hints.TargetableFlag.label}"
+                                            value="#{PrdTargetableFlagcheckboxInTable.value}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.ProductsTable.hints.TargetableFlag.tooltip}"
+                                            autoSubmit="true"
+                                            valueChangeListener="#{PrdTargetableFlagDependsOnItem.updateModelValue}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="PrdPTCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="ProductType"
+                           rowHeader="false" helpTopicId="RBH_PRDPRODUCTTYPE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.ProductType.label}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <af:selectOneChoice id="PrdPT"
+                                      value="#{row.bindings.ProductType.inputValue}"
+                                      label="#{bindings.ProductsTable.hints.ProductType.label}"
+                                      required="#{bindings.ProductsTable.hints.ProductType.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ProductsTable.hints.ProductType.tooltip}"
+                                      autoSubmit="true"
+                                      valueChangeListener="#{PrdProductTypeDependsOnItem.updateModelValue}">
+                    <f:selectItems value="#{row.bindings.ProductType.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="PrdCBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="CreatedBy"
+                           rowHeader="false" helpTopicId="RBH_PRDCREATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.CreatedBy.label}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <af:inputText id="PrdCB"
+                                value="#{row.bindings.CreatedBy.inputValue}"
+                                label="#{bindings.ProductsTable.hints.CreatedBy.label}"
+                                required="#{bindings.ProductsTable.hints.CreatedBy.mandatory}"
+                                rows="#{bindings.ProductsTable.hints.CreatedBy.displayHeight}"
+                                columns="#{bindings.ProductsTable.hints.CreatedBy.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.CreatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="PrdCDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CreatedDate"
+                           rowHeader="false" helpTopicId="RBH_PRDCREATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.CreatedDate.label}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="PrdCD"
+                                value="#{row.bindings.CreatedDate.inputValue}"
+                                label="#{bindings.ProductsTable.hints.CreatedDate.label}"
+                                required="#{bindings.ProductsTable.hints.CreatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.CreatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="PrdLUBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="LastUpdatedBy" rowHeader="false"
+                           helpTopicId="RBH_PRDLASTUPDATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.LastUpdatedBy.label}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <af:inputText id="PrdLUB"
+                                value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.ProductsTable.hints.LastUpdatedBy.label}"
+                                required="#{bindings.ProductsTable.hints.LastUpdatedBy.mandatory}"
+                                rows="#{bindings.ProductsTable.hints.LastUpdatedBy.displayHeight}"
+                                columns="#{bindings.ProductsTable.hints.LastUpdatedBy.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.LastUpdatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="PrdLUDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="LastUpdatedDate" rowHeader="false"
+                           helpTopicId="RBH_PRDLASTUPDATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ProductsTable.hints.LastUpdatedDate.label}"
+                                    id="ol10"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="PrdLUD"
+                                value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                label="#{bindings.ProductsTable.hints.LastUpdatedDate.label}"
+                                required="#{bindings.ProductsTable.hints.LastUpdatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ProductsTable.hints.LastUpdatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

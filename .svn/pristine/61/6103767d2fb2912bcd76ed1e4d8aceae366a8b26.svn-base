@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="PublisherNTCTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartPublisherNTC</default-activity>
+    <input-parameter-definition id="__3">
+      <name id="__4">createPublisherNTC</name>
+      <value id="__5">#{pageFlowScope.createPublisherNTC}</value>
+      <class id="__6">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyStrPublisherNTC</name>
+      <value id="__9">#{pageFlowScope.rowKeyStrPublisherNTC}</value>
+      <class id="__10">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyValuePublisherNTC</name>
+      <value id="__13">#{pageFlowScope.rowKeyValuePublisherNTC}</value>
+      <class id="__14">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">rowKeyPublisherNTC</name>
+      <value id="__17">#{pageFlowScope.rowKeyPublisherNTC}</value>
+      <class id="__18">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name id="__20">altKeyNamePublisherNTC</name>
+      <value id="__21">#{pageFlowScope.altKeyNamePublisherNTC}</value>
+      <class id="__22">java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__23">
+      <managed-bean-name id="__24">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__25">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__26">pageFlow</managed-bean-scope>
+      <managed-property id="__27">
+        <property-name id="__28">initializeParentContextEntries</property-name>
+        <map-entries id="__29">
+          <map-entry id="__30">
+            <key id="__31">jhsCurrentGroupName</key>
+            <value id="__32">PublisherNTC</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__33">
+      <managed-bean-name id="__34">NTCPublisherTitlesDefaultValues</managed-bean-name>
+      <managed-bean-class id="__35">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__36">pageFlow</managed-bean-scope>
+      <managed-property id="__37">
+        <property-name id="__38">iteratorBinding</property-name>
+        <value id="__39">#{data.PublisherNTCPageDef.NTCPublisherTitlesIterator}</value>
+      </managed-property>
+      <managed-property id="__40">
+        <property-name id="__41">defaultValues</property-name>
+        <map-entries id="__42">
+          <map-entry id="__43">
+            <key id="__44">PrimaryFlag</key>
+            <value id="__45">N</value>
+          </map-entry>
+          <map-entry id="__46">
+            <key id="__47">AddedDate</key>
+            <value id="__48">$CURRENT_DATE$</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__49">
+        <property-name id="__50">actionResult</property-name>
+        <value id="__51">CreateNTCPublisherTitles</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__52">
+      <managed-bean-name id="__53">NTCPublisherAttachmentsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__54">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__55">pageFlow</managed-bean-scope>
+      <managed-property id="__56">
+        <property-name id="__57">iteratorBinding</property-name>
+        <value id="__58">#{data.PublisherNTCPageDef.NTCPublisherAttachmentsIterator}</value>
+      </managed-property>
+      <managed-property id="__59">
+        <property-name id="__60">defaultValues</property-name>
+        <map-entries id="__61">
+          <map-entry id="__62">
+            <key id="__63">AttachmentType</key>
+            <value id="__64">File</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__65">
+        <property-name id="__66">actionResult</property-name>
+        <value id="__67">CreateNTCPublisherAttachments</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__68">
+      <managed-bean-name id="__69">CreatePublisherNTC</managed-bean-name>
+      <managed-bean-class id="__70">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__71">request</managed-bean-scope>
+      <managed-property id="__72">
+        <property-name id="__73">createBinding</property-name>
+        <value id="__74">#{bindings.CreatePublisherNTC}</value>
+      </managed-property>
+      <managed-property id="__75">
+        <property-name id="__76">successOutcome</property-name>
+        <value id="__77">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__78">
+        <property-name id="__79">failureOutcome</property-name>
+        <value id="__80">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__81">
+      <managed-bean-name id="__82">SavePublisherNTC</managed-bean-name>
+      <managed-bean-class id="__83">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__84">request</managed-bean-scope>
+      <managed-property id="__85">
+        <property-name id="__86">commitBinding</property-name>
+        <value id="__87">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__88">
+        <property-name id="__89">successOutcome</property-name>
+        <value id="__90">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__91">
+      <managed-bean-name id="__92">jhsRollback</managed-bean-name>
+      <managed-bean-class id="__93">oracle.jheadstart.controller.jsf.bean.RollbackBean</managed-bean-class>
+      <managed-bean-scope id="__94">request</managed-bean-scope>
+      <managed-property id="__95">
+        <property-name id="__96">rollbackBinding</property-name>
+        <value id="__97">#{bindings.Rollback}</value>
+      </managed-property>
+      <managed-property id="__98">
+        <property-name id="__99">successOutcome</property-name>
+        <value id="__100">Cancel</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__101">
+      <managed-bean-name id="__102">NTCPublisherTitlesTable</managed-bean-name>
+      <managed-bean-class id="__103">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__104">pageFlow</managed-bean-scope>
+      <managed-property id="__105">
+        <property-name id="__106">name</property-name>
+        <value id="__107">NTCPublisherTitlesTable</value>
+      </managed-property>
+      <managed-property id="__108">
+        <property-name id="__109">rangeBindingExpr</property-name>
+        <value id="__110">#{'#{bindings.NTCPublisherTitlesTable}'}</value>
+      </managed-property>
+      <managed-property id="__111">
+        <property-name id="__112">createNewRowAtTop</property-name>
+        <value id="__113">true</value>
+      </managed-property>
+      <managed-property id="__114">
+        <property-name id="__115">defaultValuesBean</property-name>
+        <value id="__116">#{pageFlowScope.NTCPublisherTitlesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__117">
+        <property-name id="__118">focusItemId</property-name>
+        <value id="__119">NTCPublisherTitlesTargetTrackingNo</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__120">
+      <managed-bean-name id="__121">DeleteNTCPublisherTitles</managed-bean-name>
+      <managed-bean-class id="__122">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__123">request</managed-bean-scope>
+      <managed-property id="__124">
+        <property-name id="__125">deleteBinding</property-name>
+        <value id="__126">#{bindings.DeleteNTCPublisherTitles}</value>
+      </managed-property>
+      <managed-property id="__127">
+        <property-name id="__128">commitBean</property-name>
+        <value id="__129">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__130">
+      <managed-bean-name id="__131">CreateNTCPublisherTitles</managed-bean-name>
+      <managed-bean-class id="__132">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__133">request</managed-bean-scope>
+      <managed-property id="__134">
+        <property-name id="__135">createBinding</property-name>
+        <value id="__136">#{bindings.CreateNTCPublisherTitles}</value>
+      </managed-property>
+      <managed-property id="__137">
+        <property-name id="__138">defaultValuesBean</property-name>
+        <value id="__139">#{pageFlowScope.NTCPublisherTitlesDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__140">
+        <property-name id="__141">successOutcome</property-name>
+        <value id="__142">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__143">
+        <property-name id="__144">failureOutcome</property-name>
+        <value id="__145">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__146">
+      <managed-bean-name id="__147">NTCPublisherTitlesTargetTrackingNoDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__148">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__149">application</managed-bean-scope>
+      <managed-property id="__150">
+        <property-name id="__151">itemsToClear</property-name>
+        <list-entries id="__152">
+          <value id="__153">NTCPublisherTitlesCatalogNumber</value>
+          <value id="__154">NTCPublisherTitlesLongTitle</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__155">
+        <property-name id="__156">componentsToRefresh</property-name>
+        <list-entries id="__157">
+          <value id="__158">NTCPublisherTitlesCatalogNumber</value>
+          <value id="__159">NTCPublisherTitlesLongTitle</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__160">
+      <managed-bean-name id="__161">NTCPublisherAttachmentsTable</managed-bean-name>
+      <managed-bean-class id="__162">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__163">pageFlow</managed-bean-scope>
+      <managed-property id="__164">
+        <property-name id="__165">name</property-name>
+        <value id="__166">NTCPublisherAttachmentsTable</value>
+      </managed-property>
+      <managed-property id="__167">
+        <property-name id="__168">rangeBindingExpr</property-name>
+        <value id="__169">#{'#{bindings.NTCPublisherAttachmentsTable}'}</value>
+      </managed-property>
+      <managed-property id="__170">
+        <property-name id="__171">createNewRowAtTop</property-name>
+        <value id="__172">true</value>
+      </managed-property>
+      <managed-property id="__173">
+        <property-name id="__174">defaultValuesBean</property-name>
+        <value id="__175">#{pageFlowScope.NTCPublisherAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__176">
+        <property-name id="__177">focusItemId</property-name>
+        <value id="__178">NTCPublisherAttachmentsAttachment</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__179">
+      <managed-bean-name id="__180">DeleteNTCPublisherAttachments</managed-bean-name>
+      <managed-bean-class id="__181">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__182">request</managed-bean-scope>
+      <managed-property id="__183">
+        <property-name id="__184">deleteBinding</property-name>
+        <value id="__185">#{bindings.DeleteNTCPublisherAttachments}</value>
+      </managed-property>
+      <managed-property id="__186">
+        <property-name id="__187">commitBean</property-name>
+        <value id="__188">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__189">
+      <managed-bean-name id="__190">CreateNTCPublisherAttachments</managed-bean-name>
+      <managed-bean-class id="__191">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__192">request</managed-bean-scope>
+      <managed-property id="__193">
+        <property-name id="__194">createBinding</property-name>
+        <value id="__195">#{bindings.CreateNTCPublisherAttachments}</value>
+      </managed-property>
+      <managed-property id="__196">
+        <property-name id="__197">defaultValuesBean</property-name>
+        <value id="__198">#{pageFlowScope.NTCPublisherAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__199">
+        <property-name id="__200">successOutcome</property-name>
+        <value id="__201">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__202">
+        <property-name id="__203">failureOutcome</property-name>
+        <value id="__204">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__205">
+      <managed-bean-name id="__206">NTCPublisherAttachmentsAttachmentFileHandlerInTable</managed-bean-name>
+      <managed-bean-class id="__207">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__208">request</managed-bean-scope>
+      <managed-property id="__209">
+        <property-name id="__210">valueBinding</property-name>
+        <value id="__211">#{bindings.NTCPublisherAttachmentsAttachment}</value>
+      </managed-property>
+      <managed-property id="__212">
+        <property-name id="__213">tableBean</property-name>
+        <value id="__214">#{pageFlowScope.NTCPublisherAttachmentsTable}</value>
+      </managed-property>
+      <managed-property id="__215">
+        <property-name id="__216">fileNameWhenEmpty</property-name>
+        <value id="__217">#{'#{bindings.NTCPublisherAttachmentsAttachment.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__218">
+      <managed-bean-name id="__219">NTCPublisherAttachmentsAttachmentDLFileHandlerInTable</managed-bean-name>
+      <managed-bean-class id="__220">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__221">request</managed-bean-scope>
+      <managed-property id="__222">
+        <property-name id="__223">valueBinding</property-name>
+        <value id="__224">#{bindings.NTCPublisherAttachmentsAttachmentDL}</value>
+      </managed-property>
+      <managed-property id="__225">
+        <property-name id="__226">tableBean</property-name>
+        <value id="__227">#{pageFlowScope.NTCPublisherAttachmentsTable}</value>
+      </managed-property>
+      <managed-property id="__228">
+        <property-name id="__229">fileNameWhenEmpty</property-name>
+        <value id="__230">#{'#{bindings.NTCPublisherAttachmentsAttachmentDL.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartPublisherNTC">
+      <case id="__231">
+        <expression id="__232">#{pageFlowScope.createPublisherNTC!=null}</expression>
+        <outcome id="__233">createPublisherNTC</outcome>
+      </case>
+      <case id="__234">
+        <expression id="__235">#{pageFlowScope.rowKeyStrPublisherNTC!=null or
+                               pageFlowScope.rowKeyValuePublisherNTC!=null or
+                               pageFlowScope.rowKeyPublisherNTC!=null}</expression>
+        <outcome id="__236">SetCurrentRowPublisherNTC</outcome>
+      </case>
+      <case id="__237">
+        <expression id="__238">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__239">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__240">CreatePublisherNTCIfNeeded</default-outcome>
+    </router>
+    <method-call id="CreatePublisherNTC">
+      <method id="__241">#{CreatePublisherNTC.execute}</method>
+      <!-- execute condition param -->
+      <parameter>
+        <class id="__242">java.lang.Object</class>
+        <value id="__243">#{pageFlowScope.createPublisherNTC}</value>
+      </parameter>
+      <outcome id="__244">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="CreatePublisherNTCIfNeeded">
+      <method id="__245">#{CreatePublisherNTC.execute}</method>
+      <!-- execute condition param -->
+      <parameter>
+        <class id="__246">java.lang.Object</class>
+        <value id="__247">true</value>
+      </parameter>
+      <outcome id="__248">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowPublisherNTC">
+      <method id="__249">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__250">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__251">#{bindings.PublisherNTCIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__252">java.lang.String</class>
+        <value id="__253">#{pageFlowScope.rowKeyStrPublisherNTC}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__254">java.lang.Object</class>
+        <value id="__255">#{pageFlowScope.rowKeyValuePublisherNTC}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__256">oracle.jbo.Key</class>
+        <value id="__257">#{pageFlowScope.rowKeyPublisherNTC}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__258">java.lang.String</class>
+        <value id="__259">#{pageFlowScope.altKeyNamePublisherNTC}</value>
+      </parameter>
+      <outcome id="__260">
+        <fixed-outcome id="__261">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelPublisherNTCReturn">
+      <outcome id="__262">
+        <name id="__263">CancelPublisherNTC</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DonePublisherNTCReturn">
+      <outcome id="__264">
+        <name id="__265">DonePublisherNTC</name>
+      </outcome>
+    </task-flow-return>
+    <view id="PublisherNTC">
+      <page id="__266">/pages/PublisherNTC.jsff</page>
+    </view>
+    <control-flow-rule id="__267">
+      <from-activity-id id="__268">*</from-activity-id>
+      <control-flow-case id="__269">
+        <from-outcome id="__270">SetCurrentRowPublisherNTC</from-outcome>
+        <to-activity-id id="__271">SetCurrentRowPublisherNTC</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__272">
+        <from-outcome id="__273">firstPage</from-outcome>
+        <to-activity-id id="__274">PublisherNTC</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__275">
+        <from-outcome id="__276">deepLinkPage</from-outcome>
+        <to-activity-id id="__277">PublisherNTC</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__278">
+        <from-outcome id="__279">PublisherNTCBreadcrumb</from-outcome>
+        <to-activity-id id="__280">PublisherNTC</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__281">
+        <from-outcome id="__282">Cancel</from-outcome>
+        <to-activity-id id="__283">PublisherNTC</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__284">
+        <from-outcome id="__285">CancelPublisherNTCReturn</from-outcome>
+        <to-activity-id id="__286">CancelPublisherNTCReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__287">
+        <from-outcome id="__288">DonePublisherNTCReturn</from-outcome>
+        <to-activity-id id="__289">DonePublisherNTCReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__290">
+      <from-activity-id id="__291">*</from-activity-id>
+      <control-flow-case id="__292">
+        <from-outcome id="__293">createPublisherNTC</from-outcome>
+        <to-activity-id id="__294">CreatePublisherNTC</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__295">
+        <from-outcome id="__296">CreatePublisherNTCIfNeeded</from-outcome>
+        <to-activity-id id="__297">CreatePublisherNTCIfNeeded</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__298">
+    <managed-bean-name id="__299">PublisherNTCTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__300">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__301">pageFlow</managed-bean-scope>
+    <managed-property id="__302">
+      <property-name id="__303">params</property-name>
+      <property-class id="__304">java.util.Map</property-class>
+      <map-entries id="__305">
+        <map-entry id="__306">
+          <key id="__307">parentContext</key>
+          <value id="__308">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__309">
+      <property-name id="__310">name</property-name>
+      <value id="__311">PublisherNTC</value>
+    </managed-property>
+    <managed-property id="__312">
+      <property-name id="__313">taskFlowId</property-name>
+      <value id="__314">/WEB-INF/adfc-config-PublisherNTC.xml#PublisherNTCTaskFlow</value>
+    </managed-property>
+    <managed-property id="__315">
+      <property-name id="__316">tabUniqueIdentifier</property-name>
+      <value id="__317">PublisherNTC</value>
+    </managed-property>
+    <managed-property id="__318">
+      <property-name id="__319">label</property-name>
+      <value id="__320">Publisher NTC</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

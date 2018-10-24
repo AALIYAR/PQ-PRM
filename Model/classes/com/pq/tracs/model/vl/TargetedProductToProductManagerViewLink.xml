@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TargetedProductToProductManagerViewLink"
+  Version="11.1.1.62.29"
+  InheritPersonalization="true"
+  EntityAssociation="com.pq.tracs.model.ao.TargetedProductToTargetedProductManagerFkAssoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.pq.tracs.model.vl.TargetedProductToProductManagerViewLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="PrmTargetedProductView"
+    Cardinality="1"
+    Owner="com.pq.tracs.model.vo.PrmTargetedProductView"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="PrmTargetedProductView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_minCardinality" Value="1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.vo.PrmTargetedProductView.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="PrmProductProductManagerView"
+    Cardinality="-1"
+    Owner="com.pq.tracs.model.vo.PrmProductProductManagerView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="PrmProductProductManagerView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.pq.tracs.model.vo.PrmProductProductManagerView.PrmTargetedProductId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

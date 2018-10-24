@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="AgreementDataAttachmentsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="bindingContainersToPrepare" value="#{'OpportunityPageDef'}"/>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, RO, ADMIN, BSSRO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="AgreementDataAttachmentsIterator"
+              Binds="PrmAgreementDataAttachmentView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AgreementDataAttachmentsIteratorQuery"
+                  Binds="AgreementDataAttachmentsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <attributeValues id="s250Name"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250Attachment"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250AttachmentDL"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250AttachmentType"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="AttachmentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250Description"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250FileSize"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="FileSize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250CreatedBy"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250CreatedDate"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250LastUpdatedBy"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250LastUpdatedDate"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AgreementDataAttachmentsTable"
+          IterBinding="AgreementDataAttachmentsIterator">
+      <nodeDefinition Name="AgreementDataAttachments"
+                      DefName="com.pq.tracs.model.vo.PrmAgreementDataAttachmentView">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="AttachmentType"/>
+          <Item Value="Description"/>
+          <Item Value="FileSize"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchAgreementDataAttachments"
+                  IterBinding="AgreementDataAttachmentsIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchAgreementDataAttachments.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchAgreementDataAttachments.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchAgreementDataAttachments.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAgreementDataAttachments}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

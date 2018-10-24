@@ -1,0 +1,1089 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="TitleLookupTopLc"
+                             partialTriggers="">
+        <f:facet name="top">
+          <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+          <af:group id="g0">
+            <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_TITLELOOKUP']}"
+                            helpTopicId="RBH_TITLELOOKUP">
+              <f:facet name="toolbar">
+                <af:toolbox id="tbox0">
+                  <af:toolbar id="tbar0">
+                    <af:group id="gr0"></af:group>
+                    <af:group id="gr1"></af:group>
+                    <af:group id="gr2"></af:group>
+                  </af:toolbar>
+                </af:toolbox>
+              </f:facet>
+              <f:facet name="context"></f:facet>
+              <af:subform id="TitleLookupSbf"
+                          rendered="#{!pageFlowScope.createModes.CreateTitleLookup and !pageFlowScope.hideSearchArea}"
+                          defaultCommand="TitleLookupQuickSearchButton">
+                <af:panelGroupLayout id="searchAreaTitleLookup"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:panelGroupLayout id="qsAreaTitleLookup"
+                                       rendered="#{pageFlowScope.searchTitleLookup.quickSearchMode}"
+                                       layout="horizontal">
+                    <af:selectOneChoice id="qsSelectTitleLookup"
+                                        label="#{nls['FILTER_BY']}"
+                                        value="#{pageFlowScope.searchTitleLookup.searchItem}"
+                                        autoSubmit="true" immediate="true"
+                                        valueChangeListener="#{pageFlowScope.searchTitleLookup.searchItemChanged}">
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.Id.label}"
+                                     value="TitleLookupId" id="si0"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.ContentOwnerId.label}"
+                                     value="TitleLookupContentOwnerId"
+                                     id="si1"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.TargetTrackingNo.label}"
+                                     value="TitleLookupTargetTrackingNo"
+                                     id="si2"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.CatalogNumber.label}"
+                                     value="TitleLookupCatalogNumber" id="si3"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.LongTitle.label}"
+                                     value="TitleLookupLongTitle" id="si4"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.label}"
+                                     value="TitleLookupCurrentCatalogNumber"
+                                     id="si5"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.ContentOwnerNo.label}"
+                                     value="TitleLookupContentOwnerNo"
+                                     id="si6"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.AccountName.label}"
+                                     value="TitleLookupAccountName" id="si7"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.AccountSite.label}"
+                                     value="TitleLookupAccountSite" id="si8"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.ProductLine.label}"
+                                     value="TitleLookupProductLine" id="si9"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.CatalogRoot.label}"
+                                     value="TitleLookupCatalogRoot" id="si10"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.CatalogSuffix.label}"
+                                     value="TitleLookupCatalogSuffix"
+                                     id="si11"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.ShortTitle.label}"
+                                     value="TitleLookupShortTitle" id="si12"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.Author.label}"
+                                     value="TitleLookupAuthor" id="si13"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.FilmAvailability.label}"
+                                     value="TitleLookupFilmAvailability"
+                                     id="si14"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.BibliographicStatus.label}"
+                                     value="TitleLookupBibliographicStatus"
+                                     id="si15"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.PublicationStartYear.label}"
+                                     value="TitleLookupPublicationStartYear"
+                                     id="si16"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.PublicationEndYear.label}"
+                                     value="TitleLookupPublicationEndYear"
+                                     id="si17"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.ExercisingRights.label}"
+                                     value="TitleLookupExercisingRights"
+                                     id="si18"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.PrimaryPmClass.label}"
+                                     value="TitleLookupPrimaryPmClass"
+                                     id="si19"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.SecondaryPmClass.label}"
+                                     value="TitleLookupSecondaryPmClass"
+                                     id="si20"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.ContentType.label}"
+                                     value="TitleLookupContentType" id="si21"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.SubContentType.label}"
+                                     value="TitleLookupSubContentType"
+                                     id="si22"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.PeerReviewFlag.label}"
+                                     value="TitleLookupPeerReviewFlag"
+                                     id="si23"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.OpenAccess.label}"
+                                     value="TitleLookupOpenAccess" id="si24"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.ActiveFlag.label}"
+                                     value="TitleLookupActiveFlag" id="si25"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.Subject.label}"
+                                     value="TitleLookupSubject" id="si26"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.SubjectCode.label}"
+                                     value="TitleLookupSubjectCode" id="si27"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.SubjectType.label}"
+                                     value="TitleLookupSubjectType" id="si28"/>
+                      <af:selectItem label="#{bindings.TitleLookupTable.hints.CurrentCatalogId.label}"
+                                     value="TitleLookupCurrentCatalogId"
+                                     id="si29"/>
+                    </af:selectOneChoice>
+                    <af:spacer width="4" id="qsAreaTitleLookupSpacer1"/>
+                    <af:panelGroupLayout partialTriggers="qsSelectTitleLookup"
+                                         id="qsAreaTitleLookuppanelGroupLayout">
+                      <af:switcher facetName="#{pageFlowScope.searchTitleLookup.searchItem}"
+                                   id="qsAreaTitleLookupSwitcher">
+                        <f:facet name="TitleLookupId">
+                          <af:inputText id="QuickSearchTitleLookupId"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.Id.label}"
+                                        shortDesc="#{bindings.TitleLookupId.hints.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPID"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupId.hints.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.TitleLookupId.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupContentOwnerId">
+                          <af:inputText id="QuickSearchTitleLookupContentOwnerId"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.ContentOwnerId.label}"
+                                        shortDesc="#{bindings.TitleLookupContentOwnerId.hints.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPCONTENTOWNERID"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupContentOwnerId.hints.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.TitleLookupContentOwnerId.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupTargetTrackingNo">
+                          <af:inputText id="QuickSearchTitleLookupTargetTrackingNo"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.TargetTrackingNo.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.TargetTrackingNo.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPTARGETTRACKINGNO"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.TargetTrackingNo.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.TitleLookupTable.hints.TargetTrackingNo.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupCatalogNumber">
+                          <af:inputText id="QuickSearchTitleLookupCatalogNumber"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.CatalogNumber.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.CatalogNumber.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPCATALOGNUMBER"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.CatalogNumber.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupLongTitle">
+                          <af:inputText id="QuickSearchTitleLookupLongTitle"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.LongTitle.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.LongTitle.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPLONGTITLE"
+                                        simple="true" columns="40"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupCurrentCatalogNumber">
+                          <af:inputText id="QuickSearchTitleLookupCurrentCatalogNumber"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPCURRENTCATALOGNUMBER"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupContentOwnerNo">
+                          <af:inputText id="QuickSearchTitleLookupContentOwnerNo"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.ContentOwnerNo.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.ContentOwnerNo.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPCONTENTOWNERNO"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.ContentOwnerNo.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.TitleLookupTable.hints.ContentOwnerNo.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupAccountName">
+                          <af:inputText id="QuickSearchTitleLookupAccountName"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.AccountName.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.AccountName.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPACCOUNTNAME"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.AccountName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupAccountSite">
+                          <af:inputText id="QuickSearchTitleLookupAccountSite"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.AccountSite.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.AccountSite.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPACCOUNTSITE"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.AccountSite.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupProductLine">
+                          <af:inputText id="QuickSearchTitleLookupProductLine"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.ProductLine.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.ProductLine.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPPRODUCTLINE"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.ProductLine.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupCatalogRoot">
+                          <af:inputText id="QuickSearchTitleLookupCatalogRoot"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.CatalogRoot.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.CatalogRoot.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPCATALOGROOT"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.CatalogRoot.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupCatalogSuffix">
+                          <af:inputText id="QuickSearchTitleLookupCatalogSuffix"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.CatalogSuffix.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.CatalogSuffix.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPCATALOGSUFFIX"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.CatalogSuffix.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupShortTitle">
+                          <af:inputText id="QuickSearchTitleLookupShortTitle"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.ShortTitle.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.ShortTitle.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPSHORTTITLE"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.ShortTitle.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupAuthor">
+                          <af:inputText id="QuickSearchTitleLookupAuthor"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.Author.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.Author.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPAUTHOR"
+                                        simple="true" columns="40"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupFilmAvailability">
+                          <af:inputText id="QuickSearchTitleLookupFilmAvailability"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.FilmAvailability.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.FilmAvailability.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPFILMAVAILABILITY"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.FilmAvailability.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupBibliographicStatus">
+                          <af:inputText id="QuickSearchTitleLookupBibliographicStatus"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.BibliographicStatus.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.BibliographicStatus.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPBIBLIOGRAPHICSTATUS"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.BibliographicStatus.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupPublicationStartYear">
+                          <af:inputText id="QuickSearchTitleLookupPublicationStartYear"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.PublicationStartYear.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.PublicationStartYear.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPPUBLICATIONSTARTYEAR"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.PublicationStartYear.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupPublicationEndYear">
+                          <af:inputText id="QuickSearchTitleLookupPublicationEndYear"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.PublicationEndYear.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.PublicationEndYear.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPPUBLICATIONENDYEAR"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.PublicationEndYear.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupExercisingRights">
+                          <af:inputText id="QuickSearchTitleLookupExercisingRights"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.ExercisingRights.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.ExercisingRights.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPEXERCISINGRIGHTS"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.ExercisingRights.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupPrimaryPmClass">
+                          <af:inputText id="QuickSearchTitleLookupPrimaryPmClass"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.PrimaryPmClass.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.PrimaryPmClass.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPPRIMARYPMCLASS"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.PrimaryPmClass.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupSecondaryPmClass">
+                          <af:inputText id="QuickSearchTitleLookupSecondaryPmClass"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.SecondaryPmClass.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.SecondaryPmClass.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPSECONDARYPMCLASS"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.SecondaryPmClass.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupContentType">
+                          <af:inputText id="QuickSearchTitleLookupContentType"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.ContentType.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.ContentType.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPCONTENTTYPE"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.ContentType.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupSubContentType">
+                          <af:inputText id="QuickSearchTitleLookupSubContentType"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.SubContentType.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.SubContentType.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPSUBCONTENTTYPE"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.SubContentType.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupPeerReviewFlag">
+                          <af:selectOneChoice id="QuickSearchTitleLookupPeerReviewFlag"
+                                              value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                              label="#{bindings.TitleLookupTable.hints.PeerReviewFlag.label}"
+                                              shortDesc="#{bindings.TitleLookupTable.hints.PeerReviewFlag.tooltip}"
+                                              helpTopicId="RBH_TITLELOOKUPPEERREVIEWFLAG"
+                                              unselectedLabel="" simple="true">
+                            <af:selectItem id="si30" value="Y" label="Yes"/>
+                            <af:selectItem id="si31" value="N" label="No"/>
+                          </af:selectOneChoice>
+                        </f:facet>
+                        <f:facet name="TitleLookupOpenAccess">
+                          <af:inputText id="QuickSearchTitleLookupOpenAccess"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.OpenAccess.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.OpenAccess.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPOPENACCESS"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.OpenAccess.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupActiveFlag">
+                          <af:inputText id="QuickSearchTitleLookupActiveFlag"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.ActiveFlag.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.ActiveFlag.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPACTIVEFLAG"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.ActiveFlag.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupSubject">
+                          <af:inputText id="QuickSearchTitleLookupSubject"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.Subject.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.Subject.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPSUBJECT"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.Subject.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupSubjectCode">
+                          <af:inputText id="QuickSearchTitleLookupSubjectCode"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.SubjectCode.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.SubjectCode.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPSUBJECTCODE"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.SubjectCode.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupSubjectType">
+                          <af:inputText id="QuickSearchTitleLookupSubjectType"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.SubjectType.label}"
+                                        shortDesc="#{bindings.TitleLookupTable.hints.SubjectType.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPSUBJECTTYPE"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupTable.hints.SubjectType.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="TitleLookupCurrentCatalogId">
+                          <af:inputText id="QuickSearchTitleLookupCurrentCatalogId"
+                                        value="#{pageFlowScope.searchTitleLookup.searchText}"
+                                        label="#{bindings.TitleLookupTable.hints.CurrentCatalogId.label}"
+                                        shortDesc="#{bindings.TitleLookupCurrentCatalogId.hints.tooltip}"
+                                        helpTopicId="RBH_TITLELOOKUPCURRENTCATALOGID"
+                                        simple="true"
+                                        columns="#{bindings.TitleLookupCurrentCatalogId.hints.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.TitleLookupCurrentCatalogId.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                      </af:switcher>
+                    </af:panelGroupLayout>
+                    <af:spacer width="4" id="qsAreaTitleLookupSpacer2"/>
+                    <af:commandImageLink action="#{pageFlowScope.searchTitleLookup.quickSearch}"
+                                         shortDesc="#{nls['FILTER_BY']}"
+                                         icon="/jheadstart/images/go_ena.png"
+                                         id="TitleLookupQuickSearchButton"/>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:subform>
+            </af:panelHeader>
+            <af:spacer width="10" height="10" id="sp0"/>
+          </af:group>
+          <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+        </f:facet>
+        <f:facet name="center">
+          <af:panelStretchLayout topHeight="0" id="psl0">
+            <f:facet name="top"></f:facet>
+            <f:facet name="center">
+              <af:panelCollection id="TitleLookupPC" featuresOff=" "
+                                  styleClass="AFStretchWidth">
+                <f:facet name="menus">
+                  <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                           id="menu0">
+                    <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                             id="menu1">
+                      <af:group id="TitleLookuptbb"
+                                rendered="#{ (bindings.TitleLookupIterator.viewObject!=null and bindings.TitleLookupIterator.viewObject.currentRow!=null)}">
+                        <af:commandMenuItem actionListener="#{bindings.FirstTitleLookup.execute}"
+                                            id="TitleLookupFirst"
+                                            partialSubmit="true"
+                                            icon="/afr/shuttleleftall_ena.png"
+                                            textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.PreviousTitleLookup.execute}"
+                                            icon="/afr/shuttleleft_ena.png"
+                                            textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                            id="TitleLookupPrevious"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.NextTitleLookup.execute}"
+                                            icon="/afr/shuttleright_ena.png"
+                                            textAndAccessKey="#{nls['NEXT_ROW']}"
+                                            id="TitleLookupNext"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.LastTitleLookup.execute}"
+                                            icon="/afr/shuttlerightall_ena.png"
+                                            textAndAccessKey="#{nls['LAST_ROW']}"
+                                            id="TitleLookupLast"
+                                            partialSubmit="true"></af:commandMenuItem>
+                      </af:group>
+                    </af:menu>
+                  </af:menu>
+                </f:facet>
+                <f:facet name="toolbar">
+                  <af:toolbar id="tbar1">
+                    <af:commandToolbarButton text="Print" id="TitleLookupPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar">
+                  <af:toolbar>
+                    <af:outputText value="#{bindings.TitleLookupIterator.estimatedRowCount} rows found"/>
+                  </af:toolbar>
+                </f:facet>
+                <af:table id="TitleLookupTab" contentDelivery="immediate"
+                          value="#{bindings.TitleLookupTable.collectionModel}"
+                          columnStretching="blank" rowBandingInterval="0"
+                          editingMode="editAll" columnSelection="multiple"
+                          contextMenuSelect="true" rowSelection="multiple"
+                          selectionListener="#{pageFlowScope.TitleLookupPage.selectionListener}"
+                          selectedRowKeys="#{pageFlowScope.TitleLookupPage.selectedRowKeySet}"
+                          rowDisclosureListener="#{pageFlowScope.TitleLookupTable.discloseRow}"
+                          var="row" varStatus="status"
+                          fetchSize="#{bindings.TitleLookupTable.rangeSize}"
+                          emptyText="#{nls['NO_ROWS_FOUND']}"
+                          queryListener="#{bindings.TitleLookupIteratorTitleLookupViewCriteriaQuery.processQuery}"
+                          filterModel="#{bindings.TitleLookupIteratorTitleLookupViewCriteriaQuery.queryDescriptor}"
+                          filterVisible="true"
+                          binding="#{pageFlowScope.TitleLookupPage.lovTable}"
+                          partialTriggers=" :::TitleLookupPC ::TitleLookupFirst ::TitleLookupPrevious ::TitleLookupNext ::TitleLookupLast"
+                          styleClass="AFStretchWidth"
+                          summary="#{nls['TABLE_TITLE_TITLELOOKUP']}">
+                  <f:facet name="contextMenu">
+                    <af:popup id="TitleLookupTablePopup"
+                              childCreation="deferred">
+                      <af:menu id="menu2">
+                        <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                      </af:menu>
+                    </af:popup>
+                  </f:facet>
+                  <af:column id="TitleLookupTargetTrackingNoCol" sortable="true"
+                             filterable="true" noWrap="true" width="228"
+                             sortProperty="TargetTrackingNo" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPTARGETTRACKINGNO"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.TargetTrackingNo.label}"
+                                      id="ol0"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupTargetTrackingNo"
+                                  value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.TargetTrackingNo.label}"
+                                  required="#{bindings.TitleLookupTable.hints.TargetTrackingNo.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.TargetTrackingNo.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.TargetTrackingNo.displayWidth}"
+                                  maximumLength="20" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.TargetTrackingNo.tooltip}">
+                      <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.TitleLookupTable.hints.TargetTrackingNo.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupCatalogNumberCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="CatalogNumber" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPCATALOGNUMBER"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.CatalogNumber.label}"
+                                      id="ol1"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupCatalogNumber"
+                                  value="#{row.bindings.CatalogNumber.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.CatalogNumber.label}"
+                                  required="#{bindings.TitleLookupTable.hints.CatalogNumber.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.CatalogNumber.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.CatalogNumber.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.CatalogNumber.tooltip}">
+                      <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupLongTitleCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="LongTitle" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPLONGTITLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.LongTitle.label}"
+                                      id="ol2"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupLongTitle"
+                                  value="#{row.bindings.LongTitle.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.LongTitle.label}"
+                                  required="#{bindings.TitleLookupTable.hints.LongTitle.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.LongTitle.displayHeight}"
+                                  columns="40" maximumLength="4000"
+                                  readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.LongTitle.tooltip}">
+                      <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupCurrentCatalogNumberCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="100" sortProperty="CurrentCatalogNumber"
+                             rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPCURRENTCATALOGNUMBER"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.label}"
+                                      id="ol3"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupCurrentCatalogNumber"
+                                  value="#{row.bindings.CurrentCatalogNumber.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.label}"
+                                  required="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.CurrentCatalogNumber.tooltip}">
+                      <f:validator binding="#{row.bindings.CurrentCatalogNumber.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupContentOwnerNoCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="ContentOwnerNo" align="right"
+                             rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPCONTENTOWNERNO"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.ContentOwnerNo.label}"
+                                      id="ol4"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupContentOwnerNo"
+                                  value="#{row.bindings.ContentOwnerNo.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.ContentOwnerNo.label}"
+                                  required="#{bindings.TitleLookupTable.hints.ContentOwnerNo.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.ContentOwnerNo.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.ContentOwnerNo.displayWidth}"
+                                  maximumLength="38" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.ContentOwnerNo.tooltip}">
+                      <f:validator binding="#{row.bindings.ContentOwnerNo.validator}"/>
+                      <af:convertNumber groupingUsed="false"
+                                        pattern="#{bindings.TitleLookupTable.hints.ContentOwnerNo.format}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupAccountNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="AccountName" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPACCOUNTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.AccountName.label}"
+                                      id="ol5"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupAccountName"
+                                  value="#{row.bindings.AccountName.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.AccountName.label}"
+                                  required="#{bindings.TitleLookupTable.hints.AccountName.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.AccountName.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.AccountName.displayWidth}"
+                                  maximumLength="400" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.AccountName.tooltip}">
+                      <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupAccountSiteCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="AccountSite" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPACCOUNTSITE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.AccountSite.label}"
+                                      id="ol6"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupAccountSite"
+                                  value="#{row.bindings.AccountSite.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.AccountSite.label}"
+                                  required="#{bindings.TitleLookupTable.hints.AccountSite.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.AccountSite.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.AccountSite.displayWidth}"
+                                  maximumLength="400" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.AccountSite.tooltip}">
+                      <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupProductLineCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="ProductLine" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPPRODUCTLINE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.ProductLine.label}"
+                                      id="ol7"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupProductLine"
+                                  value="#{row.bindings.ProductLine.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.ProductLine.label}"
+                                  required="#{bindings.TitleLookupTable.hints.ProductLine.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.ProductLine.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.ProductLine.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.ProductLine.tooltip}">
+                      <f:validator binding="#{row.bindings.ProductLine.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupCatalogRootCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="CatalogRoot" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPCATALOGROOT"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.CatalogRoot.label}"
+                                      id="ol8"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupCatalogRoot"
+                                  value="#{row.bindings.CatalogRoot.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.CatalogRoot.label}"
+                                  required="#{bindings.TitleLookupTable.hints.CatalogRoot.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.CatalogRoot.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.CatalogRoot.displayWidth}"
+                                  maximumLength="20" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.CatalogRoot.tooltip}">
+                      <f:validator binding="#{row.bindings.CatalogRoot.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupCatalogSuffixCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="CatalogSuffix" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPCATALOGSUFFIX"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.CatalogSuffix.label}"
+                                      id="ol9"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupCatalogSuffix"
+                                  value="#{row.bindings.CatalogSuffix.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.CatalogSuffix.label}"
+                                  required="#{bindings.TitleLookupTable.hints.CatalogSuffix.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.CatalogSuffix.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.CatalogSuffix.displayWidth}"
+                                  maximumLength="20" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.CatalogSuffix.tooltip}">
+                      <f:validator binding="#{row.bindings.CatalogSuffix.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupShortTitleCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="ShortTitle" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPSHORTTITLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.ShortTitle.label}"
+                                      id="ol10"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupShortTitle"
+                                  value="#{row.bindings.ShortTitle.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.ShortTitle.label}"
+                                  required="#{bindings.TitleLookupTable.hints.ShortTitle.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.ShortTitle.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.ShortTitle.displayWidth}"
+                                  maximumLength="30" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.ShortTitle.tooltip}">
+                      <f:validator binding="#{row.bindings.ShortTitle.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupAuthorCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="Author" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPAUTHOR"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.Author.label}"
+                                      id="ol11"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupAuthor"
+                                  value="#{row.bindings.Author.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.Author.label}"
+                                  required="#{bindings.TitleLookupTable.hints.Author.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.Author.displayHeight}"
+                                  columns="40" maximumLength="600"
+                                  readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.Author.tooltip}">
+                      <f:validator binding="#{row.bindings.Author.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupFilmAvailabilityCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="FilmAvailability" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPFILMAVAILABILITY"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.FilmAvailability.label}"
+                                      id="ol12"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupFilmAvailability"
+                                  value="#{row.bindings.FilmAvailability.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.FilmAvailability.label}"
+                                  required="#{bindings.TitleLookupTable.hints.FilmAvailability.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.FilmAvailability.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.FilmAvailability.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.FilmAvailability.tooltip}">
+                      <f:validator binding="#{row.bindings.FilmAvailability.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupBibliographicStatusCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="240" sortProperty="BibliographicStatus"
+                             rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPBIBLIOGRAPHICSTATUS"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.BibliographicStatus.label}"
+                                      id="ol13"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupBibliographicStatus"
+                                  value="#{row.bindings.BibliographicStatus.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.BibliographicStatus.label}"
+                                  required="#{bindings.TitleLookupTable.hints.BibliographicStatus.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.BibliographicStatus.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.BibliographicStatus.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.BibliographicStatus.tooltip}">
+                      <f:validator binding="#{row.bindings.BibliographicStatus.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupPublicationStartYearCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="100" sortProperty="PublicationStartYear"
+                             rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPPUBLICATIONSTARTYEAR"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.PublicationStartYear.label}"
+                                      id="ol14"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupPublicationStartYear"
+                                  value="#{row.bindings.PublicationStartYear.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.PublicationStartYear.label}"
+                                  required="#{bindings.TitleLookupTable.hints.PublicationStartYear.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.PublicationStartYear.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.PublicationStartYear.displayWidth}"
+                                  maximumLength="4" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.PublicationStartYear.tooltip}">
+                      <f:validator binding="#{row.bindings.PublicationStartYear.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupPublicationEndYearCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="100" sortProperty="PublicationEndYear"
+                             rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPPUBLICATIONENDYEAR"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.PublicationEndYear.label}"
+                                      id="ol15"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupPublicationEndYear"
+                                  value="#{row.bindings.PublicationEndYear.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.PublicationEndYear.label}"
+                                  required="#{bindings.TitleLookupTable.hints.PublicationEndYear.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.PublicationEndYear.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.PublicationEndYear.displayWidth}"
+                                  maximumLength="4" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.PublicationEndYear.tooltip}">
+                      <f:validator binding="#{row.bindings.PublicationEndYear.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupExercisingRightsCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="ExercisingRights" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPEXERCISINGRIGHTS"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.ExercisingRights.label}"
+                                      id="ol16"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupExercisingRights"
+                                  value="#{row.bindings.ExercisingRights.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.ExercisingRights.label}"
+                                  required="#{bindings.TitleLookupTable.hints.ExercisingRights.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.ExercisingRights.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.ExercisingRights.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.ExercisingRights.tooltip}">
+                      <f:validator binding="#{row.bindings.ExercisingRights.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupPrimaryPmClassCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="PrimaryPmClass" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPPRIMARYPMCLASS"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.PrimaryPmClass.label}"
+                                      id="ol17"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupPrimaryPmClass"
+                                  value="#{row.bindings.PrimaryPmClass.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.PrimaryPmClass.label}"
+                                  required="#{bindings.TitleLookupTable.hints.PrimaryPmClass.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.PrimaryPmClass.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.PrimaryPmClass.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.PrimaryPmClass.tooltip}">
+                      <f:validator binding="#{row.bindings.PrimaryPmClass.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupSecondaryPmClassCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="SecondaryPmClass" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPSECONDARYPMCLASS"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.SecondaryPmClass.label}"
+                                      id="ol18"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupSecondaryPmClass"
+                                  value="#{row.bindings.SecondaryPmClass.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.SecondaryPmClass.label}"
+                                  required="#{bindings.TitleLookupTable.hints.SecondaryPmClass.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.SecondaryPmClass.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.SecondaryPmClass.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.SecondaryPmClass.tooltip}">
+                      <f:validator binding="#{row.bindings.SecondaryPmClass.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupContentTypeCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="ContentType" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPCONTENTTYPE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.ContentType.label}"
+                                      id="ol19"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupContentType"
+                                  value="#{row.bindings.ContentType.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.ContentType.label}"
+                                  required="#{bindings.TitleLookupTable.hints.ContentType.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.ContentType.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.ContentType.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.ContentType.tooltip}">
+                      <f:validator binding="#{row.bindings.ContentType.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupSubContentTypeCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="SubContentType" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPSUBCONTENTTYPE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.SubContentType.label}"
+                                      id="ol20"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupSubContentType"
+                                  value="#{row.bindings.SubContentType.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.SubContentType.label}"
+                                  required="#{bindings.TitleLookupTable.hints.SubContentType.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.SubContentType.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.SubContentType.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.SubContentType.tooltip}">
+                      <f:validator binding="#{row.bindings.SubContentType.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupPeerReviewFlagCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="PeerReviewFlag" align="center"
+                             rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPPEERREVIEWFLAG"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.PeerReviewFlag.label}"
+                                      id="ol21"/>
+                    </f:facet>
+                    <af:selectBooleanCheckbox id="TitleLookupPeerReviewFlag"
+                                              label="#{bindings.TitleLookupTable.hints.PeerReviewFlag.label}"
+                                              value="#{TitleLookupPeerReviewFlagcheckboxInTable.value}"
+                                              readOnly="true"
+                                              shortDesc="#{bindings.TitleLookupTable.hints.PeerReviewFlag.tooltip}"></af:selectBooleanCheckbox>
+                  </af:column>
+                  <af:column id="TitleLookupOpenAccessCol" sortable="true"
+                             filterable="true" noWrap="true" width="120"
+                             sortProperty="OpenAccess" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPOPENACCESS"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.OpenAccess.label}"
+                                      id="ol22"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupOpenAccess"
+                                  value="#{row.bindings.OpenAccess.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.OpenAccess.label}"
+                                  required="#{bindings.TitleLookupTable.hints.OpenAccess.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.OpenAccess.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.OpenAccess.displayWidth}"
+                                  maximumLength="20" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.OpenAccess.tooltip}">
+                      <f:validator binding="#{row.bindings.OpenAccess.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupActiveFlagCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="ActiveFlag" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPACTIVEFLAG"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.ActiveFlag.label}"
+                                      id="ol23"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupActiveFlag"
+                                  value="#{row.bindings.ActiveFlag.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.ActiveFlag.label}"
+                                  required="#{bindings.TitleLookupTable.hints.ActiveFlag.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.ActiveFlag.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.ActiveFlag.displayWidth}"
+                                  maximumLength="1" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.ActiveFlag.tooltip}">
+                      <f:validator binding="#{row.bindings.ActiveFlag.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupSubjectCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="Subject" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPSUBJECT"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.Subject.label}"
+                                      id="ol24"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupSubject"
+                                  value="#{row.bindings.Subject.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.Subject.label}"
+                                  required="#{bindings.TitleLookupTable.hints.Subject.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.Subject.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.Subject.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.Subject.tooltip}">
+                      <f:validator binding="#{row.bindings.Subject.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupSubjectCodeCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="SubjectCode" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPSUBJECTCODE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.SubjectCode.label}"
+                                      id="ol25"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupSubjectCode"
+                                  value="#{row.bindings.SubjectCode.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.SubjectCode.label}"
+                                  required="#{bindings.TitleLookupTable.hints.SubjectCode.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.SubjectCode.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.SubjectCode.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.SubjectCode.tooltip}">
+                      <f:validator binding="#{row.bindings.SubjectCode.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="TitleLookupSubjectTypeCol" sortable="true"
+                             filterable="true" noWrap="true" width="120"
+                             sortProperty="SubjectType" rowHeader="false"
+                             helpTopicId="RBH_TITLELOOKUPSUBJECTTYPE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.TitleLookupTable.hints.SubjectType.label}"
+                                      id="ol26"/>
+                    </f:facet>
+                    <af:inputText id="TitleLookupSubjectType"
+                                  value="#{row.bindings.SubjectType.inputValue}"
+                                  label="#{bindings.TitleLookupTable.hints.SubjectType.label}"
+                                  required="#{bindings.TitleLookupTable.hints.SubjectType.mandatory}"
+                                  rows="#{bindings.TitleLookupTable.hints.SubjectType.displayHeight}"
+                                  columns="#{bindings.TitleLookupTable.hints.SubjectType.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.TitleLookupTable.hints.SubjectType.tooltip}">
+                      <f:validator binding="#{row.bindings.SubjectType.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </f:facet>
+          </af:panelStretchLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

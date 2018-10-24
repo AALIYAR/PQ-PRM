@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PrmTitleTargetedProductView"
+  Version="11.1.1.61.92"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  ComponentClass="com.pq.tracs.model.vo.PRMView"
+  FetchMode="FETCH_AS_NEEDED"
+  FetchSize="30"
+  PageIterMode="Partial"
+  UseGlueCode="false"
+  RangeSize="25">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="OpportunityStatusLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Negotiation Stage']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="TargetPriorityLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Target Priority']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_NegotiationStage"
+    ListVOName="OpportunityStatusLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="NegotiationStage"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TargetPriority"
+    ListVOName="TargetPriorityLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TargetPriority"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT PrmTargetedProductTitle.ID,
+       PrmAllianceManager.ID AS PRODUCT_MANAGER_ID, 
+       PrmTargetedProductTitle.TITLE_ID, 
+       PrmTargetedProductTitle.PRM_TARGETED_PRODUCT_ID, 
+       PrmTargetedProductTitle.ADDED_DATE, 
+       PrmTargetedProductTitle.REMOVED_DATE, 
+       PrmTargetedProductTitle.CREATED_BY, 
+       PrmTargetedProductTitle.CREATED_DATE, 
+       PrmTargetedProductTitle.LAST_UPDATED_BY, 
+       PrmTargetedProductTitle.LAST_UPDATED_DATE,
+       PrmTargetedProductTitle.TARGET_PRIORITY,
+       PrmTargetedProduct.PRD_ID,
+       PrmTargetedProduct.NAME Product_Name,
+       PrmTargetedProduct.PRODUCT_FAMILY,
+       JhsUsers.DISPLAY_NAME AS PRODUCT_MANAGER,
+       PrmOpportunity.ID AS OPPORTUNITY_ID,
+       PrmOpportunity.OPPORTUNITY_NO,
+       PrmOpportunity.NAME AS OPPORTUNITY_NAME,
+       OpportunityAccount.ID AS OPPORTUNITY_ACCOUNT_ID,
+       OpportunityAccount.NAME AS OPPORTUNITY_ACCOUNT_NAME,
+       PrmOpportunity.CURRENT_STATUS AS NEGOTIATION_STAGE,
+       PrmTargetedProductTitle.AI_TARGETING_FLAG
+FROM PRM_TARGETED_PRODUCT_TITLE PrmTargetedProductTitle
+    LEFT OUTER JOIN PRM_TARGETED_PRODUCT PrmTargetedProduct
+        LEFT OUTER JOIN PRM_TARGETED_PRODUCT_MANAGER PrmTargetedProductManager
+            INNER JOIN PRM_ALLIANCE_MANAGER PrmAllianceManager
+                INNER JOIN JHS_USERS JhsUsers
+                    ON PrmAllianceManager.JHS_USERS_ID = JhsUsers.ID
+                ON PrmTargetedProductManager.PRM_USER_ID = PrmAllianceManager.ID
+            ON PrmTargetedProduct.ID = PrmTargetedProductManager.PRM_TARGETED_PRODUCT_ID
+            AND NVL(PrmTargetedProductManager.REMOVED_DATE, SYSDATE) >= TRUNC(SYSDATE)
+        ON PrmTargetedProductTitle.PRM_TARGETED_PRODUCT_ID = PrmTargetedProduct.ID
+    LEFT OUTER JOIN PRM_OPPORTUNITY_TARGET PrmOpportunityTarget
+        INNER JOIN PRM_OPPORTUNITY PrmOpportunity
+            INNER JOIN TRAX_CONTENT_OWNER OpportunityAccount
+                ON PrmOpportunity.CONTENT_OWNER_ID = OpportunityAccount.ID
+            INNER JOIN TRAX_LOOKUP_CODE LookupCode
+                ON PrmOpportunity.OPPORTUNITY_TYPE = LookupCode.INTERNAL_VALUE
+                AND LookupCode.LOOKUP_CODE_SET_ID = 210
+            ON PrmOpportunityTarget.PRM_OPPORTUNITY_ID = PrmOpportunity.ID
+        ON PrmTargetedProductTitle.ID = PrmOpportunityTarget.PRM_TARGETED_PRODUCT_TITLE_ID
+               where PrmTargetedProductTitle.prm_targeted_product_id is not null]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="PrmTargetedProductTitle"
+    Entity="com.pq.tracs.model.eo.PrmTargetedProductTitle"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="ProductManagerId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="PRODUCT_MANAGER_ID"
+    Expression="PRODUCT_MANAGER_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TitleId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TitleId"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="TITLE_ID"/>
+  <ViewAttribute
+    Name="PrmTargetedProductId"
+    PrecisionRule="true"
+    EntityAttrName="PrmTargetedProductId"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="PRM_TARGETED_PRODUCT_ID"/>
+  <ViewAttribute
+    Name="AddedDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AddedDate"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="ADDED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.AddedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.AddedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.AddedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RemovedDate"
+    PrecisionRule="true"
+    EntityAttrName="RemovedDate"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="REMOVED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.RemovedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.RemovedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.RemovedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="CREATED_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.CreatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="CREATED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.CreatedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.CreatedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.CreatedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="LAST_UPDATED_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.LastUpdatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedDate"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedDate"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="LAST_UPDATED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.LastUpdatedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.LastUpdatedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.LastUpdatedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TargetPriority"
+    PrecisionRule="true"
+    EntityAttrName="TargetPriority"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="TARGET_PRIORITY"
+    LOVName="LOV_TargetPriority">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrdId"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="PRD_ID"
+    Expression="PRD_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.PrdId_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProductName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PRODUCT_NAME"
+    Expression="PRODUCT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.ProductName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProductFamily"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PRODUCT_FAMILY"
+    Expression="PRODUCT_FAMILY"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.ProductFamily_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ProductManager"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="PRODUCT_MANAGER"
+    Expression="PRODUCT_MANAGER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.ProductManager_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OpportunityId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="OPPORTUNITY_ID"
+    Expression="OPPORTUNITY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="OpportunityNo"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="OPPORTUNITY_NO"
+    Expression="OPPORTUNITY_NO"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.OpportunityNo_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OpportunityName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPPORTUNITY_NAME"
+    Expression="OPPORTUNITY_NAME"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.OpportunityName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OpportunityAccountId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="OPPORTUNITY_ACCOUNT_ID"
+    Expression="OPPORTUNITY_ACCOUNT_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="OpportunityAccountName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPPORTUNITY_ACCOUNT_NAME"
+    Expression="OPPORTUNITY_ACCOUNT_NAME"
+    SQLType="VARCHAR">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.OpportunityAccountName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="NegotiationStage"
+    IsUpdateable="false"
+    LOVName="LOV_NegotiationStage"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NEGOTIATION_STAGE"
+    Expression="NEGOTIATION_STAGE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmTitleTargetedProductView.NegotiationStage_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AiTargetingFlag"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AiTargetingFlag"
+    EntityUsage="PrmTargetedProductTitle"
+    AliasName="AI_TARGETING_FLAG"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+    <Item Value="ProductManagerId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="PrmTargetedTitleFormatView"
+    ViewLink="com.pq.tracs.model.vl.TitleTargetedProductToFormatViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ViewLinkAccessor
+    Name="PrmTargetedTitleMarketView"
+    ViewLink="com.pq.tracs.model.vl.TitleTargetedProductToMarketViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

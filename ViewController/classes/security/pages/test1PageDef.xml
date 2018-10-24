@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="test1PageDef"
+                Package="security.pages">
+  <parameters/>
+  <executables>
+    <invokeAction id="testExecute1" Binds="ExecuteWithParams" Refresh="always"/>
+    <variableIterator id="variables"/>
+    <iterator Binds="myJhsUsersView1" RangeSize="25"
+              DataControl="PrmAppModuleDataControl"
+              id="myJhsUsersView1Iterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="myJhsUsersView1Iterator" id="ExecuteWithParams"
+            InstanceName="PrmAppModuleDataControl.myJhsUsersView1"
+            DataControl="PrmAppModuleDataControl" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="bind_userName" NDValue="#{jhsUser.userId}"
+                 NDType="java.lang.String" NDOption="3"/>
+    </action>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="NewPassword">
+      <AttrNames>
+        <Item Value="NewPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="FirstName">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="LastName">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="MiddleName">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="Username">
+      <AttrNames>
+        <Item Value="Username"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="DisplayName">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="Alias">
+      <AttrNames>
+        <Item Value="Alias"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="EmailAddress">
+      <AttrNames>
+        <Item Value="EmailAddress"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="WorkPhone">
+      <AttrNames>
+        <Item Value="WorkPhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="HomePhone">
+      <AttrNames>
+        <Item Value="HomePhone"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="Fax">
+      <AttrNames>
+        <Item Value="Fax"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="CurrentPassword">
+      <AttrNames>
+        <Item Value="CurrentPassword"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="myJhsUsersView1Iterator" id="ReTypePassword">
+      <AttrNames>
+        <Item Value="ReTypePassword"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

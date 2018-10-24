@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="UsersLookupSingleTopLc"
+                             partialTriggers="">
+        <f:facet name="top">
+          <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+          <af:group id="g0">
+            <af:panelHeader id="ph0"
+                            text="#{nls['TABLE_TITLE_USERSLOOKUPSINGLE']}"
+                            helpTopicId="RBH_USERSLOOKUPSINGLE">
+              <f:facet name="toolbar">
+                <af:toolbox id="tbox0">
+                  <af:toolbar id="tbar0">
+                    <af:group id="gr0"></af:group>
+                    <af:group id="gr1"></af:group>
+                    <af:group id="gr2"></af:group>
+                  </af:toolbar>
+                </af:toolbox>
+              </f:facet>
+              <f:facet name="context"></f:facet>
+              <af:subform id="UsersLookupSingleSbf"
+                          rendered="#{!pageFlowScope.createModes.CreateUsersLookupSingle and !pageFlowScope.hideSearchArea}"
+                          defaultCommand="UsersLookupSingleQuickSearchButton">
+                <af:panelGroupLayout id="searchAreaUsersLookupSingle"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:panelGroupLayout id="qsAreaUsersLookupSingle"
+                                       rendered="#{pageFlowScope.searchUsersLookupSingle.quickSearchMode}"
+                                       layout="horizontal">
+                    <af:selectOneChoice id="qsSelectUsersLookupSingle"
+                                        label="#{nls['FILTER_BY']}"
+                                        value="#{pageFlowScope.searchUsersLookupSingle.searchItem}"
+                                        autoSubmit="true" immediate="true"
+                                        valueChangeListener="#{pageFlowScope.searchUsersLookupSingle.searchItemChanged}">
+                      <af:selectItem label="#{bindings.UsersLookupSingleTable.hints.Id.label}"
+                                     value="UsersLookupSingleId" id="si0"/>
+                      <af:selectItem label="#{bindings.UsersLookupSingleTable.hints.Username.label}"
+                                     value="UsersLookupSingleUsername"
+                                     id="si1"/>
+                      <af:selectItem label="#{bindings.UsersLookupSingleTable.hints.FirstName.label}"
+                                     value="UsersLookupSingleFirstName"
+                                     id="si2"/>
+                      <af:selectItem label="#{bindings.UsersLookupSingleTable.hints.LastName.label}"
+                                     value="UsersLookupSingleLastName"
+                                     id="si3"/>
+                      <af:selectItem label="#{bindings.UsersLookupSingleTable.hints.DisplayName.label}"
+                                     value="UsersLookupSingleDisplayName"
+                                     id="si4"/>
+                    </af:selectOneChoice>
+                    <af:spacer width="4" id="qsAreaUsersLookupSingleSpacer1"/>
+                    <af:panelGroupLayout partialTriggers="qsSelectUsersLookupSingle"
+                                         id="qsAreaUsersLookupSinglepanelGroupLayout">
+                      <af:switcher facetName="#{pageFlowScope.searchUsersLookupSingle.searchItem}"
+                                   id="qsAreaUsersLookupSingleSwitcher">
+                        <f:facet name="UsersLookupSingleId">
+                          <af:inputText id="QuickSearchUsersLookupSingleId"
+                                        value="#{pageFlowScope.searchUsersLookupSingle.searchText}"
+                                        label="#{bindings.UsersLookupSingleTable.hints.Id.label}"
+                                        shortDesc="#{bindings.UsersLookupSingleId.hints.tooltip}"
+                                        helpTopicId="RBH_USERSLOOKUPSINGLEID"
+                                        simple="true"
+                                        columns="#{bindings.UsersLookupSingleId.hints.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.UsersLookupSingleId.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="UsersLookupSingleUsername">
+                          <af:inputText id="QuickSearchUsersLookupSingleUsername"
+                                        value="#{pageFlowScope.searchUsersLookupSingle.searchText}"
+                                        label="#{bindings.UsersLookupSingleTable.hints.Username.label}"
+                                        shortDesc="#{bindings.UsersLookupSingleTable.hints.Username.tooltip}"
+                                        helpTopicId="RBH_USERSLOOKUPSINGLEUSERNAME"
+                                        simple="true"
+                                        columns="#{bindings.UsersLookupSingleTable.hints.Username.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="UsersLookupSingleFirstName">
+                          <af:inputText id="QuickSearchUsersLookupSingleFirstName"
+                                        value="#{pageFlowScope.searchUsersLookupSingle.searchText}"
+                                        label="#{bindings.UsersLookupSingleTable.hints.FirstName.label}"
+                                        shortDesc="#{bindings.UsersLookupSingleTable.hints.FirstName.tooltip}"
+                                        helpTopicId="RBH_USERSLOOKUPSINGLEFIRSTNAME"
+                                        simple="true"
+                                        columns="#{bindings.UsersLookupSingleTable.hints.FirstName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="UsersLookupSingleLastName">
+                          <af:inputText id="QuickSearchUsersLookupSingleLastName"
+                                        value="#{pageFlowScope.searchUsersLookupSingle.searchText}"
+                                        label="#{bindings.UsersLookupSingleTable.hints.LastName.label}"
+                                        shortDesc="#{bindings.UsersLookupSingleTable.hints.LastName.tooltip}"
+                                        helpTopicId="RBH_USERSLOOKUPSINGLELASTNAME"
+                                        simple="true"
+                                        columns="#{bindings.UsersLookupSingleTable.hints.LastName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="UsersLookupSingleDisplayName">
+                          <af:inputText id="QuickSearchUsersLookupSingleDisplayName"
+                                        value="#{pageFlowScope.searchUsersLookupSingle.searchText}"
+                                        label="#{bindings.UsersLookupSingleTable.hints.DisplayName.label}"
+                                        shortDesc="#{bindings.UsersLookupSingleTable.hints.DisplayName.tooltip}"
+                                        helpTopicId="RBH_USERSLOOKUPSINGLEDISPLAYNAME"
+                                        simple="true"
+                                        columns="#{bindings.UsersLookupSingleTable.hints.DisplayName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                      </af:switcher>
+                    </af:panelGroupLayout>
+                    <af:spacer width="4" id="qsAreaUsersLookupSingleSpacer2"/>
+                    <af:commandImageLink action="#{pageFlowScope.searchUsersLookupSingle.quickSearch}"
+                                         shortDesc="#{nls['FILTER_BY']}"
+                                         icon="/jheadstart/images/go_ena.png"
+                                         id="UsersLookupSingleQuickSearchButton"/>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:subform>
+            </af:panelHeader>
+            <af:spacer width="10" height="10" id="sp0"/>
+          </af:group>
+          <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+        </f:facet>
+        <f:facet name="center">
+          <af:panelStretchLayout topHeight="0" id="psl0">
+            <f:facet name="top"></f:facet>
+            <f:facet name="center">
+              <af:panelCollection id="UsersLookupSinglePC" featuresOff=" "
+                                  styleClass="AFStretchWidth">
+                <f:facet name="menus">
+                  <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                           id="menu0">
+                    <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                             id="menu1">
+                      <af:group id="UsersLookupSingletbb"
+                                rendered="#{ bindings.UsersLookupSingleIterator.currentRow!=null }">
+                        <af:commandMenuItem actionListener="#{bindings.FirstUsersLookupSingle.execute}"
+                                            id="UsersLookupSingleFirst"
+                                            partialSubmit="true"
+                                            icon="/afr/shuttleleftall_ena.png"
+                                            textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.PreviousUsersLookupSingle.execute}"
+                                            icon="/afr/shuttleleft_ena.png"
+                                            textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                            id="UsersLookupSinglePrevious"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.NextUsersLookupSingle.execute}"
+                                            icon="/afr/shuttleright_ena.png"
+                                            textAndAccessKey="#{nls['NEXT_ROW']}"
+                                            id="UsersLookupSingleNext"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.LastUsersLookupSingle.execute}"
+                                            icon="/afr/shuttlerightall_ena.png"
+                                            textAndAccessKey="#{nls['LAST_ROW']}"
+                                            id="UsersLookupSingleLast"
+                                            partialSubmit="true"></af:commandMenuItem>
+                      </af:group>
+                    </af:menu>
+                  </af:menu>
+                </f:facet>
+                <f:facet name="toolbar">
+                  <af:toolbar id="tbar1">
+                    <af:commandToolbarButton text="Print"
+                                             id="UsersLookupSinglePrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar">
+                  <af:toolbar>
+                    <af:outputText value="#{bindings.UsersLookupSingleIterator.estimatedRowCount} rows found"/>
+                  </af:toolbar>
+                </f:facet>
+                <af:table id="UsersLookupSingleTab" contentDelivery="immediate"
+                          value="#{bindings.UsersLookupSingleTable.collectionModel}"
+                          columnStretching="blank" rowBandingInterval="0"
+                          editingMode="editAll" columnSelection="multiple"
+                          contextMenuSelect="true" rowSelection="single"
+                          selectionListener="#{pageFlowScope.UsersLookupSinglePage.selectionListener}"
+                          selectedRowKeys="#{pageFlowScope.UsersLookupSinglePage.selectedRowKeySet}"
+                          rowDisclosureListener="#{pageFlowScope.UsersLookupSingleTable.discloseRow}"
+                          var="row" varStatus="status"
+                          fetchSize="#{bindings.UsersLookupSingleTable.rangeSize}"
+                          emptyText="#{nls['NO_ROWS_FOUND']}"
+                          queryListener="#{bindings.UsersLookupSingleIteratorJhsUsersLookupCriteriaQuery.processQuery}"
+                          filterModel="#{bindings.UsersLookupSingleIteratorJhsUsersLookupCriteriaQuery.queryDescriptor}"
+                          filterVisible="true"
+                          binding="#{pageFlowScope.UsersLookupSinglePage.lovTable}"
+                          partialTriggers=" :::UsersLookupSinglePC ::UsersLookupSingleFirst ::UsersLookupSinglePrevious ::UsersLookupSingleNext ::UsersLookupSingleLast"
+                          styleClass="AFStretchWidth"
+                          summary="#{nls['TABLE_TITLE_USERSLOOKUPSINGLE']}">
+                  <f:facet name="contextMenu">
+                    <af:popup id="UsersLookupSingleTablePopup"
+                              childCreation="deferred">
+                      <af:menu id="menu2">
+                        <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                      </af:menu>
+                    </af:popup>
+                  </f:facet>
+                  <af:column id="UsersLookupSingleUsernameCol" sortable="true"
+                             filterable="true" noWrap="true" width="120"
+                             sortProperty="Username" rowHeader="false"
+                             helpTopicId="RBH_USERSLOOKUPSINGLEUSERNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.UsersLookupSingleTable.hints.Username.label}"
+                                      id="ol0"/>
+                    </f:facet>
+                    <af:inputText id="UsersLookupSingleUsername"
+                                  value="#{row.bindings.Username.inputValue}"
+                                  label="#{bindings.UsersLookupSingleTable.hints.Username.label}"
+                                  required="#{bindings.UsersLookupSingleTable.hints.Username.mandatory}"
+                                  rows="#{bindings.UsersLookupSingleTable.hints.Username.displayHeight}"
+                                  columns="#{bindings.UsersLookupSingleTable.hints.Username.displayWidth}"
+                                  maximumLength="240" readOnly="true"
+                                  shortDesc="#{bindings.UsersLookupSingleTable.hints.Username.tooltip}">
+                      <f:validator binding="#{row.bindings.Username.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="UsersLookupSingleFirstNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="FirstName" rowHeader="false"
+                             helpTopicId="RBH_USERSLOOKUPSINGLEFIRSTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.UsersLookupSingleTable.hints.FirstName.label}"
+                                      id="ol1"/>
+                    </f:facet>
+                    <af:inputText id="UsersLookupSingleFirstName"
+                                  value="#{row.bindings.FirstName.inputValue}"
+                                  label="#{bindings.UsersLookupSingleTable.hints.FirstName.label}"
+                                  required="#{bindings.UsersLookupSingleTable.hints.FirstName.mandatory}"
+                                  rows="#{bindings.UsersLookupSingleTable.hints.FirstName.displayHeight}"
+                                  columns="#{bindings.UsersLookupSingleTable.hints.FirstName.displayWidth}"
+                                  maximumLength="50" readOnly="true"
+                                  shortDesc="#{bindings.UsersLookupSingleTable.hints.FirstName.tooltip}">
+                      <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="UsersLookupSingleLastNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="LastName" rowHeader="false"
+                             helpTopicId="RBH_USERSLOOKUPSINGLELASTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.UsersLookupSingleTable.hints.LastName.label}"
+                                      id="ol2"/>
+                    </f:facet>
+                    <af:inputText id="UsersLookupSingleLastName"
+                                  value="#{row.bindings.LastName.inputValue}"
+                                  label="#{bindings.UsersLookupSingleTable.hints.LastName.label}"
+                                  required="#{bindings.UsersLookupSingleTable.hints.LastName.mandatory}"
+                                  rows="#{bindings.UsersLookupSingleTable.hints.LastName.displayHeight}"
+                                  columns="#{bindings.UsersLookupSingleTable.hints.LastName.displayWidth}"
+                                  maximumLength="50" readOnly="true"
+                                  shortDesc="#{bindings.UsersLookupSingleTable.hints.LastName.tooltip}">
+                      <f:validator binding="#{row.bindings.LastName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="UsersLookupSingleDisplayNameCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="240" sortProperty="DisplayName"
+                             rowHeader="false"
+                             helpTopicId="RBH_USERSLOOKUPSINGLEDISPLAYNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.UsersLookupSingleTable.hints.DisplayName.label}"
+                                      id="ol3"/>
+                    </f:facet>
+                    <af:inputText id="UsersLookupSingleDisplayName"
+                                  value="#{row.bindings.DisplayName.inputValue}"
+                                  label="#{bindings.UsersLookupSingleTable.hints.DisplayName.label}"
+                                  required="#{bindings.UsersLookupSingleTable.hints.DisplayName.mandatory}"
+                                  rows="#{bindings.UsersLookupSingleTable.hints.DisplayName.displayHeight}"
+                                  columns="#{bindings.UsersLookupSingleTable.hints.DisplayName.displayWidth}"
+                                  maximumLength="240" readOnly="true"
+                                  shortDesc="#{bindings.UsersLookupSingleTable.hints.DisplayName.tooltip}">
+                      <f:validator binding="#{row.bindings.DisplayName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </f:facet>
+          </af:panelStretchLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

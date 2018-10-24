@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="GCADashboardPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'GCA'}"/>
+  </parameters>
+  <executables>
+    <invokeAction id="applyBindParamsGCADashboardInvoke"
+                  Binds="applyBindParamsGCADashboard" Refresh="always"/>
+    <iterator id="GCADashboardIterator" Binds="GCADashboardUserView"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <invokeAction id="ExecuteQueryGCADashboardInvoke"
+                  Binds="ExecuteQueryGCADashboard" Refresh="renderModel"
+                  RefreshCondition="#{true}"/>
+    <variableIterator id="variables">
+      <variable Name="GCADashboardRowKeyVar" Type="java.lang.String"
+                DefaultValue="#{bindings.GCADashboardIterator.currentRowKeyString}"/>
+    </variableIterator>
+    <invokeAction id="applyBindParamsRecentOpportunitiesDashboardInvoke"
+                  Binds="applyBindParamsRecentOpportunitiesDashboard"
+                  Refresh="always"/>
+    <iterator id="RecentOpportunitiesDashboardIterator"
+              Binds="RecentOpportunitiesDashboardView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="RecentOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery"
+                  Binds="RecentOpportunitiesDashboardIterator"
+                  Criteria="RecentOpportunitiesDashboardViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="OpportunityName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsPageChanged}"/>
+    <invokeAction id="ExecuteQueryRecentOpportunitiesDashboardInvoke"
+                  Binds="ExecuteQueryRecentOpportunitiesDashboard"
+                  Refresh="renderModel" RefreshCondition="#{jhsPageChanged}"/>
+  </executables>
+  <bindings>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsGCADashboard"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="GCADashboardUserView"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{GCADashboardQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="ExecuteQueryGCADashboard" IterBinding="GCADashboardIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="GCAUser" IterBinding="GCADashboardIterator">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="FirstGCADashboard" IterBinding="GCADashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousGCADashboard" IterBinding="GCADashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextGCADashboard" IterBinding="GCADashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastGCADashboard" IterBinding="GCADashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <attributeValues id="GCADashboardRowKey" IterBinding="variables">
+      <AttrNames>
+        <Item Value="GCADashboardRowKeyVar"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="SetCurrentRowWithKeyGCADashboard"
+            IterBinding="GCADashboardIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr" NDValue="#{bindings.GCADashboardRowKey}"
+                 NDType="java.lang.String"/>
+    </action>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsRecentOpportunitiesDashboard"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="RecentOpportunitiesDashboardView1"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{RecentOpportunitiesDashboardQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="ExecuteQueryRecentOpportunitiesDashboard"
+            IterBinding="RecentOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="RODId"
+                     IterBinding="RecentOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RODOpportunityNo"
+                     IterBinding="RecentOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="OpportunityNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RODOpportunityName"
+                     IterBinding="RecentOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="OpportunityName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="RecentOpportunitiesDashboardIterator"
+          id="RODCurrentStatus" Uses="LOV_CurrentStatus" StaticList="false"/>
+    <attributeValues id="RODAccountManager"
+                     IterBinding="RecentOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RODAccountName"
+                     IterBinding="RecentOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RODCountry"
+                     IterBinding="RecentOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="Country"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="RODCreatedDate"
+                     IterBinding="RecentOpportunitiesDashboardIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="RecentOpportunitiesDashboardTable"
+          IterBinding="RecentOpportunitiesDashboardIterator">
+      <nodeDefinition Name="RecentOpportunitiesDashboard"
+                      DefName="com.pq.tracs.model.ro.RecentOpportunitiesDashboardView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="OpportunityNo"/>
+          <Item Value="OpportunityName"/>
+          <Item Value="CurrentStatus"/>
+          <Item Value="AccountManager"/>
+          <Item Value="AccountName"/>
+          <Item Value="Country"/>
+          <Item Value="CreatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstRecentOpportunitiesDashboard"
+            IterBinding="RecentOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousRecentOpportunitiesDashboard"
+            IterBinding="RecentOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextRecentOpportunitiesDashboard"
+            IterBinding="RecentOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastRecentOpportunitiesDashboard"
+            IterBinding="RecentOpportunitiesDashboardIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyRecentOpportunitiesDashboard"
+            IterBinding="RecentOpportunitiesDashboardIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrRecentOpportunitiesDashboard}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

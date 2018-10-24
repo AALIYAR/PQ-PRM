@@ -1,0 +1,418 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="CamTopLc"
+                             partialTriggers=" CamCancelButton0 asAreaCamSearchOptions qsAreaCamSearchOptions"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_CAMPAIGNS']}"
+                          helpTopicId="RBH_CAMPAIGNS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0">
+                    <af:commandButton actionListener="#{CreateCampaigns.execute}"
+                                      action="CreateCam"
+                                      textAndAccessKey="#{nls['NEW_BUTTON_LABEL_CAMPAIGNS']}"
+                                      rendered="#{(true) and (jhsUserRoles['GCA,ADMIN'])}"
+                                      id="CamNewButton"></af:commandButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="CamCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:panelGroupLayout id="modelSearchAreaCam"
+                                 rendered="#{!pageFlowScope.createModes.CreateCampaigns and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreaCamSearchOptions:qsButtonCam qsAreaCamSearchOptions:asButtonCam ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreaCamSearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.CampaignsIteratorPrmCampaignViewCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.CampaignsIteratorPrmCampaignViewCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.CampaignsIteratorPrmCampaignViewCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.CampaignsIteratorPrmCampaignViewCriteriaQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchCampaigns.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonCam"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchCampaigns.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreaCamSearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.CampaignsIteratorPrmCampaignQuickQueryQuery.queryDescriptor}"
+                             model="#{bindings.CampaignsIteratorPrmCampaignQuickQueryQuery.queryModel}"
+                             queryListener="#{bindings.CampaignsIteratorPrmCampaignQuickQueryQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchCampaigns.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonCam"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchCampaigns.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="CamPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="CampaignsDetails"></af:commandMenuItem>
+                    <af:group id="Camtbb"
+                              rendered="#{ bindings.CampaignsIterator.currentRow!=null }">
+                      <af:commandMenuItem actionListener="#{bindings.FirstCampaigns.execute}"
+                                          id="CamFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousCampaigns.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="CamPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextCampaigns.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="CamNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastCampaigns.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="CamLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="CamTab"
+                                                       type="excelHTML"
+                                                       filename="Campaigns.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="CamTab"
+                                                       type="excelHTML"
+                                                       filename="Campaigns.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="CamPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.CampaignsIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="CamTab" contentDelivery="immediate"
+                        value="#{bindings.CampaignsTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.CampaignsTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.CampaignsTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.CampaignsTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.CampaignsTable.rangeSize}"
+                        autoHeightRows="#{bindings.CampaignsTable.estimatedRowCount}"
+                        fetchSize="#{bindings.CampaignsTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.CampaignsIteratorPrmCampaignQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.CampaignsIteratorPrmCampaignQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.CampaignsTable.table}"
+                        partialTriggers=":::qsAreaCamSearchOptions :::asAreaCamSearchOptions :::CamPC ::CamFirst ::CamPrevious ::CamNext ::CamLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_CAMPAIGNS']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="CamTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="CampaignsDetails"></af:commandMenuItem>
+                      </af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="CamCNmCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="CampaignName"
+                           rowHeader="false" helpTopicId="RBH_CAMCAMPAIGNNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.CampaignName.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="cl1"
+                                value="#{row.bindings.CampaignName.inputValue}"
+                                label="#{bindings.CampaignsTable.hints.CampaignName.label}"
+                                required="#{bindings.CampaignsTable.hints.CampaignName.mandatory}"
+                                rows="#{bindings.CampaignsTable.hints.CampaignName.displayHeight}"
+                                columns="#{bindings.CampaignsTable.hints.CampaignName.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.CampaignsTable.hints.CampaignName.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.CampaignName.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2"
+                                  shortDesc="#{bindings.CampaignsTable.hints.CampaignName.tooltip}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="CampaignsDetails"
+                                  text="#{row.CampaignName}"></af:commandLink>
+                </af:column>
+                <af:column id="CamCTyCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="CampaignType"
+                           rowHeader="false" helpTopicId="RBH_CAMCAMPAIGNTYPE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.CampaignType.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:selectOneChoice id="CamCTy"
+                                      value="#{row.bindings.CampaignType.inputValue}"
+                                      label="#{bindings.CampaignsTable.hints.CampaignType.label}"
+                                      required="#{bindings.CampaignsTable.hints.CampaignType.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.CampaignsTable.hints.CampaignType.tooltip}">
+                    <f:selectItems value="#{row.bindings.CampaignType.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="CamCDsCol" sortable="true" filterable="true"
+                           noWrap="true" width="260"
+                           sortProperty="CampaignDescription" rowHeader="false"
+                           helpTopicId="RBH_CAMCAMPAIGNDESCRIPTION"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.CampaignDescription.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:panelLabelAndMessage shortDesc="#{bindings.CampaignsTable.hints.CampaignDescription.tooltip}">
+                    <af:inputText id="CamCDs"
+                                  value="#{row.bindings.CampaignDescription.inputValue}"
+                                  label="#{bindings.CampaignsTable.hints.CampaignDescription.label}"
+                                  required="#{bindings.CampaignsTable.hints.CampaignDescription.mandatory}"
+                                  rows="#{bindings.CampaignsTable.hints.CampaignDescription.displayHeight}"
+                                  columns="#{bindings.CampaignsTable.hints.CampaignDescription.displayWidth}"
+                                  maximumLength="4000" readOnly="true"
+                                  autoSubmit="true" simple="true"
+                                  partialTriggers="CamCampaignDescriptionEditorLink CamCampaignDescriptionEditorText">
+                      <f:validator binding="#{row.bindings.CampaignDescription.validator}"/>
+                    </af:inputText>
+                    <af:commandLink id="CamCampaignDescriptionEditorLink"
+                                    rendered="false" immediate="true"
+                                    partialSubmit="true">
+                      <af:showPopupBehavior popupId="CamCampaignDescriptionPopup"/>
+                      <af:image source="/jheadstart/images/editor.gif"
+                                id="CamCampaignDescriptionIcon"
+                                clientComponent="true"/>
+                    </af:commandLink>
+                  </af:panelLabelAndMessage>
+                  <af:popup id="CamCampaignDescriptionPopup"
+                            contentDelivery="lazyUncached"
+                            eventContext="launcher" childCreation="deferred">
+                    <af:dialog modal="true" resize="on" title="Text Editor"
+                               id="dialog0">
+                      <af:inputText rows="10" columns="100"
+                                    value="#{row.bindings.CampaignDescription.inputValue}"
+                                    simple="true" maximumLength="4000"
+                                    id="CamCampaignDescriptionEditorText"/>
+                    </af:dialog>
+                  </af:popup>
+                </af:column>
+                <af:column id="CamSDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="StartDate"
+                           rowHeader="false" helpTopicId="RBH_CAMSTARTDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.StartDate.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.StartDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CamSD"
+                                value="#{row.bindings.StartDate.inputValue}"
+                                label="#{bindings.CampaignsTable.hints.StartDate.label}"
+                                required="#{bindings.CampaignsTable.hints.StartDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.CampaignsTable.hints.StartDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CamEDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="EndDate"
+                           rowHeader="false" helpTopicId="RBH_CAMENDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.EndDate.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.EndDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CamED"
+                                value="#{row.bindings.EndDate.inputValue}"
+                                label="#{bindings.CampaignsTable.hints.EndDate.label}"
+                                required="#{bindings.CampaignsTable.hints.EndDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.CampaignsTable.hints.EndDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CamAFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="ActiveFlag"
+                           align="center" rowHeader="false"
+                           helpTopicId="RBH_CAMACTIVEFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.ActiveFlag.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="CamAF"
+                                            label="#{bindings.CampaignsTable.hints.ActiveFlag.label}"
+                                            value="#{CamActiveFlagcheckboxInTable.value}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.CampaignsTable.hints.ActiveFlag.tooltip}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="CamCBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="CreatedBy"
+                           rowHeader="false" helpTopicId="RBH_CAMCREATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.CreatedBy.label}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <af:inputText id="CamCB"
+                                value="#{row.bindings.CreatedBy.inputValue}"
+                                label="#{bindings.CampaignsTable.hints.CreatedBy.label}"
+                                required="#{bindings.CampaignsTable.hints.CreatedBy.mandatory}"
+                                rows="#{bindings.CampaignsTable.hints.CreatedBy.displayHeight}"
+                                columns="#{bindings.CampaignsTable.hints.CreatedBy.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.CampaignsTable.hints.CreatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CamCDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CreatedDate"
+                           rowHeader="false" helpTopicId="RBH_CAMCREATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.CreatedDate.label}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                  id="id2">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CamCD"
+                                value="#{row.bindings.CreatedDate.inputValue}"
+                                label="#{bindings.CampaignsTable.hints.CreatedDate.label}"
+                                required="#{bindings.CampaignsTable.hints.CreatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.CampaignsTable.hints.CreatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="CamLUBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="LastUpdatedBy" rowHeader="false"
+                           helpTopicId="RBH_CAMLASTUPDATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.LastUpdatedBy.label}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <af:inputText id="CamLUB"
+                                value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.CampaignsTable.hints.LastUpdatedBy.label}"
+                                required="#{bindings.CampaignsTable.hints.LastUpdatedBy.mandatory}"
+                                rows="#{bindings.CampaignsTable.hints.LastUpdatedBy.displayHeight}"
+                                columns="#{bindings.CampaignsTable.hints.LastUpdatedBy.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.CampaignsTable.hints.LastUpdatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="CamLUDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="LastUpdatedDate" rowHeader="false"
+                           helpTopicId="RBH_CAMLASTUPDATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.CampaignsTable.hints.LastUpdatedDate.label}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                  id="id3">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="CamLUD"
+                                value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                label="#{bindings.CampaignsTable.hints.LastUpdatedDate.label}"
+                                required="#{bindings.CampaignsTable.hints.LastUpdatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.CampaignsTable.hints.LastUpdatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

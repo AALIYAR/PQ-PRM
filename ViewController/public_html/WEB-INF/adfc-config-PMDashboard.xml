@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="PMDashboardTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartPMDashboard</default-activity>
+    <input-parameter-definition id="__3">
+      <name id="__4">rowKeyStrPMDashboard</name>
+      <value id="__5">#{pageFlowScope.rowKeyStrPMDashboard}</value>
+      <class id="__6">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyValuePMDashboard</name>
+      <value id="__9">#{pageFlowScope.rowKeyValuePMDashboard}</value>
+      <class id="__10">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyPMDashboard</name>
+      <value id="__13">#{pageFlowScope.rowKeyPMDashboard}</value>
+      <class id="__14">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">altKeyNamePMDashboard</name>
+      <value id="__17">#{pageFlowScope.altKeyNamePMDashboard}</value>
+      <class id="__18">java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__19">
+      <managed-bean-name id="__20">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__21">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__22">pageFlow</managed-bean-scope>
+      <managed-property id="__23">
+        <property-name id="__24">initializeParentContextEntries</property-name>
+        <map-entries id="__25">
+          <map-entry id="__26">
+            <key id="__27">jhsCurrentGroupName</key>
+            <value id="__28">PMDashboard</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__29">
+      <managed-bean-name id="__30">NewOpportunitiesDashboardTable</managed-bean-name>
+      <managed-bean-class id="__31">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__32">pageFlow</managed-bean-scope>
+      <managed-property id="__33">
+        <property-name id="__34">name</property-name>
+        <value id="__35">NewOpportunitiesDashboardTable</value>
+      </managed-property>
+      <managed-property id="__36">
+        <property-name id="__37">rangeBindingExpr</property-name>
+        <value id="__38">#{'#{bindings.NewOpportunitiesDashboardTable}'}</value>
+      </managed-property>
+      <managed-property id="__39">
+        <property-name id="__40">createNewRowAtTop</property-name>
+        <value id="__41">true</value>
+      </managed-property>
+      <managed-property id="__42">
+        <property-name id="__43">focusItemId</property-name>
+        <value id="__44">NODOpportunityNo</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__45">
+      <managed-bean-name id="__46">ExpiringTitlesDashboardTable</managed-bean-name>
+      <managed-bean-class id="__47">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__48">pageFlow</managed-bean-scope>
+      <managed-property id="__49">
+        <property-name id="__50">name</property-name>
+        <value id="__51">ExpiringTitlesDashboardTable</value>
+      </managed-property>
+      <managed-property id="__52">
+        <property-name id="__53">rangeBindingExpr</property-name>
+        <value id="__54">#{'#{bindings.ExpiringTitlesDashboardTable}'}</value>
+      </managed-property>
+      <managed-property id="__55">
+        <property-name id="__56">createNewRowAtTop</property-name>
+        <value id="__57">true</value>
+      </managed-property>
+      <managed-property id="__58">
+        <property-name id="__59">focusItemId</property-name>
+        <value id="__60">ETDPrdId</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__61">
+      <managed-bean-name id="__62">ContentEvalDashboardTable</managed-bean-name>
+      <managed-bean-class id="__63">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__64">pageFlow</managed-bean-scope>
+      <managed-property id="__65">
+        <property-name id="__66">name</property-name>
+        <value id="__67">ContentEvalDashboardTable</value>
+      </managed-property>
+      <managed-property id="__68">
+        <property-name id="__69">rangeBindingExpr</property-name>
+        <value id="__70">#{'#{bindings.ContentEvalDashboardTable}'}</value>
+      </managed-property>
+      <managed-property id="__71">
+        <property-name id="__72">createNewRowAtTop</property-name>
+        <value id="__73">true</value>
+      </managed-property>
+      <managed-property id="__74">
+        <property-name id="__75">focusItemId</property-name>
+        <value id="__76">CEDTTN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__77">
+      <managed-bean-name id="__78">AutoAddDashboardTable</managed-bean-name>
+      <managed-bean-class id="__79">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__80">pageFlow</managed-bean-scope>
+      <managed-property id="__81">
+        <property-name id="__82">name</property-name>
+        <value id="__83">AutoAddDashboardTable</value>
+      </managed-property>
+      <managed-property id="__84">
+        <property-name id="__85">rangeBindingExpr</property-name>
+        <value id="__86">#{'#{bindings.AutoAddDashboardTable}'}</value>
+      </managed-property>
+      <managed-property id="__87">
+        <property-name id="__88">createNewRowAtTop</property-name>
+        <value id="__89">true</value>
+      </managed-property>
+      <managed-property id="__90">
+        <property-name id="__91">focusItemId</property-name>
+        <value id="__92">AADTTN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__93">
+      <managed-bean-name id="__94">AAndIDashboardTable</managed-bean-name>
+      <managed-bean-class id="__95">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__96">pageFlow</managed-bean-scope>
+      <managed-property id="__97">
+        <property-name id="__98">name</property-name>
+        <value id="__99">AAndIDashboardTable</value>
+      </managed-property>
+      <managed-property id="__100">
+        <property-name id="__101">rangeBindingExpr</property-name>
+        <value id="__102">#{'#{bindings.AAndIDashboardTable}'}</value>
+      </managed-property>
+      <managed-property id="__103">
+        <property-name id="__104">createNewRowAtTop</property-name>
+        <value id="__105">true</value>
+      </managed-property>
+      <managed-property id="__106">
+        <property-name id="__107">focusItemId</property-name>
+        <value id="__108">AIDTTN</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__109">
+      <managed-bean-name id="__110">OtherDashboardTable</managed-bean-name>
+      <managed-bean-class id="__111">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__112">pageFlow</managed-bean-scope>
+      <managed-property id="__113">
+        <property-name id="__114">name</property-name>
+        <value id="__115">OtherDashboardTable</value>
+      </managed-property>
+      <managed-property id="__116">
+        <property-name id="__117">rangeBindingExpr</property-name>
+        <value id="__118">#{'#{bindings.OtherDashboardTable}'}</value>
+      </managed-property>
+      <managed-property id="__119">
+        <property-name id="__120">createNewRowAtTop</property-name>
+        <value id="__121">true</value>
+      </managed-property>
+      <managed-property id="__122">
+        <property-name id="__123">focusItemId</property-name>
+        <value id="__124">OEDTTN</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartPMDashboard">
+      <case id="__125">
+        <expression id="__126">#{pageFlowScope.rowKeyStrPMDashboard!=null or
+                               pageFlowScope.rowKeyValuePMDashboard!=null or
+                               pageFlowScope.rowKeyPMDashboard!=null}</expression>
+        <outcome id="__127">SetCurrentRowPMDashboard</outcome>
+      </case>
+      <case id="__128">
+        <expression id="__129">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__130">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__131">firstPage</default-outcome>
+    </router>
+    <method-call id="SetCurrentRowPMDashboard">
+      <method id="__132">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__133">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__134">#{bindings.PMDashboardIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__135">java.lang.String</class>
+        <value id="__136">#{pageFlowScope.rowKeyStrPMDashboard}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__137">java.lang.Object</class>
+        <value id="__138">#{pageFlowScope.rowKeyValuePMDashboard}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__139">oracle.jbo.Key</class>
+        <value id="__140">#{pageFlowScope.rowKeyPMDashboard}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__141">java.lang.String</class>
+        <value id="__142">#{pageFlowScope.altKeyNamePMDashboard}</value>
+      </parameter>
+      <outcome id="__143">
+        <fixed-outcome id="__144">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelPMDashboardReturn">
+      <outcome id="__145">
+        <name id="__146">CancelPMDashboard</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DonePMDashboardReturn">
+      <outcome id="__147">
+        <name id="__148">DonePMDashboard</name>
+      </outcome>
+    </task-flow-return>
+    <view id="PMDashboard">
+      <page id="__149">/pages/PMDashboard.jsff</page>
+    </view>
+    <control-flow-rule id="__150">
+      <from-activity-id id="__151">*</from-activity-id>
+      <control-flow-case id="__152">
+        <from-outcome id="__153">SetCurrentRowPMDashboard</from-outcome>
+        <to-activity-id id="__154">SetCurrentRowPMDashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__155">
+        <from-outcome id="__156">firstPage</from-outcome>
+        <to-activity-id id="__157">PMDashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__158">
+        <from-outcome id="__159">deepLinkPage</from-outcome>
+        <to-activity-id id="__160">PMDashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__161">
+        <from-outcome id="__162">PMDashboardBreadcrumb</from-outcome>
+        <to-activity-id id="__163">PMDashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__164">
+        <from-outcome id="__165">Cancel</from-outcome>
+        <to-activity-id id="__166">StartPMDashboard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__167">
+        <from-outcome id="__168">CancelPMDashboardReturn</from-outcome>
+        <to-activity-id id="__169">CancelPMDashboardReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__170">
+        <from-outcome id="__171">DonePMDashboardReturn</from-outcome>
+        <to-activity-id id="__172">DonePMDashboardReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__173">
+    <managed-bean-name id="__174">PMDashboardTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__175">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__176">pageFlow</managed-bean-scope>
+    <managed-property id="__177">
+      <property-name id="__178">params</property-name>
+      <property-class id="__179">java.util.Map</property-class>
+      <map-entries id="__180">
+        <map-entry id="__181">
+          <key id="__182">parentContext</key>
+          <value id="__183">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__184">
+      <property-name id="__185">name</property-name>
+      <value id="__186">PMDashboard</value>
+    </managed-property>
+    <managed-property id="__187">
+      <property-name id="__188">taskFlowId</property-name>
+      <value id="__189">/WEB-INF/adfc-config-PMDashboard.xml#PMDashboardTaskFlow</value>
+    </managed-property>
+    <managed-property id="__190">
+      <property-name id="__191">tabUniqueIdentifier</property-name>
+      <value id="__192">PMDashboard</value>
+    </managed-property>
+    <managed-property id="__193">
+      <property-name id="__194">label</property-name>
+      <value id="__195">PM Dashboard</value>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__196">
+    <managed-bean-name id="__197">PMDashboardQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__198">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__199">request</managed-bean-scope>
+    <managed-property id="__200">
+      <property-name id="__201">namedParamDefs</property-name>
+      <map-entries id="__202">
+        <map-entry id="__203">
+          <key id="__204">username</key>
+          <value id="__205">#{'#{jhsUser.userId}'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__206">
+    <managed-bean-name id="__207">NewOpportunitiesDashboardQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__208">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__209">request</managed-bean-scope>
+    <managed-property id="__210">
+      <property-name id="__211">namedParamDefs</property-name>
+      <map-entries id="__212">
+        <map-entry id="__213">
+          <key id="__214">uname</key>
+          <value id="__215">#{'#{jhsUser.userId}'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__216">
+    <managed-bean-name id="__217">ContentEvalDashboardQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__218">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__219">request</managed-bean-scope>
+    <managed-property id="__220">
+      <property-name id="__221">namedParamDefs</property-name>
+      <map-entries id="__222">
+        <map-entry id="__223">
+          <key id="__224">uname</key>
+          <value id="__225">#{'#{jhsUser.userId}'}</value>
+        </map-entry>
+        <map-entry id="__226">
+          <key id="__227">GroupType</key>
+          <value id="__228">#{'Content Evaluation'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__229">
+    <managed-bean-name id="__230">AutoAddDashboardQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__231">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__232">request</managed-bean-scope>
+    <managed-property id="__233">
+      <property-name id="__234">namedParamDefs</property-name>
+      <map-entries id="__235">
+        <map-entry id="__236">
+          <key id="__237">uname</key>
+          <value id="__238">#{'#{jhsUser.userId}'}</value>
+        </map-entry>
+        <map-entry id="__239">
+          <key id="__240">GroupType</key>
+          <value id="__241">#{'Auto-Add'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__242">
+    <managed-bean-name id="__243">AAndIDashboardQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__244">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__245">request</managed-bean-scope>
+    <managed-property id="__246">
+      <property-name id="__247">namedParamDefs</property-name>
+      <map-entries id="__248">
+        <map-entry id="__249">
+          <key id="__250">uname</key>
+          <value id="__251">#{'#{jhsUser.userId}'}</value>
+        </map-entry>
+        <map-entry id="__252">
+          <key id="__253">GroupType</key>
+          <value id="__254">#{'A&amp;I'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+  <managed-bean id="__255">
+    <managed-bean-name id="__256">OtherDashboardQueryBindParams</managed-bean-name>
+    <managed-bean-class id="__257">oracle.jheadstart.controller.jsf.bean.QueryBindParams</managed-bean-class>
+    <managed-bean-scope id="__258">request</managed-bean-scope>
+    <managed-property id="__259">
+      <property-name id="__260">namedParamDefs</property-name>
+      <map-entries id="__261">
+        <map-entry id="__262">
+          <key id="__263">uname</key>
+          <value id="__264">#{'#{jhsUser.userId}'}</value>
+        </map-entry>
+        <map-entry id="__265">
+          <key id="__266">GroupType</key>
+          <value id="__267">#{'Other'}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

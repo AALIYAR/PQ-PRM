@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application"
+             version="11.1.1.59.23" id="DataBindings" SeparateXMLFiles="false"
+             Package="com.pq.tracs.view" ClientType="Generic"
+             ErrorHandlerClass="oracle.jheadstart.controller.jsf.util.JhsDCErrorHandlerImpl">
+  <pageMap>
+    <page path="/pages/UIShell.jspx" usageId="PRM_UIShellPageDef"/>
+    <page path="/pages/PopupShell.jspx" usageId="PRM_PopupShellPageDef"/>
+    <page path="/WEB-INF/adfc-config-Accounts.xml#AccountsTaskFlow@CreateAccounts"
+          usageId="AccountsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Accounts.xml#AccountsTaskFlow@SetCurrentRowAccounts"
+          usageId="AccountsPageDef"/>
+    <page path="/pages/AccountsTable.jsff" usageId="AccountsPageDef"/>
+    <page path="/pages/Accounts.jsff" usageId="AccountsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Opportunity.xml#OpportunityTaskFlow@CreateOpportunity"
+          usageId="OpportunityPageDef"/>
+    <page path="/WEB-INF/adfc-config-Opportunity.xml#OpportunityTaskFlow@SetCurrentRowOpportunity"
+          usageId="OpportunityPageDef"/>
+    <page path="/pages/OpportunityTable.jsff" usageId="OpportunityPageDef"/>
+    <page path="/pages/Opportunity.jsff" usageId="OpportunityPageDef"/>
+    <page path="/WEB-INF/adfc-config-Contract.xml#ContractTaskFlow@SetCurrentRowContract"
+          usageId="ContractPageDef"/>
+    <page path="/pages/ContractTable.jsff" usageId="ContractPageDef"/>
+    <page path="/pages/Contract.jsff" usageId="ContractPageDef"/>
+    <page path="/WEB-INF/adfc-config-Targeting.xml#TargetingTaskFlow@CreateTargeting"
+          usageId="TargetingPageDef"/>
+    <page path="/WEB-INF/adfc-config-Targeting.xml#TargetingTaskFlow@SetCurrentRowTargeting"
+          usageId="TargetingPageDef"/>
+    <page path="/pages/TargetingTable.jsff" usageId="TargetingPageDef"/>
+    <page path="/pages/Targeting.jsff" usageId="TargetingPageDef"/>
+    <page path="/WEB-INF/adfc-config-Products.xml#ProductsTaskFlow@CreateProducts"
+          usageId="ProductsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Products.xml#ProductsTaskFlow@SetCurrentRowProducts"
+          usageId="ProductsPageDef"/>
+    <page path="/pages/ProductsTable.jsff" usageId="ProductsPageDef"/>
+    <page path="/pages/Products.jsff" usageId="ProductsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Titles.xml#TitlesTaskFlow@CreateTitles"
+          usageId="TitlesPageDef"/>
+    <page path="/WEB-INF/adfc-config-Titles.xml#TitlesTaskFlow@SetCurrentRowTitles"
+          usageId="TitlesPageDef"/>
+    <page path="/pages/TitlesTable.jsff" usageId="TitlesPageDef"/>
+    <page path="/pages/Titles.jsff" usageId="TitlesPageDef"/>
+    <page path="/WEB-INF/adfc-config-TitleLookup.xml#TitleLookupTaskFlow@ClearSearchCriteria"
+          usageId="TitleLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TitleLookup.xml#TitleLookupTaskFlow@DoValidation"
+          usageId="TitleLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TitleLookup.xml#TitleLookupTaskFlow@SetCurrentRowTitleLookup"
+          usageId="TitleLookupPageDef"/>
+    <page path="/pages/TitleLookupTable.jsff" usageId="TitleLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductLookup.xml#TargetedProductLookupTaskFlow@ClearSearchCriteria"
+          usageId="TargetedProductLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductLookup.xml#TargetedProductLookupTaskFlow@DoValidation"
+          usageId="TargetedProductLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductLookup.xml#TargetedProductLookupTaskFlow@SetCurrentRowTargetedProductLookup"
+          usageId="TargetedProductLookupPageDef"/>
+    <page path="/pages/TargetedProductLookupTable.jsff"
+          usageId="TargetedProductLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountManagers.xml#AccountManagersTaskFlow@CreateAccountManagers"
+          usageId="AccountManagersPageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountManagers.xml#AccountManagersTaskFlow@SetCurrentRowAccountManagers"
+          usageId="AccountManagersPageDef"/>
+    <page path="/pages/AccountManagersTable.jsff"
+          usageId="AccountManagersPageDef"/>
+    <page path="/pages/AccountManagers.jsff" usageId="AccountManagersPageDef"/>
+    <page path="/WEB-INF/adfc-config-Events.xml#EventsTaskFlow@CreateEvents"
+          usageId="EventsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Events.xml#EventsTaskFlow@SetCurrentRowEvents"
+          usageId="EventsPageDef"/>
+    <page path="/pages/EventsTable.jsff" usageId="EventsPageDef"/>
+    <page path="/pages/Events.jsff" usageId="EventsPageDef"/>
+    <page path="/pages/PMDashboard.jsff" usageId="PMDashboardPageDef"/>
+    <page path="/WEB-INF/adfc-config-Campaigns.xml#CampaignsTaskFlow@CreateCampaigns"
+          usageId="CampaignsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Campaigns.xml#CampaignsTaskFlow@SetCurrentRowCampaigns"
+          usageId="CampaignsPageDef"/>
+    <page path="/pages/CampaignsTable.jsff" usageId="CampaignsPageDef"/>
+    <page path="/pages/Campaigns.jsff" usageId="CampaignsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Contacts.xml#ContactsTaskFlow@SetCurrentRowContacts"
+          usageId="ContactsPageDef"/>
+    <page path="/pages/ContactsTable.jsff" usageId="ContactsPageDef"/>
+    <page path="/pages/Contacts.jsff" usageId="ContactsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Contacts.xml#ContactsTaskFlow@CreateContacts"
+          usageId="ContactsPageDef"/>
+    <page path="/WEB-INF/adfc-config-OpportunityLookup.xml#OpportunityLookupTaskFlow@SetCurrentRowOpportunityLookup"
+          usageId="OpportunityLookupPageDef"/>
+    <page path="/pages/OpportunityLookupTable.jsff"
+          usageId="OpportunityLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountLookup.xml#AccountLookupTaskFlow@SetCurrentRowAccountLookup"
+          usageId="AccountLookupPageDef"/>
+    <page path="/pages/AccountLookupTable.jsff" usageId="AccountLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountLookup.xml#AccountLookupTaskFlow@ClearSearchCriteria"
+          usageId="AccountLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountLookup.xml#AccountLookupTaskFlow@DoValidation"
+          usageId="AccountLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-OpportunityLookup.xml#OpportunityLookupTaskFlow@ClearSearchCriteria"
+          usageId="OpportunityLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-OpportunityLookup.xml#OpportunityLookupTaskFlow@DoValidation"
+          usageId="OpportunityLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AMLookup.xml#AMLookupTaskFlow@ClearSearchCriteria"
+          usageId="AMLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AMLookup.xml#AMLookupTaskFlow@DoValidation"
+          usageId="AMLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AMLookup.xml#AMLookupTaskFlow@SetCurrentRowAMLookup"
+          usageId="AMLookupPageDef"/>
+    <page path="/pages/AMLookupTable.jsff" usageId="AMLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-Activities.xml#ActivitiesTaskFlow@CreateActivities"
+          usageId="ActivitiesPageDef"/>
+    <page path="/WEB-INF/adfc-config-Activities.xml#ActivitiesTaskFlow@SetCurrentRowActivities"
+          usageId="ActivitiesPageDef"/>
+    <page path="/pages/ActivitiesTable.jsff" usageId="ActivitiesPageDef"/>
+    <page path="/pages/Activities.jsff" usageId="ActivitiesPageDef"/>
+    <page path="/pages/OpportunityAgreementData.jsff"
+          usageId="OpportunityAgreementDataPageDef"/>
+    <page path="/WEB-INF/adfc-config-Ulrichs.xml#UlrichsTaskFlow@SetCurrentRowUlrichs"
+          usageId="UlrichsPageDef"/>
+    <page path="/pages/UlrichsTable.jsff" usageId="UlrichsPageDef"/>
+    <page path="/pages/Ulrichs.jsff" usageId="UlrichsPageDef"/>
+    <page path="/WEB-INF/adfc-config-UnifiedTitleSearch.xml#UnifiedTitleSearchTaskFlow@SetCurrentRowUnifiedTitleSearch"
+          usageId="UnifiedTitleSearchPageDef"/>
+    <page path="/pages/UnifiedTitleSearchTable.jsff"
+          usageId="UnifiedTitleSearchPageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountLookupSingle.xml#AccountLookupSingleTaskFlow@ClearSearchCriteria"
+          usageId="AccountLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountLookupSingle.xml#AccountLookupSingleTaskFlow@DoValidation"
+          usageId="AccountLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountLookupSingle.xml#AccountLookupSingleTaskFlow@SetCurrentRowAccountLookupSingle"
+          usageId="AccountLookupSinglePageDef"/>
+    <page path="/pages/AccountLookupSingleTable.jsff"
+          usageId="AccountLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductLookupSingle.xml#TargetedProductLookupSingleTaskFlow@ClearSearchCriteria"
+          usageId="TargetedProductLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductLookupSingle.xml#TargetedProductLookupSingleTaskFlow@DoValidation"
+          usageId="TargetedProductLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductLookupSingle.xml#TargetedProductLookupSingleTaskFlow@SetCurrentRowTargetedProductLookupSingle"
+          usageId="TargetedProductLookupSinglePageDef"/>
+    <page path="/pages/TargetedProductLookupSingleTable.jsff"
+          usageId="TargetedProductLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-AMDashboard.xml#AMDashboardTaskFlow@SetCurrentRowAMDashboard"
+          usageId="AMDashboardPageDef"/>
+    <page path="/pages/AMDashboard.jsff" usageId="AMDashboardPageDef"/>
+    <page path="/WEB-INF/adfc-config-PMDashboard.xml#PMDashboardTaskFlow@SetCurrentRowPMDashboard"
+          usageId="PMDashboardPageDef"/>
+    <page path="/WEB-INF/adfc-config-GCADashboard.xml#GCADashboardTaskFlow@SetCurrentRowGCADashboard"
+          usageId="GCADashboardPageDef"/>
+    <page path="/pages/GCADashboard.jsff" usageId="GCADashboardPageDef"/>
+    <page path="/WEB-INF/adfc-config-UsersLookup.xml#UsersLookupTaskFlow@ClearSearchCriteria"
+          usageId="UsersLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-UsersLookup.xml#UsersLookupTaskFlow@DoValidation"
+          usageId="UsersLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-UsersLookup.xml#UsersLookupTaskFlow@SetCurrentRowUsersLookup"
+          usageId="UsersLookupPageDef"/>
+    <page path="/pages/UsersLookupTable.jsff" usageId="UsersLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AgreementContactLookup.xml#AgreementContactLookupTaskFlow@ClearSearchCriteria"
+          usageId="AgreementContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AgreementContactLookup.xml#AgreementContactLookupTaskFlow@DoValidation"
+          usageId="AgreementContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AgreementContactLookup.xml#AgreementContactLookupTaskFlow@SetCurrentRowAgreementContactLookup"
+          usageId="AgreementContactLookupPageDef"/>
+    <page path="/pages/AgreementContactLookupTable.jsff"
+          usageId="AgreementContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-QAContactLookup.xml#QAContactLookupTaskFlow@ClearSearchCriteria"
+          usageId="QAContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-QAContactLookup.xml#QAContactLookupTaskFlow@DoValidation"
+          usageId="QAContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-QAContactLookup.xml#QAContactLookupTaskFlow@SetCurrentRowQAContactLookup"
+          usageId="QAContactLookupPageDef"/>
+    <page path="/pages/QAContactLookupTable.jsff"
+          usageId="QAContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-RoyaltyContactLookup.xml#RoyaltyContactLookupTaskFlow@ClearSearchCriteria"
+          usageId="RoyaltyContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-RoyaltyContactLookup.xml#RoyaltyContactLookupTaskFlow@DoValidation"
+          usageId="RoyaltyContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-RoyaltyContactLookup.xml#RoyaltyContactLookupTaskFlow@SetCurrentRowRoyaltyContactLookup"
+          usageId="RoyaltyContactLookupPageDef"/>
+    <page path="/pages/RoyaltyContactLookupTable.jsff"
+          usageId="RoyaltyContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TechnicalContactLookup.xml#TechnicalContactLookupTaskFlow@ClearSearchCriteria"
+          usageId="TechnicalContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TechnicalContactLookup.xml#TechnicalContactLookupTaskFlow@DoValidation"
+          usageId="TechnicalContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TechnicalContactLookup.xml#TechnicalContactLookupTaskFlow@SetCurrentRowTechnicalContactLookup"
+          usageId="TechnicalContactLookupPageDef"/>
+    <page path="/pages/TechnicalContactLookupTable.jsff"
+          usageId="TechnicalContactLookupPageDef"/>
+    <page path="/pages/OpportunityAttachments.jsff"
+          usageId="OpportunityAttachmentsPageDef"/>
+    <page path="/pages/AccountAttachments.jsff"
+          usageId="AccountAttachmentsPageDef"/>
+    <page path="/pages/ContractAttachments.jsff"
+          usageId="ContractAttachmentsPageDef"/>
+    <page path="/pages/TitleAttachments.jsff"
+          usageId="TitleAttachmentsPageDef"/>
+    <page path="/pages/EventAttachments.jsff"
+          usageId="EventAttachmentsPageDef"/>
+    <page path="/pages/ActivityAttachments.jsff"
+          usageId="ActivityAttachmentsPageDef"/>
+    <page path="/pages/AgreementDataAttachments.jsff"
+          usageId="AgreementDataAttachmentsPageDef"/>
+    <page path="/security/pages/ChangePassword.jspx"
+          usageId="com_pq_tracs_view_test1PageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductTitleLookup.xml#TargetedProductTitleLookupTaskFlow@ClearSearchCriteria"
+          usageId="TargetedProductTitleLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductTitleLookup.xml#TargetedProductTitleLookupTaskFlow@DoValidation"
+          usageId="TargetedProductTitleLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductTitleLookup.xml#TargetedProductTitleLookupTaskFlow@SetCurrentRowTargetedProductTitleLookup"
+          usageId="TargetedProductTitleLookupPageDef"/>
+    <page path="/pages/TargetedProductTitleLookupTable.jsff"
+          usageId="TargetedProductTitleLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-PMLookup.xml#PMLookupTaskFlow@ClearSearchCriteria"
+          usageId="PMLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-PMLookup.xml#PMLookupTaskFlow@DoValidation"
+          usageId="PMLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-PMLookup.xml#PMLookupTaskFlow@SetCurrentRowPMLookup"
+          usageId="PMLookupPageDef"/>
+    <page path="/pages/PMLookupTable.jsff" usageId="PMLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-UsersLookupSingle.xml#UsersLookupSingleTaskFlow@ClearSearchCriteria"
+          usageId="UsersLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-UsersLookupSingle.xml#UsersLookupSingleTaskFlow@DoValidation"
+          usageId="UsersLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-UsersLookupSingle.xml#UsersLookupSingleTaskFlow@SetCurrentRowUsersLookupSingle"
+          usageId="UsersLookupSinglePageDef"/>
+    <page path="/pages/UsersLookupSingleTable.jsff"
+          usageId="UsersLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-ContactLookupLoV.xml#ContactLookupLoVTaskFlow@ClearSearchCriteria"
+          usageId="ContactLookupLoVPageDef"/>
+    <page path="/WEB-INF/adfc-config-ContactLookupLoV.xml#ContactLookupLoVTaskFlow@DoValidation"
+          usageId="ContactLookupLoVPageDef"/>
+    <page path="/WEB-INF/adfc-config-ContactLookupLoV.xml#ContactLookupLoVTaskFlow@SetCurrentRowContactLookupLoV"
+          usageId="ContactLookupLoVPageDef"/>
+    <page path="/pages/ContactLookupLoVTable.jsff"
+          usageId="ContactLookupLoVPageDef"/>
+    <page path="/WEB-INF/adfc-config-ContractTemplatesLOV.xml#ContractTemplatesLOVTaskFlow@ClearSearchCriteria"
+          usageId="ContractTemplatesLOVPageDef"/>
+    <page path="/WEB-INF/adfc-config-ContractTemplatesLOV.xml#ContractTemplatesLOVTaskFlow@DoValidation"
+          usageId="ContractTemplatesLOVPageDef"/>
+    <page path="/WEB-INF/adfc-config-ContractTemplatesLOV.xml#ContractTemplatesLOVTaskFlow@SetCurrentRowContractTemplatesLOV"
+          usageId="ContractTemplatesLOVPageDef"/>
+    <page path="/pages/ContractTemplatesLOVTable.jsff"
+          usageId="ContractTemplatesLOVPageDef"/>
+    <page path="/WEB-INF/adfc-config-Imports.xml#ImportsTaskFlow@CreateImports"
+          usageId="ImportsPageDef"/>
+    <page path="/WEB-INF/adfc-config-Imports.xml#ImportsTaskFlow@SetCurrentRowImports"
+          usageId="ImportsPageDef"/>
+    <page path="/pages/ImportsTable.jsff" usageId="ImportsPageDef"/>
+    <page path="/pages/Imports.jsff" usageId="ImportsPageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountLookupSingle.xml#AccountLookupSingleTaskFlow@PreQueryUsingSearchValue"
+          usageId="AccountLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-AccountLookup.xml#AccountLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="AccountLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AgreementContactLookup.xml#AgreementContactLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="AgreementContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-AMLookup.xml#AMLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="AMLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-ContactLookupLoV.xml#ContactLookupLoVTaskFlow@PreQueryUsingSearchValue"
+          usageId="ContactLookupLoVPageDef"/>
+    <page path="/WEB-INF/adfc-config-PMLookup.xml#PMLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="PMLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-OpportunityLookup.xml#OpportunityLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="OpportunityLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-QAContactLookup.xml#QAContactLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="QAContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-RoyaltyContactLookup.xml#RoyaltyContactLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="RoyaltyContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductLookupSingle.xml#TargetedProductLookupSingleTaskFlow@PreQueryUsingSearchValue"
+          usageId="TargetedProductLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-TechnicalContactLookup.xml#TechnicalContactLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="TechnicalContactLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductLookup.xml#TargetedProductLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="TargetedProductLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TargetedProductTitleLookup.xml#TargetedProductTitleLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="TargetedProductTitleLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-TitleLookup.xml#TitleLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="TitleLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-UsersLookupSingle.xml#UsersLookupSingleTaskFlow@PreQueryUsingSearchValue"
+          usageId="UsersLookupSinglePageDef"/>
+    <page path="/WEB-INF/adfc-config-UsersLookup.xml#UsersLookupTaskFlow@PreQueryUsingSearchValue"
+          usageId="UsersLookupPageDef"/>
+    <page path="/WEB-INF/adfc-config-ContractTemplatesLOV.xml#ContractTemplatesLOVTaskFlow@PreQueryUsingSearchValue"
+          usageId="ContractTemplatesLOVPageDef"/>
+    <page path="/WEB-INF/adfc-config-Contract1.xml#Contract1TaskFlow@SetCurrentRowContract1"
+          usageId="Contract1PageDef"/>
+    <page path="/pages/Contract1Table.jsff" usageId="Contract1PageDef"/>
+    <page path="/pages/Contract1.jsff" usageId="Contract1PageDef"/>
+    <page path="/pages/ContractAttachments1.jsff"
+          usageId="ContractAttachments1PageDef"/>
+    <page path="/WEB-INF/adfc-config-Welcome.xml#WelcomeTaskFlow@CreateWelcome"
+          usageId="WelcomePageDef"/>
+    <page path="/pages/Welcome.jsff" usageId="WelcomePageDef"/>
+    <page path="/WEB-INF/adfc-config-NTCs.xml#NTCsTaskFlow@CreateNTCs"
+          usageId="NTCsPageDef"/>
+    <page path="/WEB-INF/adfc-config-NTCs.xml#NTCsTaskFlow@SetCurrentRowNTCs"
+          usageId="NTCsPageDef"/>
+    <page path="/pages/NTCsTable.jsff" usageId="NTCsPageDef"/>
+    <page path="/pages/NTCs.jsff" usageId="NTCsPageDef"/>
+    <page path="/WEB-INF/adfc-config-TitleNTC.xml#TitleNTCTaskFlow@CreateTitleNTC"
+          usageId="TitleNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-TitleNTC.xml#TitleNTCTaskFlow@CreateTitleNTCIfNeeded"
+          usageId="TitleNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-TitleNTC.xml#TitleNTCTaskFlow@SetCurrentRowTitleNTC"
+          usageId="TitleNTCPageDef"/>
+    <page path="/pages/TitleNTC.jsff" usageId="TitleNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-PublisherNTC.xml#PublisherNTCTaskFlow@CreatePublisherNTC"
+          usageId="PublisherNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-PublisherNTC.xml#PublisherNTCTaskFlow@CreatePublisherNTCIfNeeded"
+          usageId="PublisherNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-PublisherNTC.xml#PublisherNTCTaskFlow@SetCurrentRowPublisherNTC"
+          usageId="PublisherNTCPageDef"/>
+    <page path="/pages/PublisherNTC.jsff" usageId="PublisherNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-RightsNTC.xml#RightsNTCTaskFlow@CreateRightsNTC"
+          usageId="RightsNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-RightsNTC.xml#RightsNTCTaskFlow@CreateRightsNTCIfNeeded"
+          usageId="RightsNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-RightsNTC.xml#RightsNTCTaskFlow@SetCurrentRowRightsNTC"
+          usageId="RightsNTCPageDef"/>
+    <page path="/pages/RightsNTC.jsff" usageId="RightsNTCPageDef"/>
+    <page path="/WEB-INF/adfc-config-NTCTitleLOV.xml#NTCTitleLOVTaskFlow@ClearSearchCriteria"
+          usageId="NTCTitleLOVPageDef"/>
+    <page path="/WEB-INF/adfc-config-NTCTitleLOV.xml#NTCTitleLOVTaskFlow@PreQueryUsingSearchValue"
+          usageId="NTCTitleLOVPageDef"/>
+    <page path="/WEB-INF/adfc-config-NTCTitleLOV.xml#NTCTitleLOVTaskFlow@DoValidation"
+          usageId="NTCTitleLOVPageDef"/>
+    <page path="/WEB-INF/adfc-config-NTCTitleLOV.xml#NTCTitleLOVTaskFlow@SetCurrentRowNTCTitleLOV"
+          usageId="NTCTitleLOVPageDef"/>
+    <page path="/pages/NTCTitleLOVTable.jsff" usageId="NTCTitleLOVPageDef"/>
+    <page path="/pages/InactiveContractsTable.jsff"
+          usageId="InactiveContractsPageDef"/>
+  </pageMap>
+  <definitionFactories>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+    <factory className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"
+             nameSpace="http://xmlns.oracle.com/adf/controller/binding"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+    <factory className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"
+             nameSpace="http://xmlns.oracle.com/adfm/dvt"/>
+  </definitionFactories>
+  <pageDefinitionUsages>
+    <page id="PRM_UIShellPageDef"
+          path="com.pq.tracs.view.pageDefs.PRM_UIShellPageDef"/>
+    <page id="PRM_PopupShellPageDef"
+          path="com.pq.tracs.view.pageDefs.PRM_PopupShellPageDef"/>
+    <page id="AMDashboardPageDef"
+          path="com.pq.tracs.view.pageDefs.AMDashboardPageDef"/>
+    <page id="AccountsPageDef"
+          path="com.pq.tracs.view.pageDefs.AccountsPageDef"/>
+    <page id="OpportunityPageDef"
+          path="com.pq.tracs.view.pageDefs.OpportunityPageDef"/>
+    <page id="ContractPageDef"
+          path="com.pq.tracs.view.pageDefs.ContractPageDef"/>
+    <page id="TargetingPageDef"
+          path="com.pq.tracs.view.pageDefs.TargetingPageDef"/>
+    <page id="ProductsPageDef"
+          path="com.pq.tracs.view.pageDefs.ProductsPageDef"/>
+    <page id="TitlesPageDef" path="com.pq.tracs.view.pageDefs.TitlesPageDef"/>
+    <page id="TitleLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.TitleLookupPageDef"/>
+    <page id="TargetedProductLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.TargetedProductLookupPageDef"/>
+    <page id="AccountManagersPageDef"
+          path="com.pq.tracs.view.pageDefs.AccountManagersPageDef"/>
+    <page id="EventsPageDef" path="com.pq.tracs.view.pageDefs.EventsPageDef"/>
+    <page id="PMDashboardPageDef"
+          path="com.pq.tracs.view.pageDefs.PMDashboardPageDef"/>
+    <page id="CampaignsPageDef"
+          path="com.pq.tracs.view.pageDefs.CampaignsPageDef"/>
+    <page id="ContactsPageDef"
+          path="com.pq.tracs.view.pageDefs.ContactsPageDef"/>
+    <page id="OpportunityLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.OpportunityLookupPageDef"/>
+    <page id="AccountLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.AccountLookupPageDef"/>
+    <page id="AMLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.AMLookupPageDef"/>
+    <page id="ActivitiesPageDef"
+          path="com.pq.tracs.view.pageDefs.ActivitiesPageDef"/>
+    <page id="OpportunityAgreementDataPageDef"
+          path="com.pq.tracs.view.pageDefs.OpportunityAgreementDataPageDef"/>
+    <page id="JhsPageTemplatePageDef"
+          path="com.pq.tracs.view.pageDefs.JhsPageTemplatePageDef"/>
+    <page id="UlrichsPageDef" path="com.pq.tracs.view.pageDefs.UlrichsPageDef"/>
+    <page id="UnifiedTitleSearchPageDef"
+          path="com.pq.tracs.view.pageDefs.UnifiedTitleSearchPageDef"/>
+    <page id="AccountLookupSinglePageDef"
+          path="com.pq.tracs.view.pageDefs.AccountLookupSinglePageDef"/>
+    <page id="TargetedProductLookupSinglePageDef"
+          path="com.pq.tracs.view.pageDefs.TargetedProductLookupSinglePageDef"/>
+    <page id="GCADashboardPageDef"
+          path="com.pq.tracs.view.pageDefs.GCADashboardPageDef"/>
+    <page id="UsersLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.UsersLookupPageDef"/>
+    <page id="AgreementContactLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.AgreementContactLookupPageDef"/>
+    <page id="QAContactLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.QAContactLookupPageDef"/>
+    <page id="RoyaltyContactLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.RoyaltyContactLookupPageDef"/>
+    <page id="TechnicalContactLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.TechnicalContactLookupPageDef"/>
+    <page id="OpportunityAttachmentsPageDef"
+          path="com.pq.tracs.view.pageDefs.OpportunityAttachmentsPageDef"/>
+    <page id="AccountAttachmentsPageDef"
+          path="com.pq.tracs.view.pageDefs.AccountAttachmentsPageDef"/>
+    <page id="ContractAttachmentsPageDef"
+          path="com.pq.tracs.view.pageDefs.ContractAttachmentsPageDef"/>
+    <page id="TitleAttachmentsPageDef"
+          path="com.pq.tracs.view.pageDefs.TitleAttachmentsPageDef"/>
+    <page id="EventAttachmentsPageDef"
+          path="com.pq.tracs.view.pageDefs.EventAttachmentsPageDef"/>
+    <page id="ActivityAttachmentsPageDef"
+          path="com.pq.tracs.view.pageDefs.ActivityAttachmentsPageDef"/>
+    <page id="AgreementDataAttachmentsPageDef"
+          path="com.pq.tracs.view.pageDefs.AgreementDataAttachmentsPageDef"/>
+    <page id="com_pq_tracs_view_test1PageDef"
+          path="security.pages.test1PageDef"/>
+    <page id="TargetedProductTitleLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.TargetedProductTitleLookupPageDef"/>
+    <page id="PMLookupPageDef"
+          path="com.pq.tracs.view.pageDefs.PMLookupPageDef"/>
+    <page id="UsersLookupSinglePageDef"
+          path="com.pq.tracs.view.pageDefs.UsersLookupSinglePageDef"/>
+    <page id="ContactLookupLoVPageDef"
+          path="com.pq.tracs.view.pageDefs.ContactLookupLoVPageDef"/>
+    <page id="ContractTemplatesLOVPageDef"
+          path="com.pq.tracs.view.pageDefs.ContractTemplatesLOVPageDef"/>
+    <page id="ImportsPageDef" path="com.pq.tracs.view.pageDefs.ImportsPageDef"/>
+    <page id="Contract1PageDef"
+          path="com.pq.tracs.view.pageDefs.Contract1PageDef"/>
+    <page id="ContractAttachments1PageDef"
+          path="com.pq.tracs.view.pageDefs.ContractAttachments1PageDef"/>
+    <page id="WelcomePageDef" path="com.pq.tracs.view.pageDefs.WelcomePageDef"/>
+    <page id="TitleNTCPageDef"
+          path="com.pq.tracs.view.pageDefs.TitleNTCPageDef"/>
+    <page id="NTCTitleLOVPageDef"
+          path="com.pq.tracs.view.pageDefs.NTCTitleLOVPageDef"/>
+    <page id="NTCsPageDef" path="com.pq.tracs.view.pageDefs.NTCsPageDef"/>
+    <page id="PublisherNTCPageDef"
+          path="com.pq.tracs.view.pageDefs.PublisherNTCPageDef"/>
+    <page id="RightsNTCPageDef"
+          path="com.pq.tracs.view.pageDefs.RightsNTCPageDef"/>
+    <page id="InactiveContractsPageDef"
+          path="com.pq.tracs.view.pageDefs.InactiveContractsPageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="PrmAppModuleDataControl"
+                     Package="com.pq.tracs.model.service"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl"
+                     SupportsTransactions="true" SupportsFindMode="true"
+                     SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true"
+                     Configuration="PrmAppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

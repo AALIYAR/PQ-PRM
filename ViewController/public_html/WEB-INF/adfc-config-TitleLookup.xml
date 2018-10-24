@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="TitleLookupTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-lov-taskflow-template.xml</document>
+      <id id="__1">jhs-lov-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartTitleLookup</default-activity>
+    <data-control-scope id="__3">
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__4">
+      <name id="__5">rowKeyStrTitleLookup</name>
+      <value id="__6">#{pageFlowScope.rowKeyStrTitleLookup}</value>
+      <class id="__7">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name id="__9">rowKeyValueTitleLookup</name>
+      <value id="__10">#{pageFlowScope.rowKeyValueTitleLookup}</value>
+      <class id="__11">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__12">
+      <name id="__13">rowKeyTitleLookup</name>
+      <value id="__14">#{pageFlowScope.rowKeyTitleLookup}</value>
+      <class id="__15">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__16">
+      <name id="__17">altKeyNameTitleLookup</name>
+      <value id="__18">#{pageFlowScope.altKeyNameTitleLookup}</value>
+      <class id="__19">java.lang.String</class>
+    </input-parameter-definition>
+    <return-value-definition id="__20">
+      <name>LovValidationRow</name>
+      <value>#{pageFlowScope.LovValidationRow}</value>
+    </return-value-definition>
+    <managed-bean id="__21">
+      <managed-bean-name id="__22">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__23">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__24">pageFlow</managed-bean-scope>
+      <managed-property id="__25">
+        <property-name id="__26">initializeParentContextEntries</property-name>
+        <map-entries id="__27">
+          <map-entry id="__28">
+            <key id="__29">jhsCurrentGroupName</key>
+            <value id="__30">TitleLookup</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__31">
+      <managed-bean-name id="__32">TitleLookupDefaultValues</managed-bean-name>
+      <managed-bean-class id="__33">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__34">pageFlow</managed-bean-scope>
+      <managed-property id="__35">
+        <property-name id="__36">iteratorBinding</property-name>
+        <value id="__37">#{data.TitleLookupPageDef.TitleLookupIterator}</value>
+      </managed-property>
+      <managed-property id="__38">
+        <property-name id="__39">defaultValues</property-name>
+        <map-entries id="__40">
+          <map-entry id="__41">
+            <key id="__42">PeerReviewFlag</key>
+            <value id="__43">N</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__44">
+        <property-name id="__45">actionResult</property-name>
+        <value id="__46">CreateTitleLookup</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__47">
+      <managed-bean-name id="__48">searchTitleLookup</managed-bean-name>
+      <managed-bean-class id="__49">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__50">pageFlow</managed-bean-scope>
+      <managed-property id="__51">
+        <property-name id="__52">bindings</property-name>
+        <value id="__53">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__54">
+        <property-name id="__55">searchBinding</property-name>
+        <value id="__56">#{'#{bindings.advancedSearchTitleLookup}'}</value>
+      </managed-property>
+      <managed-property id="__57">
+        <property-name id="__58">searchItem</property-name>
+        <value id="__59">TitleLookupLongTitle</value>
+      </managed-property>
+      <managed-property id="__60">
+        <property-name id="__61">dataCollection</property-name>
+        <value id="__62">TitleLookup</value>
+      </managed-property>
+      <managed-property id="__63">
+        <property-name id="__64">operators</property-name>
+        <map-entries id="__65">
+          <map-entry id="__66">
+            <key id="__67">TitleLookupLongTitle</key>
+            <value id="__68">is</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__69">
+        <property-name id="__70">itemAttributes</property-name>
+        <map-entries id="__71">
+          <map-entry id="__72">
+            <key id="__73">TitleLookupId</key>
+            <value id="__74">Id</value>
+          </map-entry>
+          <map-entry id="__75">
+            <key id="__76">TitleLookupContentOwnerId</key>
+            <value id="__77">ContentOwnerId</value>
+          </map-entry>
+          <map-entry id="__78">
+            <key id="__79">TitleLookupTargetTrackingNo</key>
+            <value id="__80">TargetTrackingNo</value>
+          </map-entry>
+          <map-entry id="__81">
+            <key id="__82">TitleLookupCatalogNumber</key>
+            <value id="__83">CatalogNumber</value>
+          </map-entry>
+          <map-entry id="__84">
+            <key id="__85">TitleLookupLongTitle</key>
+            <value id="__86">LongTitle</value>
+          </map-entry>
+          <map-entry id="__87">
+            <key id="__88">TitleLookupCurrentCatalogNumber</key>
+            <value id="__89">CurrentCatalogNumber</value>
+          </map-entry>
+          <map-entry id="__90">
+            <key id="__91">TitleLookupContentOwnerNo</key>
+            <value id="__92">ContentOwnerNo</value>
+          </map-entry>
+          <map-entry id="__93">
+            <key id="__94">TitleLookupAccountName</key>
+            <value id="__95">AccountName</value>
+          </map-entry>
+          <map-entry id="__96">
+            <key id="__97">TitleLookupAccountSite</key>
+            <value id="__98">AccountSite</value>
+          </map-entry>
+          <map-entry id="__99">
+            <key id="__100">TitleLookupProductLine</key>
+            <value id="__101">ProductLine</value>
+          </map-entry>
+          <map-entry id="__102">
+            <key id="__103">TitleLookupCatalogRoot</key>
+            <value id="__104">CatalogRoot</value>
+          </map-entry>
+          <map-entry id="__105">
+            <key id="__106">TitleLookupCatalogSuffix</key>
+            <value id="__107">CatalogSuffix</value>
+          </map-entry>
+          <map-entry id="__108">
+            <key id="__109">TitleLookupShortTitle</key>
+            <value id="__110">ShortTitle</value>
+          </map-entry>
+          <map-entry id="__111">
+            <key id="__112">TitleLookupAuthor</key>
+            <value id="__113">Author</value>
+          </map-entry>
+          <map-entry id="__114">
+            <key id="__115">TitleLookupFilmAvailability</key>
+            <value id="__116">FilmAvailability</value>
+          </map-entry>
+          <map-entry id="__117">
+            <key id="__118">TitleLookupBibliographicStatus</key>
+            <value id="__119">BibliographicStatus</value>
+          </map-entry>
+          <map-entry id="__120">
+            <key id="__121">TitleLookupPublicationStartYear</key>
+            <value id="__122">PublicationStartYear</value>
+          </map-entry>
+          <map-entry id="__123">
+            <key id="__124">TitleLookupPublicationEndYear</key>
+            <value id="__125">PublicationEndYear</value>
+          </map-entry>
+          <map-entry id="__126">
+            <key id="__127">TitleLookupExercisingRights</key>
+            <value id="__128">ExercisingRights</value>
+          </map-entry>
+          <map-entry id="__129">
+            <key id="__130">TitleLookupPrimaryPmClass</key>
+            <value id="__131">PrimaryPmClass</value>
+          </map-entry>
+          <map-entry id="__132">
+            <key id="__133">TitleLookupSecondaryPmClass</key>
+            <value id="__134">SecondaryPmClass</value>
+          </map-entry>
+          <map-entry id="__135">
+            <key id="__136">TitleLookupContentType</key>
+            <value id="__137">ContentType</value>
+          </map-entry>
+          <map-entry id="__138">
+            <key id="__139">TitleLookupSubContentType</key>
+            <value id="__140">SubContentType</value>
+          </map-entry>
+          <map-entry id="__141">
+            <key id="__142">TitleLookupPeerReviewFlag</key>
+            <value id="__143">PeerReviewFlag</value>
+          </map-entry>
+          <map-entry id="__144">
+            <key id="__145">TitleLookupOpenAccess</key>
+            <value id="__146">OpenAccess</value>
+          </map-entry>
+          <map-entry id="__147">
+            <key id="__148">TitleLookupActiveFlag</key>
+            <value id="__149">ActiveFlag</value>
+          </map-entry>
+          <map-entry id="__150">
+            <key id="__151">TitleLookupSubject</key>
+            <value id="__152">Subject</value>
+          </map-entry>
+          <map-entry id="__153">
+            <key id="__154">TitleLookupSubjectCode</key>
+            <value id="__155">SubjectCode</value>
+          </map-entry>
+          <map-entry id="__156">
+            <key id="__157">TitleLookupSubjectType</key>
+            <value id="__158">SubjectType</value>
+          </map-entry>
+          <map-entry id="__159">
+            <key id="__160">TitleLookupCurrentCatalogId</key>
+            <value id="__161">CurrentCatalogId</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__162">
+      <managed-bean-name id="__163">TitleLookupPage</managed-bean-name>
+      <managed-bean-class id="__164">oracle.jheadstart.controller.jsf.bean.LovPageBean</managed-bean-class>
+      <managed-bean-scope id="__165">pageFlow</managed-bean-scope>
+      <managed-property id="__166">
+        <property-name id="__167">multiSelect</property-name>
+        <value id="__168">true</value>
+      </managed-property>
+      <managed-property id="__169">
+        <property-name id="__170">lovItemBean</property-name>
+        <value id="__171">#{pageFlowScope.lovItemBeanRef}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__172">
+      <managed-bean-name id="__173">TitleLookupTable</managed-bean-name>
+      <managed-bean-class id="__174">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__175">pageFlow</managed-bean-scope>
+      <managed-property id="__176">
+        <property-name id="__177">name</property-name>
+        <value id="__178">TitleLookupTable</value>
+      </managed-property>
+      <managed-property id="__179">
+        <property-name id="__180">rangeBindingExpr</property-name>
+        <value id="__181">#{'#{bindings.TitleLookupTable}'}</value>
+      </managed-property>
+      <managed-property id="__182">
+        <property-name id="__183">createNewRowAtTop</property-name>
+        <value id="__184">true</value>
+      </managed-property>
+      <managed-property id="__185">
+        <property-name id="__186">defaultValuesBean</property-name>
+        <value id="__187">#{pageFlowScope.TitleLookupDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__188">
+        <property-name id="__189">lovPage</property-name>
+        <value id="__190">#{pageFlowScope.TitleLookupPage}</value>
+      </managed-property>
+      <managed-property id="__191">
+        <property-name id="__192">focusItemId</property-name>
+        <value id="__193">TitleLookupTargetTrackingNo</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__194">
+      <managed-bean-name id="__195">TitleLookupPeerReviewFlagcheckboxInTable</managed-bean-name>
+      <managed-bean-class id="__196">oracle.jheadstart.controller.jsf.bean.CheckboxInTableBean</managed-bean-class>
+      <managed-bean-scope id="__197">request</managed-bean-scope>
+      <managed-property id="__198">
+        <property-name id="__199">binding</property-name>
+        <value id="__200">#{bindings.TitleLookupPeerReviewFlag}</value>
+      </managed-property>
+      <managed-property id="__201">
+        <property-name id="__202">tableBean</property-name>
+        <value id="__203">#{pageFlowScope.TitleLookupTable}</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartTitleLookup">
+      <case id="__204">
+        <expression id="__205">#{pageFlowScope.lovItemBeanRef.validationStarted}</expression>
+        <outcome id="__206">DoValidation</outcome>
+      </case>
+      <case id="__207">
+        <expression id="__208">#{pageFlowScope.lovItemBeanRef.lovSearchValue!=null}</expression>
+        <outcome id="__209">PreQueryUsingSearchValue</outcome>
+      </case>
+      <case id="__210">
+        <expression id="__211">#{pageFlowScope.rowKeyStrTitleLookup!=null or
+                               pageFlowScope.rowKeyValueTitleLookup!=null or
+                               pageFlowScope.rowKeyTitleLookup!=null}</expression>
+        <outcome id="__212">SetCurrentRowTitleLookup</outcome>
+      </case>
+      <case id="__213">
+        <expression id="__214">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__215">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__216">clearSearchCriteria</default-outcome>
+    </router>
+    <method-call id="ClearSearchCriteria">
+      <method id="__217">#{pageFlowScope.searchTitleLookup.clearSearchCriteria}</method>
+      <outcome id="__218">
+        <fixed-outcome id="__219">firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="PreQueryUsingSearchValue">
+      <method id="__220">#{pageFlowScope.searchTitleLookup.quickSearch}</method>
+      <parameter>
+        <value id="__221">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__222">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__223">
+        <fixed-outcome>firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="DoValidation">
+      <method id="__224">#{pageFlowScope.searchTitleLookup.quickSearch}</method>
+      <parameter>
+        <value id="__225">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__226">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__227">
+        <fixed-outcome>DoneTitleLookupReturn</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowTitleLookup">
+      <method id="__228">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__229">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__230">#{bindings.TitleLookupIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__231">java.lang.String</class>
+        <value id="__232">#{pageFlowScope.rowKeyStrTitleLookup}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__233">java.lang.Object</class>
+        <value id="__234">#{pageFlowScope.rowKeyValueTitleLookup}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__235">oracle.jbo.Key</class>
+        <value id="__236">#{pageFlowScope.rowKeyTitleLookup}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__237">java.lang.String</class>
+        <value id="__238">#{pageFlowScope.altKeyNameTitleLookup}</value>
+      </parameter>
+      <outcome id="__239">
+        <fixed-outcome id="__240">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelTitleLookupReturn">
+      <outcome id="__241">
+        <name id="__242">CancelTitleLookup</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneTitleLookupReturn">
+      <outcome id="__243">
+        <name id="__244">DoneTitleLookup</name>
+      </outcome>
+    </task-flow-return>
+    <view id="TitleLookupTable">
+      <page id="__245">/pages/TitleLookupTable.jsff</page>
+    </view>
+    <control-flow-rule id="__246">
+      <from-activity-id id="__247">*</from-activity-id>
+      <control-flow-case id="__248">
+        <from-outcome id="__249">SetCurrentRowTitleLookup</from-outcome>
+        <to-activity-id id="__250">SetCurrentRowTitleLookup</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__251">
+        <from-outcome id="__252">firstPage</from-outcome>
+        <to-activity-id id="__253">TitleLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__254">
+        <from-outcome id="__255">deepLinkPage</from-outcome>
+        <to-activity-id id="__256">TitleLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__257">
+        <from-outcome id="__258">TitleLookupTableBreadcrumb</from-outcome>
+        <to-activity-id id="__259">TitleLookupTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__260">
+        <from-outcome id="__261">Cancel</from-outcome>
+        <to-activity-id id="__262">StartTitleLookup</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__263">
+        <from-outcome id="__264">CancelTitleLookupReturn</from-outcome>
+        <to-activity-id id="__265">CancelTitleLookupReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__266">
+        <from-outcome id="__267">DoneTitleLookupReturn</from-outcome>
+        <to-activity-id id="__268">DoneTitleLookupReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__269">
+      <from-activity-id id="__270">*</from-activity-id>
+      <control-flow-case id="__271">
+        <from-outcome id="__272">clearSearchCriteria</from-outcome>
+        <to-activity-id id="__273">ClearSearchCriteria</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__274">
+        <from-outcome id="__275">PreQueryUsingSearchValue</from-outcome>
+        <to-activity-id id="__276">PreQueryUsingSearchValue</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__277">
+        <from-outcome id="__278">DoValidation</from-outcome>
+        <to-activity-id id="__279">DoValidation</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__280">
+    <managed-bean-name id="__281">TitleLookupTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__282">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__283">pageFlow</managed-bean-scope>
+    <managed-property id="__284">
+      <property-name id="__285">params</property-name>
+      <property-class id="__286">java.util.Map</property-class>
+      <map-entries id="__287">
+        <map-entry id="__288">
+          <key id="__289">parentContext</key>
+          <value id="__290">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__291">
+      <property-name id="__292">name</property-name>
+      <value id="__293">TitleLookup</value>
+    </managed-property>
+    <managed-property id="__294">
+      <property-name id="__295">taskFlowId</property-name>
+      <value id="__296">/WEB-INF/adfc-config-TitleLookup.xml#TitleLookupTaskFlow</value>
+    </managed-property>
+    <managed-property id="__297">
+      <property-name id="__298">tabUniqueIdentifier</property-name>
+      <value id="__299">TitleLookup</value>
+    </managed-property>
+    <managed-property id="__300">
+      <property-name id="__301">label</property-name>
+      <value id="__302">Titles</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

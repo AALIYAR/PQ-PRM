@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ContractTemplatesLOVTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-lov-taskflow-template.xml</document>
+      <id id="__1">jhs-lov-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartContractTemplatesLOV</default-activity>
+    <data-control-scope id="__3">
+      <isolated/>
+    </data-control-scope>
+    <input-parameter-definition id="__4">
+      <name id="__5">rowKeyStrContractTemplatesLOV</name>
+      <value id="__6">#{pageFlowScope.rowKeyStrContractTemplatesLOV}</value>
+      <class id="__7">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__8">
+      <name id="__9">rowKeyValueContractTemplatesLOV</name>
+      <value id="__10">#{pageFlowScope.rowKeyValueContractTemplatesLOV}</value>
+      <class id="__11">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__12">
+      <name id="__13">rowKeyContractTemplatesLOV</name>
+      <value id="__14">#{pageFlowScope.rowKeyContractTemplatesLOV}</value>
+      <class id="__15">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__16">
+      <name id="__17">altKeyNameContractTemplatesLOV</name>
+      <value id="__18">#{pageFlowScope.altKeyNameContractTemplatesLOV}</value>
+      <class id="__19">java.lang.String</class>
+    </input-parameter-definition>
+    <return-value-definition id="__20">
+      <name>LovValidationRow</name>
+      <value>#{pageFlowScope.LovValidationRow}</value>
+    </return-value-definition>
+    <managed-bean id="__21">
+      <managed-bean-name id="__22">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__23">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__24">pageFlow</managed-bean-scope>
+      <managed-property id="__25">
+        <property-name id="__26">initializeParentContextEntries</property-name>
+        <map-entries id="__27">
+          <map-entry id="__28">
+            <key id="__29">jhsCurrentGroupName</key>
+            <value id="__30">ContractTemplatesLOV</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__31">
+      <managed-bean-name id="__32">searchContractTemplatesLOV</managed-bean-name>
+      <managed-bean-class id="__33">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__34">pageFlow</managed-bean-scope>
+      <managed-property id="__35">
+        <property-name id="__36">bindings</property-name>
+        <value id="__37">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__38">
+        <property-name id="__39">searchBinding</property-name>
+        <value id="__40">#{'#{bindings.advancedSearchContractTemplatesLOV}'}</value>
+      </managed-property>
+      <managed-property id="__41">
+        <property-name id="__42">searchItem</property-name>
+        <value id="__43">ContractTemplatesLOVTemplateName</value>
+      </managed-property>
+      <managed-property id="__44">
+        <property-name id="__45">dataCollection</property-name>
+        <value id="__46">ContractTemplateLookup1</value>
+      </managed-property>
+      <managed-property id="__47">
+        <property-name id="__48">operators</property-name>
+        <map-entries id="__49"></map-entries>
+      </managed-property>
+      <managed-property id="__50">
+        <property-name id="__51">itemAttributes</property-name>
+        <map-entries id="__52">
+          <map-entry id="__53">
+            <key id="__54">ContractTemplatesLOVId</key>
+            <value id="__55">Id</value>
+          </map-entry>
+          <map-entry id="__56">
+            <key id="__57">ContractTemplatesLOVTemplateName</key>
+            <value id="__58">TemplateName</value>
+          </map-entry>
+          <map-entry id="__59">
+            <key id="__60">ContractTemplatesLOVForm</key>
+            <value id="__61">Form</value>
+          </map-entry>
+          <map-entry id="__62">
+            <key id="__63">ContractTemplatesLOVStatus</key>
+            <value id="__64">Status</value>
+          </map-entry>
+          <map-entry id="__65">
+            <key id="__66">ContractTemplatesLOVType</key>
+            <value id="__67">Type</value>
+          </map-entry>
+          <map-entry id="__68">
+            <key id="__69">ContractTemplatesLOVDivision</key>
+            <value id="__70">Division</value>
+          </map-entry>
+          <map-entry id="__71">
+            <key id="__72">ContractTemplatesLOVTermLength</key>
+            <value id="__73">TermLength</value>
+          </map-entry>
+          <map-entry id="__74">
+            <key id="__75">ContractTemplatesLOVCancellationNoticeTerm</key>
+            <value id="__76">CancellationNoticeTerm</value>
+          </map-entry>
+          <map-entry id="__77">
+            <key id="__78">ContractTemplatesLOVAutoRenewTermMonths</key>
+            <value id="__79">AutoRenewTermMonths</value>
+          </map-entry>
+          <map-entry id="__80">
+            <key id="__81">ContractTemplatesLOVExclusivity</key>
+            <value id="__82">Exclusivity</value>
+          </map-entry>
+          <map-entry id="__83">
+            <key id="__84">ContractTemplatesLOVContentMasterOwner</key>
+            <value id="__85">ContentMasterOwner</value>
+          </map-entry>
+          <map-entry id="__86">
+            <key id="__87">ContractTemplatesLOVRightsToBeRetained</key>
+            <value id="__88">RightsToBeRetained</value>
+          </map-entry>
+          <map-entry id="__89">
+            <key id="__90">ContractTemplatesLOVAutoAdd</key>
+            <value id="__91">AutoAdd</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__92">
+      <managed-bean-name id="__93">ContractTemplatesLOVPage</managed-bean-name>
+      <managed-bean-class id="__94">oracle.jheadstart.controller.jsf.bean.LovPageBean</managed-bean-class>
+      <managed-bean-scope id="__95">pageFlow</managed-bean-scope>
+      <managed-property id="__96">
+        <property-name id="__97">multiSelect</property-name>
+        <value id="__98">false</value>
+      </managed-property>
+      <managed-property id="__99">
+        <property-name id="__100">lovItemBean</property-name>
+        <value id="__101">#{pageFlowScope.lovItemBeanRef}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__102">
+      <managed-bean-name id="__103">ContractTemplatesLOVTable</managed-bean-name>
+      <managed-bean-class id="__104">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__105">pageFlow</managed-bean-scope>
+      <managed-property id="__106">
+        <property-name id="__107">name</property-name>
+        <value id="__108">ContractTemplatesLOVTable</value>
+      </managed-property>
+      <managed-property id="__109">
+        <property-name id="__110">rangeBindingExpr</property-name>
+        <value id="__111">#{'#{bindings.ContractTemplatesLOVTable}'}</value>
+      </managed-property>
+      <managed-property id="__112">
+        <property-name id="__113">createNewRowAtTop</property-name>
+        <value id="__114">true</value>
+      </managed-property>
+      <managed-property id="__115">
+        <property-name id="__116">lovPage</property-name>
+        <value id="__117">#{pageFlowScope.ContractTemplatesLOVPage}</value>
+      </managed-property>
+      <managed-property id="__118">
+        <property-name id="__119">focusItemId</property-name>
+        <value id="__120">ContractTemplatesLOVId</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartContractTemplatesLOV">
+      <case id="__121">
+        <expression id="__122">#{pageFlowScope.lovItemBeanRef.validationStarted}</expression>
+        <outcome id="__123">DoValidation</outcome>
+      </case>
+      <case id="__124">
+        <expression id="__125">#{pageFlowScope.lovItemBeanRef.lovSearchValue!=null}</expression>
+        <outcome id="__126">PreQueryUsingSearchValue</outcome>
+      </case>
+      <case id="__127">
+        <expression id="__128">#{pageFlowScope.rowKeyStrContractTemplatesLOV!=null
+                               or
+                               pageFlowScope.rowKeyValueContractTemplatesLOV!=null
+                               or pageFlowScope.rowKeyContractTemplatesLOV!=null}</expression>
+        <outcome id="__129">SetCurrentRowContractTemplatesLOV</outcome>
+      </case>
+      <case id="__130">
+        <expression id="__131">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__132">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__133">clearSearchCriteria</default-outcome>
+    </router>
+    <method-call id="ClearSearchCriteria">
+      <method id="__134">#{pageFlowScope.searchContractTemplatesLOV.clearSearchCriteriaAndRequery}</method>
+      <outcome id="__135">
+        <fixed-outcome id="__136">firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="PreQueryUsingSearchValue">
+      <method id="__137">#{pageFlowScope.searchContractTemplatesLOV.quickSearch}</method>
+      <parameter>
+        <value id="__138">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__139">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__140">
+        <fixed-outcome>firstPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="DoValidation">
+      <method id="__141">#{pageFlowScope.searchContractTemplatesLOV.quickSearch}</method>
+      <parameter>
+        <value id="__142">#{pageFlowScope.lovItemBeanRef.lovSearchItem}</value>
+      </parameter>
+      <parameter>
+        <value id="__143">#{pageFlowScope.lovItemBeanRef.lovSearchValue}</value>
+      </parameter>
+      <outcome id="__144">
+        <fixed-outcome>DoneContractTemplatesLOVReturn</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowContractTemplatesLOV">
+      <method id="__145">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__146">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__147">#{bindings.ContractTemplatesLOVIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__148">java.lang.String</class>
+        <value id="__149">#{pageFlowScope.rowKeyStrContractTemplatesLOV}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__150">java.lang.Object</class>
+        <value id="__151">#{pageFlowScope.rowKeyValueContractTemplatesLOV}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__152">oracle.jbo.Key</class>
+        <value id="__153">#{pageFlowScope.rowKeyContractTemplatesLOV}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__154">java.lang.String</class>
+        <value id="__155">#{pageFlowScope.altKeyNameContractTemplatesLOV}</value>
+      </parameter>
+      <outcome id="__156">
+        <fixed-outcome id="__157">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelContractTemplatesLOVReturn">
+      <outcome id="__158">
+        <name id="__159">CancelContractTemplatesLOV</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneContractTemplatesLOVReturn">
+      <outcome id="__160">
+        <name id="__161">DoneContractTemplatesLOV</name>
+      </outcome>
+    </task-flow-return>
+    <view id="ContractTemplatesLOVTable">
+      <page id="__162">/pages/ContractTemplatesLOVTable.jsff</page>
+    </view>
+    <control-flow-rule id="__163">
+      <from-activity-id id="__164">*</from-activity-id>
+      <control-flow-case id="__165">
+        <from-outcome id="__166">SetCurrentRowContractTemplatesLOV</from-outcome>
+        <to-activity-id id="__167">SetCurrentRowContractTemplatesLOV</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__168">
+        <from-outcome id="__169">firstPage</from-outcome>
+        <to-activity-id id="__170">ContractTemplatesLOVTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__171">
+        <from-outcome id="__172">deepLinkPage</from-outcome>
+        <to-activity-id id="__173">ContractTemplatesLOVTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__174">
+        <from-outcome id="__175">ContractTemplatesLOVTableBreadcrumb</from-outcome>
+        <to-activity-id id="__176">ContractTemplatesLOVTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__177">
+        <from-outcome id="__178">Cancel</from-outcome>
+        <to-activity-id id="__179">StartContractTemplatesLOV</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__180">
+        <from-outcome id="__181">CancelContractTemplatesLOVReturn</from-outcome>
+        <to-activity-id id="__182">CancelContractTemplatesLOVReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__183">
+        <from-outcome id="__184">DoneContractTemplatesLOVReturn</from-outcome>
+        <to-activity-id id="__185">DoneContractTemplatesLOVReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__186">
+      <from-activity-id id="__187">*</from-activity-id>
+      <control-flow-case id="__188">
+        <from-outcome id="__189">clearSearchCriteria</from-outcome>
+        <to-activity-id id="__190">ClearSearchCriteria</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__191">
+        <from-outcome id="__192">PreQueryUsingSearchValue</from-outcome>
+        <to-activity-id id="__193">PreQueryUsingSearchValue</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__194">
+        <from-outcome id="__195">DoValidation</from-outcome>
+        <to-activity-id id="__196">DoValidation</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__197">
+    <managed-bean-name id="__198">ContractTemplatesLOVTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__199">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__200">pageFlow</managed-bean-scope>
+    <managed-property id="__201">
+      <property-name id="__202">params</property-name>
+      <property-class id="__203">java.util.Map</property-class>
+      <map-entries id="__204">
+        <map-entry id="__205">
+          <key id="__206">parentContext</key>
+          <value id="__207">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__208">
+      <property-name id="__209">name</property-name>
+      <value id="__210">ContractTemplatesLOV</value>
+    </managed-property>
+    <managed-property id="__211">
+      <property-name id="__212">taskFlowId</property-name>
+      <value id="__213">/WEB-INF/adfc-config-ContractTemplatesLOV.xml#ContractTemplatesLOVTaskFlow</value>
+    </managed-property>
+    <managed-property id="__214">
+      <property-name id="__215">tabUniqueIdentifier</property-name>
+      <value id="__216">ContractTemplatesLOV</value>
+    </managed-property>
+    <managed-property id="__217">
+      <property-name id="__218">label</property-name>
+      <value id="__219">Standard Contracts</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

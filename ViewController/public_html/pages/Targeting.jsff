@@ -1,0 +1,2433 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="TrgTopLc"
+                             partialTriggers=" TrgDeleteDialog Trgfbb TrgNewButton TrgDelB TrgSaveButton0 TrgCancelButton0 TrgSaveButton1 TrgCancelButton1"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateTargeting ? nls['INSERT_TITLE_TARGETING'] :  (jhsUserRoles['AM,AST,PM,GCA,ADMIN'] ? nls['EDIT_TITLE_TARGETIN: #{bindings.TrgGroupName.inputValue}'] : nls['VIEW_TITLE_TARGETIN: #{bindings.TrgGroupName.inputValue}'])  }"
+                          helpTopicId="RBH_TARGETING">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="Trgfbb" layout="horizontal"
+                                       rendered="#{ (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null) and bindings.TargetingIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateTargeting and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="TrgFirst TrgPrevious TrgNext TrgLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstTargeting.execute}"
+                                             id="TrgFirst" partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousTargeting.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="TrgPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1} / #{bindings.TargetingIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextTargeting.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="TrgNext" partialSubmit="true"
+                                             rendered="#{bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1 lt bindings.TargetingIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1 lt bindings.TargetingIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastTargeting.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="TrgLast" partialSubmit="true"
+                                             rendered="#{bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1 lt bindings.TargetingIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.TargetingIterator.rangeStart+bindings.TargetingIterator.currentRowIndexInRange+1 lt bindings.TargetingIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateTargeting.execute}"
+                                             action="CreateTrg"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_TARGETING']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateTargeting and (true) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             id="TrgNewButton"></af:commandToolbarButton>
+                    <af:commandToolbarButton action="DeleteTargeting"
+                                             partialSubmit="true"
+                                             icon="/jheadstart/images/deleteRow.png"
+                                             shortDesc="#{nls['DELETE_BUTTON_LABEL_TARGETING']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateTargeting and  (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null)  and (jhsUserRoles['PM,GCA,ADMIN'])}"
+                                             immediate="true" id="TrgDelB">
+                      <af:showPopupBehavior popupId="TrgDeletePopup"/>
+                    </af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="TrgPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveTargeting.execute}"
+                                      rendered="#{!pageFlowScope.hideSaveButton}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="TrgSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="TrgCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.TargetingIterator.findMode!='true'}"
+                       id="TrgSw" defaultFacet="hasRows"
+                       facetName="#{( (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null)) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp" id="TrgNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="TrgFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="4"
+                                    id="TrgFI">
+                  <af:inputText id="TrgGNo"
+                                value="#{bindings.TrgGroupNo.inputValue}"
+                                label="#{bindings.TrgGroupNo.hints.label}"
+                                required="#{bindings.TrgGroupNo.hints.mandatory}"
+                                rows="#{bindings.TrgGroupNo.hints.displayHeight}"
+                                columns="#{bindings.TrgGroupNo.hints.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.TrgGroupNo.hints.tooltip}"
+                                helpTopicId="RBH_TRGGROUPNO">
+                    <f:validator binding="#{bindings.TrgGroupNo.validator}"/>
+                  </af:inputText>
+                  <af:popup id="hoverPopup0">
+                    <af:noteWindow>
+                      <af:outputText value="#{bindings.TrgGroupName.inputValue}"/>
+                    </af:noteWindow>
+                  </af:popup>
+                  <af:panelLabelAndMessage label="#{bindings.TrgGroupName.hints.label}"
+                                           shortDesc="#{bindings.TrgGroupName.hints.tooltip}"
+                                           helpTopicId="RBH_TRGGROUPNAME"
+                                           showRequired="#{bindings.TrgGroupName.hints.mandatory}"
+                                           id="TrgGroupNameLabel">
+                    <af:inputText id="TrgGNm"
+                                  value="#{bindings.TrgGroupName.inputValue}"
+                                  required="#{bindings.TrgGroupName.hints.mandatory}"
+                                  rows="#{bindings.TrgGroupName.hints.displayHeight}"
+                                  columns="#{bindings.TrgGroupName.hints.displayWidth}"
+                                  maximumLength="400"
+                                  readOnly="#{((pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                  autoSubmit="true" simple="true"
+                                  partialTriggers="TrgGroupNameEditorLink TrgGroupNameEditorText">
+                      <f:validator binding="#{bindings.TrgGroupName.validator}"/>
+                      <af:showPopupBehavior popupId="hoverPopup0"
+                                            triggerType="mouseHover"
+                                            align="endAfter"/>
+                    </af:inputText>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl0" valign="top"
+                                           layout="horizontal">
+                        <af:commandLink id="TrgGroupNameEditorLink"
+                                        rendered="#{!(((pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))))}"
+                                        immediate="true" partialSubmit="true">
+                          <af:showPopupBehavior popupId="TrgGroupNamePopup"/>
+                          <af:image source="/jheadstart/images/editor.gif"
+                                    id="TrgGroupNameIcon"
+                                    clientComponent="true"/>
+                        </af:commandLink>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:selectOneChoice id="TrgGTy"
+                                      value="#{bindings.TrgGroupType.inputValue}"
+                                      label="#{bindings.TrgGroupType.hints.label}"
+                                      required="#{bindings.TrgGroupType.hints.mandatory}"
+                                      readOnly="#{((pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TrgGroupType.hints.tooltip}"
+                                      helpTopicId="RBH_TRGGROUPTYPE">
+                    <f:selectItems value="#{bindings.TrgGroupType.items}"/>
+                  </af:selectOneChoice>
+                  <af:inputText id="TrgPCt"
+                                value="#{bindings.TrgProductCount.inputValue}"
+                                label="#{bindings.TrgProductCount.hints.label}"
+                                required="#{bindings.TrgProductCount.hints.mandatory}"
+                                rows="#{bindings.TrgProductCount.hints.displayHeight}"
+                                columns="#{bindings.TrgProductCount.hints.displayWidth}"
+                                readOnly="true"
+                                shortDesc="#{bindings.TrgProductCount.hints.tooltip}"
+                                helpTopicId="RBH_TRGPRODUCTCOUNT">
+                    <f:validator binding="#{bindings.TrgProductCount.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TrgProductCount.format}"/>
+                  </af:inputText>
+                  <af:inputText id="TrgTCt"
+                                value="#{bindings.TrgTitleCount.inputValue}"
+                                label="#{bindings.TrgTitleCount.hints.label}"
+                                required="#{bindings.TrgTitleCount.hints.mandatory}"
+                                rows="#{bindings.TrgTitleCount.hints.displayHeight}"
+                                columns="#{bindings.TrgTitleCount.hints.displayWidth}"
+                                readOnly="true"
+                                shortDesc="#{bindings.TrgTitleCount.hints.tooltip}"
+                                helpTopicId="RBH_TRGTITLECOUNT">
+                    <f:validator binding="#{bindings.TrgTitleCount.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TrgTitleCount.format}"/>
+                  </af:inputText>
+                  <af:panelLabelAndMessage id="TrgTargetTitlesToProductsPlm"
+                                           helpTopicId="RBH_TRGTARGETTITLESTOPRODUCTS">
+                    <af:commandButton id="TrgTTP"
+                                      textAndAccessKey="Target Titles to Products"
+                                      actionListener="#{bindings.TrgTargetTitlesToProducts.execute}"
+                                      disabled="#{!jhsUserRoles['PM,GCA,ADMIN']}"></af:commandButton>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl1" valign="top"
+                                           layout="horizontal"></af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="TrgFileNameNpr"
+                                value="#{bindings.TrgFileName.inputValue}"
+                                label="#{bindings.TrgFileName.hints.label}"
+                                required="#{bindings.TrgFileName.hints.mandatory}"
+                                rows="#{bindings.TrgFileName.hints.displayHeight}"
+                                columns="#{bindings.TrgFileName.hints.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}"
+                                shortDesc="#{bindings.TrgFileName.hints.tooltip}"
+                                helpTopicId="RBH_TRGFILENAME">
+                    <f:validator binding="#{bindings.TrgFileName.validator}"/>
+                  </af:inputText>
+                  <af:panelLabelAndMessage id="TrgFileNamePlm"
+                                           label="#{bindings.TrgFileName.hints.label}"
+                                           shortDesc="#{bindings.TrgFileName.hints.tooltip}"
+                                           helpTopicId="RBH_TRGFILENAME"
+                                           rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:commandLink id="TrgFileName"
+                                    text="#{bindings.TrgFileName.attributeValue}"
+                                    shortDesc="#{bindings.TrgFileName.hints.tooltip}"
+                                    action="LaunchTab">
+                      <af:setActionListener from="Imports"
+                                            to="#{jhsDynTabLauncher.taskFlowName}"/>
+                      <af:setActionListener from="#{bindings.TrgImportFileId.inputValue}"
+                                            to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                      <af:setActionListener from="#{bindings.TrgImportFileName.inputValue}"
+                                            to="#{jhsDynTabLauncher.label}"/>
+                      <af:setActionListener from="#{bindings.TrgImportFileId.inputValue}"
+                                            to="#{jhsDynTabLauncher.parameters.rowKeyValueImports}"/>
+                      <af:setActionListener from="#{jhsDynTabLauncher}"
+                                            to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                    </af:commandLink>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl2" valign="top"
+                                           layout="horizontal"></af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="TrgCB"
+                                value="#{bindings.TrgCreatedBy.inputValue}"
+                                label="#{bindings.TrgCreatedBy.hints.label}"
+                                required="#{bindings.TrgCreatedBy.hints.mandatory}"
+                                rows="#{bindings.TrgCreatedBy.hints.displayHeight}"
+                                columns="#{bindings.TrgCreatedBy.hints.displayWidth}"
+                                maximumLength="20"
+                                readOnly="#{((pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.TrgCreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_TRGCREATEDBY">
+                    <f:validator binding="#{bindings.TrgCreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="TrgCD"
+                                value="#{bindings.TrgCreatedDate.inputValue}"
+                                label="#{bindings.TrgCreatedDate.hints.label}"
+                                required="#{bindings.TrgCreatedDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.TrgCreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_TRGCREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="TrgLUB"
+                                value="#{bindings.TrgLastUpdatedBy.inputValue}"
+                                label="#{bindings.TrgLastUpdatedBy.hints.label}"
+                                required="#{bindings.TrgLastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.TrgLastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.TrgLastUpdatedBy.hints.displayWidth}"
+                                maximumLength="20"
+                                readOnly="#{((pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.TrgLastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_TRGLASTUPDATEDBY">
+                    <f:validator binding="#{bindings.TrgLastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="TrgLUD"
+                                value="#{bindings.TrgLastUpdatedDate.inputValue}"
+                                label="#{bindings.TrgLastUpdatedDate.hints.label}"
+                                required="#{bindings.TrgLastUpdatedDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateTargeting) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                shortDesc="#{bindings.TrgLastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_TRGLASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" " helpTopicId="RBH_TARGETING">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveTargeting.execute}"
+                                            rendered="#{!pageFlowScope.hideSaveButton}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="TrgSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="TrgCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+          <af:panelTabbed position="above" childCreation="lazy" id="pst0"
+                          dimensionsFrom="auto" styleClass="AFStretchWidth">
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_TARGETGROUPPRODUCTS']}"
+                               partialTriggers=" TrgTopLc s40DeleteDialog qsAreas40SearchOptions s40PC:s40Arm s40PC:s40delrmTM s40PC:s40Arl s40PC:s40Tab:s40delrm s40PC:s40Tab:s40delrl"
+                               id="s40TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s40TopLc"
+                                   partialTriggers=" TrgTopLc s40DeleteDialog qsAreas40SearchOptions s40PC:s40Arm s40PC:s40delrmTM s40PC:s40Arl s40PC:s40Tab:s40delrm s40PC:s40Tab:s40delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp3"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas40"
+                                     rendered="#{!pageFlowScope.createModes.CreateTargetGroupProducts and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas40SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.TargetGroupProductsIteratorQuery.queryDescriptor}"
+                                 model="#{bindings.TargetGroupProductsIteratorQuery.queryModel}"
+                                 queryListener="#{bindings.TargetGroupProductsIteratorQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl3">
+                  <af:panelCollection id="s40PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu0">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu1">
+                          <af:group id="s40tbb"
+                                    rendered="#{ bindings.TargetGroupProductsIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstTargetGroupProducts.execute}"
+                                                id="s40First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousTargetGroupProducts.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s40Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextTargetGroupProducts.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s40Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastTargetGroupProducts.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s40Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s40Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.TargetGroupProductsTable.addRow}"
+                                            rendered="#{ (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s40delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s40DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi0">
+                          <af:exportCollectionActionListener exportedId="s40Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetGroupProducts.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar1">
+                        <!-- Also create CreateTargetGroupProducts bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s40Arl" immediate="false"
+                                             rendered="#{ (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.TargetGroupProductsTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl0"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s40Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetGroupProducts.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s40Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.TargetGroupProductsIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s40Tab" contentDelivery="immediate"
+                              value="#{bindings.TargetGroupProductsTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.TargetGroupProductsTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.TargetGroupProductsTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.TargetGroupProductsTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.TargetGroupProductsTable.rangeSize}"
+                              autoHeightRows="#{bindings.TargetGroupProductsTable.estimatedRowCount lt 5 ? 5 : bindings.TargetGroupProductsTable.estimatedRowCount lt bindings.TargetGroupProductsTable.rangeSize ? bindings.TargetGroupProductsTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.TargetGroupProductsTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.TargetGroupProductsIteratorQuery.processQuery}"
+                              filterModel="#{bindings.TargetGroupProductsIteratorQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.TargetGroupProductsTable.table}"
+                              partialTriggers=":::qsAreas40SearchOptions :::s40PC ::s40First ::s40Previous ::s40Next ::s40Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_TARGETGROUPPRODUCTS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s40TablePopup" childCreation="deferred">
+                          <af:menu id="menu2">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu3"></af:menu>
+                            <af:commandMenuItem id="s40delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s40DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s40ActionColumn" width="20" align="center"
+                                 headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl4">
+                          <af:commandImageLink id="s40delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s40DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s40NmCol" sortable="true" filterable="true"
+                                 noWrap="true" width="260" sortProperty="Name"
+                                 rowHeader="false" helpTopicId="RBH_S40NAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupProductsTable.hints.Name.label}"
+                                          showRequired="#{bindings.TargetGroupProductsTable.hints.Name.mandatory}"
+                                          id="ol0"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s40NamePgl"
+                                             layout="horizontal">
+                          <af:inputText id="s40Nm"
+                                        label="#{bindings.TargetGroupProductsTable.hints.Name.label}"
+                                        readOnly="#{((pageFlowScope.TargetGroupProductsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupProductsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                        columns="40" maximumLength="400"
+                                        shortDesc="#{bindings.TargetGroupProductsTable.hints.Name.tooltip}"
+                                        value="#{row.bindings.Name.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s40NameLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s40NameLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.Name.validator}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.TargetGroupProductsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupProductsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))))}"
+                                          id="cl1"
+                                          actionListener="#{pageFlowScope.s40NameLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s40NameIcon" clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb2"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s40NameLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s40NameLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s40PICol" sortable="true" filterable="true"
+                                 noWrap="true" width="100" sortProperty="PrdId"
+                                 align="right" rowHeader="false"
+                                 helpTopicId="RBH_S40PRDID"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupProductsTable.hints.PrdId.label}"
+                                          id="ol1"/>
+                        </f:facet>
+                        <af:inputText id="s40PI"
+                                      value="#{row.bindings.PrdId.inputValue}"
+                                      label="#{bindings.TargetGroupProductsTable.hints.PrdId.label}"
+                                      required="#{bindings.TargetGroupProductsTable.hints.PrdId.mandatory}"
+                                      rows="#{bindings.TargetGroupProductsTable.hints.PrdId.displayHeight}"
+                                      columns="#{bindings.TargetGroupProductsTable.hints.PrdId.displayWidth}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupProductsTable.hints.PrdId.tooltip}">
+                          <f:validator binding="#{row.bindings.PrdId.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.TargetGroupProductsTable.hints.PrdId.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s40PFmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="ProductFamily" rowHeader="false"
+                                 helpTopicId="RBH_S40PRODUCTFAMILY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupProductsTable.hints.ProductFamily.label}"
+                                          id="ol2"/>
+                        </f:facet>
+                        <af:inputText id="s40PFm"
+                                      value="#{row.bindings.ProductFamily.inputValue}"
+                                      label="#{bindings.TargetGroupProductsTable.hints.ProductFamily.label}"
+                                      required="#{bindings.TargetGroupProductsTable.hints.ProductFamily.mandatory}"
+                                      rows="#{bindings.TargetGroupProductsTable.hints.ProductFamily.displayHeight}"
+                                      columns="#{bindings.TargetGroupProductsTable.hints.ProductFamily.displayWidth}"
+                                      maximumLength="100" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupProductsTable.hints.ProductFamily.tooltip}">
+                          <f:validator binding="#{row.bindings.ProductFamily.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s40PMCol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="ProductManager" rowHeader="false"
+                                 helpTopicId="RBH_S40PRODUCTMANAGER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupProductsTable.hints.ProductManager.label}"
+                                          id="ol3"/>
+                        </f:facet>
+                        <af:inputText id="s40PM"
+                                      value="#{row.bindings.ProductManager.inputValue}"
+                                      label="#{bindings.TargetGroupProductsTable.hints.ProductManager.label}"
+                                      required="#{bindings.TargetGroupProductsTable.hints.ProductManager.mandatory}"
+                                      rows="#{bindings.TargetGroupProductsTable.hints.ProductManager.displayHeight}"
+                                      columns="#{bindings.TargetGroupProductsTable.hints.ProductManager.displayWidth}"
+                                      maximumLength="240" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupProductsTable.hints.ProductManager.tooltip}">
+                          <f:validator binding="#{row.bindings.ProductManager.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s40ADCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="AddedDate" rowHeader="false"
+                                 helpTopicId="RBH_S40ADDEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupProductsTable.hints.AddedDate.label}"
+                                          showRequired="#{bindings.TargetGroupProductsTable.hints.AddedDate.mandatory}"
+                                          id="ol4"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                        id="id0">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s40AD"
+                                      value="#{row.bindings.AddedDate.inputValue}"
+                                      label="#{bindings.TargetGroupProductsTable.hints.AddedDate.label}"
+                                      required="#{bindings.TargetGroupProductsTable.hints.AddedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.TargetGroupProductsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupProductsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TargetGroupProductsTable.hints.AddedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s40RDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="RemovedDate" rowHeader="false"
+                                 helpTopicId="RBH_S40REMOVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupProductsTable.hints.RemovedDate.label}"
+                                          showRequired="#{bindings.TargetGroupProductsTable.hints.RemovedDate.mandatory}"
+                                          id="ol5"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                        id="id1">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s40RD"
+                                      value="#{row.bindings.RemovedDate.inputValue}"
+                                      label="#{bindings.TargetGroupProductsTable.hints.RemovedDate.label}"
+                                      required="#{bindings.TargetGroupProductsTable.hints.RemovedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.TargetGroupProductsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupProductsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TargetGroupProductsTable.hints.RemovedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+                <af:panelTabbed position="above" childCreation="lazy" id="pst1"
+                                dimensionsFrom="auto"
+                                styleClass="AFStretchWidth">
+                  <af:showDetailItem stretchChildren="first"
+                                     text="#{nls['TABLE_TITLE_TARGETGROUPPRODUCTFORMATS']}"
+                                     partialTriggers=" s40PC:s40Tab s40TopLc s400DeleteDialog s400PC:s400Arm s400PC:s400delrmTM s400PC:s400Arl s400PC:s400Tab:s400delrm s400PC:s400Tab:s400delrl"
+                                     id="s400TopLcSdi"
+                                     rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                                     disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                    <af:panelGroupLayout layout="vertical" id="s400TopLc"
+                                         partialTriggers=" s40PC:s40Tab s40TopLc s400DeleteDialog s400PC:s400Arm s400PC:s400delrmTM s400PC:s400Arl s400PC:s400Tab:s400delrm s400PC:s400Tab:s400delrl"
+                                         rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                      <f:facet name="separator">
+                        <af:spacer width="10" height="10" id="sp4"/>
+                      </f:facet>
+                      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                      <af:panelGroupLayout layout="vertical" id="pgl5">
+                        <af:panelCollection id="s400PC" featuresOff=" "
+                                            inlineStyle=" width:630px; ">
+                          <f:facet name="menus">
+                            <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                     id="menu4">
+                              <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                       id="menu5">
+                                <af:group id="s400tbb"
+                                          rendered="#{ bindings.TargetGroupProductFormatsIterator.currentRow!=null }">
+                                  <af:commandMenuItem actionListener="#{bindings.FirstTargetGroupProductFormats.execute}"
+                                                      id="s400First"
+                                                      partialSubmit="true"
+                                                      icon="/afr/shuttleleftall_ena.png"
+                                                      textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                  <af:commandMenuItem actionListener="#{bindings.PreviousTargetGroupProductFormats.execute}"
+                                                      icon="/afr/shuttleleft_ena.png"
+                                                      textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                      id="s400Previous"
+                                                      partialSubmit="true"></af:commandMenuItem>
+                                  <af:commandMenuItem actionListener="#{bindings.NextTargetGroupProductFormats.execute}"
+                                                      icon="/afr/shuttleright_ena.png"
+                                                      textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                      id="s400Next"
+                                                      partialSubmit="true"></af:commandMenuItem>
+                                  <af:commandMenuItem actionListener="#{bindings.LastTargetGroupProductFormats.execute}"
+                                                      icon="/afr/shuttlerightall_ena.png"
+                                                      textAndAccessKey="#{nls['LAST_ROW']}"
+                                                      id="s400Last"
+                                                      partialSubmit="true"></af:commandMenuItem>
+                                </af:group>
+                              </af:menu>
+                              <af:commandMenuItem id="s400Arm"
+                                                  textAndAccessKey="#{nls['ADD_ROW']}"
+                                                  immediate="false"
+                                                  icon="/jheadstart/images/addRow.png"
+                                                  partialSubmit="true"
+                                                  actionListener="#{pageFlowScope.TargetGroupProductFormatsTable.addRow}"
+                                                  rendered="#{ bindings.TargetGroupProductsIterator.currentRow!=null  }"></af:commandMenuItem>
+                              <af:commandMenuItem id="s400delrmTM"
+                                                  textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                  icon="/jheadstart/images/deleteRow.png"
+                                                  partialSubmit="true"
+                                                  immediate="true">
+                                <af:showPopupBehavior popupId="::s400DeletePopup"/>
+                              </af:commandMenuItem>
+                            </af:menu>
+                          </f:facet>
+                          <f:facet name="toolbar">
+                            <af:toolbar id="tbar2">
+                              <!-- Also create CreateTargetGroupProductFormats bean so we can start table group in create mode as well -->
+                              <af:commandImageLink id="s400Arl"
+                                                   immediate="false"
+                                                   rendered="#{ bindings.TargetGroupProductsIterator.currentRow!=null  }"
+                                                   partialSubmit="true"
+                                                   actionListener="#{pageFlowScope.TargetGroupProductFormatsTable.addRow}"
+                                                   shortDesc="#{nls['ADD_ROW']}"
+                                                   icon="/jheadstart/images/addRow.png"/>
+                              <af:commandToolbarButton text="Print"
+                                                       id="s400Print"
+                                                       shortDesc="Opens a new tab with printer friendly format.">
+                                <af:showPrintablePageBehavior/>
+                              </af:commandToolbarButton>
+                            </af:toolbar>
+                          </f:facet>
+                          <f:facet name="statusbar">
+                            <af:toolbar>
+                              <af:outputText value="#{bindings.TargetGroupProductFormatsIterator.estimatedRowCount} rows found"/>
+                            </af:toolbar>
+                          </f:facet>
+                          <af:table id="s400Tab" contentDelivery="immediate"
+                                    value="#{bindings.TargetGroupProductFormatsTable.collectionModel}"
+                                    columnStretching="blank"
+                                    rowBandingInterval="0" editingMode="editAll"
+                                    columnSelection="multiple"
+                                    contextMenuSelect="true"
+                                    rowSelection="single"
+                                    selectionListener="#{pageFlowScope.TargetGroupProductFormatsTable.makeCurrent}"
+                                    selectedRowKeys="#{pageFlowScope.TargetGroupProductFormatsTable.selectedRow}"
+                                    rowDisclosureListener="#{pageFlowScope.TargetGroupProductFormatsTable.discloseRow}"
+                                    var="row" varStatus="status"
+                                    rows="#{bindings.TargetGroupProductFormatsTable.rangeSize}"
+                                    autoHeightRows="#{bindings.TargetGroupProductFormatsTable.estimatedRowCount lt 5 ? 5 : bindings.TargetGroupProductFormatsTable.estimatedRowCount lt bindings.TargetGroupProductFormatsTable.rangeSize ? bindings.TargetGroupProductFormatsTable.estimatedRowCount : 0 }"
+                                    fetchSize="#{bindings.TargetGroupProductFormatsTable.rangeSize}"
+                                    emptyText="#{nls['NO_ROWS_FOUND']}"
+                                    binding="#{pageFlowScope.TargetGroupProductFormatsTable.table}"
+                                    partialTriggers=" :::s400PC ::s400First ::s400Previous ::s400Next ::s400Last"
+                                    width="630px"
+                                    summary="#{nls['TABLE_TITLE_TARGETGROUPPRODUCTFORMATS']}">
+                            <f:facet name="contextMenu">
+                              <af:popup id="s400TablePopup"
+                                        childCreation="deferred">
+                                <af:menu id="menu6">
+                                  <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                           id="menu7"></af:menu>
+                                  <af:commandMenuItem id="s400delrm"
+                                                      textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                      icon="/jheadstart/images/deleteRow.png"
+                                                      partialSubmit="true"
+                                                      immediate="true">
+                                    <af:showPopupBehavior popupId=":::s400DeletePopup"/>
+                                  </af:commandMenuItem>
+                                </af:menu>
+                              </af:popup>
+                            </f:facet>
+                            <af:column id="s400ActionColumn" width="20"
+                                       align="center" headerText=" ">
+                              <af:panelGroupLayout layout="horizontal"
+                                                   id="pgl6">
+                                <af:commandImageLink id="s400delrl"
+                                                     partialSubmit="true"
+                                                     immediate="true"
+                                                     shortDesc="#{nls['DELETE_ROW']}"
+                                                     icon="/jheadstart/images/deleteRow.png">
+                                  <af:showPopupBehavior popupId=":::s400DeletePopup"/>
+                                </af:commandImageLink>
+                              </af:panelGroupLayout>
+                            </af:column>
+                            <af:column id="s400TFCol" sortable="true"
+                                       noWrap="true" width="120"
+                                       sortProperty="TargetedFormat"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S400TARGETEDFORMAT"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductFormatsTable.hints.TargetedFormat.label}"
+                                                showRequired="#{bindings.TargetGroupProductFormatsTable.hints.TargetedFormat.mandatory}"
+                                                id="ol6"/>
+                              </f:facet>
+                              <af:selectOneChoice id="s400TF"
+                                                  value="#{row.bindings.TargetedFormat.inputValue}"
+                                                  label="#{bindings.TargetGroupProductFormatsTable.hints.TargetedFormat.label}"
+                                                  required="#{bindings.TargetGroupProductFormatsTable.hints.TargetedFormat.mandatory}"
+                                                  shortDesc="#{bindings.TargetGroupProductFormatsTable.hints.TargetedFormat.tooltip}">
+                                <f:selectItems value="#{row.bindings.TargetedFormat.items}"/>
+                              </af:selectOneChoice>
+                            </af:column>
+                            <af:column id="s400CBCol" sortable="true"
+                                       noWrap="true" width="120"
+                                       sortProperty="CreatedBy"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S400CREATEDBY"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductFormatsTable.hints.CreatedBy.label}"
+                                                id="ol7"/>
+                              </f:facet>
+                              <af:inputText id="s400CB"
+                                            value="#{row.bindings.CreatedBy.inputValue}"
+                                            label="#{bindings.TargetGroupProductFormatsTable.hints.CreatedBy.label}"
+                                            required="#{bindings.TargetGroupProductFormatsTable.hints.CreatedBy.mandatory}"
+                                            rows="#{bindings.TargetGroupProductFormatsTable.hints.CreatedBy.displayHeight}"
+                                            columns="#{bindings.TargetGroupProductFormatsTable.hints.CreatedBy.displayWidth}"
+                                            maximumLength="20" readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupProductFormatsTable.hints.CreatedBy.tooltip}">
+                                <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                              </af:inputText>
+                            </af:column>
+                            <af:column id="s400CDCol" sortable="true"
+                                       noWrap="true" width="100"
+                                       sortProperty="CreatedDate"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S400CREATEDDATE"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductFormatsTable.hints.CreatedDate.label}"
+                                                id="ol8"/>
+                              </f:facet>
+                              <af:inputDate id="s400CD"
+                                            value="#{row.bindings.CreatedDate.inputValue}"
+                                            label="#{bindings.TargetGroupProductFormatsTable.hints.CreatedDate.label}"
+                                            required="#{bindings.TargetGroupProductFormatsTable.hints.CreatedDate.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupProductFormatsTable.hints.CreatedDate.tooltip}">
+                                <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                              </af:inputDate>
+                            </af:column>
+                            <af:column id="s400LUBCol" sortable="true"
+                                       noWrap="true" width="120"
+                                       sortProperty="LastUpdatedBy"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S400LASTUPDATEDBY"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedBy.label}"
+                                                id="ol9"/>
+                              </f:facet>
+                              <af:inputText id="s400LUB"
+                                            value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                            label="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedBy.label}"
+                                            required="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedBy.mandatory}"
+                                            rows="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedBy.displayHeight}"
+                                            columns="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedBy.displayWidth}"
+                                            maximumLength="20" readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedBy.tooltip}">
+                                <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                              </af:inputText>
+                            </af:column>
+                            <af:column id="s400LUDCol" sortable="true"
+                                       noWrap="true" width="100"
+                                       sortProperty="LastUpdatedDate"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S400LASTUPDATEDDATE"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedDate.label}"
+                                                id="ol10"/>
+                              </f:facet>
+                              <af:inputDate id="s400LUD"
+                                            value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                            label="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedDate.label}"
+                                            required="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedDate.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupProductFormatsTable.hints.LastUpdatedDate.tooltip}">
+                                <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                              </af:inputDate>
+                            </af:column>
+                          </af:table>
+                        </af:panelCollection>
+                      </af:panelGroupLayout>
+                      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                  <af:showDetailItem stretchChildren="first"
+                                     text="#{nls['TABLE_TITLE_TARGETGROUPPRODUCTMARKETS']}"
+                                     partialTriggers=" s40PC:s40Tab s40TopLc s401DeleteDialog s401PC:s401Arm s401PC:s401delrmTM s401PC:s401Arl s401PC:s401Tab:s401delrm s401PC:s401Tab:s401delrl"
+                                     id="s401TopLcSdi"
+                                     rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                                     disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                    <af:panelGroupLayout layout="vertical" id="s401TopLc"
+                                         partialTriggers=" s40PC:s40Tab s40TopLc s401DeleteDialog s401PC:s401Arm s401PC:s401delrmTM s401PC:s401Arl s401PC:s401Tab:s401delrm s401PC:s401Tab:s401delrl"
+                                         rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                      <f:facet name="separator">
+                        <af:spacer width="10" height="10" id="sp5"/>
+                      </f:facet>
+                      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                      <af:panelGroupLayout layout="vertical" id="pgl7">
+                        <af:panelCollection id="s401PC" featuresOff=" "
+                                            inlineStyle=" width:630px; ">
+                          <f:facet name="menus">
+                            <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                     id="menu8">
+                              <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                       id="menu9">
+                                <af:group id="s401tbb"
+                                          rendered="#{ bindings.TargetGroupProductMarketsIterator.currentRow!=null }">
+                                  <af:commandMenuItem actionListener="#{bindings.FirstTargetGroupProductMarkets.execute}"
+                                                      id="s401First"
+                                                      partialSubmit="true"
+                                                      icon="/afr/shuttleleftall_ena.png"
+                                                      textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                  <af:commandMenuItem actionListener="#{bindings.PreviousTargetGroupProductMarkets.execute}"
+                                                      icon="/afr/shuttleleft_ena.png"
+                                                      textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                      id="s401Previous"
+                                                      partialSubmit="true"></af:commandMenuItem>
+                                  <af:commandMenuItem actionListener="#{bindings.NextTargetGroupProductMarkets.execute}"
+                                                      icon="/afr/shuttleright_ena.png"
+                                                      textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                      id="s401Next"
+                                                      partialSubmit="true"></af:commandMenuItem>
+                                  <af:commandMenuItem actionListener="#{bindings.LastTargetGroupProductMarkets.execute}"
+                                                      icon="/afr/shuttlerightall_ena.png"
+                                                      textAndAccessKey="#{nls['LAST_ROW']}"
+                                                      id="s401Last"
+                                                      partialSubmit="true"></af:commandMenuItem>
+                                </af:group>
+                              </af:menu>
+                              <af:commandMenuItem id="s401Arm"
+                                                  textAndAccessKey="#{nls['ADD_ROW']}"
+                                                  immediate="false"
+                                                  icon="/jheadstart/images/addRow.png"
+                                                  partialSubmit="true"
+                                                  actionListener="#{pageFlowScope.TargetGroupProductMarketsTable.addRow}"
+                                                  rendered="#{ bindings.TargetGroupProductsIterator.currentRow!=null  }"></af:commandMenuItem>
+                              <af:commandMenuItem id="s401delrmTM"
+                                                  textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                  icon="/jheadstart/images/deleteRow.png"
+                                                  partialSubmit="true"
+                                                  immediate="true">
+                                <af:showPopupBehavior popupId="::s401DeletePopup"/>
+                              </af:commandMenuItem>
+                            </af:menu>
+                          </f:facet>
+                          <f:facet name="toolbar">
+                            <af:toolbar id="tbar3">
+                              <!-- Also create CreateTargetGroupProductMarkets bean so we can start table group in create mode as well -->
+                              <af:commandImageLink id="s401Arl"
+                                                   immediate="false"
+                                                   rendered="#{ bindings.TargetGroupProductsIterator.currentRow!=null  }"
+                                                   partialSubmit="true"
+                                                   actionListener="#{pageFlowScope.TargetGroupProductMarketsTable.addRow}"
+                                                   shortDesc="#{nls['ADD_ROW']}"
+                                                   icon="/jheadstart/images/addRow.png"/>
+                              <af:commandToolbarButton text="Print"
+                                                       id="s401Print"
+                                                       shortDesc="Opens a new tab with printer friendly format.">
+                                <af:showPrintablePageBehavior/>
+                              </af:commandToolbarButton>
+                            </af:toolbar>
+                          </f:facet>
+                          <f:facet name="statusbar">
+                            <af:toolbar>
+                              <af:outputText value="#{bindings.TargetGroupProductMarketsIterator.estimatedRowCount} rows found"/>
+                            </af:toolbar>
+                          </f:facet>
+                          <af:table id="s401Tab" contentDelivery="immediate"
+                                    value="#{bindings.TargetGroupProductMarketsTable.collectionModel}"
+                                    columnStretching="blank"
+                                    rowBandingInterval="0" editingMode="editAll"
+                                    columnSelection="multiple"
+                                    contextMenuSelect="true"
+                                    rowSelection="single"
+                                    selectionListener="#{pageFlowScope.TargetGroupProductMarketsTable.makeCurrent}"
+                                    selectedRowKeys="#{pageFlowScope.TargetGroupProductMarketsTable.selectedRow}"
+                                    rowDisclosureListener="#{pageFlowScope.TargetGroupProductMarketsTable.discloseRow}"
+                                    var="row" varStatus="status"
+                                    rows="#{bindings.TargetGroupProductMarketsTable.rangeSize}"
+                                    autoHeightRows="#{bindings.TargetGroupProductMarketsTable.estimatedRowCount lt 5 ? 5 : bindings.TargetGroupProductMarketsTable.estimatedRowCount lt bindings.TargetGroupProductMarketsTable.rangeSize ? bindings.TargetGroupProductMarketsTable.estimatedRowCount : 0 }"
+                                    fetchSize="#{bindings.TargetGroupProductMarketsTable.rangeSize}"
+                                    emptyText="#{nls['NO_ROWS_FOUND']}"
+                                    binding="#{pageFlowScope.TargetGroupProductMarketsTable.table}"
+                                    partialTriggers=" :::s401PC ::s401First ::s401Previous ::s401Next ::s401Last"
+                                    width="630px"
+                                    summary="#{nls['TABLE_TITLE_TARGETGROUPPRODUCTMARKETS']}">
+                            <f:facet name="contextMenu">
+                              <af:popup id="s401TablePopup"
+                                        childCreation="deferred">
+                                <af:menu id="menu10">
+                                  <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                           id="menu11"></af:menu>
+                                  <af:commandMenuItem id="s401delrm"
+                                                      textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                      icon="/jheadstart/images/deleteRow.png"
+                                                      partialSubmit="true"
+                                                      immediate="true">
+                                    <af:showPopupBehavior popupId=":::s401DeletePopup"/>
+                                  </af:commandMenuItem>
+                                </af:menu>
+                              </af:popup>
+                            </f:facet>
+                            <af:column id="s401ActionColumn" width="20"
+                                       align="center" headerText=" ">
+                              <af:panelGroupLayout layout="horizontal"
+                                                   id="pgl8">
+                                <af:commandImageLink id="s401delrl"
+                                                     partialSubmit="true"
+                                                     immediate="true"
+                                                     shortDesc="#{nls['DELETE_ROW']}"
+                                                     icon="/jheadstart/images/deleteRow.png">
+                                  <af:showPopupBehavior popupId=":::s401DeletePopup"/>
+                                </af:commandImageLink>
+                              </af:panelGroupLayout>
+                            </af:column>
+                            <af:column id="s401TMCol" sortable="true"
+                                       noWrap="true" width="120"
+                                       sortProperty="TargetedMarket"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S401TARGETEDMARKET"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductMarketsTable.hints.TargetedMarket.label}"
+                                                showRequired="#{bindings.TargetGroupProductMarketsTable.hints.TargetedMarket.mandatory}"
+                                                id="ol11"/>
+                              </f:facet>
+                              <af:selectOneChoice id="s401TM"
+                                                  value="#{row.bindings.TargetedMarket.inputValue}"
+                                                  label="#{bindings.TargetGroupProductMarketsTable.hints.TargetedMarket.label}"
+                                                  required="#{bindings.TargetGroupProductMarketsTable.hints.TargetedMarket.mandatory}"
+                                                  shortDesc="#{bindings.TargetGroupProductMarketsTable.hints.TargetedMarket.tooltip}">
+                                <f:selectItems value="#{row.bindings.TargetedMarket.items}"/>
+                              </af:selectOneChoice>
+                            </af:column>
+                            <af:column id="s401CBCol" sortable="true"
+                                       noWrap="true" width="120"
+                                       sortProperty="CreatedBy"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S401CREATEDBY"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductMarketsTable.hints.CreatedBy.label}"
+                                                id="ol12"/>
+                              </f:facet>
+                              <af:inputText id="s401CB"
+                                            value="#{row.bindings.CreatedBy.inputValue}"
+                                            label="#{bindings.TargetGroupProductMarketsTable.hints.CreatedBy.label}"
+                                            required="#{bindings.TargetGroupProductMarketsTable.hints.CreatedBy.mandatory}"
+                                            rows="#{bindings.TargetGroupProductMarketsTable.hints.CreatedBy.displayHeight}"
+                                            columns="#{bindings.TargetGroupProductMarketsTable.hints.CreatedBy.displayWidth}"
+                                            maximumLength="20" readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupProductMarketsTable.hints.CreatedBy.tooltip}">
+                                <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                              </af:inputText>
+                            </af:column>
+                            <af:column id="s401CDCol" sortable="true"
+                                       noWrap="true" width="100"
+                                       sortProperty="CreatedDate"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S401CREATEDDATE"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductMarketsTable.hints.CreatedDate.label}"
+                                                id="ol13"/>
+                              </f:facet>
+                              <af:inputDate id="s401CD"
+                                            value="#{row.bindings.CreatedDate.inputValue}"
+                                            label="#{bindings.TargetGroupProductMarketsTable.hints.CreatedDate.label}"
+                                            required="#{bindings.TargetGroupProductMarketsTable.hints.CreatedDate.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupProductMarketsTable.hints.CreatedDate.tooltip}">
+                                <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                              </af:inputDate>
+                            </af:column>
+                            <af:column id="s401LUBCol" sortable="true"
+                                       noWrap="true" width="120"
+                                       sortProperty="LastUpdatedBy"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S401LASTUPDATEDBY"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedBy.label}"
+                                                id="ol14"/>
+                              </f:facet>
+                              <af:inputText id="s401LUB"
+                                            value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                            label="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedBy.label}"
+                                            required="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedBy.mandatory}"
+                                            rows="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedBy.displayHeight}"
+                                            columns="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedBy.displayWidth}"
+                                            maximumLength="20" readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedBy.tooltip}">
+                                <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                              </af:inputText>
+                            </af:column>
+                            <af:column id="s401LUDCol" sortable="true"
+                                       noWrap="true" width="100"
+                                       sortProperty="LastUpdatedDate"
+                                       rowHeader="false"
+                                       helpTopicId="RBH_S401LASTUPDATEDDATE"
+                                       filterFeatures="caseInsensitive">
+                              <f:facet name="header">
+                                <af:outputLabel value="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedDate.label}"
+                                                id="ol15"/>
+                              </f:facet>
+                              <af:inputDate id="s401LUD"
+                                            value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                            label="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedDate.label}"
+                                            required="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedDate.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupProductMarketsTable.hints.LastUpdatedDate.tooltip}">
+                                <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                              </af:inputDate>
+                            </af:column>
+                          </af:table>
+                        </af:panelCollection>
+                      </af:panelGroupLayout>
+                      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+                    </af:panelGroupLayout>
+                  </af:showDetailItem>
+                </af:panelTabbed>
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_TARGETGROUPTITLES']}"
+                               partialTriggers=" TrgTopLc s41DeleteDialog qsAreas41SearchOptions s41PC:s41Arm s41PC:s41delrmTM s41PC:s41Arl s41PC:s41Tab:s41delrm s41PC:s41Tab:s41delrl"
+                               id="s41TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s41TopLc"
+                                   partialTriggers=" TrgTopLc s41DeleteDialog qsAreas41SearchOptions s41PC:s41Arm s41PC:s41delrmTM s41PC:s41Arl s41PC:s41Tab:s41delrm s41PC:s41Tab:s41delrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp6"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas41"
+                                     rendered="#{!pageFlowScope.createModes.CreateTargetGroupTitles and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas41SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.TargetGroupTitlesIteratorPrmTargetGroupTitleViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.TargetGroupTitlesIteratorPrmTargetGroupTitleViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.TargetGroupTitlesIteratorPrmTargetGroupTitleViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl9">
+                  <af:panelCollection id="s41PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu12">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu13">
+                          <af:group id="s41tbb"
+                                    rendered="#{ bindings.TargetGroupTitlesIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstTargetGroupTitles.execute}"
+                                                id="s41First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousTargetGroupTitles.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s41Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextTargetGroupTitles.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s41Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastTargetGroupTitles.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s41Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s41Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.TargetGroupTitlesTable.addRow}"
+                                            rendered="#{ (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s41delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s41DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi1">
+                          <af:exportCollectionActionListener exportedId="s41Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetGroupTitles.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar4">
+                        <!-- Also create CreateTargetGroupTitles bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s41Arl" immediate="false"
+                                             rendered="#{ (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.TargetGroupTitlesTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl2"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s41Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetGroupTitles.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s41Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.TargetGroupTitlesIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s41Tab" contentDelivery="immediate"
+                              value="#{bindings.TargetGroupTitlesTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.TargetGroupTitlesTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.TargetGroupTitlesTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.TargetGroupTitlesTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.TargetGroupTitlesTable.rangeSize}"
+                              autoHeightRows="#{bindings.TargetGroupTitlesTable.estimatedRowCount lt 5 ? 5 : bindings.TargetGroupTitlesTable.estimatedRowCount lt bindings.TargetGroupTitlesTable.rangeSize ? bindings.TargetGroupTitlesTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.TargetGroupTitlesTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.TargetGroupTitlesIteratorPrmTargetGroupTitleViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.TargetGroupTitlesIteratorPrmTargetGroupTitleViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.TargetGroupTitlesTable.table}"
+                              partialTriggers=":::qsAreas41SearchOptions :::s41PC ::s41First ::s41Previous ::s41Next ::s41Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_TARGETGROUPTITLES']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s41TablePopup" childCreation="deferred">
+                          <af:menu id="menu14">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu15"></af:menu>
+                            <af:commandMenuItem id="s41delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s41DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s41ActionColumn" frozen="true" width="20"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl10">
+                          <af:commandImageLink id="s41delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s41DeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s41TTNCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetTrackingNo"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S41TARGETTRACKINGNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.TargetTrackingNo.label}"
+                                          showRequired="#{bindings.TargetGroupTitlesTable.hints.TargetTrackingNo.mandatory}"
+                                          id="ol16"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s41TargetTrackingNoPgl"
+                                             layout="horizontal">
+                          <af:inputText id="s41TTN"
+                                        label="#{bindings.TargetGroupTitlesTable.hints.TargetTrackingNo.label}"
+                                        readOnly="#{((pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                        columns="#{bindings.TargetGroupTitlesTable.hints.TargetTrackingNo.displayWidth}"
+                                        maximumLength="38"
+                                        shortDesc="#{bindings.TargetGroupTitlesTable.hints.TargetTrackingNo.tooltip}"
+                                        value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s41TargetTrackingNoLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s41TargetTrackingNoLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.TargetGroupTitlesTable.hints.TargetTrackingNo.format}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))))}"
+                                          id="cl3"
+                                          actionListener="#{pageFlowScope.s41TargetTrackingNoLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s41TargetTrackingNoIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb5"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s41TargetTrackingNoLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s41TargetTrackingNoLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s41ELCol" noWrap="true" width="30"
+                                 rowHeader="false" helpTopicId="RBH_S41EDITLINK"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="Edit" id="ol17"/>
+                        </f:facet>
+                        <af:inputText id="cl4" value="" label="Edit"
+                                      required="false" columns="5"
+                                      maximumLength="5" readOnly="true"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}"></af:inputText>
+                        <af:commandLink id="s41EL" text="Edit"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Titles"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s41TitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Title - #{bindings.s41TargetTrackingNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s41TitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s41CNCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CatalogNumber" rowHeader="false"
+                                 helpTopicId="RBH_S41CATALOGNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.CatalogNumber.label}"
+                                          id="ol18"/>
+                        </f:facet>
+                        <af:inputText id="s41CN"
+                                      value="#{row.bindings.CatalogNumber.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.CatalogNumber.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.CatalogNumber.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.CatalogNumber.displayHeight}"
+                                      columns="#{bindings.TargetGroupTitlesTable.hints.CatalogNumber.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.CatalogNumber.tooltip}"
+                                      autoSubmit="true">
+                          <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s41TtlCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="LongTitle" rowHeader="false"
+                                 helpTopicId="RBH_S41LONGTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.LongTitle.label}"
+                                          id="ol19"/>
+                        </f:facet>
+                        <af:inputText id="s41Ttl"
+                                      value="#{row.bindings.LongTitle.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.LongTitle.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.LongTitle.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.LongTitle.displayHeight}"
+                                      columns="40" maximumLength="4000"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.LongTitle.tooltip}">
+                          <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s41SuCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240"
+                                 sortProperty="Subject" rowHeader="false"
+                                 helpTopicId="RBH_S41SUBJECT"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.Subject.label}"
+                                          id="ol20"/>
+                        </f:facet>
+                        <af:inputText id="s41Su"
+                                      value="#{row.bindings.Subject.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.Subject.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.Subject.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.Subject.displayHeight}"
+                                      columns="#{bindings.TargetGroupTitlesTable.hints.Subject.displayWidth}"
+                                      maximumLength="200" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.Subject.tooltip}">
+                          <f:validator binding="#{row.bindings.Subject.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s41SuTCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="SubjectType" rowHeader="false"
+                                 helpTopicId="RBH_S41SUBJECTTYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.SubjectType.label}"
+                                          id="ol21"/>
+                        </f:facet>
+                        <af:inputText id="s41SuT"
+                                      value="#{row.bindings.SubjectType.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.SubjectType.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.SubjectType.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.SubjectType.displayHeight}"
+                                      columns="#{bindings.TargetGroupTitlesTable.hints.SubjectType.displayWidth}"
+                                      maximumLength="200" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.SubjectType.tooltip}">
+                          <f:validator binding="#{row.bindings.SubjectType.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s41AccountNoCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="AccountNo" rowHeader="false"
+                                 helpTopicId="RBH_S41ACCOUNTNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.AccountNo.label}"
+                                          id="ol22"/>
+                        </f:facet>
+                        <af:inputText id="s41AccountNo"
+                                      value="#{row.bindings.AccountNo.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.AccountNo.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.AccountNo.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.AccountNo.displayHeight}"
+                                      columns="#{bindings.TargetGroupTitlesTable.hints.AccountNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.AccountNo.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.TargetGroupTitlesTable.hints.AccountNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s41AccountNameCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="AccountName" rowHeader="false"
+                                 helpTopicId="RBH_S41ACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.AccountName.label}"
+                                          id="ol23"/>
+                        </f:facet>
+                        <af:inputText id="cl5"
+                                      value="#{row.bindings.AccountName.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.AccountName.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.AccountName.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.AccountName.displayHeight}"
+                                      columns="#{bindings.TargetGroupTitlesTable.hints.AccountName.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.AccountName.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s41AccountName"
+                                        text="#{row.bindings.AccountName.attributeValue}"
+                                        shortDesc="#{bindings.TargetGroupTitlesTable.hints.AccountName.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Accounts"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s41AccountId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Account #{bindings.s41AccountNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s41AccountId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s41AccountCountryCol" sortable="true"
+                                 filterable="true" noWrap="true" width="500"
+                                 sortProperty="AccountCountry" rowHeader="false"
+                                 helpTopicId="RBH_S41ACCOUNTCOUNTRY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.AccountCountry.label}"
+                                          id="ol24"/>
+                        </f:facet>
+                        <af:inputText id="s41AccountCountry"
+                                      value="#{row.bindings.AccountCountry.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.AccountCountry.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.AccountCountry.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.AccountCountry.displayHeight}"
+                                      columns="#{bindings.TargetGroupTitlesTable.hints.AccountCountry.displayWidth}"
+                                      maximumLength="100" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.AccountCountry.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountCountry.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s41ADCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="AddedDate" rowHeader="false"
+                                 helpTopicId="RBH_S41ADDEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.AddedDate.label}"
+                                          showRequired="#{bindings.TargetGroupTitlesTable.hints.AddedDate.mandatory}"
+                                          id="ol25"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                        id="id2">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s41AD"
+                                      value="#{row.bindings.AddedDate.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.AddedDate.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.AddedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.AddedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s41RDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="RemovedDate" rowHeader="false"
+                                 helpTopicId="RBH_S41REMOVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.RemovedDate.label}"
+                                          showRequired="#{bindings.TargetGroupTitlesTable.hints.RemovedDate.mandatory}"
+                                          id="ol26"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                        id="id3">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s41RD"
+                                      value="#{row.bindings.RemovedDate.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.RemovedDate.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.RemovedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.RemovedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s41OACol" sortable="true" filterable="true"
+                                 noWrap="true" width="240"
+                                 sortProperty="OpenAccess" rowHeader="false"
+                                 helpTopicId="RBH_S41OPENACCESS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.OpenAccess.label}"
+                                          showRequired="#{bindings.TargetGroupTitlesTable.hints.OpenAccess.mandatory}"
+                                          id="ol27"/>
+                        </f:facet>
+                        <af:inputText id="s41OA"
+                                      value="#{row.bindings.OpenAccess.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.OpenAccess.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.OpenAccess.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.OpenAccess.displayHeight}"
+                                      columns="#{bindings.TargetGroupTitlesTable.hints.OpenAccess.displayWidth}"
+                                      maximumLength="20"
+                                      readOnly="#{((pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTitlesTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.OpenAccess.tooltip}">
+                          <f:validator binding="#{row.bindings.OpenAccess.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s41ExternalIndexesCol" sortable="true"
+                                 filterable="true" noWrap="true" width="500"
+                                 sortProperty="ExternalIndexes"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S41EXTERNALINDEXES"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTitlesTable.hints.ExternalIndexes.label}"
+                                          id="ol28"/>
+                        </f:facet>
+                        <af:inputText id="s41ExternalIndexes"
+                                      value="#{row.bindings.ExternalIndexes.inputValue}"
+                                      label="#{bindings.TargetGroupTitlesTable.hints.ExternalIndexes.label}"
+                                      required="#{bindings.TargetGroupTitlesTable.hints.ExternalIndexes.mandatory}"
+                                      rows="#{bindings.TargetGroupTitlesTable.hints.ExternalIndexes.displayHeight}"
+                                      columns="#{bindings.TargetGroupTitlesTable.hints.ExternalIndexes.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTitlesTable.hints.ExternalIndexes.tooltip}">
+                          <f:validator binding="#{row.bindings.ExternalIndexes.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_TARGETGROUPTARGETS']}"
+                               partialTriggers=" TrgTopLc s42DeleteDialog qsAreas42SearchOptions s42PC:s42Arm s42PC:s42duprmTM s42PC:s42delrmTM s42PC:s42Arl s42PC:s42Tab:s42duprm s42PC:s42Tab:s42delrm s42PC:s42Tab:s42delrl s42PC:s42Tab:s42duprl"
+                               id="s42TopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="s42TopLc"
+                                   partialTriggers=" TrgTopLc s42DeleteDialog qsAreas42SearchOptions s42PC:s42Arm s42PC:s42duprmTM s42PC:s42delrmTM s42PC:s42Arl s42PC:s42Tab:s42duprm s42PC:s42Tab:s42delrm s42PC:s42Tab:s42delrl s42PC:s42Tab:s42duprl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp7"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreas42"
+                                     rendered="#{!pageFlowScope.createModes.CreateTargetGroupTargets and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreas42SearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.TargetGroupTargetsIteratorPrmTargetedProductTitleViewCriteriaQuery.queryDescriptor}"
+                                 model="#{bindings.TargetGroupTargetsIteratorPrmTargetedProductTitleViewCriteriaQuery.queryModel}"
+                                 queryListener="#{bindings.TargetGroupTargetsIteratorPrmTargetedProductTitleViewCriteriaQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl11">
+                  <af:panelCollection id="s42PC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu16">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu17">
+                          <af:group id="s42tbb"
+                                    rendered="#{ bindings.TargetGroupTargetsIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstTargetGroupTargets.execute}"
+                                                id="s42First"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousTargetGroupTargets.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="s42Previous"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextTargetGroupTargets.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="s42Next"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastTargetGroupTargets.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="s42Last"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="s42Arm"
+                                            textAndAccessKey="#{nls['ADD_ROW']}"
+                                            immediate="false"
+                                            icon="/jheadstart/images/addRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.TargetGroupTargetsTable.addRow}"
+                                            rendered="#{ (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s42duprmTM"
+                                            textAndAccessKey="#{nls['DUPLICATE_ROW']}"
+                                            immediate="true"
+                                            icon="/jheadstart/images/duplicateRow.png"
+                                            partialSubmit="true"
+                                            actionListener="#{pageFlowScope.TargetGroupTargetsTable.duplicateRow}"
+                                            rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}"></af:commandMenuItem>
+                        <af:commandMenuItem id="s42delrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}">
+                          <af:showPopupBehavior popupId="::s42DeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi2">
+                          <af:exportCollectionActionListener exportedId="s42Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetGroupTargets.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar5">
+                        <!-- Also create CreateTargetGroupTargets bean so we can start table group in create mode as well -->
+                        <af:commandImageLink id="s42Arl" immediate="false"
+                                             rendered="#{ (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                             partialSubmit="true"
+                                             actionListener="#{pageFlowScope.TargetGroupTargetsTable.addRow}"
+                                             shortDesc="#{nls['ADD_ROW']}"
+                                             icon="/jheadstart/images/addRow.png"/>
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl6"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="s42Tab"
+                                                             type="excelHTML"
+                                                             filename="TargetGroupTargets.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print" id="s42Print"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.TargetGroupTargetsIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="s42Tab" contentDelivery="immediate"
+                              value="#{bindings.TargetGroupTargetsTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.TargetGroupTargetsTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.TargetGroupTargetsTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.TargetGroupTargetsTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.TargetGroupTargetsTable.rangeSize}"
+                              autoHeightRows="#{bindings.TargetGroupTargetsTable.estimatedRowCount lt 5 ? 5 : bindings.TargetGroupTargetsTable.estimatedRowCount lt bindings.TargetGroupTargetsTable.rangeSize ? bindings.TargetGroupTargetsTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.TargetGroupTargetsTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.TargetGroupTargetsIteratorPrmTargetedProductTitleViewCriteriaQuery.processQuery}"
+                              filterModel="#{bindings.TargetGroupTargetsIteratorPrmTargetedProductTitleViewCriteriaQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.TargetGroupTargetsTable.table}"
+                              partialTriggers=":::qsAreas42SearchOptions :::s42PC ::s42First ::s42Previous ::s42Next ::s42Last"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_TARGETGROUPTARGETS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="s42TablePopup" childCreation="deferred">
+                          <af:menu id="menu18">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu19"></af:menu>
+                            <af:commandMenuItem id="s42duprm"
+                                                textAndAccessKey="#{nls['DUPLICATE_ROW']}"
+                                                immediate="true"
+                                                icon="/jheadstart/images/duplicateRow.png"
+                                                partialSubmit="true"
+                                                actionListener="#{pageFlowScope.TargetGroupTargetsTable.duplicateRow}"
+                                                rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}"></af:commandMenuItem>
+                            <af:commandMenuItem id="s42delrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}">
+                              <af:showPopupBehavior popupId=":::s42DeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="s42ActionColumn" frozen="true" width="40"
+                                 align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl12">
+                          <af:commandImageLink id="s42delrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::s42DeletePopup"/>
+                          </af:commandImageLink>
+                          <af:commandImageLink id="s42duprl" immediate="true"
+                                               partialSubmit="true"
+                                               actionListener="#{pageFlowScope.TargetGroupTargetsTable.duplicateRow}"
+                                               rendered="#{jhsUserRoles['AM,AST,PM,GCA,ADMIN']}"
+                                               shortDesc="#{nls['DUPLICATE_ROW']}"
+                                               icon="/jheadstart/images/duplicateRow.png"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s42TTNCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetTrackingNo"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S42TARGETTRACKINGNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.TargetTrackingNo.label}"
+                                          showRequired="#{bindings.TargetGroupTargetsTable.hints.TargetTrackingNo.mandatory}"
+                                          id="ol29"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s42TargetTrackingNoPgl"
+                                             layout="horizontal">
+                          <af:inputText id="s42TTN"
+                                        label="#{bindings.TargetGroupTargetsTable.hints.TargetTrackingNo.label}"
+                                        readOnly="#{((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                        columns="#{bindings.TargetGroupTargetsTable.hints.TargetTrackingNo.displayWidth}"
+                                        maximumLength="20"
+                                        shortDesc="#{bindings.TargetGroupTargetsTable.hints.TargetTrackingNo.tooltip}"
+                                        value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s42TargetTrackingNoLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s42TargetTrackingNoLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.TargetGroupTargetsTable.hints.TargetTrackingNo.format}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))))}"
+                                          id="cl7"
+                                          actionListener="#{pageFlowScope.s42TargetTrackingNoLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s42TargetTrackingNoIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb8"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s42TargetTrackingNoLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s42TargetTrackingNoLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s42CNCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CatalogNumber" rowHeader="false"
+                                 helpTopicId="RBH_S42CATALOGNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.CatalogNumber.label}"
+                                          id="ol30"/>
+                        </f:facet>
+                        <af:inputText id="s42CN"
+                                      value="#{row.bindings.CatalogNumber.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.CatalogNumber.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.CatalogNumber.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.CatalogNumber.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.CatalogNumber.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.CatalogNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42TtlCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="LongTitle" rowHeader="false"
+                                 helpTopicId="RBH_S42LONGTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.LongTitle.label}"
+                                          id="ol31"/>
+                        </f:facet>
+                        <af:inputText id="s42Ttl"
+                                      value="#{row.bindings.LongTitle.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.LongTitle.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.LongTitle.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.LongTitle.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.LongTitle.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.LongTitle.tooltip}">
+                          <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42AuCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240" sortProperty="Author"
+                                 rowHeader="false" helpTopicId="RBH_S42AUTHOR"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.Author.label}"
+                                          id="ol32"/>
+                        </f:facet>
+                        <af:inputText id="s42Au"
+                                      value="#{row.bindings.Author.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.Author.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.Author.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.Author.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.Author.displayWidth}"
+                                      maximumLength="600" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.Author.tooltip}">
+                          <f:validator binding="#{row.bindings.Author.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42NmCol" sortable="true" filterable="true"
+                                 noWrap="true" width="240" sortProperty="Name"
+                                 rowHeader="false" helpTopicId="RBH_S42NAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.Name.label}"
+                                          id="ol33"/>
+                        </f:facet>
+                        <af:inputText id="s42Nm"
+                                      value="#{row.bindings.Name.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.Name.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.Name.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.Name.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.Name.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.Name.tooltip}">
+                          <f:validator binding="#{row.bindings.Name.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42PICol" sortable="true" filterable="true"
+                                 noWrap="true" width="228" sortProperty="PrdId"
+                                 align="right" rowHeader="false"
+                                 helpTopicId="RBH_S42PRDID"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.PrdId.label}"
+                                          id="ol34"/>
+                        </f:facet>
+                        <af:inputText id="s42PI"
+                                      value="#{row.bindings.PrdId.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.PrdId.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.PrdId.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.PrdId.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.PrdId.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.PrdId.tooltip}">
+                          <f:validator binding="#{row.bindings.PrdId.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.TargetGroupTargetsTable.hints.PrdId.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42PNmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="260"
+                                 sortProperty="ProductName" rowHeader="false"
+                                 helpTopicId="RBH_S42PRODUCTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.ProductName.label}"
+                                          showRequired="#{bindings.TargetGroupTargetsTable.hints.ProductName.mandatory}"
+                                          id="ol35"/>
+                        </f:facet>
+                        <af:panelGroupLayout id="s42ProductNamePgl"
+                                             layout="horizontal">
+                          <af:inputText id="s42PNm"
+                                        label="#{bindings.TargetGroupTargetsTable.hints.ProductName.label}"
+                                        readOnly="#{((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                        columns="#{bindings.TargetGroupTargetsTable.hints.ProductName.displayWidth}"
+                                        maximumLength="400"
+                                        shortDesc="#{bindings.TargetGroupTargetsTable.hints.ProductName.tooltip}"
+                                        value="#{row.bindings.ProductName.inputValue}"
+                                        autoSubmit="true"
+                                        valueChangeListener="#{pageFlowScope.s42ProductNameLovItemInTable.validateWithLov}"
+                                        binding="#{pageFlowScope.s42ProductNameLovItemInTable.lovField}"
+                                        simple="true">
+                            <f:validator binding="#{row.bindings.ProductName.validator}"/>
+                          </af:inputText>
+                          <af:commandLink immediate="true" partialSubmit="true"
+                                          rendered="#{!(((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))))}"
+                                          id="cl8"
+                                          actionListener="#{pageFlowScope.s42ProductNameLovItemInTable.lovIconClicked}">
+                            <af:image source="/jheadstart/images/lov.png"
+                                      id="s42ProductNameIcon"
+                                      clientComponent="true"/>
+                          </af:commandLink>
+                          <af:commandButton text="hidden" id="cb11"
+                                            rendered="false"
+                                            action="#{pageFlowScope.s42ProductNameLovItemInTable.validationAction}"
+                                            binding="#{pageFlowScope.s42ProductNameLovItemInTable.validationButton}"/>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="s42PFmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="ProductFamily" rowHeader="false"
+                                 helpTopicId="RBH_S42PRODUCTFAMILY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.ProductFamily.label}"
+                                          id="ol36"/>
+                        </f:facet>
+                        <af:inputText id="s42PFm"
+                                      value="#{row.bindings.ProductFamily.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.ProductFamily.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.ProductFamily.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.ProductFamily.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.ProductFamily.displayWidth}"
+                                      maximumLength="100" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.ProductFamily.tooltip}">
+                          <f:validator binding="#{row.bindings.ProductFamily.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42AiTargetingFlagCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="AiTargetingFlag" align="center"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S42AITARGETINGFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.AiTargetingFlag.label}"
+                                          showRequired="#{bindings.TargetGroupTargetsTable.hints.AiTargetingFlag.mandatory}"
+                                          id="ol37"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="s42AiTargetingFlag"
+                                                  label="#{bindings.TargetGroupTargetsTable.hints.AiTargetingFlag.label}"
+                                                  value="#{s42AiTargetingFlagcheckboxInTable.value}"
+                                                  readOnly="#{((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                                  shortDesc="#{bindings.TargetGroupTargetsTable.hints.AiTargetingFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="s42ADCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="AddedDate" rowHeader="false"
+                                 helpTopicId="RBH_S42ADDEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.AddedDate.label}"
+                                          showRequired="#{bindings.TargetGroupTargetsTable.hints.AddedDate.mandatory}"
+                                          id="ol38"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                        id="id4">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s42AD"
+                                      value="#{row.bindings.AddedDate.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.AddedDate.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.AddedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.AddedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s42RDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="RemovedDate" rowHeader="false"
+                                 helpTopicId="RBH_S42REMOVEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.RemovedDate.label}"
+                                          showRequired="#{bindings.TargetGroupTargetsTable.hints.RemovedDate.mandatory}"
+                                          id="ol39"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.RemovedDate}"
+                                        id="id5">
+                            <af:convertDateTime pattern="#{nls.datepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s42RD"
+                                      value="#{row.bindings.RemovedDate.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.RemovedDate.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.RemovedDate.mandatory}"
+                                      readOnly="#{((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.RemovedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s42OpportunityNoCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="OpportunityNo" rowHeader="false"
+                                 helpTopicId="RBH_S42OPPORTUNITYNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.OpportunityNo.label}"
+                                          id="ol40"/>
+                        </f:facet>
+                        <af:inputText id="s42OpportunityNo"
+                                      value="#{row.bindings.OpportunityNo.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.OpportunityNo.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.OpportunityNo.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.OpportunityNo.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.OpportunityNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.OpportunityNo.tooltip}">
+                          <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.TargetGroupTargetsTable.hints.OpportunityNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42ONmCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="OpportunityName"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S42OPPORTUNITYNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.OpportunityName.label}"
+                                          id="ol41"/>
+                        </f:facet>
+                        <af:inputText id="cl9"
+                                      value="#{row.bindings.OpportunityName.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.OpportunityName.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.OpportunityName.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.OpportunityName.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.OpportunityName.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.OpportunityName.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="s42ONm"
+                                        text="#{row.bindings.OpportunityName.attributeValue}"
+                                        shortDesc="#{bindings.TargetGroupTargetsTable.hints.OpportunityName.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Opportunity"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.s42OpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="#{bindings.s42OpportunityName.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.s42OpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="s42NSCol" sortable="true" filterable="true"
+                                 noWrap="true" width="180"
+                                 sortProperty="NegotiationStage"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S42NEGOTIATIONSTAGE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.NegotiationStage.label}"
+                                          id="ol42"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s42NS"
+                                            value="#{row.bindings.NegotiationStage.inputValue}"
+                                            label="#{bindings.TargetGroupTargetsTable.hints.NegotiationStage.label}"
+                                            required="#{bindings.TargetGroupTargetsTable.hints.NegotiationStage.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.TargetGroupTargetsTable.hints.NegotiationStage.tooltip}">
+                          <f:selectItems value="#{row.bindings.NegotiationStage.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s42OANCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="OpportunityAccountName"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S42OPPORTUNITYACCOUNTNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.OpportunityAccountName.label}"
+                                          id="ol43"/>
+                        </f:facet>
+                        <af:inputText id="s42OAN"
+                                      value="#{row.bindings.OpportunityAccountName.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.OpportunityAccountName.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.OpportunityAccountName.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.OpportunityAccountName.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.OpportunityAccountName.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.OpportunityAccountName.tooltip}">
+                          <f:validator binding="#{row.bindings.OpportunityAccountName.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42OACol" sortable="true" filterable="true"
+                                 noWrap="true" width="240"
+                                 sortProperty="OpenAccess" rowHeader="false"
+                                 helpTopicId="RBH_S42OPENACCESS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.OpenAccess.label}"
+                                          showRequired="#{bindings.TargetGroupTargetsTable.hints.OpenAccess.mandatory}"
+                                          id="ol44"/>
+                        </f:facet>
+                        <af:inputText id="s42OA"
+                                      value="#{row.bindings.OpenAccess.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.OpenAccess.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.OpenAccess.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.OpenAccess.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.OpenAccess.displayWidth}"
+                                      maximumLength="20"
+                                      readOnly="#{((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.OpenAccess.tooltip}">
+                          <f:validator binding="#{row.bindings.OpenAccess.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42ExternalIndexesCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="ExternalIndexes"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S42EXTERNALINDEXES"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.ExternalIndexes.label}"
+                                          id="ol45"/>
+                        </f:facet>
+                        <af:inputText id="s42ExternalIndexes"
+                                      value="#{row.bindings.ExternalIndexes.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.ExternalIndexes.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.ExternalIndexes.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.ExternalIndexes.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.ExternalIndexes.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.ExternalIndexes.tooltip}">
+                          <f:validator binding="#{row.bindings.ExternalIndexes.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42CBCol" sortable="true" filterable="true"
+                                 noWrap="true" width="120"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S42CREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.CreatedBy.label}"
+                                          id="ol46"/>
+                        </f:facet>
+                        <af:inputText id="s42CB"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.CreatedBy.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42CDCol" sortable="true" filterable="true"
+                                 noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_S42CREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.CreatedDate.label}"
+                                          id="ol47"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id6">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s42CD"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.CreatedDate.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s42LUBCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="LastUpdatedBy" rowHeader="false"
+                                 helpTopicId="RBH_S42LASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedBy.label}"
+                                          id="ol48"/>
+                        </f:facet>
+                        <af:inputText id="s42LUB"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="s42LUDCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S42LASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedDate.label}"
+                                          id="ol49"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id7">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="s42LUD"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="s42TargetPriorityCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetPriority" rowHeader="false"
+                                 helpTopicId="RBH_S42TARGETPRIORITY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.TargetPriority.label}"
+                                          showRequired="#{bindings.TargetGroupTargetsTable.hints.TargetPriority.mandatory}"
+                                          id="ol50"/>
+                        </f:facet>
+                        <af:selectOneChoice id="s42TargetPriority"
+                                            value="#{row.bindings.TargetPriority.inputValue}"
+                                            label="#{bindings.TargetGroupTargetsTable.hints.TargetPriority.label}"
+                                            required="#{bindings.TargetGroupTargetsTable.hints.TargetPriority.mandatory}"
+                                            readOnly="#{((pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))) or ((!pageFlowScope.TargetGroupTargetsTable.newRow) and (!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])))}"
+                                            shortDesc="#{bindings.TargetGroupTargetsTable.hints.TargetPriority.tooltip}">
+                          <f:selectItems value="#{row.bindings.TargetPriority.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="s42AllianceManagerCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="AllianceManager"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_S42ALLIANCEMANAGER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.TargetGroupTargetsTable.hints.AllianceManager.label}"
+                                          id="ol51"/>
+                        </f:facet>
+                        <af:inputText id="s42AllianceManager"
+                                      value="#{row.bindings.AllianceManager.inputValue}"
+                                      label="#{bindings.TargetGroupTargetsTable.hints.AllianceManager.label}"
+                                      required="#{bindings.TargetGroupTargetsTable.hints.AllianceManager.mandatory}"
+                                      rows="#{bindings.TargetGroupTargetsTable.hints.AllianceManager.displayHeight}"
+                                      columns="#{bindings.TargetGroupTargetsTable.hints.AllianceManager.displayWidth}"
+                                      maximumLength="240" readOnly="true"
+                                      shortDesc="#{bindings.TargetGroupTargetsTable.hints.AllianceManager.tooltip}">
+                          <f:validator binding="#{row.bindings.AllianceManager.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+          </af:panelTabbed>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="TrgDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="TrgDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_TARGETIN: #{bindings.TrgGroupName.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteTargeting.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="TrgGroupNamePopup" contentDelivery="lazyUncached"
+                  eventContext="launcher" childCreation="deferred">
+          <af:dialog modal="true" resize="on" title="Text Editor" id="dialog0">
+            <af:inputText rows="10" columns="100"
+                          value="#{bindings.TrgGroupName.inputValue}"
+                          simple="true" maximumLength="400"
+                          id="TrgGroupNameEditorText"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s40DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s40DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_TARGETGROUPPRODUCT:#{pageFlowScope.TargetGroupProductsTable.currentRowAttributeValues.Name}']} "
+                           id="ot1"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteTargetGroupProducts.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="jhsLovPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher"
+                  binding="#{pageFlowScope.jhsLovPopup.component}">
+          <af:dialog modal="true" title="#{pageFlowScope.LovItemBean.lovTitle}"
+                     type="none" id="dialog1" resize="on"
+                     stretchChildren="first"
+                     contentWidth="#{pageFlowScope.LovItemBean.lovWidth}"
+                     contentHeight="#{pageFlowScope.LovItemBean.lovHeight}">
+            <af:region value="#{bindings.LovTaskFlow.regionModel}"
+                       id="region0"/>
+            <f:facet name="buttonBar">
+              <af:group id="g0">
+                <af:commandButton textAndAccessKey="#{nls['OK_BUTTON_LABEL']}"
+                                  id="cb0" partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.handleLovSelection}"/>
+                <af:commandButton textAndAccessKey="#{nls['CANCEL']}" id="cb1"
+                                  partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.cancelLov}"/>
+              </af:group>
+            </f:facet>
+          </af:dialog>
+          <af:clientListener method="popupClosedListener" type="popupClosed"/>
+          <af:serverListener type="serverPopupClosed"
+                             method="#{pageFlowScope.LovItemBean.cancelLov}"/>
+        </af:popup>
+        <af:popup id="s400DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s400DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_TARGETGROUPPRODUCTFORMAT:#{pageFlowScope.TargetGroupProductFormatsTable.currentRowAttributeValues.TargetedFormat}']} "
+                           id="ot4"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteTargetGroupProductFormats.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s401DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s401DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_TARGETGROUPPRODUCTMARKET:#{pageFlowScope.TargetGroupProductMarketsTable.currentRowAttributeValues.TargetedMarket}']} "
+                           id="ot7"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteTargetGroupProductMarkets.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s41DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s41DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_TARGETGROUPTITLE:#{pageFlowScope.TargetGroupTitlesTable.currentRowAttributeValues.CatalogNumber}']} "
+                           id="ot10"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteTargetGroupTitles.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s42DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s42DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_TARGETGROUPTARGET:#{pageFlowScope.TargetGroupTargetsTable.currentRowAttributeValues.LongTitle}']} "
+                           id="ot13"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteTargetGroupTargets.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

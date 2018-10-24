@@ -1,0 +1,2297 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="ImportsTopLc"
+                             partialTriggers=" Importsfbb ImportsSaveButton0 ImportsCancelButton0 ImportsSaveButton1 ImportsCancelButton1"
+                             rendered="#{jhsUserRoles['PI, ADMIN, AM, AST, PM']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateImports ? nls['INSERT_TITLE_IMPORTS'] :  (jhsUserRoles['PI,ADMIN'] ? nls['EDIT_TITLE_IMPORT: #{bindings.ImportsFileName.inputValue}'] : nls['VIEW_TITLE_IMPORT: #{bindings.ImportsFileName.inputValue}'])  }"
+                          helpTopicId="RBH_IMPORTS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="Importsfbb" layout="horizontal"
+                                       rendered="#{ bindings.ImportsIterator.currentRow!=null  and bindings.ImportsIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateImports and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="ImportsFirst ImportsPrevious ImportsNext ImportsLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstImports.execute}"
+                                             id="ImportsFirst"
+                                             partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousImports.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="ImportsPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1} / #{bindings.ImportsIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextImports.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="ImportsNext"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1 lt bindings.ImportsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1 lt bindings.ImportsIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastImports.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="ImportsLast"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1 lt bindings.ImportsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.ImportsIterator.rangeStart+bindings.ImportsIterator.currentRowIndexInRange+1 lt bindings.ImportsIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0"></af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton action="#{SaveImports.execute}"
+                                      rendered="#{(((((jhsUserRoles['PI,ADMIN']) or (jhsUserRoles['PI,ADMIN'])) or (jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')) or (bindings.ImportsImportStatus ne 'Imported')) or (jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus eq 'Validated')) and (!pageFlowScope.hideSaveButton)}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="ImportsSaveButton0"
+                                      partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="ImportsCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.ImportsIterator.findMode!='true'}"
+                       id="ImportsSw" defaultFacet="hasRows"
+                       facetName="#{( bindings.ImportsIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp"
+                                  id="ImportsNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="ImportsFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="5"
+                                    id="ImportsFI"></af:panelFormLayout>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout valign="top" layout="horizontal"
+                                     id="ImportsRegionsPGL" inlineStyle="  ">
+                  <f:facet name="separator">
+                    <af:spacer width="10" height="10" id="sp3"/>
+                  </f:facet>
+                  <af:panelGroupLayout inlineStyle=" " layout="vertical"
+                                       id="ImportsRegionsFileRegionPgl">
+                    <af:panelFormLayout rows="1" maxColumns="1"
+                                        labelAlignment="top"
+                                        id="ImportsFileRegionPanelForm">
+                      <af:inputText id="ImportsImportNumber"
+                                    value="#{bindings.ImportsImportNumber.inputValue}"
+                                    label="#{bindings.ImportsImportNumber.hints.label}"
+                                    required="#{bindings.ImportsImportNumber.hints.mandatory}"
+                                    rows="#{bindings.ImportsImportNumber.hints.displayHeight}"
+                                    columns="#{bindings.ImportsImportNumber.hints.displayWidth}"
+                                    maximumLength="38" readOnly="true"
+                                    shortDesc="#{bindings.ImportsImportNumber.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSIMPORTNUMBER">
+                        <f:validator binding="#{bindings.ImportsImportNumber.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.ImportsImportNumber.format}"/>
+                      </af:inputText>
+                      <af:inputText id="ImportsFileName"
+                                    value="#{bindings.ImportsFileName.inputValue}"
+                                    label="#{bindings.ImportsFileName.hints.label}"
+                                    required="#{bindings.ImportsFileName.hints.mandatory}"
+                                    rows="#{bindings.ImportsFileName.hints.displayHeight}"
+                                    columns="#{bindings.ImportsFileName.hints.displayWidth}"
+                                    maximumLength="200"
+                                    readOnly="#{((pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN']))) or ((!pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN'])))}"
+                                    shortDesc="#{bindings.ImportsFileName.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSFILENAME">
+                        <f:validator binding="#{bindings.ImportsFileName.validator}"/>
+                      </af:inputText>
+                      <af:selectOneChoice id="ImportsImportType"
+                                          value="#{bindings.ImportsImportType.inputValue}"
+                                          label="#{bindings.ImportsImportType.hints.label}"
+                                          required="#{bindings.ImportsImportType.hints.mandatory}"
+                                          readOnly="#{(((pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN']))) or ((!pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN'])))) or (!(pageFlowScope.createModes.CreateImports))}"
+                                          shortDesc="#{bindings.ImportsImportType.hints.tooltip}"
+                                          helpTopicId="RBH_IMPORTSIMPORTTYPE">
+                        <f:selectItems value="#{bindings.ImportsImportType.items}"/>
+                      </af:selectOneChoice>
+                      <af:inputText id="ImportsImportStatus"
+                                    value="#{bindings.ImportsImportStatus.inputValue}"
+                                    label="#{bindings.ImportsImportStatus.hints.label}"
+                                    required="#{bindings.ImportsImportStatus.hints.mandatory}"
+                                    rows="#{bindings.ImportsImportStatus.hints.displayHeight}"
+                                    columns="#{bindings.ImportsImportStatus.hints.displayWidth}"
+                                    maximumLength="20" readOnly="true"
+                                    shortDesc="#{bindings.ImportsImportStatus.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSIMPORTSTATUS">
+                        <f:validator binding="#{bindings.ImportsImportStatus.validator}"/>
+                      </af:inputText>
+                      <af:inputFile id="ImportsImportFile"
+                                    label="#{bindings.ImportsImportFile.hints.label}"
+                                    columns="#{bindings.ImportsImportFile.hints.displayWidth}"
+                                    binding="#{ImportsImportFileFileHandlerBean.usesUploadIndicator}"
+                                    rendered="#{(!((((pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN']))) or ((!pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN'])))) or (!(pageFlowScope.createModes.CreateImports)))) and (true)}"
+                                    shortDesc="#{bindings.ImportsImportFile.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSIMPORTFILE"
+                                    valueChangeListener="#{ImportsImportFileFileHandlerBean.uploadFile}"/>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout inlineStyle=" " layout="vertical"
+                                       id="ImportsRegionsParseRegionPgl">
+                    <af:panelFormLayout rows="1" maxColumns="1"
+                                        labelAlignment="top"
+                                        id="ImportsParseRegionPanelForm">
+                      <af:panelLabelAndMessage label="Download File"
+                                               id="ImportsImportFileDLLabel"
+                                               shortDesc="#{bindings.ImportsImportFileDL.hints.tooltip}"
+                                               helpTopicId="RBH_IMPORTSIMPORTFILEDL">
+                        <af:commandLink id="ImportsImportFileDL"
+                                        rendered="#{ImportsImportFileDLFileHandlerBean.fileExist}">
+                          <af:outputText id="ot0"
+                                         value="#{ImportsImportFileDLFileHandlerBean.fileName}"/>
+                          <af:fileDownloadActionListener contentType="#{ImportsImportFileDLFileHandlerBean.contentType}"
+                                                         filename="#{ImportsImportFileDLFileHandlerBean.fileName}"
+                                                         method="#{ImportsImportFileDLFileHandlerBean.downloadFile}"/>
+                        </af:commandLink>
+                        <f:facet name="end">
+                          <af:panelGroupLayout id="pgl0" valign="top"
+                                               layout="horizontal"></af:panelGroupLayout>
+                        </f:facet>
+                      </af:panelLabelAndMessage>
+                      <af:inputText id="ImportsParsedRowCount"
+                                    value="#{bindings.ImportsParsedRowCount.inputValue}"
+                                    label="#{bindings.ImportsParsedRowCount.hints.label}"
+                                    required="#{bindings.ImportsParsedRowCount.hints.mandatory}"
+                                    rows="#{bindings.ImportsParsedRowCount.hints.displayHeight}"
+                                    columns="#{bindings.ImportsParsedRowCount.hints.displayWidth}"
+                                    maximumLength="38" readOnly="true"
+                                    shortDesc="#{bindings.ImportsParsedRowCount.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSPARSEDROWCOUNT">
+                        <f:validator binding="#{bindings.ImportsParsedRowCount.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.ImportsParsedRowCount.format}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout inlineStyle=" " layout="vertical"
+                                       id="ImportsRegionsValidateRegionPgl">
+                    <af:panelFormLayout rows="1" maxColumns="1"
+                                        labelAlignment="top"
+                                        id="ImportsValidateRegionPanelForm">
+                      <af:panelLabelAndMessage id="ImportsStartValidatePlm"
+                                               helpTopicId="RBH_IMPORTSSTARTVALIDATE">
+                        <af:commandButton id="ImportsStartValidate"
+                                          textAndAccessKey="Validate and Match"
+                                          actionListener="#{bindings.ImportsStartValidate.execute}"
+                                          rendered="#{jhsUserRoles['PI,ADMIN']}"
+                                          disabled="#{bindings.ImportsImportStatus eq 'New' or bindings.ImportsImportStatus eq 'Imported' or bindings.ImportsParsedRowCount.inputValue eq '0'}"></af:commandButton>
+                        <f:facet name="end">
+                          <af:panelGroupLayout id="pgl1" valign="top"
+                                               layout="horizontal"></af:panelGroupLayout>
+                        </f:facet>
+                      </af:panelLabelAndMessage>
+                      <af:inputText id="ImportsPotentialMatchCount"
+                                    value="#{bindings.ImportsPotentialMatchCount.inputValue}"
+                                    label="#{bindings.ImportsPotentialMatchCount.hints.label}"
+                                    required="#{bindings.ImportsPotentialMatchCount.hints.mandatory}"
+                                    rows="#{bindings.ImportsPotentialMatchCount.hints.displayHeight}"
+                                    columns="#{bindings.ImportsPotentialMatchCount.hints.displayWidth}"
+                                    maximumLength="38" readOnly="true"
+                                    shortDesc="#{bindings.ImportsPotentialMatchCount.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSPOTENTIALMATCHCOUNT">
+                        <f:validator binding="#{bindings.ImportsPotentialMatchCount.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.ImportsPotentialMatchCount.format}"/>
+                      </af:inputText>
+                      <af:inputText id="ImportsValidatedRowCount"
+                                    value="#{bindings.ImportsValidatedRowCount.inputValue}"
+                                    label="#{bindings.ImportsValidatedRowCount.hints.label}"
+                                    required="#{bindings.ImportsValidatedRowCount.hints.mandatory}"
+                                    rows="#{bindings.ImportsValidatedRowCount.hints.displayHeight}"
+                                    columns="#{bindings.ImportsValidatedRowCount.hints.displayWidth}"
+                                    maximumLength="38" readOnly="true"
+                                    shortDesc="#{bindings.ImportsValidatedRowCount.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSVALIDATEDROWCOUNT">
+                        <f:validator binding="#{bindings.ImportsValidatedRowCount.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.ImportsValidatedRowCount.format}"/>
+                      </af:inputText>
+                      <af:inputText id="ImportsValidationWarningCount"
+                                    value="#{bindings.ImportsValidationWarningCount.inputValue}"
+                                    label="#{bindings.ImportsValidationWarningCount.hints.label}"
+                                    required="#{bindings.ImportsValidationWarningCount.hints.mandatory}"
+                                    rows="#{bindings.ImportsValidationWarningCount.hints.displayHeight}"
+                                    columns="#{bindings.ImportsValidationWarningCount.hints.displayWidth}"
+                                    maximumLength="38" readOnly="true"
+                                    shortDesc="#{bindings.ImportsValidationWarningCount.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSVALIDATIONWARNINGCOUNT">
+                        <f:validator binding="#{bindings.ImportsValidationWarningCount.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.ImportsValidationWarningCount.format}"/>
+                      </af:inputText>
+                      <af:inputText id="ImportsValidationErrorCount"
+                                    value="#{bindings.ImportsValidationErrorCount.inputValue}"
+                                    label="#{bindings.ImportsValidationErrorCount.hints.label}"
+                                    required="#{bindings.ImportsValidationErrorCount.hints.mandatory}"
+                                    rows="#{bindings.ImportsValidationErrorCount.hints.displayHeight}"
+                                    columns="#{bindings.ImportsValidationErrorCount.hints.displayWidth}"
+                                    maximumLength="38" readOnly="true"
+                                    shortDesc="#{bindings.ImportsValidationErrorCount.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSVALIDATIONERRORCOUNT">
+                        <f:validator binding="#{bindings.ImportsValidationErrorCount.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.ImportsValidationErrorCount.format}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout inlineStyle=" " layout="vertical"
+                                       id="ImportsRegionsImportRegionPgl">
+                    <af:panelFormLayout rows="1" maxColumns="1"
+                                        labelAlignment="top"
+                                        id="ImportsImportRegionPanelForm">
+                      <af:panelLabelAndMessage id="ImportsStartImportPlm"
+                                               helpTopicId="RBH_IMPORTSSTARTIMPORT">
+                        <af:commandButton id="ImportsStartImport"
+                                          textAndAccessKey="Import"
+                                          actionListener="#{bindings.ImportsStartImport.execute}"
+                                          rendered="#{jhsUserRoles['PI,ADMIN']}"
+                                          disabled="#{bindings.ImportsImportStatus.inputValue ne 'Validated' or bindings.ImportsImportTypeCheck.inputValue eq 'Lookup'}"></af:commandButton>
+                        <f:facet name="end">
+                          <af:panelGroupLayout id="pgl2" valign="top"
+                                               layout="horizontal"></af:panelGroupLayout>
+                        </f:facet>
+                      </af:panelLabelAndMessage>
+                      <af:inputText id="ImportsImportedRowCount"
+                                    value="#{bindings.ImportsImportedRowCount.inputValue}"
+                                    label="#{bindings.ImportsImportedRowCount.hints.label}"
+                                    required="#{bindings.ImportsImportedRowCount.hints.mandatory}"
+                                    rows="#{bindings.ImportsImportedRowCount.hints.displayHeight}"
+                                    columns="#{bindings.ImportsImportedRowCount.hints.displayWidth}"
+                                    maximumLength="38" readOnly="true"
+                                    shortDesc="#{bindings.ImportsImportedRowCount.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSIMPORTEDROWCOUNT">
+                        <f:validator binding="#{bindings.ImportsImportedRowCount.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.ImportsImportedRowCount.format}"/>
+                      </af:inputText>
+                      <af:inputText id="ImportsGroupNameNpr"
+                                    value="#{bindings.ImportsGroupName.inputValue}"
+                                    label="#{bindings.ImportsGroupName.hints.label}"
+                                    required="#{bindings.ImportsGroupName.hints.mandatory}"
+                                    rows="#{bindings.ImportsGroupName.hints.displayHeight}"
+                                    columns="#{bindings.ImportsGroupName.hints.displayWidth}"
+                                    maximumLength="400"
+                                    readOnly="#{((pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN']))) or ((!pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN'])))}"
+                                    rendered="#{adfFacesContext.outputMode eq 'printable'}"
+                                    shortDesc="#{bindings.ImportsGroupName.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSGROUPNAME">
+                        <f:validator binding="#{bindings.ImportsGroupName.validator}"/>
+                      </af:inputText>
+                      <af:panelLabelAndMessage id="ImportsGroupNamePlm"
+                                               label="#{bindings.ImportsGroupName.hints.label}"
+                                               shortDesc="#{bindings.ImportsGroupName.hints.tooltip}"
+                                               helpTopicId="RBH_IMPORTSGROUPNAME"
+                                               rendered="#{adfFacesContext.outputMode != 'printable'}">
+                        <af:commandLink id="ImportsGroupName"
+                                        text="#{bindings.ImportsGroupName.attributeValue}"
+                                        shortDesc="#{bindings.ImportsGroupName.hints.tooltip}"
+                                        action="LaunchTab">
+                          <af:setActionListener from="Targeting"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.ImportsGroupId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="#{bindings.ImportsGroupName.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.ImportsGroupId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueTargeting}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                        <f:facet name="end">
+                          <af:panelGroupLayout id="pgl3" valign="top"
+                                               layout="horizontal"></af:panelGroupLayout>
+                        </f:facet>
+                      </af:panelLabelAndMessage>
+                      <af:inputText id="ImportsGroupType"
+                                    value="#{bindings.ImportsGroupType.inputValue}"
+                                    label="#{bindings.ImportsGroupType.hints.label}"
+                                    required="#{bindings.ImportsGroupType.hints.mandatory}"
+                                    rows="#{bindings.ImportsGroupType.hints.displayHeight}"
+                                    columns="#{bindings.ImportsGroupType.hints.displayWidth}"
+                                    maximumLength="20"
+                                    readOnly="#{((pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN']))) or ((!pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN'])))}"
+                                    shortDesc="#{bindings.ImportsGroupType.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSGROUPTYPE">
+                        <f:validator binding="#{bindings.ImportsGroupType.validator}"/>
+                      </af:inputText>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                  <af:panelGroupLayout inlineStyle=" " layout="vertical"
+                                       id="ImportsRegionsDateRegionPgl">
+                    <af:panelFormLayout rows="1" maxColumns="1"
+                                        labelAlignment="top"
+                                        id="ImportsDateRegionPanelForm">
+                      <af:inputText id="ImportsImportNote"
+                                    value="#{bindings.ImportsImportNote.inputValue}"
+                                    label="#{bindings.ImportsImportNote.hints.label}"
+                                    required="#{bindings.ImportsImportNote.hints.mandatory}"
+                                    rows="#{bindings.ImportsImportNote.hints.displayHeight}"
+                                    columns="#{bindings.ImportsImportNote.hints.displayWidth}"
+                                    maximumLength="2000"
+                                    readOnly="#{((pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN']))) or ((!pageFlowScope.createModes.CreateImports) and (!(jhsUserRoles['PI,ADMIN'])))}"
+                                    shortDesc="#{bindings.ImportsImportNote.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSIMPORTNOTE">
+                        <f:validator binding="#{bindings.ImportsImportNote.validator}"/>
+                      </af:inputText>
+                      <af:inputText id="ImportsCreatedBy"
+                                    value="#{bindings.ImportsCreatedBy.inputValue}"
+                                    label="#{bindings.ImportsCreatedBy.hints.label}"
+                                    required="#{bindings.ImportsCreatedBy.hints.mandatory}"
+                                    rows="#{bindings.ImportsCreatedBy.hints.displayHeight}"
+                                    columns="#{bindings.ImportsCreatedBy.hints.displayWidth}"
+                                    maximumLength="20" readOnly="true"
+                                    shortDesc="#{bindings.ImportsCreatedBy.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSCREATEDBY">
+                        <f:validator binding="#{bindings.ImportsCreatedBy.validator}"/>
+                      </af:inputText>
+                      <af:inputDate id="ImportsCreatedDate"
+                                    value="#{bindings.ImportsCreatedDate.inputValue}"
+                                    label="#{bindings.ImportsCreatedDate.hints.label}"
+                                    required="#{bindings.ImportsCreatedDate.hints.mandatory}"
+                                    readOnly="true"
+                                    shortDesc="#{bindings.ImportsCreatedDate.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSCREATEDDATE">
+                        <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                      </af:inputDate>
+                      <af:inputText id="ImportsLastUpdatedBy"
+                                    value="#{bindings.ImportsLastUpdatedBy.inputValue}"
+                                    label="#{bindings.ImportsLastUpdatedBy.hints.label}"
+                                    required="#{bindings.ImportsLastUpdatedBy.hints.mandatory}"
+                                    rows="#{bindings.ImportsLastUpdatedBy.hints.displayHeight}"
+                                    columns="#{bindings.ImportsLastUpdatedBy.hints.displayWidth}"
+                                    maximumLength="20" readOnly="true"
+                                    shortDesc="#{bindings.ImportsLastUpdatedBy.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSLASTUPDATEDBY">
+                        <f:validator binding="#{bindings.ImportsLastUpdatedBy.validator}"/>
+                      </af:inputText>
+                      <af:inputDate id="ImportsLastUpdatedDate"
+                                    value="#{bindings.ImportsLastUpdatedDate.inputValue}"
+                                    label="#{bindings.ImportsLastUpdatedDate.hints.label}"
+                                    required="#{bindings.ImportsLastUpdatedDate.hints.mandatory}"
+                                    readOnly="true"
+                                    shortDesc="#{bindings.ImportsLastUpdatedDate.hints.tooltip}"
+                                    helpTopicId="RBH_IMPORTSLASTUPDATEDDATE">
+                        <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                      </af:inputDate>
+                    </af:panelFormLayout>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+                <af:panelHeader id="ph1" text=" " helpTopicId="RBH_IMPORTS">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveImports.execute}"
+                                            rendered="#{(((((jhsUserRoles['PI,ADMIN']) or (jhsUserRoles['PI,ADMIN'])) or (jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')) or (bindings.ImportsImportStatus ne 'Imported')) or (jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus eq 'Validated')) and (!pageFlowScope.hideSaveButton)}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="ImportsSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="ImportsCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+          <af:panelTabbed position="above" childCreation="lazy" id="pst0"
+                          dimensionsFrom="auto" styleClass="AFStretchWidth">
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_PARSERESULTS']}"
+                               partialTriggers=" ImportsTopLc ParseResultsDeleteDialog qsAreaParseResultsSearchOptions ParseResultsPC:ParseResultsdelrmTM ParseResultsPC:ParseResultsTab:ParseResultsdelrm ParseResultsPC:ParseResultsTab:ParseResultsdelrl"
+                               id="ParseResultsTopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="ParseResultsTopLc"
+                                   partialTriggers=" ImportsTopLc ParseResultsDeleteDialog qsAreaParseResultsSearchOptions ParseResultsPC:ParseResultsdelrmTM ParseResultsPC:ParseResultsTab:ParseResultsdelrm ParseResultsPC:ParseResultsTab:ParseResultsdelrl"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp4"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreaParseResults"
+                                     rendered="#{!pageFlowScope.createModes.CreateParseResults and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreaParseResultsSearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.ParseResultsIteratorQuery.queryDescriptor}"
+                                 model="#{bindings.ParseResultsIteratorQuery.queryModel}"
+                                 queryListener="#{bindings.ParseResultsIteratorQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl4">
+                  <af:panelCollection id="ParseResultsPC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu0">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu1">
+                          <af:group id="ParseResultstbb"
+                                    rendered="#{ bindings.ParseResultsIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstParseResults.execute}"
+                                                id="ParseResultsFirst"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousParseResults.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="ParseResultsPrevious"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextParseResults.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="ParseResultsNext"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastParseResults.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="ParseResultsLast"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem id="ParseResultsdelrmTM"
+                                            textAndAccessKey="#{nls['DELETE_ROW']}"
+                                            icon="/jheadstart/images/deleteRow.png"
+                                            partialSubmit="true"
+                                            immediate="true"
+                                            rendered="#{bindings.ImportsImportStatus ne 'Imported'}">
+                          <af:showPopupBehavior popupId="::ParseResultsDeletePopup"/>
+                        </af:commandMenuItem>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi0">
+                          <af:exportCollectionActionListener exportedId="ParseResultsTab"
+                                                             type="excelHTML"
+                                                             filename="ParseResults.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar1">
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl0"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="ParseResultsTab"
+                                                             type="excelHTML"
+                                                             filename="ParseResults.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print"
+                                                 id="ParseResultsPrint"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.ParseResultsIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="ParseResultsTab" contentDelivery="immediate"
+                              value="#{bindings.ParseResultsTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.ParseResultsTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.ParseResultsTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.ParseResultsTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.ParseResultsTable.rangeSize}"
+                              autoHeightRows="#{bindings.ParseResultsTable.estimatedRowCount lt 5 ? 5 : bindings.ParseResultsTable.estimatedRowCount lt bindings.ParseResultsTable.rangeSize ? bindings.ParseResultsTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.ParseResultsTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.ParseResultsIteratorQuery.processQuery}"
+                              filterModel="#{bindings.ParseResultsIteratorQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.ParseResultsTable.table}"
+                              partialTriggers=":::qsAreaParseResultsSearchOptions :::ParseResultsPC ::ParseResultsFirst ::ParseResultsPrevious ::ParseResultsNext ::ParseResultsLast"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_PARSERESULTS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="ParseResultsTablePopup"
+                                  childCreation="deferred">
+                          <af:menu id="menu2">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu3"></af:menu>
+                            <af:commandMenuItem id="ParseResultsdelrm"
+                                                textAndAccessKey="#{nls['DELETE_ROW']}"
+                                                icon="/jheadstart/images/deleteRow.png"
+                                                partialSubmit="true"
+                                                immediate="true"
+                                                rendered="#{bindings.ImportsImportStatus ne 'Imported'}">
+                              <af:showPopupBehavior popupId=":::ParseResultsDeletePopup"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="ParseResultsActionColumn" frozen="true"
+                                 width="20" align="center" headerText=" ">
+                        <af:panelGroupLayout layout="horizontal" id="pgl5">
+                          <af:commandImageLink id="ParseResultsdelrl"
+                                               partialSubmit="true"
+                                               immediate="true"
+                                               rendered="#{bindings.ImportsImportStatus ne 'Imported'}"
+                                               shortDesc="#{nls['DELETE_ROW']}"
+                                               icon="/jheadstart/images/deleteRow.png">
+                            <af:showPopupBehavior popupId=":::ParseResultsDeletePopup"/>
+                          </af:commandImageLink>
+                        </af:panelGroupLayout>
+                      </af:column>
+                      <af:column id="ParseResultsRowNumberCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="RowNumber" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSROWNUMBER"
+                                 filterFeatures="caseInsensitive"
+                                 inlineStyle="background-color:#{row.ValidationStatus eq 'OK' ? '' : (row.ValidationStatus eq 'Warning' ? 'Yellow' : 'Red')}">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.RowNumber.label}"
+                                          id="ol0"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsRowNumber"
+                                      value="#{row.bindings.RowNumber.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.RowNumber.label}"
+                                      required="#{bindings.ParseResultsTable.hints.RowNumber.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.RowNumber.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.RowNumber.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.RowNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.RowNumber.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ParseResultsTable.hints.RowNumber.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsTitleCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="Title" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.Title.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.Title.mandatory}"
+                                          id="ol1"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsTitle"
+                                      value="#{row.bindings.Title.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.Title.label}"
+                                      required="#{bindings.ParseResultsTable.hints.Title.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.Title.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.Title.displayWidth}"
+                                      maximumLength="400"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.Title.tooltip}">
+                          <f:validator binding="#{row.bindings.Title.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsIssnCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="Issn" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSISSN"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.Issn.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.Issn.mandatory}"
+                                          id="ol2"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsIssn"
+                                      value="#{row.bindings.Issn.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.Issn.label}"
+                                      required="#{bindings.ParseResultsTable.hints.Issn.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.Issn.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.Issn.displayWidth}"
+                                      maximumLength="20"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.Issn.tooltip}">
+                          <f:validator binding="#{row.bindings.Issn.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsOnlineIssnCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="OnlineIssn" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSONLINEISSN"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.OnlineIssn.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.OnlineIssn.mandatory}"
+                                          id="ol3"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsOnlineIssn"
+                                      value="#{row.bindings.OnlineIssn.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.OnlineIssn.label}"
+                                      required="#{bindings.ParseResultsTable.hints.OnlineIssn.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.OnlineIssn.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.OnlineIssn.displayWidth}"
+                                      maximumLength="20"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.OnlineIssn.tooltip}">
+                          <f:validator binding="#{row.bindings.OnlineIssn.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsIsbnCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="Isbn" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSISBN"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.Isbn.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.Isbn.mandatory}"
+                                          id="ol4"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsIsbn"
+                                      value="#{row.bindings.Isbn.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.Isbn.label}"
+                                      required="#{bindings.ParseResultsTable.hints.Isbn.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.Isbn.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.Isbn.displayWidth}"
+                                      maximumLength="20"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.Isbn.tooltip}">
+                          <f:validator binding="#{row.bindings.Isbn.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsSubjectsCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="Subjects" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSSUBJECTS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.Subjects.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.Subjects.mandatory}"
+                                          id="ol5"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsSubjects"
+                                      value="#{row.bindings.Subjects.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.Subjects.label}"
+                                      required="#{bindings.ParseResultsTable.hints.Subjects.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.Subjects.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.Subjects.displayWidth}"
+                                      maximumLength="400"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.Subjects.tooltip}">
+                          <f:validator binding="#{row.bindings.Subjects.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsLanguagesCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="Languages" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSLANGUAGES"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.Languages.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.Languages.mandatory}"
+                                          id="ol6"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsLanguages"
+                                      value="#{row.bindings.Languages.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.Languages.label}"
+                                      required="#{bindings.ParseResultsTable.hints.Languages.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.Languages.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.Languages.displayWidth}"
+                                      maximumLength="200"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.Languages.tooltip}">
+                          <f:validator binding="#{row.bindings.Languages.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsPublicationStartYearCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="PublicationStartYear"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSPUBLICATIONSTARTYEAR"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.PublicationStartYear.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.PublicationStartYear.mandatory}"
+                                          id="ol7"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsPublicationStartYear"
+                                      value="#{row.bindings.PublicationStartYear.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.PublicationStartYear.label}"
+                                      required="#{bindings.ParseResultsTable.hints.PublicationStartYear.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.PublicationStartYear.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.PublicationStartYear.displayWidth}"
+                                      maximumLength="20"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.PublicationStartYear.tooltip}">
+                          <f:validator binding="#{row.bindings.PublicationStartYear.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsPublicationCityCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="120" sortProperty="PublicationCity"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSPUBLICATIONCITY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.PublicationCity.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.PublicationCity.mandatory}"
+                                          id="ol8"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsPublicationCity"
+                                      value="#{row.bindings.PublicationCity.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.PublicationCity.label}"
+                                      required="#{bindings.ParseResultsTable.hints.PublicationCity.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.PublicationCity.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.PublicationCity.displayWidth}"
+                                      maximumLength="200"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.PublicationCity.tooltip}">
+                          <f:validator binding="#{row.bindings.PublicationCity.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsPrimaryPmClassCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="120" sortProperty="PrimaryPmClass"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSPRIMARYPMCLASS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.PrimaryPmClass.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.PrimaryPmClass.mandatory}"
+                                          id="ol9"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsPrimaryPmClass"
+                                      value="#{row.bindings.PrimaryPmClass.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.PrimaryPmClass.label}"
+                                      required="#{bindings.ParseResultsTable.hints.PrimaryPmClass.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.PrimaryPmClass.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.PrimaryPmClass.displayWidth}"
+                                      maximumLength="40"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.PrimaryPmClass.tooltip}">
+                          <f:validator binding="#{row.bindings.PrimaryPmClass.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsPeerReviewCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="PeerReview" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSPEERREVIEW"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.PeerReview.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.PeerReview.mandatory}"
+                                          id="ol10"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsPeerReview"
+                                      value="#{row.bindings.PeerReview.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.PeerReview.label}"
+                                      required="#{bindings.ParseResultsTable.hints.PeerReview.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.PeerReview.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.PeerReview.displayWidth}"
+                                      maximumLength="10"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.PeerReview.tooltip}">
+                          <f:validator binding="#{row.bindings.PeerReview.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsOpenAccessCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="OpenAccess" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSOPENACCESS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.OpenAccess.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.OpenAccess.mandatory}"
+                                          id="ol11"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsOpenAccess"
+                                      value="#{row.bindings.OpenAccess.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.OpenAccess.label}"
+                                      required="#{bindings.ParseResultsTable.hints.OpenAccess.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.OpenAccess.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.OpenAccess.displayWidth}"
+                                      maximumLength="10"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.OpenAccess.tooltip}">
+                          <f:validator binding="#{row.bindings.OpenAccess.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsAccountNoCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="AccountNo" align="right"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSACCOUNTNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.AccountNo.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.AccountNo.mandatory}"
+                                          id="ol12"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsAccountNo"
+                                      value="#{row.bindings.AccountNo.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.AccountNo.label}"
+                                      required="#{bindings.ParseResultsTable.hints.AccountNo.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.AccountNo.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.AccountNo.displayWidth}"
+                                      maximumLength="38"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.AccountNo.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountNo.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsPublisherCol" sortable="true"
+                                 filterable="true" noWrap="true" width="240"
+                                 sortProperty="Publisher" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSPUBLISHER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.Publisher.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.Publisher.mandatory}"
+                                          id="ol13"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsPublisher"
+                                      value="#{row.bindings.Publisher.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.Publisher.label}"
+                                      required="#{bindings.ParseResultsTable.hints.Publisher.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.Publisher.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.Publisher.displayWidth}"
+                                      maximumLength="400"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.Publisher.tooltip}">
+                          <f:validator binding="#{row.bindings.Publisher.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsSubjectTypeCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="SubjectType" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSSUBJECTTYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.SubjectType.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.SubjectType.mandatory}"
+                                          id="ol14"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsSubjectType"
+                                      value="#{row.bindings.SubjectType.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.SubjectType.label}"
+                                      required="#{bindings.ParseResultsTable.hints.SubjectType.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.SubjectType.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.SubjectType.displayWidth}"
+                                      maximumLength="80"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.SubjectType.tooltip}">
+                          <f:validator binding="#{row.bindings.SubjectType.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsCatalogingSourceUrlCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="240" sortProperty="CatalogingSourceUrl"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSCATALOGINGSOURCEURL"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.CatalogingSourceUrl.label}"
+                                          showRequired="#{bindings.ParseResultsTable.hints.CatalogingSourceUrl.mandatory}"
+                                          id="ol15"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsCatalogingSourceUrl"
+                                      value="#{row.bindings.CatalogingSourceUrl.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.CatalogingSourceUrl.label}"
+                                      required="#{bindings.ParseResultsTable.hints.CatalogingSourceUrl.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.CatalogingSourceUrl.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.CatalogingSourceUrl.displayWidth}"
+                                      maximumLength="400"
+                                      readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus ne 'Imported')}"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.CatalogingSourceUrl.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogingSourceUrl.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsValidationStatusCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="ValidationStatus"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSVALIDATIONSTATUS"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.ValidationStatus.label}"
+                                          id="ol16"/>
+                        </f:facet>
+                        <af:selectOneChoice id="ParseResultsValidationStatus"
+                                            value="#{row.bindings.ValidationStatus.inputValue}"
+                                            label="#{bindings.ParseResultsTable.hints.ValidationStatus.label}"
+                                            required="#{bindings.ParseResultsTable.hints.ValidationStatus.mandatory}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.ParseResultsTable.hints.ValidationStatus.tooltip}">
+                          <f:selectItems value="#{row.bindings.ValidationStatus.items}"/>
+                        </af:selectOneChoice>
+                      </af:column>
+                      <af:column id="ParseResultsCreatedByCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="CreatedBy" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSCREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.CreatedBy.label}"
+                                          id="ol17"/>
+                        </f:facet>
+                        <af:inputText id="ParseResultsCreatedBy"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.CreatedBy.label}"
+                                      required="#{bindings.ParseResultsTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.ParseResultsTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.ParseResultsTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ParseResultsCreatedDateCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="CreatedDate" rowHeader="false"
+                                 helpTopicId="RBH_PARSERESULTSCREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ParseResultsTable.hints.CreatedDate.label}"
+                                          id="ol18"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id0">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="ParseResultsCreatedDate"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.ParseResultsTable.hints.CreatedDate.label}"
+                                      required="#{bindings.ParseResultsTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ParseResultsTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_POTENTIALMATCHES']}"
+                               partialTriggers=" ImportsTopLc qsAreaPotentialMatchesSearchOptions"
+                               id="PotentialMatchesTopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="PotentialMatchesTopLc"
+                                   partialTriggers=" ImportsTopLc qsAreaPotentialMatchesSearchOptions"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp5"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreaPotentialMatches"
+                                     rendered="#{!pageFlowScope.createModes.CreatePotentialMatches and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreaPotentialMatchesSearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.PotentialMatchesIteratorQuery.queryDescriptor}"
+                                 model="#{bindings.PotentialMatchesIteratorQuery.queryModel}"
+                                 queryListener="#{bindings.PotentialMatchesIteratorQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl6">
+                  <af:panelCollection id="PotentialMatchesPC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu4">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu5">
+                          <af:group id="PotentialMatchestbb"
+                                    rendered="#{ bindings.PotentialMatchesIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstPotentialMatches.execute}"
+                                                id="PotentialMatchesFirst"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousPotentialMatches.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="PotentialMatchesPrevious"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextPotentialMatches.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="PotentialMatchesNext"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastPotentialMatches.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="PotentialMatchesLast"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi1">
+                          <af:exportCollectionActionListener exportedId="PotentialMatchesTab"
+                                                             type="excelHTML"
+                                                             filename="PotentialMatches.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar2">
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl1"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="PotentialMatchesTab"
+                                                             type="excelHTML"
+                                                             filename="PotentialMatches.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print"
+                                                 id="PotentialMatchesPrint"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.PotentialMatchesIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="PotentialMatchesTab"
+                              contentDelivery="immediate"
+                              value="#{bindings.PotentialMatchesTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.PotentialMatchesTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.PotentialMatchesTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.PotentialMatchesTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.PotentialMatchesTable.rangeSize}"
+                              autoHeightRows="#{bindings.PotentialMatchesTable.estimatedRowCount lt 5 ? 5 : bindings.PotentialMatchesTable.estimatedRowCount lt bindings.PotentialMatchesTable.rangeSize ? bindings.PotentialMatchesTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.PotentialMatchesTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.PotentialMatchesIteratorQuery.processQuery}"
+                              filterModel="#{bindings.PotentialMatchesIteratorQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.PotentialMatchesTable.table}"
+                              partialTriggers=":::qsAreaPotentialMatchesSearchOptions :::PotentialMatchesPC ::PotentialMatchesFirst ::PotentialMatchesPrevious ::PotentialMatchesNext ::PotentialMatchesLast"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_POTENTIALMATCHES']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="PotentialMatchesTablePopup"
+                                  childCreation="deferred">
+                          <af:menu id="menu6">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu7"></af:menu>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="PotentialMatchesRowNumberCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="RowNumber"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESROWNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.RowNumber.label}"
+                                          id="ol19"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesRowNumber"
+                                      value="#{row.bindings.RowNumber.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.RowNumber.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.RowNumber.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.RowNumber.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.RowNumber.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.RowNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.RowNumber.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.PotentialMatchesTable.hints.RowNumber.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesUseUlrichsFlagCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="UseUlrichsFlag"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESUSEULRICHSFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.UseUlrichsFlag.label}"
+                                          showRequired="#{bindings.PotentialMatchesTable.hints.UseUlrichsFlag.mandatory}"
+                                          id="ol20"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="PotentialMatchesUseUlrichsFlag"
+                                                  label="#{bindings.PotentialMatchesTable.hints.UseUlrichsFlag.label}"
+                                                  value="#{PotentialMatchesUseUlrichsFlagcheckboxInTable.value}"
+                                                  readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus eq 'Validated')}"
+                                                  disabled="#{row.TitleId != null || row.UlrichsTitleId == null}"
+                                                  shortDesc="#{bindings.PotentialMatchesTable.hints.UseUlrichsFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="PotentialMatchesIgnoreMatchFlagCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="IgnoreMatchFlag"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESIGNOREMATCHFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.IgnoreMatchFlag.label}"
+                                          showRequired="#{bindings.PotentialMatchesTable.hints.IgnoreMatchFlag.mandatory}"
+                                          id="ol21"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="PotentialMatchesIgnoreMatchFlag"
+                                                  label="#{bindings.PotentialMatchesTable.hints.IgnoreMatchFlag.label}"
+                                                  value="#{PotentialMatchesIgnoreMatchFlagcheckboxInTable.value}"
+                                                  readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus eq 'Validated')}"
+                                                  disabled="#{row.TitleId == null}"
+                                                  shortDesc="#{bindings.PotentialMatchesTable.hints.IgnoreMatchFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="PotentialMatchesIgnoreRecordFlagCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="IgnoreRecordFlag"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESIGNORERECORDFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.IgnoreRecordFlag.label}"
+                                          showRequired="#{bindings.PotentialMatchesTable.hints.IgnoreRecordFlag.mandatory}"
+                                          id="ol22"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="PotentialMatchesIgnoreRecordFlag"
+                                                  label="#{bindings.PotentialMatchesTable.hints.IgnoreRecordFlag.label}"
+                                                  value="#{PotentialMatchesIgnoreRecordFlagcheckboxInTable.value}"
+                                                  readOnly="#{!(jhsUserRoles['PI,ADMIN'] &amp;&amp; bindings.ImportsImportStatus eq 'Validated')}"
+                                                  disabled="#{row.TitleId == null || (row.ContractId == null &amp;&amp; row.OpportunityId == null)}"
+                                                  shortDesc="#{bindings.PotentialMatchesTable.hints.IgnoreRecordFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                      <af:column id="PotentialMatchesParseTitleCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="180" sortProperty="ParseTitle"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESPARSETITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.ParseTitle.label}"
+                                          id="ol23"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesParseTitle"
+                                      value="#{row.bindings.ParseTitle.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.ParseTitle.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.ParseTitle.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.ParseTitle.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.ParseTitle.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.ParseTitle.tooltip}">
+                          <f:validator binding="#{row.bindings.ParseTitle.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesParseIssnCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="ParseIssn"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESPARSEISSN"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.ParseIssn.label}"
+                                          id="ol24"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesParseIssn"
+                                      value="#{row.bindings.ParseIssn.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.ParseIssn.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.ParseIssn.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.ParseIssn.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.ParseIssn.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.ParseIssn.tooltip}">
+                          <f:validator binding="#{row.bindings.ParseIssn.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesMatchedByCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="MatchedBy"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESMATCHEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.MatchedBy.label}"
+                                          id="ol25"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesMatchedBy"
+                                      value="#{row.bindings.MatchedBy.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.MatchedBy.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.MatchedBy.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.MatchedBy.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.MatchedBy.displayWidth}"
+                                      maximumLength="50" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.MatchedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.MatchedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesTargetTrackingNoCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="TargetTrackingNo"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESTARGETTRACKINGNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.TargetTrackingNo.label}"
+                                          id="ol26"/>
+                        </f:facet>
+                        <af:inputText id="cl2"
+                                      value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.TargetTrackingNo.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.TargetTrackingNo.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.TargetTrackingNo.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.TargetTrackingNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.TargetTrackingNo.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.PotentialMatchesTable.hints.TargetTrackingNo.format}"/>
+                        </af:inputText>
+                        <af:commandLink id="PotentialMatchesTargetTrackingNo"
+                                        text="#{row.bindings.TargetTrackingNo.attributeValue}"
+                                        shortDesc="#{bindings.PotentialMatchesTable.hints.TargetTrackingNo.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Titles"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.PotentialMatchesTitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Title #{bindings.PotentialMatchesTargetTrackingNo.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.PotentialMatchesTitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="PotentialMatchesCatalogNumberCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="CatalogNumber"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESCATALOGNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.CatalogNumber.label}"
+                                          id="ol27"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesCatalogNumber"
+                                      value="#{row.bindings.CatalogNumber.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.CatalogNumber.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.CatalogNumber.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.CatalogNumber.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.CatalogNumber.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.CatalogNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesUlrichsSerialIdCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="UlrichsSerialId"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESULRICHSSERIALID"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.UlrichsSerialId.label}"
+                                          id="ol28"/>
+                        </f:facet>
+                        <af:inputText id="cl3"
+                                      value="#{row.bindings.UlrichsSerialId.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.UlrichsSerialId.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.UlrichsSerialId.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.UlrichsSerialId.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.UlrichsSerialId.displayWidth}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.UlrichsSerialId.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.UlrichsSerialId.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.PotentialMatchesTable.hints.UlrichsSerialId.format}"/>
+                        </af:inputText>
+                        <af:commandLink id="PotentialMatchesUlrichsSerialId"
+                                        text="#{row.bindings.UlrichsSerialId.attributeValue}"
+                                        shortDesc="#{bindings.PotentialMatchesTable.hints.UlrichsSerialId.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Ulrichs"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.PotentialMatchesUlrichsTitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Ulrichs Serial #{bindings.PotentialMatchesUlrichsSerialId.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.PotentialMatchesUlrichsTitleId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueUlrichs}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="PotentialMatchesTitleTypeCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="120" sortProperty="TitleType"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESTITLETYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.TitleType.label}"
+                                          id="ol29"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesTitleType"
+                                      value="#{row.bindings.TitleType.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.TitleType.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.TitleType.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.TitleType.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.TitleType.displayWidth}"
+                                      maximumLength="48" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.TitleType.tooltip}">
+                          <f:validator binding="#{row.bindings.TitleType.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesTitleCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="Title" rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.Title.label}"
+                                          id="ol30"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesTitle"
+                                      value="#{row.bindings.Title.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.Title.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.Title.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.Title.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.Title.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.Title.tooltip}">
+                          <f:validator binding="#{row.bindings.Title.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesClassificationCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="Classification"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESCLASSIFICATION"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.Classification.label}"
+                                          id="ol31"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesClassification"
+                                      value="#{row.bindings.Classification.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.Classification.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.Classification.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.Classification.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.Classification.displayWidth}"
+                                      maximumLength="100" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.Classification.tooltip}">
+                          <f:validator binding="#{row.bindings.Classification.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesContractNumberCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="ContractNumber"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESCONTRACTNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.ContractNumber.label}"
+                                          id="ol32"/>
+                        </f:facet>
+                        <af:inputText id="cl4"
+                                      value="#{row.bindings.ContractNumber.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.ContractNumber.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.ContractNumber.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.ContractNumber.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.ContractNumber.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.ContractNumber.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.ContractNumber.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="PotentialMatchesContractNumber"
+                                        text="#{row.bindings.ContractNumber.attributeValue}"
+                                        shortDesc="#{bindings.PotentialMatchesTable.hints.ContractNumber.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Contract"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.PotentialMatchesContractId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Contract #{bindings.PotentialMatchesContractNumber.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.PotentialMatchesContractId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueContract}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="PotentialMatchesOpportunityNoCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="OpportunityNo"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESOPPORTUNITYNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.OpportunityNo.label}"
+                                          id="ol33"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesOpportunityNo"
+                                      value="#{row.bindings.OpportunityNo.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.OpportunityNo.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.OpportunityNo.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.OpportunityNo.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.OpportunityNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.OpportunityNo.tooltip}">
+                          <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.PotentialMatchesTable.hints.OpportunityNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesOpportunityNameCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="180" sortProperty="OpportunityName"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESOPPORTUNITYNAME"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.OpportunityName.label}"
+                                          id="ol34"/>
+                        </f:facet>
+                        <af:inputText id="cl5"
+                                      value="#{row.bindings.OpportunityName.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.OpportunityName.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.OpportunityName.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.OpportunityName.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.OpportunityName.displayWidth}"
+                                      maximumLength="200" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.OpportunityName.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                        </af:inputText>
+                        <af:commandLink id="PotentialMatchesOpportunityName"
+                                        text="#{row.bindings.OpportunityName.attributeValue}"
+                                        shortDesc="#{bindings.PotentialMatchesTable.hints.OpportunityName.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Opportunity"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{bindings.PotentialMatchesOpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Oppty #{bindings.PotentialMatchesOpportunityName.inputValue}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{bindings.PotentialMatchesOpportunityId.inputValue}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="PotentialMatchesCreatedByCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="CreatedBy"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESCREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.CreatedBy.label}"
+                                          id="ol35"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesCreatedBy"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.CreatedBy.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesCreatedDateCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="CreatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESCREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.CreatedDate.label}"
+                                          id="ol36"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id1">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="PotentialMatchesCreatedDate"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.CreatedDate.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                      <af:column id="PotentialMatchesLastUpdatedByCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="LastUpdatedBy"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESLASTUPDATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.LastUpdatedBy.label}"
+                                          id="ol37"/>
+                        </f:facet>
+                        <af:inputText id="PotentialMatchesLastUpdatedBy"
+                                      value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.LastUpdatedBy.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.LastUpdatedBy.mandatory}"
+                                      rows="#{bindings.PotentialMatchesTable.hints.LastUpdatedBy.displayHeight}"
+                                      columns="#{bindings.PotentialMatchesTable.hints.LastUpdatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.LastUpdatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="PotentialMatchesLastUpdatedDateCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="LastUpdatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_POTENTIALMATCHESLASTUPDATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.PotentialMatchesTable.hints.LastUpdatedDate.label}"
+                                          id="ol38"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                        id="id2">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="PotentialMatchesLastUpdatedDate"
+                                      value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                      label="#{bindings.PotentialMatchesTable.hints.LastUpdatedDate.label}"
+                                      required="#{bindings.PotentialMatchesTable.hints.LastUpdatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.PotentialMatchesTable.hints.LastUpdatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_VALIDATIONMESSAGES']}"
+                               partialTriggers=" ImportsTopLc qsAreaValidationMessagesSearchOptions"
+                               id="ValidationMessagesTopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical"
+                                   id="ValidationMessagesTopLc"
+                                   partialTriggers=" ImportsTopLc qsAreaValidationMessagesSearchOptions"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp6"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout id="modelSearchAreaValidationMessages"
+                                     rendered="#{!pageFlowScope.createModes.CreateValidationMessages and !pageFlowScope.hideSearchArea}"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:quickQuery id="qsAreaValidationMessagesSearchOptions"
+                                 label="#{nls['FILTER_BY']}"
+                                 value="#{bindings.ValidationMessagesIteratorQuery.queryDescriptor}"
+                                 model="#{bindings.ValidationMessagesIteratorQuery.queryModel}"
+                                 queryListener="#{bindings.ValidationMessagesIteratorQuery.processQuery}"></af:quickQuery>
+                </af:panelGroupLayout>
+                <af:panelGroupLayout layout="vertical" id="pgl7">
+                  <af:panelCollection id="ValidationMessagesPC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu8">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu9">
+                          <af:group id="ValidationMessagestbb"
+                                    rendered="#{ bindings.ValidationMessagesIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstValidationMessages.execute}"
+                                                id="ValidationMessagesFirst"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousValidationMessages.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="ValidationMessagesPrevious"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextValidationMessages.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="ValidationMessagesNext"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastValidationMessages.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="ValidationMessagesLast"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi2">
+                          <af:exportCollectionActionListener exportedId="ValidationMessagesTab"
+                                                             type="excelHTML"
+                                                             filename="ValidationMessages.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar3">
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl6"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="ValidationMessagesTab"
+                                                             type="excelHTML"
+                                                             filename="ValidationMessages.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print"
+                                                 id="ValidationMessagesPrint"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.ValidationMessagesIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="ValidationMessagesTab"
+                              contentDelivery="immediate"
+                              value="#{bindings.ValidationMessagesTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.ValidationMessagesTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.ValidationMessagesTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.ValidationMessagesTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.ValidationMessagesTable.rangeSize}"
+                              autoHeightRows="#{bindings.ValidationMessagesTable.estimatedRowCount lt 5 ? 5 : bindings.ValidationMessagesTable.estimatedRowCount lt bindings.ValidationMessagesTable.rangeSize ? bindings.ValidationMessagesTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.ValidationMessagesTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.ValidationMessagesIteratorQuery.processQuery}"
+                              filterModel="#{bindings.ValidationMessagesIteratorQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.ValidationMessagesTable.table}"
+                              partialTriggers=":::qsAreaValidationMessagesSearchOptions :::ValidationMessagesPC ::ValidationMessagesFirst ::ValidationMessagesPrevious ::ValidationMessagesNext ::ValidationMessagesLast"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_VALIDATIONMESSAGES']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="ValidationMessagesTablePopup"
+                                  childCreation="deferred">
+                          <af:menu id="menu10">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu11"></af:menu>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="ValidationMessagesRowNumberCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="RowNumber"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_VALIDATIONMESSAGESROWNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ValidationMessagesTable.hints.RowNumber.label}"
+                                          id="ol39"/>
+                        </f:facet>
+                        <af:inputText id="ValidationMessagesRowNumber"
+                                      value="#{row.bindings.RowNumber.inputValue}"
+                                      label="#{bindings.ValidationMessagesTable.hints.RowNumber.label}"
+                                      required="#{bindings.ValidationMessagesTable.hints.RowNumber.mandatory}"
+                                      rows="#{bindings.ValidationMessagesTable.hints.RowNumber.displayHeight}"
+                                      columns="#{bindings.ValidationMessagesTable.hints.RowNumber.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ValidationMessagesTable.hints.RowNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.RowNumber.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ValidationMessagesTable.hints.RowNumber.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ValidationMessagesTitleCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="Title" rowHeader="false"
+                                 helpTopicId="RBH_VALIDATIONMESSAGESTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ValidationMessagesTable.hints.Title.label}"
+                                          id="ol40"/>
+                        </f:facet>
+                        <af:inputText id="ValidationMessagesTitle"
+                                      value="#{row.bindings.Title.inputValue}"
+                                      label="#{bindings.ValidationMessagesTable.hints.Title.label}"
+                                      required="#{bindings.ValidationMessagesTable.hints.Title.mandatory}"
+                                      rows="#{bindings.ValidationMessagesTable.hints.Title.displayHeight}"
+                                      columns="#{bindings.ValidationMessagesTable.hints.Title.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.ValidationMessagesTable.hints.Title.tooltip}">
+                          <f:validator binding="#{row.bindings.Title.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ValidationMessagesIssnCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="Issn" rowHeader="false"
+                                 helpTopicId="RBH_VALIDATIONMESSAGESISSN"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ValidationMessagesTable.hints.Issn.label}"
+                                          id="ol41"/>
+                        </f:facet>
+                        <af:inputText id="ValidationMessagesIssn"
+                                      value="#{row.bindings.Issn.inputValue}"
+                                      label="#{bindings.ValidationMessagesTable.hints.Issn.label}"
+                                      required="#{bindings.ValidationMessagesTable.hints.Issn.mandatory}"
+                                      rows="#{bindings.ValidationMessagesTable.hints.Issn.displayHeight}"
+                                      columns="#{bindings.ValidationMessagesTable.hints.Issn.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ValidationMessagesTable.hints.Issn.tooltip}">
+                          <f:validator binding="#{row.bindings.Issn.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ValidationMessagesMessageTypeCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="120" sortProperty="MessageType"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_VALIDATIONMESSAGESMESSAGETYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ValidationMessagesTable.hints.MessageType.label}"
+                                          id="ol42"/>
+                        </f:facet>
+                        <af:inputText id="ValidationMessagesMessageType"
+                                      value="#{row.bindings.MessageType.inputValue}"
+                                      label="#{bindings.ValidationMessagesTable.hints.MessageType.label}"
+                                      required="#{bindings.ValidationMessagesTable.hints.MessageType.mandatory}"
+                                      rows="#{bindings.ValidationMessagesTable.hints.MessageType.displayHeight}"
+                                      columns="#{bindings.ValidationMessagesTable.hints.MessageType.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ValidationMessagesTable.hints.MessageType.tooltip}">
+                          <f:validator binding="#{row.bindings.MessageType.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ValidationMessagesMessageCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="480" sortProperty="Message"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_VALIDATIONMESSAGESMESSAGE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ValidationMessagesTable.hints.Message.label}"
+                                          id="ol43"/>
+                        </f:facet>
+                        <af:inputText id="ValidationMessagesMessage"
+                                      value="#{row.bindings.Message.inputValue}"
+                                      label="#{bindings.ValidationMessagesTable.hints.Message.label}"
+                                      required="#{bindings.ValidationMessagesTable.hints.Message.mandatory}"
+                                      rows="#{bindings.ValidationMessagesTable.hints.Message.displayHeight}"
+                                      columns="#{bindings.ValidationMessagesTable.hints.Message.displayWidth}"
+                                      maximumLength="1000" readOnly="true"
+                                      shortDesc="#{bindings.ValidationMessagesTable.hints.Message.tooltip}">
+                          <f:validator binding="#{row.bindings.Message.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ValidationMessagesCreatedByCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="CreatedBy"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_VALIDATIONMESSAGESCREATEDBY"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ValidationMessagesTable.hints.CreatedBy.label}"
+                                          id="ol44"/>
+                        </f:facet>
+                        <af:inputText id="ValidationMessagesCreatedBy"
+                                      value="#{row.bindings.CreatedBy.inputValue}"
+                                      label="#{bindings.ValidationMessagesTable.hints.CreatedBy.label}"
+                                      required="#{bindings.ValidationMessagesTable.hints.CreatedBy.mandatory}"
+                                      rows="#{bindings.ValidationMessagesTable.hints.CreatedBy.displayHeight}"
+                                      columns="#{bindings.ValidationMessagesTable.hints.CreatedBy.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ValidationMessagesTable.hints.CreatedBy.tooltip}">
+                          <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ValidationMessagesCreatedDateCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="CreatedDate"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_VALIDATIONMESSAGESCREATEDDATE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ValidationMessagesTable.hints.CreatedDate.label}"
+                                          id="ol45"/>
+                        </f:facet>
+                        <f:facet name="filter">
+                          <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                        id="id3">
+                            <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                          </af:inputDate>
+                        </f:facet>
+                        <af:inputDate id="ValidationMessagesCreatedDate"
+                                      value="#{row.bindings.CreatedDate.inputValue}"
+                                      label="#{bindings.ValidationMessagesTable.hints.CreatedDate.label}"
+                                      required="#{bindings.ValidationMessagesTable.hints.CreatedDate.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.ValidationMessagesTable.hints.CreatedDate.tooltip}">
+                          <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                        </af:inputDate>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+            <af:showDetailItem stretchChildren="first"
+                               text="#{nls['TABLE_TITLE_IMPORTRESULTS']}"
+                               partialTriggers=" ImportsTopLc"
+                               id="ImportResultsTopLcSdi"
+                               rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}"
+                               disabled="#{!jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+              <af:panelGroupLayout layout="vertical" id="ImportResultsTopLc"
+                                   partialTriggers=" ImportsTopLc"
+                                   rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp7"/>
+                </f:facet>
+                <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+                <af:panelGroupLayout layout="vertical" id="pgl8">
+                  <af:panelCollection id="ImportResultsPC" featuresOff=" "
+                                      styleClass="AFStretchWidth">
+                    <f:facet name="menus">
+                      <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                               id="menu12">
+                        <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                 id="menu13">
+                          <af:group id="ImportResultstbb"
+                                    rendered="#{ bindings.ImportResultsIterator.currentRow!=null }">
+                            <af:commandMenuItem actionListener="#{bindings.FirstImportResults.execute}"
+                                                id="ImportResultsFirst"
+                                                partialSubmit="true"
+                                                icon="/afr/shuttleleftall_ena.png"
+                                                textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.PreviousImportResults.execute}"
+                                                icon="/afr/shuttleleft_ena.png"
+                                                textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                id="ImportResultsPrevious"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.NextImportResults.execute}"
+                                                icon="/afr/shuttleright_ena.png"
+                                                textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                id="ImportResultsNext"
+                                                partialSubmit="true"></af:commandMenuItem>
+                            <af:commandMenuItem actionListener="#{bindings.LastImportResults.execute}"
+                                                icon="/afr/shuttlerightall_ena.png"
+                                                textAndAccessKey="#{nls['LAST_ROW']}"
+                                                id="ImportResultsLast"
+                                                partialSubmit="true"></af:commandMenuItem>
+                          </af:group>
+                        </af:menu>
+                        <af:commandMenuItem partialSubmit="true"
+                                            textAndAccessKey="#{nls['EXPORT']}"
+                                            icon="/jheadstart/images/excel.png"
+                                            immediate="true" id="cmi3">
+                          <af:exportCollectionActionListener exportedId="ImportResultsTab"
+                                                             type="excelHTML"
+                                                             filename="ImportResults.xls"/>
+                        </af:commandMenuItem>
+                      </af:menu>
+                    </f:facet>
+                    <f:facet name="toolbar">
+                      <af:toolbar id="tbar4">
+                        <af:commandImageLink immediate="true"
+                                             partialSubmit="true" id="cl7"
+                                             shortDesc="#{nls['EXPORT']}"
+                                             icon="/jheadstart/images/excel.png">
+                          <af:exportCollectionActionListener exportedId="ImportResultsTab"
+                                                             type="excelHTML"
+                                                             filename="ImportResults.xls"/>
+                        </af:commandImageLink>
+                        <af:commandToolbarButton text="Print"
+                                                 id="ImportResultsPrint"
+                                                 shortDesc="Opens a new tab with printer friendly format.">
+                          <af:showPrintablePageBehavior/>
+                        </af:commandToolbarButton>
+                      </af:toolbar>
+                    </f:facet>
+                    <f:facet name="statusbar">
+                      <af:toolbar>
+                        <af:outputText value="#{bindings.ImportResultsIterator.estimatedRowCount} rows found"/>
+                      </af:toolbar>
+                    </f:facet>
+                    <af:table id="ImportResultsTab" contentDelivery="immediate"
+                              value="#{bindings.ImportResultsTable.collectionModel}"
+                              columnStretching="blank" rowBandingInterval="0"
+                              editingMode="editAll" columnSelection="multiple"
+                              contextMenuSelect="true" rowSelection="single"
+                              selectionListener="#{pageFlowScope.ImportResultsTable.makeCurrent}"
+                              selectedRowKeys="#{pageFlowScope.ImportResultsTable.selectedRow}"
+                              rowDisclosureListener="#{pageFlowScope.ImportResultsTable.discloseRow}"
+                              var="row" varStatus="status"
+                              rows="#{bindings.ImportResultsTable.rangeSize}"
+                              autoHeightRows="#{bindings.ImportResultsTable.estimatedRowCount lt 5 ? 5 : bindings.ImportResultsTable.estimatedRowCount lt bindings.ImportResultsTable.rangeSize ? bindings.ImportResultsTable.estimatedRowCount : 0 }"
+                              fetchSize="#{bindings.ImportResultsTable.rangeSize}"
+                              emptyText="#{nls['NO_ROWS_FOUND']}"
+                              queryListener="#{bindings.ImportResultsIteratorQuery.processQuery}"
+                              filterModel="#{bindings.ImportResultsIteratorQuery.queryDescriptor}"
+                              filterVisible="true"
+                              binding="#{pageFlowScope.ImportResultsTable.table}"
+                              partialTriggers=" :::ImportResultsPC ::ImportResultsFirst ::ImportResultsPrevious ::ImportResultsNext ::ImportResultsLast"
+                              styleClass="AFStretchWidth"
+                              summary="#{nls['TABLE_TITLE_IMPORTRESULTS']}">
+                      <f:facet name="contextMenu">
+                        <af:popup id="ImportResultsTablePopup"
+                                  childCreation="deferred">
+                          <af:menu id="menu14">
+                            <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu15"></af:menu>
+                          </af:menu>
+                        </af:popup>
+                      </f:facet>
+                      <af:column id="ImportResultsRowNumberCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="RowNumber" align="right"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSROWNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.RowNumber.label}"
+                                          id="ol46"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsRowNumber"
+                                      value="#{row.bindings.RowNumber.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.RowNumber.label}"
+                                      required="#{bindings.ImportResultsTable.hints.RowNumber.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.RowNumber.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.RowNumber.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.RowNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.RowNumber.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ImportResultsTable.hints.RowNumber.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsTitleTypeCol" sortable="true"
+                                 filterable="true" noWrap="true" width="120"
+                                 sortProperty="TitleType" rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSTITLETYPE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.TitleType.label}"
+                                          id="ol47"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsTitleType"
+                                      value="#{row.bindings.TitleType.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.TitleType.label}"
+                                      required="#{bindings.ImportResultsTable.hints.TitleType.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.TitleType.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.TitleType.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.TitleType.tooltip}">
+                          <f:validator binding="#{row.bindings.TitleType.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsTitleCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="Title" rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.Title.label}"
+                                          id="ol48"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsTitle"
+                                      value="#{row.bindings.Title.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.Title.label}"
+                                      required="#{bindings.ImportResultsTable.hints.Title.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.Title.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.Title.displayWidth}"
+                                      maximumLength="400" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.Title.tooltip}">
+                          <f:validator binding="#{row.bindings.Title.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsIssnCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="Issn" rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSISSN"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.Issn.label}"
+                                          id="ol49"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsIssn"
+                                      value="#{row.bindings.Issn.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.Issn.label}"
+                                      required="#{bindings.ImportResultsTable.hints.Issn.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.Issn.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.Issn.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.Issn.tooltip}">
+                          <f:validator binding="#{row.bindings.Issn.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsOnlineIssnCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="OnlineIssn" rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSONLINEISSN"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.OnlineIssn.label}"
+                                          id="ol50"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsOnlineIssn"
+                                      value="#{row.bindings.OnlineIssn.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.OnlineIssn.label}"
+                                      required="#{bindings.ImportResultsTable.hints.OnlineIssn.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.OnlineIssn.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.OnlineIssn.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.OnlineIssn.tooltip}">
+                          <f:validator binding="#{row.bindings.OnlineIssn.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsIsbnCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="Isbn" rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSISBN"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.Isbn.label}"
+                                          id="ol51"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsIsbn"
+                                      value="#{row.bindings.Isbn.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.Isbn.label}"
+                                      required="#{bindings.ImportResultsTable.hints.Isbn.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.Isbn.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.Isbn.displayWidth}"
+                                      maximumLength="20" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.Isbn.tooltip}">
+                          <f:validator binding="#{row.bindings.Isbn.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsAccountNoCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="AccountNo" align="right"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSACCOUNTNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.AccountNo.label}"
+                                          id="ol52"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsAccountNo"
+                                      value="#{row.bindings.AccountNo.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.AccountNo.label}"
+                                      required="#{bindings.ImportResultsTable.hints.AccountNo.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.AccountNo.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.AccountNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.AccountNo.tooltip}">
+                          <f:validator binding="#{row.bindings.AccountNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ImportResultsTable.hints.AccountNo.format}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsTargetTrackingNoCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="TargetTrackingNo"
+                                 align="right" rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSTARGETTRACKINGNO"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.TargetTrackingNo.label}"
+                                          id="ol53"/>
+                        </f:facet>
+                        <af:inputText id="cl8"
+                                      value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.TargetTrackingNo.label}"
+                                      required="#{bindings.ImportResultsTable.hints.TargetTrackingNo.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.TargetTrackingNo.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.TargetTrackingNo.displayWidth}"
+                                      maximumLength="38" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.TargetTrackingNo.tooltip}"
+                                      rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                          <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                          <af:convertNumber groupingUsed="false"
+                                            pattern="#{bindings.ImportResultsTable.hints.TargetTrackingNo.format}"/>
+                        </af:inputText>
+                        <af:commandLink id="ImportResultsTargetTrackingNo"
+                                        text="#{row.bindings.TargetTrackingNo.attributeValue}"
+                                        shortDesc="#{bindings.ImportResultsTable.hints.TargetTrackingNo.tooltip}"
+                                        action="LaunchTab"
+                                        rendered="#{adfFacesContext.outputMode != 'printable'}">
+                          <af:setActionListener from="Titles"
+                                                to="#{jhsDynTabLauncher.taskFlowName}"/>
+                          <af:setActionListener from="#{row.TitleId}"
+                                                to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                          <af:setActionListener from="Title #{row.TargetTrackingNo}"
+                                                to="#{jhsDynTabLauncher.label}"/>
+                          <af:setActionListener from="#{row.TitleId}"
+                                                to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                          <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                        </af:commandLink>
+                      </af:column>
+                      <af:column id="ImportResultsCatalogNumberCol"
+                                 sortable="true" filterable="true" noWrap="true"
+                                 width="100" sortProperty="CatalogNumber"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSCATALOGNUMBER"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.CatalogNumber.label}"
+                                          id="ol54"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsCatalogNumber"
+                                      value="#{row.bindings.CatalogNumber.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.CatalogNumber.label}"
+                                      required="#{bindings.ImportResultsTable.hints.CatalogNumber.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.CatalogNumber.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.CatalogNumber.displayWidth}"
+                                      maximumLength="40" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.CatalogNumber.tooltip}">
+                          <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsLongTitleCol" sortable="true"
+                                 filterable="true" noWrap="true" width="180"
+                                 sortProperty="LongTitle" rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSLONGTITLE"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.LongTitle.label}"
+                                          id="ol55"/>
+                        </f:facet>
+                        <af:inputText id="ImportResultsLongTitle"
+                                      value="#{row.bindings.LongTitle.inputValue}"
+                                      label="#{bindings.ImportResultsTable.hints.LongTitle.label}"
+                                      required="#{bindings.ImportResultsTable.hints.LongTitle.mandatory}"
+                                      rows="#{bindings.ImportResultsTable.hints.LongTitle.displayHeight}"
+                                      columns="#{bindings.ImportResultsTable.hints.LongTitle.displayWidth}"
+                                      maximumLength="4000" readOnly="true"
+                                      shortDesc="#{bindings.ImportResultsTable.hints.LongTitle.tooltip}">
+                          <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                        </af:inputText>
+                      </af:column>
+                      <af:column id="ImportResultsTargetFlagCol" sortable="true"
+                                 filterable="true" noWrap="true" width="100"
+                                 sortProperty="TargetFlag" align="center"
+                                 rowHeader="false"
+                                 helpTopicId="RBH_IMPORTRESULTSTARGETFLAG"
+                                 filterFeatures="caseInsensitive">
+                        <f:facet name="header">
+                          <af:outputLabel value="#{bindings.ImportResultsTable.hints.TargetFlag.label}"
+                                          id="ol56"/>
+                        </f:facet>
+                        <af:selectBooleanCheckbox id="ImportResultsTargetFlag"
+                                                  label="#{bindings.ImportResultsTable.hints.TargetFlag.label}"
+                                                  value="#{ImportResultsTargetFlagcheckboxInTable.value}"
+                                                  readOnly="true"
+                                                  shortDesc="#{bindings.ImportResultsTable.hints.TargetFlag.tooltip}"></af:selectBooleanCheckbox>
+                      </af:column>
+                    </af:table>
+                  </af:panelCollection>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+              </af:panelGroupLayout>
+            </af:showDetailItem>
+          </af:panelTabbed>
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="ParseResultsDeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="ParseResultsDeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_PARSERESULT:#{pageFlowScope.ParseResultsTable.currentRowAttributeValues.Title}']} "
+                           id="ot1"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteParseResults.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

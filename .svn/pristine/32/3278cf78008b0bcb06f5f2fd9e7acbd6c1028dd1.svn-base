@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PrmTargetedProductTitle"
+  Version="11.1.1.61.92"
+  DBObjectType="table"
+  DBObjectName="PRM_TARGETED_PRODUCT_TITLE"
+  AliasName="PrmTargetedProductTitle"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.pq.tracs.model.eo.PrmTargetedProductTitleImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Init|Access"/>
+    <AttrArray Name="_publishEvents"/>
+    <Attr Name="_superClass" Value="com.pq.tracs.model.eo.PrmBaseEntity"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TARGETED_PRODUCT_TITLE"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PrmTargetedProductId"
+    Precision="38"
+    Scale="0"
+    ColumnName="PRM_TARGETED_PRODUCT_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TitleId"
+    IsNotNull="true"
+    Precision="38"
+    Scale="0"
+    ColumnName="TITLE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AddedDate"
+    IsNotNull="true"
+    ColumnName="ADDED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_TARGETED_PRODUCT_TITLE"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RemovedDate"
+    ColumnName="REMOVED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    IsUpdateable="while_insert"
+    IsNotNull="true"
+    ColumnName="CREATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_TARGETED_PRODUCT_TITLE"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    IsNotNull="true"
+    Precision="20"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedDate"
+    IsNotNull="true"
+    ColumnName="LAST_UPDATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_TARGETED_PRODUCT_TITLE"
+    RetrievedOnInsert="true"
+    ChangeIndicator="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PrmTargetGroupId"
+    Precision="38"
+    Scale="0"
+    ColumnName="PRM_TARGET_GROUP_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TargetPriority"
+    Precision="40"
+    ColumnName="TARGET_PRIORITY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.eo.PrmTargetedProductTitle.TargetPriority_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="TargetType"
+    Precision="40"
+    ColumnName="TARGET_TYPE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RightsGrantedDate"
+    ColumnName="RIGHTS_GRANTED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="PRM_TARGETED_PRODUCT_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AiTargetingFlag"
+    IsNotNull="true"
+    Precision="1"
+    ColumnName="AI_TARGETING_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="CHAR"
+    TableName="PRM_TARGETED_PRODUCT_TITLE"
+    RetrievedOnUpdate="true"
+    RetrievedOnInsert="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.eo.PrmTargetedProductTitle.AiTargetingFlag_LABEL"/>
+        <DISPLAYWIDTH
+          Value="5"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="TraxTitle"
+    Association="com.pq.tracs.model.ao.TitleToTargetedProductTitleFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.TitleToTargetedProductTitleFkAssoc.TraxTitle"
+    AssociationOtherEnd="com.pq.tracs.model.ao.TitleToTargetedProductTitleFkAssoc.PrmTargetedProductTitle"
+    Type="com.pq.tracs.model.eo.PrmBaseEntity"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="PrmTargetedProduct"
+    Association="com.pq.tracs.model.ao.ProductToTargetedProductTitleFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.ProductToTargetedProductTitleFkAssoc.PrmTargetedProduct"
+    AssociationOtherEnd="com.pq.tracs.model.ao.ProductToTargetedProductTitleFkAssoc.PrmTargetedProductTitle"
+    Type="com.pq.tracs.model.eo.PrmBaseEntity"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="PrmOpportunityTarget"
+    Association="com.pq.tracs.model.ao.TargetedProductTitleToOpportunityTargetFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.TargetedProductTitleToOpportunityTargetFkAssoc.PrmOpportunityTarget"
+    AssociationOtherEnd="com.pq.tracs.model.ao.TargetedProductTitleToOpportunityTargetFkAssoc.PrmTargetedProductTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="PrmTargetedTitleFormat"
+    Association="com.pq.tracs.model.ao.TargetedTitleToFormatFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.TargetedTitleToFormatFkAssoc.PrmTargetedTitleFormat"
+    AssociationOtherEnd="com.pq.tracs.model.ao.TargetedTitleToFormatFkAssoc.PrmTargetedProductTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="PrmTargetedTitleMarket"
+    Association="com.pq.tracs.model.ao.TargetedTitleToMarketFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.TargetedTitleToMarketFkAssoc.PrmTargetedTitleMarket"
+    AssociationOtherEnd="com.pq.tracs.model.ao.TargetedTitleToMarketFkAssoc.PrmTargetedProductTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="PrmTargetGroup"
+    Association="com.pq.tracs.model.ao.TargetGroupToTargetedProductTitleFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.TargetGroupToTargetedProductTitleFkAssoc.PrmTargetGroup"
+    AssociationOtherEnd="com.pq.tracs.model.ao.TargetGroupToTargetedProductTitleFkAssoc.PrmTargetedProductTitle"
+    Type="com.pq.tracs.model.eo.PrmTargetGroupImpl"
+    IsUpdateable="true"/>
+  <Key
+    Name="PrmTargetedProductTitlPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="PRM_TARGETED_PRODUCT_TITL_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046453">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046453"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046455">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046455"/>
+      <Attr Name="_checkCondition" Value='"TITLE_ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.TitleId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046456">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046456"/>
+      <Attr Name="_checkCondition" Value='"ADDED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.AddedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046457">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046457"/>
+      <Attr Name="_checkCondition" Value='"CREATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.CreatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046458">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046458"/>
+      <Attr Name="_checkCondition" Value='"CREATED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.CreatedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046459">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046459"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_BY" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.LastUpdatedBy"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0046460">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0046460"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.LastUpdatedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="PrmTargetedProductTitleFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PRM_TARGETED_PRODUCT_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="PRM_TARGETED_PRODUCT_TITLE_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.PrmTargetedProductId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="PrmTargetedProductTitleFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TITLE_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="PRM_TARGETED_PRODUCT_TITLE_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.TitleId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_PrmTargetedProductTitle">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="PRM_TARGET_GROUP_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_PRM_TARGETED_PRODUCT_TITLE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item
+        Value="com.pq.tracs.model.eo.PrmTargetedProductTitle.PrmTargetGroupId"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

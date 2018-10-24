@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="ReminderWizardTaskFlow">
+    <!-- DEBUG:BEGIN:TASK_FLOW_TEMPLATE_REFERENCE : default/misc/facesConfig/taskFlowTemplateReference.vm, nesting level: 2 -->
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <!-- DEBUG:END:TASK_FLOW_TEMPLATE_REFERENCE : default/misc/facesConfig/taskFlowTemplateReference.vm, nesting level: 2-->
+    <default-activity id="__2">StartReminderWizard</default-activity>
+    <!-- DEBUG:BEGIN:TASK_FLOW_INPUT_PARAMETERS : default/misc/facesConfig/taskFlowInputParameters.vm, nesting level: 2 -->
+    <input-parameter-definition id="__3">
+      <name id="__4">createReminderWizard</name>
+      <value id="__5">#{pageFlowScope.createReminderWizard}</value>
+      <class id="__6">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyStrReminderWizard</name>
+      <value id="__9">#{pageFlowScope.rowKeyStrReminderWizard}</value>
+      <class id="__10">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyValueReminderWizard</name>
+      <value id="__13">#{pageFlowScope.rowKeyValueReminderWizard}</value>
+      <class id="__14">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">rowKeyReminderWizard</name>
+      <value id="__17">#{pageFlowScope.rowKeyReminderWizard}</value>
+      <class id="__18">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name id="__20">altKeyNameReminderWizard</name>
+      <value id="__21">#{pageFlowScope.altKeyNameReminderWizard}</value>
+      <class id="__22">java.lang.String</class>
+    </input-parameter-definition>
+    <!-- DEBUG:END:TASK_FLOW_INPUT_PARAMETERS : default/misc/facesConfig/taskFlowInputParameters.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:TASK_FLOW_MANAGER_BEAN : default/misc/facesConfig/taskFlowManagerBean.vm, nesting level: 2 -->
+    <managed-bean id="__23">
+      <managed-bean-name id="__24">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__25">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__26">pageFlow</managed-bean-scope>
+      <managed-property id="__27">
+        <property-name id="__28">initializeParentContextEntries</property-name>
+        <map-entries id="__29">
+          <map-entry id="__30">
+            <key id="__31">jhsCurrentGroupName</key>
+            <value id="__32">ReminderWizard</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <!-- DEBUG:END:TASK_FLOW_MANAGER_BEAN : default/misc/facesConfig/taskFlowManagerBean.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:DEFAULT_VALUES_BEAN : default/misc/facesConfig/defaultValuesBean.vm, nesting level: 2 -->
+    <managed-bean id="__33">
+      <managed-bean-name id="__34">ReminderWizardDefaultValues</managed-bean-name>
+      <managed-bean-class id="__35">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__36">pageFlow</managed-bean-scope>
+      <managed-property id="__37">
+        <property-name id="__38">iteratorBinding</property-name>
+        <value id="__39">#{data.ReminderWizardPageDef.ReminderWizardIterator}</value>
+      </managed-property>
+      <managed-property id="__40">
+        <property-name id="__41">defaultValues</property-name>
+        <map-entries id="__42">
+          <map-entry id="__43">
+            <key id="__44">AttachmentType</key>
+            <value id="__45">Reminder</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__46">
+        <property-name id="__47">actionResult</property-name>
+        <value id="__48">CreateReminderWizard</value>
+      </managed-property>
+    </managed-bean>
+    <!-- DEBUG:END:DEFAULT_VALUES_BEAN : default/misc/facesConfig/defaultValuesBean.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:CREATE_ROW_BEAN : default/misc/facesConfig/createRowBean.vm, nesting level: 2 -->
+    <managed-bean id="__49">
+      <managed-bean-name id="__50">CreateReminderWizard</managed-bean-name>
+      <managed-bean-class id="__51">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__52">request</managed-bean-scope>
+      <managed-property id="__53">
+        <property-name id="__54">createBinding</property-name>
+        <value id="__55">#{bindings.CreateReminderWizard}</value>
+      </managed-property>
+      <managed-property id="__56">
+        <property-name id="__57">defaultValuesBean</property-name>
+        <value id="__58">#{pageFlowScope.ReminderWizardDefaultValues}</value>
+      </managed-property>
+    </managed-bean>
+    <!-- DEBUG:END:CREATE_ROW_BEAN : default/misc/facesConfig/createRowBean.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:SAVE_BEAN : default/misc/facesConfig/saveBean.vm, nesting level: 2 -->
+    <managed-bean id="__59">
+      <managed-bean-name id="__60">SaveReminderWizard</managed-bean-name>
+      <managed-bean-class id="__61">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__62">request</managed-bean-scope>
+      <managed-property id="__63">
+        <property-name id="__64">commitBinding</property-name>
+        <value id="__65">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__66">
+        <property-name id="__67">successOutcome</property-name>
+        <value id="__68">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <!-- DEBUG:END:SAVE_BEAN : default/misc/facesConfig/saveBean.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:CANCEL_BEAN : default/misc/facesConfig/cancelBean.vm, nesting level: 2 -->
+    <managed-bean id="__69">
+      <managed-bean-name id="__70">jhsRollback</managed-bean-name>
+      <managed-bean-class id="__71">oracle.jheadstart.controller.jsf.bean.RollbackBean</managed-bean-class>
+      <managed-bean-scope id="__72">request</managed-bean-scope>
+      <managed-property id="__73">
+        <property-name id="__74">rollbackBinding</property-name>
+        <value id="__75">#{bindings.Rollback}</value>
+      </managed-property>
+      <managed-property id="__76">
+        <property-name id="__77">successOutcome</property-name>
+        <value id="__78">Cancel</value>
+      </managed-property>
+    </managed-bean>
+    <!-- DEBUG:END:CANCEL_BEAN : default/misc/facesConfig/cancelBean.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:LOV_ITEM_BEAN : default/misc/facesConfig/lovItemBean.vm, nesting level: 2 -->
+    <managed-bean id="__79">
+      <managed-bean-name id="__80">ReminderWizardFirstNameLovItem</managed-bean-name>
+      <managed-bean-class id="__81">oracle.jheadstart.controller.jsf.bean.LovItemBean</managed-bean-class>
+      <managed-bean-scope id="__82">pageFlow</managed-bean-scope>
+      <managed-property id="__83">
+        <property-name id="__84">lovFieldBindingExpr</property-name>
+        <value id="__85">#{'#{bindings.ReminderWizardFirstName}'}</value>
+      </managed-property>
+      <managed-property id="__86">
+        <property-name id="__87">lovSearchItem</property-name>
+        <value id="__88">ContactLookupLoVFirstName</value>
+      </managed-property>
+      <managed-property id="__89">
+        <property-name id="__90">popupId</property-name>
+        <value id="__91">ReminderWizardFirstNamePopup</value>
+      </managed-property>
+      <managed-property id="__92">
+        <property-name id="__93">lovTaskFlowManager</property-name>
+        <property-class id="__94">oracle.jheadstart.controller.jsf.bean.DynamicRegionManager</property-class>
+        <value id="__95">#{pageFlowScope.ReminderWizardFirstNameInFormTaskFlowManager}</value>
+      </managed-property>
+      <managed-property id="__96">
+        <property-name id="__97">lovTaskFlowName</property-name>
+        <value id="__98">ReminderWizardFirstNameInForm</value>
+      </managed-property>
+      <managed-property id="__99">
+        <property-name id="__100">lovParams</property-name>
+        <map-entries id="__101"></map-entries>
+      </managed-property>
+      <managed-property id="__102">
+        <property-name id="__103">returnValues</property-name>
+        <map-entries id="__104">
+          <map-entry id="__105">
+            <key id="__106">FirstName</key>
+            <value id="__107">ReminderWizardFirstName</value>
+          </map-entry>
+          <map-entry id="__108">
+            <key id="__109">Id</key>
+            <value id="__110">ReminderWizardContactId</value>
+          </map-entry>
+          <map-entry id="__111">
+            <key id="__112">LastName</key>
+            <value id="__113">ReminderWizardLastName</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__114">
+        <property-name id="__115">copyToModel</property-name>
+        <value id="__116">true</value>
+      </managed-property>
+      <managed-property id="__117">
+        <property-name id="__118">itemsToClear</property-name>
+        <list-entries id="__119"></list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__120">
+      <managed-bean-name id="__121">ReminderWizardFirstNameInFormTaskFlowConfig</managed-bean-name>
+      <managed-bean-class id="__122">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+      <managed-bean-scope id="__123">pageFlow</managed-bean-scope>
+      <managed-property id="__124">
+        <property-name id="__125">params</property-name>
+        <property-class id="__126">java.util.Map</property-class>
+        <map-entries id="__127">
+          <map-entry id="__128">
+            <key id="__129">lovItemBeanRef</key>
+            <value id="__130">#{pageFlowScope.ReminderWizardFirstNameLovItem}</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__131">
+        <property-name id="__132">taskFlowId</property-name>
+        <value id="__133">/WEB-INF/adfc-config-ContactLookupLoV.xml#ContactLookupLoVTaskFlow</value>
+      </managed-property>
+      <managed-property id="__134">
+        <property-name id="__135">name</property-name>
+        <value id="__136">ReminderWizardFirstNameInForm</value>
+      </managed-property>
+    </managed-bean>
+    <!-- DEBUG:END:LOV_ITEM_BEAN : default/misc/facesConfig/lovItemBean.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:DYNAMIC_REGION_MANAGER_BEAN : default/misc/facesConfig/dynamicRegionManagerBean.vm, nesting level: 2 -->
+    <managed-bean id="__137">
+      <managed-bean-name id="__138">ReminderWizardFirstNameInFormTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__139">oracle.jheadstart.controller.jsf.bean.DynamicRegionManager</managed-bean-class>
+      <managed-bean-scope id="__140">pageFlow</managed-bean-scope>
+    </managed-bean>
+    <!-- DEBUG:END:DYNAMIC_REGION_MANAGER_BEAN : default/misc/facesConfig/dynamicRegionManagerBean.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:TASK_FLOW_CUSTOM_BEANS : default/common/empty.vm, nesting level: 2 -->
+    <!-- DEBUG:END:TASK_FLOW_CUSTOM_BEANS : default/common/empty.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:TASK_FLOW_MAIN_ROUTER : default/misc/facesConfig/taskFlowMainRouter.vm, nesting level: 2 -->
+    <router id="StartReminderWizard">
+      <case id="__141">
+        <expression id="__142">#{pageFlowScope.createReminderWizard!=null}</expression>
+        <outcome id="__143">createReminderWizard</outcome>
+      </case>
+      <case id="__144">
+        <expression id="__145">#{pageFlowScope.rowKeyStrReminderWizard!=null or
+                               pageFlowScope.rowKeyValueReminderWizard!=null or
+                               pageFlowScope.rowKeyReminderWizard!=null}</expression>
+        <outcome id="__146">SetCurrentRowReminderWizard</outcome>
+      </case>
+      <case id="__147">
+        <expression id="__148">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__149">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__150">firstPage</default-outcome>
+    </router>
+    <!-- DEBUG:END:TASK_FLOW_MAIN_ROUTER : default/misc/facesConfig/taskFlowMainRouter.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:TASK_FLOW_METHOD_CALL_ACTIVITIES : default/misc/facesConfig/taskFlowMethodCallActivities.vm, nesting level: 2 -->
+    <method-call id="CreateReminderWizard">
+      <method id="__151">#{CreateReminderWizard.execute}</method>
+      <!-- execute condition param -->
+      <parameter>
+        <class id="__152">java.lang.Object</class>
+        <value id="__153">#{pageFlowScope.createReminderWizard}</value>
+      </parameter>
+      <outcome id="__154">
+        <fixed-outcome id="__155">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowReminderWizard">
+      <method id="__156">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__157">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__158">#{bindings.ReminderWizardIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__159">java.lang.String</class>
+        <value id="__160">#{pageFlowScope.rowKeyStrReminderWizard}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__161">java.lang.Object</class>
+        <value id="__162">#{pageFlowScope.rowKeyValueReminderWizard}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__163">oracle.jbo.Key</class>
+        <value id="__164">#{pageFlowScope.rowKeyReminderWizard}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__165">java.lang.String</class>
+        <value id="__166">#{pageFlowScope.altKeyNameReminderWizard}</value>
+      </parameter>
+      <outcome id="__167">
+        <fixed-outcome id="__168">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <!-- DEBUG:END:TASK_FLOW_METHOD_CALL_ACTIVITIES : default/misc/facesConfig/taskFlowMethodCallActivities.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:TASK_FLOW_CALL_ACTIVITIES : default/misc/facesConfig/taskFlowCallActivities.vm, nesting level: 2 -->
+    <!-- DEBUG:END:TASK_FLOW_CALL_ACTIVITIES : default/misc/facesConfig/taskFlowCallActivities.vm, nesting level: 2-->
+    <task-flow-return id="CancelReminderWizardReturn">
+      <outcome id="__169">
+        <name id="__170">CancelReminderWizard</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneReminderWizardReturn">
+      <outcome id="__171">
+        <name id="__172">DoneReminderWizard</name>
+      </outcome>
+    </task-flow-return>
+    <!-- DEBUG:BEGIN:TASK_FLOW_VIEW_ACTIVITIES : default/misc/facesConfig/taskFlowViewActivities.vm, nesting level: 2 -->
+    <view id="ReminderWizard">
+      <page id="__173">/pages/ReminderWizard.jsff</page>
+      <train-stop id="__174">
+        <display-name id="__175">#{pageFlowScope.createModes.CreateReminderWizard ? nls['INSERT_TITLE_REMINDERWIZARD'] : nls['VIEW_TITLE_REMINDERWIZAR: #{bindings.ReminderWizardAttachmentName.inputValue}']}</display-name>
+      </train-stop>
+    </view>
+    <!-- DEBUG:END:TASK_FLOW_VIEW_ACTIVITIES : default/misc/facesConfig/taskFlowViewActivities.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:TASK_FLOW_CUSTOM_ACTIVITIES : default/common/empty.vm, nesting level: 2 -->
+    <!-- DEBUG:END:TASK_FLOW_CUSTOM_ACTIVITIES : default/common/empty.vm, nesting level: 2-->
+    <train/>
+    <!-- DEBUG:BEGIN:TASK_FLOW_CONTROL_FLOW_RULES : default/misc/facesConfig/taskFlowControlFlowRules.vm, nesting level: 2 -->
+    <control-flow-rule id="__176">
+      <from-activity-id id="__177">*</from-activity-id>
+      <control-flow-case id="__178">
+        <from-outcome id="__179">createReminderWizard</from-outcome>
+        <to-activity-id id="__180">CreateReminderWizard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__181">
+        <from-outcome id="__182">SetCurrentRowReminderWizard</from-outcome>
+        <to-activity-id id="__183">SetCurrentRowReminderWizard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__184">
+        <from-outcome id="__185">firstPage</from-outcome>
+        <to-activity-id id="__186">ReminderWizard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__187">
+        <from-outcome id="__188">deepLinkPage</from-outcome>
+        <to-activity-id id="__189">ReminderWizard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__190">
+        <from-outcome id="__191">ReminderWizardBreadcrumb</from-outcome>
+        <to-activity-id id="__192">ReminderWizard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__193">
+        <from-outcome id="__194">Cancel</from-outcome>
+        <to-activity-id id="__195">ReminderWizard</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__196">
+        <from-outcome id="__197">CancelReminderWizardReturn</from-outcome>
+        <to-activity-id id="__198">CancelReminderWizardReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__199">
+        <from-outcome id="__200">DoneReminderWizardReturn</from-outcome>
+        <to-activity-id id="__201">DoneReminderWizardReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <!-- DEBUG:END:TASK_FLOW_CONTROL_FLOW_RULES : default/misc/facesConfig/taskFlowControlFlowRules.vm, nesting level: 2-->
+    <!-- DEBUG:BEGIN:TASK_FLOW_CUSTOM_CONTROL_FLOW_RULES : default/common/empty.vm, nesting level: 2 -->
+    <!-- DEBUG:END:TASK_FLOW_CUSTOM_CONTROL_FLOW_RULES : default/common/empty.vm, nesting level: 2-->
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <!-- DEBUG:BEGIN:TASK_FLOW_CONFIG_BEAN : default/misc/facesConfig/taskFlowConfigBean.vm, nesting level: 2 -->
+  <managed-bean id="__202">
+    <managed-bean-name id="__203">ReminderWizardTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__204">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__205">pageFlow</managed-bean-scope>
+    <managed-property id="__206">
+      <property-name id="__207">params</property-name>
+      <property-class id="__208">java.util.Map</property-class>
+      <map-entries id="__209">
+        <map-entry id="__210">
+          <key id="__211">parentContext</key>
+          <value id="__212">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+        <map-entry id="__213">
+          <key id="__214">createReminderWizard</key>
+          <value id="__215">true</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__216">
+      <property-name id="__217">name</property-name>
+      <value id="__218">ReminderWizard</value>
+    </managed-property>
+    <managed-property id="__219">
+      <property-name id="__220">taskFlowId</property-name>
+      <value id="__221">/WEB-INF/adfc-config-ReminderWizard.xml#ReminderWizardTaskFlow</value>
+    </managed-property>
+    <managed-property id="__222">
+      <property-name id="__223">label</property-name>
+      <value id="__224">Reminder</value>
+    </managed-property>
+  </managed-bean>
+  <!-- DEBUG:END:TASK_FLOW_CONFIG_BEAN : default/misc/facesConfig/taskFlowConfigBean.vm, nesting level: 2-->
+</adfc-config>

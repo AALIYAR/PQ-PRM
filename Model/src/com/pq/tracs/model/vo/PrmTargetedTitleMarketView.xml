@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PrmTargetedTitleMarketView"
+  Version="11.1.1.59.23"
+  SelectList="PrmTargetedTitleMarket.ID, 
+       PrmTargetedTitleMarket.PRM_TARGETED_PRODUCT_TITLE_ID, 
+       PrmTargetedTitleMarket.TARGETED_MARKET, 
+       PrmTargetedTitleMarket.ADDED_DATE, 
+       PrmTargetedTitleMarket.REMOVED_DATE, 
+       PrmTargetedTitleMarket.CREATED_BY, 
+       PrmTargetedTitleMarket.CREATED_DATE, 
+       PrmTargetedTitleMarket.LAST_UPDATED_BY, 
+       PrmTargetedTitleMarket.LAST_UPDATED_DATE"
+  FromList="PRM_TARGETED_TITLE_MARKET PrmTargetedTitleMarket"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  PageIterMode="Partial"
+  UseGlueCode="false"
+  ComponentClass="com.pq.tracs.model.vo.PRMView"
+  FetchMode="FETCH_AS_NEEDED"
+  FetchSize="15"
+  RangeSize="10">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.pq.tracs.model.vo.PrmTargetedTitleMarketView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="MarketTypeLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.CategoryLookupView">
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Market Type']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_TargetedMarket"
+    ListVOName="MarketTypeLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TargetedMarket"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Value"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <EntityUsage
+    Name="PrmTargetedTitleMarket"
+    Entity="com.pq.tracs.model.eo.PrmTargetedTitleMarket"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="PrmTargetedProductTitleId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PrmTargetedProductTitleId"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="PRM_TARGETED_PRODUCT_TITLE_ID"/>
+  <ViewAttribute
+    Name="TargetedMarket"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="TargetedMarket"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="TARGETED_MARKET"
+    LOVName="LOV_TargetedMarket">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AddedDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AddedDate"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="ADDED_DATE"/>
+  <ViewAttribute
+    Name="RemovedDate"
+    PrecisionRule="true"
+    EntityAttrName="RemovedDate"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="REMOVED_DATE"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="CREATED_DATE"/>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="LAST_UPDATED_BY"/>
+  <ViewAttribute
+    Name="LastUpdatedDate"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedDate"
+    EntityUsage="PrmTargetedTitleMarket"
+    AliasName="LAST_UPDATED_DATE"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

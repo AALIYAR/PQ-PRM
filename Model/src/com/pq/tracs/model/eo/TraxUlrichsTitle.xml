@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Entity SYSTEM "jbo_03_01.dtd">
+<!---->
+<Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="TraxUlrichsTitle"
+  Version="11.1.1.59.23"
+  DBObjectType="synonym"
+  DBObjectName="TRAX_ULRICHS_TITLE"
+  AliasName="TraxUlrichsTitle"
+  BindingStyle="OracleName"
+  UseGlueCode="false"
+  RowClass="com.pq.tracs.model.eo.PrmBaseEntity">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <AttrArray Name="_publishEvents"/>
+  </DesignTime>
+  <Attribute
+    Name="Id"
+    IsNotNull="true"
+    ColumnName="ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TRAX_ULRICHS_TITLE"
+    PrimaryKey="true"
+    Precision="38"
+    Scale="0">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="TitleId"
+    Precision="38"
+    Scale="0"
+    ColumnName="TITLE_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UlrichsStagingId"
+    Precision="38"
+    Scale="0"
+    ColumnName="ULRICHS_STAGING_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CountryCode"
+    Precision="10"
+    ColumnName="COUNTRY_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Title"
+    Precision="1000"
+    ColumnName="TITLE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SubTitle"
+    Precision="1000"
+    ColumnName="SUB_TITLE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ExplanationOfTitleAcronym"
+    Precision="1000"
+    ColumnName="EXPLANATION_OF_TITLE_ACRONYM"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="YearFirstPublished"
+    Precision="1000"
+    ColumnName="YEAR_FIRST_PUBLISHED"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Frequency"
+    Precision="200"
+    ColumnName="FREQUENCY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="BibliographicNotes"
+    Precision="1000"
+    ColumnName="BIBLIOGRAPHIC_NOTES"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="VariantTitleCataloging"
+    Precision="400"
+    ColumnName="VARIANT_TITLE_CATALOGING"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PublisherSubdivision"
+    Precision="400"
+    ColumnName="PUBLISHER_SUBDIVISION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="ParentPublisher"
+    Precision="400"
+    ColumnName="PARENT_PUBLISHER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CoPublisher"
+    Precision="400"
+    ColumnName="CO_PUBLISHER"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="NewspaperOwnership"
+    IsQueriable="false"
+    ColumnName="NEWSPAPER_OWNERSHIP"
+    SQLType="CLOB"
+    Type="java.sql.Clob"
+    ColumnType="CLOB"
+    TableName="TRAX_ULRICHS_TITLE"/>
+  <Attribute
+    Name="WebAddressUrl"
+    Precision="400"
+    ColumnName="WEB_ADDRESS_URL"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RefereedSerialFlag"
+    Precision="10"
+    ColumnName="REFEREED_SERIAL_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="NumberOfAnnotationRecords"
+    Precision="38"
+    Scale="0"
+    ColumnName="NUMBER_OF_ANNOTATION_RECORDS"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Annotation"
+    Precision="2000"
+    ColumnName="ANNOTATION"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="2000"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedBy"
+    Precision="40"
+    ColumnName="CREATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="CreatedDate"
+    IsNotNull="true"
+    ColumnName="CREATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedBy"
+    Precision="40"
+    ColumnName="LAST_UPDATED_BY"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="LastUpdatedDate"
+    IsNotNull="true"
+    ColumnName="LAST_UPDATED_DATE"
+    SQLType="TIMESTAMP"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    TableName="TRAX_ULRICHS_TITLE"
+    ChangeIndicator="true">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SpecialIndex"
+    Precision="200"
+    ColumnName="SPECIAL_INDEX"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RecordNumber"
+    Precision="38"
+    Scale="0"
+    ColumnName="RECORD_NUMBER"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="StatusCode"
+    Precision="30"
+    ColumnName="STATUS_CODE"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="30"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="PrimaryPmClass"
+    Precision="40"
+    ColumnName="PRIMARY_PM_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="SecondaryPmClass"
+    Precision="40"
+    ColumnName="SECONDARY_PM_CLASS"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="RightsContactName"
+    Precision="200"
+    ColumnName="RIGHTS_CONTACT_NAME"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="UlrichsSerialId"
+    Precision="38"
+    Scale="0"
+    ColumnName="ULRICHS_SERIAL_ID"
+    SQLType="NUMERIC"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.eo.TraxUlrichsTitle.UlrichsSerialId_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <Attribute
+    Name="OpenAccessIndicator"
+    Precision="40"
+    ColumnName="OPEN_ACCESS_INDICATOR"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="40"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="AvailableOnlineFlag"
+    Precision="1"
+    ColumnName="AVAILABLE_ONLINE_FLAG"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1"/>
+    </DesignTime>
+  </Attribute>
+  <Attribute
+    Name="Format"
+    Precision="50"
+    ColumnName="FORMAT"
+    SQLType="VARCHAR"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    TableName="TRAX_ULRICHS_TITLE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="50"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Attribute>
+  <AccessorAttribute
+    Name="TraxUlrichsSubject"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsSubjectFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsSubjectFkAssoc.TraxUlrichsSubject"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsSubjectFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxUlrichsWireService"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsWireServiceFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsWireServiceFkAssoc.TraxUlrichsWireService"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsWireServiceFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxUlrichsVariantTitle"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsVariantTitleFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsVariantTitleFkAssoc.TraxUlrichsVariantTitle"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsVariantTitleFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxUlrichsPublisher"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsPublisherFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsPublisherFkAssoc.TraxUlrichsPublisher"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsPublisherFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxUlrichsOnlineVendor"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsOnlineVendorFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsOnlineVendorFkAssoc.TraxUlrichsOnlineVendor"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsOnlineVendorFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxUlrichsLanguage"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsLanguageFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsLanguageFkAssoc.TraxUlrichsLanguage"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsLanguageFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxUlrichsEditor"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsEditorFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsEditorFkAssoc.TraxUlrichsEditor"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsEditorFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxUlrichsClassification"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsClassificationFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsClassificationFkAssoc.TraxUlrichsClassification"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsClassificationFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxUlrichsAbstractIndex"
+    Association="com.pq.tracs.model.ao.UlrichsTitleToUlrichsAbstractIndexFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsAbstractIndexFkAssoc.TraxUlrichsAbstractIndex"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsTitleToUlrichsAbstractIndexFkAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <AccessorAttribute
+    Name="TraxTitle"
+    Association="com.pq.tracs.model.ao.TitleToUlrichsTitleFkAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.TitleToUlrichsTitleFkAssoc.TraxTitle"
+    AssociationOtherEnd="com.pq.tracs.model.ao.TitleToUlrichsTitleFkAssoc.TraxUlrichsTitle"
+    Type="com.pq.tracs.model.eo.TraxTitleImpl"
+    IsUpdateable="true"/>
+  <AccessorAttribute
+    Name="TraxTitleUlrichsRelation"
+    Association="com.pq.tracs.model.ao.UlrichsToTitleRelationAssoc"
+    AssociationEnd="com.pq.tracs.model.ao.UlrichsToTitleRelationAssoc.TraxTitleUlrichsRelation"
+    AssociationOtherEnd="com.pq.tracs.model.ao.UlrichsToTitleRelationAssoc.TraxUlrichsTitle"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <Key
+    Name="SysC0045275">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0045275"/>
+      <Attr Name="_checkCondition" Value='"ID" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.TraxUlrichsTitle.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0045276">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0045276"/>
+      <Attr Name="_checkCondition" Value='"CREATED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.TraxUlrichsTitle.CreatedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="SysC0045277">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="SYS_C0045277"/>
+      <Attr Name="_checkCondition" Value='"LAST_UPDATED_DATE" IS NOT NULL'/>
+      <Attr Name="_isCheck" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.TraxUlrichsTitle.LastUpdatedDate"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TraxUlrichsDataPk"
+    PrimaryKey="true">
+    <DesignTime>
+      <Attr Name="_DBObjectName" Value="TRAX_ULRICHS_DATA_PK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.TraxUlrichsTitle.Id"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TraxUlrichsTitleFk">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TITLE_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="TRAX_ULRICHS_TITLE_FK"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.TraxUlrichsTitle.TitleId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="TraxUlrichsTitleFk1">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="TRAX_ULRICHS_STAGING_PK"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="TRAX_ULRICHS_TITLE_FK1"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.TraxUlrichsTitle.UlrichsStagingId"/>
+    </AttrArray>
+  </Key>
+  <Key
+    Name="fk_TraxUlrichsTitle">
+    <DesignTime>
+      <Attr Name="_referencedKey" Value="SYS_C0044995"/>
+      <Attr Name="_isForeign" Value="true"/>
+      <Attr Name="_DBObjectName" Value="FK_TRAX_ULRICHS_TITLE"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.eo.TraxUlrichsTitle.TitleId"/>
+    </AttrArray>
+  </Key>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</Entity>

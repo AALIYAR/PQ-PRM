@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelGroupLayout layout="vertical" id="s250TopLc"
+                           partialTriggers=" s250DeleteDialog s250fbb s250NewButton s250DelB s250SaveButton0 s250CancelButton0 s250SaveButton1 s250CancelButton1"
+                           rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+        <f:facet name="separator">
+          <af:spacer width="10" height="10" id="sp0"/>
+        </f:facet>
+        <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+        <af:panelHeader id="ph0"
+                        text="#{pageFlowScope.createModes.CreateAgreementDataAttachments ? nls['INSERT_TITLE_AGREEMENTDATAATTACHMENTS'] :  (jhsUserRoles['AM,AST,GCA,ADMIN'] ? nls['EDIT_TITLE_AGREEMENTDATAATTACHMENT: #{bindings.s250Name.inputValue}'] : nls['VIEW_TITLE_AGREEMENTDATAATTACHMENT: #{bindings.s250Name.inputValue}'])  }"
+                        helpTopicId="RBH_AGREEMENTDATAATTACHMENTS">
+          <f:facet name="toolbar">
+            <af:toolbox id="tbox0">
+              <af:toolbar id="tbar0">
+                <af:panelGroupLayout id="s250fbb" layout="horizontal"
+                                     rendered="#{ bindings.AgreementDataAttachmentsIterator.currentRow!=null  and bindings.AgreementDataAttachmentsIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateAgreementDataAttachments and !pageFlowScope.hideFormBrowseButtons}"
+                                     partialTriggers="s250First s250Previous s250Next s250Last">
+                  <af:commandToolbarButton actionListener="#{bindings.FirstAgreementDataAttachments.execute}"
+                                           id="s250First" partialSubmit="true"
+                                           icon="/afr/shuttleleftall_ena.png"
+                                           shortDesc="#{nls['FIRST_ROW']}"
+                                           rendered="#{bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                  <af:image source="/afr/shuttleleftall_dis.png"
+                            rendered="#{!(bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1>1)}"
+                            id="img0"/>
+                  <af:commandToolbarButton actionListener="#{bindings.PreviousAgreementDataAttachments.execute}"
+                                           icon="/afr/shuttleleft_ena.png"
+                                           shortDesc="#{nls['PREVIOUS_ROW']}"
+                                           id="s250Previous"
+                                           partialSubmit="true"
+                                           rendered="#{bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                  <af:image source="/afr/shuttleleft_dis.png"
+                            rendered="#{!(bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1>1)}"
+                            id="img1"/>
+                  <af:spacer width="4" height="1" id="sp1"/>
+                  <af:outputFormatted styleUsage="instruction"
+                                      inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                      value=" [#{bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1} / #{bindings.AgreementDataAttachmentsIterator.estimatedRowCount}] "
+                                      id="of0"/>
+                  <af:commandToolbarButton actionListener="#{bindings.NextAgreementDataAttachments.execute}"
+                                           icon="/afr/shuttleright_ena.png"
+                                           shortDesc="#{nls['NEXT_ROW']}"
+                                           id="s250Next" partialSubmit="true"
+                                           rendered="#{bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1 lt bindings.AgreementDataAttachmentsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                  <af:image source="/afr/shuttleright_dis.png"
+                            rendered="#{!(bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1 lt bindings.AgreementDataAttachmentsIterator.estimatedRowCount)}"
+                            id="img2"/>
+                  <af:commandToolbarButton actionListener="#{bindings.LastAgreementDataAttachments.execute}"
+                                           icon="/afr/shuttlerightall_ena.png"
+                                           shortDesc="#{nls['LAST_ROW']}"
+                                           id="s250Last" partialSubmit="true"
+                                           rendered="#{bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1 lt bindings.AgreementDataAttachmentsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                  <af:image source="/afr/shuttlerightall_dis.png"
+                            rendered="#{!(bindings.AgreementDataAttachmentsIterator.rangeStart+bindings.AgreementDataAttachmentsIterator.currentRowIndexInRange+1 lt bindings.AgreementDataAttachmentsIterator.estimatedRowCount)}"
+                            id="img3"/>
+                </af:panelGroupLayout>
+                <af:group id="gr0">
+                  <af:commandToolbarButton actionListener="#{CreateAgreementDataAttachments.execute}"
+                                           action="Creates250"
+                                           icon="/jheadstart/images/newRowInForm.png"
+                                           partialSubmit="true"
+                                           shortDesc="#{nls['NEW_BUTTON_LABEL_AGREEMENTDATAATTACHMENTS']}"
+                                           rendered="#{!pageFlowScope.createModes.CreateAgreementDataAttachments and (true) and (jhsUserRoles['AM,AST,GCA,ADMIN'])}"
+                                           id="s250NewButton"></af:commandToolbarButton>
+                  <af:commandToolbarButton action="DeleteAgreementDataAttachments"
+                                           partialSubmit="true"
+                                           icon="/jheadstart/images/deleteRow.png"
+                                           shortDesc="#{nls['DELETE_BUTTON_LABEL_AGREEMENTDATAATTACHMENTS']}"
+                                           rendered="#{!pageFlowScope.createModes.CreateAgreementDataAttachments and  bindings.AgreementDataAttachmentsIterator.currentRow!=null   and (jhsUserRoles['GCA,ADMIN'])}"
+                                           immediate="true" id="s250DelB">
+                    <af:showPopupBehavior popupId="s250DeletePopup"/>
+                  </af:commandToolbarButton>
+                </af:group>
+                <af:group id="gr1"></af:group>
+                <af:group id="gr2">
+                  <af:commandToolbarButton text="Print" id="s250Print"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                  <af:commandButton action="#{SaveAgreementDataAttachments.execute}"
+                                    rendered="#{((jhsUserRoles['AM,AST,GCA,ADMIN']) or (jhsUserRoles['AM,AST,GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                    textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                    id="s250SaveButton0" partialSubmit="true"></af:commandButton>
+                  <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                    immediate="true" partialSubmit="true"
+                                    rendered="#{!pageFlowScope.hideCancelButton}"
+                                    actionListener="#{jhsRollback.execute}"
+                                    action="Cancel" id="s250CancelButton0"></af:commandButton>
+                </af:group>
+              </af:toolbar>
+            </af:toolbox>
+          </f:facet>
+          <f:facet name="context"></f:facet>
+        </af:panelHeader>
+        <af:switcher rendered="#{bindings.AgreementDataAttachmentsIterator.findMode!='true'}"
+                     id="s250Sw" defaultFacet="hasRows"
+                     facetName="#{( bindings.AgreementDataAttachmentsIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+          <f:facet name="noRows">
+            <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                styleUsage="pageStamp" id="s250NoRowsFound"/>
+          </f:facet>
+          <f:facet name="hasRows">
+            <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+            <af:panelGroupLayout id="s250FC" layout="vertical">
+              <f:facet name="separator">
+                <af:spacer width="10" height="10" id="sp2"/>
+              </f:facet>
+              <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="2"
+                                  id="s250FI">
+                <af:inputFile id="s250Att" label="Upload File"
+                              columns="#{bindings.s250Attachment.hints.displayWidth}"
+                              binding="#{s250AttachmentFileHandlerBean.usesUploadIndicator}"
+                              rendered="#{(!(((pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))))) and (true)}"
+                              shortDesc="#{bindings.s250Attachment.hints.tooltip}"
+                              helpTopicId="RBH_S250ATTACHMENT"
+                              valueChangeListener="#{s250AttachmentFileHandlerBean.uploadFile}"/>
+                <af:panelLabelAndMessage label="Download File"
+                                         id="s250AttachmentDLLabel"
+                                         shortDesc="#{bindings.s250AttachmentDL.hints.tooltip}"
+                                         helpTopicId="RBH_S250ATTACHMENTDL">
+                  <af:commandLink id="s250ADL"
+                                  rendered="#{s250AttachmentDLFileHandlerBean.fileExist}">
+                    <af:outputText id="ot1"
+                                   value="#{s250AttachmentDLFileHandlerBean.fileName}"/>
+                    <af:fileDownloadActionListener contentType="#{s250AttachmentDLFileHandlerBean.contentType}"
+                                                   filename="#{s250AttachmentDLFileHandlerBean.fileName}"
+                                                   method="#{s250AttachmentDLFileHandlerBean.downloadFile}"/>
+                  </af:commandLink>
+                  <f:facet name="end">
+                    <af:panelGroupLayout id="pgl0" valign="top"
+                                         layout="horizontal"></af:panelGroupLayout>
+                  </f:facet>
+                </af:panelLabelAndMessage>
+                <af:inputText id="s250ATy"
+                              value="#{bindings.s250AttachmentType.inputValue}"
+                              label="#{bindings.s250AttachmentType.hints.label}"
+                              required="#{bindings.s250AttachmentType.hints.mandatory}"
+                              rows="#{bindings.s250AttachmentType.hints.displayHeight}"
+                              columns="#{bindings.s250AttachmentType.hints.displayWidth}"
+                              maximumLength="20"
+                              readOnly="#{((pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                              shortDesc="#{bindings.s250AttachmentType.hints.tooltip}"
+                              helpTopicId="RBH_S250ATTACHMENTTYPE">
+                  <f:validator binding="#{bindings.s250AttachmentType.validator}"/>
+                </af:inputText>
+                <af:popup id="hoverPopup0">
+                  <af:noteWindow>
+                    <af:outputText value="#{bindings.s250Description.inputValue}"/>
+                  </af:noteWindow>
+                </af:popup>
+                <af:panelLabelAndMessage label="#{bindings.s250Description.hints.label}"
+                                         shortDesc="#{bindings.s250Description.hints.tooltip}"
+                                         helpTopicId="RBH_S250DESCRIPTION"
+                                         showRequired="#{bindings.s250Description.hints.mandatory}"
+                                         id="s250DescriptionLabel">
+                  <af:inputText id="s250Des"
+                                value="#{bindings.s250Description.inputValue}"
+                                required="#{bindings.s250Description.hints.mandatory}"
+                                rows="#{bindings.s250Description.hints.displayHeight}"
+                                columns="#{bindings.s250Description.hints.displayWidth}"
+                                maximumLength="4000"
+                                readOnly="#{((pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                                autoSubmit="true" simple="true"
+                                partialTriggers="s250DescriptionEditorLink s250DescriptionEditorText">
+                    <f:validator binding="#{bindings.s250Description.validator}"/>
+                    <af:showPopupBehavior popupId="hoverPopup0"
+                                          triggerType="mouseHover"
+                                          align="endAfter"/>
+                  </af:inputText>
+                  <f:facet name="end">
+                    <af:panelGroupLayout id="pgl1" valign="top"
+                                         layout="horizontal">
+                      <af:commandLink id="s250DescriptionEditorLink"
+                                      rendered="#{!(((pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))))}"
+                                      immediate="true" partialSubmit="true">
+                        <af:showPopupBehavior popupId="s250DescriptionPopup"/>
+                        <af:image source="/jheadstart/images/editor.gif"
+                                  id="s250DescriptionIcon"
+                                  clientComponent="true"/>
+                      </af:commandLink>
+                    </af:panelGroupLayout>
+                  </f:facet>
+                </af:panelLabelAndMessage>
+                <af:inputText id="s250FS"
+                              value="#{bindings.s250FileSize.inputValue}"
+                              label="#{bindings.s250FileSize.hints.label}"
+                              required="#{bindings.s250FileSize.hints.mandatory}"
+                              rows="#{bindings.s250FileSize.hints.displayHeight}"
+                              columns="#{bindings.s250FileSize.hints.displayWidth}"
+                              maximumLength="38" readOnly="true"
+                              shortDesc="#{bindings.s250FileSize.hints.tooltip}"
+                              helpTopicId="RBH_S250FILESIZE">
+                  <f:validator binding="#{bindings.s250FileSize.validator}"/>
+                  <af:convertNumber groupingUsed="false"
+                                    pattern="#{bindings.s250FileSize.format}"/>
+                </af:inputText>
+                <af:inputText id="s250CB"
+                              value="#{bindings.s250CreatedBy.inputValue}"
+                              label="#{bindings.s250CreatedBy.hints.label}"
+                              required="#{bindings.s250CreatedBy.hints.mandatory}"
+                              rows="#{bindings.s250CreatedBy.hints.displayHeight}"
+                              columns="#{bindings.s250CreatedBy.hints.displayWidth}"
+                              maximumLength="40"
+                              readOnly="#{((pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                              shortDesc="#{bindings.s250CreatedBy.hints.tooltip}"
+                              helpTopicId="RBH_S250CREATEDBY">
+                  <f:validator binding="#{bindings.s250CreatedBy.validator}"/>
+                </af:inputText>
+                <af:inputDate id="s250CD"
+                              value="#{bindings.s250CreatedDate.inputValue}"
+                              label="#{bindings.s250CreatedDate.hints.label}"
+                              required="#{bindings.s250CreatedDate.hints.mandatory}"
+                              readOnly="#{((pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                              shortDesc="#{bindings.s250CreatedDate.hints.tooltip}"
+                              helpTopicId="RBH_S250CREATEDDATE">
+                  <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                </af:inputDate>
+                <af:inputText id="s250LUB"
+                              value="#{bindings.s250LastUpdatedBy.inputValue}"
+                              label="#{bindings.s250LastUpdatedBy.hints.label}"
+                              required="#{bindings.s250LastUpdatedBy.hints.mandatory}"
+                              rows="#{bindings.s250LastUpdatedBy.hints.displayHeight}"
+                              columns="#{bindings.s250LastUpdatedBy.hints.displayWidth}"
+                              maximumLength="40"
+                              readOnly="#{((pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                              shortDesc="#{bindings.s250LastUpdatedBy.hints.tooltip}"
+                              helpTopicId="RBH_S250LASTUPDATEDBY">
+                  <f:validator binding="#{bindings.s250LastUpdatedBy.validator}"/>
+                </af:inputText>
+                <af:inputDate id="s250LUD"
+                              value="#{bindings.s250LastUpdatedDate.inputValue}"
+                              label="#{bindings.s250LastUpdatedDate.hints.label}"
+                              required="#{bindings.s250LastUpdatedDate.hints.mandatory}"
+                              readOnly="#{((pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN']))) or ((!pageFlowScope.createModes.CreateAgreementDataAttachments) and (!(jhsUserRoles['AM,AST,GCA,ADMIN'])))}"
+                              shortDesc="#{bindings.s250LastUpdatedDate.hints.tooltip}"
+                              helpTopicId="RBH_S250LASTUPDATEDDATE">
+                  <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                </af:inputDate>
+              </af:panelFormLayout>
+              <af:panelHeader id="ph1" text=" "
+                              helpTopicId="RBH_AGREEMENTDATAATTACHMENTS">
+                <f:facet name="toolbar">
+                  <af:toolbox id="toolbox0">
+                    <af:toolbar id="toolbar0">
+                      <af:group id="gr3">
+                        <af:commandButton action="#{SaveAgreementDataAttachments.execute}"
+                                          rendered="#{((jhsUserRoles['AM,AST,GCA,ADMIN']) or (jhsUserRoles['AM,AST,GCA,ADMIN'])) and (!pageFlowScope.hideSaveButton)}"
+                                          textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                          id="s250SaveButton1"
+                                          partialSubmit="true"></af:commandButton>
+                        <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                          immediate="true" partialSubmit="true"
+                                          rendered="#{!pageFlowScope.hideCancelButton}"
+                                          actionListener="#{jhsRollback.execute}"
+                                          action="Cancel"
+                                          id="s250CancelButton1"></af:commandButton>
+                      </af:group>
+                    </af:toolbar>
+                  </af:toolbox>
+                </f:facet>
+              </af:panelHeader>
+            </af:panelGroupLayout>
+            <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+          </f:facet>
+        </af:switcher>
+        <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+      </af:panelGroupLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="s250DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="s250DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_AGREEMENTDATAATTACHMENT: #{bindings.s250Name.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteAgreementDataAttachments.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="s250DescriptionPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher" childCreation="deferred">
+          <af:dialog modal="true" resize="on" title="Text Editor" id="dialog0">
+            <af:inputText rows="10" columns="100"
+                          value="#{bindings.s250Description.inputValue}"
+                          simple="true" maximumLength="4000"
+                          id="s250DescriptionEditorText"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="AccountManagersPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'AST, GCA, ADMIN'}"/>
+  </parameters>
+  <executables>
+    <iterator id="AccountManagersIterator" Binds="PrmAllianceManagerView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="-1"/>
+    <searchRegion id="AccountManagersIteratorPrmAllianceManagerViewCriteriaQuery"
+                  Binds="AccountManagersIterator"
+                  Criteria="PrmAllianceManagerViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="DisplayName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <searchRegion id="AccountManagersIteratorPrmAllianceManagerQuickQueryQuery"
+                  Binds="AccountManagersIterator"
+                  Criteria="PrmAllianceManagerQuickQuery"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="DisplayName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryAccountManagersInvoke"
+                  Binds="ExecuteQueryAccountManagers" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="AllianceManagerAccountsIterator"
+              Binds="PrmAllianceManagerAccountView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AllianceManagerAccountsIteratorPrmAllianceManagerAccountViewCriteriaQuery"
+                  Binds="AllianceManagerAccountsIterator"
+                  Criteria="PrmAllianceManagerAccountViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="AccountName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AllianceManagerOpportunitiesIterator"
+              Binds="PrmAllianceManagerOpportunityView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AllianceManagerOpportunitiesIteratorPrmAllianceManagerOpportunityViewCriteriaQuery"
+                  Binds="AllianceManagerOpportunitiesIterator"
+                  Criteria="PrmAllianceManagerOpportunityViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="OpportunityName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="ProductManagerProductsIterator"
+              Binds="PrmProductManagerProductView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="ProductManagerProductsIteratorQuery"
+                  Binds="ProductManagerProductsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator Binds="ReassignAllianceManagerLookup" RangeSize="25"
+              DataControl="PrmAppModuleDataControl"
+              id="ReassignAllianceManagerLookupIterator"/>
+    <iterator Binds="ReassignProductManagerLookup" RangeSize="25"
+              DataControl="PrmAppModuleDataControl"
+              id="ReassignProductManagerLookupIterator"/>
+    <taskFlow id="LovTaskFlow"
+              taskFlowId="#{pageFlowScope.jhsLovTaskFlowManager.currentTaskFlowId}"
+              activation="deferred"
+              parametersMap="#{pageFlowScope.jhsLovTaskFlowManager.currentParamMap}"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteQueryAccountManagers"
+            IterBinding="AccountManagersIterator" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues id="AMgJhsUsersId" IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="JhsUsersId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgLkpjhsusersid"
+                     IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="Lkpjhsusersid"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false" IterBinding="AccountManagersIterator"
+                  id="AMgUsername" Uses="LOV_Username"/>
+    <list IterBinding="AccountManagersIterator" id="AMgUserType"
+          Uses="LOV_UserType" StaticList="false"/>
+    <attributeValues id="AMgFirstName" IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgLastName" IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgDisplayName" IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgStartDate" IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgEndDate" IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgCreatedBy" IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgCreatedDate" IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgLastUpdatedBy"
+                     IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AMgLastUpdatedDate"
+                     IterBinding="AccountManagersIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AccountManagersTable" IterBinding="AccountManagersIterator">
+      <nodeDefinition Name="AccountManagers"
+                      DefName="com.pq.tracs.model.vo.PrmAllianceManagerView">
+        <AttrNames>
+          <Item Value="JhsUsersId"/>
+          <Item Value="Lkpjhsusersid"/>
+          <Item Value="Username"/>
+          <Item Value="UserType"/>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="DisplayName"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAccountManagers" IterBinding="AccountManagersIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAccountManagers" IterBinding="AccountManagersIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAccountManagers" IterBinding="AccountManagersIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAccountManagers" IterBinding="AccountManagersIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAccountManagers"
+            IterBinding="AccountManagersIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAccountManagers}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAccountManagers" IterBinding="AccountManagersIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAccountManagers" IterBinding="AccountManagersIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="sa0ContentOwnerId"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false"
+                  IterBinding="AllianceManagerAccountsIterator"
+                  id="sa0AccountName" Uses="LOV_AccountName"/>
+    <attributeValues id="sa0AccountNumber"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="AccountNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa0AccountSite"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa0StartDate"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa0EndDate"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa0CreatedBy"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa0CreatedDate"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa0LastUpdatedBy"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa0LastUpdatedDate"
+                     IterBinding="AllianceManagerAccountsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AllianceManagerAccountsTable"
+          IterBinding="AllianceManagerAccountsIterator">
+      <nodeDefinition Name="AllianceManagerAccounts"
+                      DefName="com.pq.tracs.model.vo.PrmAllianceManagerAccountView">
+        <AttrNames>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountNumber"/>
+          <Item Value="AccountSite"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAllianceManagerAccounts"
+            IterBinding="AllianceManagerAccountsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAllianceManagerAccounts"
+            IterBinding="AllianceManagerAccountsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAllianceManagerAccounts"
+            IterBinding="AllianceManagerAccountsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAllianceManagerAccounts"
+            IterBinding="AllianceManagerAccountsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAllianceManagerAccounts"
+            IterBinding="AllianceManagerAccountsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAllianceManagerAccounts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAllianceManagerAccounts"
+            IterBinding="AllianceManagerAccountsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAllianceManagerAccounts"
+            IterBinding="AllianceManagerAccountsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="sa1PrmOpportunityId"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="PrmOpportunityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1ContentOwnerId"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1OpportunityNo"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityNo"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false"
+                  IterBinding="AllianceManagerOpportunitiesIterator"
+                  id="sa1OpportunityName" Uses="LOV_OpportunityName"/>
+    <attributeValues id="sa1CurrentStatus"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="CurrentStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1AccountNumber"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AccountNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1AccountName"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1AccountSite"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1StartDate"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1EndDate"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1CreatedBy"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1CreatedDate"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1LastUpdatedBy"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa1LastUpdatedDate"
+                     IterBinding="AllianceManagerOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AllianceManagerOpportunitiesTable"
+          IterBinding="AllianceManagerOpportunitiesIterator">
+      <nodeDefinition Name="AllianceManagerOpportunities"
+                      DefName="com.pq.tracs.model.vo.PrmAllianceManagerOpportunityView">
+        <AttrNames>
+          <Item Value="PrmOpportunityId"/>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="OpportunityNo"/>
+          <Item Value="OpportunityName"/>
+          <Item Value="CurrentStatus"/>
+          <Item Value="AccountNumber"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountSite"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAllianceManagerOpportunities"
+            IterBinding="AllianceManagerOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAllianceManagerOpportunities"
+            IterBinding="AllianceManagerOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAllianceManagerOpportunities"
+            IterBinding="AllianceManagerOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAllianceManagerOpportunities"
+            IterBinding="AllianceManagerOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyAllianceManagerOpportunities"
+            IterBinding="AllianceManagerOpportunitiesIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAllianceManagerOpportunities}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAllianceManagerOpportunities"
+            IterBinding="AllianceManagerOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAllianceManagerOpportunities"
+            IterBinding="AllianceManagerOpportunitiesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="sa2PrmTargetedProductId"
+                     IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="PrmTargetedProductId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2Name" IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2PrdId" IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="PrdId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2ProductFamily"
+                     IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="ProductFamily"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2AddedDate"
+                     IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2RemovedDate"
+                     IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2CreatedBy"
+                     IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2CreatedDate"
+                     IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2LastUpdatedBy"
+                     IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sa2LastUpdatedDate"
+                     IterBinding="ProductManagerProductsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ProductManagerProductsTable"
+          IterBinding="ProductManagerProductsIterator">
+      <nodeDefinition Name="ProductManagerProducts"
+                      DefName="com.pq.tracs.model.vo.PrmProductManagerProductView">
+        <AttrNames>
+          <Item Value="PrmTargetedProductId"/>
+          <Item Value="Name"/>
+          <Item Value="PrdId"/>
+          <Item Value="ProductFamily"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstProductManagerProducts"
+            IterBinding="ProductManagerProductsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousProductManagerProducts"
+            IterBinding="ProductManagerProductsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextProductManagerProducts"
+            IterBinding="ProductManagerProductsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastProductManagerProducts"
+            IterBinding="ProductManagerProductsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyProductManagerProducts"
+            IterBinding="ProductManagerProductsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrProductManagerProducts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateProductManagerProducts"
+            IterBinding="ProductManagerProductsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteProductManagerProducts"
+            IterBinding="ProductManagerProductsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+    <list IterBinding="ReassignAllianceManagerLookupIterator"
+          ListOperMode="navigation"
+          ListIter="ReassignAllianceManagerLookupIterator"
+          id="ReassignAllianceManagerLookup" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
+    <list IterBinding="ReassignProductManagerLookupIterator"
+          ListOperMode="navigation"
+          ListIter="ReassignProductManagerLookupIterator"
+          id="ReassignProductManagerLookup" DTSupportsMRU="true">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </list>
+  </bindings>
+</pageDefinition>

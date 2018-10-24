@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://jtestcase.sourceforge.net/dtd/jtestcase2.xsd">
+    <class name="PrmAppModuleAMTest">
+        <!--adding more method tags-->
+        <method name="testApplyBindParams">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testApplyBindParams">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testGetJhsOrgKey">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testGetNestedJhsModelService">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testProcessParentShuttle">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testProcessIntersectionShuttle">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testSetRangeStart">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testQueryByKeyValue">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testSetCurrentRowWithKeyValue">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testAdvancedSearch">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testForwardToApex">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testCreateTargetFromUlrichs">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testTargetTitlesToProducts">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testValidateImportData">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testSaveImportData">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testClearDeepLinkViewCriteria">
+            <!--adding zero or more test-case tags-->
+        </method>
+        <method name="testClearViewCriteria">
+            <!--adding zero or more test-case tags-->
+        </method>
+    </class>
+</tests>

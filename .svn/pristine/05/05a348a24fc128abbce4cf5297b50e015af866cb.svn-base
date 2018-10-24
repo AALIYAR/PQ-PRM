@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="ContractTemplatesLOVPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <iterator id="ContractTemplatesLOVIterator" Binds="ContractTemplateLookup1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+  </executables>
+  <bindings>
+    <attributeValues id="ContractTemplatesLOVId"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVTemplateName"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="TemplateName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVForm"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="Form"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVStatus"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVType"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="Type"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVDivision"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="Division"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVTermLength"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="TermLength"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVCancellationNoticeTerm"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="CancellationNoticeTerm"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVAutoRenewTermMonths"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="AutoRenewTermMonths"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVExclusivity"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="Exclusivity"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVContentMasterOwner"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="ContentMasterOwner"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVRightsToBeRetained"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="RightsToBeRetained"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="ContractTemplatesLOVAutoAdd"
+                     IterBinding="ContractTemplatesLOVIterator">
+      <AttrNames>
+        <Item Value="AutoAdd"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="ContractTemplatesLOVTable"
+          IterBinding="ContractTemplatesLOVIterator">
+      <nodeDefinition Name="ContractTemplatesLOV"
+                      DefName="com.pq.tracs.model.lookup.ContractTemplateLookup">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="TemplateName"/>
+          <Item Value="Form"/>
+          <Item Value="Status"/>
+          <Item Value="Type"/>
+          <Item Value="Division"/>
+          <Item Value="TermLength"/>
+          <Item Value="CancellationNoticeTerm"/>
+          <Item Value="AutoRenewTermMonths"/>
+          <Item Value="Exclusivity"/>
+          <Item Value="ContentMasterOwner"/>
+          <Item Value="RightsToBeRetained"/>
+          <Item Value="AutoAdd"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstContractTemplatesLOV"
+            IterBinding="ContractTemplatesLOVIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousContractTemplatesLOV"
+            IterBinding="ContractTemplatesLOVIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextContractTemplatesLOV"
+            IterBinding="ContractTemplatesLOVIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastContractTemplatesLOV"
+            IterBinding="ContractTemplatesLOVIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchContractTemplatesLOV"
+                  IterBinding="ContractTemplatesLOVIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchContractTemplatesLOV.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchContractTemplatesLOV.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchContractTemplatesLOV.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyContractTemplatesLOV"
+            IterBinding="ContractTemplatesLOVIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrContractTemplatesLOV}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

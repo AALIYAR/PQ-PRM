@@ -1,0 +1,357 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="psl0" partialTriggers=""
+                             rendered="#{jhsUserRoles['GCA']}">
+        <f:facet name="top">
+          <af:panelGroupLayout layout="scroll" id="GCATopLc" partialTriggers=""
+                               rendered="#{jhsUserRoles['GCA']}">
+            <f:facet name="separator">
+              <af:spacer width="10" height="10" id="sp0"/>
+            </f:facet>
+            <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+            <af:group id="g0"></af:group>
+            <af:switcher rendered="#{bindings.GCADashboardIterator.findMode!='true'}"
+                         id="GCASw" defaultFacet="hasRows"
+                         facetName="#{( bindings.GCADashboardIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+              <f:facet name="noRows">
+                <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                    styleUsage="pageStamp" id="GCANoRowsFound"/>
+              </f:facet>
+              <f:facet name="hasRows">
+                <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm), disabled (default/pageComponent/formGroup.vm) -->
+                <af:panelGroupLayout id="GCAFC" layout="vertical">
+                  <f:facet name="separator">
+                    <af:spacer width="10" height="10" id="sp1"/>
+                  </f:facet>
+                  <af:panelFormLayout rows="1" labelAlignment="start"
+                                      maxColumns="1" id="GCAFI">
+                    <af:inputText id="GCAUser"
+                                  value="#{bindings.GCAUser.inputValue}"
+                                  label="Welcome" required="false"
+                                  readOnly="true" helpTopicId="RBH_GCAUSER">
+                      <f:validator binding="#{bindings.GCAUser.validator}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+              </f:facet>
+            </af:switcher>
+            <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+            <af:spacer width="10" height="10" id="sp2"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelDashboard id="GCADb" columns="1" rowHeight="300px">
+            <af:panelBox text="#{nls['TABLE_TITLE_RECENTOPPORTUNITIESDASHBOARD']}"
+                         id="RODPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="RODTopLc"
+                                     partialTriggers=" GCATopLc qsAreaRODSearchOptions"
+                                     rendered="#{jhsUserRoles['GCA']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g1">
+                    <af:panelGroupLayout id="modelSearchAreaROD"
+                                         rendered="#{!pageFlowScope.createModes.CreateRecentOpportunitiesDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaRODSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.RecentOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.queryDescriptor}"
+                                     model="#{bindings.RecentOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.queryModel}"
+                                     queryListener="#{bindings.RecentOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp3"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl1">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="RODPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu0">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu1">
+                              <af:group id="RODtbb"
+                                        rendered="#{ bindings.RecentOpportunitiesDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstRecentOpportunitiesDashboard.execute}"
+                                                    id="RODFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousRecentOpportunitiesDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="RODPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextRecentOpportunitiesDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="RODNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastRecentOpportunitiesDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="RODLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi0">
+                              <af:exportCollectionActionListener exportedId="RODTab"
+                                                                 type="excelHTML"
+                                                                 filename="RecentOpportunitiesDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar0">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl0"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="RODTab"
+                                                                 type="excelHTML"
+                                                                 filename="RecentOpportunitiesDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="RODPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.RecentOpportunitiesDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="RODTab" contentDelivery="immediate"
+                                  value="#{bindings.RecentOpportunitiesDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.RecentOpportunitiesDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.RecentOpportunitiesDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.RecentOpportunitiesDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.RecentOpportunitiesDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.RecentOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.processQuery}"
+                                  filterModel="#{bindings.RecentOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.RecentOpportunitiesDashboardTable.table}"
+                                  partialTriggers=":::qsAreaRODSearchOptions :::RODPC ::RODFirst ::RODPrevious ::RODNext ::RODLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_RECENTOPPORTUNITIESDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="RODTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu2">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu3"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="RODOpportunityNoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="OpportunityNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RODOPPORTUNITYNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityNo.label}"
+                                              id="ol0"/>
+                            </f:facet>
+                            <af:inputText id="RODOpportunityNo"
+                                          value="#{row.bindings.OpportunityNo.inputValue}"
+                                          label="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityNo.label}"
+                                          required="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityNo.mandatory}"
+                                          rows="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityNo.displayHeight}"
+                                          columns="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityNo.tooltip}">
+                              <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="RODONmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="OpportunityName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RODOPPORTUNITYNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityName.label}"
+                                              id="ol1"/>
+                            </f:facet>
+                            <af:inputText id="cl1"
+                                          value="#{row.bindings.OpportunityName.inputValue}"
+                                          label="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityName.label}"
+                                          required="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityName.mandatory}"
+                                          rows="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityName.displayHeight}"
+                                          columns="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityName.displayWidth}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="RODONm"
+                                            text="#{row.bindings.OpportunityName.attributeValue}"
+                                            shortDesc="#{bindings.RecentOpportunitiesDashboardTable.hints.OpportunityName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Opportunity"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Opp. - #{row.OpportunityName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="RODCSCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="CurrentStatus"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RODCURRENTSTATUS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.RecentOpportunitiesDashboardTable.hints.CurrentStatus.label}"
+                                              id="ol2"/>
+                            </f:facet>
+                            <af:selectOneChoice id="RODCS"
+                                                value="#{row.bindings.CurrentStatus.inputValue}"
+                                                label="#{bindings.RecentOpportunitiesDashboardTable.hints.CurrentStatus.label}"
+                                                required="#{bindings.RecentOpportunitiesDashboardTable.hints.CurrentStatus.mandatory}"
+                                                readOnly="true"
+                                                shortDesc="#{bindings.RecentOpportunitiesDashboardTable.hints.CurrentStatus.tooltip}">
+                              <f:selectItems value="#{row.bindings.CurrentStatus.items}"/>
+                            </af:selectOneChoice>
+                          </af:column>
+                          <af:column id="RODAMgCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountManager"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RODACCOUNTMANAGER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountManager.label}"
+                                              id="ol3"/>
+                            </f:facet>
+                            <af:inputText id="RODAMg"
+                                          value="#{row.bindings.AccountManager.inputValue}"
+                                          label="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountManager.label}"
+                                          required="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountManager.mandatory}"
+                                          rows="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountManager.displayHeight}"
+                                          columns="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountManager.displayWidth}"
+                                          maximumLength="101" readOnly="true"
+                                          shortDesc="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountManager.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountManager.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="RODANmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RODACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountName.label}"
+                                              id="ol4"/>
+                            </f:facet>
+                            <af:inputText id="RODANm"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountName.label}"
+                                          required="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.RecentOpportunitiesDashboardTable.hints.AccountName.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="RODCoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="Country" rowHeader="false"
+                                     helpTopicId="RBH_RODCOUNTRY"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.RecentOpportunitiesDashboardTable.hints.Country.label}"
+                                              id="ol5"/>
+                            </f:facet>
+                            <af:inputText id="RODCo"
+                                          value="#{row.bindings.Country.inputValue}"
+                                          label="#{bindings.RecentOpportunitiesDashboardTable.hints.Country.label}"
+                                          required="#{bindings.RecentOpportunitiesDashboardTable.hints.Country.mandatory}"
+                                          rows="#{bindings.RecentOpportunitiesDashboardTable.hints.Country.displayHeight}"
+                                          columns="#{bindings.RecentOpportunitiesDashboardTable.hints.Country.displayWidth}"
+                                          maximumLength="200" readOnly="true"
+                                          shortDesc="#{bindings.RecentOpportunitiesDashboardTable.hints.Country.tooltip}">
+                              <f:validator binding="#{row.bindings.Country.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="RODCDCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="CreatedDate"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RODCREATEDDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.RecentOpportunitiesDashboardTable.hints.CreatedDate.label}"
+                                              id="ol6"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                            id="id0">
+                                <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="RODCD"
+                                          value="#{row.bindings.CreatedDate.inputValue}"
+                                          label="#{bindings.RecentOpportunitiesDashboardTable.hints.CreatedDate.label}"
+                                          required="#{bindings.RecentOpportunitiesDashboardTable.hints.CreatedDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.RecentOpportunitiesDashboardTable.hints.CreatedDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+          </af:panelDashboard>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

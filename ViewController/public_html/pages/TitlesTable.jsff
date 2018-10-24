@@ -1,0 +1,734 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="TtlTopLc"
+                             partialTriggers=" TtlCancelButton0 asAreaTtlSearchOptions qsAreaTtlSearchOptions"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_TITLES']}"
+                          helpTopicId="RBH_TITLES">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0">
+                    <af:commandButton actionListener="#{CreateTitles.execute}"
+                                      action="CreateTtl"
+                                      textAndAccessKey="#{nls['NEW_BUTTON_LABEL_TITLES']}"
+                                      rendered="#{(true) and (jhsUserRoles['AM,PM,AST,GCA,ADMIN'])}"
+                                      id="TtlNewButton"></af:commandButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="TtlCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:panelGroupLayout id="modelSearchAreaTtl"
+                                 rendered="#{!pageFlowScope.createModes.CreateTitles and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreaTtlSearchOptions:qsButtonTtl qsAreaTtlSearchOptions:asButtonTtl ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreaTtlSearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchTitles.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonTtl"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchTitles.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreaTtlSearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.queryDescriptor}"
+                             model="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.queryModel}"
+                             queryListener="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchTitles.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonTtl"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchTitles.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="TtlPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="TitlesDetails"></af:commandMenuItem>
+                    <af:group id="Ttltbb"
+                              rendered="#{ (bindings.TitlesIterator.viewObject!=null and bindings.TitlesIterator.viewObject.currentRow!=null)}">
+                      <af:commandMenuItem actionListener="#{bindings.FirstTitles.execute}"
+                                          id="TtlFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousTitles.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="TtlPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextTitles.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="TtlNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastTitles.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="TtlLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="TtlTab"
+                                                       type="excelHTML"
+                                                       filename="Titles.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="TtlTab"
+                                                       type="excelHTML"
+                                                       filename="Titles.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="TtlPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.TitlesIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="TtlTab" contentDelivery="immediate"
+                        value="#{bindings.TitlesTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.TitlesTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.TitlesTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.TitlesTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.TitlesTable.rangeSize}"
+                        autoHeightRows="#{bindings.TitlesTable.estimatedRowCount}"
+                        fetchSize="#{bindings.TitlesTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.processQuery}"
+                        filterModel="#{bindings.TitlesIteratorTraxTitleViewCriteriaQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.TitlesTable.table}"
+                        partialTriggers=":::qsAreaTtlSearchOptions :::asAreaTtlSearchOptions :::TtlPC ::TtlFirst ::TtlPrevious ::TtlNext ::TtlLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_TITLES']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="TtlTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="TitlesDetails"></af:commandMenuItem>
+                      </af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="TtlTTNCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="TargetTrackingNo" rowHeader="false"
+                           helpTopicId="RBH_TTLTARGETTRACKINGNO"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.TargetTrackingNo.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="TtlTTN"
+                                value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                label="#{bindings.TitlesTable.hints.TargetTrackingNo.label}"
+                                required="#{bindings.TitlesTable.hints.TargetTrackingNo.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.TargetTrackingNo.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.TargetTrackingNo.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.TargetTrackingNo.tooltip}">
+                    <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TitlesTable.hints.TargetTrackingNo.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlTtlCol" sortable="true" filterable="true"
+                           noWrap="true" width="260" sortProperty="LongTitle"
+                           rowHeader="false" helpTopicId="RBH_TTLLONGTITLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.LongTitle.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:inputText id="cl1"
+                                value="#{row.bindings.LongTitle.inputValue}"
+                                label="#{bindings.TitlesTable.hints.LongTitle.label}"
+                                required="#{bindings.TitlesTable.hints.LongTitle.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.LongTitle.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.LongTitle.displayWidth}"
+                                maximumLength="4000" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.LongTitle.tooltip}"
+                                autoSubmit="true"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2"
+                                  shortDesc="#{bindings.TitlesTable.hints.LongTitle.tooltip}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="TitlesDetails"
+                                  text="#{row.LongTitle}"></af:commandLink>
+                </af:column>
+                <af:column id="TtlSTtCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="ShortTitle"
+                           rowHeader="false" helpTopicId="RBH_TTLSHORTTITLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.ShortTitle.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:inputText id="TtlSTt"
+                                value="#{row.bindings.ShortTitle.inputValue}"
+                                label="#{bindings.TitlesTable.hints.ShortTitle.label}"
+                                required="#{bindings.TitlesTable.hints.ShortTitle.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.ShortTitle.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.ShortTitle.displayWidth}"
+                                maximumLength="30" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.ShortTitle.tooltip}">
+                    <f:validator binding="#{row.bindings.ShortTitle.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlANoCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="AccountNumber" rowHeader="false"
+                           helpTopicId="RBH_TTLACCOUNTNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.AccountNumber.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:inputText id="TtlANo"
+                                value="#{row.bindings.AccountNumber.inputValue}"
+                                label="#{bindings.TitlesTable.hints.AccountNumber.label}"
+                                required="#{bindings.TitlesTable.hints.AccountNumber.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.AccountNumber.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.AccountNumber.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.AccountNumber.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TitlesTable.hints.AccountNumber.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlANLCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="AccountName"
+                           rowHeader="false"
+                           helpTopicId="RBH_TTLACCOUNTNAMELINK"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.AccountName.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:inputText id="cl3"
+                                value="#{row.bindings.AccountName.inputValue}"
+                                label="#{bindings.TitlesTable.hints.AccountName.label}"
+                                required="false"
+                                rows="#{bindings.TitlesTable.hints.AccountName.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.AccountName.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.AccountName.tooltip}"
+                                autoSubmit="true"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="TtlANL"
+                                  text="#{row.bindings.AccountName.attributeValue}"
+                                  shortDesc="#{bindings.TitlesTable.hints.AccountName.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Accounts"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.TtlContentOwnerId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Account - #{bindings.TtlAccountNumber.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.TtlContentOwnerId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="TtlAccountSiteCol" sortable="true"
+                           filterable="true" noWrap="true" width="240"
+                           sortProperty="AccountSite" rowHeader="false"
+                           helpTopicId="RBH_TTLACCOUNTSITE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.AccountSite.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:inputText id="TtlAccountSite"
+                                value="#{row.bindings.AccountSite.inputValue}"
+                                label="#{bindings.TitlesTable.hints.AccountSite.label}"
+                                required="#{bindings.TitlesTable.hints.AccountSite.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.AccountSite.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.AccountSite.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.AccountSite.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlCatalogNumberCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="CatalogNumber" rowHeader="false"
+                           helpTopicId="RBH_TTLCATALOGNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.CatalogNumber.label}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <af:inputText id="TtlCatalogNumber"
+                                value="#{row.bindings.CatalogNumber.inputValue}"
+                                label="#{bindings.TitlesTable.hints.CatalogNumber.label}"
+                                required="#{bindings.TitlesTable.hints.CatalogNumber.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.CatalogNumber.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.CatalogNumber.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.CatalogNumber.tooltip}"
+                                autoSubmit="true"
+                                valueChangeListener="#{TtlCatalogNumberDependsOnItem.updateModelValue}">
+                    <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlCRCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CatalogRoot"
+                           rowHeader="false" helpTopicId="RBH_TTLCATALOGROOT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.CatalogRoot.label}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <af:inputText id="TtlCR"
+                                value="#{row.bindings.CatalogRoot.inputValue}"
+                                label="#{bindings.TitlesTable.hints.CatalogRoot.label}"
+                                required="#{bindings.TitlesTable.hints.CatalogRoot.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.CatalogRoot.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.CatalogRoot.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.CatalogRoot.tooltip}">
+                    <f:validator binding="#{row.bindings.CatalogRoot.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlCSCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="CatalogSuffix" rowHeader="false"
+                           helpTopicId="RBH_TTLCATALOGSUFFIX"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.CatalogSuffix.label}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <af:inputText id="TtlCS"
+                                value="#{row.bindings.CatalogSuffix.inputValue}"
+                                label="#{bindings.TitlesTable.hints.CatalogSuffix.label}"
+                                required="#{bindings.TitlesTable.hints.CatalogSuffix.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.CatalogSuffix.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.CatalogSuffix.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.CatalogSuffix.tooltip}">
+                    <f:validator binding="#{row.bindings.CatalogSuffix.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlUSICol" sortable="true" noWrap="true"
+                           width="100" sortProperty="UlrichsSerialId"
+                           rowHeader="false"
+                           helpTopicId="RBH_TTLULRICHSSERIALID"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.UlrichsSerialId.label}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <af:inputText id="cl4"
+                                value="#{row.bindings.UlrichsSerialId.inputValue}"
+                                label="#{bindings.TitlesTable.hints.UlrichsSerialId.label}"
+                                required="#{bindings.TitlesTable.hints.UlrichsSerialId.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.UlrichsSerialId.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.UlrichsSerialId.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.UlrichsSerialId.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.UlrichsSerialId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TitlesTable.hints.UlrichsSerialId.format}"/>
+                  </af:inputText>
+                  <af:commandLink id="TtlUSI"
+                                  text="#{row.bindings.UlrichsSerialId.attributeValue}"
+                                  shortDesc="#{bindings.TitlesTable.hints.UlrichsSerialId.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Ulrichs"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.TtlUlrichsId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Ulrichs Serial #{bindings.TtlUlrichsSerialId.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.TtlUlrichsId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueUlrichs}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="TtlAuCol" sortable="true" filterable="true"
+                           noWrap="true" width="260" sortProperty="Author"
+                           rowHeader="false" helpTopicId="RBH_TTLAUTHOR"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.Author.label}"
+                                    id="ol10"/>
+                  </f:facet>
+                  <af:panelLabelAndMessage shortDesc="#{bindings.TitlesTable.hints.Author.tooltip}">
+                    <af:inputText id="TtlAu"
+                                  value="#{row.bindings.Author.inputValue}"
+                                  label="#{bindings.TitlesTable.hints.Author.label}"
+                                  required="#{bindings.TitlesTable.hints.Author.mandatory}"
+                                  rows="#{bindings.TitlesTable.hints.Author.displayHeight}"
+                                  columns="#{bindings.TitlesTable.hints.Author.displayWidth}"
+                                  maximumLength="600" readOnly="true"
+                                  autoSubmit="true" simple="true"
+                                  partialTriggers="TtlAuthorEditorLink TtlAuthorEditorText">
+                      <f:validator binding="#{row.bindings.Author.validator}"/>
+                    </af:inputText>
+                    <af:commandLink id="TtlAuthorEditorLink" rendered="false"
+                                    immediate="true" partialSubmit="true">
+                      <af:showPopupBehavior popupId="TtlAuthorPopup"/>
+                      <af:image source="/jheadstart/images/editor.gif"
+                                id="TtlAuthorIcon" clientComponent="true"/>
+                    </af:commandLink>
+                  </af:panelLabelAndMessage>
+                  <af:popup id="TtlAuthorPopup" contentDelivery="lazyUncached"
+                            eventContext="launcher" childCreation="deferred">
+                    <af:dialog modal="true" resize="on" title="Text Editor"
+                               id="dialog0">
+                      <af:inputText rows="10" columns="100"
+                                    value="#{row.bindings.Author.inputValue}"
+                                    simple="true" maximumLength="600"
+                                    id="TtlAuthorEditorText"/>
+                    </af:dialog>
+                  </af:popup>
+                </af:column>
+                <af:column id="TtlPClCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="PrimaryClassification"
+                           rowHeader="false"
+                           helpTopicId="RBH_TTLPRIMARYCLASSIFICATION"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.PrimaryClassification.label}"
+                                    id="ol11"/>
+                  </f:facet>
+                  <af:inputText id="TtlPCl"
+                                value="#{row.bindings.PrimaryClassification.inputValue}"
+                                label="#{bindings.TitlesTable.hints.PrimaryClassification.label}"
+                                required="#{bindings.TitlesTable.hints.PrimaryClassification.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.PrimaryClassification.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.PrimaryClassification.displayWidth}"
+                                maximumLength="100" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.PrimaryClassification.tooltip}">
+                    <f:validator binding="#{row.bindings.PrimaryClassification.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlExercisingRightsCol" sortable="true"
+                           filterable="true" noWrap="true" width="180"
+                           sortProperty="ExercisingRights" rowHeader="false"
+                           helpTopicId="RBH_TTLEXERCISINGRIGHTS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.ExercisingRights.label}"
+                                    id="ol12"/>
+                  </f:facet>
+                  <af:inputText id="TtlExercisingRights"
+                                value="#{row.bindings.ExercisingRights.inputValue}"
+                                label="#{bindings.TitlesTable.hints.ExercisingRights.label}"
+                                required="#{bindings.TitlesTable.hints.ExercisingRights.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.ExercisingRights.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.ExercisingRights.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.ExercisingRights.tooltip}">
+                    <f:validator binding="#{row.bindings.ExercisingRights.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlReasonNotExercisingRightsCol" sortable="true"
+                           filterable="true" noWrap="true" width="180"
+                           sortProperty="ReasonNotExercisingRights"
+                           rowHeader="false"
+                           helpTopicId="RBH_TTLREASONNOTEXERCISINGRIGHTS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.ReasonNotExercisingRights.label}"
+                                    id="ol13"/>
+                  </f:facet>
+                  <af:inputText id="TtlReasonNotExercisingRights"
+                                value="#{row.bindings.ReasonNotExercisingRights.inputValue}"
+                                label="#{bindings.TitlesTable.hints.ReasonNotExercisingRights.label}"
+                                required="#{bindings.TitlesTable.hints.ReasonNotExercisingRights.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.ReasonNotExercisingRights.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.ReasonNotExercisingRights.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.ReasonNotExercisingRights.tooltip}">
+                    <f:validator binding="#{row.bindings.ReasonNotExercisingRights.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlPSYCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="PublicationStartYear" rowHeader="false"
+                           helpTopicId="RBH_TTLPUBLICATIONSTARTYEAR"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.PublicationStartYear.label}"
+                                    id="ol14"/>
+                  </f:facet>
+                  <af:inputText id="TtlPSY"
+                                value="#{row.bindings.PublicationStartYear.inputValue}"
+                                label="#{bindings.TitlesTable.hints.PublicationStartYear.label}"
+                                required="#{bindings.TitlesTable.hints.PublicationStartYear.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.PublicationStartYear.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.PublicationStartYear.displayWidth}"
+                                maximumLength="4" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.PublicationStartYear.tooltip}">
+                    <f:validator binding="#{row.bindings.PublicationStartYear.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlPEYCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="PublicationEndYear" rowHeader="false"
+                           helpTopicId="RBH_TTLPUBLICATIONENDYEAR"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.PublicationEndYear.label}"
+                                    id="ol15"/>
+                  </f:facet>
+                  <af:inputText id="TtlPEY"
+                                value="#{row.bindings.PublicationEndYear.inputValue}"
+                                label="#{bindings.TitlesTable.hints.PublicationEndYear.label}"
+                                required="#{bindings.TitlesTable.hints.PublicationEndYear.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.PublicationEndYear.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.PublicationEndYear.displayWidth}"
+                                maximumLength="4" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.PublicationEndYear.tooltip}">
+                    <f:validator binding="#{row.bindings.PublicationEndYear.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TtlFACol" sortable="true" filterable="true"
+                           noWrap="true" width="180"
+                           sortProperty="FilmAvailability" rowHeader="false"
+                           helpTopicId="RBH_TTLFILMAVAILABILITY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.FilmAvailability.label}"
+                                    id="ol16"/>
+                  </f:facet>
+                  <af:selectOneChoice id="TtlFA"
+                                      value="#{row.bindings.FilmAvailability.inputValue}"
+                                      label="#{bindings.TitlesTable.hints.FilmAvailability.label}"
+                                      required="#{bindings.TitlesTable.hints.FilmAvailability.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TitlesTable.hints.FilmAvailability.tooltip}">
+                    <f:selectItems value="#{row.bindings.FilmAvailability.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="TtlBSCol" sortable="true" filterable="true"
+                           noWrap="true" width="180"
+                           sortProperty="BibliographicStatus" rowHeader="false"
+                           helpTopicId="RBH_TTLBIBLIOGRAPHICSTATUS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.BibliographicStatus.label}"
+                                    id="ol17"/>
+                  </f:facet>
+                  <af:selectOneChoice id="TtlBS"
+                                      value="#{row.bindings.BibliographicStatus.inputValue}"
+                                      label="#{bindings.TitlesTable.hints.BibliographicStatus.label}"
+                                      required="#{bindings.TitlesTable.hints.BibliographicStatus.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TitlesTable.hints.BibliographicStatus.tooltip}">
+                    <f:selectItems value="#{row.bindings.BibliographicStatus.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="TtlPMCCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="PrimaryPmClass" rowHeader="false"
+                           helpTopicId="RBH_TTLPRIMARYPMCLASS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.PrimaryPmClass.label}"
+                                    id="ol18"/>
+                  </f:facet>
+                  <af:selectOneChoice id="TtlPMC"
+                                      value="#{row.bindings.PrimaryPmClass.inputValue}"
+                                      label="#{bindings.TitlesTable.hints.PrimaryPmClass.label}"
+                                      required="#{bindings.TitlesTable.hints.PrimaryPmClass.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TitlesTable.hints.PrimaryPmClass.tooltip}">
+                    <f:selectItems value="#{row.bindings.PrimaryPmClass.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="TtlPLnCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="ProductLine"
+                           rowHeader="false" helpTopicId="RBH_TTLPRODUCTLINE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.ProductLine.label}"
+                                    id="ol19"/>
+                  </f:facet>
+                  <af:selectOneChoice id="TtlPLn"
+                                      value="#{row.bindings.ProductLine.inputValue}"
+                                      label="#{bindings.TitlesTable.hints.ProductLine.label}"
+                                      required="#{bindings.TitlesTable.hints.ProductLine.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TitlesTable.hints.ProductLine.tooltip}">
+                    <f:selectItems value="#{row.bindings.ProductLine.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="TtlPRFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="PeerReviewFlag" align="center"
+                           rowHeader="false" helpTopicId="RBH_TTLPEERREVIEWFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.PeerReviewFlag.label}"
+                                    id="ol20"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="TtlPRF"
+                                            label="#{bindings.TitlesTable.hints.PeerReviewFlag.label}"
+                                            value="#{TtlPeerReviewFlagcheckboxInTable.value}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.TitlesTable.hints.PeerReviewFlag.tooltip}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="TtlOACol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="OpenAccess"
+                           rowHeader="false" helpTopicId="RBH_TTLOPENACCESS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.OpenAccess.label}"
+                                    id="ol21"/>
+                  </f:facet>
+                  <af:selectOneChoice id="TtlOA"
+                                      value="#{row.bindings.OpenAccess.inputValue}"
+                                      label="#{bindings.TitlesTable.hints.OpenAccess.label}"
+                                      required="#{bindings.TitlesTable.hints.OpenAccess.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TitlesTable.hints.OpenAccess.tooltip}">
+                    <f:selectItems value="#{row.bindings.OpenAccess.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="TtlCurrentCatalogTitleCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="CurrentCatalogTitle" rowHeader="false"
+                           helpTopicId="RBH_TTLCURRENTCATALOGTITLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.CurrentCatalogTitle.label}"
+                                    id="ol22"/>
+                  </f:facet>
+                  <af:inputText id="cl5"
+                                value="#{row.bindings.CurrentCatalogTitle.inputValue}"
+                                label="#{bindings.TitlesTable.hints.CurrentCatalogTitle.label}"
+                                required="#{bindings.TitlesTable.hints.CurrentCatalogTitle.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.CurrentCatalogTitle.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.CurrentCatalogTitle.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.CurrentCatalogTitle.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.CurrentCatalogTitle.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="TtlCurrentCatalogTitle"
+                                  text="#{row.bindings.CurrentCatalogTitle.attributeValue}"
+                                  shortDesc="#{bindings.TitlesTable.hints.CurrentCatalogTitle.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Titles"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.TtlCurrentCatalogId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Catalog #{bindings.TtlCurrentCatalogTitle.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.TtlCurrentCatalogId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="TtlCataloguedByCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="CataloguedBy" rowHeader="false"
+                           helpTopicId="RBH_TTLCATALOGUEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TitlesTable.hints.CataloguedBy.label}"
+                                    id="ol23"/>
+                  </f:facet>
+                  <af:inputText id="TtlCataloguedBy"
+                                value="#{row.bindings.CataloguedBy.inputValue}"
+                                label="#{bindings.TitlesTable.hints.CataloguedBy.label}"
+                                required="#{bindings.TitlesTable.hints.CataloguedBy.mandatory}"
+                                rows="#{bindings.TitlesTable.hints.CataloguedBy.displayHeight}"
+                                columns="#{bindings.TitlesTable.hints.CataloguedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.TitlesTable.hints.CataloguedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.CataloguedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

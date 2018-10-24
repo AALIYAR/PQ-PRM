@@ -1,0 +1,1591 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PrmOpportunityAgreementDataView"
+  Version="11.1.1.61.92"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  RowClass="com.pq.tracs.model.vo.PrmOpportunityAgreementDataViewRowImpl"
+  ComponentClass="com.pq.tracs.model.vo.PRMView"
+  FetchMode="FETCH_AS_NEEDED"
+  FetchSize="30"
+  PageIterMode="Partial"
+  UseGlueCode="false"
+  MaxFetchSize="1">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="ContractFormLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Form']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractTypeLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Type']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractStatusLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Status']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractTermLengthLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Term Length']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractCancelNoticeTermLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Cancel Notice Term']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractDivisionLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Division']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractExclusivityLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Exclusivity']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractMasterOwnerLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Master Owner']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractAutoRenewTermLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Auto Renew Term']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractRightsRetainedLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Rights Set']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PaymentFrequencyLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Payment Frequency']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="InterimPaymentTermLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Payment Term']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="AnnualPaymentTermLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Payment Term']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractTemplateLookup1"
+    ViewObjectName="com.pq.tracs.model.lookup.ContractTemplateLookup"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="CurrencyLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Currency']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractAutoAddLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Auto Add']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractAssignmentLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Assignment']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractRoyaltyBearingLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Royalty Bearing']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractFairTreatmentClauseLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Fair Treatment Clause']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractIssueEditionCoverageLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Issue Edition Coverage']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractCompleteContentSetLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Complete Content Set']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractWarrantyAndIndemnificationLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Warranty And Indemnification']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="ContractGovernanceLookup"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView">
+    <ViewCriteriaUsage
+      Name="LookupCodeViewCriteria"
+      FullName="com.pq.tracs.model.lookup.LookupCodeView.LookupCodeViewCriteria"/>
+    <ParameterMap>
+      <PIMap Variable="code_set">
+        <TransientExpression><![CDATA['Contract Governance']]></TransientExpression>
+      </PIMap>
+    </ParameterMap>
+  </ViewAccessor>
+  <ListBinding
+    Name="LOV_Form"
+    ListVOName="ContractFormLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Form"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Status"
+    ListVOName="ContractStatusLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Status"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Type"
+    ListVOName="ContractTypeLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Type"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Division"
+    ListVOName="ContractDivisionLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Division"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TermLength"
+    ListVOName="ContractTermLengthLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TermLength"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CancellationNoticeTerm"
+    ListVOName="ContractCancelNoticeTermLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CancellationNoticeTerm"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AutoRenewTermMonths"
+    ListVOName="ContractAutoRenewTermLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AutoRenewTermMonths"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Exclusivity"
+    ListVOName="ContractExclusivityLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Exclusivity"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ContentMasterOwner"
+    ListVOName="ContractMasterOwnerLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ContentMasterOwner"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RightsToBeRetained"
+    ListVOName="ContractRightsRetainedLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RightsToBeRetained"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_PaymentFrequency"
+    ListVOName="PaymentFrequencyLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="PaymentFrequency"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_InterimPaymentTermDays"
+    ListVOName="InterimPaymentTermLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="InterimPaymentTermDays"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AnnualPaymentTermDays"
+    ListVOName="AnnualPaymentTermLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AnnualPaymentTermDays"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_TemplateName"
+    ListVOName="ContractTemplateLookup1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="TemplateName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="TemplateId"/>
+      <Item Value="AutoRenewTermMonths"/>
+      <Item Value="CancellationNoticeTerm"/>
+      <Item Value="ContentMasterOwner"/>
+      <Item Value="Division"/>
+      <Item Value="Exclusivity"/>
+      <Item Value="Form"/>
+      <Item Value="RightsToBeRetained"/>
+      <Item Value="Status"/>
+      <Item Value="TermLength"/>
+      <Item Value="Type"/>
+      <Item Value="AutoAdd"/>
+      <Item Value="Assignment"/>
+      <Item Value="CompleteContentSet"/>
+      <Item Value="FairTreatmentClause"/>
+      <Item Value="Governance"/>
+      <Item Value="IssueEditionCoverage"/>
+      <Item Value="RoyaltyBearing"/>
+      <Item Value="WarrantyAndIndemnification"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="TemplateName"/>
+      <Item Value="Id"/>
+      <Item Value="AutoRenewTermMonths"/>
+      <Item Value="CancellationNoticeTerm"/>
+      <Item Value="ContentMasterOwner"/>
+      <Item Value="Division"/>
+      <Item Value="Exclusivity"/>
+      <Item Value="Form"/>
+      <Item Value="RightsToBeRetained"/>
+      <Item Value="Status"/>
+      <Item Value="TermLength"/>
+      <Item Value="Type"/>
+      <Item Value="AutoAdd"/>
+      <Item Value="Assignment"/>
+      <Item Value="CompleteContentSet"/>
+      <Item Value="FairTreatmentClause"/>
+      <Item Value="Governance"/>
+      <Item Value="IssueEditionCoverage"/>
+      <Item Value="RoyaltyBearing"/>
+      <Item Value="WarrantyAndIndemnification"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="TemplateName"/>
+      <Item Value="Form"/>
+      <Item Value="Status"/>
+      <Item Value="Type"/>
+      <Item Value="Division"/>
+      <Item Value="TermLength"/>
+      <Item Value="CancellationNoticeTerm"/>
+      <Item Value="AutoRenewTermMonths"/>
+      <Item Value="RightsToBeRetained"/>
+      <Item Value="Exclusivity"/>
+      <Item Value="ContentMasterOwner"/>
+      <Item Value="AutoAdd"/>
+    </AttrArray>
+    <DisplayCriteria
+      Hint="hide"/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Currency"
+    ListVOName="CurrencyLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Currency"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_AutoAdd"
+    ListVOName="ContractAutoAddLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="AutoAdd"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Assignment"
+    ListVOName="ContractAssignmentLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Assignment"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_RoyaltyBearing"
+    ListVOName="ContractRoyaltyBearingLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="RoyaltyBearing"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_FairTreatmentClause"
+    ListVOName="ContractFairTreatmentClauseLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="FairTreatmentClause"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_IssueEditionCoverage"
+    ListVOName="ContractIssueEditionCoverageLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="IssueEditionCoverage"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_CompleteContentSet"
+    ListVOName="ContractCompleteContentSetLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="CompleteContentSet"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_WarrantyAndIndemnification"
+    ListVOName="ContractWarrantyAndIndemnificationLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="WarrantyAndIndemnification"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_Governance"
+    ListVOName="ContractGovernanceLookup"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Governance"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="InternalValue"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="DisplayValue"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT PrmOpportunityAgreementData.ID, 
+       PrmOpportunityAgreementData.PRM_OPPORTUNITY_ID, 
+       PrmOpportunityAgreementData.CONTRACT_ID, 
+       PrmOpportunityAgreementData.TEMPLATE_ID, 
+       PrmOpportunityAgreementData.NOTES, 
+       PrmOpportunityAgreementData.FORM, 
+       PrmOpportunityAgreementData.STATUS, 
+       PrmOpportunityAgreementData.TYPE, 
+       PrmOpportunityAgreementData.DIVISION, 
+       PrmOpportunityAgreementData.EFFECTIVE_DATE, 
+       PrmOpportunityAgreementData.TERM_LENGTH, 
+       PrmOpportunityAgreementData.CANCELLATION_NOTICE_TERM, 
+       PrmOpportunityAgreementData.EXPIRATION_DATE, 
+       PrmOpportunityAgreementData.AUTO_RENEW_TERM_MONTHS, 
+       PrmOpportunityAgreementData.SIGNATORY, 
+       PrmOpportunityAgreementData.CONTRACT_SIGNED_DATE, 
+       PrmOpportunityAgreementData.RIGHTS_TO_BE_RETAINED, 
+       PrmOpportunityAgreementData.EXCLUSIVITY, 
+       PrmOpportunityAgreementData.CONTENT_MASTER_OWNER, 
+       PrmOpportunityAgreementData.TECHNICAL_CONTACT_ID, 
+       PrmOpportunityAgreementData.AGREEMENT_CONTACT_ID, 
+       PrmOpportunityAgreementData.QA_CONTACT_ID, 
+       PrmOpportunityAgreementData.ROYALTY_CONTACT_ID, 
+       PrmOpportunityAgreementData.CURRENCY, 
+       PrmOpportunityAgreementData.PAYMENT_FREQUENCY, 
+       PrmOpportunityAgreementData.INTERIM_PAYMENT_TERM_DAYS, 
+       PrmOpportunityAgreementData.ANNUAL_PAYMENT_TERM_DAYS, 
+       PrmOpportunityAgreementData.CREATED_BY, 
+       PrmOpportunityAgreementData.CREATED_DATE, 
+       PrmOpportunityAgreementData.LAST_UPDATED_BY, 
+       PrmOpportunityAgreementData.LAST_UPDATED_DATE,
+       PrmOpportunityAgreementData.Assignment,
+       PrmOpportunityAgreementData.Royalty_Bearing,
+       PrmOpportunityAgreementData.Guarantee,
+       PrmOpportunityAgreementData.Fair_Treatment_Clause,
+       PrmOpportunityAgreementData.Issue_Edition_Coverage,
+       PrmOpportunityAgreementData.Complete_Content_Set,
+       PrmOpportunityAgreementData.Warranty_And_Indemnification,
+       PrmOpportunityAgreementData.Governance,
+       TraxContractTemplate.TEMPLATE_NAME,
+       concat(AgreementContact.FIRST_NAME, concat(' ',AgreementContact.LAST_NAME))  AGREEMENT_NAME,
+       concat(QAContact.FIRST_NAME, concat(' ',QAContact.LAST_NAME)) QA_NAME,
+       concat(RoyaltyContact.FIRST_NAME, concat(' ', RoyaltyContact.LAST_NAME)) ROYALTY_NAME,
+       concat(TechnicalContact.FIRST_NAME, concat(' ',TechnicalContact.LAST_NAME)) TECHNICAL_NAME,
+       PrmOpportunity.CONTENT_OWNER_ID,
+       PrmOpportunityAgreementData.AUTO_RENEWAL,
+       PrmOpportunityAgreementData.AUTO_ADD
+FROM PRM_OPPORTUNITY_AGREEMENT_DATA PrmOpportunityAgreementData
+    INNER JOIN PRM_OPPORTUNITY PrmOpportunity
+        ON PrmOpportunityAgreementData.PRM_OPPORTUNITY_ID = PrmOpportunity.ID
+    LEFT OUTER JOIN TRAX_CONTRACT TraxContractTemplate
+        ON PrmOpportunityAgreementData.TEMPLATE_ID = TraxContractTemplate.ID
+    LEFT OUTER JOIN TRAX_CONTACT AgreementContact
+        ON PrmOpportunityAgreementData.AGREEMENT_CONTACT_ID = AgreementContact.ID
+    LEFT OUTER JOIN TRAX_CONTACT QAContact
+        ON PrmOpportunityAgreementData.QA_CONTACT_ID = QAContact.ID
+    LEFT OUTER JOIN TRAX_CONTACT RoyaltyContact
+        ON PrmOpportunityAgreementData.ROYALTY_CONTACT_ID = RoyaltyContact.ID
+    LEFT OUTER JOIN TRAX_CONTACT TechnicalContact
+        ON PrmOpportunityAgreementData.TECHNICAL_CONTACT_ID = TechnicalContact.ID]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="PrmOpportunityAgreementData"
+    Entity="com.pq.tracs.model.eo.PrmOpportunityAgreementData"/>
+  <ViewAttribute
+    Name="Id"
+    IsUpdateable="while_insert"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="ID"/>
+  <ViewAttribute
+    Name="PrmOpportunityId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PrmOpportunityId"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="PRM_OPPORTUNITY_ID"/>
+  <ViewAttribute
+    Name="ContractId"
+    PrecisionRule="true"
+    EntityAttrName="ContractId"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="CONTRACT_ID"/>
+  <ViewAttribute
+    Name="TemplateId"
+    PrecisionRule="true"
+    EntityAttrName="TemplateId"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="TEMPLATE_ID"/>
+  <ViewAttribute
+    Name="Notes"
+    PrecisionRule="true"
+    EntityAttrName="Notes"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="NOTES">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+        <DISPLAYHEIGHT
+          Value="3"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Form"
+    LOVName="LOV_Form"
+    PrecisionRule="true"
+    EntityAttrName="Form"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="FORM">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Status"
+    LOVName="LOV_Status"
+    PrecisionRule="true"
+    EntityAttrName="Status"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="STATUS">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Type"
+    LOVName="LOV_Type"
+    PrecisionRule="true"
+    EntityAttrName="Type"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="TYPE">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Division"
+    LOVName="LOV_Division"
+    PrecisionRule="true"
+    EntityAttrName="Division"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="DIVISION">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EffectiveDate"
+    PrecisionRule="true"
+    EntityAttrName="EffectiveDate"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="EFFECTIVE_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.EffectiveDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.EffectiveDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.EffectiveDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TermLength"
+    LOVName="LOV_TermLength"
+    PrecisionRule="true"
+    EntityAttrName="TermLength"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="TERM_LENGTH">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.TermLength_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CancellationNoticeTerm"
+    LOVName="LOV_CancellationNoticeTerm"
+    PrecisionRule="true"
+    EntityAttrName="CancellationNoticeTerm"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="CANCELLATION_NOTICE_TERM">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.CancellationNoticeTerm_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ExpirationDate"
+    PrecisionRule="true"
+    EntityAttrName="ExpirationDate"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="EXPIRATION_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.ExpirationDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.ExpirationDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.ExpirationDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AutoRenewTermMonths"
+    LOVName="LOV_AutoRenewTermMonths"
+    PrecisionRule="true"
+    EntityAttrName="AutoRenewTermMonths"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="AUTO_RENEW_TERM_MONTHS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.AutoRenewTermMonths_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Signatory"
+    PrecisionRule="true"
+    EntityAttrName="Signatory"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="SIGNATORY">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContractSignedDate"
+    PrecisionRule="true"
+    EntityAttrName="ContractSignedDate"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="CONTRACT_SIGNED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.ContractSignedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.ContractSignedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.ContractSignedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RightsToBeRetained"
+    LOVName="LOV_RightsToBeRetained"
+    PrecisionRule="true"
+    EntityAttrName="RightsToBeRetained"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="RIGHTS_TO_BE_RETAINED">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.RightsToBeRetained_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Exclusivity"
+    LOVName="LOV_Exclusivity"
+    PrecisionRule="true"
+    EntityAttrName="Exclusivity"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="EXCLUSIVITY">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContentMasterOwner"
+    LOVName="LOV_ContentMasterOwner"
+    PrecisionRule="true"
+    EntityAttrName="ContentMasterOwner"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="CONTENT_MASTER_OWNER">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.ContentMasterOwner_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TechnicalContactId"
+    PrecisionRule="true"
+    EntityAttrName="TechnicalContactId"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="TECHNICAL_CONTACT_ID"/>
+  <ViewAttribute
+    Name="AgreementContactId"
+    PrecisionRule="true"
+    EntityAttrName="AgreementContactId"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="AGREEMENT_CONTACT_ID"/>
+  <ViewAttribute
+    Name="QaContactId"
+    PrecisionRule="true"
+    EntityAttrName="QaContactId"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="QA_CONTACT_ID"/>
+  <ViewAttribute
+    Name="RoyaltyContactId"
+    PrecisionRule="true"
+    EntityAttrName="RoyaltyContactId"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="ROYALTY_CONTACT_ID"/>
+  <ViewAttribute
+    Name="Currency"
+    LOVName="LOV_Currency"
+    PrecisionRule="true"
+    EntityAttrName="Currency"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="CURRENCY">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PaymentFrequency"
+    LOVName="LOV_PaymentFrequency"
+    PrecisionRule="true"
+    EntityAttrName="PaymentFrequency"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="PAYMENT_FREQUENCY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.PaymentFrequency_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="InterimPaymentTermDays"
+    LOVName="LOV_InterimPaymentTermDays"
+    PrecisionRule="true"
+    EntityAttrName="InterimPaymentTermDays"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="INTERIM_PAYMENT_TERM_DAYS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.InterimPaymentTermDays_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AnnualPaymentTermDays"
+    LOVName="LOV_AnnualPaymentTermDays"
+    PrecisionRule="true"
+    EntityAttrName="AnnualPaymentTermDays"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="ANNUAL_PAYMENT_TERM_DAYS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.AnnualPaymentTermDays_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="CREATED_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.CreatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedDate"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="CreatedDate"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="CREATED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.CreatedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.CreatedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.CreatedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedBy"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedBy"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="LAST_UPDATED_BY">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.LastUpdatedBy_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="LastUpdatedDate"
+    IsUpdateable="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="LastUpdatedDate"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="LAST_UPDATED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.LastUpdatedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.LastUpdatedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.LastUpdatedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Assignment"
+    PrecisionRule="true"
+    EntityAttrName="Assignment"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="ASSIGNMENT"
+    LOVName="LOV_Assignment">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RoyaltyBearing"
+    PrecisionRule="true"
+    EntityAttrName="RoyaltyBearing"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="ROYALTY_BEARING"
+    LOVName="LOV_RoyaltyBearing">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Guarantee"
+    PrecisionRule="true"
+    EntityAttrName="Guarantee"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="GUARANTEE"/>
+  <ViewAttribute
+    Name="FairTreatmentClause"
+    PrecisionRule="true"
+    EntityAttrName="FairTreatmentClause"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="FAIR_TREATMENT_CLAUSE"
+    LOVName="LOV_FairTreatmentClause">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IssueEditionCoverage"
+    PrecisionRule="true"
+    EntityAttrName="IssueEditionCoverage"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="ISSUE_EDITION_COVERAGE"
+    LOVName="LOV_IssueEditionCoverage">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CompleteContentSet"
+    PrecisionRule="true"
+    EntityAttrName="CompleteContentSet"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="COMPLETE_CONTENT_SET"
+    LOVName="LOV_CompleteContentSet">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="WarrantyAndIndemnification"
+    PrecisionRule="true"
+    EntityAttrName="WarrantyAndIndemnification"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="WARRANTY_AND_INDEMNIFICATION"
+    LOVName="LOV_WarrantyAndIndemnification">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Governance"
+    PrecisionRule="true"
+    EntityAttrName="Governance"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="GOVERNANCE"
+    LOVName="LOV_Governance">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.Governance_LABEL"/>
+        <CONTROLTYPE
+          Value="choice"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TemplateName"
+    LOVName="LOV_TemplateName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TEMPLATE_NAME"
+    Expression="TEMPLATE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.TemplateName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AgreementName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="201"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="AGREEMENT_NAME"
+    Expression="AGREEMENT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="201"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.AgreementName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="QaName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="201"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="QA_NAME"
+    Expression="QA_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="201"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.QaName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RoyaltyName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="201"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ROYALTY_NAME"
+    Expression="ROYALTY_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="201"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.RoyaltyName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TechnicalName"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="201"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TECHNICAL_NAME"
+    Expression="TECHNICAL_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="201"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.TechnicalName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ContentOwnerId"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="CONTENT_OWNER_ID"
+    Expression="CONTENT_OWNER_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AutoRenewal"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AutoRenewal"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="AUTO_RENEWAL">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.AutoRenewal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AutoAdd"
+    PrecisionRule="true"
+    EntityAttrName="AutoAdd"
+    EntityUsage="PrmOpportunityAgreementData"
+    AliasName="AUTO_ADD"
+    LOVName="LOV_AutoAdd">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView.AutoAdd_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="PrmOpportunityAgreementDataViewCriteria"
+    ViewObjectName="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow141"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="Assignment"
+        ViewAttribute="Assignment"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="RoyaltyBearing"
+        ViewAttribute="RoyaltyBearing"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Guarantee"
+        ViewAttribute="Guarantee"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="FairTreatmentClause"
+        ViewAttribute="FairTreatmentClause"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="IssueEditionCoverage"
+        ViewAttribute="IssueEditionCoverage"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="CompleteContentSet"
+        ViewAttribute="CompleteContentSet"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="WarrantyAndIndemnification"
+        ViewAttribute="WarrantyAndIndemnification"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="Governance"
+        ViewAttribute="Governance"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ViewLinkAccessor
+    Name="PrmAgreementDataAttachmentView"
+    ViewLink="com.pq.tracs.model.vl.AgreementDataToAttachmentViewLink"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

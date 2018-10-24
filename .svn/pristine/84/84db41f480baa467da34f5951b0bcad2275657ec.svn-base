@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="sc4TopLc"
+                             partialTriggers=" sc4DeleteDialog sc4fbb sc4NewButton sc4DelB sc4SaveButton0 sc4CancelButton0 sc4SaveButton1 sc4CancelButton1"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateActivityAttachments ? nls['INSERT_TITLE_ACTIVITYATTACHMENTS'] :  nls['EDIT_TITLE_ACTIVITYATTACHMENT: #{bindings.sc4Name.inputValue}'] }"
+                          helpTopicId="RBH_ACTIVITYATTACHMENTS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="sc4fbb" layout="horizontal"
+                                       rendered="#{ bindings.ActivityAttachmentsIterator.currentRow!=null  and bindings.ActivityAttachmentsIterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateActivityAttachments and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="sc4First sc4Previous sc4Next sc4Last">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstActivityAttachments.execute}"
+                                             id="sc4First" partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousActivityAttachments.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="sc4Previous"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1} / #{bindings.ActivityAttachmentsIterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextActivityAttachments.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="sc4Next" partialSubmit="true"
+                                             rendered="#{bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1 lt bindings.ActivityAttachmentsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1 lt bindings.ActivityAttachmentsIterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastActivityAttachments.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="sc4Last" partialSubmit="true"
+                                             rendered="#{bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1 lt bindings.ActivityAttachmentsIterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.ActivityAttachmentsIterator.rangeStart+bindings.ActivityAttachmentsIterator.currentRowIndexInRange+1 lt bindings.ActivityAttachmentsIterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateActivityAttachments.execute}"
+                                             action="Createsc4"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_ACTIVITYATTACHMENTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateActivityAttachments and (true) }"
+                                             id="sc4NewButton"></af:commandToolbarButton>
+                    <af:commandToolbarButton action="DeleteActivityAttachments"
+                                             partialSubmit="true"
+                                             icon="/jheadstart/images/deleteRow.png"
+                                             shortDesc="#{nls['DELETE_BUTTON_LABEL_ACTIVITYATTACHMENTS']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateActivityAttachments and  bindings.ActivityAttachmentsIterator.currentRow!=null   }"
+                                             immediate="true" id="sc4DelB">
+                      <af:showPopupBehavior popupId="sc4DeletePopup"/>
+                    </af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="sc4Print"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveActivityAttachments.execute}"
+                                      rendered="#{!pageFlowScope.hideSaveButton}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="sc4SaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="sc4CancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.ActivityAttachmentsIterator.findMode!='true'}"
+                       id="sc4Sw" defaultFacet="hasRows"
+                       facetName="#{( bindings.ActivityAttachmentsIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp" id="sc4NoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="sc4FC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="2"
+                                    id="sc4FI">
+                  <af:inputFile id="sc4Att" label="Upload File"
+                                columns="#{bindings.sc4Attachment.hints.displayWidth}"
+                                binding="#{sc4AttachmentFileHandlerBean.usesUploadIndicator}"
+                                shortDesc="#{bindings.sc4Attachment.hints.tooltip}"
+                                helpTopicId="RBH_SC4ATTACHMENT"
+                                valueChangeListener="#{sc4AttachmentFileHandlerBean.uploadFile}"/>
+                  <af:panelLabelAndMessage label="Download File"
+                                           id="sc4AttachmentDLLabel"
+                                           shortDesc="#{bindings.sc4AttachmentDL.hints.tooltip}"
+                                           helpTopicId="RBH_SC4ATTACHMENTDL">
+                    <af:commandLink id="sc4ADL"
+                                    rendered="#{sc4AttachmentDLFileHandlerBean.fileExist}">
+                      <af:outputText id="ot1"
+                                     value="#{sc4AttachmentDLFileHandlerBean.fileName}"/>
+                      <af:fileDownloadActionListener contentType="#{sc4AttachmentDLFileHandlerBean.contentType}"
+                                                     filename="#{sc4AttachmentDLFileHandlerBean.fileName}"
+                                                     method="#{sc4AttachmentDLFileHandlerBean.downloadFile}"/>
+                    </af:commandLink>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl0" valign="top"
+                                           layout="horizontal"></af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="sc4ATy"
+                                value="#{bindings.sc4AttachmentType.inputValue}"
+                                label="#{bindings.sc4AttachmentType.hints.label}"
+                                required="#{bindings.sc4AttachmentType.hints.mandatory}"
+                                rows="#{bindings.sc4AttachmentType.hints.displayHeight}"
+                                columns="#{bindings.sc4AttachmentType.hints.displayWidth}"
+                                maximumLength="20"
+                                shortDesc="#{bindings.sc4AttachmentType.hints.tooltip}"
+                                helpTopicId="RBH_SC4ATTACHMENTTYPE">
+                    <f:validator binding="#{bindings.sc4AttachmentType.validator}"/>
+                  </af:inputText>
+                  <af:popup id="hoverPopup0">
+                    <af:noteWindow>
+                      <af:outputText value="#{bindings.sc4Description.inputValue}"/>
+                    </af:noteWindow>
+                  </af:popup>
+                  <af:panelLabelAndMessage label="#{bindings.sc4Description.hints.label}"
+                                           shortDesc="#{bindings.sc4Description.hints.tooltip}"
+                                           helpTopicId="RBH_SC4DESCRIPTION"
+                                           showRequired="#{bindings.sc4Description.hints.mandatory}"
+                                           id="sc4DescriptionLabel">
+                    <af:inputText id="sc4Des"
+                                  value="#{bindings.sc4Description.inputValue}"
+                                  required="#{bindings.sc4Description.hints.mandatory}"
+                                  rows="#{bindings.sc4Description.hints.displayHeight}"
+                                  columns="#{bindings.sc4Description.hints.displayWidth}"
+                                  maximumLength="4000" autoSubmit="true"
+                                  simple="true"
+                                  partialTriggers="sc4DescriptionEditorLink sc4DescriptionEditorText">
+                      <f:validator binding="#{bindings.sc4Description.validator}"/>
+                      <af:showPopupBehavior popupId="hoverPopup0"
+                                            triggerType="mouseHover"
+                                            align="endAfter"/>
+                    </af:inputText>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl1" valign="top"
+                                           layout="horizontal">
+                        <af:commandLink id="sc4DescriptionEditorLink"
+                                        immediate="true" partialSubmit="true">
+                          <af:showPopupBehavior popupId="sc4DescriptionPopup"/>
+                          <af:image source="/jheadstart/images/editor.gif"
+                                    id="sc4DescriptionIcon"
+                                    clientComponent="true"/>
+                        </af:commandLink>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="sc4FS"
+                                value="#{bindings.sc4FileSize.inputValue}"
+                                label="#{bindings.sc4FileSize.hints.label}"
+                                required="#{bindings.sc4FileSize.hints.mandatory}"
+                                rows="#{bindings.sc4FileSize.hints.displayHeight}"
+                                columns="#{bindings.sc4FileSize.hints.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.sc4FileSize.hints.tooltip}"
+                                helpTopicId="RBH_SC4FILESIZE">
+                    <f:validator binding="#{bindings.sc4FileSize.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.sc4FileSize.format}"/>
+                  </af:inputText>
+                  <af:inputText id="sc4CB"
+                                value="#{bindings.sc4CreatedBy.inputValue}"
+                                label="#{bindings.sc4CreatedBy.hints.label}"
+                                required="#{bindings.sc4CreatedBy.hints.mandatory}"
+                                rows="#{bindings.sc4CreatedBy.hints.displayHeight}"
+                                columns="#{bindings.sc4CreatedBy.hints.displayWidth}"
+                                maximumLength="40"
+                                shortDesc="#{bindings.sc4CreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_SC4CREATEDBY">
+                    <f:validator binding="#{bindings.sc4CreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="sc4CD"
+                                value="#{bindings.sc4CreatedDate.inputValue}"
+                                label="#{bindings.sc4CreatedDate.hints.label}"
+                                required="#{bindings.sc4CreatedDate.hints.mandatory}"
+                                shortDesc="#{bindings.sc4CreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_SC4CREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="sc4LUB"
+                                value="#{bindings.sc4LastUpdatedBy.inputValue}"
+                                label="#{bindings.sc4LastUpdatedBy.hints.label}"
+                                required="#{bindings.sc4LastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.sc4LastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.sc4LastUpdatedBy.hints.displayWidth}"
+                                maximumLength="40"
+                                shortDesc="#{bindings.sc4LastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_SC4LASTUPDATEDBY">
+                    <f:validator binding="#{bindings.sc4LastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="sc4LUD"
+                                value="#{bindings.sc4LastUpdatedDate.inputValue}"
+                                label="#{bindings.sc4LastUpdatedDate.hints.label}"
+                                required="#{bindings.sc4LastUpdatedDate.hints.mandatory}"
+                                shortDesc="#{bindings.sc4LastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_SC4LASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" "
+                                helpTopicId="RBH_ACTIVITYATTACHMENTS">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveActivityAttachments.execute}"
+                                            rendered="#{!pageFlowScope.hideSaveButton}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="sc4SaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="sc4CancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="sc4DeletePopup" contentDelivery="lazyUncached"
+                  childCreation="deferred">
+          <af:dialog type="yesNo" title="#{nls['WARNING']}"
+                     dialogListener="#{ExecuteActionAfterConfirmation.processDialogEvent}"
+                     modal="true" id="sc4DeleteDialog">
+            <af:outputText value="#{nls['DELETE_WARNING_ACTIVITYATTACHMENT: #{bindings.sc4Name.inputValue}']} "
+                           id="ot0"/>
+            <f:attribute name="methodExpression"
+                         value="#{'#{DeleteActivityAttachments.execute}'}"/>
+          </af:dialog>
+        </af:popup>
+        <af:popup id="sc4DescriptionPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher" childCreation="deferred">
+          <af:dialog modal="true" resize="on" title="Text Editor" id="dialog0">
+            <af:inputText rows="10" columns="100"
+                          value="#{bindings.sc4Description.inputValue}"
+                          simple="true" maximumLength="4000"
+                          id="sc4DescriptionEditorText"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

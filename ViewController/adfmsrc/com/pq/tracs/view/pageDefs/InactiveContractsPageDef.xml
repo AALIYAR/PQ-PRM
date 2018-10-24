@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="InactiveContractsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="bindingContainersToPrepare" value="#{'AccountsPageDef'}"/>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, RO, ADMIN, BSSRO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="InactiveContractsIterator" Binds="TraxInactiveContractView"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="InactiveContractsIteratorQuery"
+                  Binds="InactiveContractsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ContractNumber"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <searchRegion id="InactiveContractsIteratorTraxInactiveContractQuickQueryQuery"
+                  Binds="InactiveContractsIterator"
+                  Criteria="TraxInactiveContractQuickQuery"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ContractNumber"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <attributeValues id="st10Id" IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10ContractNumber"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="ContractNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10Note" IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="Note"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InactiveContractsIterator" id="st10Form"
+          Uses="LOV_Form" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10Status"
+          Uses="LOV_Status" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10Type"
+          Uses="LOV_Type" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10Division"
+          Uses="LOV_Division" StaticList="false"/>
+    <attributeValues id="st10CompSubsToProvide"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="CompSubsToProvide"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10FormatOfCompSubs"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="FormatOfCompSubs"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10EffectiveDate"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="EffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10ExpirationDate"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InactiveContractsIterator" id="st10TermLength"
+          Uses="LOV_TermLength" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator"
+          id="st10CancellationNoticeTerm" Uses="LOV_CancellationNoticeTerm"
+          StaticList="false"/>
+    <attributeValues id="st10RolloverDate"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="RolloverDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10CancellationDate"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="CancellationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10CancellationEffectiveDate"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="CancellationEffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InactiveContractsIterator" id="st10CancellationReason"
+          Uses="LOV_CancellationReason" StaticList="false"/>
+    <attributeValues id="st10AutoRenewsFlag"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="AutoRenewsFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10Signatory" IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="Signatory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10ContractSignedDate"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="ContractSignedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InactiveContractsIterator" id="st10AutoRenewTermMonths"
+          Uses="LOV_AutoRenewTermMonths" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10Exclusivity"
+          Uses="LOV_Exclusivity" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10ContentMasterOwner"
+          Uses="LOV_ContentMasterOwner" StaticList="false"/>
+    <attributeValues id="st10RightsToBeRetained"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="RightsToBeRetained"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10NoteFlag" IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="NoteFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10RelationshipOwner"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="RelationshipOwner"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10AgreementContactId"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="AgreementContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10QaContactId"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="QaContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10TechnicalContactId"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="TechnicalContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10CreatedBy" IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10CreatedDate"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10LastUpdatedBy"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10LastUpdatedDate"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10ContentOwnerId"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10ActiveFlag"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="ActiveFlag"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10ContractTemplateId"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="ContractTemplateId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10AccountId" IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10AccountNumber"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="AccountNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10AccountName"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10AccountSite"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="InactiveContractsIterator" id="st10AutoAdd"
+          Uses="LOV_AutoAdd" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10Assignment"
+          Uses="LOV_Assignment" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10RoyaltyBearing"
+          Uses="LOV_RoyaltyBearing" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10FairTreatmentClause"
+          Uses="LOV_FairTreatmentClause" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator"
+          id="st10IssueEditionCoverage" Uses="LOV_IssueEditionCoverage"
+          StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10CompleteContentSet"
+          Uses="LOV_CompleteContentSet" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator"
+          id="st10WarrantyAndIndemnification"
+          Uses="LOV_WarrantyAndIndemnification" StaticList="false"/>
+    <list IterBinding="InactiveContractsIterator" id="st10Governance"
+          Uses="LOV_Governance" StaticList="false"/>
+    <attributeValues id="st10Guarantee" IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="Guarantee"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="st10TechnicalContact"
+                     IterBinding="InactiveContractsIterator">
+      <AttrNames>
+        <Item Value="TechnicalContact"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="InactiveContractsTable" IterBinding="InactiveContractsIterator">
+      <nodeDefinition Name="InactiveContracts"
+                      DefName="com.pq.tracs.model.ro.TraxContractView">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContractNumber"/>
+          <Item Value="Note"/>
+          <Item Value="Form"/>
+          <Item Value="Status"/>
+          <Item Value="Type"/>
+          <Item Value="Division"/>
+          <Item Value="CompSubsToProvide"/>
+          <Item Value="FormatOfCompSubs"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="TermLength"/>
+          <Item Value="CancellationNoticeTerm"/>
+          <Item Value="RolloverDate"/>
+          <Item Value="CancellationDate"/>
+          <Item Value="CancellationEffectiveDate"/>
+          <Item Value="CancellationReason"/>
+          <Item Value="AutoRenewsFlag"/>
+          <Item Value="Signatory"/>
+          <Item Value="ContractSignedDate"/>
+          <Item Value="AutoRenewTermMonths"/>
+          <Item Value="Exclusivity"/>
+          <Item Value="ContentMasterOwner"/>
+          <Item Value="RightsToBeRetained"/>
+          <Item Value="NoteFlag"/>
+          <Item Value="RelationshipOwner"/>
+          <Item Value="AgreementContactId"/>
+          <Item Value="QaContactId"/>
+          <Item Value="TechnicalContactId"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="ActiveFlag"/>
+          <Item Value="ContractTemplateId"/>
+          <Item Value="AccountId"/>
+          <Item Value="AccountNumber"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountSite"/>
+          <Item Value="AutoAdd"/>
+          <Item Value="Assignment"/>
+          <Item Value="RoyaltyBearing"/>
+          <Item Value="FairTreatmentClause"/>
+          <Item Value="IssueEditionCoverage"/>
+          <Item Value="CompleteContentSet"/>
+          <Item Value="WarrantyAndIndemnification"/>
+          <Item Value="Governance"/>
+          <Item Value="Guarantee"/>
+          <Item Value="TechnicalContact"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstInactiveContracts" IterBinding="InactiveContractsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousInactiveContracts"
+            IterBinding="InactiveContractsIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextInactiveContracts" IterBinding="InactiveContractsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastInactiveContracts" IterBinding="InactiveContractsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyInactiveContracts"
+            IterBinding="InactiveContractsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrInactiveContracts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

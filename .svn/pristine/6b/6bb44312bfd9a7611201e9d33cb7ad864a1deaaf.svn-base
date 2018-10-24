@@ -1,0 +1,1093 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="st10TopLc"
+                             partialTriggers=" asAreast10SearchOptions qsAreast10SearchOptions"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:group id="g0">
+            <af:panelGroupLayout id="modelSearchAreast10"
+                                 rendered="#{!pageFlowScope.createModes.CreateInactiveContracts and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreast10SearchOptions:qsButtonst10 qsAreast10SearchOptions:asButtonst10 ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreast10SearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.InactiveContractsIteratorQuery.queryDescriptor}"
+                        model="#{bindings.InactiveContractsIteratorQuery.queryModel}"
+                        queryListener="#{bindings.InactiveContractsIteratorQuery.processQuery}"
+                        queryOperationListener="#{bindings.InactiveContractsIteratorQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchInactiveContracts.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonst10"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchInactiveContracts.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreast10SearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.InactiveContractsIteratorTraxInactiveContractQuickQueryQuery.queryDescriptor}"
+                             model="#{bindings.InactiveContractsIteratorTraxInactiveContractQuickQueryQuery.queryModel}"
+                             queryListener="#{bindings.InactiveContractsIteratorTraxInactiveContractQuickQueryQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchInactiveContracts.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonst10"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchInactiveContracts.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:group>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="st10PC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:group id="st10tbb"
+                              rendered="#{ bindings.InactiveContractsIterator.currentRow!=null }">
+                      <af:commandMenuItem actionListener="#{bindings.FirstInactiveContracts.execute}"
+                                          id="st10First" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousInactiveContracts.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="st10Previous"
+                                          partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextInactiveContracts.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="st10Next" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastInactiveContracts.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="st10Last" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="st10Tab"
+                                                       type="excelHTML"
+                                                       filename="InactiveContracts.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar0">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="st10Tab"
+                                                       type="excelHTML"
+                                                       filename="InactiveContracts.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="st10Print"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.InactiveContractsIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="st10Tab" contentDelivery="immediate"
+                        value="#{bindings.InactiveContractsTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.InactiveContractsTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.InactiveContractsTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.InactiveContractsTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.InactiveContractsTable.rangeSize}"
+                        autoHeightRows="#{bindings.InactiveContractsTable.estimatedRowCount lt 5 ? 5 : bindings.InactiveContractsTable.estimatedRowCount lt bindings.InactiveContractsTable.rangeSize ? bindings.InactiveContractsTable.estimatedRowCount : 0 }"
+                        fetchSize="#{bindings.InactiveContractsTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.InactiveContractsIteratorTraxInactiveContractQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.InactiveContractsIteratorTraxInactiveContractQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.InactiveContractsTable.table}"
+                        partialTriggers=":::qsAreast10SearchOptions :::asAreast10SearchOptions :::st10PC ::st10First ::st10Previous ::st10Next ::st10Last"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_INACTIVECONTRACTS']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="st10TablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="st10CNCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="ContractNumber" rowHeader="false"
+                           helpTopicId="RBH_ST10CONTRACTNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.ContractNumber.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="cl1"
+                                value="#{row.bindings.ContractNumber.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.ContractNumber.label}"
+                                required="#{bindings.InactiveContractsTable.hints.ContractNumber.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.ContractNumber.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.ContractNumber.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.ContractNumber.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.ContractNumber.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="st10CN"
+                                  text="#{row.bindings.ContractNumber.attributeValue}"
+                                  shortDesc="#{bindings.InactiveContractsTable.hints.ContractNumber.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Contract1"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.st10Id.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Contract #{bindings.st10ContractNumber.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.st10Id.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueContract1}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="st10NtCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Note"
+                           rowHeader="false" helpTopicId="RBH_ST10NOTE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Note.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:inputText id="st10Nt"
+                                value="#{row.bindings.Note.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.Note.label}"
+                                required="#{bindings.InactiveContractsTable.hints.Note.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.Note.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.Note.displayWidth}"
+                                maximumLength="4000" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.Note.tooltip}">
+                    <f:validator binding="#{row.bindings.Note.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10FoCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Form"
+                           rowHeader="false" helpTopicId="RBH_ST10FORM"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Form.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10Fo"
+                                      value="#{row.bindings.Form.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.Form.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.Form.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.Form.tooltip}">
+                    <f:selectItems value="#{row.bindings.Form.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10StsCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Status"
+                           rowHeader="false" helpTopicId="RBH_ST10STATUS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Status.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10Sts"
+                                      value="#{row.bindings.Status.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.Status.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.Status.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.Status.tooltip}">
+                    <f:selectItems value="#{row.bindings.Status.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10TpCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Type"
+                           rowHeader="false" helpTopicId="RBH_ST10TYPE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Type.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10Tp"
+                                      value="#{row.bindings.Type.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.Type.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.Type.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.Type.tooltip}">
+                    <f:selectItems value="#{row.bindings.Type.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10DivCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Division"
+                           rowHeader="false" helpTopicId="RBH_ST10DIVISION"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Division.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10Div"
+                                      value="#{row.bindings.Division.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.Division.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.Division.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.Division.tooltip}">
+                    <f:selectItems value="#{row.bindings.Division.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10CSPCol" sortable="true" filterable="true"
+                           noWrap="true" width="228"
+                           sortProperty="CompSubsToProvide" rowHeader="false"
+                           helpTopicId="RBH_ST10COMPSUBSTOPROVIDE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.CompSubsToProvide.label}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <af:inputText id="st10CSP"
+                                value="#{row.bindings.CompSubsToProvide.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.CompSubsToProvide.label}"
+                                required="#{bindings.InactiveContractsTable.hints.CompSubsToProvide.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.CompSubsToProvide.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.CompSubsToProvide.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.CompSubsToProvide.tooltip}">
+                    <f:validator binding="#{row.bindings.CompSubsToProvide.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InactiveContractsTable.hints.CompSubsToProvide.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10FCPCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="FormatOfCompSubs" rowHeader="false"
+                           helpTopicId="RBH_ST10FORMATOFCOMPSUBS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.FormatOfCompSubs.label}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <af:inputText id="st10FCP"
+                                value="#{row.bindings.FormatOfCompSubs.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.FormatOfCompSubs.label}"
+                                required="#{bindings.InactiveContractsTable.hints.FormatOfCompSubs.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.FormatOfCompSubs.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.FormatOfCompSubs.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.FormatOfCompSubs.tooltip}">
+                    <f:validator binding="#{row.bindings.FormatOfCompSubs.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10EfDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="EffectiveDate" rowHeader="false"
+                           helpTopicId="RBH_ST10EFFECTIVEDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.EffectiveDate.label}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.EffectiveDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="st10EfD"
+                                value="#{row.bindings.EffectiveDate.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.EffectiveDate.label}"
+                                required="#{bindings.InactiveContractsTable.hints.EffectiveDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.EffectiveDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="st10ExDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ExpirationDate" rowHeader="false"
+                           helpTopicId="RBH_ST10EXPIRATIONDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.ExpirationDate.label}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.ExpirationDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="st10ExD"
+                                value="#{row.bindings.ExpirationDate.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.ExpirationDate.label}"
+                                required="#{bindings.InactiveContractsTable.hints.ExpirationDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.ExpirationDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="st10TLCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="TermLength"
+                           rowHeader="false" helpTopicId="RBH_ST10TERMLENGTH"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.TermLength.label}"
+                                    id="ol10"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10TL"
+                                      value="#{row.bindings.TermLength.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.TermLength.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.TermLength.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.TermLength.tooltip}">
+                    <f:selectItems value="#{row.bindings.TermLength.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10CNTCol" sortable="true" filterable="true"
+                           noWrap="true" width="228"
+                           sortProperty="CancellationNoticeTerm"
+                           rowHeader="false"
+                           helpTopicId="RBH_ST10CANCELLATIONNOTICETERM"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.CancellationNoticeTerm.label}"
+                                    id="ol11"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10CNT"
+                                      value="#{row.bindings.CancellationNoticeTerm.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.CancellationNoticeTerm.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.CancellationNoticeTerm.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.CancellationNoticeTerm.tooltip}">
+                    <f:selectItems value="#{row.bindings.CancellationNoticeTerm.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10RoDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="RolloverDate"
+                           rowHeader="false" helpTopicId="RBH_ST10ROLLOVERDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.RolloverDate.label}"
+                                    id="ol12"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.RolloverDate}"
+                                  id="id2">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="st10RoD"
+                                value="#{row.bindings.RolloverDate.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.RolloverDate.label}"
+                                required="#{bindings.InactiveContractsTable.hints.RolloverDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.RolloverDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="st10CaDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="CancellationDate" rowHeader="false"
+                           helpTopicId="RBH_ST10CANCELLATIONDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.CancellationDate.label}"
+                                    id="ol13"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CancellationDate}"
+                                  id="id3">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="st10CaD"
+                                value="#{row.bindings.CancellationDate.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.CancellationDate.label}"
+                                required="#{bindings.InactiveContractsTable.hints.CancellationDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.CancellationDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="st10CEDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="CancellationEffectiveDate"
+                           rowHeader="false"
+                           helpTopicId="RBH_ST10CANCELLATIONEFFECTIVEDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.CancellationEffectiveDate.label}"
+                                    id="ol14"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CancellationEffectiveDate}"
+                                  id="id4">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="st10CED"
+                                value="#{row.bindings.CancellationEffectiveDate.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.CancellationEffectiveDate.label}"
+                                required="#{bindings.InactiveContractsTable.hints.CancellationEffectiveDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.CancellationEffectiveDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="st10CaRCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="CancellationReason" rowHeader="false"
+                           helpTopicId="RBH_ST10CANCELLATIONREASON"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.CancellationReason.label}"
+                                    id="ol15"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10CaR"
+                                      value="#{row.bindings.CancellationReason.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.CancellationReason.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.CancellationReason.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.CancellationReason.tooltip}">
+                    <f:selectItems value="#{row.bindings.CancellationReason.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10ARFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="AutoRenewsFlag" rowHeader="false"
+                           helpTopicId="RBH_ST10AUTORENEWSFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.AutoRenewsFlag.label}"
+                                    id="ol16"/>
+                  </f:facet>
+                  <af:inputText id="st10ARF"
+                                value="#{row.bindings.AutoRenewsFlag.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.AutoRenewsFlag.label}"
+                                required="#{bindings.InactiveContractsTable.hints.AutoRenewsFlag.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.AutoRenewsFlag.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.AutoRenewsFlag.displayWidth}"
+                                maximumLength="1" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.AutoRenewsFlag.tooltip}">
+                    <f:validator binding="#{row.bindings.AutoRenewsFlag.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10SigCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Signatory"
+                           rowHeader="false" helpTopicId="RBH_ST10SIGNATORY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Signatory.label}"
+                                    id="ol17"/>
+                  </f:facet>
+                  <af:inputText id="st10Sig"
+                                value="#{row.bindings.Signatory.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.Signatory.label}"
+                                required="#{bindings.InactiveContractsTable.hints.Signatory.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.Signatory.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.Signatory.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.Signatory.tooltip}">
+                    <f:validator binding="#{row.bindings.Signatory.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10CSDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ContractSignedDate" rowHeader="false"
+                           helpTopicId="RBH_ST10CONTRACTSIGNEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.ContractSignedDate.label}"
+                                    id="ol18"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.ContractSignedDate}"
+                                  id="id5">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="st10CSD"
+                                value="#{row.bindings.ContractSignedDate.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.ContractSignedDate.label}"
+                                required="#{bindings.InactiveContractsTable.hints.ContractSignedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.ContractSignedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="st10ARTCol" sortable="true" filterable="true"
+                           noWrap="true" width="228"
+                           sortProperty="AutoRenewTermMonths" rowHeader="false"
+                           helpTopicId="RBH_ST10AUTORENEWTERMMONTHS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.AutoRenewTermMonths.label}"
+                                    id="ol19"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10ART"
+                                      value="#{row.bindings.AutoRenewTermMonths.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.AutoRenewTermMonths.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.AutoRenewTermMonths.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.AutoRenewTermMonths.tooltip}">
+                    <f:selectItems value="#{row.bindings.AutoRenewTermMonths.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10ExcCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Exclusivity"
+                           rowHeader="false" helpTopicId="RBH_ST10EXCLUSIVITY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Exclusivity.label}"
+                                    id="ol20"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10Exc"
+                                      value="#{row.bindings.Exclusivity.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.Exclusivity.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.Exclusivity.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.Exclusivity.tooltip}">
+                    <f:selectItems value="#{row.bindings.Exclusivity.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10CMOCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="ContentMasterOwner" rowHeader="false"
+                           helpTopicId="RBH_ST10CONTENTMASTEROWNER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.ContentMasterOwner.label}"
+                                    id="ol21"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10CMO"
+                                      value="#{row.bindings.ContentMasterOwner.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.ContentMasterOwner.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.ContentMasterOwner.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.ContentMasterOwner.tooltip}">
+                    <f:selectItems value="#{row.bindings.ContentMasterOwner.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10RtRCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="RightsToBeRetained" rowHeader="false"
+                           helpTopicId="RBH_ST10RIGHTSTOBERETAINED"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.RightsToBeRetained.label}"
+                                    id="ol22"/>
+                  </f:facet>
+                  <af:inputText id="st10RtR"
+                                value="#{row.bindings.RightsToBeRetained.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.RightsToBeRetained.label}"
+                                required="#{bindings.InactiveContractsTable.hints.RightsToBeRetained.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.RightsToBeRetained.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.RightsToBeRetained.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.RightsToBeRetained.tooltip}">
+                    <f:validator binding="#{row.bindings.RightsToBeRetained.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10NFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="NoteFlag"
+                           rowHeader="false" helpTopicId="RBH_ST10NOTEFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.NoteFlag.label}"
+                                    id="ol23"/>
+                  </f:facet>
+                  <af:inputText id="st10NF"
+                                value="#{row.bindings.NoteFlag.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.NoteFlag.label}"
+                                required="#{bindings.InactiveContractsTable.hints.NoteFlag.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.NoteFlag.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.NoteFlag.displayWidth}"
+                                maximumLength="1" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.NoteFlag.tooltip}">
+                    <f:validator binding="#{row.bindings.NoteFlag.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10ROCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="RelationshipOwner" rowHeader="false"
+                           helpTopicId="RBH_ST10RELATIONSHIPOWNER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.RelationshipOwner.label}"
+                                    id="ol24"/>
+                  </f:facet>
+                  <af:inputText id="st10RO"
+                                value="#{row.bindings.RelationshipOwner.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.RelationshipOwner.label}"
+                                required="#{bindings.InactiveContractsTable.hints.RelationshipOwner.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.RelationshipOwner.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.RelationshipOwner.displayWidth}"
+                                maximumLength="100" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.RelationshipOwner.tooltip}">
+                    <f:validator binding="#{row.bindings.RelationshipOwner.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10CBCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="CreatedBy"
+                           rowHeader="false" helpTopicId="RBH_ST10CREATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.CreatedBy.label}"
+                                    id="ol25"/>
+                  </f:facet>
+                  <af:inputText id="st10CB"
+                                value="#{row.bindings.CreatedBy.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.CreatedBy.label}"
+                                required="#{bindings.InactiveContractsTable.hints.CreatedBy.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.CreatedBy.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.CreatedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.CreatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10CDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CreatedDate"
+                           rowHeader="false" helpTopicId="RBH_ST10CREATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.CreatedDate.label}"
+                                    id="ol26"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                  id="id6">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="st10CD"
+                                value="#{row.bindings.CreatedDate.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.CreatedDate.label}"
+                                required="#{bindings.InactiveContractsTable.hints.CreatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.CreatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="st10LUBCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="LastUpdatedBy" rowHeader="false"
+                           helpTopicId="RBH_ST10LASTUPDATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.LastUpdatedBy.label}"
+                                    id="ol27"/>
+                  </f:facet>
+                  <af:inputText id="st10LUB"
+                                value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.LastUpdatedBy.label}"
+                                required="#{bindings.InactiveContractsTable.hints.LastUpdatedBy.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.LastUpdatedBy.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.LastUpdatedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.LastUpdatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10LUDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="LastUpdatedDate" rowHeader="false"
+                           helpTopicId="RBH_ST10LASTUPDATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.LastUpdatedDate.label}"
+                                    id="ol28"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                  id="id7">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="st10LUD"
+                                value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.LastUpdatedDate.label}"
+                                required="#{bindings.InactiveContractsTable.hints.LastUpdatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.LastUpdatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="st10ContentOwnerIdCol" sortable="true"
+                           filterable="true" noWrap="true" width="228"
+                           sortProperty="ContentOwnerId" align="right"
+                           rowHeader="false"
+                           helpTopicId="RBH_ST10CONTENTOWNERID"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.ContentOwnerId.label}"
+                                    id="ol29"/>
+                  </f:facet>
+                  <af:inputText id="st10ContentOwnerId"
+                                value="#{row.bindings.ContentOwnerId.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.ContentOwnerId.label}"
+                                required="#{bindings.InactiveContractsTable.hints.ContentOwnerId.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.ContentOwnerId.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.ContentOwnerId.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.ContentOwnerId.tooltip}">
+                    <f:validator binding="#{row.bindings.ContentOwnerId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InactiveContractsTable.hints.ContentOwnerId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10ActiveFlagCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="ActiveFlag" rowHeader="false"
+                           helpTopicId="RBH_ST10ACTIVEFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.ActiveFlag.label}"
+                                    id="ol30"/>
+                  </f:facet>
+                  <af:inputText id="st10ActiveFlag"
+                                value="#{row.bindings.ActiveFlag.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.ActiveFlag.label}"
+                                required="#{bindings.InactiveContractsTable.hints.ActiveFlag.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.ActiveFlag.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.ActiveFlag.displayWidth}"
+                                maximumLength="1" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.ActiveFlag.tooltip}">
+                    <f:validator binding="#{row.bindings.ActiveFlag.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10ContractTemplateIdCol" sortable="true"
+                           filterable="true" noWrap="true" width="228"
+                           sortProperty="ContractTemplateId" align="right"
+                           rowHeader="false"
+                           helpTopicId="RBH_ST10CONTRACTTEMPLATEID"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.ContractTemplateId.label}"
+                                    id="ol31"/>
+                  </f:facet>
+                  <af:inputText id="st10ContractTemplateId"
+                                value="#{row.bindings.ContractTemplateId.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.ContractTemplateId.label}"
+                                required="#{bindings.InactiveContractsTable.hints.ContractTemplateId.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.ContractTemplateId.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.ContractTemplateId.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.ContractTemplateId.tooltip}">
+                    <f:validator binding="#{row.bindings.ContractTemplateId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InactiveContractsTable.hints.ContractTemplateId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10AccountIdCol" sortable="true"
+                           filterable="true" noWrap="true" width="228"
+                           sortProperty="AccountId" align="right"
+                           rowHeader="false" helpTopicId="RBH_ST10ACCOUNTID"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.AccountId.label}"
+                                    id="ol32"/>
+                  </f:facet>
+                  <af:inputText id="st10AccountId"
+                                value="#{row.bindings.AccountId.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.AccountId.label}"
+                                required="#{bindings.InactiveContractsTable.hints.AccountId.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.AccountId.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.AccountId.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.AccountId.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountId.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InactiveContractsTable.hints.AccountId.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10AccountNumberCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="AccountNumber" align="right"
+                           rowHeader="false" helpTopicId="RBH_ST10ACCOUNTNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.AccountNumber.label}"
+                                    id="ol33"/>
+                  </f:facet>
+                  <af:inputText id="st10AccountNumber"
+                                value="#{row.bindings.AccountNumber.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.AccountNumber.label}"
+                                required="#{bindings.InactiveContractsTable.hints.AccountNumber.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.AccountNumber.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.AccountNumber.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.AccountNumber.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountNumber.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.InactiveContractsTable.hints.AccountNumber.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10AccountNameCol" sortable="true"
+                           filterable="true" noWrap="true" width="240"
+                           sortProperty="AccountName" rowHeader="false"
+                           helpTopicId="RBH_ST10ACCOUNTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.AccountName.label}"
+                                    id="ol34"/>
+                  </f:facet>
+                  <af:inputText id="st10AccountName"
+                                value="#{row.bindings.AccountName.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.AccountName.label}"
+                                required="#{bindings.InactiveContractsTable.hints.AccountName.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.AccountName.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.AccountName.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.AccountName.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10AccountSiteCol" sortable="true"
+                           filterable="true" noWrap="true" width="240"
+                           sortProperty="AccountSite" rowHeader="false"
+                           helpTopicId="RBH_ST10ACCOUNTSITE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.AccountSite.label}"
+                                    id="ol35"/>
+                  </f:facet>
+                  <af:inputText id="st10AccountSite"
+                                value="#{row.bindings.AccountSite.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.AccountSite.label}"
+                                required="#{bindings.InactiveContractsTable.hints.AccountSite.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.AccountSite.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.AccountSite.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.AccountSite.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10AutoAddCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="AutoAdd"
+                           rowHeader="false" helpTopicId="RBH_ST10AUTOADD"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.AutoAdd.label}"
+                                    id="ol36"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10AutoAdd"
+                                      value="#{row.bindings.AutoAdd.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.AutoAdd.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.AutoAdd.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.AutoAdd.tooltip}">
+                    <f:selectItems value="#{row.bindings.AutoAdd.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10AssignmentCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="Assignment" rowHeader="false"
+                           helpTopicId="RBH_ST10ASSIGNMENT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Assignment.label}"
+                                    id="ol37"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10Assignment"
+                                      value="#{row.bindings.Assignment.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.Assignment.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.Assignment.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.Assignment.tooltip}">
+                    <f:selectItems value="#{row.bindings.Assignment.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10RoyaltyBearingCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="RoyaltyBearing" rowHeader="false"
+                           helpTopicId="RBH_ST10ROYALTYBEARING"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.RoyaltyBearing.label}"
+                                    id="ol38"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10RoyaltyBearing"
+                                      value="#{row.bindings.RoyaltyBearing.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.RoyaltyBearing.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.RoyaltyBearing.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.RoyaltyBearing.tooltip}">
+                    <f:selectItems value="#{row.bindings.RoyaltyBearing.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10FairTreatmentClauseCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="FairTreatmentClause" rowHeader="false"
+                           helpTopicId="RBH_ST10FAIRTREATMENTCLAUSE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.FairTreatmentClause.label}"
+                                    id="ol39"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10FairTreatmentClause"
+                                      value="#{row.bindings.FairTreatmentClause.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.FairTreatmentClause.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.FairTreatmentClause.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.FairTreatmentClause.tooltip}">
+                    <f:selectItems value="#{row.bindings.FairTreatmentClause.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10IssueEditionCoverageCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="IssueEditionCoverage" rowHeader="false"
+                           helpTopicId="RBH_ST10ISSUEEDITIONCOVERAGE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.IssueEditionCoverage.label}"
+                                    id="ol40"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10IssueEditionCoverage"
+                                      value="#{row.bindings.IssueEditionCoverage.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.IssueEditionCoverage.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.IssueEditionCoverage.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.IssueEditionCoverage.tooltip}">
+                    <f:selectItems value="#{row.bindings.IssueEditionCoverage.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10CompleteContentSetCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="CompleteContentSet" rowHeader="false"
+                           helpTopicId="RBH_ST10COMPLETECONTENTSET"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.CompleteContentSet.label}"
+                                    id="ol41"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10CompleteContentSet"
+                                      value="#{row.bindings.CompleteContentSet.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.CompleteContentSet.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.CompleteContentSet.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.CompleteContentSet.tooltip}">
+                    <f:selectItems value="#{row.bindings.CompleteContentSet.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10WarrantyAndIndemnificationCol"
+                           sortable="true" filterable="true" noWrap="true"
+                           width="120" sortProperty="WarrantyAndIndemnification"
+                           rowHeader="false"
+                           helpTopicId="RBH_ST10WARRANTYANDINDEMNIFICATION"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.WarrantyAndIndemnification.label}"
+                                    id="ol42"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10WarrantyAndIndemnification"
+                                      value="#{row.bindings.WarrantyAndIndemnification.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.WarrantyAndIndemnification.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.WarrantyAndIndemnification.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.WarrantyAndIndemnification.tooltip}">
+                    <f:selectItems value="#{row.bindings.WarrantyAndIndemnification.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10GovernanceCol" sortable="true"
+                           filterable="true" noWrap="true" width="120"
+                           sortProperty="Governance" rowHeader="false"
+                           helpTopicId="RBH_ST10GOVERNANCE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Governance.label}"
+                                    id="ol43"/>
+                  </f:facet>
+                  <af:selectOneChoice id="st10Governance"
+                                      value="#{row.bindings.Governance.inputValue}"
+                                      label="#{bindings.InactiveContractsTable.hints.Governance.label}"
+                                      required="#{bindings.InactiveContractsTable.hints.Governance.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.InactiveContractsTable.hints.Governance.tooltip}">
+                    <f:selectItems value="#{row.bindings.Governance.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="st10GuaranteeCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="Guarantee" rowHeader="false"
+                           helpTopicId="RBH_ST10GUARANTEE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.Guarantee.label}"
+                                    id="ol44"/>
+                  </f:facet>
+                  <af:inputText id="st10Guarantee"
+                                value="#{row.bindings.Guarantee.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.Guarantee.label}"
+                                required="#{bindings.InactiveContractsTable.hints.Guarantee.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.Guarantee.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.Guarantee.displayWidth}"
+                                maximumLength="1" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.Guarantee.tooltip}">
+                    <f:validator binding="#{row.bindings.Guarantee.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="st10TechnicalContactCol" sortable="true"
+                           filterable="true" noWrap="true" width="180"
+                           sortProperty="TechnicalContact" rowHeader="false"
+                           helpTopicId="RBH_ST10TECHNICALCONTACT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.InactiveContractsTable.hints.TechnicalContact.label}"
+                                    id="ol45"/>
+                  </f:facet>
+                  <af:inputText id="st10TechnicalContact"
+                                value="#{row.bindings.TechnicalContact.inputValue}"
+                                label="#{bindings.InactiveContractsTable.hints.TechnicalContact.label}"
+                                required="#{bindings.InactiveContractsTable.hints.TechnicalContact.mandatory}"
+                                rows="#{bindings.InactiveContractsTable.hints.TechnicalContact.displayHeight}"
+                                columns="#{bindings.InactiveContractsTable.hints.TechnicalContact.displayWidth}"
+                                maximumLength="713" readOnly="true"
+                                shortDesc="#{bindings.InactiveContractsTable.hints.TechnicalContact.tooltip}">
+                    <f:validator binding="#{row.bindings.TechnicalContact.validator}"/>
+                  </af:inputText>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

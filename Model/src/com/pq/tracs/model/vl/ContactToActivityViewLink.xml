@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ContactToActivityViewLink"
+  Version="11.1.1.59.23"
+  EntityAssociation="com.pq.tracs.model.ao.ContactToActivityFkAssoc">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.pq.tracs.model.vl.ContactToActivityViewLink_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="TraxContactView"
+    Cardinality="1"
+    Owner="com.pq.tracs.model.vo.TraxContactView"
+    Source="true">
+    <DesignTime>
+      <Attr Name="_finderName" Value="TraxContactView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.vo.TraxContactView.Id"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="TraxActivityView"
+    Cardinality="-1"
+    Owner="com.pq.tracs.model.vo.TraxActivityView">
+    <DesignTime>
+      <Attr Name="_finderName" Value="TraxActivityView"/>
+      <Attr Name="_isUpdateable" Value="true"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.pq.tracs.model.vo.TraxActivityView.ContactId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

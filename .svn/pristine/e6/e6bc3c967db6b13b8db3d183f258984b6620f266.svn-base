@@ -1,0 +1,836 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="ActTopLc"
+                             partialTriggers=" ActSaveButton0 ActCancelButton0 asAreaActSearchOptions qsAreaActSearchOptions"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_ACTIVITIES']}"
+                          helpTopicId="RBH_ACTIVITIES">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0">
+                    <af:commandButton actionListener="#{CreateActivities.execute}"
+                                      action="CreateAct"
+                                      textAndAccessKey="#{nls['NEW_BUTTON_LABEL_ACTIVITIES']}"
+                                      rendered="#{(true) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                      id="ActNewButton"></af:commandButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton action="#{SaveActivities.execute}"
+                                      rendered="#{(jhsUserRoles['AM,AST,PM,GCA,ADMIN']) and (!pageFlowScope.hideSaveButton)}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="ActSaveButton0" partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="ActCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:panelGroupLayout id="modelSearchAreaAct"
+                                 rendered="#{!pageFlowScope.createModes.CreateActivities and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreaActSearchOptions:qsButtonAct qsAreaActSearchOptions:asButtonAct ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreaActSearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.ActivitiesIteratorTraxActivityViewCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.ActivitiesIteratorTraxActivityViewCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.ActivitiesIteratorTraxActivityViewCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.ActivitiesIteratorTraxActivityViewCriteriaQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchActivities.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonAct"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchActivities.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreaActSearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.ActivitiesIteratorTraxActivityQuickQueryQuery.queryDescriptor}"
+                             model="#{bindings.ActivitiesIteratorTraxActivityQuickQueryQuery.queryModel}"
+                             queryListener="#{bindings.ActivitiesIteratorTraxActivityQuickQueryQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchActivities.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonAct"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchActivities.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="ActPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="ActivitiesDetails"></af:commandMenuItem>
+                    <af:group id="Acttbb"
+                              rendered="#{ (bindings.ActivitiesIterator.viewObject!=null and bindings.ActivitiesIterator.viewObject.currentRow!=null)}">
+                      <af:commandMenuItem actionListener="#{bindings.FirstActivities.execute}"
+                                          id="ActFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousActivities.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="ActPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextActivities.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="ActNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastActivities.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="ActLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="ActTab"
+                                                       type="excelHTML"
+                                                       filename="Activities.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="ActTab"
+                                                       type="excelHTML"
+                                                       filename="Activities.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="ActPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.ActivitiesIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="ActTab" contentDelivery="immediate"
+                        value="#{bindings.ActivitiesTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.ActivitiesTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.ActivitiesTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.ActivitiesTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.ActivitiesTable.rangeSize}"
+                        autoHeightRows="#{bindings.ActivitiesTable.estimatedRowCount}"
+                        fetchSize="#{bindings.ActivitiesTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.ActivitiesIteratorTraxActivityQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.ActivitiesIteratorTraxActivityQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.ActivitiesTable.table}"
+                        partialTriggers=":::qsAreaActSearchOptions :::asAreaActSearchOptions :::ActPC ::ActFirst ::ActPrevious ::ActNext ::ActLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_ACTIVITIES']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="ActTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="ActivitiesDetails"></af:commandMenuItem>
+                      </af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="ActDesCol" sortable="true" filterable="true"
+                           noWrap="true" width="260" sortProperty="Description"
+                           rowHeader="false"
+                           helpTopicId="RBH_ACTDESCRIPTIONTABLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.Description.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.Description.mandatory}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:panelLabelAndMessage shortDesc="#{bindings.ActivitiesTable.hints.Description.tooltip}">
+                    <af:inputText id="ActDes"
+                                  value="#{row.bindings.Description.inputValue}"
+                                  label="#{bindings.ActivitiesTable.hints.Description.label}"
+                                  required="#{bindings.ActivitiesTable.hints.Description.mandatory}"
+                                  rows="1"
+                                  columns="#{bindings.ActivitiesTable.hints.Description.displayWidth}"
+                                  maximumLength="4000"
+                                  readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                  autoSubmit="true" simple="true"
+                                  partialTriggers="ActDescriptionTableEditorLink ActDescriptionTableEditorText">
+                      <f:validator binding="#{row.bindings.Description.validator}"/>
+                    </af:inputText>
+                    <af:commandLink id="ActDescriptionTableEditorLink"
+                                    rendered="#{!(!(jhsUserRoles['AM,AST,PM,GCA,ADMIN']))}"
+                                    immediate="true" partialSubmit="true">
+                      <af:showPopupBehavior popupId="ActDescriptionTablePopup"/>
+                      <af:image source="/jheadstart/images/editor.gif"
+                                id="ActDescriptionTableIcon"
+                                clientComponent="true"/>
+                    </af:commandLink>
+                  </af:panelLabelAndMessage>
+                  <af:popup id="ActDescriptionTablePopup"
+                            contentDelivery="lazyUncached"
+                            eventContext="launcher" childCreation="deferred">
+                    <af:dialog modal="true" resize="on" title="Text Editor"
+                               id="dialog0">
+                      <af:inputText rows="10" columns="100"
+                                    value="#{row.bindings.Description.inputValue}"
+                                    simple="true" maximumLength="4000"
+                                    id="ActDescriptionTableEditorText"/>
+                    </af:dialog>
+                  </af:popup>
+                </af:column>
+                <af:column id="ActTyCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="Type"
+                           rowHeader="false" helpTopicId="RBH_ACTTYPE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.Type.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.Type.mandatory}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:inputText id="cl1" value="#{row.bindings.Type.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.Type.label}"
+                                required="#{bindings.ActivitiesTable.hints.Type.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.Type.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.Type.displayWidth}"
+                                maximumLength="40"
+                                readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                shortDesc="#{bindings.ActivitiesTable.hints.Type.tooltip}"
+                                autoSubmit="true"
+                                valueChangeListener="#{ActTypeDependsOnItem.updateModelValue}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.Type.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2"
+                                  shortDesc="#{bindings.ActivitiesTable.hints.Type.tooltip}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="ActivitiesDetails" text="#{row.Type}"></af:commandLink>
+                </af:column>
+                <af:column id="ActSTyCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="SubType"
+                           rowHeader="false" helpTopicId="RBH_ACTSUBTYPE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.SubType.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.SubType.mandatory}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:selectOneChoice id="ActSTy"
+                                      value="#{row.bindings.SubType.inputValue}"
+                                      label="#{bindings.ActivitiesTable.hints.SubType.label}"
+                                      required="#{bindings.ActivitiesTable.hints.SubType.mandatory}"
+                                      readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                      shortDesc="#{bindings.ActivitiesTable.hints.SubType.tooltip}">
+                    <f:selectItems value="#{row.bindings.SubType.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="ActStCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="Status"
+                           rowHeader="false" helpTopicId="RBH_ACTSTATUS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.Status.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.Status.mandatory}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:selectOneChoice id="ActSt"
+                                      value="#{row.bindings.Status.inputValue}"
+                                      label="#{bindings.ActivitiesTable.hints.Status.label}"
+                                      required="#{bindings.ActivitiesTable.hints.Status.mandatory}"
+                                      readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                      shortDesc="#{bindings.ActivitiesTable.hints.Status.tooltip}">
+                    <f:selectItems value="#{row.bindings.Status.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="ActPriCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="Priority"
+                           rowHeader="false" helpTopicId="RBH_ACTPRIORITY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.Priority.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.Priority.mandatory}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:selectOneChoice id="ActPri"
+                                      value="#{row.bindings.Priority.inputValue}"
+                                      label="#{bindings.ActivitiesTable.hints.Priority.label}"
+                                      required="#{bindings.ActivitiesTable.hints.Priority.mandatory}"
+                                      readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                      shortDesc="#{bindings.ActivitiesTable.hints.Priority.tooltip}">
+                    <f:selectItems value="#{row.bindings.Priority.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="ActASDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ActualStartDate" rowHeader="false"
+                           helpTopicId="RBH_ACTACTUALSTARTDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.ActualStartDate.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.ActualStartDate.mandatory}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.ActualStartDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="ActASD"
+                                value="#{row.bindings.ActualStartDate.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.ActualStartDate.label}"
+                                required="#{bindings.ActivitiesTable.hints.ActualStartDate.mandatory}"
+                                readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                shortDesc="#{bindings.ActivitiesTable.hints.ActualStartDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="ActCoDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="CompletionDate" rowHeader="false"
+                           helpTopicId="RBH_ACTCOMPLETIONDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.CompletionDate.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.CompletionDate.mandatory}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CompletionDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="ActCoD"
+                                value="#{row.bindings.CompletionDate.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.CompletionDate.label}"
+                                required="#{bindings.ActivitiesTable.hints.CompletionDate.mandatory}"
+                                readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                shortDesc="#{bindings.ActivitiesTable.hints.CompletionDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="ActDDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="DueDate"
+                           rowHeader="false" helpTopicId="RBH_ACTDUEDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.DueDate.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.DueDate.mandatory}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.DueDate}"
+                                  id="id2">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="ActDD"
+                                value="#{row.bindings.DueDate.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.DueDate.label}"
+                                required="#{bindings.ActivitiesTable.hints.DueDate.mandatory}"
+                                readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                shortDesc="#{bindings.ActivitiesTable.hints.DueDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="ActESDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ExpectedStartDate" rowHeader="false"
+                           helpTopicId="RBH_ACTEXPECTEDSTARTDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.ExpectedStartDate.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.ExpectedStartDate.mandatory}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.ExpectedStartDate}"
+                                  id="id3">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="ActESD"
+                                value="#{row.bindings.ExpectedStartDate.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.ExpectedStartDate.label}"
+                                required="#{bindings.ActivitiesTable.hints.ExpectedStartDate.mandatory}"
+                                readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                shortDesc="#{bindings.ActivitiesTable.hints.ExpectedStartDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="ActHSCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="HoursSpent"
+                           align="right" rowHeader="false"
+                           helpTopicId="RBH_ACTHOURSSPENT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.HoursSpent.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.HoursSpent.mandatory}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <af:inputText id="ActHS"
+                                value="#{row.bindings.HoursSpent.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.HoursSpent.label}"
+                                required="#{bindings.ActivitiesTable.hints.HoursSpent.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.HoursSpent.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.HoursSpent.displayWidth}"
+                                maximumLength="8"
+                                readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                shortDesc="#{bindings.ActivitiesTable.hints.HoursSpent.tooltip}">
+                    <f:validator binding="#{row.bindings.HoursSpent.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ActivitiesTable.hints.HoursSpent.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActANoCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ContentOwnerNo" align="right"
+                           rowHeader="false" helpTopicId="RBH_ACTCONTENTOWNERNO"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.ContentOwnerNo.label}"
+                                    id="ol10"/>
+                  </f:facet>
+                  <af:inputText id="ActANo"
+                                value="#{row.bindings.ContentOwnerNo.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.ContentOwnerNo.label}"
+                                required="#{bindings.ActivitiesTable.hints.ContentOwnerNo.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.ContentOwnerNo.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.ContentOwnerNo.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.ContentOwnerNo.tooltip}">
+                    <f:validator binding="#{row.bindings.ContentOwnerNo.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ActivitiesTable.hints.ContentOwnerNo.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActANmCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="AccountName"
+                           rowHeader="false" helpTopicId="RBH_ACTACCOUNTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.AccountName.label}"
+                                    id="ol11"/>
+                  </f:facet>
+                  <af:inputText id="cl3"
+                                value="#{row.bindings.AccountName.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.AccountName.label}"
+                                required="#{bindings.ActivitiesTable.hints.AccountName.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.AccountName.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.AccountName.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.AccountName.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="ActANm"
+                                  text="#{row.bindings.AccountName.attributeValue}"
+                                  shortDesc="#{bindings.ActivitiesTable.hints.AccountName.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Accounts"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.ActAccountId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Account - #{bindings.ActContentOwnerNo.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.ActAccountId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="ActAStCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="AccountSite"
+                           rowHeader="false" helpTopicId="RBH_ACTACCOUNTSITE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.AccountSite.label}"
+                                    id="ol12"/>
+                  </f:facet>
+                  <af:inputText id="ActASt"
+                                value="#{row.bindings.AccountSite.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.AccountSite.label}"
+                                required="#{bindings.ActivitiesTable.hints.AccountSite.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.AccountSite.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.AccountSite.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.AccountSite.tooltip}">
+                    <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActOpportunityNoCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="OpportunityNo" rowHeader="false"
+                           helpTopicId="RBH_ACTOPPORTUNITYNO"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.OpportunityNo.label}"
+                                    showRequired="#{bindings.ActivitiesTable.hints.OpportunityNo.mandatory}"
+                                    id="ol13"/>
+                  </f:facet>
+                  <af:inputText id="ActOpportunityNo"
+                                value="#{row.bindings.OpportunityNo.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.OpportunityNo.label}"
+                                required="#{bindings.ActivitiesTable.hints.OpportunityNo.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.OpportunityNo.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.OpportunityNo.displayWidth}"
+                                maximumLength="38"
+                                readOnly="#{!(jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                shortDesc="#{bindings.ActivitiesTable.hints.OpportunityNo.tooltip}">
+                    <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ActivitiesTable.hints.OpportunityNo.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActONmCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="OpportunityName" rowHeader="false"
+                           helpTopicId="RBH_ACTOPPORTUNITYNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.OpportunityName.label}"
+                                    id="ol14"/>
+                  </f:facet>
+                  <af:inputText id="cl4"
+                                value="#{row.bindings.OpportunityName.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.OpportunityName.label}"
+                                required="#{bindings.ActivitiesTable.hints.OpportunityName.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.OpportunityName.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.OpportunityName.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.OpportunityName.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="ActONm"
+                                  text="#{row.bindings.OpportunityName.attributeValue}"
+                                  shortDesc="#{bindings.ActivitiesTable.hints.OpportunityName.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Opportunity"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.ActOpportunityId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Opp. - #{bindings.ActOpportunityName.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.ActOpportunityId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="ActCoNCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="ContractNumber" rowHeader="false"
+                           helpTopicId="RBH_ACTCONTRACTNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.ContractNumber.label}"
+                                    id="ol15"/>
+                  </f:facet>
+                  <af:inputText id="cl5"
+                                value="#{row.bindings.ContractNumber.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.ContractNumber.label}"
+                                required="#{bindings.ActivitiesTable.hints.ContractNumber.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.ContractNumber.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.ContractNumber.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.ContractNumber.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.ContractNumber.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="ActCoN"
+                                  text="#{row.bindings.ContractNumber.attributeValue}"
+                                  shortDesc="#{bindings.ActivitiesTable.hints.ContractNumber.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Contract"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.ActContractId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Contract - #{bindings.ActContractNumber.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.ActContractId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueContract}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="ActTTNCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="TargetTrackingNo" align="right"
+                           rowHeader="false"
+                           helpTopicId="RBH_ACTTARGETTRACKINGNO"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.TargetTrackingNo.label}"
+                                    id="ol16"/>
+                  </f:facet>
+                  <af:inputText id="cl6"
+                                value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.TargetTrackingNo.label}"
+                                required="#{bindings.ActivitiesTable.hints.TargetTrackingNo.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.TargetTrackingNo.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.TargetTrackingNo.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.TargetTrackingNo.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ActivitiesTable.hints.TargetTrackingNo.format}"/>
+                  </af:inputText>
+                  <af:commandLink id="ActTTN"
+                                  text="#{row.bindings.TargetTrackingNo.attributeValue}"
+                                  shortDesc="#{bindings.ActivitiesTable.hints.TargetTrackingNo.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Titles"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.ActTitleId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="Title - #{bindings.ActTargetTrackingNo.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.ActTitleId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="ActCaNCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="CatalogNumber" rowHeader="false"
+                           helpTopicId="RBH_ACTCATALOGNUMBER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.CatalogNumber.label}"
+                                    id="ol17"/>
+                  </f:facet>
+                  <af:inputText id="ActCaN"
+                                value="#{row.bindings.CatalogNumber.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.CatalogNumber.label}"
+                                required="#{bindings.ActivitiesTable.hints.CatalogNumber.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.CatalogNumber.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.CatalogNumber.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.CatalogNumber.tooltip}">
+                    <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActTtlCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="LongTitle"
+                           rowHeader="false" helpTopicId="RBH_ACTLONGTITLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.LongTitle.label}"
+                                    id="ol18"/>
+                  </f:facet>
+                  <af:inputText id="ActTtl"
+                                value="#{row.bindings.LongTitle.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.LongTitle.label}"
+                                required="#{bindings.ActivitiesTable.hints.LongTitle.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.LongTitle.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.LongTitle.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.LongTitle.tooltip}">
+                    <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActSTtCol" sortable="true" filterable="true"
+                           noWrap="true" width="180" sortProperty="ShortTitle"
+                           rowHeader="false" helpTopicId="RBH_ACTSHORTTITLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.ShortTitle.label}"
+                                    id="ol19"/>
+                  </f:facet>
+                  <af:inputText id="ActSTt"
+                                value="#{row.bindings.ShortTitle.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.ShortTitle.label}"
+                                required="#{bindings.ActivitiesTable.hints.ShortTitle.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.ShortTitle.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.ShortTitle.displayWidth}"
+                                maximumLength="30" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.ShortTitle.tooltip}">
+                    <f:validator binding="#{row.bindings.ShortTitle.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActDNmCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="DisplayName"
+                           rowHeader="false" helpTopicId="RBH_ACTDISPLAYNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.DisplayName.label}"
+                                    id="ol20"/>
+                  </f:facet>
+                  <af:inputText id="ActDNm"
+                                value="#{row.bindings.DisplayName.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.DisplayName.label}"
+                                required="#{bindings.ActivitiesTable.hints.DisplayName.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.DisplayName.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.DisplayName.displayWidth}"
+                                maximumLength="100" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.DisplayName.tooltip}">
+                    <f:validator binding="#{row.bindings.DisplayName.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActOwCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="Owner"
+                           rowHeader="false" helpTopicId="RBH_ACTOWNER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.Owner.label}"
+                                    id="ol21"/>
+                  </f:facet>
+                  <af:inputText id="ActOw"
+                                value="#{row.bindings.Owner.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.Owner.label}"
+                                required="#{bindings.ActivitiesTable.hints.Owner.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.Owner.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.Owner.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.Owner.tooltip}">
+                    <f:validator binding="#{row.bindings.Owner.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActCBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="CreatedBy"
+                           rowHeader="false" helpTopicId="RBH_ACTCREATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.CreatedBy.label}"
+                                    id="ol22"/>
+                  </f:facet>
+                  <af:inputText id="ActCB"
+                                value="#{row.bindings.CreatedBy.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.CreatedBy.label}"
+                                required="#{bindings.ActivitiesTable.hints.CreatedBy.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.CreatedBy.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.CreatedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.CreatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActCDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CreatedDate"
+                           rowHeader="false" helpTopicId="RBH_ACTCREATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.CreatedDate.label}"
+                                    id="ol23"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                  id="id4">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="ActCD"
+                                value="#{row.bindings.CreatedDate.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.CreatedDate.label}"
+                                required="#{bindings.ActivitiesTable.hints.CreatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.CreatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="ActLUBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="LastUpdatedBy" rowHeader="false"
+                           helpTopicId="RBH_ACTLASTUPDATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.LastUpdatedBy.label}"
+                                    id="ol24"/>
+                  </f:facet>
+                  <af:inputText id="ActLUB"
+                                value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.LastUpdatedBy.label}"
+                                required="#{bindings.ActivitiesTable.hints.LastUpdatedBy.mandatory}"
+                                rows="#{bindings.ActivitiesTable.hints.LastUpdatedBy.displayHeight}"
+                                columns="#{bindings.ActivitiesTable.hints.LastUpdatedBy.displayWidth}"
+                                maximumLength="40" readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.LastUpdatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="ActLUDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="LastUpdatedDate" rowHeader="false"
+                           helpTopicId="RBH_ACTLASTUPDATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.ActivitiesTable.hints.LastUpdatedDate.label}"
+                                    id="ol25"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                  id="id5">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="ActLUD"
+                                value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                label="#{bindings.ActivitiesTable.hints.LastUpdatedDate.label}"
+                                required="#{bindings.ActivitiesTable.hints.LastUpdatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.ActivitiesTable.hints.LastUpdatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

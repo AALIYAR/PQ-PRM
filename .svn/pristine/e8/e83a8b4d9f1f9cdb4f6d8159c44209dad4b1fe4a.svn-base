@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="QAContactLookupPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <invokeAction id="applyBindParamsQAContactLookupInvoke"
+                  Binds="applyBindParamsQAContactLookup" Refresh="always"/>
+    <iterator id="QAContactLookupIterator" Binds="QAContactLookup"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="QAContactLookupIteratorQuery"
+                  Binds="QAContactLookupIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="FirstName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsQAContactLookup"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="QAContactLookup"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{QAContactLookupQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <attributeValues id="QAContactLookupId"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupContactName"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="ContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupJobTitle"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupJobRole"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="JobRole"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupFirstName"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupMiddleName"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupLastName"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupTitle"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupGender"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="QAContactLookupPronunciation"
+                     IterBinding="QAContactLookupIterator">
+      <AttrNames>
+        <Item Value="Pronunciation"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="QAContactLookupTable" IterBinding="QAContactLookupIterator">
+      <nodeDefinition Name="QAContactLookup"
+                      DefName="com.pq.tracs.model.lookup.ContentOwnerContactLookup">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContactName"/>
+          <Item Value="JobTitle"/>
+          <Item Value="JobRole"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleName"/>
+          <Item Value="LastName"/>
+          <Item Value="Title"/>
+          <Item Value="Gender"/>
+          <Item Value="Pronunciation"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstQAContactLookup" IterBinding="QAContactLookupIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousQAContactLookup" IterBinding="QAContactLookupIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextQAContactLookup" IterBinding="QAContactLookupIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastQAContactLookup" IterBinding="QAContactLookupIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchQAContactLookup"
+                  IterBinding="QAContactLookupIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchQAContactLookup.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchQAContactLookup.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchQAContactLookup.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyQAContactLookup"
+            IterBinding="QAContactLookupIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrQAContactLookup}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

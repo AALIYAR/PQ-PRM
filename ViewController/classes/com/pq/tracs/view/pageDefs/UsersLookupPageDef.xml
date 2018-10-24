@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="UsersLookupPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <iterator id="UsersLookupIterator" Binds="JhsUsersLookup1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="UsersLookupIteratorJhsUsersLookupCriteriaQuery"
+                  Binds="UsersLookupIterator" Criteria="JhsUsersLookupCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Username"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <attributeValues id="UsersLookupId" IterBinding="UsersLookupIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UsersLookupUsername" IterBinding="UsersLookupIterator">
+      <AttrNames>
+        <Item Value="Username"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UsersLookupFirstName"
+                     IterBinding="UsersLookupIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UsersLookupLastName" IterBinding="UsersLookupIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="UsersLookupDisplayName"
+                     IterBinding="UsersLookupIterator">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="UsersLookupTable" IterBinding="UsersLookupIterator">
+      <nodeDefinition Name="UsersLookup"
+                      DefName="com.pq.tracs.model.lookup.JhsUsersLookup">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="Username"/>
+          <Item Value="FirstName"/>
+          <Item Value="LastName"/>
+          <Item Value="DisplayName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstUsersLookup" IterBinding="UsersLookupIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousUsersLookup" IterBinding="UsersLookupIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextUsersLookup" IterBinding="UsersLookupIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastUsersLookup" IterBinding="UsersLookupIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchUsersLookup"
+                  IterBinding="UsersLookupIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchUsersLookup.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchUsersLookup.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchUsersLookup.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyUsersLookup"
+            IterBinding="UsersLookupIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrUsersLookup}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

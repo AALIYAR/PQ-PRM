@@ -1,0 +1,2135 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="psl0" partialTriggers=""
+                             rendered="#{jhsUserRoles['PM']}">
+        <f:facet name="top">
+          <af:panelGroupLayout layout="scroll" id="PMDTopLc" partialTriggers=""
+                               rendered="#{jhsUserRoles['PM']}">
+            <f:facet name="separator">
+              <af:spacer width="10" height="10" id="sp0"/>
+            </f:facet>
+            <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+            <af:group id="g0"></af:group>
+            <af:switcher rendered="#{bindings.PMDashboardIterator.findMode!='true'}"
+                         id="PMDSw" defaultFacet="hasRows"
+                         facetName="#{( bindings.PMDashboardIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+              <f:facet name="noRows">
+                <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                    styleUsage="pageStamp" id="PMDNoRowsFound"/>
+              </f:facet>
+              <f:facet name="hasRows">
+                <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm), disabled (default/pageComponent/formGroup.vm) -->
+                <af:panelGroupLayout id="PMDFC" layout="vertical">
+                  <f:facet name="separator">
+                    <af:spacer width="10" height="10" id="sp1"/>
+                  </f:facet>
+                  <af:panelFormLayout rows="1" labelAlignment="start"
+                                      maxColumns="2" id="PMDFI">
+                    <af:inputText id="PMDUser"
+                                  value="#{bindings.PMDUser.inputValue}"
+                                  label="Welcome" required="false"
+                                  readOnly="true" helpTopicId="RBH_PMDUSER">
+                      <f:validator binding="#{bindings.PMDUser.validator}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+              </f:facet>
+            </af:switcher>
+            <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+            <af:spacer width="10" height="10" id="sp2"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelDashboard id="PMDDb" columns="2" rowHeight="300px">
+            <af:panelBox text="#{nls['TABLE_TITLE_NEWOPPORTUNITIESDASHBOARD']}"
+                         id="NODPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="NODTopLc"
+                                     partialTriggers=" PMDTopLc qsAreaNODSearchOptions"
+                                     rendered="#{jhsUserRoles['PM']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g1">
+                    <af:panelGroupLayout id="modelSearchAreaNOD"
+                                         rendered="#{!pageFlowScope.createModes.CreateNewOpportunitiesDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaNODSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.NewOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.queryDescriptor}"
+                                     model="#{bindings.NewOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.queryModel}"
+                                     queryListener="#{bindings.NewOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp3"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl1">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="NODPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu0">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu1">
+                              <af:group id="NODtbb"
+                                        rendered="#{ bindings.NewOpportunitiesDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstNewOpportunitiesDashboard.execute}"
+                                                    id="NODFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousNewOpportunitiesDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="NODPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextNewOpportunitiesDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="NODNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastNewOpportunitiesDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="NODLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi0">
+                              <af:exportCollectionActionListener exportedId="NODTab"
+                                                                 type="excelHTML"
+                                                                 filename="NewOpportunitiesDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar0">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl0"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="NODTab"
+                                                                 type="excelHTML"
+                                                                 filename="NewOpportunitiesDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="NODPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.NewOpportunitiesDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="NODTab" contentDelivery="immediate"
+                                  value="#{bindings.NewOpportunitiesDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.NewOpportunitiesDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.NewOpportunitiesDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.NewOpportunitiesDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.NewOpportunitiesDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.NewOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.processQuery}"
+                                  filterModel="#{bindings.NewOpportunitiesDashboardIteratorRecentOpportunitiesDashboardViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.NewOpportunitiesDashboardTable.table}"
+                                  partialTriggers=":::qsAreaNODSearchOptions :::NODPC ::NODFirst ::NODPrevious ::NODNext ::NODLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_NEWOPPORTUNITIESDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="NODTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu2">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu3"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="NODOpportunityNoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="OpportunityNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_NODOPPORTUNITYNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityNo.label}"
+                                              id="ol0"/>
+                            </f:facet>
+                            <af:inputText id="NODOpportunityNo"
+                                          value="#{row.bindings.OpportunityNo.inputValue}"
+                                          label="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityNo.label}"
+                                          required="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityNo.mandatory}"
+                                          rows="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityNo.displayHeight}"
+                                          columns="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityNo.tooltip}">
+                              <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="NODONmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="OpportunityName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_NODOPPORTUNITYNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityName.label}"
+                                              id="ol1"/>
+                            </f:facet>
+                            <af:inputText id="cl1"
+                                          value="#{row.bindings.OpportunityName.inputValue}"
+                                          label="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityName.label}"
+                                          required="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityName.mandatory}"
+                                          rows="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityName.displayHeight}"
+                                          columns="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityName.displayWidth}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="NODONm"
+                                            text="#{row.bindings.OpportunityName.attributeValue}"
+                                            shortDesc="#{bindings.NewOpportunitiesDashboardTable.hints.OpportunityName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Opportunity"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Opp. - #{row.OpportunityName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="NODCSCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="CurrentStatus"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_NODCURRENTSTATUS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.NewOpportunitiesDashboardTable.hints.CurrentStatus.label}"
+                                              id="ol2"/>
+                            </f:facet>
+                            <af:selectOneChoice id="NODCS"
+                                                value="#{row.bindings.CurrentStatus.inputValue}"
+                                                label="#{bindings.NewOpportunitiesDashboardTable.hints.CurrentStatus.label}"
+                                                required="#{bindings.NewOpportunitiesDashboardTable.hints.CurrentStatus.mandatory}"
+                                                readOnly="true"
+                                                shortDesc="#{bindings.NewOpportunitiesDashboardTable.hints.CurrentStatus.tooltip}">
+                              <f:selectItems value="#{row.bindings.CurrentStatus.items}"/>
+                            </af:selectOneChoice>
+                          </af:column>
+                          <af:column id="NODAMCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountManager"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_NODACCOUNTMANAGER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.NewOpportunitiesDashboardTable.hints.AccountManager.label}"
+                                              id="ol3"/>
+                            </f:facet>
+                            <af:inputText id="NODAM"
+                                          value="#{row.bindings.AccountManager.inputValue}"
+                                          label="#{bindings.NewOpportunitiesDashboardTable.hints.AccountManager.label}"
+                                          required="#{bindings.NewOpportunitiesDashboardTable.hints.AccountManager.mandatory}"
+                                          rows="#{bindings.NewOpportunitiesDashboardTable.hints.AccountManager.displayHeight}"
+                                          columns="#{bindings.NewOpportunitiesDashboardTable.hints.AccountManager.displayWidth}"
+                                          maximumLength="101" readOnly="true"
+                                          shortDesc="#{bindings.NewOpportunitiesDashboardTable.hints.AccountManager.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountManager.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="NODANmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_NODACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.NewOpportunitiesDashboardTable.hints.AccountName.label}"
+                                              id="ol4"/>
+                            </f:facet>
+                            <af:inputText id="NODANm"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="#{bindings.NewOpportunitiesDashboardTable.hints.AccountName.label}"
+                                          required="#{bindings.NewOpportunitiesDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.NewOpportunitiesDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="#{bindings.NewOpportunitiesDashboardTable.hints.AccountName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.NewOpportunitiesDashboardTable.hints.AccountName.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="NODCDCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="CreatedDate"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_NODCREATEDDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.NewOpportunitiesDashboardTable.hints.CreatedDate.label}"
+                                              id="ol5"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                            id="id0">
+                                <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="NODCD"
+                                          value="#{row.bindings.CreatedDate.inputValue}"
+                                          label="#{bindings.NewOpportunitiesDashboardTable.hints.CreatedDate.label}"
+                                          required="#{bindings.NewOpportunitiesDashboardTable.hints.CreatedDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.NewOpportunitiesDashboardTable.hints.CreatedDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+            <af:panelBox text="#{nls['TABLE_TITLE_EXPIRINGTITLESDASHBOARD']}"
+                         id="ETDPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="ETDTopLc"
+                                     partialTriggers=" PMDTopLc qsAreaETDSearchOptions"
+                                     rendered="#{jhsUserRoles['PM']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g2">
+                    <af:panelGroupLayout id="modelSearchAreaETD"
+                                         rendered="#{!pageFlowScope.createModes.CreateExpiringTitlesDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaETDSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.ExpiringTitlesDashboardIteratorPMExpiringTitleDashboardViewCriteriaQuery.queryDescriptor}"
+                                     model="#{bindings.ExpiringTitlesDashboardIteratorPMExpiringTitleDashboardViewCriteriaQuery.queryModel}"
+                                     queryListener="#{bindings.ExpiringTitlesDashboardIteratorPMExpiringTitleDashboardViewCriteriaQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp4"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl2">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="ETDPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu4">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu5">
+                              <af:group id="ETDtbb"
+                                        rendered="#{ bindings.ExpiringTitlesDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstExpiringTitlesDashboard.execute}"
+                                                    id="ETDFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousExpiringTitlesDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="ETDPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextExpiringTitlesDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="ETDNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastExpiringTitlesDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="ETDLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi1">
+                              <af:exportCollectionActionListener exportedId="ETDTab"
+                                                                 type="excelHTML"
+                                                                 filename="ExpiringTitlesDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar1">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl2"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="ETDTab"
+                                                                 type="excelHTML"
+                                                                 filename="ExpiringTitlesDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="ETDPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.ExpiringTitlesDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="ETDTab" contentDelivery="immediate"
+                                  value="#{bindings.ExpiringTitlesDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.ExpiringTitlesDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.ExpiringTitlesDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.ExpiringTitlesDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.ExpiringTitlesDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.ExpiringTitlesDashboardIteratorPMExpiringTitleDashboardViewCriteriaQuery.processQuery}"
+                                  filterModel="#{bindings.ExpiringTitlesDashboardIteratorPMExpiringTitleDashboardViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.ExpiringTitlesDashboardTable.table}"
+                                  partialTriggers=":::qsAreaETDSearchOptions :::ETDPC ::ETDFirst ::ETDPrevious ::ETDNext ::ETDLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_EXPIRINGTITLESDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="ETDTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu6">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu7"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="ETDPrdIdCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="PrdId" rowHeader="false"
+                                     helpTopicId="RBH_ETDPRDID"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ExpiringTitlesDashboardTable.hints.PrdId.label}"
+                                              id="ol6"/>
+                            </f:facet>
+                            <af:inputText id="ETDPrdId"
+                                          value="#{row.bindings.PrdId.inputValue}"
+                                          label="#{bindings.ExpiringTitlesDashboardTable.hints.PrdId.label}"
+                                          required="#{bindings.ExpiringTitlesDashboardTable.hints.PrdId.mandatory}"
+                                          rows="#{bindings.ExpiringTitlesDashboardTable.hints.PrdId.displayHeight}"
+                                          columns="#{bindings.ExpiringTitlesDashboardTable.hints.PrdId.displayWidth}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.PrdId.tooltip}">
+                              <f:validator binding="#{row.bindings.PrdId.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.ExpiringTitlesDashboardTable.hints.PrdId.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ETDPNmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="ProductName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ETDPRODUCTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ExpiringTitlesDashboardTable.hints.ProductName.label}"
+                                              id="ol7"/>
+                            </f:facet>
+                            <af:inputText id="cl3"
+                                          value="#{row.bindings.ProductName.inputValue}"
+                                          label="#{bindings.ExpiringTitlesDashboardTable.hints.ProductName.label}"
+                                          required="#{bindings.ExpiringTitlesDashboardTable.hints.ProductName.mandatory}"
+                                          rows="#{bindings.ExpiringTitlesDashboardTable.hints.ProductName.displayHeight}"
+                                          columns="#{bindings.ExpiringTitlesDashboardTable.hints.ProductName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.ProductName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.ProductName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="ETDPNm"
+                                            text="#{row.bindings.ProductName.attributeValue}"
+                                            shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.ProductName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Products"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.ProductId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="#{row.ProductId}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.ProductId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueProducts}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="ETDTTNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="TargetTrackingNo"
+                                     align="right" rowHeader="false"
+                                     helpTopicId="RBH_ETDTARGETTRACKINGNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ExpiringTitlesDashboardTable.hints.TargetTrackingNo.label}"
+                                              id="ol8"/>
+                            </f:facet>
+                            <af:inputText id="ETDTTN"
+                                          value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                          label="#{bindings.ExpiringTitlesDashboardTable.hints.TargetTrackingNo.label}"
+                                          required="#{bindings.ExpiringTitlesDashboardTable.hints.TargetTrackingNo.mandatory}"
+                                          rows="#{bindings.ExpiringTitlesDashboardTable.hints.TargetTrackingNo.displayHeight}"
+                                          columns="#{bindings.ExpiringTitlesDashboardTable.hints.TargetTrackingNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.TargetTrackingNo.tooltip}">
+                              <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.ExpiringTitlesDashboardTable.hints.TargetTrackingNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ETDCaNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="CatalogNumber"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ETDCATALOGNUMBER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ExpiringTitlesDashboardTable.hints.CatalogNumber.label}"
+                                              id="ol9"/>
+                            </f:facet>
+                            <af:inputText id="cl4"
+                                          value="#{row.bindings.CatalogNumber.inputValue}"
+                                          label="#{bindings.ExpiringTitlesDashboardTable.hints.CatalogNumber.label}"
+                                          required="#{bindings.ExpiringTitlesDashboardTable.hints.CatalogNumber.mandatory}"
+                                          rows="#{bindings.ExpiringTitlesDashboardTable.hints.CatalogNumber.displayHeight}"
+                                          columns="#{bindings.ExpiringTitlesDashboardTable.hints.CatalogNumber.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.CatalogNumber.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="ETDCaN"
+                                            text="#{row.bindings.CatalogNumber.attributeValue}"
+                                            shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.CatalogNumber.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Titles"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.TitleId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Title - #{row.CatalogNumber}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.TitleId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="ETDTTlCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="LongTitle" rowHeader="false"
+                                     helpTopicId="RBH_ETDLONGTITLE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ExpiringTitlesDashboardTable.hints.LongTitle.label}"
+                                              id="ol10"/>
+                            </f:facet>
+                            <af:inputText id="ETDTTl"
+                                          value="#{row.bindings.LongTitle.inputValue}"
+                                          label="#{bindings.ExpiringTitlesDashboardTable.hints.LongTitle.label}"
+                                          required="#{bindings.ExpiringTitlesDashboardTable.hints.LongTitle.mandatory}"
+                                          rows="#{bindings.ExpiringTitlesDashboardTable.hints.LongTitle.displayHeight}"
+                                          columns="#{bindings.ExpiringTitlesDashboardTable.hints.LongTitle.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.LongTitle.tooltip}">
+                              <f:validator binding="#{row.bindings.LongTitle.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ETDCoNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="ContractNumber"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ETDCONTRACTNUMBER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ExpiringTitlesDashboardTable.hints.ContractNumber.label}"
+                                              id="ol11"/>
+                            </f:facet>
+                            <af:inputText id="cl5"
+                                          value="#{row.bindings.ContractNumber.inputValue}"
+                                          label="#{bindings.ExpiringTitlesDashboardTable.hints.ContractNumber.label}"
+                                          required="#{bindings.ExpiringTitlesDashboardTable.hints.ContractNumber.mandatory}"
+                                          rows="#{bindings.ExpiringTitlesDashboardTable.hints.ContractNumber.displayHeight}"
+                                          columns="#{bindings.ExpiringTitlesDashboardTable.hints.ContractNumber.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.ContractNumber.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.ContractNumber.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="ETDCoN"
+                                            text="#{row.bindings.ContractNumber.attributeValue}"
+                                            shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.ContractNumber.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Contract"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.ContractId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Contract - #{row.ContractNumber}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.ContractId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueContract}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="ETDExDCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="ExpirationDate"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ETDEXPIRATIONDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ExpiringTitlesDashboardTable.hints.ExpirationDate.label}"
+                                              id="ol12"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.ExpirationDate}"
+                                            id="id1">
+                                <af:convertDateTime pattern="#{nls.datepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="ETDExD"
+                                          value="#{row.bindings.ExpirationDate.inputValue}"
+                                          label="#{bindings.ExpiringTitlesDashboardTable.hints.ExpirationDate.label}"
+                                          required="#{bindings.ExpiringTitlesDashboardTable.hints.ExpirationDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.ExpiringTitlesDashboardTable.hints.ExpirationDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+            <af:panelBox text="#{nls['TABLE_TITLE_CONTENTEVALDASHBOARD']}"
+                         id="CEDPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="CEDTopLc"
+                                     partialTriggers=" PMDTopLc qsAreaCEDSearchOptions"
+                                     rendered="#{jhsUserRoles['PM']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g3">
+                    <af:panelGroupLayout id="modelSearchAreaCED"
+                                         rendered="#{!pageFlowScope.createModes.CreateContentEvalDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaCEDSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.ContentEvalDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryDescriptor}"
+                                     model="#{bindings.ContentEvalDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryModel}"
+                                     queryListener="#{bindings.ContentEvalDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp5"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl3">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="CEDPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu8">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu9">
+                              <af:group id="CEDtbb"
+                                        rendered="#{ bindings.ContentEvalDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstContentEvalDashboard.execute}"
+                                                    id="CEDFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousContentEvalDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="CEDPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextContentEvalDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="CEDNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastContentEvalDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="CEDLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi2">
+                              <af:exportCollectionActionListener exportedId="CEDTab"
+                                                                 type="excelHTML"
+                                                                 filename="ContentEvalDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar2">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl6"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="CEDTab"
+                                                                 type="excelHTML"
+                                                                 filename="ContentEvalDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="CEDPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.ContentEvalDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="CEDTab" contentDelivery="immediate"
+                                  value="#{bindings.ContentEvalDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.ContentEvalDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.ContentEvalDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.ContentEvalDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.ContentEvalDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.ContentEvalDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.processQuery}"
+                                  filterModel="#{bindings.ContentEvalDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.ContentEvalDashboardTable.table}"
+                                  partialTriggers=":::qsAreaCEDSearchOptions :::CEDPC ::CEDFirst ::CEDPrevious ::CEDNext ::CEDLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_CONTENTEVALDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="CEDTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu10">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu11"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="CEDTTNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="TargetTrackingNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_CEDTARGETTRACKINGNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.TargetTrackingNo.label}"
+                                              id="ol13"/>
+                            </f:facet>
+                            <af:inputText id="cl7"
+                                          value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.TargetTrackingNo.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.TargetTrackingNo.mandatory}"
+                                          rows="#{bindings.ContentEvalDashboardTable.hints.TargetTrackingNo.displayHeight}"
+                                          columns="#{bindings.ContentEvalDashboardTable.hints.TargetTrackingNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.TargetTrackingNo.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.ContentEvalDashboardTable.hints.TargetTrackingNo.format}"/>
+                            </af:inputText>
+                            <af:commandLink id="CEDTTN"
+                                            text="#{row.bindings.TargetTrackingNo.attributeValue}"
+                                            shortDesc="#{bindings.ContentEvalDashboardTable.hints.TargetTrackingNo.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Titles"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Title - #{row.TargetTrackingNo}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="CEDCaNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="CatalogNumber"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_CEDCATALOGNUMBER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.CatalogNumber.label}"
+                                              id="ol14"/>
+                            </f:facet>
+                            <af:inputText id="CEDCaN"
+                                          value="#{row.bindings.CatalogNumber.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.CatalogNumber.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.CatalogNumber.mandatory}"
+                                          rows="#{bindings.ContentEvalDashboardTable.hints.CatalogNumber.displayHeight}"
+                                          columns="#{bindings.ContentEvalDashboardTable.hints.CatalogNumber.displayWidth}"
+                                          maximumLength="40" readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.CatalogNumber.tooltip}">
+                              <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="CEDTtlCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="Title" rowHeader="false"
+                                     helpTopicId="RBH_CEDTITLE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.Title.label}"
+                                              id="ol15"/>
+                            </f:facet>
+                            <af:inputText id="CEDTtl"
+                                          value="#{row.bindings.Title.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.Title.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.Title.mandatory}"
+                                          rows="#{bindings.ContentEvalDashboardTable.hints.Title.displayHeight}"
+                                          columns="#{bindings.ContentEvalDashboardTable.hints.Title.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.Title.tooltip}">
+                              <f:validator binding="#{row.bindings.Title.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="CEDADCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AddedDate" rowHeader="false"
+                                     helpTopicId="RBH_CEDADDEDDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.AddedDate.label}"
+                                              id="ol16"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                            id="id2">
+                                <af:convertDateTime pattern="#{nls.datepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="CEDAD"
+                                          value="#{row.bindings.AddedDate.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.AddedDate.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.AddedDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.AddedDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                          <af:column id="CEDGNmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="GroupName" rowHeader="false"
+                                     helpTopicId="RBH_CEDGROUPNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.GroupName.label}"
+                                              id="ol17"/>
+                            </f:facet>
+                            <af:inputText id="cl8"
+                                          value="#{row.bindings.GroupName.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.GroupName.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.GroupName.mandatory}"
+                                          rows="#{bindings.ContentEvalDashboardTable.hints.GroupName.displayHeight}"
+                                          columns="#{bindings.ContentEvalDashboardTable.hints.GroupName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.GroupName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.GroupName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="CEDGNm"
+                                            text="#{row.bindings.GroupName.attributeValue}"
+                                            shortDesc="#{bindings.ContentEvalDashboardTable.hints.GroupName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Targeting"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.GroupId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="#{row.GroupName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.GroupId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTargeting}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="CEDAccountNoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AccountNo" align="right"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_CEDACCOUNTNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.AccountNo.label}"
+                                              id="ol18"/>
+                            </f:facet>
+                            <af:inputText id="CEDAccountNo"
+                                          value="#{row.bindings.AccountNo.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.AccountNo.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.AccountNo.mandatory}"
+                                          rows="#{bindings.ContentEvalDashboardTable.hints.AccountNo.displayHeight}"
+                                          columns="#{bindings.ContentEvalDashboardTable.hints.AccountNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.AccountNo.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.ContentEvalDashboardTable.hints.AccountNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="CEDAccountNameCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_CEDACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.AccountName.label}"
+                                              id="ol19"/>
+                            </f:facet>
+                            <af:inputText id="cl9"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.AccountName.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.ContentEvalDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="#{bindings.ContentEvalDashboardTable.hints.AccountName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.AccountName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="CEDAccountName"
+                                            text="#{row.bindings.AccountName.attributeValue}"
+                                            shortDesc="#{bindings.ContentEvalDashboardTable.hints.AccountName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Accounts"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Account - #{row.AccountNo}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="CEDOpenAccessCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="OpenAccess" rowHeader="false"
+                                     helpTopicId="RBH_CEDOPENACCESS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.OpenAccess.label}"
+                                              id="ol20"/>
+                            </f:facet>
+                            <af:inputText id="CEDOpenAccess"
+                                          value="#{row.bindings.OpenAccess.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.OpenAccess.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.OpenAccess.mandatory}"
+                                          rows="#{bindings.ContentEvalDashboardTable.hints.OpenAccess.displayHeight}"
+                                          columns="#{bindings.ContentEvalDashboardTable.hints.OpenAccess.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.OpenAccess.tooltip}">
+                              <f:validator binding="#{row.bindings.OpenAccess.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="CEDExternalIndexesCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="ExternalIndexes"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_CEDEXTERNALINDEXES"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ContentEvalDashboardTable.hints.ExternalIndexes.label}"
+                                              id="ol21"/>
+                            </f:facet>
+                            <af:inputText id="CEDExternalIndexes"
+                                          value="#{row.bindings.ExternalIndexes.inputValue}"
+                                          label="#{bindings.ContentEvalDashboardTable.hints.ExternalIndexes.label}"
+                                          required="#{bindings.ContentEvalDashboardTable.hints.ExternalIndexes.mandatory}"
+                                          rows="#{bindings.ContentEvalDashboardTable.hints.ExternalIndexes.displayHeight}"
+                                          columns="#{bindings.ContentEvalDashboardTable.hints.ExternalIndexes.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.ContentEvalDashboardTable.hints.ExternalIndexes.tooltip}">
+                              <f:validator binding="#{row.bindings.ExternalIndexes.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+            <af:panelBox text="#{nls['TABLE_TITLE_AUTOADDDASHBOARD']}"
+                         id="AADPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="AADTopLc"
+                                     partialTriggers=" PMDTopLc qsAreaAADSearchOptions"
+                                     rendered="#{jhsUserRoles['PM']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g4">
+                    <af:panelGroupLayout id="modelSearchAreaAAD"
+                                         rendered="#{!pageFlowScope.createModes.CreateAutoAddDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaAADSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.AutoAddDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryDescriptor}"
+                                     model="#{bindings.AutoAddDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryModel}"
+                                     queryListener="#{bindings.AutoAddDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp6"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl4">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="AADPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu12">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu13">
+                              <af:group id="AADtbb"
+                                        rendered="#{ bindings.AutoAddDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstAutoAddDashboard.execute}"
+                                                    id="AADFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousAutoAddDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="AADPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextAutoAddDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="AADNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastAutoAddDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="AADLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi3">
+                              <af:exportCollectionActionListener exportedId="AADTab"
+                                                                 type="excelHTML"
+                                                                 filename="AutoAddDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar3">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl10"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="AADTab"
+                                                                 type="excelHTML"
+                                                                 filename="AutoAddDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="AADPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.AutoAddDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="AADTab" contentDelivery="immediate"
+                                  value="#{bindings.AutoAddDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.AutoAddDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.AutoAddDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.AutoAddDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.AutoAddDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.AutoAddDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.processQuery}"
+                                  filterModel="#{bindings.AutoAddDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.AutoAddDashboardTable.table}"
+                                  partialTriggers=":::qsAreaAADSearchOptions :::AADPC ::AADFirst ::AADPrevious ::AADNext ::AADLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_AUTOADDDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="AADTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu14">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu15"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="AADTTNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="TargetTrackingNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AADTARGETTRACKINGNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.TargetTrackingNo.label}"
+                                              id="ol22"/>
+                            </f:facet>
+                            <af:inputText id="cl11"
+                                          value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.TargetTrackingNo.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.TargetTrackingNo.mandatory}"
+                                          rows="#{bindings.AutoAddDashboardTable.hints.TargetTrackingNo.displayHeight}"
+                                          columns="#{bindings.AutoAddDashboardTable.hints.TargetTrackingNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.TargetTrackingNo.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.AutoAddDashboardTable.hints.TargetTrackingNo.format}"/>
+                            </af:inputText>
+                            <af:commandLink id="AADTTN"
+                                            text="#{row.bindings.TargetTrackingNo.attributeValue}"
+                                            shortDesc="#{bindings.AutoAddDashboardTable.hints.TargetTrackingNo.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Titles"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Title - #{row.TargetTrackingNo}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AADCaNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="CatalogNumber"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AADCATALOGNUMBER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.CatalogNumber.label}"
+                                              id="ol23"/>
+                            </f:facet>
+                            <af:inputText id="AADCaN"
+                                          value="#{row.bindings.CatalogNumber.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.CatalogNumber.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.CatalogNumber.mandatory}"
+                                          rows="#{bindings.AutoAddDashboardTable.hints.CatalogNumber.displayHeight}"
+                                          columns="#{bindings.AutoAddDashboardTable.hints.CatalogNumber.displayWidth}"
+                                          maximumLength="40" readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.CatalogNumber.tooltip}">
+                              <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AADTtlCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="Title" rowHeader="false"
+                                     helpTopicId="RBH_AADTITLE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.Title.label}"
+                                              id="ol24"/>
+                            </f:facet>
+                            <af:inputText id="AADTtl"
+                                          value="#{row.bindings.Title.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.Title.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.Title.mandatory}"
+                                          rows="#{bindings.AutoAddDashboardTable.hints.Title.displayHeight}"
+                                          columns="#{bindings.AutoAddDashboardTable.hints.Title.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.Title.tooltip}">
+                              <f:validator binding="#{row.bindings.Title.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AADADCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AddedDate" rowHeader="false"
+                                     helpTopicId="RBH_AADADDEDDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.AddedDate.label}"
+                                              id="ol25"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                            id="id3">
+                                <af:convertDateTime pattern="#{nls.datepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="AADAD"
+                                          value="#{row.bindings.AddedDate.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.AddedDate.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.AddedDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.AddedDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                          <af:column id="AADGNmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="GroupName" rowHeader="false"
+                                     helpTopicId="RBH_AADGROUPNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.GroupName.label}"
+                                              id="ol26"/>
+                            </f:facet>
+                            <af:inputText id="cl12"
+                                          value="#{row.bindings.GroupName.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.GroupName.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.GroupName.mandatory}"
+                                          rows="#{bindings.AutoAddDashboardTable.hints.GroupName.displayHeight}"
+                                          columns="#{bindings.AutoAddDashboardTable.hints.GroupName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.GroupName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.GroupName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="AADGNm"
+                                            text="#{row.bindings.GroupName.attributeValue}"
+                                            shortDesc="#{bindings.AutoAddDashboardTable.hints.GroupName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Targeting"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.GroupId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="#{row.GroupName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.GroupId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTargeting}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AADAccountNoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AccountNo" align="right"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AADACCOUNTNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.AccountNo.label}"
+                                              id="ol27"/>
+                            </f:facet>
+                            <af:inputText id="AADAccountNo"
+                                          value="#{row.bindings.AccountNo.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.AccountNo.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.AccountNo.mandatory}"
+                                          rows="#{bindings.AutoAddDashboardTable.hints.AccountNo.displayHeight}"
+                                          columns="#{bindings.AutoAddDashboardTable.hints.AccountNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.AccountNo.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.AutoAddDashboardTable.hints.AccountNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AADAccountNameCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AADACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.AccountName.label}"
+                                              id="ol28"/>
+                            </f:facet>
+                            <af:inputText id="cl13"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.AccountName.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.AutoAddDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="#{bindings.AutoAddDashboardTable.hints.AccountName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.AccountName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="AADAccountName"
+                                            text="#{row.bindings.AccountName.attributeValue}"
+                                            shortDesc="#{bindings.AutoAddDashboardTable.hints.AccountName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Accounts"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Account - #{row.AccountNo}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AADOpenAccessCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="OpenAccess" rowHeader="false"
+                                     helpTopicId="RBH_AADOPENACCESS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.OpenAccess.label}"
+                                              id="ol29"/>
+                            </f:facet>
+                            <af:inputText id="AADOpenAccess"
+                                          value="#{row.bindings.OpenAccess.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.OpenAccess.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.OpenAccess.mandatory}"
+                                          rows="#{bindings.AutoAddDashboardTable.hints.OpenAccess.displayHeight}"
+                                          columns="#{bindings.AutoAddDashboardTable.hints.OpenAccess.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.OpenAccess.tooltip}">
+                              <f:validator binding="#{row.bindings.OpenAccess.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AADExternalIndexesCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="ExternalIndexes"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AADEXTERNALINDEXES"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AutoAddDashboardTable.hints.ExternalIndexes.label}"
+                                              id="ol30"/>
+                            </f:facet>
+                            <af:inputText id="AADExternalIndexes"
+                                          value="#{row.bindings.ExternalIndexes.inputValue}"
+                                          label="#{bindings.AutoAddDashboardTable.hints.ExternalIndexes.label}"
+                                          required="#{bindings.AutoAddDashboardTable.hints.ExternalIndexes.mandatory}"
+                                          rows="#{bindings.AutoAddDashboardTable.hints.ExternalIndexes.displayHeight}"
+                                          columns="#{bindings.AutoAddDashboardTable.hints.ExternalIndexes.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.AutoAddDashboardTable.hints.ExternalIndexes.tooltip}">
+                              <f:validator binding="#{row.bindings.ExternalIndexes.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+            <af:panelBox text="#{nls['TABLE_TITLE_AANDIDASHBOARD']}" id="AIDPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="AIDTopLc"
+                                     partialTriggers=" PMDTopLc qsAreaAIDSearchOptions"
+                                     rendered="#{jhsUserRoles['PM']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g5">
+                    <af:panelGroupLayout id="modelSearchAreaAID"
+                                         rendered="#{!pageFlowScope.createModes.CreateAAndIDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaAIDSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.AAndIDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryDescriptor}"
+                                     model="#{bindings.AAndIDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryModel}"
+                                     queryListener="#{bindings.AAndIDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp7"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl5">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="AIDPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu16">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu17">
+                              <af:group id="AIDtbb"
+                                        rendered="#{ bindings.AAndIDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstAAndIDashboard.execute}"
+                                                    id="AIDFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousAAndIDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="AIDPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextAAndIDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="AIDNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastAAndIDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="AIDLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi4">
+                              <af:exportCollectionActionListener exportedId="AIDTab"
+                                                                 type="excelHTML"
+                                                                 filename="AAndIDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar4">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl14"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="AIDTab"
+                                                                 type="excelHTML"
+                                                                 filename="AAndIDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="AIDPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.AAndIDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="AIDTab" contentDelivery="immediate"
+                                  value="#{bindings.AAndIDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.AAndIDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.AAndIDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.AAndIDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.AAndIDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.AAndIDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.processQuery}"
+                                  filterModel="#{bindings.AAndIDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.AAndIDashboardTable.table}"
+                                  partialTriggers=":::qsAreaAIDSearchOptions :::AIDPC ::AIDFirst ::AIDPrevious ::AIDNext ::AIDLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_AANDIDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="AIDTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu18">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu19"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="AIDTTNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="TargetTrackingNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AIDTARGETTRACKINGNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.TargetTrackingNo.label}"
+                                              id="ol31"/>
+                            </f:facet>
+                            <af:inputText id="cl15"
+                                          value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.TargetTrackingNo.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.TargetTrackingNo.mandatory}"
+                                          rows="#{bindings.AAndIDashboardTable.hints.TargetTrackingNo.displayHeight}"
+                                          columns="#{bindings.AAndIDashboardTable.hints.TargetTrackingNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.TargetTrackingNo.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.AAndIDashboardTable.hints.TargetTrackingNo.format}"/>
+                            </af:inputText>
+                            <af:commandLink id="AIDTTN"
+                                            text="#{row.bindings.TargetTrackingNo.attributeValue}"
+                                            shortDesc="#{bindings.AAndIDashboardTable.hints.TargetTrackingNo.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Titles"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Title - #{row.TargetTrackingNo}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AIDCaNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="CatalogNumber"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AIDCATALOGNUMBER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.CatalogNumber.label}"
+                                              id="ol32"/>
+                            </f:facet>
+                            <af:inputText id="AIDCaN"
+                                          value="#{row.bindings.CatalogNumber.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.CatalogNumber.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.CatalogNumber.mandatory}"
+                                          rows="#{bindings.AAndIDashboardTable.hints.CatalogNumber.displayHeight}"
+                                          columns="#{bindings.AAndIDashboardTable.hints.CatalogNumber.displayWidth}"
+                                          maximumLength="40" readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.CatalogNumber.tooltip}">
+                              <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AIDTtlCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="Title" rowHeader="false"
+                                     helpTopicId="RBH_AIDTITLE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.Title.label}"
+                                              id="ol33"/>
+                            </f:facet>
+                            <af:inputText id="AIDTtl"
+                                          value="#{row.bindings.Title.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.Title.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.Title.mandatory}"
+                                          rows="#{bindings.AAndIDashboardTable.hints.Title.displayHeight}"
+                                          columns="#{bindings.AAndIDashboardTable.hints.Title.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.Title.tooltip}">
+                              <f:validator binding="#{row.bindings.Title.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AIDADCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AddedDate" rowHeader="false"
+                                     helpTopicId="RBH_AIDADDEDDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.AddedDate.label}"
+                                              id="ol34"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                            id="id4">
+                                <af:convertDateTime pattern="#{nls.datepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="AIDAD"
+                                          value="#{row.bindings.AddedDate.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.AddedDate.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.AddedDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.AddedDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                          <af:column id="AIDGNmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="GroupName" rowHeader="false"
+                                     helpTopicId="RBH_AIDGROUPNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.GroupName.label}"
+                                              id="ol35"/>
+                            </f:facet>
+                            <af:inputText id="cl16"
+                                          value="#{row.bindings.GroupName.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.GroupName.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.GroupName.mandatory}"
+                                          rows="#{bindings.AAndIDashboardTable.hints.GroupName.displayHeight}"
+                                          columns="#{bindings.AAndIDashboardTable.hints.GroupName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.GroupName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.GroupName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="AIDGNm"
+                                            text="#{row.bindings.GroupName.attributeValue}"
+                                            shortDesc="#{bindings.AAndIDashboardTable.hints.GroupName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Targeting"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.GroupId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="#{row.GroupName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.GroupId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTargeting}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AIDAccountNoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AccountNo" align="right"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AIDACCOUNTNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.AccountNo.label}"
+                                              id="ol36"/>
+                            </f:facet>
+                            <af:inputText id="AIDAccountNo"
+                                          value="#{row.bindings.AccountNo.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.AccountNo.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.AccountNo.mandatory}"
+                                          rows="#{bindings.AAndIDashboardTable.hints.AccountNo.displayHeight}"
+                                          columns="#{bindings.AAndIDashboardTable.hints.AccountNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.AccountNo.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.AAndIDashboardTable.hints.AccountNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AIDAccountNameCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AIDACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.AccountName.label}"
+                                              id="ol37"/>
+                            </f:facet>
+                            <af:inputText id="cl17"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.AccountName.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.AAndIDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="#{bindings.AAndIDashboardTable.hints.AccountName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.AccountName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="AIDAccountName"
+                                            text="#{row.bindings.AccountName.attributeValue}"
+                                            shortDesc="#{bindings.AAndIDashboardTable.hints.AccountName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Accounts"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Account - #{row.AccountNo}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AIDOpenAccessCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="OpenAccess" rowHeader="false"
+                                     helpTopicId="RBH_AIDOPENACCESS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.OpenAccess.label}"
+                                              id="ol38"/>
+                            </f:facet>
+                            <af:inputText id="AIDOpenAccess"
+                                          value="#{row.bindings.OpenAccess.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.OpenAccess.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.OpenAccess.mandatory}"
+                                          rows="#{bindings.AAndIDashboardTable.hints.OpenAccess.displayHeight}"
+                                          columns="#{bindings.AAndIDashboardTable.hints.OpenAccess.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.OpenAccess.tooltip}">
+                              <f:validator binding="#{row.bindings.OpenAccess.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AIDExternalIndexesCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="ExternalIndexes"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_AIDEXTERNALINDEXES"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AAndIDashboardTable.hints.ExternalIndexes.label}"
+                                              id="ol39"/>
+                            </f:facet>
+                            <af:inputText id="AIDExternalIndexes"
+                                          value="#{row.bindings.ExternalIndexes.inputValue}"
+                                          label="#{bindings.AAndIDashboardTable.hints.ExternalIndexes.label}"
+                                          required="#{bindings.AAndIDashboardTable.hints.ExternalIndexes.mandatory}"
+                                          rows="#{bindings.AAndIDashboardTable.hints.ExternalIndexes.displayHeight}"
+                                          columns="#{bindings.AAndIDashboardTable.hints.ExternalIndexes.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.AAndIDashboardTable.hints.ExternalIndexes.tooltip}">
+                              <f:validator binding="#{row.bindings.ExternalIndexes.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+            <af:panelBox text="#{nls['TABLE_TITLE_OTHERDASHBOARD']}" id="OEDPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="OEDTopLc"
+                                     partialTriggers=" PMDTopLc qsAreaOEDSearchOptions"
+                                     rendered="#{jhsUserRoles['PM']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g6">
+                    <af:panelGroupLayout id="modelSearchAreaOED"
+                                         rendered="#{!pageFlowScope.createModes.CreateOtherDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaOEDSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.OtherDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryDescriptor}"
+                                     model="#{bindings.OtherDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryModel}"
+                                     queryListener="#{bindings.OtherDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp8"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl6">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="OEDPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu20">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu21">
+                              <af:group id="OEDtbb"
+                                        rendered="#{ bindings.OtherDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstOtherDashboard.execute}"
+                                                    id="OEDFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousOtherDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="OEDPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextOtherDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="OEDNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastOtherDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="OEDLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi5">
+                              <af:exportCollectionActionListener exportedId="OEDTab"
+                                                                 type="excelHTML"
+                                                                 filename="OtherDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar5">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl18"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="OEDTab"
+                                                                 type="excelHTML"
+                                                                 filename="OtherDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="OEDPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.OtherDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="OEDTab" contentDelivery="immediate"
+                                  value="#{bindings.OtherDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.OtherDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.OtherDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.OtherDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.OtherDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.OtherDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.processQuery}"
+                                  filterModel="#{bindings.OtherDashboardIteratorPMContentEvalDashboardViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.OtherDashboardTable.table}"
+                                  partialTriggers=":::qsAreaOEDSearchOptions :::OEDPC ::OEDFirst ::OEDPrevious ::OEDNext ::OEDLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_OTHERDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="OEDTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu22">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu23"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="OEDTTNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="TargetTrackingNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_OEDTARGETTRACKINGNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.TargetTrackingNo.label}"
+                                              id="ol40"/>
+                            </f:facet>
+                            <af:inputText id="cl19"
+                                          value="#{row.bindings.TargetTrackingNo.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.TargetTrackingNo.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.TargetTrackingNo.mandatory}"
+                                          rows="#{bindings.OtherDashboardTable.hints.TargetTrackingNo.displayHeight}"
+                                          columns="#{bindings.OtherDashboardTable.hints.TargetTrackingNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.TargetTrackingNo.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.TargetTrackingNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.OtherDashboardTable.hints.TargetTrackingNo.format}"/>
+                            </af:inputText>
+                            <af:commandLink id="OEDTTN"
+                                            text="#{row.bindings.TargetTrackingNo.attributeValue}"
+                                            shortDesc="#{bindings.OtherDashboardTable.hints.TargetTrackingNo.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Titles"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Title - #{row.TargetTrackingNo}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTitles}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="OEDCaNCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="CatalogNumber"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_OEDCATALOGNUMBER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.CatalogNumber.label}"
+                                              id="ol41"/>
+                            </f:facet>
+                            <af:inputText id="OEDCaN"
+                                          value="#{row.bindings.CatalogNumber.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.CatalogNumber.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.CatalogNumber.mandatory}"
+                                          rows="#{bindings.OtherDashboardTable.hints.CatalogNumber.displayHeight}"
+                                          columns="#{bindings.OtherDashboardTable.hints.CatalogNumber.displayWidth}"
+                                          maximumLength="40" readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.CatalogNumber.tooltip}">
+                              <f:validator binding="#{row.bindings.CatalogNumber.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="OEDTtlCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="Title" rowHeader="false"
+                                     helpTopicId="RBH_OEDTITLE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.Title.label}"
+                                              id="ol42"/>
+                            </f:facet>
+                            <af:inputText id="OEDTtl"
+                                          value="#{row.bindings.Title.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.Title.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.Title.mandatory}"
+                                          rows="#{bindings.OtherDashboardTable.hints.Title.displayHeight}"
+                                          columns="#{bindings.OtherDashboardTable.hints.Title.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.Title.tooltip}">
+                              <f:validator binding="#{row.bindings.Title.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="OEDADCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AddedDate" rowHeader="false"
+                                     helpTopicId="RBH_OEDADDEDDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.AddedDate.label}"
+                                              id="ol43"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.AddedDate}"
+                                            id="id5">
+                                <af:convertDateTime pattern="#{nls.datepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="OEDAD"
+                                          value="#{row.bindings.AddedDate.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.AddedDate.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.AddedDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.AddedDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                          <af:column id="OEDGNmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="GroupName" rowHeader="false"
+                                     helpTopicId="RBH_OEDGROUPNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.GroupName.label}"
+                                              id="ol44"/>
+                            </f:facet>
+                            <af:inputText id="cl20"
+                                          value="#{row.bindings.GroupName.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.GroupName.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.GroupName.mandatory}"
+                                          rows="#{bindings.OtherDashboardTable.hints.GroupName.displayHeight}"
+                                          columns="#{bindings.OtherDashboardTable.hints.GroupName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.GroupName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.GroupName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="OEDGNm"
+                                            text="#{row.bindings.GroupName.attributeValue}"
+                                            shortDesc="#{bindings.OtherDashboardTable.hints.GroupName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Targeting"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.GroupId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="#{row.GroupName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.GroupId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueTargeting}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="OEDAccountNoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AccountNo" align="right"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_OEDACCOUNTNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.AccountNo.label}"
+                                              id="ol45"/>
+                            </f:facet>
+                            <af:inputText id="OEDAccountNo"
+                                          value="#{row.bindings.AccountNo.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.AccountNo.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.AccountNo.mandatory}"
+                                          rows="#{bindings.OtherDashboardTable.hints.AccountNo.displayHeight}"
+                                          columns="#{bindings.OtherDashboardTable.hints.AccountNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.AccountNo.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.OtherDashboardTable.hints.AccountNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="OEDAccountNameCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_OEDACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.AccountName.label}"
+                                              id="ol46"/>
+                            </f:facet>
+                            <af:inputText id="cl21"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.AccountName.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.OtherDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="#{bindings.OtherDashboardTable.hints.AccountName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.AccountName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="OEDAccountName"
+                                            text="#{row.bindings.AccountName.attributeValue}"
+                                            shortDesc="#{bindings.OtherDashboardTable.hints.AccountName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Accounts"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Account - #{row.AccountNo}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="OEDOpenAccessCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="OpenAccess" rowHeader="false"
+                                     helpTopicId="RBH_OEDOPENACCESS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.OpenAccess.label}"
+                                              id="ol47"/>
+                            </f:facet>
+                            <af:inputText id="OEDOpenAccess"
+                                          value="#{row.bindings.OpenAccess.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.OpenAccess.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.OpenAccess.mandatory}"
+                                          rows="#{bindings.OtherDashboardTable.hints.OpenAccess.displayHeight}"
+                                          columns="#{bindings.OtherDashboardTable.hints.OpenAccess.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.OpenAccess.tooltip}">
+                              <f:validator binding="#{row.bindings.OpenAccess.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="OEDExternalIndexesCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="ExternalIndexes"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_OEDEXTERNALINDEXES"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.OtherDashboardTable.hints.ExternalIndexes.label}"
+                                              id="ol48"/>
+                            </f:facet>
+                            <af:inputText id="OEDExternalIndexes"
+                                          value="#{row.bindings.ExternalIndexes.inputValue}"
+                                          label="#{bindings.OtherDashboardTable.hints.ExternalIndexes.label}"
+                                          required="#{bindings.OtherDashboardTable.hints.ExternalIndexes.mandatory}"
+                                          rows="#{bindings.OtherDashboardTable.hints.ExternalIndexes.displayHeight}"
+                                          columns="#{bindings.OtherDashboardTable.hints.ExternalIndexes.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.OtherDashboardTable.hints.ExternalIndexes.tooltip}">
+                              <f:validator binding="#{row.bindings.ExternalIndexes.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+          </af:panelDashboard>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

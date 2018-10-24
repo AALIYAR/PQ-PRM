@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<menu xmlns="http://myfaces.apache.org/trinidad/menu">
+    <itemNode id="AMDashboardMI" label="AM Dashboard"
+              action="uishell:AMDashboard" focusViewId="AMDashboard"
+              rendered="#{jhsUserRoles['AM, AST']}"></itemNode>
+    <itemNode id="PMDashboardMI" label="PM Dashboard"
+              action="uishell:PMDashboard" focusViewId="PMDashboard"
+              rendered="#{jhsUserRoles['PM']}"></itemNode>
+    <itemNode id="GCADashboardMI" label="GCA Dashboard"
+              action="uishell:GCADashboard" focusViewId="GCADashboard"
+              rendered="#{jhsUserRoles['GCA']}"></itemNode>
+    <itemNode id="AccountsMI" label="Accounts" action="uishell:Accounts"
+              focusViewId="Accounts"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO, BSSRO']}"></itemNode>
+    <itemNode id="ContactsMI" label="Contacts" action="uishell:Contacts"
+              focusViewId="Contacts"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}"></itemNode>
+    <itemNode id="OpportunityMI" label="Opportunities"
+              action="uishell:Opportunity" focusViewId="Opportunity"
+              rendered="#{jhsUserRoles['AM, AST, GCA, ADMIN, PM, RO']}"></itemNode>
+    <itemNode id="ContractMI" label="Contracts" action="uishell:Contract"
+              focusViewId="Contract"
+              rendered="#{jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO, BSSRO']}"></itemNode>
+    <itemNode id="TargetingMI" label="Targeting" action="uishell:Targeting"
+              focusViewId="Targeting"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN']}"></itemNode>
+    <itemNode id="ProductsMI" label="Products" action="uishell:Products"
+              focusViewId="Products"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO, PA']}"></itemNode>
+    <itemNode id="TitlesMI" label="Titles" action="uishell:Titles"
+              focusViewId="Titles"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}"></itemNode>
+    <itemNode id="UlrichsMI" label="Ulrichs" action="uishell:Ulrichs"
+              focusViewId="Ulrichs"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}"></itemNode>
+    <itemNode id="UnifiedTitleSearchMI" label="Unified Search"
+              action="uishell:UnifiedTitleSearch"
+              focusViewId="UnifiedTitleSearch"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}"></itemNode>
+    <itemNode id="CampaignsMI" label="Campaigns" action="uishell:Campaigns"
+              focusViewId="Campaigns"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}"></itemNode>
+    <itemNode id="AccountManagersMI" label="AM/PM/AST Mgmt"
+              action="uishell:AccountManagers" focusViewId="AccountManagers"
+              rendered="#{jhsUserRoles['AST, GCA, ADMIN']}"></itemNode>
+    <itemNode id="EventsMI" label="Events" action="uishell:Events"
+              focusViewId="Events"
+              rendered="#{jhsUserRoles['AM, PM, GCA, AST, ADMIN, RO']}"></itemNode>
+    <itemNode id="ActivitiesMI" label="Activities" action="uishell:Activities"
+              focusViewId="Activities"
+              rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO']}"></itemNode>
+    <itemNode id="ImportsMI" label="Imports" action="uishell:Imports"
+              focusViewId="Imports"
+              rendered="#{jhsUserRoles['PI, ADMIN, AM, AST, PM']}"></itemNode>
+</menu>

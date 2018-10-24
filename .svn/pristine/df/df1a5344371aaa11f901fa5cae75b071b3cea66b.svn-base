@@ -1,0 +1,802 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="AccTopLc"
+                             partialTriggers=" AccCancelButton0 asAreaAccSearchOptions qsAreaAccSearchOptions"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN, RO, BSSRO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_ACCOUNTS']}"
+                          helpTopicId="RBH_ACCOUNTS">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0">
+                    <af:commandButton actionListener="#{CreateAccounts.execute}"
+                                      action="CreateAcc"
+                                      textAndAccessKey="#{nls['NEW_BUTTON_LABEL_ACCOUNTS']}"
+                                      rendered="#{(true) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                      id="AccNewButton"></af:commandButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="AccCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:panelGroupLayout id="modelSearchAreaAcc"
+                                 rendered="#{!pageFlowScope.createModes.CreateAccounts and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreaAccSearchOptions:qsButtonAcc qsAreaAccSearchOptions:asButtonAcc ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreaAccSearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.AccountsIteratorTraxContentOwnerViewCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.AccountsIteratorTraxContentOwnerViewCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.AccountsIteratorTraxContentOwnerViewCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.AccountsIteratorTraxContentOwnerViewCriteriaQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchAccounts.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonAcc"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchAccounts.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreaAccSearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.AccountsIteratorTraxContentOwnerQuickQueryQuery.queryDescriptor}"
+                             model="#{bindings.AccountsIteratorTraxContentOwnerQuickQueryQuery.queryModel}"
+                             queryListener="#{bindings.AccountsIteratorTraxContentOwnerQuickQueryQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchAccounts.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonAcc"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchAccounts.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="AccPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="AccountsDetails"></af:commandMenuItem>
+                    <af:group id="Acctbb"
+                              rendered="#{ (bindings.AccountsIterator.viewObject!=null and bindings.AccountsIterator.viewObject.currentRow!=null)}">
+                      <af:commandMenuItem actionListener="#{bindings.FirstAccounts.execute}"
+                                          id="AccFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousAccounts.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="AccPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextAccounts.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="AccNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastAccounts.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="AccLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="AccTab"
+                                                       type="excelHTML"
+                                                       filename="Accounts.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="AccTab"
+                                                       type="excelHTML"
+                                                       filename="Accounts.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="AccPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.AccountsIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="AccTab" contentDelivery="immediate"
+                        value="#{bindings.AccountsTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.AccountsTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.AccountsTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.AccountsTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.AccountsTable.rangeSize}"
+                        autoHeightRows="#{bindings.AccountsTable.estimatedRowCount}"
+                        fetchSize="#{bindings.AccountsTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.AccountsIteratorTraxContentOwnerQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.AccountsIteratorTraxContentOwnerQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.AccountsTable.table}"
+                        partialTriggers=":::qsAreaAccSearchOptions :::asAreaAccSearchOptions :::AccPC ::AccFirst ::AccPrevious ::AccNext ::AccLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_ACCOUNTS']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="AccTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="AccountsDetails"></af:commandMenuItem>
+                      </af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="AccCONCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ContentOwnerNo" rowHeader="false"
+                           helpTopicId="RBH_ACCCONTENTOWNERNO"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.ContentOwnerNo.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="AccCON"
+                                value="#{row.bindings.ContentOwnerNo.inputValue}"
+                                label="#{bindings.AccountsTable.hints.ContentOwnerNo.label}"
+                                required="#{bindings.AccountsTable.hints.ContentOwnerNo.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.ContentOwnerNo.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.ContentOwnerNo.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.ContentOwnerNo.tooltip}">
+                    <f:validator binding="#{row.bindings.ContentOwnerNo.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccNmTCol" sortable="true" filterable="true"
+                           noWrap="true" width="260" sortProperty="Name"
+                           rowHeader="false" helpTopicId="RBH_ACCNAMETABLE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Name.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:inputText id="cl1" value="#{row.bindings.Name.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Name.label}"
+                                required="#{bindings.AccountsTable.hints.Name.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Name.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Name.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{row.NameTable}" autoSubmit="true"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.Name.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2" shortDesc="#{row.NameTable}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="AccountsDetails" text="#{row.Name}"></af:commandLink>
+                </af:column>
+                <af:column id="AccKALCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="KeyAccountLevel" rowHeader="false"
+                           helpTopicId="RBH_ACCKEYACCOUNTLEVEL"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.KeyAccountLevel.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:selectOneChoice id="AccKAL"
+                                      value="#{row.bindings.KeyAccountLevel.inputValue}"
+                                      label="#{bindings.AccountsTable.hints.KeyAccountLevel.label}"
+                                      required="#{bindings.AccountsTable.hints.KeyAccountLevel.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.AccountsTable.hints.KeyAccountLevel.tooltip}">
+                    <f:selectItems value="#{row.bindings.KeyAccountLevel.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="AccStCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Site"
+                           rowHeader="false" helpTopicId="RBH_ACCSITE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Site.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:inputText id="AccSt"
+                                value="#{row.bindings.Site.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Site.label}"
+                                required="#{bindings.AccountsTable.hints.Site.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Site.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Site.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.Site.tooltip}">
+                    <f:validator binding="#{row.bindings.Site.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccAMCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="AllianceManager" rowHeader="false"
+                           helpTopicId="RBH_ACCALLIANCEMANAGER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.AllianceManager.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:inputText id="AccAM"
+                                value="#{row.bindings.AllianceManager.inputValue}"
+                                label="#{bindings.AccountsTable.hints.AllianceManager.label}"
+                                required="false"
+                                rows="#{bindings.AccountsTable.hints.AllianceManager.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.AllianceManager.displayWidth}"
+                                readOnly="true">
+                    <f:validator binding="#{row.bindings.AllianceManager.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccParentAccountCol" sortable="true"
+                           filterable="true" noWrap="true" width="260"
+                           sortProperty="Parentaccount" rowHeader="false"
+                           helpTopicId="RBH_ACCPARENTACCOUNT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Parentaccount.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:panelGroupLayout id="AccParentAccountPgl"
+                                       layout="horizontal">
+                    <af:inputText id="AccParentAccount"
+                                  label="#{bindings.AccountsTable.hints.Parentaccount.label}"
+                                  readOnly="true"
+                                  columns="#{bindings.AccountsTable.hints.Parentaccount.displayWidth}"
+                                  maximumLength="400"
+                                  value="#{row.bindings.Parentaccount.inputValue}"
+                                  autoSubmit="true"
+                                  valueChangeListener="#{pageFlowScope.AccParentAccountLovItemInTable.validateWithLov}"
+                                  binding="#{pageFlowScope.AccParentAccountLovItemInTable.lovField}"
+                                  simple="true">
+                      <f:validator binding="#{row.bindings.Parentaccount.validator}"/>
+                    </af:inputText>
+                    <af:commandLink immediate="true" partialSubmit="true"
+                                    rendered="#{!(true)}" id="cl3"
+                                    actionListener="#{pageFlowScope.AccParentAccountLovItemInTable.lovIconClicked}">
+                      <af:image source="/jheadstart/images/lov.png"
+                                id="AccParentAccountIcon"
+                                clientComponent="true"/>
+                    </af:commandLink>
+                    <af:commandButton text="hidden" id="cb2" rendered="false"
+                                      action="#{pageFlowScope.AccParentAccountLovItemInTable.validationAction}"
+                                      binding="#{pageFlowScope.AccParentAccountLovItemInTable.validationButton}"/>
+                  </af:panelGroupLayout>
+                </af:column>
+                <af:column id="AccAL1Col" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="AddressLine1"
+                           rowHeader="false" helpTopicId="RBH_ACCADDRESSLINE1"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.AddressLine1.label}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <af:inputText id="AccAL1"
+                                value="#{row.bindings.AddressLine1.inputValue}"
+                                label="#{bindings.AccountsTable.hints.AddressLine1.label}"
+                                required="#{bindings.AccountsTable.hints.AddressLine1.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.AddressLine1.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.AddressLine1.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.AddressLine1.tooltip}">
+                    <f:validator binding="#{row.bindings.AddressLine1.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccCtCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="City"
+                           rowHeader="false" helpTopicId="RBH_ACCCITY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.City.label}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <af:inputText id="AccCt"
+                                value="#{row.bindings.City.inputValue}"
+                                label="#{bindings.AccountsTable.hints.City.label}"
+                                required="#{bindings.AccountsTable.hints.City.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.City.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.City.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.City.tooltip}">
+                    <f:validator binding="#{row.bindings.City.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccSoPCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="StateOrProvince" rowHeader="false"
+                           helpTopicId="RBH_ACCSTATEORPROVINCE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.StateOrProvince.label}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <af:inputText id="AccSoP"
+                                value="#{row.bindings.StateOrProvince.inputValue}"
+                                label="#{bindings.AccountsTable.hints.StateOrProvince.label}"
+                                required="#{bindings.AccountsTable.hints.StateOrProvince.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.StateOrProvince.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.StateOrProvince.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.StateOrProvince.tooltip}">
+                    <f:validator binding="#{row.bindings.StateOrProvince.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccZoPCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="ZipOrPostalCode" rowHeader="false"
+                           helpTopicId="RBH_ACCZIPORPOSTALCODE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.ZipOrPostalCode.label}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <af:inputText id="AccZoP"
+                                value="#{row.bindings.ZipOrPostalCode.inputValue}"
+                                label="#{bindings.AccountsTable.hints.ZipOrPostalCode.label}"
+                                required="#{bindings.AccountsTable.hints.ZipOrPostalCode.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.ZipOrPostalCode.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.ZipOrPostalCode.displayWidth}"
+                                maximumLength="50" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.ZipOrPostalCode.tooltip}">
+                    <f:validator binding="#{row.bindings.ZipOrPostalCode.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccCoCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Country"
+                           rowHeader="false" helpTopicId="RBH_ACCCOUNTRY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Country.label}"
+                                    id="ol10"/>
+                  </f:facet>
+                  <af:selectOneChoice id="AccCo"
+                                      value="#{row.bindings.Country.inputValue}"
+                                      label="#{bindings.AccountsTable.hints.Country.label}"
+                                      required="#{bindings.AccountsTable.hints.Country.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.AccountsTable.hints.Country.tooltip}">
+                    <f:selectItems value="#{row.bindings.Country.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="AccAddCol" sortable="true" filterable="true"
+                           noWrap="true" width="240"
+                           sortProperty="Accountaddress" rowHeader="false"
+                           helpTopicId="RBH_ACCACCOUNTADDRESS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Accountaddress.label}"
+                                    id="ol11"/>
+                  </f:facet>
+                  <af:inputText id="AccAdd"
+                                value="#{row.bindings.Accountaddress.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Accountaddress.label}"
+                                required="#{bindings.AccountsTable.hints.Accountaddress.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Accountaddress.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Accountaddress.displayWidth}"
+                                maximumLength="526" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.Accountaddress.tooltip}">
+                    <f:validator binding="#{row.bindings.Accountaddress.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccCNCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Contactname"
+                           rowHeader="false" helpTopicId="RBH_ACCCONTACTNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Contactname.label}"
+                                    id="ol12"/>
+                  </f:facet>
+                  <af:inputText id="AccCN"
+                                value="#{row.bindings.Contactname.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Contactname.label}"
+                                required="#{bindings.AccountsTable.hints.Contactname.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Contactname.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Contactname.displayWidth}"
+                                maximumLength="201" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.Contactname.tooltip}">
+                    <f:validator binding="#{row.bindings.Contactname.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccCPCol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Contactphone"
+                           rowHeader="false" helpTopicId="RBH_ACCCONTACTPHONE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Contactphone.label}"
+                                    id="ol13"/>
+                  </f:facet>
+                  <af:inputText id="AccCP"
+                                value="#{row.bindings.Contactphone.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Contactphone.label}"
+                                required="#{bindings.AccountsTable.hints.Contactphone.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Contactphone.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Contactphone.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.Contactphone.tooltip}">
+                    <f:validator binding="#{row.bindings.Contactphone.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccCECol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="Contactemail"
+                           rowHeader="false" helpTopicId="RBH_ACCCONTACTEMAIL"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Contactemail.label}"
+                                    id="ol14"/>
+                  </f:facet>
+                  <af:inputText id="AccCE"
+                                value="#{row.bindings.Contactemail.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Contactemail.label}"
+                                required="#{bindings.AccountsTable.hints.Contactemail.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Contactemail.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Contactemail.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.Contactemail.tooltip}">
+                    <f:validator binding="#{row.bindings.Contactemail.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccProblematicPublisherCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="ProblematicPublisher" align="center"
+                           rowHeader="false"
+                           helpTopicId="RBH_ACCPROBLEMATICPUBLISHER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.ProblematicPublisher.label}"
+                                    id="ol15"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="AccProblematicPublisher"
+                                            label="#{bindings.AccountsTable.hints.ProblematicPublisher.label}"
+                                            value="#{AccProblematicPublishercheckboxInTable.value}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.AccountsTable.hints.ProblematicPublisher.tooltip}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="AccFBCol" sortable="true" filterable="true"
+                           noWrap="true" width="180" sortProperty="Facebook"
+                           rowHeader="false" helpTopicId="RBH_ACCFACEBOOK"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Facebook.label}"
+                                    id="ol16"/>
+                  </f:facet>
+                  <af:inputText id="AccFB"
+                                value="#{row.bindings.Facebook.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Facebook.label}"
+                                required="#{bindings.AccountsTable.hints.Facebook.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Facebook.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Facebook.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.Facebook.tooltip}">
+                    <f:validator binding="#{row.bindings.Facebook.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccLICol" sortable="true" filterable="true"
+                           noWrap="true" width="180" sortProperty="Linkedin"
+                           rowHeader="false" helpTopicId="RBH_ACCLINKEDIN"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Linkedin.label}"
+                                    id="ol17"/>
+                  </f:facet>
+                  <af:inputText id="AccLI"
+                                value="#{row.bindings.Linkedin.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Linkedin.label}"
+                                required="#{bindings.AccountsTable.hints.Linkedin.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Linkedin.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Linkedin.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.Linkedin.tooltip}">
+                    <f:validator binding="#{row.bindings.Linkedin.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccTwtCol" sortable="true" filterable="true"
+                           noWrap="true" width="180" sortProperty="Twitter"
+                           rowHeader="false" helpTopicId="RBH_ACCTWITTER"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.Twitter.label}"
+                                    id="ol18"/>
+                  </f:facet>
+                  <af:inputText id="AccTwt"
+                                value="#{row.bindings.Twitter.inputValue}"
+                                label="#{bindings.AccountsTable.hints.Twitter.label}"
+                                required="#{bindings.AccountsTable.hints.Twitter.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.Twitter.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.Twitter.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.Twitter.tooltip}">
+                    <f:validator binding="#{row.bindings.Twitter.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccWPCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="WorkPhone"
+                           rowHeader="false" helpTopicId="RBH_ACCWORKPHONE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.WorkPhone.label}"
+                                    id="ol19"/>
+                  </f:facet>
+                  <af:inputText id="AccWP"
+                                value="#{row.bindings.WorkPhone.inputValue}"
+                                label="#{bindings.AccountsTable.hints.WorkPhone.label}"
+                                required="#{bindings.AccountsTable.hints.WorkPhone.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.WorkPhone.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.WorkPhone.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.WorkPhone.tooltip}">
+                    <f:validator binding="#{row.bindings.WorkPhone.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccWECol" sortable="true" filterable="true"
+                           noWrap="true" width="240" sortProperty="WorkEmail"
+                           rowHeader="false" helpTopicId="RBH_ACCWORKEMAIL"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.WorkEmail.label}"
+                                    id="ol20"/>
+                  </f:facet>
+                  <af:inputText id="AccWE"
+                                value="#{row.bindings.WorkEmail.inputValue}"
+                                label="#{bindings.AccountsTable.hints.WorkEmail.label}"
+                                required="#{bindings.AccountsTable.hints.WorkEmail.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.WorkEmail.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.WorkEmail.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.WorkEmail.tooltip}">
+                    <f:validator binding="#{row.bindings.WorkEmail.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccWFCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="WorkFax"
+                           rowHeader="false" helpTopicId="RBH_ACCWORKFAX"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.WorkFax.label}"
+                                    id="ol21"/>
+                  </f:facet>
+                  <af:inputText id="AccWF"
+                                value="#{row.bindings.WorkFax.inputValue}"
+                                label="#{bindings.AccountsTable.hints.WorkFax.label}"
+                                required="#{bindings.AccountsTable.hints.WorkFax.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.WorkFax.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.WorkFax.displayWidth}"
+                                maximumLength="255" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.WorkFax.tooltip}">
+                    <f:validator binding="#{row.bindings.WorkFax.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccPLCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="PrimaryLanguage" rowHeader="false"
+                           helpTopicId="RBH_ACCPRIMARYLANGUAGE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.PrimaryLanguage.label}"
+                                    id="ol22"/>
+                  </f:facet>
+                  <af:selectOneChoice id="AccPL"
+                                      value="#{row.bindings.PrimaryLanguage.inputValue}"
+                                      label="#{bindings.AccountsTable.hints.PrimaryLanguage.label}"
+                                      required="#{bindings.AccountsTable.hints.PrimaryLanguage.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.AccountsTable.hints.PrimaryLanguage.tooltip}">
+                    <f:selectItems value="#{row.bindings.PrimaryLanguage.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="AccVanLoozenIdCol" sortable="true"
+                           filterable="true" noWrap="true" width="100"
+                           sortProperty="VanLoozenId" rowHeader="false"
+                           helpTopicId="RBH_ACCVANLOOZENID"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.VanLoozenId.label}"
+                                    id="ol23"/>
+                  </f:facet>
+                  <af:inputText id="AccVanLoozenId"
+                                value="#{row.bindings.VanLoozenId.inputValue}"
+                                label="#{bindings.AccountsTable.hints.VanLoozenId.label}"
+                                required="#{bindings.AccountsTable.hints.VanLoozenId.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.VanLoozenId.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.VanLoozenId.displayWidth}"
+                                maximumLength="30" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.VanLoozenId.tooltip}">
+                    <f:validator binding="#{row.bindings.VanLoozenId.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccPSCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="PartnerSince"
+                           rowHeader="false" helpTopicId="RBH_ACCPARTNERSINCE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.PartnerSince.label}"
+                                    id="ol24"/>
+                  </f:facet>
+                  <af:inputText id="AccPS"
+                                value="#{row.bindings.PartnerSince.inputValue}"
+                                label="#{bindings.AccountsTable.hints.PartnerSince.label}"
+                                required="#{bindings.AccountsTable.hints.PartnerSince.mandatory}"
+                                rows="#{bindings.AccountsTable.hints.PartnerSince.displayHeight}"
+                                columns="#{bindings.AccountsTable.hints.PartnerSince.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.PartnerSince.tooltip}">
+                    <f:validator binding="#{row.bindings.PartnerSince.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="AccBLSCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="BrandingLogoStatus" rowHeader="false"
+                           helpTopicId="RBH_ACCBRANDINGLOGOSTATUS"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.BrandingLogoStatus.label}"
+                                    id="ol25"/>
+                  </f:facet>
+                  <af:selectOneChoice id="AccBLS"
+                                      value="#{row.bindings.BrandingLogoStatus.inputValue}"
+                                      label="#{bindings.AccountsTable.hints.BrandingLogoStatus.label}"
+                                      required="#{bindings.AccountsTable.hints.BrandingLogoStatus.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.AccountsTable.hints.BrandingLogoStatus.tooltip}">
+                    <f:selectItems value="#{row.bindings.BrandingLogoStatus.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="AccNLFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="NewsletterFlag" align="center"
+                           rowHeader="false" helpTopicId="RBH_ACCNEWSLETTERFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.NewsletterFlag.label}"
+                                    id="ol26"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="AccNLF"
+                                            label="#{bindings.AccountsTable.hints.NewsletterFlag.label}"
+                                            value="#{AccNewsletterFlagcheckboxInTable.value}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.AccountsTable.hints.NewsletterFlag.tooltip}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="AccNLDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="NewsletterDate" rowHeader="false"
+                           helpTopicId="RBH_ACCNEWSLETTERDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.NewsletterDate.label}"
+                                    id="ol27"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.NewsletterDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="AccNLD"
+                                value="#{row.bindings.NewsletterDate.inputValue}"
+                                label="#{bindings.AccountsTable.hints.NewsletterDate.label}"
+                                required="#{bindings.AccountsTable.hints.NewsletterDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.NewsletterDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="AccHGFCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="HolidayGiftFlag" align="center"
+                           rowHeader="false"
+                           helpTopicId="RBH_ACCHOLIDAYGIFTFLAG"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.HolidayGiftFlag.label}"
+                                    id="ol28"/>
+                  </f:facet>
+                  <af:selectBooleanCheckbox id="AccHGF"
+                                            label="#{bindings.AccountsTable.hints.HolidayGiftFlag.label}"
+                                            value="#{AccHolidayGiftFlagcheckboxInTable.value}"
+                                            readOnly="true"
+                                            shortDesc="#{bindings.AccountsTable.hints.HolidayGiftFlag.tooltip}"></af:selectBooleanCheckbox>
+                </af:column>
+                <af:column id="AccHGDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="HolidayGiftDate" rowHeader="false"
+                           helpTopicId="RBH_ACCHOLIDAYGIFTDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.AccountsTable.hints.HolidayGiftDate.label}"
+                                    id="ol29"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.HolidayGiftDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="AccHGD"
+                                value="#{row.bindings.HolidayGiftDate.inputValue}"
+                                label="#{bindings.AccountsTable.hints.HolidayGiftDate.label}"
+                                required="#{bindings.AccountsTable.hints.HolidayGiftDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.AccountsTable.hints.HolidayGiftDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datepattern}"/>
+                  </af:inputDate>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="jhsLovPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher"
+                  binding="#{pageFlowScope.jhsLovPopup.component}">
+          <af:dialog modal="true" title="#{pageFlowScope.LovItemBean.lovTitle}"
+                     type="none" id="dialog0" resize="on"
+                     stretchChildren="first"
+                     contentWidth="#{pageFlowScope.LovItemBean.lovWidth}"
+                     contentHeight="#{pageFlowScope.LovItemBean.lovHeight}">
+            <af:region value="#{bindings.LovTaskFlow.regionModel}"
+                       id="region0"/>
+            <f:facet name="buttonBar">
+              <af:group id="g0">
+                <af:commandButton textAndAccessKey="#{nls['OK_BUTTON_LABEL']}"
+                                  id="cb0" partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.handleLovSelection}"/>
+                <af:commandButton textAndAccessKey="#{nls['CANCEL']}" id="cb1"
+                                  partialSubmit="true"
+                                  actionListener="#{pageFlowScope.LovItemBean.cancelLov}"/>
+              </af:group>
+            </f:facet>
+          </af:dialog>
+          <af:clientListener method="popupClosedListener" type="popupClosed"/>
+          <af:serverListener type="serverPopupClosed"
+                             method="#{pageFlowScope.LovItemBean.cancelLov}"/>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

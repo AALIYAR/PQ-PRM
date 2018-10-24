@@ -1,0 +1,413 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="TrgTopLc"
+                             partialTriggers=" TrgCancelButton0 asAreaTrgSearchOptions qsAreaTrgSearchOptions"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, ADMIN']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0" text="#{nls['TABLE_TITLE_TARGETING']}"
+                          helpTopicId="RBH_TARGETING">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:group id="gr0">
+                    <af:commandButton actionListener="#{CreateTargeting.execute}"
+                                      action="CreateTrg"
+                                      textAndAccessKey="#{nls['NEW_BUTTON_LABEL_TARGETING']}"
+                                      rendered="#{(true) and (jhsUserRoles['AM,AST,PM,GCA,ADMIN'])}"
+                                      id="TrgNewButton"></af:commandButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="TrgCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+            <af:panelGroupLayout id="modelSearchAreaTrg"
+                                 rendered="#{!pageFlowScope.createModes.CreateTargeting and !pageFlowScope.hideSearchArea}"
+                                 partialTriggers=" asAreaTrgSearchOptions:qsButtonTrg qsAreaTrgSearchOptions:asButtonTrg ">
+              <f:attribute name="JhsIgnoreChanges" value="true"/>
+              <af:query id="asAreaTrgSearchOptions"
+                        headerText="#{nls['ADVANCED_SEARCH']}" disclosed="true"
+                        value="#{bindings.TargetingIteratorPrmTargetGroupViewCriteriaQuery.queryDescriptor}"
+                        model="#{bindings.TargetingIteratorPrmTargetGroupViewCriteriaQuery.queryModel}"
+                        queryListener="#{bindings.TargetingIteratorPrmTargetGroupViewCriteriaQuery.processQuery}"
+                        queryOperationListener="#{bindings.TargetingIteratorPrmTargetGroupViewCriteriaQuery.processQueryOperation}"
+                        rendered="#{!pageFlowScope.searchTargeting.quickSearchMode}"
+                        rows="1" labelAlignment="top" maxColumns="4">
+                <f:facet name="toolbar">
+                  <af:commandButton partialSubmit="true" id="qsButtonTrg"
+                                    immediate="true"
+                                    textAndAccessKey="#{nls['QUICK_SEARCH']}"
+                                    action="#{pageFlowScope.searchTargeting.switchToQuickSearchMode}"/>
+                </f:facet>
+              </af:query>
+              <af:quickQuery id="qsAreaTrgSearchOptions"
+                             label="#{nls['FILTER_BY']}"
+                             value="#{bindings.TargetingIteratorPrmTargetGroupQuickQueryQuery.queryDescriptor}"
+                             model="#{bindings.TargetingIteratorPrmTargetGroupQuickQueryQuery.queryModel}"
+                             queryListener="#{bindings.TargetingIteratorPrmTargetGroupQuickQueryQuery.processQuery}"
+                             rendered="#{pageFlowScope.searchTargeting.quickSearchMode}">
+                <f:facet name="end">
+                  <af:commandLink id="asButtonTrg"
+                                  textAndAccessKey="#{nls['ADVANCED_SEARCH']}"
+                                  partialSubmit="true" immediate="true"
+                                  action="#{pageFlowScope.searchTargeting.switchToAdvancedSearchMode}"/>
+                </f:facet>
+              </af:quickQuery>
+            </af:panelGroupLayout>
+          </af:panelHeader>
+          <af:panelGroupLayout layout="vertical" id="pgl0">
+            <af:panelCollection id="TrgPC" featuresOff=" "
+                                styleClass="AFStretchWidth">
+              <f:facet name="menus">
+                <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                         id="menu0">
+                  <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                           id="menu1">
+                    <af:commandMenuItem id="mi0"
+                                        textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                        action="TargetingDetails"></af:commandMenuItem>
+                    <af:group id="Trgtbb"
+                              rendered="#{ (bindings.TargetingIterator.viewObject!=null and bindings.TargetingIterator.viewObject.currentRow!=null)}">
+                      <af:commandMenuItem actionListener="#{bindings.FirstTargeting.execute}"
+                                          id="TrgFirst" partialSubmit="true"
+                                          icon="/afr/shuttleleftall_ena.png"
+                                          textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.PreviousTargeting.execute}"
+                                          icon="/afr/shuttleleft_ena.png"
+                                          textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                          id="TrgPrevious" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.NextTargeting.execute}"
+                                          icon="/afr/shuttleright_ena.png"
+                                          textAndAccessKey="#{nls['NEXT_ROW']}"
+                                          id="TrgNext" partialSubmit="true"></af:commandMenuItem>
+                      <af:commandMenuItem actionListener="#{bindings.LastTargeting.execute}"
+                                          icon="/afr/shuttlerightall_ena.png"
+                                          textAndAccessKey="#{nls['LAST_ROW']}"
+                                          id="TrgLast" partialSubmit="true"></af:commandMenuItem>
+                    </af:group>
+                  </af:menu>
+                  <af:commandMenuItem partialSubmit="true"
+                                      textAndAccessKey="#{nls['EXPORT']}"
+                                      icon="/jheadstart/images/excel.png"
+                                      immediate="true" id="cmi0">
+                    <af:exportCollectionActionListener exportedId="TrgTab"
+                                                       type="excelHTML"
+                                                       filename="Targeting.xls"/>
+                  </af:commandMenuItem>
+                </af:menu>
+              </f:facet>
+              <f:facet name="toolbar">
+                <af:toolbar id="tbar1">
+                  <af:commandImageLink immediate="true" partialSubmit="true"
+                                       id="cl0" shortDesc="#{nls['EXPORT']}"
+                                       icon="/jheadstart/images/excel.png">
+                    <af:exportCollectionActionListener exportedId="TrgTab"
+                                                       type="excelHTML"
+                                                       filename="Targeting.xls"/>
+                  </af:commandImageLink>
+                  <af:commandToolbarButton text="Print" id="TrgPrint"
+                                           shortDesc="Opens a new tab with printer friendly format.">
+                    <af:showPrintablePageBehavior/>
+                  </af:commandToolbarButton>
+                </af:toolbar>
+              </f:facet>
+              <f:facet name="statusbar">
+                <af:toolbar>
+                  <af:outputText value="#{bindings.TargetingIterator.estimatedRowCount} rows found"/>
+                </af:toolbar>
+              </f:facet>
+              <af:table id="TrgTab" contentDelivery="immediate"
+                        value="#{bindings.TargetingTable.collectionModel}"
+                        columnStretching="blank" rowBandingInterval="0"
+                        editingMode="editAll" columnSelection="multiple"
+                        contextMenuSelect="true" rowSelection="single"
+                        selectionListener="#{pageFlowScope.TargetingTable.makeCurrent}"
+                        selectedRowKeys="#{pageFlowScope.TargetingTable.selectedRow}"
+                        rowDisclosureListener="#{pageFlowScope.TargetingTable.discloseRow}"
+                        var="row" varStatus="status"
+                        rows="#{bindings.TargetingTable.rangeSize}"
+                        autoHeightRows="#{bindings.TargetingTable.estimatedRowCount}"
+                        fetchSize="#{bindings.TargetingTable.rangeSize}"
+                        emptyText="#{nls['NO_ROWS_FOUND']}"
+                        queryListener="#{bindings.TargetingIteratorPrmTargetGroupQuickQueryQuery.processQuery}"
+                        filterModel="#{bindings.TargetingIteratorPrmTargetGroupQuickQueryQuery.queryDescriptor}"
+                        filterVisible="true"
+                        binding="#{pageFlowScope.TargetingTable.table}"
+                        partialTriggers=":::qsAreaTrgSearchOptions :::asAreaTrgSearchOptions :::TrgPC ::TrgFirst ::TrgPrevious ::TrgNext ::TrgLast"
+                        styleClass="AFStretchWidth"
+                        summary="#{nls['TABLE_TITLE_TARGETING']}">
+                <f:facet name="contextMenu">
+                  <af:popup id="TrgTablePopup" childCreation="deferred">
+                    <af:menu id="menu2">
+                      <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3">
+                        <af:commandMenuItem id="mi1"
+                                            textAndAccessKey="#{nls['DETAIL_VIEW_BUTTON_LABEL']}"
+                                            action="TargetingDetails"></af:commandMenuItem>
+                      </af:menu>
+                    </af:menu>
+                  </af:popup>
+                </f:facet>
+                <af:column id="TrgGNoCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="GroupNo"
+                           rowHeader="false" helpTopicId="RBH_TRGGROUPNO"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.GroupNo.label}"
+                                    id="ol0"/>
+                  </f:facet>
+                  <af:inputText id="TrgGNo"
+                                value="#{row.bindings.GroupNo.inputValue}"
+                                label="#{bindings.TargetingTable.hints.GroupNo.label}"
+                                required="#{bindings.TargetingTable.hints.GroupNo.mandatory}"
+                                rows="#{bindings.TargetingTable.hints.GroupNo.displayHeight}"
+                                columns="#{bindings.TargetingTable.hints.GroupNo.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.GroupNo.tooltip}">
+                    <f:validator binding="#{row.bindings.GroupNo.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TrgGNmCol" sortable="true" filterable="true"
+                           noWrap="false" width="260" sortProperty="GroupName"
+                           rowHeader="false" helpTopicId="RBH_TRGGROUPNAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.GroupName.label}"
+                                    id="ol1"/>
+                  </f:facet>
+                  <af:inputText id="cl1"
+                                value="#{row.bindings.GroupName.inputValue}"
+                                label="#{bindings.TargetingTable.hints.GroupName.label}"
+                                required="#{bindings.TargetingTable.hints.GroupName.mandatory}"
+                                rows="#{bindings.TargetingTable.hints.GroupName.displayHeight}"
+                                columns="#{bindings.TargetingTable.hints.GroupName.displayWidth}"
+                                maximumLength="400" readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.GroupName.tooltip}"
+                                autoSubmit="true"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.GroupName.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="cl2"
+                                  shortDesc="#{bindings.TargetingTable.hints.GroupName.tooltip}"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}"
+                                  action="TargetingDetails"
+                                  text="#{row.GroupName}"></af:commandLink>
+                </af:column>
+                <af:column id="TrgGTyCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="GroupType"
+                           rowHeader="false" helpTopicId="RBH_TRGGROUPTYPE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.GroupType.label}"
+                                    id="ol2"/>
+                  </f:facet>
+                  <af:selectOneChoice id="TrgGTy"
+                                      value="#{row.bindings.GroupType.inputValue}"
+                                      label="#{bindings.TargetingTable.hints.GroupType.label}"
+                                      required="#{bindings.TargetingTable.hints.GroupType.mandatory}"
+                                      readOnly="true"
+                                      shortDesc="#{bindings.TargetingTable.hints.GroupType.tooltip}">
+                    <f:selectItems value="#{row.bindings.GroupType.items}"/>
+                  </af:selectOneChoice>
+                </af:column>
+                <af:column id="TrgPCtCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="ProductCount"
+                           rowHeader="false" helpTopicId="RBH_TRGPRODUCTCOUNT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.ProductCount.label}"
+                                    id="ol3"/>
+                  </f:facet>
+                  <af:inputText id="TrgPCt"
+                                value="#{row.bindings.ProductCount.inputValue}"
+                                label="#{bindings.TargetingTable.hints.ProductCount.label}"
+                                required="#{bindings.TargetingTable.hints.ProductCount.mandatory}"
+                                rows="#{bindings.TargetingTable.hints.ProductCount.displayHeight}"
+                                columns="#{bindings.TargetingTable.hints.ProductCount.displayWidth}"
+                                readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.ProductCount.tooltip}">
+                    <f:validator binding="#{row.bindings.ProductCount.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TargetingTable.hints.ProductCount.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TrgTCtCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="TitleCount"
+                           rowHeader="false" helpTopicId="RBH_TRGTITLECOUNT"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.TitleCount.label}"
+                                    id="ol4"/>
+                  </f:facet>
+                  <af:inputText id="TrgTCt"
+                                value="#{row.bindings.TitleCount.inputValue}"
+                                label="#{bindings.TargetingTable.hints.TitleCount.label}"
+                                required="#{bindings.TargetingTable.hints.TitleCount.mandatory}"
+                                rows="#{bindings.TargetingTable.hints.TitleCount.displayHeight}"
+                                columns="#{bindings.TargetingTable.hints.TitleCount.displayWidth}"
+                                readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.TitleCount.tooltip}">
+                    <f:validator binding="#{row.bindings.TitleCount.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.TargetingTable.hints.TitleCount.format}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TrgFileNameCol" sortable="true" noWrap="true"
+                           width="180" sortProperty="FileName" rowHeader="false"
+                           helpTopicId="RBH_TRGFILENAME"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.FileName.label}"
+                                    id="ol5"/>
+                  </f:facet>
+                  <af:inputText id="cl3"
+                                value="#{row.bindings.FileName.inputValue}"
+                                label="#{bindings.TargetingTable.hints.FileName.label}"
+                                required="#{bindings.TargetingTable.hints.FileName.mandatory}"
+                                rows="#{bindings.TargetingTable.hints.FileName.displayHeight}"
+                                columns="#{bindings.TargetingTable.hints.FileName.displayWidth}"
+                                maximumLength="200" readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.FileName.tooltip}"
+                                rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                    <f:validator binding="#{row.bindings.FileName.validator}"/>
+                  </af:inputText>
+                  <af:commandLink id="TrgFileName"
+                                  text="#{row.bindings.FileName.attributeValue}"
+                                  shortDesc="#{bindings.TargetingTable.hints.FileName.tooltip}"
+                                  action="LaunchTab"
+                                  rendered="#{adfFacesContext.outputMode != 'printable'}">
+                    <af:setActionListener from="Imports"
+                                          to="#{jhsDynTabLauncher.taskFlowName}"/>
+                    <af:setActionListener from="#{bindings.TrgImportFileId.inputValue}"
+                                          to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                    <af:setActionListener from="#{bindings.TrgImportFileName.inputValue}"
+                                          to="#{jhsDynTabLauncher.label}"/>
+                    <af:setActionListener from="#{bindings.TrgImportFileId.inputValue}"
+                                          to="#{jhsDynTabLauncher.parameters.rowKeyValueImports}"/>
+                    <af:setActionListener from="#{jhsDynTabLauncher}"
+                                          to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                  </af:commandLink>
+                </af:column>
+                <af:column id="TrgCBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120" sortProperty="CreatedBy"
+                           rowHeader="false" helpTopicId="RBH_TRGCREATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.CreatedBy.label}"
+                                    id="ol6"/>
+                  </f:facet>
+                  <af:inputText id="TrgCB"
+                                value="#{row.bindings.CreatedBy.inputValue}"
+                                label="#{bindings.TargetingTable.hints.CreatedBy.label}"
+                                required="#{bindings.TargetingTable.hints.CreatedBy.mandatory}"
+                                rows="#{bindings.TargetingTable.hints.CreatedBy.displayHeight}"
+                                columns="#{bindings.TargetingTable.hints.CreatedBy.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.CreatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TrgCDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100" sortProperty="CreatedDate"
+                           rowHeader="false" helpTopicId="RBH_TRGCREATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.CreatedDate.label}"
+                                    id="ol7"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.CreatedDate}"
+                                  id="id0">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="TrgCD"
+                                value="#{row.bindings.CreatedDate.inputValue}"
+                                label="#{bindings.TargetingTable.hints.CreatedDate.label}"
+                                required="#{bindings.TargetingTable.hints.CreatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.CreatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+                <af:column id="TrgLUBCol" sortable="true" filterable="true"
+                           noWrap="true" width="120"
+                           sortProperty="LastUpdatedBy" rowHeader="false"
+                           helpTopicId="RBH_TRGLASTUPDATEDBY"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.LastUpdatedBy.label}"
+                                    id="ol8"/>
+                  </f:facet>
+                  <af:inputText id="TrgLUB"
+                                value="#{row.bindings.LastUpdatedBy.inputValue}"
+                                label="#{bindings.TargetingTable.hints.LastUpdatedBy.label}"
+                                required="#{bindings.TargetingTable.hints.LastUpdatedBy.mandatory}"
+                                rows="#{bindings.TargetingTable.hints.LastUpdatedBy.displayHeight}"
+                                columns="#{bindings.TargetingTable.hints.LastUpdatedBy.displayWidth}"
+                                maximumLength="20" readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.LastUpdatedBy.tooltip}">
+                    <f:validator binding="#{row.bindings.LastUpdatedBy.validator}"/>
+                  </af:inputText>
+                </af:column>
+                <af:column id="TrgLUDCol" sortable="true" filterable="true"
+                           noWrap="true" width="100"
+                           sortProperty="LastUpdatedDate" rowHeader="false"
+                           helpTopicId="RBH_TRGLASTUPDATEDDATE"
+                           filterFeatures="caseInsensitive">
+                  <f:facet name="header">
+                    <af:outputLabel value="#{bindings.TargetingTable.hints.LastUpdatedDate.label}"
+                                    id="ol9"/>
+                  </f:facet>
+                  <f:facet name="filter">
+                    <af:inputDate value="#{status.filterCriteria.LastUpdatedDate}"
+                                  id="id1">
+                      <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                    </af:inputDate>
+                  </f:facet>
+                  <af:inputDate id="TrgLUD"
+                                value="#{row.bindings.LastUpdatedDate.inputValue}"
+                                label="#{bindings.TargetingTable.hints.LastUpdatedDate.label}"
+                                required="#{bindings.TargetingTable.hints.LastUpdatedDate.mandatory}"
+                                readOnly="true"
+                                shortDesc="#{bindings.TargetingTable.hints.LastUpdatedDate.tooltip}">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:column>
+              </af:table>
+            </af:panelCollection>
+          </af:panelGroupLayout>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

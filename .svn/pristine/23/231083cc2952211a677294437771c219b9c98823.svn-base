@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="PrmCampaignOpportunityView"
+  Version="11.1.1.61.92"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Partial"
+  UseGlueCode="false"
+  FetchMode="FETCH_AS_NEEDED"
+  FetchSize="30"
+  ComponentClass="com.pq.tracs.model.vo.PRMView"
+  RangeSize="25">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewAccessor
+    Name="PrmOpportunityView1"
+    ViewObjectName="com.pq.tracs.model.vo.PrmOpportunityView"
+    RowLevelBinds="true">
+    <ViewCriteriaUsage
+      Name="PrmOpportunityViewCriteria"
+      FullName="com.pq.tracs.model.vo.PrmOpportunityView.PrmOpportunityViewCriteria"/>
+  </ViewAccessor>
+  <ViewAccessor
+    Name="PrmLookupModule_AccountCategoryLookup1"
+    ViewObjectName="com.pq.tracs.model.lookup.LookupCodeView"
+    AMUsageName="PrmLookupModule"
+    ViewInstanceName="AccountCategoryLookup"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_OpportunityName"
+    ListVOName="PrmOpportunityView1"
+    ListRangeSize="-1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OpportunityName"/>
+    </AttrArray>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="OpportunityType"/>
+      <Item Value="PrmOpportunityId"/>
+      <Item Value="AccountName"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Name"/>
+      <Item Value="OpportunityType"/>
+      <Item Value="Id"/>
+      <Item Value="Accountname"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+      <Item Value="OpportunityType"/>
+      <Item Value="Accountname"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery>
+    <![CDATA[SELECT PrmCampaignOpportunity.ID, 
+       PrmCampaignOpportunity.PRM_CAMPAIGN_ID, 
+       PrmCampaignOpportunity.PRM_OPPORTUNITY_ID, 
+       PrmCampaignOpportunity.ADDED_DATE, 
+       PrmCampaignOpportunity.REMOVED_DATE, 
+       PrmOpportunity.ID AS Opp_Id, 
+       PrmOpportunity.OPPORTUNITY_NO,
+       PrmOpportunity.NAME as Opportunity_Name, 
+       PrmOpportunity.OPPORTUNITY_TYPE, 
+       TraxContentOwner.ID AS Account_Id, 
+       TraxContentOwner.NAME AS Account_Name, 
+       TraxContentOwner.SITE AS Account_Site,
+    tlc.DISPLAY_VALUE AS OPPORTUNITY_STATUS,
+    tlc1.DISPLAY_VALUE AS REASON_LOST,
+       PrmOpportunity.AGREEMENT_RECEIVED_DATE,
+           ju.first_name|| ' ' ||  ju.last_name as Alliance_Manager,
+            (  SELECT LISTAGG(PRODUCT_DISCIPLINE || '/' || ACCOUNT_CATEGORY || '/' || ACCOUNT_PRIORITY,  ',') WITHIN GROUP (ORDER BY ID) "ACCOUNT_PRODUCT_DISCIPLINE"
+       FROM PRM_ACCOUNT_PRODUCT_DISCIPLINE 
+  WHERE PRM_ACCOUNT_PRODUCT_DISCIPLINE.CONTENT_OWNER_ID = TraxContentOwner.ID
+    GROUP BY CONTENT_OWNER_ID ) AS ACCOUNT_PRODUCT_DISCIPLINE
+
+    
+FROM PRM_CAMPAIGN_OPPORTUNITY PrmCampaignOpportunity
+inner join PRM_OPPORTUNITY PrmOpportunity
+on PrmCampaignOpportunity.PRM_OPPORTUNITY_ID = PrmOpportunity.ID
+
+inner join TRAX_CONTENT_OWNER TraxContentOwner
+on PrmOpportunity.CONTENT_OWNER_ID = TraxContentOwner.ID and  TraxContentOwner.ACTIVE_FLAG = 'Y'
+
+inner join PRM_OPPORTUNITY_ALLIANCE_MGR poam
+on  PrmOpportunity.id = poam.prm_opportunity_id and poam.end_Date is null 
+
+inner join PRM_ALLIANCE_MANAGER pam
+ON pam.id = poam.prm_alliance_manager_id and pam.end_date is null and pam.active_flag = 'Y'
+
+inner join JHS_USERS ju
+ON ju.id = pam.jhs_users_id
+
+
+inner join TRAX_LOOKUP_CODE tlc
+on tlc.INTERNAL_VALUE =  PrmOpportunity.CURRENT_STATUS
+
+inner join TRAX_LOOKUP_CODE_SET tlcs
+on tlcs.ID = tlc.LOOKUP_CODE_SET_ID
+and tlcs.CODE_SET = 'Negotiation Stage'
+
+left outer join trax_lookup_code tlc
+on PrmOpportunity.current_status = tlc.INTERNAL_VALUE
+inner join TRAX_LOOKUP_CODE_SET tlcs 
+on tlc.LOOKUP_CODE_SET_ID = tlcs.id and
+tlcs.CODE_SET = 'Negotiation Stage'
+left outer join trax_lookup_code tlc1
+on PrmOpportunity.reason_lost = tlc1.INTERNAL_VALUE and tlc1.LOOKUP_CODE_SET_ID in (214, 215)]]>
+  </SQLQuery>
+  <EntityUsage
+    Name="PrmCampaignOpportunity"
+    Entity="com.pq.tracs.model.eo.PrmCampaignOpportunity"/>
+  <ViewAttribute
+    Name="Id"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="Id"
+    EntityUsage="PrmCampaignOpportunity"
+    AliasName="ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrmCampaignId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PrmCampaignId"
+    EntityUsage="PrmCampaignOpportunity"
+    AliasName="PRM_CAMPAIGN_ID">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="PrmOpportunityId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="PrmOpportunityId"
+    EntityUsage="PrmCampaignOpportunity"
+    AliasName="PRM_OPPORTUNITY_ID"/>
+  <ViewAttribute
+    Name="AddedDate"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="AddedDate"
+    EntityUsage="PrmCampaignOpportunity"
+    AliasName="ADDED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AddedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AddedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AddedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="RemovedDate"
+    PrecisionRule="true"
+    EntityAttrName="RemovedDate"
+    EntityUsage="PrmCampaignOpportunity"
+    AliasName="REMOVED_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.RemovedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.RemovedDate_FMT_FORMAT"/>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.RemovedDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OppId"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="OPP_ID"
+    Expression="OPP_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OpportunityNo"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="OPPORTUNITY_NO"
+    Expression="OPPORTUNITY_NO"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.OpportunityNo_LABEL"/>
+        <DISPLAYWIDTH
+          Value="10"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OpportunityName"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="200"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPPORTUNITY_NAME"
+    Expression="OPPORTUNITY_NAME"
+    SQLType="VARCHAR"
+    LOVName="LOV_OpportunityName">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="200"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.OpportunityName_LABEL"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OpportunityType"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPPORTUNITY_TYPE"
+    Expression="OPPORTUNITY_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.OpportunityType_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccountId"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="38"
+    Scale="0"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="ACCOUNT_ID"
+    Expression="ACCOUNT_ID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="22"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccountName"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCOUNT_NAME"
+    Expression="ACCOUNT_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AccountName_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccountSite"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="400"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCOUNT_SITE"
+    Expression="ACCOUNT_SITE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="400"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AccountSite_LABEL"/>
+        <DISPLAYWIDTH
+          Value="40"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OpportunityStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    IsNotNull="true"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OPPORTUNITY_STATUS"
+    Expression="OPPORTUNITY_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.OpportunityStatus_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReasonLost"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="80"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REASON_LOST"
+    Expression="REASON_LOST"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="80"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.ReasonLost_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AgreementReceivedDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Date"
+    ColumnType="DATE"
+    AliasName="AGREEMENT_RECEIVED_DATE"
+    Expression="AGREEMENT_RECEIVED_DATE"
+    SQLType="DATE">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AgreementReceivedDate_LABEL"/>
+        <FMT_FORMATTER
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AgreementReceivedDate_FMT_FORMATTER"/>
+        <FMT_FORMAT
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AgreementReceivedDate_FMT_FORMAT"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AllianceManager"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="101"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ALLIANCE_MANAGER"
+    Expression="ALLIANCE_MANAGER"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="101"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AllianceManager_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccountProductDiscipline"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCOUNT_PRODUCT_DISCIPLINE"
+    Expression="ACCOUNT_PRODUCT_DISCIPLINE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4000"/>
+    </DesignTime>
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="com.pq.tracs.model.vo.PrmCampaignOpportunityView.AccountProductDiscipline_LABEL"/>
+        <DISPLAYWIDTH
+          Value="30"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="PrmCampaignOpportunityViewCriteria"
+    ViewObjectName="com.pq.tracs.model.vo.PrmCampaignOpportunityView"
+    Conjunction="AND">
+    <Properties>
+      <CustomProperties>
+        <Property
+          Name="displayOperators"
+          Value="InAdvancedMode"/>
+        <Property
+          Name="autoExecute"
+          Value="false"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="vcrow121"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="AddedDate"
+        ViewAttribute="AddedDate"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="RemovedDate"
+        ViewAttribute="RemovedDate"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="OpportunityNo"
+        ViewAttribute="OpportunityNo"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="OpportunityName"
+        ViewAttribute="OpportunityName"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="OpportunityType"
+        ViewAttribute="OpportunityType"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AccountName"
+        ViewAttribute="AccountName"
+        Operator="STARTSWITH"
+        Conjunction="AND"
+        Required="Optional"/>
+      <ViewCriteriaItem
+        Name="AccountSite"
+        ViewAttribute="AccountSite"
+        Operator="="
+        Conjunction="AND"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="Id"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.pq.tracs.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

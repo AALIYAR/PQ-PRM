@@ -1,0 +1,531 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="ContactLookupLoVTopLc"
+                             partialTriggers="">
+        <f:facet name="top">
+          <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+          <af:group id="g0">
+            <af:panelHeader id="ph0"
+                            text="#{nls['TABLE_TITLE_CONTACTLOOKUPLOV']}"
+                            helpTopicId="RBH_CONTACTLOOKUPLOV">
+              <f:facet name="toolbar">
+                <af:toolbox id="tbox0">
+                  <af:toolbar id="tbar0">
+                    <af:group id="gr0"></af:group>
+                    <af:group id="gr1"></af:group>
+                    <af:group id="gr2"></af:group>
+                  </af:toolbar>
+                </af:toolbox>
+              </f:facet>
+              <f:facet name="context"></f:facet>
+              <af:subform id="ContactLookupLoVSbf"
+                          rendered="#{!pageFlowScope.createModes.CreateContactLookupLoV and !pageFlowScope.hideSearchArea}"
+                          defaultCommand="ContactLookupLoVQuickSearchButton">
+                <af:panelGroupLayout id="searchAreaContactLookupLoV"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:panelGroupLayout id="qsAreaContactLookupLoV"
+                                       rendered="#{pageFlowScope.searchContactLookupLoV.quickSearchMode}"
+                                       layout="horizontal">
+                    <af:selectOneChoice id="qsSelectContactLookupLoV"
+                                        label="#{nls['FILTER_BY']}"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchItem}"
+                                        autoSubmit="true" immediate="true"
+                                        valueChangeListener="#{pageFlowScope.searchContactLookupLoV.searchItemChanged}">
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.Id.label}"
+                                     value="ContactLookupLoVId" id="si0"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.FirstName.label}"
+                                     value="ContactLookupLoVFirstName"
+                                     id="si1"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.MiddleName.label}"
+                                     value="ContactLookupLoVMiddleName"
+                                     id="si2"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.LastName.label}"
+                                     value="ContactLookupLoVLastName" id="si3"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.Title.label}"
+                                     value="ContactLookupLoVTitle" id="si4"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.Gender.label}"
+                                     value="ContactLookupLoVGender" id="si5"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.Pronunciation.label}"
+                                     value="ContactLookupLoVPronunciation"
+                                     id="si6"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.JobTitle.label}"
+                                     value="ContactLookupLoVJobTitle" id="si7"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.JobRole.label}"
+                                     value="ContactLookupLoVJobRole" id="si8"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.ContactName.label}"
+                                     value="ContactLookupLoVContactName"
+                                     id="si9"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.WorkPhone.label}"
+                                     value="ContactLookupLoVWorkPhone"
+                                     id="si10"/>
+                      <af:selectItem label="#{bindings.ContactLookupLoVTable.hints.WorkEmail.label}"
+                                     value="ContactLookupLoVWorkEmail"
+                                     id="si11"/>
+                    </af:selectOneChoice>
+                    <af:spacer width="4" id="qsAreaContactLookupLoVSpacer1"/>
+                    <af:panelGroupLayout partialTriggers="qsSelectContactLookupLoV"
+                                         id="qsAreaContactLookupLoVpanelGroupLayout">
+                      <af:switcher facetName="#{pageFlowScope.searchContactLookupLoV.searchItem}"
+                                   id="qsAreaContactLookupLoVSwitcher">
+                        <f:facet name="ContactLookupLoVId">
+                          <af:inputText id="QuickSearchContactLookupLoVId"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.Id.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVId.hints.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVID"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVId.hints.displayWidth}"
+                                        maximumLength="4000">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.ContactLookupLoVId.format}"/>
+                          </af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVFirstName">
+                          <af:inputText id="QuickSearchContactLookupLoVFirstName"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.FirstName.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.FirstName.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVFIRSTNAME"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.FirstName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVMiddleName">
+                          <af:inputText id="QuickSearchContactLookupLoVMiddleName"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.MiddleName.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.MiddleName.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVMIDDLENAME"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.MiddleName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVLastName">
+                          <af:inputText id="QuickSearchContactLookupLoVLastName"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.LastName.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.LastName.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVLASTNAME"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.LastName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVTitle">
+                          <af:inputText id="QuickSearchContactLookupLoVTitle"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.Title.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.Title.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVTITLE"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.Title.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVGender">
+                          <af:inputText id="QuickSearchContactLookupLoVGender"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.Gender.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.Gender.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVGENDER"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.Gender.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVPronunciation">
+                          <af:inputText id="QuickSearchContactLookupLoVPronunciation"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.Pronunciation.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.Pronunciation.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVPRONUNCIATION"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.Pronunciation.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVJobTitle">
+                          <af:inputText id="QuickSearchContactLookupLoVJobTitle"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.JobTitle.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.JobTitle.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVJOBTITLE"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.JobTitle.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVJobRole">
+                          <af:inputText id="QuickSearchContactLookupLoVJobRole"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.JobRole.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.JobRole.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVJOBROLE"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.JobRole.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVContactName">
+                          <af:inputText id="QuickSearchContactLookupLoVContactName"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.ContactName.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.ContactName.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVCONTACTNAME"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.ContactName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVWorkPhone">
+                          <af:inputText id="QuickSearchContactLookupLoVWorkPhone"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.WorkPhone.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.WorkPhone.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVWORKPHONE"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.WorkPhone.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="ContactLookupLoVWorkEmail">
+                          <af:inputText id="QuickSearchContactLookupLoVWorkEmail"
+                                        value="#{pageFlowScope.searchContactLookupLoV.searchText}"
+                                        label="#{bindings.ContactLookupLoVTable.hints.WorkEmail.label}"
+                                        shortDesc="#{bindings.ContactLookupLoVTable.hints.WorkEmail.tooltip}"
+                                        helpTopicId="RBH_CONTACTLOOKUPLOVWORKEMAIL"
+                                        simple="true"
+                                        columns="#{bindings.ContactLookupLoVTable.hints.WorkEmail.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                      </af:switcher>
+                    </af:panelGroupLayout>
+                    <af:spacer width="4" id="qsAreaContactLookupLoVSpacer2"/>
+                    <af:commandImageLink action="#{pageFlowScope.searchContactLookupLoV.quickSearch}"
+                                         shortDesc="#{nls['FILTER_BY']}"
+                                         icon="/jheadstart/images/go_ena.png"
+                                         id="ContactLookupLoVQuickSearchButton"/>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:subform>
+            </af:panelHeader>
+            <af:spacer width="10" height="10" id="sp0"/>
+          </af:group>
+          <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+        </f:facet>
+        <f:facet name="center">
+          <af:panelStretchLayout topHeight="0" id="psl0">
+            <f:facet name="top"></f:facet>
+            <f:facet name="center">
+              <af:panelCollection id="ContactLookupLoVPC" featuresOff=" "
+                                  styleClass="AFStretchWidth">
+                <f:facet name="menus">
+                  <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                           id="menu0">
+                    <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                             id="menu1">
+                      <af:group id="ContactLookupLoVtbb"
+                                rendered="#{ bindings.ContactLookupLoVIterator.currentRow!=null }">
+                        <af:commandMenuItem actionListener="#{bindings.FirstContactLookupLoV.execute}"
+                                            id="ContactLookupLoVFirst"
+                                            partialSubmit="true"
+                                            icon="/afr/shuttleleftall_ena.png"
+                                            textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.PreviousContactLookupLoV.execute}"
+                                            icon="/afr/shuttleleft_ena.png"
+                                            textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                            id="ContactLookupLoVPrevious"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.NextContactLookupLoV.execute}"
+                                            icon="/afr/shuttleright_ena.png"
+                                            textAndAccessKey="#{nls['NEXT_ROW']}"
+                                            id="ContactLookupLoVNext"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.LastContactLookupLoV.execute}"
+                                            icon="/afr/shuttlerightall_ena.png"
+                                            textAndAccessKey="#{nls['LAST_ROW']}"
+                                            id="ContactLookupLoVLast"
+                                            partialSubmit="true"></af:commandMenuItem>
+                      </af:group>
+                    </af:menu>
+                  </af:menu>
+                </f:facet>
+                <f:facet name="toolbar">
+                  <af:toolbar id="tbar1">
+                    <af:commandToolbarButton text="Print"
+                                             id="ContactLookupLoVPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar">
+                  <af:toolbar>
+                    <af:outputText value="#{bindings.ContactLookupLoVIterator.estimatedRowCount} rows found"/>
+                  </af:toolbar>
+                </f:facet>
+                <af:table id="ContactLookupLoVTab" contentDelivery="immediate"
+                          value="#{bindings.ContactLookupLoVTable.collectionModel}"
+                          columnStretching="blank" rowBandingInterval="0"
+                          editingMode="editAll" columnSelection="multiple"
+                          contextMenuSelect="true" rowSelection="single"
+                          selectionListener="#{pageFlowScope.ContactLookupLoVPage.selectionListener}"
+                          selectedRowKeys="#{pageFlowScope.ContactLookupLoVPage.selectedRowKeySet}"
+                          rowDisclosureListener="#{pageFlowScope.ContactLookupLoVTable.discloseRow}"
+                          var="row" varStatus="status"
+                          fetchSize="#{bindings.ContactLookupLoVTable.rangeSize}"
+                          emptyText="#{nls['NO_ROWS_FOUND']}"
+                          queryListener="#{bindings.ContactLookupLoVIteratorTraxContactViewCriteriaQuery.processQuery}"
+                          filterModel="#{bindings.ContactLookupLoVIteratorTraxContactViewCriteriaQuery.queryDescriptor}"
+                          filterVisible="true"
+                          binding="#{pageFlowScope.ContactLookupLoVPage.lovTable}"
+                          partialTriggers=" :::ContactLookupLoVPC ::ContactLookupLoVFirst ::ContactLookupLoVPrevious ::ContactLookupLoVNext ::ContactLookupLoVLast"
+                          styleClass="AFStretchWidth"
+                          summary="#{nls['TABLE_TITLE_CONTACTLOOKUPLOV']}">
+                  <f:facet name="contextMenu">
+                    <af:popup id="ContactLookupLoVTablePopup"
+                              childCreation="deferred">
+                      <af:menu id="menu2">
+                        <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                      </af:menu>
+                    </af:popup>
+                  </f:facet>
+                  <af:column id="ContactLookupLoVFirstNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="FirstName" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVFIRSTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.FirstName.label}"
+                                      id="ol0"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVFirstName"
+                                  value="#{row.bindings.FirstName.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.FirstName.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.FirstName.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.FirstName.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.FirstName.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.FirstName.tooltip}">
+                      <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVMiddleNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="MiddleName" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVMIDDLENAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.MiddleName.label}"
+                                      id="ol1"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVMiddleName"
+                                  value="#{row.bindings.MiddleName.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.MiddleName.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.MiddleName.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.MiddleName.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.MiddleName.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.MiddleName.tooltip}">
+                      <f:validator binding="#{row.bindings.MiddleName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVLastNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="LastName" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVLASTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.LastName.label}"
+                                      id="ol2"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVLastName"
+                                  value="#{row.bindings.LastName.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.LastName.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.LastName.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.LastName.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.LastName.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.LastName.tooltip}">
+                      <f:validator binding="#{row.bindings.LastName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVTitleCol" sortable="true"
+                             filterable="true" noWrap="true" width="120"
+                             sortProperty="Title" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVTITLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.Title.label}"
+                                      id="ol3"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVTitle"
+                                  value="#{row.bindings.Title.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.Title.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.Title.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.Title.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.Title.displayWidth}"
+                                  maximumLength="20" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.Title.tooltip}">
+                      <f:validator binding="#{row.bindings.Title.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVGenderCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="Gender" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVGENDER"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.Gender.label}"
+                                      id="ol4"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVGender"
+                                  value="#{row.bindings.Gender.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.Gender.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.Gender.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.Gender.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.Gender.displayWidth}"
+                                  maximumLength="10" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.Gender.tooltip}">
+                      <f:validator binding="#{row.bindings.Gender.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVPronunciationCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="240" sortProperty="Pronunciation"
+                             rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVPRONUNCIATION"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.Pronunciation.label}"
+                                      id="ol5"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVPronunciation"
+                                  value="#{row.bindings.Pronunciation.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.Pronunciation.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.Pronunciation.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.Pronunciation.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.Pronunciation.displayWidth}"
+                                  maximumLength="400" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.Pronunciation.tooltip}">
+                      <f:validator binding="#{row.bindings.Pronunciation.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVJobTitleCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="JobTitle" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVJOBTITLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.JobTitle.label}"
+                                      id="ol6"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVJobTitle"
+                                  value="#{row.bindings.JobTitle.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.JobTitle.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.JobTitle.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.JobTitle.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.JobTitle.displayWidth}"
+                                  maximumLength="4000" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.JobTitle.tooltip}">
+                      <f:validator binding="#{row.bindings.JobTitle.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVJobRoleCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="JobRole" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVJOBROLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.JobRole.label}"
+                                      id="ol7"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVJobRole"
+                                  value="#{row.bindings.JobRole.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.JobRole.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.JobRole.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.JobRole.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.JobRole.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.JobRole.tooltip}">
+                      <f:validator binding="#{row.bindings.JobRole.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVContactNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="ContactName" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVCONTACTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.ContactName.label}"
+                                      id="ol8"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVContactName"
+                                  value="#{row.bindings.ContactName.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.ContactName.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.ContactName.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.ContactName.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.ContactName.displayWidth}"
+                                  maximumLength="201" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.ContactName.tooltip}">
+                      <f:validator binding="#{row.bindings.ContactName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVWorkPhoneCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="WorkPhone" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVWORKPHONE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.WorkPhone.label}"
+                                      id="ol9"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVWorkPhone"
+                                  value="#{row.bindings.WorkPhone.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.WorkPhone.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.WorkPhone.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.WorkPhone.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.WorkPhone.displayWidth}"
+                                  maximumLength="255" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.WorkPhone.tooltip}">
+                      <f:validator binding="#{row.bindings.WorkPhone.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="ContactLookupLoVWorkEmailCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="WorkEmail" rowHeader="false"
+                             helpTopicId="RBH_CONTACTLOOKUPLOVWORKEMAIL"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.ContactLookupLoVTable.hints.WorkEmail.label}"
+                                      id="ol10"/>
+                    </f:facet>
+                    <af:inputText id="ContactLookupLoVWorkEmail"
+                                  value="#{row.bindings.WorkEmail.inputValue}"
+                                  label="#{bindings.ContactLookupLoVTable.hints.WorkEmail.label}"
+                                  required="#{bindings.ContactLookupLoVTable.hints.WorkEmail.mandatory}"
+                                  rows="#{bindings.ContactLookupLoVTable.hints.WorkEmail.displayHeight}"
+                                  columns="#{bindings.ContactLookupLoVTable.hints.WorkEmail.displayWidth}"
+                                  maximumLength="255" readOnly="true"
+                                  shortDesc="#{bindings.ContactLookupLoVTable.hints.WorkEmail.tooltip}">
+                      <f:validator binding="#{row.bindings.WorkEmail.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </f:facet>
+          </af:panelStretchLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="NTCsTaskFlow">
+    <template-reference>
+      <document id="__0">/WEB-INF/jhs-fragment-taskflow-template.xml</document>
+      <id id="__1">jhs-fragment-taskflow-template</id>
+    </template-reference>
+    <default-activity id="__2">StartNTCs</default-activity>
+    <input-parameter-definition id="__3">
+      <name id="__4">createNTCs</name>
+      <value id="__5">#{pageFlowScope.createNTCs}</value>
+      <class id="__6">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__7">
+      <name id="__8">rowKeyStrNTCs</name>
+      <value id="__9">#{pageFlowScope.rowKeyStrNTCs}</value>
+      <class id="__10">java.lang.String</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__11">
+      <name id="__12">rowKeyValueNTCs</name>
+      <value id="__13">#{pageFlowScope.rowKeyValueNTCs}</value>
+      <class id="__14">java.lang.Object</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__15">
+      <name id="__16">rowKeyNTCs</name>
+      <value id="__17">#{pageFlowScope.rowKeyNTCs}</value>
+      <class id="__18">oracle.jbo.Key</class>
+    </input-parameter-definition>
+    <input-parameter-definition id="__19">
+      <name id="__20">altKeyNameNTCs</name>
+      <value id="__21">#{pageFlowScope.altKeyNameNTCs}</value>
+      <class id="__22">java.lang.String</class>
+    </input-parameter-definition>
+    <managed-bean id="__23">
+      <managed-bean-name id="__24">jhsTaskFlowManager</managed-bean-name>
+      <managed-bean-class id="__25">oracle.jheadstart.controller.jsf.bean.TaskFlowManager</managed-bean-class>
+      <managed-bean-scope id="__26">pageFlow</managed-bean-scope>
+      <managed-property id="__27">
+        <property-name id="__28">initializeParentContextEntries</property-name>
+        <map-entries id="__29">
+          <map-entry id="__30">
+            <key id="__31">jhsCurrentGroupName</key>
+            <value id="__32">NTCs</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__33">
+      <managed-bean-name id="__34">NTCTitleChangeDefaultValues</managed-bean-name>
+      <managed-bean-class id="__35">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__36">pageFlow</managed-bean-scope>
+      <managed-property id="__37">
+        <property-name id="__38">iteratorBinding</property-name>
+        <value id="__39">#{data.NTCsPageDef.NTCTitleChangeIterator}</value>
+      </managed-property>
+      <managed-property id="__40">
+        <property-name id="__41">defaultValues</property-name>
+        <map-entries id="__42">
+          <map-entry id="__43">
+            <key id="__44">SupportDocumentationIncFlag</key>
+            <value id="__45">N</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__46">
+        <property-name id="__47">actionResult</property-name>
+        <value id="__48">CreateNTCTitleChange</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__49">
+      <managed-bean-name id="__50">NTCActivityAttachmentsDefaultValues</managed-bean-name>
+      <managed-bean-class id="__51">oracle.jheadstart.controller.jsf.bean.DefaultValuesBean</managed-bean-class>
+      <managed-bean-scope id="__52">pageFlow</managed-bean-scope>
+      <managed-property id="__53">
+        <property-name id="__54">iteratorBinding</property-name>
+        <value id="__55">#{data.NTCsPageDef.NTCActivityAttachmentsIterator}</value>
+      </managed-property>
+      <managed-property id="__56">
+        <property-name id="__57">defaultValues</property-name>
+        <map-entries id="__58">
+          <map-entry id="__59">
+            <key id="__60">AttachmentType</key>
+            <value id="__61">File</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+      <managed-property id="__62">
+        <property-name id="__63">actionResult</property-name>
+        <value id="__64">CreateNTCActivityAttachments</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__65">
+      <managed-bean-name id="__66">CreateNTCs</managed-bean-name>
+      <managed-bean-class id="__67">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__68">request</managed-bean-scope>
+      <managed-property id="__69">
+        <property-name id="__70">createBinding</property-name>
+        <value id="__71">#{bindings.CreateNTCs}</value>
+      </managed-property>
+      <managed-property id="__72">
+        <property-name id="__73">successOutcome</property-name>
+        <value id="__74">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__75">
+        <property-name id="__76">failureOutcome</property-name>
+        <value id="__77">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__78">
+      <managed-bean-name id="__79">jhsRollback</managed-bean-name>
+      <managed-bean-class id="__80">oracle.jheadstart.controller.jsf.bean.RollbackBean</managed-bean-class>
+      <managed-bean-scope id="__81">request</managed-bean-scope>
+      <managed-property id="__82">
+        <property-name id="__83">rollbackBinding</property-name>
+        <value id="__84">#{bindings.Rollback}</value>
+      </managed-property>
+      <managed-property id="__85">
+        <property-name id="__86">successOutcome</property-name>
+        <value id="__87">Cancel</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__88">
+      <managed-bean-name id="__89">searchNTCs</managed-bean-name>
+      <managed-bean-class id="__90">oracle.jheadstart.controller.jsf.bean.JhsSearchBean</managed-bean-class>
+      <managed-bean-scope id="__91">pageFlow</managed-bean-scope>
+      <managed-property id="__92">
+        <property-name id="__93">bindings</property-name>
+        <value id="__94">#{'#{bindings}'}</value>
+      </managed-property>
+      <managed-property id="__95">
+        <property-name id="__96">searchBinding</property-name>
+        <value id="__97">#{'#{bindings.advancedSearchNTCs}'}</value>
+      </managed-property>
+      <managed-property id="__98">
+        <property-name id="__99">searchItem</property-name>
+        <value id="__100">NTCsNtcNumber</value>
+      </managed-property>
+      <managed-property id="__101">
+        <property-name id="__102">dataCollection</property-name>
+        <value id="__103">NTCActivityView1</value>
+      </managed-property>
+      <managed-property id="__104">
+        <property-name id="__105">operators</property-name>
+        <map-entries id="__106"></map-entries>
+      </managed-property>
+      <managed-property id="__107">
+        <property-name id="__108">itemAttributes</property-name>
+        <map-entries id="__109">
+          <map-entry id="__110">
+            <key id="__111">NTCsId</key>
+            <value id="__112">Id</value>
+          </map-entry>
+          <map-entry id="__113">
+            <key id="__114">NTCsNtcNumber</key>
+            <value id="__115">NtcNumber</value>
+          </map-entry>
+          <map-entry id="__116">
+            <key id="__117">NTCsTypeCode</key>
+            <value id="__118">Type</value>
+          </map-entry>
+          <map-entry id="__119">
+            <key id="__120">NTCsType</key>
+            <value id="__121">Type</value>
+          </map-entry>
+          <map-entry id="__122">
+            <key id="__123">NTCsSubType</key>
+            <value id="__124">SubType</value>
+          </map-entry>
+          <map-entry id="__125">
+            <key id="__126">NTCsStatus</key>
+            <value id="__127">Status</value>
+          </map-entry>
+          <map-entry id="__128">
+            <key id="__129">NTCsPriority</key>
+            <value id="__130">Priority</value>
+          </map-entry>
+          <map-entry id="__131">
+            <key id="__132">NTCsNtcPriority</key>
+            <value id="__133">NtcPriority</value>
+          </map-entry>
+          <map-entry id="__134">
+            <key id="__135">NTCsDescription</key>
+            <value id="__136">Description</value>
+          </map-entry>
+          <map-entry id="__137">
+            <key id="__138">NTCsNotes</key>
+            <value id="__139">Notes</value>
+          </map-entry>
+          <map-entry id="__140">
+            <key id="__141">NTCsCreatedBy</key>
+            <value id="__142">CreatedBy</value>
+          </map-entry>
+          <map-entry id="__143">
+            <key id="__144">NTCsCreatedDate</key>
+            <value id="__145">CreatedDate</value>
+          </map-entry>
+          <map-entry id="__146">
+            <key id="__147">NTCsLastUpdatedBy</key>
+            <value id="__148">LastUpdatedBy</value>
+          </map-entry>
+          <map-entry id="__149">
+            <key id="__150">NTCsLastUpdatedDate</key>
+            <value id="__151">LastUpdatedDate</value>
+          </map-entry>
+        </map-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__152">
+      <managed-bean-name id="__153">NTCsTable</managed-bean-name>
+      <managed-bean-class id="__154">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__155">pageFlow</managed-bean-scope>
+      <managed-property id="__156">
+        <property-name id="__157">name</property-name>
+        <value id="__158">NTCsTable</value>
+      </managed-property>
+      <managed-property id="__159">
+        <property-name id="__160">rangeBindingExpr</property-name>
+        <value id="__161">#{'#{bindings.NTCsTable}'}</value>
+      </managed-property>
+      <managed-property id="__162">
+        <property-name id="__163">createNewRowAtTop</property-name>
+        <value id="__164">true</value>
+      </managed-property>
+      <managed-property id="__165">
+        <property-name id="__166">focusItemId</property-name>
+        <value id="__167">NTCsNtcNumber</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__168">
+      <managed-bean-name id="__169">NTCsTypeDependsOnItem</managed-bean-name>
+      <managed-bean-class id="__170">oracle.jheadstart.controller.jsf.bean.DependsOnItemBean</managed-bean-class>
+      <managed-bean-scope id="__171">application</managed-bean-scope>
+      <managed-property id="__172">
+        <property-name id="__173">itemsToClear</property-name>
+        <list-entries id="__174">
+          <value id="__175">NTCsTypeCode</value>
+          <value id="__176">NTCsSubType</value>
+        </list-entries>
+      </managed-property>
+      <managed-property id="__177">
+        <property-name id="__178">componentsToRefresh</property-name>
+        <list-entries id="__179">
+          <value id="__180">NTCsTypeCode</value>
+          <value id="__181">NTCsSubType</value>
+        </list-entries>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__182">
+      <managed-bean-name id="__183">DeleteNTCs</managed-bean-name>
+      <managed-bean-class id="__184">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__185">request</managed-bean-scope>
+      <managed-property id="__186">
+        <property-name id="__187">deleteBinding</property-name>
+        <value id="__188">#{bindings.DeleteNTCs}</value>
+      </managed-property>
+      <managed-property id="__189">
+        <property-name id="__190">commitBean</property-name>
+        <value id="__191">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__192">
+      <managed-bean-name id="__193">SaveNTCs</managed-bean-name>
+      <managed-bean-class id="__194">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__195">request</managed-bean-scope>
+      <managed-property id="__196">
+        <property-name id="__197">commitBinding</property-name>
+        <value id="__198">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__199">
+        <property-name id="__200">successOutcome</property-name>
+        <value id="__201">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__202">
+      <managed-bean-name id="__203">CreateNTCTitleChange</managed-bean-name>
+      <managed-bean-class id="__204">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__205">request</managed-bean-scope>
+      <managed-property id="__206">
+        <property-name id="__207">createBinding</property-name>
+        <value id="__208">#{bindings.CreateNTCTitleChange}</value>
+      </managed-property>
+      <managed-property id="__209">
+        <property-name id="__210">defaultValuesBean</property-name>
+        <value id="__211">#{pageFlowScope.NTCTitleChangeDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__212">
+        <property-name id="__213">successOutcome</property-name>
+        <value id="__214">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__215">
+        <property-name id="__216">failureOutcome</property-name>
+        <value id="__217">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__218">
+      <managed-bean-name id="__219">SaveNTCTitleChange</managed-bean-name>
+      <managed-bean-class id="__220">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__221">request</managed-bean-scope>
+      <managed-property id="__222">
+        <property-name id="__223">commitBinding</property-name>
+        <value id="__224">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__225">
+        <property-name id="__226">successOutcome</property-name>
+        <value id="__227">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__228">
+      <managed-bean-name id="__229">SaveNTCActivityTitles</managed-bean-name>
+      <managed-bean-class id="__230">oracle.jheadstart.controller.jsf.bean.CommitBean</managed-bean-class>
+      <managed-bean-scope id="__231">request</managed-bean-scope>
+      <managed-property id="__232">
+        <property-name id="__233">commitBinding</property-name>
+        <value id="__234">#{bindings.Commit}</value>
+      </managed-property>
+      <managed-property id="__235">
+        <property-name id="__236">successOutcome</property-name>
+        <value id="__237">Commit</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__238">
+      <managed-bean-name id="__239">NTCActivityAttachmentsTable</managed-bean-name>
+      <managed-bean-class id="__240">oracle.jheadstart.controller.jsf.bean.TableBean</managed-bean-class>
+      <managed-bean-scope id="__241">pageFlow</managed-bean-scope>
+      <managed-property id="__242">
+        <property-name id="__243">name</property-name>
+        <value id="__244">NTCActivityAttachmentsTable</value>
+      </managed-property>
+      <managed-property id="__245">
+        <property-name id="__246">rangeBindingExpr</property-name>
+        <value id="__247">#{'#{bindings.NTCActivityAttachmentsTable}'}</value>
+      </managed-property>
+      <managed-property id="__248">
+        <property-name id="__249">createNewRowAtTop</property-name>
+        <value id="__250">true</value>
+      </managed-property>
+      <managed-property id="__251">
+        <property-name id="__252">defaultValuesBean</property-name>
+        <value id="__253">#{pageFlowScope.NTCActivityAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__254">
+        <property-name id="__255">focusItemId</property-name>
+        <value id="__256">NTCActivityAttachmentsAttachment</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__257">
+      <managed-bean-name id="__258">DeleteNTCActivityAttachments</managed-bean-name>
+      <managed-bean-class id="__259">oracle.jheadstart.controller.jsf.bean.DeleteRowBean</managed-bean-class>
+      <managed-bean-scope id="__260">request</managed-bean-scope>
+      <managed-property id="__261">
+        <property-name id="__262">deleteBinding</property-name>
+        <value id="__263">#{bindings.DeleteNTCActivityAttachments}</value>
+      </managed-property>
+      <managed-property id="__264">
+        <property-name id="__265">commitBean</property-name>
+        <value id="__266">#{jhsCommit}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__267">
+      <managed-bean-name id="__268">CreateNTCActivityAttachments</managed-bean-name>
+      <managed-bean-class id="__269">oracle.jheadstart.controller.jsf.bean.CreateRowBean</managed-bean-class>
+      <managed-bean-scope id="__270">request</managed-bean-scope>
+      <managed-property id="__271">
+        <property-name id="__272">createBinding</property-name>
+        <value id="__273">#{bindings.CreateNTCActivityAttachments}</value>
+      </managed-property>
+      <managed-property id="__274">
+        <property-name id="__275">defaultValuesBean</property-name>
+        <value id="__276">#{pageFlowScope.NTCActivityAttachmentsDefaultValues}</value>
+      </managed-property>
+      <managed-property id="__277">
+        <property-name id="__278">successOutcome</property-name>
+        <value id="__279">deepLinkPage</value>
+      </managed-property>
+      <managed-property id="__280">
+        <property-name id="__281">failureOutcome</property-name>
+        <value id="__282">firstPage</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__283">
+      <managed-bean-name id="__284">NTCActivityAttachmentsAttachmentFileHandlerInTable</managed-bean-name>
+      <managed-bean-class id="__285">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__286">request</managed-bean-scope>
+      <managed-property id="__287">
+        <property-name id="__288">valueBinding</property-name>
+        <value id="__289">#{bindings.NTCActivityAttachmentsAttachment}</value>
+      </managed-property>
+      <managed-property id="__290">
+        <property-name id="__291">tableBean</property-name>
+        <value id="__292">#{pageFlowScope.NTCActivityAttachmentsTable}</value>
+      </managed-property>
+      <managed-property id="__293">
+        <property-name id="__294">fileNameWhenEmpty</property-name>
+        <value id="__295">#{'#{bindings.NTCActivityAttachmentsAttachment.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <managed-bean id="__296">
+      <managed-bean-name id="__297">NTCActivityAttachmentsAttachmentDLFileHandlerInTable</managed-bean-name>
+      <managed-bean-class id="__298">com.pq.tracs.view.beans.PrmFileHandlerBean</managed-bean-class>
+      <managed-bean-scope id="__299">request</managed-bean-scope>
+      <managed-property id="__300">
+        <property-name id="__301">valueBinding</property-name>
+        <value id="__302">#{bindings.NTCActivityAttachmentsAttachmentDL}</value>
+      </managed-property>
+      <managed-property id="__303">
+        <property-name id="__304">tableBean</property-name>
+        <value id="__305">#{pageFlowScope.NTCActivityAttachmentsTable}</value>
+      </managed-property>
+      <managed-property id="__306">
+        <property-name id="__307">fileNameWhenEmpty</property-name>
+        <value id="__308">#{'#{bindings.NTCActivityAttachmentsAttachmentDL.hints.tooltip}'}</value>
+      </managed-property>
+    </managed-bean>
+    <router id="StartNTCs">
+      <case id="__309">
+        <expression id="__310">#{pageFlowScope.createNTCs!=null}</expression>
+        <outcome id="__311">createNTCs</outcome>
+      </case>
+      <case id="__312">
+        <expression id="__313">#{pageFlowScope.rowKeyStrNTCs!=null or
+                               pageFlowScope.rowKeyValueNTCs!=null or
+                               pageFlowScope.rowKeyNTCs!=null}</expression>
+        <outcome id="__314">SetCurrentRowNTCs</outcome>
+      </case>
+      <case id="__315">
+        <expression id="__316">#{pageFlowScope.isDeepLink!=null and
+                               pageFlowScope.isDeepLink}</expression>
+        <outcome id="__317">deepLinkPage</outcome>
+      </case>
+      <default-outcome id="__318">firstPage</default-outcome>
+    </router>
+    <method-call id="CreateNTCs">
+      <method id="__319">#{CreateNTCs.execute}</method>
+      <!-- execute condition param -->
+      <parameter>
+        <class id="__320">java.lang.Object</class>
+        <value id="__321">#{pageFlowScope.createNTCs}</value>
+      </parameter>
+      <outcome id="__322">
+        <to-string/>
+      </outcome>
+    </method-call>
+    <method-call id="SetCurrentRowNTCs">
+      <method id="__323">#{jhsSetCurrentRow.execute}</method>
+      <!-- iterator param -->
+      <parameter>
+        <class id="__324">oracle.adf.model.binding.DCIteratorBinding</class>
+        <value id="__325">#{bindings.NTCsIterator}</value>
+      </parameter>
+      <!-- rowKeyStr param -->
+      <parameter>
+        <class id="__326">java.lang.String</class>
+        <value id="__327">#{pageFlowScope.rowKeyStrNTCs}</value>
+      </parameter>
+      <!-- rowKeyValue param -->
+      <parameter>
+        <class id="__328">java.lang.Object</class>
+        <value id="__329">#{pageFlowScope.rowKeyValueNTCs}</value>
+      </parameter>
+      <!-- rowKey param -->
+      <parameter>
+        <class id="__330">oracle.jbo.Key</class>
+        <value id="__331">#{pageFlowScope.rowKeyNTCs}</value>
+      </parameter>
+      <!-- altKeyName param -->
+      <parameter>
+        <class id="__332">java.lang.String</class>
+        <value id="__333">#{pageFlowScope.altKeyNameNTCs}</value>
+      </parameter>
+      <outcome id="__334">
+        <fixed-outcome id="__335">deepLinkPage</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="CancelNTCsReturn">
+      <outcome id="__336">
+        <name id="__337">CancelNTCs</name>
+      </outcome>
+    </task-flow-return>
+    <task-flow-return id="DoneNTCsReturn">
+      <outcome id="__338">
+        <name id="__339">DoneNTCs</name>
+      </outcome>
+    </task-flow-return>
+    <view id="NTCsTable">
+      <page id="__340">/pages/NTCsTable.jsff</page>
+    </view>
+    <view id="NTCs">
+      <page id="__341">/pages/NTCs.jsff</page>
+    </view>
+    <control-flow-rule id="__342">
+      <from-activity-id id="__343">*</from-activity-id>
+      <control-flow-case id="__344">
+        <from-outcome id="__345">SetCurrentRowNTCs</from-outcome>
+        <to-activity-id id="__346">SetCurrentRowNTCs</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__347">
+        <from-outcome id="__348">firstPage</from-outcome>
+        <to-activity-id id="__349">NTCsTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__350">
+        <from-outcome id="__351">deepLinkPage</from-outcome>
+        <to-activity-id id="__352">NTCs</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__353">
+        <from-outcome id="__354">NTCsTableBreadcrumb</from-outcome>
+        <to-activity-id id="__355">NTCsTable</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__356">
+        <from-outcome id="__357">NTCsBreadcrumb</from-outcome>
+        <to-activity-id id="__358">NTCs</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__359">
+        <from-outcome id="__360">Cancel</from-outcome>
+        <to-activity-id id="__361">StartNTCs</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__362">
+        <from-outcome id="__363">CancelNTCsReturn</from-outcome>
+        <to-activity-id id="__364">CancelNTCsReturn</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__365">
+        <from-outcome id="__366">DoneNTCsReturn</from-outcome>
+        <to-activity-id id="__367">DoneNTCsReturn</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__368">
+      <from-activity-id id="__369">NTCsTable</from-activity-id>
+      <control-flow-case id="__370">
+        <from-outcome id="__371">CreateNTCs</from-outcome>
+        <to-activity-id id="__372">NTCs</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__373">
+        <from-outcome id="__374">NTCsDetails</from-outcome>
+        <to-activity-id id="__375">NTCs</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__376">
+      <from-activity-id id="__377">*</from-activity-id>
+      <control-flow-case id="__378">
+        <from-outcome id="__379">createNTCs</from-outcome>
+        <to-activity-id id="__380">CreateNTCs</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+  <!-- This bean must be defined outside the task-flow-definition element
+       because it needs to be available in the pageFlowScope of the unbounded
+       task-flow not in the pageFlowScope of the bounded task flow itself. -->
+  <managed-bean id="__381">
+    <managed-bean-name id="__382">NTCsTaskFlowConfig</managed-bean-name>
+    <managed-bean-class id="__383">oracle.jheadstart.controller.jsf.bean.TaskFlowConfigBean</managed-bean-class>
+    <managed-bean-scope id="__384">pageFlow</managed-bean-scope>
+    <managed-property id="__385">
+      <property-name id="__386">params</property-name>
+      <property-class id="__387">java.util.Map</property-class>
+      <map-entries id="__388">
+        <map-entry id="__389">
+          <key id="__390">parentContext</key>
+          <value id="__391">#{pageFlowScope.parentContext}</value>
+        </map-entry>
+      </map-entries>
+    </managed-property>
+    <managed-property id="__392">
+      <property-name id="__393">name</property-name>
+      <value id="__394">NTCs</value>
+    </managed-property>
+    <managed-property id="__395">
+      <property-name id="__396">taskFlowId</property-name>
+      <value id="__397">/WEB-INF/adfc-config-NTCs.xml#NTCsTaskFlow</value>
+    </managed-property>
+    <managed-property id="__398">
+      <property-name id="__399">tabUniqueIdentifier</property-name>
+      <value id="__400">NTCs</value>
+    </managed-property>
+    <managed-property id="__401">
+      <property-name id="__402">label</property-name>
+      <value id="__403">NTCs</value>
+    </managed-property>
+  </managed-bean>
+</adfc-config>

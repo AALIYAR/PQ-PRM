@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="TargetingPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, ADMIN'}"/>
+  </parameters>
+  <executables>
+    <iterator id="TargetingIterator" Binds="PrmTargetGroupView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="-1"/>
+    <searchRegion id="TargetingIteratorPrmTargetGroupViewCriteriaQuery"
+                  Binds="TargetingIterator"
+                  Criteria="PrmTargetGroupViewCriteria"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="GroupName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <searchRegion id="TargetingIteratorPrmTargetGroupQuickQueryQuery"
+                  Binds="TargetingIterator" Criteria="PrmTargetGroupQuickQuery"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="GroupName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryTargetingInvoke" Binds="ExecuteQueryTargeting"
+                  Refresh="renderModel" RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="TargetGroupProductsIterator"
+              Binds="PrmTargetGroupProductView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="15"/>
+    <searchRegion id="TargetGroupProductsIteratorQuery"
+                  Binds="TargetGroupProductsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryTargetGroupProductsInvoke"
+                  Binds="ExecuteQueryTargetGroupProducts" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="TargetGroupProductFormatsIterator"
+              Binds="PrmTargetedFormatView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <iterator id="TargetGroupProductMarketsIterator"
+              Binds="PrmTargetedMarketView2"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <iterator id="TargetGroupTitlesIterator" Binds="PrmTargetGroupTitleView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="15"/>
+    <searchRegion id="TargetGroupTitlesIteratorPrmTargetGroupTitleViewCriteriaQuery"
+                  Binds="TargetGroupTitlesIterator"
+                  Criteria="PrmTargetGroupTitleViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="LongTitle"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryTargetGroupTitlesInvoke"
+                  Binds="ExecuteQueryTargetGroupTitles" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <variableIterator id="variables">
+      <variable Name="s41EditLinkVar" Type="String"/>
+    </variableIterator>
+    <iterator id="TargetGroupTargetsIterator"
+              Binds="PrmTargetedProductTitleView2"
+              DataControl="PrmAppModuleDataControl" RangeSize="15"/>
+    <searchRegion id="TargetGroupTargetsIteratorPrmTargetedProductTitleViewCriteriaQuery"
+                  Binds="TargetGroupTargetsIterator"
+                  Criteria="PrmTargetedProductTitleViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="LongTitle"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryTargetGroupTargetsInvoke"
+                  Binds="ExecuteQueryTargetGroupTargets" Refresh="renderModel"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <taskFlow id="LovTaskFlow"
+              taskFlowId="#{pageFlowScope.jhsLovTaskFlowManager.currentTaskFlowId}"
+              activation="deferred"
+              parametersMap="#{pageFlowScope.jhsLovTaskFlowManager.currentParamMap}"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteQueryTargeting" IterBinding="TargetingIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <attributeValues id="TrgImportFileId" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="ImportFileId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TrgGroupNo" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="GroupNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TrgGroupName" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="GroupName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="TargetingIterator" id="TrgGroupType"
+          Uses="LOV_GroupType" StaticList="false"/>
+    <attributeValues id="TrgProductCount" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="ProductCount"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TrgTitleCount" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="TitleCount"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="TrgTargetTitlesToProducts"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="targetTitlesToProducts"
+                  ReturnName="PrmAppModuleDataControl.methodResults.targetTitlesToProducts_PrmAppModuleDataControl_dataProvider_targetTitlesToProducts_result"
+                  IsViewObjectMethod="false"/>
+    <attributeValues id="TrgFileName" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="FileName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TrgCreatedBy" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TrgCreatedDate" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TrgLastUpdatedBy" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TrgLastUpdatedDate" IterBinding="TargetingIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="TargetingTable" IterBinding="TargetingIterator">
+      <nodeDefinition Name="Targeting"
+                      DefName="com.pq.tracs.model.vo.PrmTargetGroupView">
+        <AttrNames>
+          <Item Value="ImportFileId"/>
+          <Item Value="GroupNo"/>
+          <Item Value="GroupName"/>
+          <Item Value="GroupType"/>
+          <Item Value="ProductCount"/>
+          <Item Value="TitleCount"/>
+          <Item Value="FileName"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTargeting" IterBinding="TargetingIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousTargeting" IterBinding="TargetingIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextTargeting" IterBinding="TargetingIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastTargeting" IterBinding="TargetingIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyTargeting" IterBinding="TargetingIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTargeting}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateTargeting" IterBinding="TargetingIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteTargeting" IterBinding="TargetingIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryTargetGroupProducts"
+            IterBinding="TargetGroupProductsIterator" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues id="s40PrmTargetedProductId"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="PrmTargetedProductId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40Name" IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40PrdId" IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="PrdId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40ProductFamily"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="ProductFamily"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40ProductManager"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="ProductManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40AddedDate"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40RemovedDate"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40CreatedBy"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40CreatedDate"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40LastUpdatedBy"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s40LastUpdatedDate"
+                     IterBinding="TargetGroupProductsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="TargetGroupProductsTable"
+          IterBinding="TargetGroupProductsIterator">
+      <nodeDefinition Name="TargetGroupProducts"
+                      DefName="com.pq.tracs.model.vo.PrmTargetGroupProductView">
+        <AttrNames>
+          <Item Value="PrmTargetedProductId"/>
+          <Item Value="Name"/>
+          <Item Value="PrdId"/>
+          <Item Value="ProductFamily"/>
+          <Item Value="ProductManager"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTargetGroupProducts"
+            IterBinding="TargetGroupProductsIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousTargetGroupProducts"
+            IterBinding="TargetGroupProductsIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextTargetGroupProducts"
+            IterBinding="TargetGroupProductsIterator" RequiresUpdateModel="true"
+            Action="next"/>
+    <action id="LastTargetGroupProducts"
+            IterBinding="TargetGroupProductsIterator" RequiresUpdateModel="true"
+            Action="last"/>
+    <action id="SetCurrentRowWithKeyTargetGroupProducts"
+            IterBinding="TargetGroupProductsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTargetGroupProducts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateTargetGroupProducts"
+            IterBinding="TargetGroupProductsIterator" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="DeleteTargetGroupProducts"
+            IterBinding="TargetGroupProductsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <list IterBinding="TargetGroupProductFormatsIterator"
+          id="s400TargetedFormat" Uses="LOV_TargetedFormat" StaticList="false"/>
+    <attributeValues id="s400CreatedBy"
+                     IterBinding="TargetGroupProductFormatsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s400CreatedDate"
+                     IterBinding="TargetGroupProductFormatsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s400LastUpdatedBy"
+                     IterBinding="TargetGroupProductFormatsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s400LastUpdatedDate"
+                     IterBinding="TargetGroupProductFormatsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="TargetGroupProductFormatsTable"
+          IterBinding="TargetGroupProductFormatsIterator">
+      <nodeDefinition Name="TargetGroupProductFormats"
+                      DefName="com.pq.tracs.model.vo.PrmTargetedFormatView">
+        <AttrNames>
+          <Item Value="TargetedFormat"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTargetGroupProductFormats"
+            IterBinding="TargetGroupProductFormatsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousTargetGroupProductFormats"
+            IterBinding="TargetGroupProductFormatsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextTargetGroupProductFormats"
+            IterBinding="TargetGroupProductFormatsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastTargetGroupProductFormats"
+            IterBinding="TargetGroupProductFormatsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyTargetGroupProductFormats"
+            IterBinding="TargetGroupProductFormatsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTargetGroupProductFormats}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateTargetGroupProductFormats"
+            IterBinding="TargetGroupProductFormatsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteTargetGroupProductFormats"
+            IterBinding="TargetGroupProductFormatsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <list IterBinding="TargetGroupProductMarketsIterator"
+          id="s401TargetedMarket" Uses="LOV_TargetedMarket" StaticList="false"/>
+    <attributeValues id="s401CreatedBy"
+                     IterBinding="TargetGroupProductMarketsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s401CreatedDate"
+                     IterBinding="TargetGroupProductMarketsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s401LastUpdatedBy"
+                     IterBinding="TargetGroupProductMarketsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s401LastUpdatedDate"
+                     IterBinding="TargetGroupProductMarketsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="TargetGroupProductMarketsTable"
+          IterBinding="TargetGroupProductMarketsIterator">
+      <nodeDefinition Name="TargetGroupProductMarkets"
+                      DefName="com.pq.tracs.model.vo.PrmTargetedMarketView">
+        <AttrNames>
+          <Item Value="TargetedMarket"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTargetGroupProductMarkets"
+            IterBinding="TargetGroupProductMarketsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousTargetGroupProductMarkets"
+            IterBinding="TargetGroupProductMarketsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextTargetGroupProductMarkets"
+            IterBinding="TargetGroupProductMarketsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastTargetGroupProductMarkets"
+            IterBinding="TargetGroupProductMarketsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyTargetGroupProductMarkets"
+            IterBinding="TargetGroupProductMarketsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTargetGroupProductMarkets}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateTargetGroupProductMarkets"
+            IterBinding="TargetGroupProductMarketsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteTargetGroupProductMarkets"
+            IterBinding="TargetGroupProductMarketsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryTargetGroupTitles"
+            IterBinding="TargetGroupTitlesIterator" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues id="s41TitleId" IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="TitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41AccountId" IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41TargetTrackingNo"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41EditLink" IterBinding="variables">
+      <AttrNames>
+        <Item Value="s41EditLinkVar"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41CatalogNumber"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41LongTitle" IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41Subject" IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="Subject"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41SubjectType"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="SubjectType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41AccountNo" IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="AccountNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41AccountName"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41AccountCountry"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="AccountCountry"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41AddedDate" IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41RemovedDate"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41OpenAccess" IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="OpenAccess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41ExternalIndexes"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="ExternalIndexes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41CreatedBy" IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41CreatedDate"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41LastUpdatedBy"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s41LastUpdatedDate"
+                     IterBinding="TargetGroupTitlesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="TargetGroupTitlesTable" IterBinding="TargetGroupTitlesIterator">
+      <nodeDefinition Name="TargetGroupTitles"
+                      DefName="com.pq.tracs.model.vo.PrmTargetGroupTitleView">
+        <AttrNames>
+          <Item Value="TitleId"/>
+          <Item Value="AccountId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="Subject"/>
+          <Item Value="SubjectType"/>
+          <Item Value="AccountNo"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountCountry"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="OpenAccess"/>
+          <Item Value="ExternalIndexes"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTargetGroupTitles" IterBinding="TargetGroupTitlesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousTargetGroupTitles"
+            IterBinding="TargetGroupTitlesIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextTargetGroupTitles" IterBinding="TargetGroupTitlesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastTargetGroupTitles" IterBinding="TargetGroupTitlesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyTargetGroupTitles"
+            IterBinding="TargetGroupTitlesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTargetGroupTitles}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateTargetGroupTitles" IterBinding="TargetGroupTitlesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteTargetGroupTitles" IterBinding="TargetGroupTitlesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="ExecuteQueryTargetGroupTargets"
+            IterBinding="TargetGroupTargetsIterator" RequiresUpdateModel="true"
+            Action="iteratorExecute"/>
+    <attributeValues id="s42PrmTargetedProductId"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="PrmTargetedProductId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42TitleId" IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="TitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42TargetTrackingNo"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42CatalogNumber"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42LongTitle" IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42Author" IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="Author"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42Name" IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42PrdId" IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="PrdId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42ProductName"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="ProductName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42ProductFamily"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="ProductFamily"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="s42AiTargetingFlag" IterBinding="TargetGroupTargetsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="AiTargetingFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="s42AddedDate" IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42RemovedDate"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42OpportunityId"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="OpportunityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42OpportunityAccountId"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="OpportunityAccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42OpportunityNo"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="OpportunityNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42OpportunityName"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="OpportunityName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="TargetGroupTargetsIterator"
+          id="s42NegotiationStage" Uses="LOV_NegotiationStage"
+          StaticList="false"/>
+    <attributeValues id="s42OpportunityAccountName"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="OpportunityAccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42OpenAccess"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="OpenAccess"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42ExternalIndexes"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="ExternalIndexes"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42CreatedBy" IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42CreatedDate"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42LastUpdatedBy"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42LastUpdatedDate"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s42Id" IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="TargetGroupTargetsIterator"
+          id="s42TargetPriority" Uses="LOV_TargetPriority" StaticList="false"/>
+    <attributeValues id="s42AllianceManager"
+                     IterBinding="TargetGroupTargetsIterator">
+      <AttrNames>
+        <Item Value="AllianceManager"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="TargetGroupTargetsTable" IterBinding="TargetGroupTargetsIterator">
+      <nodeDefinition Name="TargetGroupTargets"
+                      DefName="com.pq.tracs.model.vo.PrmTargetedProductTitleView">
+        <AttrNames>
+          <Item Value="PrmTargetedProductId"/>
+          <Item Value="TitleId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="Author"/>
+          <Item Value="Name"/>
+          <Item Value="PrdId"/>
+          <Item Value="ProductName"/>
+          <Item Value="ProductFamily"/>
+          <Item Value="AiTargetingFlag"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="OpportunityId"/>
+          <Item Value="OpportunityAccountId"/>
+          <Item Value="OpportunityNo"/>
+          <Item Value="OpportunityName"/>
+          <Item Value="NegotiationStage"/>
+          <Item Value="OpportunityAccountName"/>
+          <Item Value="OpenAccess"/>
+          <Item Value="ExternalIndexes"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="Id"/>
+          <Item Value="TargetPriority"/>
+          <Item Value="AllianceManager"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTargetGroupTargets"
+            IterBinding="TargetGroupTargetsIterator" RequiresUpdateModel="true"
+            Action="first"/>
+    <action id="PreviousTargetGroupTargets"
+            IterBinding="TargetGroupTargetsIterator" RequiresUpdateModel="true"
+            Action="previous"/>
+    <action id="NextTargetGroupTargets" IterBinding="TargetGroupTargetsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastTargetGroupTargets" IterBinding="TargetGroupTargetsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyTargetGroupTargets"
+            IterBinding="TargetGroupTargetsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTargetGroupTargets}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateTargetGroupTargets"
+            IterBinding="TargetGroupTargetsIterator" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="DeleteTargetGroupTargets"
+            IterBinding="TargetGroupTargetsIterator" RequiresUpdateModel="false"
+            Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

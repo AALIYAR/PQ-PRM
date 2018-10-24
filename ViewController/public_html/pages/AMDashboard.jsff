@@ -1,0 +1,1393 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="psl0" partialTriggers=""
+                             rendered="#{jhsUserRoles['AM, AST']}">
+        <f:facet name="top">
+          <af:panelGroupLayout layout="scroll" id="AMDTopLc" partialTriggers=""
+                               rendered="#{jhsUserRoles['AM, AST']}">
+            <f:facet name="separator">
+              <af:spacer width="10" height="10" id="sp0"/>
+            </f:facet>
+            <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+            <af:group id="g0"></af:group>
+            <af:switcher rendered="#{bindings.AMDashboardIterator.findMode!='true'}"
+                         id="AMDSw" defaultFacet="hasRows"
+                         facetName="#{( bindings.AMDashboardIterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+              <f:facet name="noRows">
+                <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                    styleUsage="pageStamp" id="AMDNoRowsFound"/>
+              </f:facet>
+              <f:facet name="hasRows">
+                <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm), disabled (default/pageComponent/formGroup.vm) -->
+                <af:panelGroupLayout id="AMDFC" layout="vertical">
+                  <f:facet name="separator">
+                    <af:spacer width="10" height="10" id="sp1"/>
+                  </f:facet>
+                  <af:panelFormLayout rows="1" labelAlignment="start"
+                                      maxColumns="2" id="AMDFI">
+                    <af:inputText id="AMDUser"
+                                  value="#{bindings.AMDUser.inputValue}"
+                                  label="Welcome" required="false"
+                                  readOnly="true" helpTopicId="RBH_AMDUSER">
+                      <f:validator binding="#{bindings.AMDUser.validator}"/>
+                    </af:inputText>
+                  </af:panelFormLayout>
+                </af:panelGroupLayout>
+                <!-- Popped "disabled" from stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+              </f:facet>
+            </af:switcher>
+            <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+            <af:spacer width="10" height="10" id="sp2"/>
+          </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="center">
+          <af:panelDashboard id="AMDDb" columns="2" rowHeight="300px">
+            <af:panelBox text="#{nls['TABLE_TITLE_AMACCOUNTDASHBOARD']}"
+                         id="ADbPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="ADbTopLc"
+                                     partialTriggers=" AMDTopLc qsAreaADbSearchOptions"
+                                     rendered="#{jhsUserRoles['AM, AST']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g1">
+                    <af:panelGroupLayout id="modelSearchAreaADb"
+                                         rendered="#{!pageFlowScope.createModes.CreateAMAccountDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaADbSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.AMAccountDashboardIteratorMyAccountsQuickQueryQuery.queryDescriptor}"
+                                     model="#{bindings.AMAccountDashboardIteratorMyAccountsQuickQueryQuery.queryModel}"
+                                     queryListener="#{bindings.AMAccountDashboardIteratorMyAccountsQuickQueryQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp3"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl1">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="ADbPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu0">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu1">
+                              <af:group id="ADbtbb"
+                                        rendered="#{ bindings.AMAccountDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstAMAccountDashboard.execute}"
+                                                    id="ADbFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousAMAccountDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="ADbPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextAMAccountDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="ADbNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastAMAccountDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="ADbLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi0">
+                              <af:exportCollectionActionListener exportedId="ADbTab"
+                                                                 type="excelHTML"
+                                                                 filename="AMAccountDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar0">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl0"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="ADbTab"
+                                                                 type="excelHTML"
+                                                                 filename="AMAccountDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="ADbPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.AMAccountDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="ADbTab" contentDelivery="immediate"
+                                  value="#{bindings.AMAccountDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.AMAccountDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.AMAccountDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.AMAccountDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.AMAccountDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.AMAccountDashboardIteratorMyAccountsQuickQueryQuery.processQuery}"
+                                  filterModel="#{bindings.AMAccountDashboardIteratorMyAccountsQuickQueryQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.AMAccountDashboardTable.table}"
+                                  partialTriggers=":::qsAreaADbSearchOptions :::ADbPC ::ADbFirst ::ADbPrevious ::ADbNext ::ADbLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_AMACCOUNTDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="ADbTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu2">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu3"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="ADbKALCol" sortable="true"
+                                     filterable="true" noWrap="false"
+                                     width="100" sortProperty="KeyAccountLevel"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ADBKEYACCOUNTLEVEL"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMAccountDashboardTable.hints.KeyAccountLevel.label}"
+                                              id="ol0"/>
+                            </f:facet>
+                            <af:selectOneChoice id="ADbKAL"
+                                                value="#{row.bindings.KeyAccountLevel.inputValue}"
+                                                label="#{bindings.AMAccountDashboardTable.hints.KeyAccountLevel.label}"
+                                                required="#{bindings.AMAccountDashboardTable.hints.KeyAccountLevel.mandatory}"
+                                                readOnly="true"
+                                                shortDesc="hint tooltip 0">
+                              <f:selectItems value="#{row.bindings.KeyAccountLevel.items}"/>
+                            </af:selectOneChoice>
+                          </af:column>
+                          <af:column id="ADbANmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="Name" rowHeader="false"
+                                     helpTopicId="RBH_ADBACCTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMAccountDashboardTable.hints.Name.label}"
+                                              id="ol1"/>
+                            </f:facet>
+                            <af:inputText id="cl1"
+                                          value="#{row.bindings.Name.inputValue}"
+                                          label="#{bindings.AMAccountDashboardTable.hints.Name.label}"
+                                          required="#{bindings.AMAccountDashboardTable.hints.Name.mandatory}"
+                                          rows="#{bindings.AMAccountDashboardTable.hints.Name.displayHeight}"
+                                          columns="#{bindings.AMAccountDashboardTable.hints.Name.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.Name.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="ADbANm"
+                                            text="#{row.bindings.Name.attributeValue}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Accounts"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Acct. - #{row.Name}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.Id}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="ADbAStCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="Site" rowHeader="false"
+                                     helpTopicId="RBH_ADBSITE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMAccountDashboardTable.hints.Site.label}"
+                                              id="ol2"/>
+                            </f:facet>
+                            <af:inputText id="ADbASt"
+                                          value="#{row.bindings.Site.inputValue}"
+                                          label="#{bindings.AMAccountDashboardTable.hints.Site.label}"
+                                          required="#{bindings.AMAccountDashboardTable.hints.Site.mandatory}"
+                                          rows="#{bindings.AMAccountDashboardTable.hints.Site.displayHeight}"
+                                          columns="#{bindings.AMAccountDashboardTable.hints.Site.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.AMAccountDashboardTable.hints.Site.tooltip}">
+                              <f:validator binding="#{row.bindings.Site.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ADbCyCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="City" rowHeader="false"
+                                     helpTopicId="RBH_ADBCITY"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMAccountDashboardTable.hints.City.label}"
+                                              id="ol3"/>
+                            </f:facet>
+                            <af:inputText id="ADbCy"
+                                          value="#{row.bindings.City.inputValue}"
+                                          label="#{bindings.AMAccountDashboardTable.hints.City.label}"
+                                          required="#{bindings.AMAccountDashboardTable.hints.City.mandatory}"
+                                          rows="#{bindings.AMAccountDashboardTable.hints.City.displayHeight}"
+                                          columns="#{bindings.AMAccountDashboardTable.hints.City.displayWidth}"
+                                          maximumLength="200" readOnly="true"
+                                          shortDesc="#{bindings.AMAccountDashboardTable.hints.City.tooltip}">
+                              <f:validator binding="#{row.bindings.City.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ADbSoPCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="StateOrProvince"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ADBSTATEORPROVINCE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMAccountDashboardTable.hints.StateOrProvince.label}"
+                                              id="ol4"/>
+                            </f:facet>
+                            <af:inputText id="ADbSoP"
+                                          value="#{row.bindings.StateOrProvince.inputValue}"
+                                          label="#{bindings.AMAccountDashboardTable.hints.StateOrProvince.label}"
+                                          required="#{bindings.AMAccountDashboardTable.hints.StateOrProvince.mandatory}"
+                                          rows="#{bindings.AMAccountDashboardTable.hints.StateOrProvince.displayHeight}"
+                                          columns="#{bindings.AMAccountDashboardTable.hints.StateOrProvince.displayWidth}"
+                                          maximumLength="100" readOnly="true"
+                                          shortDesc="#{bindings.AMAccountDashboardTable.hints.StateOrProvince.tooltip}">
+                              <f:validator binding="#{row.bindings.StateOrProvince.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ADbCoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="120"
+                                     sortProperty="Country" rowHeader="false"
+                                     helpTopicId="RBH_ADBCOUNTRY"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMAccountDashboardTable.hints.Country.label}"
+                                              id="ol5"/>
+                            </f:facet>
+                            <af:inputText id="ADbCo"
+                                          value="#{row.bindings.Country.inputValue}"
+                                          label="#{bindings.AMAccountDashboardTable.hints.Country.label}"
+                                          required="#{bindings.AMAccountDashboardTable.hints.Country.mandatory}"
+                                          rows="#{bindings.AMAccountDashboardTable.hints.Country.displayHeight}"
+                                          columns="#{bindings.AMAccountDashboardTable.hints.Country.displayWidth}"
+                                          maximumLength="100" readOnly="true"
+                                          shortDesc="#{bindings.AMAccountDashboardTable.hints.Country.tooltip}">
+                              <f:validator binding="#{row.bindings.Country.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+            <af:panelBox text="#{nls['TABLE_TITLE_AMOPPORTUNITYDASHBOARD']}"
+                         id="ODbPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="ODbTopLc"
+                                     partialTriggers=" AMDTopLc qsAreaODbSearchOptions"
+                                     rendered="#{jhsUserRoles['AM, AST']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g2">
+                    <af:panelGroupLayout id="modelSearchAreaODb"
+                                         rendered="#{!pageFlowScope.createModes.CreateAMOpportunityDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaODbSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.AMOpportunityDashboardIteratorMyOpportunitiesQuickQueryQuery.queryDescriptor}"
+                                     model="#{bindings.AMOpportunityDashboardIteratorMyOpportunitiesQuickQueryQuery.queryModel}"
+                                     queryListener="#{bindings.AMOpportunityDashboardIteratorMyOpportunitiesQuickQueryQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp4"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl2">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="ODbPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu4">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu5">
+                              <af:group id="ODbtbb"
+                                        rendered="#{ bindings.AMOpportunityDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstAMOpportunityDashboard.execute}"
+                                                    id="ODbFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousAMOpportunityDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="ODbPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextAMOpportunityDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="ODbNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastAMOpportunityDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="ODbLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi1">
+                              <af:exportCollectionActionListener exportedId="ODbTab"
+                                                                 type="excelHTML"
+                                                                 filename="AMOpportunityDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar1">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl2"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="ODbTab"
+                                                                 type="excelHTML"
+                                                                 filename="AMOpportunityDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="ODbPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.AMOpportunityDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="ODbTab" contentDelivery="immediate"
+                                  value="#{bindings.AMOpportunityDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.AMOpportunityDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.AMOpportunityDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.AMOpportunityDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.AMOpportunityDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.AMOpportunityDashboardIteratorMyOpportunitiesQuickQueryQuery.processQuery}"
+                                  filterModel="#{bindings.AMOpportunityDashboardIteratorMyOpportunitiesQuickQueryQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.AMOpportunityDashboardTable.table}"
+                                  partialTriggers=":::qsAreaODbSearchOptions :::ODbPC ::ODbFirst ::ODbPrevious ::ODbNext ::ODbLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_AMOPPORTUNITYDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="ODbTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu6">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu7"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="ODbOpportunityNoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="OpportunityNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBOPPORTUNITYNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.OpportunityNo.label}"
+                                              id="ol6"/>
+                            </f:facet>
+                            <af:inputText id="ODbOpportunityNo"
+                                          value="#{row.bindings.OpportunityNo.inputValue}"
+                                          label="#{bindings.AMOpportunityDashboardTable.hints.OpportunityNo.label}"
+                                          required="#{bindings.AMOpportunityDashboardTable.hints.OpportunityNo.mandatory}"
+                                          rows="#{bindings.AMOpportunityDashboardTable.hints.OpportunityNo.displayHeight}"
+                                          columns="#{bindings.AMOpportunityDashboardTable.hints.OpportunityNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.AMOpportunityDashboardTable.hints.OpportunityNo.tooltip}">
+                              <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.AMOpportunityDashboardTable.hints.OpportunityNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ODbONmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="OpportunityName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBOPPORTUNITYNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.OpportunityName.label}"
+                                              id="ol7"/>
+                            </f:facet>
+                            <af:inputText id="cl3"
+                                          value="#{row.bindings.OpportunityName.inputValue}"
+                                          label="#{bindings.AMOpportunityDashboardTable.hints.OpportunityName.label}"
+                                          required="#{bindings.AMOpportunityDashboardTable.hints.OpportunityName.mandatory}"
+                                          rows="#{bindings.AMOpportunityDashboardTable.hints.OpportunityName.displayHeight}"
+                                          columns="#{bindings.AMOpportunityDashboardTable.hints.OpportunityName.displayWidth}"
+                                          maximumLength="200" readOnly="true"
+                                          shortDesc="#{bindings.AMOpportunityDashboardTable.hints.OpportunityName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="ODbONm"
+                                            text="#{row.bindings.OpportunityName.attributeValue}"
+                                            shortDesc="#{bindings.AMOpportunityDashboardTable.hints.OpportunityName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Opportunity"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.OpportunityId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Opp. - #{row.OpportunityName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.OpportunityId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="ODbCSCol" sortable="true"
+                                     filterable="true" noWrap="true" width="120"
+                                     sortProperty="CurrentStatus"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBCURRENTSTATUS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.CurrentStatus.label}"
+                                              id="ol8"/>
+                            </f:facet>
+                            <af:inputText id="ODbCS"
+                                          value="#{row.bindings.CurrentStatus.inputValue}"
+                                          label="#{bindings.AMOpportunityDashboardTable.hints.CurrentStatus.label}"
+                                          required="#{bindings.AMOpportunityDashboardTable.hints.CurrentStatus.mandatory}"
+                                          rows="#{bindings.AMOpportunityDashboardTable.hints.CurrentStatus.displayHeight}"
+                                          columns="#{bindings.AMOpportunityDashboardTable.hints.CurrentStatus.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.AMOpportunityDashboardTable.hints.CurrentStatus.tooltip}">
+                              <f:validator binding="#{row.bindings.CurrentStatus.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ODbPriorityCol" sortable="true"
+                                     filterable="true" noWrap="true" width="120"
+                                     sortProperty="Priority" rowHeader="false"
+                                     helpTopicId="RBH_ODBPRIORITY"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.Priority.label}"
+                                              id="ol9"/>
+                            </f:facet>
+                            <af:selectOneChoice id="ODbPriority"
+                                                value="#{row.bindings.Priority.inputValue}"
+                                                label="#{bindings.AMOpportunityDashboardTable.hints.Priority.label}"
+                                                required="#{bindings.AMOpportunityDashboardTable.hints.Priority.mandatory}"
+                                                readOnly="true"
+                                                shortDesc="#{bindings.AMOpportunityDashboardTable.hints.Priority.tooltip}">
+                              <f:selectItems value="#{row.bindings.Priority.items}"/>
+                            </af:selectOneChoice>
+                          </af:column>
+                          <af:column id="ODbANmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.AccountName.label}"
+                                              id="ol10"/>
+                            </f:facet>
+                            <af:inputText id="cl4"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="#{bindings.AMOpportunityDashboardTable.hints.AccountName.label}"
+                                          required="#{bindings.AMOpportunityDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.AMOpportunityDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="#{bindings.AMOpportunityDashboardTable.hints.AccountName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.AMOpportunityDashboardTable.hints.AccountName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="ODbANm"
+                                            text="#{row.bindings.AccountName.attributeValue}"
+                                            shortDesc="#{bindings.AMOpportunityDashboardTable.hints.AccountName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Accounts"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Acct. - #{row.AccountName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="ODbCnCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="Contact" rowHeader="false"
+                                     helpTopicId="RBH_ODBCONTACT"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.Contact.label}"
+                                              id="ol11"/>
+                            </f:facet>
+                            <af:inputText id="ODbCn"
+                                          value="#{row.bindings.Contact.inputValue}"
+                                          label="#{bindings.AMOpportunityDashboardTable.hints.Contact.label}"
+                                          required="#{bindings.AMOpportunityDashboardTable.hints.Contact.mandatory}"
+                                          rows="#{bindings.AMOpportunityDashboardTable.hints.Contact.displayHeight}"
+                                          columns="#{bindings.AMOpportunityDashboardTable.hints.Contact.displayWidth}"
+                                          maximumLength="201" readOnly="true">
+                              <f:validator binding="#{row.bindings.Contact.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ODbECQCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="EstimatedCloseQuarter"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBESTIMATEDCLOSEQUARTER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.EstimatedCloseQuarter.label}"
+                                              id="ol12"/>
+                            </f:facet>
+                            <af:inputText id="ODbECQ"
+                                          value="#{row.bindings.EstimatedCloseQuarter.inputValue}"
+                                          label="#{bindings.AMOpportunityDashboardTable.hints.EstimatedCloseQuarter.label}"
+                                          required="false"
+                                          columns="#{bindings.AMOpportunityDashboardTable.hints.EstimatedCloseQuarter.displayWidth}"
+                                          readOnly="true">
+                              <f:validator binding="#{row.bindings.EstimatedCloseQuarter.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="ODbCPSCol" sortable="true"
+                                     filterable="true" noWrap="true" width="120"
+                                     sortProperty="CurrentPreStatus"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBCURRENTPRESTATUS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.CurrentPreStatus.label}"
+                                              id="ol13"/>
+                            </f:facet>
+                            <af:selectOneChoice id="ODbCPS"
+                                                value="#{row.bindings.CurrentPreStatus.inputValue}"
+                                                label="#{bindings.AMOpportunityDashboardTable.hints.CurrentPreStatus.label}"
+                                                required="#{bindings.AMOpportunityDashboardTable.hints.CurrentPreStatus.mandatory}"
+                                                readOnly="true"
+                                                shortDesc="#{bindings.AMOpportunityDashboardTable.hints.CurrentPreStatus.tooltip}">
+                              <f:selectItems value="#{row.bindings.CurrentPreStatus.items}"/>
+                            </af:selectOneChoice>
+                          </af:column>
+                          <af:column id="ODbCCSCol" sortable="true"
+                                     filterable="true" noWrap="true" width="120"
+                                     sortProperty="CurrentCatalogingStatus"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBCURRENTCATALOGINGSTATUS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.CurrentCatalogingStatus.label}"
+                                              id="ol14"/>
+                            </f:facet>
+                            <af:selectOneChoice id="ODbCCS"
+                                                value="#{row.bindings.CurrentCatalogingStatus.inputValue}"
+                                                label="#{bindings.AMOpportunityDashboardTable.hints.CurrentCatalogingStatus.label}"
+                                                required="#{bindings.AMOpportunityDashboardTable.hints.CurrentCatalogingStatus.mandatory}"
+                                                readOnly="true"
+                                                shortDesc="#{bindings.AMOpportunityDashboardTable.hints.CurrentCatalogingStatus.tooltip}">
+                              <f:selectItems value="#{row.bindings.CurrentCatalogingStatus.items}"/>
+                            </af:selectOneChoice>
+                          </af:column>
+                          <af:column id="ODbCASCol" sortable="true"
+                                     filterable="true" noWrap="true" width="120"
+                                     sortProperty="CurrentAgreementStatus"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBCURRENTAGREEMENTSTATUS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.CurrentAgreementStatus.label}"
+                                              id="ol15"/>
+                            </f:facet>
+                            <af:selectOneChoice id="ODbCAS"
+                                                value="#{row.bindings.CurrentAgreementStatus.inputValue}"
+                                                label="#{bindings.AMOpportunityDashboardTable.hints.CurrentAgreementStatus.label}"
+                                                required="#{bindings.AMOpportunityDashboardTable.hints.CurrentAgreementStatus.mandatory}"
+                                                readOnly="true"
+                                                shortDesc="#{bindings.AMOpportunityDashboardTable.hints.CurrentAgreementStatus.tooltip}">
+                              <f:selectItems value="#{row.bindings.CurrentAgreementStatus.items}"/>
+                            </af:selectOneChoice>
+                          </af:column>
+                          <af:column id="ODbTargetedProductsCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="TargetedProducts"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ODBTARGETEDPRODUCTS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMOpportunityDashboardTable.hints.TargetedProducts.label}"
+                                              id="ol16"/>
+                            </f:facet>
+                            <af:inputText id="ODbTargetedProducts"
+                                          value="#{row.bindings.TargetedProducts.inputValue}"
+                                          label="#{bindings.AMOpportunityDashboardTable.hints.TargetedProducts.label}"
+                                          required="#{bindings.AMOpportunityDashboardTable.hints.TargetedProducts.mandatory}"
+                                          rows="#{bindings.AMOpportunityDashboardTable.hints.TargetedProducts.displayHeight}"
+                                          columns="#{bindings.AMOpportunityDashboardTable.hints.TargetedProducts.displayWidth}"
+                                          maximumLength="1000" readOnly="true"
+                                          shortDesc="#{bindings.AMOpportunityDashboardTable.hints.TargetedProducts.tooltip}">
+                              <f:validator binding="#{row.bindings.TargetedProducts.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+            <af:panelBox text="#{nls['TABLE_TITLE_AMREMINDERDASHBOARD']}"
+                         id="RDbPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="RDbTopLc"
+                                     partialTriggers=" AMDTopLc qsAreaRDbSearchOptions"
+                                     rendered="#{jhsUserRoles['AM, AST']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g3">
+                    <af:panelGroupLayout id="modelSearchAreaRDb"
+                                         rendered="#{!pageFlowScope.createModes.CreateAMReminderDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaRDbSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.AMReminderDashboardIteratorMyReminderQuickQueryQuery.queryDescriptor}"
+                                     model="#{bindings.AMReminderDashboardIteratorMyReminderQuickQueryQuery.queryModel}"
+                                     queryListener="#{bindings.AMReminderDashboardIteratorMyReminderQuickQueryQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp5"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl3">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="RDbPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu8">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu9">
+                              <af:group id="RDbtbb"
+                                        rendered="#{ bindings.AMReminderDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstAMReminderDashboard.execute}"
+                                                    id="RDbFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousAMReminderDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="RDbPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextAMReminderDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="RDbNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastAMReminderDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="RDbLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi2">
+                              <af:exportCollectionActionListener exportedId="RDbTab"
+                                                                 type="excelHTML"
+                                                                 filename="AMReminderDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar2">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl5"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="RDbTab"
+                                                                 type="excelHTML"
+                                                                 filename="AMReminderDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="RDbPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.AMReminderDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="RDbTab" contentDelivery="immediate"
+                                  value="#{bindings.AMReminderDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.AMReminderDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.AMReminderDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.AMReminderDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.AMReminderDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.AMReminderDashboardIteratorMyReminderQuickQueryQuery.processQuery}"
+                                  filterModel="#{bindings.AMReminderDashboardIteratorMyReminderQuickQueryQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.AMReminderDashboardTable.table}"
+                                  partialTriggers=":::qsAreaRDbSearchOptions :::RDbPC ::RDbFirst ::RDbPrevious ::RDbNext ::RDbLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_AMREMINDERDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="RDbTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu10">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu11"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="RDbDesCol" sortable="true"
+                                     filterable="true" noWrap="false"
+                                     width="180" sortProperty="Description"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RDBDESCRIPTION"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="Detail" id="ol17"/>
+                            </f:facet>
+                            <af:inputText id="RDbDes"
+                                          value="#{row.bindings.Description.inputValue}"
+                                          label="Detail"
+                                          required="#{bindings.AMReminderDashboardTable.hints.Description.mandatory}"
+                                          rows="#{bindings.AMReminderDashboardTable.hints.Description.displayHeight}"
+                                          columns="30" maximumLength="4000"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.AMReminderDashboardTable.hints.Description.tooltip}">
+                              <f:validator binding="#{row.bindings.Description.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="RDbADCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="DueDate" rowHeader="false"
+                                     helpTopicId="RBH_RDBACTIONDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMReminderDashboardTable.hints.DueDate.label}"
+                                              id="ol18"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.DueDate}"
+                                            id="id0">
+                                <af:convertDateTime pattern="#{nls.datepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="RDbAD"
+                                          value="#{row.bindings.DueDate.inputValue}"
+                                          label="#{bindings.AMReminderDashboardTable.hints.DueDate.label}"
+                                          required="#{bindings.AMReminderDashboardTable.hints.DueDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.AMReminderDashboardTable.hints.DueDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                          <af:column id="RDbOpportunityNoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="OpportunityNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RDBOPPORTUNITYNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMReminderDashboardTable.hints.OpportunityNo.label}"
+                                              id="ol19"/>
+                            </f:facet>
+                            <af:inputText id="RDbOpportunityNo"
+                                          value="#{row.bindings.OpportunityNo.inputValue}"
+                                          label="#{bindings.AMReminderDashboardTable.hints.OpportunityNo.label}"
+                                          required="#{bindings.AMReminderDashboardTable.hints.OpportunityNo.mandatory}"
+                                          rows="#{bindings.AMReminderDashboardTable.hints.OpportunityNo.displayHeight}"
+                                          columns="#{bindings.AMReminderDashboardTable.hints.OpportunityNo.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.AMReminderDashboardTable.hints.OpportunityNo.tooltip}">
+                              <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.AMReminderDashboardTable.hints.OpportunityNo.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="RDbONmCol" sortable="true"
+                                     filterable="true" noWrap="false"
+                                     width="180" sortProperty="OpportunityName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RDBOPPORTUNITYNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.AMReminderDashboardTable.hints.OpportunityName.label}"
+                                              id="ol20"/>
+                            </f:facet>
+                            <af:inputText id="cl6"
+                                          value="#{row.bindings.OpportunityName.inputValue}"
+                                          label="#{bindings.AMReminderDashboardTable.hints.OpportunityName.label}"
+                                          required="#{bindings.AMReminderDashboardTable.hints.OpportunityName.mandatory}"
+                                          rows="#{bindings.AMReminderDashboardTable.hints.OpportunityName.displayHeight}"
+                                          columns="30" maximumLength="200"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.AMReminderDashboardTable.hints.OpportunityName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.OpportunityName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="RDbONm"
+                                            text="#{row.bindings.OpportunityName.attributeValue}"
+                                            shortDesc="#{bindings.AMReminderDashboardTable.hints.OpportunityName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Opportunity"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.OpportunityId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Opp. - #{row.OpportunityName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.OpportunityId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="RDbCSCol" sortable="true"
+                                     filterable="true" noWrap="true" width="60"
+                                     sortProperty="CurrentStatus"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RDBCURRENTSTATUS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="Status" id="ol21"/>
+                            </f:facet>
+                            <af:inputText id="RDbCS"
+                                          value="#{row.bindings.CurrentStatus.inputValue}"
+                                          label="Status"
+                                          required="#{bindings.AMReminderDashboardTable.hints.CurrentStatus.mandatory}"
+                                          rows="#{bindings.AMReminderDashboardTable.hints.CurrentStatus.displayHeight}"
+                                          columns="10" maximumLength="20"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.AMReminderDashboardTable.hints.CurrentStatus.tooltip}">
+                              <f:validator binding="#{row.bindings.CurrentStatus.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="RDbANmCol" sortable="true"
+                                     filterable="true" noWrap="false"
+                                     width="180" sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_RDBACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="Account" id="ol22"/>
+                            </f:facet>
+                            <af:inputText id="RDbANm"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="Account"
+                                          required="#{bindings.AMReminderDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.AMReminderDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="30" maximumLength="400"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.AMReminderDashboardTable.hints.AccountName.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+            <af:panelBox text="#{nls['TABLE_TITLE_ACTIVITYDASHBOARD']}"
+                         id="AcDPb">
+              <f:facet name="toolbar"/>
+              <af:panelStretchLayout topHeight="auto" id="AcDTopLc"
+                                     partialTriggers=" AMDTopLc qsAreaAcDSearchOptions"
+                                     rendered="#{jhsUserRoles['AM, AST']}">
+                <f:facet name="top">
+                  <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (prm_templates/pageComponent/dashboardContent.vm) -->
+                  <af:group id="g4">
+                    <af:panelGroupLayout id="modelSearchAreaAcD"
+                                         rendered="#{!pageFlowScope.createModes.CreateActivityDashboard and !pageFlowScope.hideSearchArea}"
+                                         partialTriggers="">
+                      <f:attribute name="JhsIgnoreChanges" value="true"/>
+                      <af:quickQuery id="qsAreaAcDSearchOptions"
+                                     label="#{nls['FILTER_BY']}"
+                                     value="#{bindings.ActivityDashboardIteratorActivityDashboardViewCriteriaQuery.queryDescriptor}"
+                                     model="#{bindings.ActivityDashboardIteratorActivityDashboardViewCriteriaQuery.queryModel}"
+                                     queryListener="#{bindings.ActivityDashboardIteratorActivityDashboardViewCriteriaQuery.processQuery}"></af:quickQuery>
+                    </af:panelGroupLayout>
+                    <af:spacer width="10" height="10" id="sp6"/>
+                  </af:group>
+                  <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+                </f:facet>
+                <f:facet name="center">
+                  <af:panelStretchLayout topHeight="0" id="psl4">
+                    <f:facet name="top"></f:facet>
+                    <f:facet name="center">
+                      <af:panelCollection id="AcDPC" featuresOff=" "
+                                          styleClass="AFStretchWidth">
+                        <f:facet name="menus">
+                          <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                                   id="menu12">
+                            <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                                     id="menu13">
+                              <af:group id="AcDtbb"
+                                        rendered="#{ bindings.ActivityDashboardIterator.currentRow!=null }">
+                                <af:commandMenuItem actionListener="#{bindings.FirstActivityDashboard.execute}"
+                                                    id="AcDFirst"
+                                                    partialSubmit="true"
+                                                    icon="/afr/shuttleleftall_ena.png"
+                                                    textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.PreviousActivityDashboard.execute}"
+                                                    icon="/afr/shuttleleft_ena.png"
+                                                    textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                                    id="AcDPrevious"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.NextActivityDashboard.execute}"
+                                                    icon="/afr/shuttleright_ena.png"
+                                                    textAndAccessKey="#{nls['NEXT_ROW']}"
+                                                    id="AcDNext"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                                <af:commandMenuItem actionListener="#{bindings.LastActivityDashboard.execute}"
+                                                    icon="/afr/shuttlerightall_ena.png"
+                                                    textAndAccessKey="#{nls['LAST_ROW']}"
+                                                    id="AcDLast"
+                                                    partialSubmit="true"></af:commandMenuItem>
+                              </af:group>
+                            </af:menu>
+                            <af:commandMenuItem partialSubmit="true"
+                                                textAndAccessKey="#{nls['EXPORT']}"
+                                                icon="/jheadstart/images/excel.png"
+                                                immediate="true" id="cmi3">
+                              <af:exportCollectionActionListener exportedId="AcDTab"
+                                                                 type="excelHTML"
+                                                                 filename="ActivityDashboard.xls"/>
+                            </af:commandMenuItem>
+                          </af:menu>
+                        </f:facet>
+                        <f:facet name="toolbar">
+                          <af:toolbar id="tbar3">
+                            <af:commandImageLink immediate="true"
+                                                 partialSubmit="true" id="cl7"
+                                                 shortDesc="#{nls['EXPORT']}"
+                                                 icon="/jheadstart/images/excel.png">
+                              <af:exportCollectionActionListener exportedId="AcDTab"
+                                                                 type="excelHTML"
+                                                                 filename="ActivityDashboard.xls"/>
+                            </af:commandImageLink>
+                            <af:commandToolbarButton text="Print" id="AcDPrint"
+                                                     shortDesc="Opens a new tab with printer friendly format.">
+                              <af:showPrintablePageBehavior/>
+                            </af:commandToolbarButton>
+                          </af:toolbar>
+                        </f:facet>
+                        <f:facet name="statusbar">
+                          <af:toolbar>
+                            <af:outputText value="#{bindings.ActivityDashboardIterator.estimatedRowCount} rows found"/>
+                          </af:toolbar>
+                        </f:facet>
+                        <af:table id="AcDTab" contentDelivery="immediate"
+                                  value="#{bindings.ActivityDashboardTable.collectionModel}"
+                                  columnStretching="blank"
+                                  rowBandingInterval="0" editingMode="editAll"
+                                  columnSelection="multiple"
+                                  contextMenuSelect="true" rowSelection="single"
+                                  selectionListener="#{pageFlowScope.ActivityDashboardTable.makeCurrent}"
+                                  selectedRowKeys="#{pageFlowScope.ActivityDashboardTable.selectedRow}"
+                                  rowDisclosureListener="#{pageFlowScope.ActivityDashboardTable.discloseRow}"
+                                  var="row" varStatus="status"
+                                  fetchSize="#{bindings.ActivityDashboardTable.rangeSize}"
+                                  emptyText="#{nls['NO_ROWS_FOUND']}"
+                                  queryListener="#{bindings.ActivityDashboardIteratorActivityDashboardViewCriteriaQuery.processQuery}"
+                                  filterModel="#{bindings.ActivityDashboardIteratorActivityDashboardViewCriteriaQuery.queryDescriptor}"
+                                  filterVisible="true"
+                                  binding="#{pageFlowScope.ActivityDashboardTable.table}"
+                                  partialTriggers=":::qsAreaAcDSearchOptions :::AcDPC ::AcDFirst ::AcDPrevious ::AcDNext ::AcDLast"
+                                  styleClass="AFStretchWidth"
+                                  summary="#{nls['TABLE_TITLE_ACTIVITYDASHBOARD']}">
+                          <f:facet name="contextMenu">
+                            <af:popup id="AcDTablePopup"
+                                      childCreation="deferred">
+                              <af:menu id="menu14">
+                                <af:menu text="#{nls['GO_TO_MENU_LABEL']}"
+                                         id="menu15"></af:menu>
+                              </af:menu>
+                            </af:popup>
+                          </f:facet>
+                          <af:column id="AcDOppoNoCol" sortable="true"
+                                     noWrap="true" width="228"
+                                     sortProperty="OpportunityNo"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ACDOPPORTUNITYNO"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.OpportunityNo.label}"
+                                              id="ol23"/>
+                            </f:facet>
+                            <af:inputText id="AcDOppoNo"
+                                          value="#{row.bindings.OpportunityNo.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.OpportunityNo.label}"
+                                          required="false"
+                                          rows="#{bindings.ActivityDashboardTable.hints.OpportunityNo.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.OpportunityNo.displayWidth}"
+                                          maximumLength="38" readOnly="true">
+                              <f:validator binding="#{row.bindings.OpportunityNo.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AcDOppoNameCol" noWrap="true"
+                                     width="500" rowHeader="false"
+                                     helpTopicId="RBH_ACDOPPORTUNITYNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.Name.label}"
+                                              id="ol24"/>
+                            </f:facet>
+                            <af:inputText id="cl8"
+                                          value="#{row.bindings.Name.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.Name.label}"
+                                          required="false"
+                                          rows="#{bindings.ActivityDashboardTable.hints.Name.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.Name.displayWidth}"
+                                          maximumLength="200" readOnly="true"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.Name.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="AcDOppoName"
+                                            text="#{row.bindings.Name.attributeValue}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Opportunity"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.Opportunityid}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Opportunity - #{row.OpportunityName}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.Opportunityid}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueOpportunity}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AcDDesCol" sortable="true"
+                                     filterable="true" noWrap="true" width="500"
+                                     sortProperty="Description"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ACDDESCRIPTION"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.Description.label}"
+                                              id="ol25"/>
+                            </f:facet>
+                            <af:inputText id="AcDDes"
+                                          value="#{row.bindings.Description.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.Description.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.Description.mandatory}"
+                                          rows="#{bindings.ActivityDashboardTable.hints.Description.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.Description.displayWidth}"
+                                          maximumLength="4000" readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.Description.tooltip}">
+                              <f:validator binding="#{row.bindings.Description.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AcDUTyCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="UserType" rowHeader="false"
+                                     helpTopicId="RBH_ACDUSERTYPE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.UserType.label}"
+                                              id="ol26"/>
+                            </f:facet>
+                            <af:inputText id="AcDUTy"
+                                          value="#{row.bindings.UserType.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.UserType.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.UserType.mandatory}"
+                                          rows="#{bindings.ActivityDashboardTable.hints.UserType.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.UserType.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.UserType.tooltip}">
+                              <f:validator binding="#{row.bindings.UserType.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AcDDDCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="DueDate" rowHeader="false"
+                                     helpTopicId="RBH_ACDDUEDATE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.DueDate.label}"
+                                              id="ol27"/>
+                            </f:facet>
+                            <f:facet name="filter">
+                              <af:inputDate value="#{status.filterCriteria.DueDate}"
+                                            id="id1">
+                                <af:convertDateTime pattern="#{nls.datepattern}"/>
+                              </af:inputDate>
+                            </f:facet>
+                            <af:inputDate id="AcDDD"
+                                          value="#{row.bindings.DueDate.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.DueDate.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.DueDate.mandatory}"
+                                          readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.DueDate.tooltip}">
+                              <af:convertDateTime pattern="#{nls.datepattern}"/>
+                            </af:inputDate>
+                          </af:column>
+                          <af:column id="AcDTyCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="Type" rowHeader="false"
+                                     helpTopicId="RBH_ACDTYPE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.Type.label}"
+                                              id="ol28"/>
+                            </f:facet>
+                            <af:inputText id="cl9"
+                                          value="#{row.bindings.Type.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.Type.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.Type.mandatory}"
+                                          rows="#{bindings.ActivityDashboardTable.hints.Type.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.Type.displayWidth}"
+                                          maximumLength="40" readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.Type.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.Type.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="AcDTy"
+                                            text="#{row.bindings.Type.attributeValue}"
+                                            shortDesc="#{bindings.ActivityDashboardTable.hints.Type.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Activities"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.ActivityId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Activity"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.ActivityId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueActivities}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AcDSTyCol" sortable="true"
+                                     filterable="true" noWrap="true" width="240"
+                                     sortProperty="SubType" rowHeader="false"
+                                     helpTopicId="RBH_ACDSUBTYPE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.SubType.label}"
+                                              id="ol29"/>
+                            </f:facet>
+                            <af:inputText id="AcDSTy"
+                                          value="#{row.bindings.SubType.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.SubType.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.SubType.mandatory}"
+                                          rows="#{bindings.ActivityDashboardTable.hints.SubType.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.SubType.displayWidth}"
+                                          maximumLength="40" readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.SubType.tooltip}">
+                              <f:validator binding="#{row.bindings.SubType.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AcDStCol" sortable="true"
+                                     filterable="true" noWrap="true" width="120"
+                                     sortProperty="Status" rowHeader="false"
+                                     helpTopicId="RBH_ACDSTATUS"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.Status.label}"
+                                              id="ol30"/>
+                            </f:facet>
+                            <af:inputText id="AcDSt"
+                                          value="#{row.bindings.Status.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.Status.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.Status.mandatory}"
+                                          rows="#{bindings.ActivityDashboardTable.hints.Status.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.Status.displayWidth}"
+                                          maximumLength="20" readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.Status.tooltip}">
+                              <f:validator binding="#{row.bindings.Status.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AcDANoCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="AccountNumber"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ACDACCOUNTNUMBER"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.AccountNumber.label}"
+                                              id="ol31"/>
+                            </f:facet>
+                            <af:inputText id="AcDANo"
+                                          value="#{row.bindings.AccountNumber.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.AccountNumber.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.AccountNumber.mandatory}"
+                                          rows="#{bindings.ActivityDashboardTable.hints.AccountNumber.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.AccountNumber.displayWidth}"
+                                          maximumLength="38" readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.AccountNumber.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountNumber.validator}"/>
+                              <af:convertNumber groupingUsed="false"
+                                                pattern="#{bindings.ActivityDashboardTable.hints.AccountNumber.format}"/>
+                            </af:inputText>
+                          </af:column>
+                          <af:column id="AcDKALCol" sortable="true"
+                                     filterable="true" noWrap="true" width="100"
+                                     sortProperty="KeyAccountLevel"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ACDKEYACCOUNTLEVEL"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.KeyAccountLevel.label}"
+                                              id="ol32"/>
+                            </f:facet>
+                            <af:selectOneChoice id="AcDKAL"
+                                                value="#{row.bindings.KeyAccountLevel.inputValue}"
+                                                label="#{bindings.ActivityDashboardTable.hints.KeyAccountLevel.label}"
+                                                required="#{bindings.ActivityDashboardTable.hints.KeyAccountLevel.mandatory}"
+                                                readOnly="true"
+                                                shortDesc="#{bindings.ActivityDashboardTable.hints.KeyAccountLevel.tooltip}">
+                              <f:selectItems value="#{row.bindings.KeyAccountLevel.items}"/>
+                            </af:selectOneChoice>
+                          </af:column>
+                          <af:column id="AcDANmCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountName"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ACDACCOUNTNAME"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.AccountName.label}"
+                                              id="ol33"/>
+                            </f:facet>
+                            <af:inputText id="cl10"
+                                          value="#{row.bindings.AccountName.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.AccountName.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.AccountName.mandatory}"
+                                          rows="#{bindings.ActivityDashboardTable.hints.AccountName.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.AccountName.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.AccountName.tooltip}"
+                                          rendered="#{adfFacesContext.outputMode eq 'printable'}">
+                              <f:validator binding="#{row.bindings.AccountName.validator}"/>
+                            </af:inputText>
+                            <af:commandLink id="AcDANm"
+                                            text="#{row.bindings.AccountName.attributeValue}"
+                                            shortDesc="#{bindings.ActivityDashboardTable.hints.AccountName.tooltip}"
+                                            action="LaunchTab"
+                                            rendered="#{adfFacesContext.outputMode != 'printable'}">
+                              <af:setActionListener from="Accounts"
+                                                    to="#{jhsDynTabLauncher.taskFlowName}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.tabUniqueIdentifier}"/>
+                              <af:setActionListener from="Acct. - #{row.AccountNumber}"
+                                                    to="#{jhsDynTabLauncher.label}"/>
+                              <af:setActionListener from="#{row.AccountId}"
+                                                    to="#{jhsDynTabLauncher.parameters.rowKeyValueAccounts}"/>
+                              <af:setActionListener from="#{jhsDynTabLauncher}"
+                                                    to="#{pageFlowScope.parentContext.jhsDynTabLauncher}"/>
+                            </af:commandLink>
+                          </af:column>
+                          <af:column id="AcDAStCol" sortable="true"
+                                     filterable="true" noWrap="true" width="180"
+                                     sortProperty="AccountSite"
+                                     rowHeader="false"
+                                     helpTopicId="RBH_ACDACCOUNTSITE"
+                                     filterFeatures="caseInsensitive">
+                            <f:facet name="header">
+                              <af:outputLabel value="#{bindings.ActivityDashboardTable.hints.AccountSite.label}"
+                                              id="ol34"/>
+                            </f:facet>
+                            <af:inputText id="AcDASt"
+                                          value="#{row.bindings.AccountSite.inputValue}"
+                                          label="#{bindings.ActivityDashboardTable.hints.AccountSite.label}"
+                                          required="#{bindings.ActivityDashboardTable.hints.AccountSite.mandatory}"
+                                          rows="#{bindings.ActivityDashboardTable.hints.AccountSite.displayHeight}"
+                                          columns="#{bindings.ActivityDashboardTable.hints.AccountSite.displayWidth}"
+                                          maximumLength="400" readOnly="true"
+                                          shortDesc="#{bindings.ActivityDashboardTable.hints.AccountSite.tooltip}">
+                              <f:validator binding="#{row.bindings.AccountSite.validator}"/>
+                            </af:inputText>
+                          </af:column>
+                        </af:table>
+                      </af:panelCollection>
+                    </f:facet>
+                  </af:panelStretchLayout>
+                </f:facet>
+              </af:panelStretchLayout>
+            </af:panelBox>
+          </af:panelDashboard>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

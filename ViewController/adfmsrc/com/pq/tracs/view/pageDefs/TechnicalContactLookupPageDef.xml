@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="TechnicalContactLookupPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <invokeAction id="applyBindParamsTechnicalContactLookupInvoke"
+                  Binds="applyBindParamsTechnicalContactLookup"
+                  Refresh="always"/>
+    <iterator id="TechnicalContactLookupIterator" Binds="TechnicalContactLookup"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="TechnicalContactLookupIteratorQuery"
+                  Binds="TechnicalContactLookupIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="FirstName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsTechnicalContactLookup"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="TechnicalContactLookup"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{TechnicalContactLookupQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <attributeValues id="TechnicalContactLookupId"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupContactName"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="ContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupJobTitle"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupJobRole"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="JobRole"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupFirstName"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupMiddleName"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupLastName"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupTitle"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupGender"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="TechnicalContactLookupPronunciation"
+                     IterBinding="TechnicalContactLookupIterator">
+      <AttrNames>
+        <Item Value="Pronunciation"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="TechnicalContactLookupTable"
+          IterBinding="TechnicalContactLookupIterator">
+      <nodeDefinition Name="TechnicalContactLookup"
+                      DefName="com.pq.tracs.model.lookup.ContentOwnerContactLookup">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContactName"/>
+          <Item Value="JobTitle"/>
+          <Item Value="JobRole"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleName"/>
+          <Item Value="LastName"/>
+          <Item Value="Title"/>
+          <Item Value="Gender"/>
+          <Item Value="Pronunciation"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstTechnicalContactLookup"
+            IterBinding="TechnicalContactLookupIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousTechnicalContactLookup"
+            IterBinding="TechnicalContactLookupIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextTechnicalContactLookup"
+            IterBinding="TechnicalContactLookupIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastTechnicalContactLookup"
+            IterBinding="TechnicalContactLookupIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchTechnicalContactLookup"
+                  IterBinding="TechnicalContactLookupIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchTechnicalContactLookup.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchTechnicalContactLookup.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchTechnicalContactLookup.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyTechnicalContactLookup"
+            IterBinding="TechnicalContactLookupIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrTechnicalContactLookup}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

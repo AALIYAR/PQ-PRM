@@ -1,0 +1,449 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="QAContactLookupTopLc"
+                             partialTriggers="">
+        <f:facet name="top">
+          <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+          <af:group id="g0">
+            <af:panelHeader id="ph0"
+                            text="#{nls['TABLE_TITLE_QACONTACTLOOKUP']}"
+                            helpTopicId="RBH_QACONTACTLOOKUP">
+              <f:facet name="toolbar">
+                <af:toolbox id="tbox0">
+                  <af:toolbar id="tbar0">
+                    <af:group id="gr0"></af:group>
+                    <af:group id="gr1"></af:group>
+                    <af:group id="gr2"></af:group>
+                  </af:toolbar>
+                </af:toolbox>
+              </f:facet>
+              <f:facet name="context"></f:facet>
+              <af:subform id="QAContactLookupSbf"
+                          rendered="#{!pageFlowScope.createModes.CreateQAContactLookup and !pageFlowScope.hideSearchArea}"
+                          defaultCommand="QAContactLookupQuickSearchButton">
+                <af:panelGroupLayout id="searchAreaQAContactLookup"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:panelGroupLayout id="qsAreaQAContactLookup"
+                                       rendered="#{pageFlowScope.searchQAContactLookup.quickSearchMode}"
+                                       layout="horizontal">
+                    <af:selectOneChoice id="qsSelectQAContactLookup"
+                                        label="#{nls['FILTER_BY']}"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchItem}"
+                                        autoSubmit="true" immediate="true"
+                                        valueChangeListener="#{pageFlowScope.searchQAContactLookup.searchItemChanged}">
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.ContactName.label}"
+                                     value="QAContactLookupContactName"
+                                     id="si0"/>
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.JobTitle.label}"
+                                     value="QAContactLookupJobTitle" id="si1"/>
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.JobRole.label}"
+                                     value="QAContactLookupJobRole" id="si2"/>
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.FirstName.label}"
+                                     value="QAContactLookupFirstName" id="si3"/>
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.MiddleName.label}"
+                                     value="QAContactLookupMiddleName"
+                                     id="si4"/>
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.LastName.label}"
+                                     value="QAContactLookupLastName" id="si5"/>
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.Title.label}"
+                                     value="QAContactLookupTitle" id="si6"/>
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.Gender.label}"
+                                     value="QAContactLookupGender" id="si7"/>
+                      <af:selectItem label="#{bindings.QAContactLookupTable.hints.Pronunciation.label}"
+                                     value="QAContactLookupPronunciation"
+                                     id="si8"/>
+                    </af:selectOneChoice>
+                    <af:spacer width="4" id="qsAreaQAContactLookupSpacer1"/>
+                    <af:panelGroupLayout partialTriggers="qsSelectQAContactLookup"
+                                         id="qsAreaQAContactLookuppanelGroupLayout">
+                      <af:switcher facetName="#{pageFlowScope.searchQAContactLookup.searchItem}"
+                                   id="qsAreaQAContactLookupSwitcher">
+                        <f:facet name="QAContactLookupContactName">
+                          <af:inputText id="QuickSearchQAContactLookupContactName"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.ContactName.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.ContactName.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPCONTACTNAME"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.ContactName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="QAContactLookupJobTitle">
+                          <af:inputText id="QuickSearchQAContactLookupJobTitle"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.JobTitle.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.JobTitle.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPJOBTITLE"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.JobTitle.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="QAContactLookupJobRole">
+                          <af:inputText id="QuickSearchQAContactLookupJobRole"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.JobRole.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.JobRole.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPJOBROLE"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.JobRole.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="QAContactLookupFirstName">
+                          <af:inputText id="QuickSearchQAContactLookupFirstName"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.FirstName.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.FirstName.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPFIRSTNAME"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.FirstName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="QAContactLookupMiddleName">
+                          <af:inputText id="QuickSearchQAContactLookupMiddleName"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.MiddleName.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.MiddleName.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPMIDDLENAME"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.MiddleName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="QAContactLookupLastName">
+                          <af:inputText id="QuickSearchQAContactLookupLastName"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.LastName.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.LastName.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPLASTNAME"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.LastName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="QAContactLookupTitle">
+                          <af:inputText id="QuickSearchQAContactLookupTitle"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.Title.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.Title.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPTITLE"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.Title.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="QAContactLookupGender">
+                          <af:inputText id="QuickSearchQAContactLookupGender"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.Gender.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.Gender.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPGENDER"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.Gender.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="QAContactLookupPronunciation">
+                          <af:inputText id="QuickSearchQAContactLookupPronunciation"
+                                        value="#{pageFlowScope.searchQAContactLookup.searchText}"
+                                        label="#{bindings.QAContactLookupTable.hints.Pronunciation.label}"
+                                        shortDesc="#{bindings.QAContactLookupTable.hints.Pronunciation.tooltip}"
+                                        helpTopicId="RBH_QACONTACTLOOKUPPRONUNCIATION"
+                                        simple="true"
+                                        columns="#{bindings.QAContactLookupTable.hints.Pronunciation.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                      </af:switcher>
+                    </af:panelGroupLayout>
+                    <af:spacer width="4" id="qsAreaQAContactLookupSpacer2"/>
+                    <af:commandImageLink action="#{pageFlowScope.searchQAContactLookup.quickSearch}"
+                                         shortDesc="#{nls['FILTER_BY']}"
+                                         icon="/jheadstart/images/go_ena.png"
+                                         id="QAContactLookupQuickSearchButton"/>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:subform>
+            </af:panelHeader>
+            <af:spacer width="10" height="10" id="sp0"/>
+          </af:group>
+          <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+        </f:facet>
+        <f:facet name="center">
+          <af:panelStretchLayout topHeight="0" id="psl0">
+            <f:facet name="top"></f:facet>
+            <f:facet name="center">
+              <af:panelCollection id="QAContactLookupPC" featuresOff=" "
+                                  styleClass="AFStretchWidth">
+                <f:facet name="menus">
+                  <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                           id="menu0">
+                    <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                             id="menu1">
+                      <af:group id="QAContactLookuptbb"
+                                rendered="#{ bindings.QAContactLookupIterator.currentRow!=null }">
+                        <af:commandMenuItem actionListener="#{bindings.FirstQAContactLookup.execute}"
+                                            id="QAContactLookupFirst"
+                                            partialSubmit="true"
+                                            icon="/afr/shuttleleftall_ena.png"
+                                            textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.PreviousQAContactLookup.execute}"
+                                            icon="/afr/shuttleleft_ena.png"
+                                            textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                            id="QAContactLookupPrevious"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.NextQAContactLookup.execute}"
+                                            icon="/afr/shuttleright_ena.png"
+                                            textAndAccessKey="#{nls['NEXT_ROW']}"
+                                            id="QAContactLookupNext"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.LastQAContactLookup.execute}"
+                                            icon="/afr/shuttlerightall_ena.png"
+                                            textAndAccessKey="#{nls['LAST_ROW']}"
+                                            id="QAContactLookupLast"
+                                            partialSubmit="true"></af:commandMenuItem>
+                      </af:group>
+                    </af:menu>
+                  </af:menu>
+                </f:facet>
+                <f:facet name="toolbar">
+                  <af:toolbar id="tbar1">
+                    <af:commandToolbarButton text="Print"
+                                             id="QAContactLookupPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar">
+                  <af:toolbar>
+                    <af:outputText value="#{bindings.QAContactLookupIterator.estimatedRowCount} rows found"/>
+                  </af:toolbar>
+                </f:facet>
+                <af:table id="QAContactLookupTab" contentDelivery="immediate"
+                          value="#{bindings.QAContactLookupTable.collectionModel}"
+                          columnStretching="blank" rowBandingInterval="0"
+                          editingMode="editAll" columnSelection="multiple"
+                          contextMenuSelect="true" rowSelection="single"
+                          selectionListener="#{pageFlowScope.QAContactLookupPage.selectionListener}"
+                          selectedRowKeys="#{pageFlowScope.QAContactLookupPage.selectedRowKeySet}"
+                          rowDisclosureListener="#{pageFlowScope.QAContactLookupTable.discloseRow}"
+                          var="row" varStatus="status"
+                          fetchSize="#{bindings.QAContactLookupTable.rangeSize}"
+                          emptyText="#{nls['NO_ROWS_FOUND']}"
+                          queryListener="#{bindings.QAContactLookupIteratorQuery.processQuery}"
+                          filterModel="#{bindings.QAContactLookupIteratorQuery.queryDescriptor}"
+                          filterVisible="true"
+                          binding="#{pageFlowScope.QAContactLookupPage.lovTable}"
+                          partialTriggers=" :::QAContactLookupPC ::QAContactLookupFirst ::QAContactLookupPrevious ::QAContactLookupNext ::QAContactLookupLast"
+                          styleClass="AFStretchWidth"
+                          summary="#{nls['TABLE_TITLE_QACONTACTLOOKUP']}">
+                  <f:facet name="contextMenu">
+                    <af:popup id="QAContactLookupTablePopup"
+                              childCreation="deferred">
+                      <af:menu id="menu2">
+                        <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                      </af:menu>
+                    </af:popup>
+                  </f:facet>
+                  <af:column id="QAContactLookupContactNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="240"
+                             sortProperty="ContactName" rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPCONTACTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.ContactName.label}"
+                                      id="ol0"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupContactName"
+                                  value="#{row.bindings.ContactName.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.ContactName.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.ContactName.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.ContactName.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.ContactName.displayWidth}"
+                                  maximumLength="141" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.ContactName.tooltip}">
+                      <f:validator binding="#{row.bindings.ContactName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="QAContactLookupJobTitleCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="JobTitle" rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPJOBTITLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.JobTitle.label}"
+                                      id="ol1"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupJobTitle"
+                                  value="#{row.bindings.JobTitle.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.JobTitle.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.JobTitle.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.JobTitle.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.JobTitle.displayWidth}"
+                                  maximumLength="4000" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.JobTitle.tooltip}">
+                      <f:validator binding="#{row.bindings.JobTitle.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="QAContactLookupJobRoleCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="JobRole" rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPJOBROLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.JobRole.label}"
+                                      id="ol2"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupJobRole"
+                                  value="#{row.bindings.JobRole.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.JobRole.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.JobRole.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.JobRole.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.JobRole.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.JobRole.tooltip}">
+                      <f:validator binding="#{row.bindings.JobRole.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="QAContactLookupFirstNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="FirstName" rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPFIRSTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.FirstName.label}"
+                                      id="ol3"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupFirstName"
+                                  value="#{row.bindings.FirstName.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.FirstName.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.FirstName.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.FirstName.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.FirstName.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.FirstName.tooltip}">
+                      <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="QAContactLookupMiddleNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="MiddleName" rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPMIDDLENAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.MiddleName.label}"
+                                      id="ol4"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupMiddleName"
+                                  value="#{row.bindings.MiddleName.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.MiddleName.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.MiddleName.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.MiddleName.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.MiddleName.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.MiddleName.tooltip}">
+                      <f:validator binding="#{row.bindings.MiddleName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="QAContactLookupLastNameCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="LastName" rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPLASTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.LastName.label}"
+                                      id="ol5"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupLastName"
+                                  value="#{row.bindings.LastName.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.LastName.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.LastName.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.LastName.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.LastName.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.LastName.tooltip}">
+                      <f:validator binding="#{row.bindings.LastName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="QAContactLookupTitleCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="Title" rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPTITLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.Title.label}"
+                                      id="ol6"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupTitle"
+                                  value="#{row.bindings.Title.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.Title.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.Title.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.Title.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.Title.displayWidth}"
+                                  maximumLength="20" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.Title.tooltip}">
+                      <f:validator binding="#{row.bindings.Title.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="QAContactLookupGenderCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="Gender" rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPGENDER"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.Gender.label}"
+                                      id="ol7"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupGender"
+                                  value="#{row.bindings.Gender.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.Gender.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.Gender.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.Gender.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.Gender.displayWidth}"
+                                  maximumLength="10" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.Gender.tooltip}">
+                      <f:validator binding="#{row.bindings.Gender.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="QAContactLookupPronunciationCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="180" sortProperty="Pronunciation"
+                             rowHeader="false"
+                             helpTopicId="RBH_QACONTACTLOOKUPPRONUNCIATION"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.QAContactLookupTable.hints.Pronunciation.label}"
+                                      id="ol8"/>
+                    </f:facet>
+                    <af:inputText id="QAContactLookupPronunciation"
+                                  value="#{row.bindings.Pronunciation.inputValue}"
+                                  label="#{bindings.QAContactLookupTable.hints.Pronunciation.label}"
+                                  required="#{bindings.QAContactLookupTable.hints.Pronunciation.mandatory}"
+                                  rows="#{bindings.QAContactLookupTable.hints.Pronunciation.displayHeight}"
+                                  columns="#{bindings.QAContactLookupTable.hints.Pronunciation.displayWidth}"
+                                  maximumLength="400" readOnly="true"
+                                  shortDesc="#{bindings.QAContactLookupTable.hints.Pronunciation.tooltip}">
+                      <f:validator binding="#{row.bindings.Pronunciation.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </f:facet>
+          </af:panelStretchLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

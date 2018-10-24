@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="EventsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'AM, PM, GCA, AST, ADMIN, RO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="EventsIterator" Binds="TraxEventView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="-1"/>
+    <searchRegion id="EventsIteratorTraxEventViewCriteriaQuery"
+                  Binds="EventsIterator" Criteria="TraxEventViewCriteria"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="EventName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <searchRegion id="EventsIteratorTraxEventQuickQueryQuery"
+                  Binds="EventsIterator" Criteria="TraxEventQuickQuery"
+                  InitialQueryOverridden="#{pageFlowScope.isDeepLink!=null and pageFlowScope.isDeepLink}"
+                  DefaultQuickSearchAttrName="EventName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  RefreshCondition="#{jhsAfterCommit}"/>
+    <invokeAction id="ExecuteQueryEventsInvoke" Binds="ExecuteQueryEvents"
+                  Refresh="renderModel" RefreshCondition="#{jhsAfterCommit}"/>
+    <iterator id="EventUsersIterator" Binds="TraxEventUserView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="EventUsersIteratorQuery" Binds="EventUsersIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="DisplayName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="EventAttachmentsIterator" Binds="TraxEventAttachmentView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <taskFlow id="LovTaskFlow"
+              taskFlowId="#{pageFlowScope.jhsLovTaskFlowManager.currentTaskFlowId}"
+              activation="deferred"
+              parametersMap="#{pageFlowScope.jhsLovTaskFlowManager.currentParamMap}"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <action id="ExecuteQueryEvents" IterBinding="EventsIterator"
+            RequiresUpdateModel="true" Action="iteratorExecute"/>
+    <list IterBinding="EventsIterator" id="EvtEventType" Uses="LOV_EventType"
+          StaticList="false"/>
+    <attributeValues id="EvtEventName" IterBinding="EventsIterator">
+      <AttrNames>
+        <Item Value="EventName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="EvtEventDate" IterBinding="EventsIterator">
+      <AttrNames>
+        <Item Value="EventDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="EvtDescription" IterBinding="EventsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="EvtNote" IterBinding="EventsIterator">
+      <AttrNames>
+        <Item Value="Note"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="EvtCreatedBy" IterBinding="EventsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="EvtCreatedDate" IterBinding="EventsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="EvtLastUpdatedBy" IterBinding="EventsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="EvtLastUpdatedDate" IterBinding="EventsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="EventsTable" IterBinding="EventsIterator">
+      <nodeDefinition Name="Events"
+                      DefName="com.pq.tracs.model.vo.TraxEventView">
+        <AttrNames>
+          <Item Value="EventType"/>
+          <Item Value="EventName"/>
+          <Item Value="EventDate"/>
+          <Item Value="Description"/>
+          <Item Value="Note"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstEvents" IterBinding="EventsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousEvents" IterBinding="EventsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextEvents" IterBinding="EventsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastEvents" IterBinding="EventsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyEvents" IterBinding="EventsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr" NDValue="#{pageFlowScope.rowKeyStrEvents}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateEvents" IterBinding="EventsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteEvents" IterBinding="EventsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="sb0JhsUsersId" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="JhsUsersId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb0UserId" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="UserId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb0Username" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="Username"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb0DisplayName" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="DisplayName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="EventUsersIterator" id="sb0UserType"
+          Uses="LOV_UserType" StaticList="false"/>
+    <attributeValues id="sb0AddDate" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="AddDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb0RemovedDate" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb0CreatedBy" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb0CreatedDate" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb0LastUpdatedBy" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb0LastUpdatedDate" IterBinding="EventUsersIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="EventUsersTable" IterBinding="EventUsersIterator">
+      <nodeDefinition Name="EventUsers"
+                      DefName="com.pq.tracs.model.vo.TraxEventUserView">
+        <AttrNames>
+          <Item Value="JhsUsersId"/>
+          <Item Value="UserId"/>
+          <Item Value="Username"/>
+          <Item Value="DisplayName"/>
+          <Item Value="UserType"/>
+          <Item Value="AddDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstEventUsers" IterBinding="EventUsersIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousEventUsers" IterBinding="EventUsersIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextEventUsers" IterBinding="EventUsersIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastEventUsers" IterBinding="EventUsersIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyEventUsers" IterBinding="EventUsersIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrEventUsers}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateEventUsers" IterBinding="EventUsersIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteEventUsers" IterBinding="EventUsersIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="sb1Name" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1Attachment" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1AttachmentDL"
+                     IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1AttachmentType"
+                     IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="AttachmentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1Description" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1FileSize" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="FileSize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1CreatedBy" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1CreatedDate" IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1LastUpdatedBy"
+                     IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="sb1LastUpdatedDate"
+                     IterBinding="EventAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="EventAttachmentsTable" IterBinding="EventAttachmentsIterator">
+      <nodeDefinition Name="EventAttachments"
+                      DefName="com.pq.tracs.model.vo.TraxEventAttachmentView">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="AttachmentType"/>
+          <Item Value="Description"/>
+          <Item Value="FileSize"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyEventAttachments"
+            IterBinding="EventAttachmentsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrEventAttachments}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateEventAttachments" IterBinding="EventAttachmentsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

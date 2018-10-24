@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="OpportunityAgreementDataPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="bindingContainersToPrepare" value="#{'OpportunityPageDef'}"/>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, RO, ADMIN, BSSRO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="OpportunityAgreementDataIterator"
+              Binds="PrmOpportunityAgreementDataView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="1"/>
+    <searchRegion id="OpportunityAgreementDataIteratorQuery"
+                  Binds="OpportunityAgreementDataIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="AgreementName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="AgreementDataAttachmentsIterator"
+              Binds="PrmAgreementDataAttachmentView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="AgreementDataAttachmentsIteratorQuery"
+                  Binds="AgreementDataAttachmentsIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="Name"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <taskFlow id="LovTaskFlow"
+              taskFlowId="#{pageFlowScope.jhsLovTaskFlowManager.currentTaskFlowId}"
+              activation="deferred"
+              parametersMap="#{pageFlowScope.jhsLovTaskFlowManager.currentParamMap}"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <attributeValues id="s25ContractId"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="ContractId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25ContentOwnerId"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <listOfValues StaticList="false"
+                  IterBinding="OpportunityAgreementDataIterator"
+                  id="s25TemplateName" Uses="LOV_TemplateName"/>
+    <attributeValues id="s25TemplateId"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="TemplateId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25Notes"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="Notes"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25Form" Uses="LOV_Form" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25Status" Uses="LOV_Status" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25Type" Uses="LOV_Type" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25Division" Uses="LOV_Division" StaticList="false"/>
+    <attributeValues id="s25EffectiveDate"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="EffectiveDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25TermLength" Uses="LOV_TermLength" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25CancellationNoticeTerm" Uses="LOV_CancellationNoticeTerm"
+          StaticList="false"/>
+    <attributeValues id="s25ExpirationDate"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="ExpirationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="s25AutoRenewal" IterBinding="OpportunityAgreementDataIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="AutoRenewal"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25AutoRenewTermMonths" Uses="LOV_AutoRenewTermMonths"
+          StaticList="false"/>
+    <attributeValues id="s25Signatory"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="Signatory"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25ContractSignedDate"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="ContractSignedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25RightsToBeRetained" Uses="LOV_RightsToBeRetained"
+          StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25Exclusivity" Uses="LOV_Exclusivity" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25ContentMasterOwner" Uses="LOV_ContentMasterOwner"
+          StaticList="false"/>
+    <attributeValues id="s25TechnicalContactId"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="TechnicalContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25AgreementContactId"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="AgreementContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25QaContactId"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="QaContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25RoyaltyContactId"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="RoyaltyContactId"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25Currency" Uses="LOV_Currency" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25PaymentFrequency" Uses="LOV_PaymentFrequency"
+          StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25InterimPaymentTermDays" Uses="LOV_InterimPaymentTermDays"
+          StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25AnnualPaymentTermDays" Uses="LOV_AnnualPaymentTermDays"
+          StaticList="false"/>
+    <attributeValues id="s25AgreementName"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="AgreementName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25QaName"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="QaName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25RoyaltyName"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="RoyaltyName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25TechnicalName"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="TechnicalName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25AutoAdd" Uses="LOV_AutoAdd" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25Assignment" Uses="LOV_Assignment" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25RoyaltyBearing" Uses="LOV_RoyaltyBearing" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25FairTreatmentClause" Uses="LOV_FairTreatmentClause"
+          StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25IssueEditionCoverage" Uses="LOV_IssueEditionCoverage"
+          StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25CompleteContentSet" Uses="LOV_CompleteContentSet"
+          StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25WarrantyAndIndemnification"
+          Uses="LOV_WarrantyAndIndemnification" StaticList="false"/>
+    <list IterBinding="OpportunityAgreementDataIterator"
+          id="s25Governance" Uses="LOV_Governance" StaticList="false"/>
+    <attributeValues id="s25CreatedBy"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25CreatedDate"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25LastUpdatedBy"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25LastUpdatedDate"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25Id" IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s25PrmOpportunityId"
+                     IterBinding="OpportunityAgreementDataIterator">
+      <AttrNames>
+        <Item Value="PrmOpportunityId"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="OpportunityAgreementDataTable"
+          IterBinding="OpportunityAgreementDataIterator">
+      <nodeDefinition Name="OpportunityAgreementData"
+                      DefName="com.pq.tracs.model.vo.PrmOpportunityAgreementDataView">
+        <AttrNames>
+          <Item Value="ContractId"/>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="TemplateName"/>
+          <Item Value="TemplateId"/>
+          <Item Value="Notes"/>
+          <Item Value="Form"/>
+          <Item Value="Status"/>
+          <Item Value="Type"/>
+          <Item Value="Division"/>
+          <Item Value="EffectiveDate"/>
+          <Item Value="TermLength"/>
+          <Item Value="CancellationNoticeTerm"/>
+          <Item Value="ExpirationDate"/>
+          <Item Value="AutoRenewal"/>
+          <Item Value="AutoRenewTermMonths"/>
+          <Item Value="Signatory"/>
+          <Item Value="ContractSignedDate"/>
+          <Item Value="RightsToBeRetained"/>
+          <Item Value="Exclusivity"/>
+          <Item Value="ContentMasterOwner"/>
+          <Item Value="TechnicalContactId"/>
+          <Item Value="AgreementContactId"/>
+          <Item Value="QaContactId"/>
+          <Item Value="RoyaltyContactId"/>
+          <Item Value="Currency"/>
+          <Item Value="PaymentFrequency"/>
+          <Item Value="InterimPaymentTermDays"/>
+          <Item Value="AnnualPaymentTermDays"/>
+          <Item Value="AgreementName"/>
+          <Item Value="QaName"/>
+          <Item Value="RoyaltyName"/>
+          <Item Value="TechnicalName"/>
+          <Item Value="AutoAdd"/>
+          <Item Value="Assignment"/>
+          <Item Value="RoyaltyBearing"/>
+          <Item Value="FairTreatmentClause"/>
+          <Item Value="IssueEditionCoverage"/>
+          <Item Value="CompleteContentSet"/>
+          <Item Value="WarrantyAndIndemnification"/>
+          <Item Value="Governance"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="Id"/>
+          <Item Value="PrmOpportunityId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstOpportunityAgreementData"
+            IterBinding="OpportunityAgreementDataIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousOpportunityAgreementData"
+            IterBinding="OpportunityAgreementDataIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextOpportunityAgreementData"
+            IterBinding="OpportunityAgreementDataIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastOpportunityAgreementData"
+            IterBinding="OpportunityAgreementDataIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyOpportunityAgreementData"
+            IterBinding="OpportunityAgreementDataIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrOpportunityAgreementData}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateOpportunityAgreementData"
+            IterBinding="OpportunityAgreementDataIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteOpportunityAgreementData"
+            IterBinding="OpportunityAgreementDataIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="s250Name"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250Attachment"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250AttachmentDL"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Attachment"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250AttachmentType"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="AttachmentType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250Description"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="Description"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250FileSize"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="FileSize"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250CreatedBy"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250CreatedDate"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250LastUpdatedBy"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s250LastUpdatedDate"
+                     IterBinding="AgreementDataAttachmentsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AgreementDataAttachmentsTable"
+          IterBinding="AgreementDataAttachmentsIterator">
+      <nodeDefinition Name="AgreementDataAttachments"
+                      DefName="com.pq.tracs.model.vo.PrmAgreementDataAttachmentView">
+        <AttrNames>
+          <Item Value="Name"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="Attachment"/>
+          <Item Value="AttachmentType"/>
+          <Item Value="Description"/>
+          <Item Value="FileSize"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchAgreementDataAttachments"
+                  IterBinding="AgreementDataAttachmentsIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchAgreementDataAttachments.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchAgreementDataAttachments.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchAgreementDataAttachments.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAgreementDataAttachments}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteAgreementDataAttachments"
+            IterBinding="AgreementDataAttachmentsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

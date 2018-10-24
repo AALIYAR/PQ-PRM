@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplateNoStretch.jspx">
+    <f:facet name="pageContent">
+      <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+      <af:panelGroupLayout id="pcpg" layout="scroll">
+        <af:panelGroupLayout layout="vertical" id="s371CRTopLc"
+                             partialTriggers=" s371CRfbb s371CRNewButton s371CRSaveButton0 s371CRCancelButton0 s371CRSaveButton1 s371CRCancelButton1"
+                             rendered="#{jhsUserRoles['AM, PM, AST, GCA, RO, ADMIN, BSSRO']}">
+          <f:facet name="separator">
+            <af:spacer width="10" height="10" id="sp0"/>
+          </f:facet>
+          <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+          <af:panelHeader id="ph0"
+                          text="#{pageFlowScope.createModes.CreateContractAttachments1 ? nls['INSERT_TITLE_CONTRACTATTACHMENTS1'] :  (jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'] ? nls['EDIT_TITLE_CONTRACTATTACHMENTS: #{bindings.s371CRName.inputValue}'] : nls['VIEW_TITLE_CONTRACTATTACHMENTS: #{bindings.s371CRName.inputValue}'])  }"
+                          helpTopicId="RBH_CONTRACTATTACHMENTS1">
+            <f:facet name="toolbar">
+              <af:toolbox id="tbox0">
+                <af:toolbar id="tbar0">
+                  <af:panelGroupLayout id="s371CRfbb" layout="horizontal"
+                                       rendered="#{ bindings.ContractAttachments1Iterator.currentRow!=null  and bindings.ContractAttachments1Iterator.estimatedRowCount>1 and !pageFlowScope.createModes.CreateContractAttachments1 and !pageFlowScope.hideFormBrowseButtons}"
+                                       partialTriggers="s371CRFirst s371CRPrevious s371CRNext s371CRLast">
+                    <af:commandToolbarButton actionListener="#{bindings.FirstContractAttachments1.execute}"
+                                             id="s371CRFirst"
+                                             partialSubmit="true"
+                                             icon="/afr/shuttleleftall_ena.png"
+                                             shortDesc="#{nls['FIRST_ROW']}"
+                                             rendered="#{bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleftall_dis.png"
+                              rendered="#{!(bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1>1)}"
+                              id="img0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.PreviousContractAttachments1.execute}"
+                                             icon="/afr/shuttleleft_ena.png"
+                                             shortDesc="#{nls['PREVIOUS_ROW']}"
+                                             id="s371CRPrevious"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1>1}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleleft_dis.png"
+                              rendered="#{!(bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1>1)}"
+                              id="img1"/>
+                    <af:spacer width="4" height="1" id="sp1"/>
+                    <af:outputFormatted styleUsage="instruction"
+                                        inlineStyle="white-space:nowrap; vertical-align:bottom;"
+                                        value=" [#{bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1} / #{bindings.ContractAttachments1Iterator.estimatedRowCount}] "
+                                        id="of0"/>
+                    <af:commandToolbarButton actionListener="#{bindings.NextContractAttachments1.execute}"
+                                             icon="/afr/shuttleright_ena.png"
+                                             shortDesc="#{nls['NEXT_ROW']}"
+                                             id="s371CRNext"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1 lt bindings.ContractAttachments1Iterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttleright_dis.png"
+                              rendered="#{!(bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1 lt bindings.ContractAttachments1Iterator.estimatedRowCount)}"
+                              id="img2"/>
+                    <af:commandToolbarButton actionListener="#{bindings.LastContractAttachments1.execute}"
+                                             icon="/afr/shuttlerightall_ena.png"
+                                             shortDesc="#{nls['LAST_ROW']}"
+                                             id="s371CRLast"
+                                             partialSubmit="true"
+                                             rendered="#{bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1 lt bindings.ContractAttachments1Iterator.estimatedRowCount}"></af:commandToolbarButton>
+                    <af:image source="/afr/shuttlerightall_dis.png"
+                              rendered="#{!(bindings.ContractAttachments1Iterator.rangeStart+bindings.ContractAttachments1Iterator.currentRowIndexInRange+1 lt bindings.ContractAttachments1Iterator.estimatedRowCount)}"
+                              id="img3"/>
+                  </af:panelGroupLayout>
+                  <af:group id="gr0">
+                    <af:commandToolbarButton actionListener="#{CreateContractAttachments1.execute}"
+                                             action="Creates371CR"
+                                             icon="/jheadstart/images/newRowInForm.png"
+                                             partialSubmit="true"
+                                             shortDesc="#{nls['NEW_BUTTON_LABEL_CONTRACTATTACHMENTS1']}"
+                                             rendered="#{!pageFlowScope.createModes.CreateContractAttachments1 and (true) and (jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])}"
+                                             id="s371CRNewButton"></af:commandToolbarButton>
+                  </af:group>
+                  <af:group id="gr1"></af:group>
+                  <af:group id="gr2">
+                    <af:commandToolbarButton text="Print" id="s371CRPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                    <af:commandButton action="#{SaveContractAttachments1.execute}"
+                                      rendered="#{((jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']) or (jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])) and (!pageFlowScope.hideSaveButton)}"
+                                      textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                      id="s371CRSaveButton0"
+                                      partialSubmit="true"></af:commandButton>
+                    <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                      immediate="true" partialSubmit="true"
+                                      rendered="#{!pageFlowScope.hideCancelButton}"
+                                      actionListener="#{jhsRollback.execute}"
+                                      action="Cancel" id="s371CRCancelButton0"></af:commandButton>
+                  </af:group>
+                </af:toolbar>
+              </af:toolbox>
+            </f:facet>
+            <f:facet name="context"></f:facet>
+          </af:panelHeader>
+          <af:switcher rendered="#{bindings.ContractAttachments1Iterator.findMode!='true'}"
+                       id="s371CRSw" defaultFacet="hasRows"
+                       facetName="#{( bindings.ContractAttachments1Iterator.currentRow!=null ) ? 'hasRows' : 'noRows'}">
+            <f:facet name="noRows">
+              <af:outputFormatted value="#{nls['NO_ROWS_FOUND']}"
+                                  styleUsage="pageStamp"
+                                  id="s371CRNoRowsFound"/>
+            </f:facet>
+            <f:facet name="hasRows">
+              <!-- Pushed "disabled" on stretchContext, now: Stretching disabled on group level. -->
+              <af:panelGroupLayout id="s371CRFC" layout="vertical">
+                <f:facet name="separator">
+                  <af:spacer width="10" height="10" id="sp2"/>
+                </f:facet>
+                <af:panelFormLayout rows="1" labelAlignment="top" maxColumns="2"
+                                    id="s371CRFI">
+                  <af:inputFile id="s371CRAtt" label="Upload File"
+                                columns="#{bindings.s371CRAttachment.hints.displayWidth}"
+                                binding="#{s371CRAttachmentFileHandlerBean.usesUploadIndicator}"
+                                rendered="#{(!(((pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))) or ((!pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))))) and (true)}"
+                                shortDesc="#{bindings.s371CRAttachment.hints.tooltip}"
+                                helpTopicId="RBH_S371CRATTACHMENT"
+                                valueChangeListener="#{s371CRAttachmentFileHandlerBean.uploadFile}"/>
+                  <af:panelLabelAndMessage label="Download File"
+                                           id="s371CRAttachmentDLLabel"
+                                           shortDesc="#{bindings.s371CRAttachmentDL.hints.tooltip}"
+                                           helpTopicId="RBH_S371CRATTACHMENTDL">
+                    <af:commandLink id="s371CRADL"
+                                    rendered="#{s371CRAttachmentDLFileHandlerBean.fileExist}">
+                      <af:outputText id="ot0"
+                                     value="#{s371CRAttachmentDLFileHandlerBean.fileName}"/>
+                      <af:fileDownloadActionListener contentType="#{s371CRAttachmentDLFileHandlerBean.contentType}"
+                                                     filename="#{s371CRAttachmentDLFileHandlerBean.fileName}"
+                                                     method="#{s371CRAttachmentDLFileHandlerBean.downloadFile}"/>
+                    </af:commandLink>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl0" valign="top"
+                                           layout="horizontal"></af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="s371CRATy"
+                                value="#{bindings.s371CRAttachmentType.inputValue}"
+                                label="#{bindings.s371CRAttachmentType.hints.label}"
+                                required="#{bindings.s371CRAttachmentType.hints.mandatory}"
+                                rows="#{bindings.s371CRAttachmentType.hints.displayHeight}"
+                                columns="#{bindings.s371CRAttachmentType.hints.displayWidth}"
+                                maximumLength="20"
+                                readOnly="#{((pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))) or ((!pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])))}"
+                                shortDesc="#{bindings.s371CRAttachmentType.hints.tooltip}"
+                                helpTopicId="RBH_S371CRATTACHMENTTYPE">
+                    <f:validator binding="#{bindings.s371CRAttachmentType.validator}"/>
+                  </af:inputText>
+                  <af:popup id="hoverPopup0">
+                    <af:noteWindow>
+                      <af:outputText value="#{bindings.s371CRDescription.inputValue}"/>
+                    </af:noteWindow>
+                  </af:popup>
+                  <af:panelLabelAndMessage label="#{bindings.s371CRDescription.hints.label}"
+                                           shortDesc="#{bindings.s371CRDescription.hints.tooltip}"
+                                           helpTopicId="RBH_S371CRDESCRIPTION"
+                                           showRequired="#{bindings.s371CRDescription.hints.mandatory}"
+                                           id="s371CRDescriptionLabel">
+                    <af:inputText id="s371CRDes"
+                                  value="#{bindings.s371CRDescription.inputValue}"
+                                  required="#{bindings.s371CRDescription.hints.mandatory}"
+                                  rows="#{bindings.s371CRDescription.hints.displayHeight}"
+                                  columns="#{bindings.s371CRDescription.hints.displayWidth}"
+                                  maximumLength="4000"
+                                  readOnly="#{((pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))) or ((!pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])))}"
+                                  autoSubmit="true" simple="true"
+                                  partialTriggers="s371CRDescriptionEditorLink s371CRDescriptionEditorText">
+                      <f:validator binding="#{bindings.s371CRDescription.validator}"/>
+                      <af:showPopupBehavior popupId="hoverPopup0"
+                                            triggerType="mouseHover"
+                                            align="endAfter"/>
+                    </af:inputText>
+                    <f:facet name="end">
+                      <af:panelGroupLayout id="pgl1" valign="top"
+                                           layout="horizontal">
+                        <af:commandLink id="s371CRDescriptionEditorLink"
+                                        rendered="#{!(((pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))) or ((!pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))))}"
+                                        immediate="true" partialSubmit="true">
+                          <af:showPopupBehavior popupId="s371CRDescriptionPopup"/>
+                          <af:image source="/jheadstart/images/editor.gif"
+                                    id="s371CRDescriptionIcon"
+                                    clientComponent="true"/>
+                        </af:commandLink>
+                      </af:panelGroupLayout>
+                    </f:facet>
+                  </af:panelLabelAndMessage>
+                  <af:inputText id="s371CRFS"
+                                value="#{bindings.s371CRFileSize.inputValue}"
+                                label="#{bindings.s371CRFileSize.hints.label}"
+                                required="#{bindings.s371CRFileSize.hints.mandatory}"
+                                rows="#{bindings.s371CRFileSize.hints.displayHeight}"
+                                columns="#{bindings.s371CRFileSize.hints.displayWidth}"
+                                maximumLength="38" readOnly="true"
+                                shortDesc="#{bindings.s371CRFileSize.hints.tooltip}"
+                                helpTopicId="RBH_S371CRFILESIZE">
+                    <f:validator binding="#{bindings.s371CRFileSize.validator}"/>
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.s371CRFileSize.format}"/>
+                  </af:inputText>
+                  <af:inputText id="s371CRCB"
+                                value="#{bindings.s371CRCreatedBy.inputValue}"
+                                label="#{bindings.s371CRCreatedBy.hints.label}"
+                                required="#{bindings.s371CRCreatedBy.hints.mandatory}"
+                                rows="#{bindings.s371CRCreatedBy.hints.displayHeight}"
+                                columns="#{bindings.s371CRCreatedBy.hints.displayWidth}"
+                                maximumLength="40"
+                                readOnly="#{((pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))) or ((!pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])))}"
+                                shortDesc="#{bindings.s371CRCreatedBy.hints.tooltip}"
+                                helpTopicId="RBH_S371CRCREATEDBY">
+                    <f:validator binding="#{bindings.s371CRCreatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="s371CRCD"
+                                value="#{bindings.s371CRCreatedDate.inputValue}"
+                                label="#{bindings.s371CRCreatedDate.hints.label}"
+                                required="#{bindings.s371CRCreatedDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))) or ((!pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])))}"
+                                shortDesc="#{bindings.s371CRCreatedDate.hints.tooltip}"
+                                helpTopicId="RBH_S371CRCREATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                  <af:inputText id="s371CRLUB"
+                                value="#{bindings.s371CRLastUpdatedBy.inputValue}"
+                                label="#{bindings.s371CRLastUpdatedBy.hints.label}"
+                                required="#{bindings.s371CRLastUpdatedBy.hints.mandatory}"
+                                rows="#{bindings.s371CRLastUpdatedBy.hints.displayHeight}"
+                                columns="#{bindings.s371CRLastUpdatedBy.hints.displayWidth}"
+                                maximumLength="40"
+                                readOnly="#{((pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))) or ((!pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])))}"
+                                shortDesc="#{bindings.s371CRLastUpdatedBy.hints.tooltip}"
+                                helpTopicId="RBH_S371CRLASTUPDATEDBY">
+                    <f:validator binding="#{bindings.s371CRLastUpdatedBy.validator}"/>
+                  </af:inputText>
+                  <af:inputDate id="s371CRLUD"
+                                value="#{bindings.s371CRLastUpdatedDate.inputValue}"
+                                label="#{bindings.s371CRLastUpdatedDate.hints.label}"
+                                required="#{bindings.s371CRLastUpdatedDate.hints.mandatory}"
+                                readOnly="#{((pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']))) or ((!pageFlowScope.createModes.CreateContractAttachments1) and (!(jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])))}"
+                                shortDesc="#{bindings.s371CRLastUpdatedDate.hints.tooltip}"
+                                helpTopicId="RBH_S371CRLASTUPDATEDDATE">
+                    <af:convertDateTime pattern="#{nls.datetimepattern}"/>
+                  </af:inputDate>
+                </af:panelFormLayout>
+                <af:panelHeader id="ph1" text=" "
+                                helpTopicId="RBH_CONTRACTATTACHMENTS1">
+                  <f:facet name="toolbar">
+                    <af:toolbox id="toolbox0">
+                      <af:toolbar id="toolbar0">
+                        <af:group id="gr3">
+                          <af:commandButton action="#{SaveContractAttachments1.execute}"
+                                            rendered="#{((jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO']) or (jhsUserRoles['AM, AST, PM, GCA, ADMIN, RO'])) and (!pageFlowScope.hideSaveButton)}"
+                                            textAndAccessKey="#{nls['SAVE_BUTTON_LABEL']}"
+                                            id="s371CRSaveButton1"
+                                            partialSubmit="true"></af:commandButton>
+                          <af:commandButton textAndAccessKey="#{nls['CANCEL']}"
+                                            immediate="true"
+                                            partialSubmit="true"
+                                            rendered="#{!pageFlowScope.hideCancelButton}"
+                                            actionListener="#{jhsRollback.execute}"
+                                            action="Cancel"
+                                            id="s371CRCancelButton1"></af:commandButton>
+                        </af:group>
+                      </af:toolbar>
+                    </af:toolbox>
+                  </f:facet>
+                </af:panelHeader>
+              </af:panelGroupLayout>
+              <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+            </f:facet>
+          </af:switcher>
+          <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+        </af:panelGroupLayout>
+      </af:panelGroupLayout>
+      <!-- Popped "disabled" from stretchContext, now: Stretching disabled on group level. -->
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl">
+        <af:popup id="s371CRDescriptionPopup" contentDelivery="lazyUncached"
+                  eventContext="launcher" childCreation="deferred">
+          <af:dialog modal="true" resize="on" title="Text Editor" id="dialog0">
+            <af:inputText rows="10" columns="100"
+                          value="#{bindings.s371CRDescription.inputValue}"
+                          simple="true" maximumLength="4000"
+                          id="s371CRDescriptionEditorText"/>
+          </af:dialog>
+        </af:popup>
+      </af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+

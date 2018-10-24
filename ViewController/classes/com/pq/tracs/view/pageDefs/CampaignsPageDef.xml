@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="CampaignsPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters>
+    <parameter id="roles" value="#{'AM, PM, AST, GCA, ADMIN, RO'}"/>
+  </parameters>
+  <executables>
+    <iterator id="CampaignsIterator" Binds="PrmCampaignView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="-1"/>
+    <searchRegion id="CampaignsIteratorPrmCampaignViewCriteriaQuery"
+                  Binds="CampaignsIterator" Criteria="PrmCampaignViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="CampaignName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <searchRegion id="CampaignsIteratorPrmCampaignQuickQueryQuery"
+                  Binds="CampaignsIterator" Criteria="PrmCampaignQuickQuery"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="CampaignName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="CampaignOpportunitiesIterator"
+              Binds="PrmCampaignOpportunityView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="CampaignOpportunitiesIteratorPrmCampaignOpportunityViewCriteriaQuery"
+                  Binds="CampaignOpportunitiesIterator"
+                  Criteria="PrmCampaignOpportunityViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="OpportunityName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <variableIterator id="variables">
+      <variable Name="s90EditLinkVar" Type="String"/>
+      <variable Name="s91EditLinkVar" Type="String"/>
+      <variable Name="s92EditLinkVar" Type="String"/>
+      <variable Name="s93EditLinkVar" Type="String"/>
+    </variableIterator>
+    <iterator id="CampaignAccountsIterator" Binds="PrmCampaignAccountView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="CampaignAccountsIteratorPrmCampaignAccountViewCriteriaQuery"
+                  Binds="CampaignAccountsIterator"
+                  Criteria="PrmCampaignAccountViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="AccountName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="CampaignTitlesIterator" Binds="PrmCampaignTitleView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="CampaignTitlesIteratorPrmCampaignTitleViewCriteriaQuery"
+                  Binds="CampaignTitlesIterator"
+                  Criteria="PrmCampaignTitleViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="LongTitle"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <iterator id="CampaignProductsIterator" Binds="PrmCampaignProductView1"
+              DataControl="PrmAppModuleDataControl" RangeSize="10"/>
+    <searchRegion id="CampaignProductsIteratorPrmCampaignProductViewCriteriaQuery"
+                  Binds="CampaignProductsIterator"
+                  Criteria="PrmCampaignProductViewCriteria"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="ProductName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+    <taskFlow id="LovTaskFlow"
+              taskFlowId="#{pageFlowScope.jhsLovTaskFlowManager.currentTaskFlowId}"
+              activation="deferred"
+              parametersMap="#{pageFlowScope.jhsLovTaskFlowManager.currentParamMap}"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings>
+    <attributeValues id="CamCampaignName" IterBinding="CampaignsIterator">
+      <AttrNames>
+        <Item Value="CampaignName"/>
+      </AttrNames>
+    </attributeValues>
+    <list IterBinding="CampaignsIterator" id="CamCampaignType"
+          Uses="LOV_CampaignType" StaticList="false"/>
+    <attributeValues id="CamCampaignDescription"
+                     IterBinding="CampaignsIterator">
+      <AttrNames>
+        <Item Value="CampaignDescription"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CamStartDate" IterBinding="CampaignsIterator">
+      <AttrNames>
+        <Item Value="StartDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CamEndDate" IterBinding="CampaignsIterator">
+      <AttrNames>
+        <Item Value="EndDate"/>
+      </AttrNames>
+    </attributeValues>
+    <button id="CamActiveFlag" IterBinding="CampaignsIterator"
+            DTSupportsMRU="false">
+      <AttrNames>
+        <Item Value="ActiveFlag"/>
+      </AttrNames>
+      <ValueList>
+        <Item Value="Y"/>
+        <Item Value="N"/>
+      </ValueList>
+    </button>
+    <attributeValues id="CamCreatedBy" IterBinding="CampaignsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CamCreatedDate" IterBinding="CampaignsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CamLastUpdatedBy" IterBinding="CampaignsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="CamLastUpdatedDate" IterBinding="CampaignsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="CampaignsTable" IterBinding="CampaignsIterator">
+      <nodeDefinition Name="Campaigns"
+                      DefName="com.pq.tracs.model.vo.PrmCampaignView">
+        <AttrNames>
+          <Item Value="CampaignName"/>
+          <Item Value="CampaignType"/>
+          <Item Value="CampaignDescription"/>
+          <Item Value="StartDate"/>
+          <Item Value="EndDate"/>
+          <Item Value="ActiveFlag"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstCampaigns" IterBinding="CampaignsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousCampaigns" IterBinding="CampaignsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextCampaigns" IterBinding="CampaignsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastCampaigns" IterBinding="CampaignsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyCampaigns" IterBinding="CampaignsIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrCampaigns}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateCampaigns" IterBinding="CampaignsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteCampaigns" IterBinding="CampaignsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="s90PrmOpportunityId"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="PrmOpportunityId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90OpportunityNo"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90OpporunityName"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90EditLink" IterBinding="variables">
+      <AttrNames>
+        <Item Value="s90EditLinkVar"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90OpportunityType"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90AccountId"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AccountId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90AccountName"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90Site" IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90AddedDate"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90RemovedDate"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90OpportunityStatus"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="OpportunityStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90AgreementReceivedDate"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AgreementReceivedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90ReasonLost"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="ReasonLost"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90AllianceManager"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AllianceManager"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s90AccountProductDiscipline"
+                     IterBinding="CampaignOpportunitiesIterator">
+      <AttrNames>
+        <Item Value="AccountProductDiscipline"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="CampaignOpportunitiesTable"
+          IterBinding="CampaignOpportunitiesIterator">
+      <nodeDefinition Name="CampaignOpportunities"
+                      DefName="com.pq.tracs.model.vo.PrmCampaignOpportunityView">
+        <AttrNames>
+          <Item Value="PrmOpportunityId"/>
+          <Item Value="OpportunityNo"/>
+          <Item Value="OpportunityName"/>
+          <Item Value="OpportunityType"/>
+          <Item Value="AccountId"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountSite"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="OpportunityStatus"/>
+          <Item Value="AgreementReceivedDate"/>
+          <Item Value="ReasonLost"/>
+          <Item Value="AllianceManager"/>
+          <Item Value="AccountProductDiscipline"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstCampaignOpportunities"
+            IterBinding="CampaignOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousCampaignOpportunities"
+            IterBinding="CampaignOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextCampaignOpportunities"
+            IterBinding="CampaignOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastCampaignOpportunities"
+            IterBinding="CampaignOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyCampaignOpportunities"
+            IterBinding="CampaignOpportunitiesIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrCampaignOpportunities}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateCampaignOpportunities"
+            IterBinding="CampaignOpportunitiesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteCampaignOpportunities"
+            IterBinding="CampaignOpportunitiesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="s91ContentOwnerId"
+                     IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="ContentOwnerId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91AccountName" IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91EditLink" IterBinding="variables">
+      <AttrNames>
+        <Item Value="s91EditLinkVar"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91AccountSite" IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="AccountSite"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91AddedDate" IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91RemovedDate" IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91CreatedBy" IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91CreatedDate" IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91LastUpdatedBy"
+                     IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s91LastUpdatedDate"
+                     IterBinding="CampaignAccountsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="CampaignAccountsTable" IterBinding="CampaignAccountsIterator">
+      <nodeDefinition Name="CampaignAccounts"
+                      DefName="com.pq.tracs.model.vo.PrmCampaignAccountView">
+        <AttrNames>
+          <Item Value="ContentOwnerId"/>
+          <Item Value="AccountName"/>
+          <Item Value="AccountSite"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstCampaignAccounts" IterBinding="CampaignAccountsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousCampaignAccounts" IterBinding="CampaignAccountsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextCampaignAccounts" IterBinding="CampaignAccountsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastCampaignAccounts" IterBinding="CampaignAccountsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyCampaignAccounts"
+            IterBinding="CampaignAccountsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrCampaignAccounts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateCampaignAccounts" IterBinding="CampaignAccountsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteCampaignAccounts" IterBinding="CampaignAccountsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="s92TitleId" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="TitleId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92TargetTrackingNo"
+                     IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="TargetTrackingNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92EditLink" IterBinding="variables">
+      <AttrNames>
+        <Item Value="s92EditLinkVar"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92CatalogNumber" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="CatalogNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92LongTitle" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="LongTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92AccountNo" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="AccountNo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92AccountName" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="AccountName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92AddedDate" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92RemovedDate" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92CreatedBy" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92CreatedDate" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92LastUpdatedBy" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92LastUpdatedDate"
+                     IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s92ExternalIndex" IterBinding="CampaignTitlesIterator">
+      <AttrNames>
+        <Item Value="ExternalIndex"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="CampaignTitlesTable" IterBinding="CampaignTitlesIterator">
+      <nodeDefinition Name="CampaignTitles"
+                      DefName="com.pq.tracs.model.vo.PrmCampaignTitleView">
+        <AttrNames>
+          <Item Value="TitleId"/>
+          <Item Value="TargetTrackingNo"/>
+          <Item Value="CatalogNumber"/>
+          <Item Value="LongTitle"/>
+          <Item Value="AccountNo"/>
+          <Item Value="AccountName"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+          <Item Value="ExternalIndex"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstCampaignTitles" IterBinding="CampaignTitlesIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousCampaignTitles" IterBinding="CampaignTitlesIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextCampaignTitles" IterBinding="CampaignTitlesIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastCampaignTitles" IterBinding="CampaignTitlesIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyCampaignTitles"
+            IterBinding="CampaignTitlesIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrCampaignTitles}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateCampaignTitles" IterBinding="CampaignTitlesIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteCampaignTitles" IterBinding="CampaignTitlesIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <attributeValues id="s93PrmTargetedProductId"
+                     IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="PrmTargetedProductId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93ProductName" IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="ProductName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93EditLink" IterBinding="variables">
+      <AttrNames>
+        <Item Value="s93EditLinkVar"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93PrdId" IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="PrdId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93ProductFamily"
+                     IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="ProductFamily"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93AddedDate" IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="AddedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93RemovedDate" IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="RemovedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93CreatedBy" IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93CreatedDate" IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="CreatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93LastUpdatedBy"
+                     IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="s93LastUpdatedDate"
+                     IterBinding="CampaignProductsIterator">
+      <AttrNames>
+        <Item Value="LastUpdatedDate"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="CampaignProductsTable" IterBinding="CampaignProductsIterator">
+      <nodeDefinition Name="CampaignProducts"
+                      DefName="com.pq.tracs.model.vo.PrmCampaignProductView">
+        <AttrNames>
+          <Item Value="PrmTargetedProductId"/>
+          <Item Value="ProductName"/>
+          <Item Value="PrdId"/>
+          <Item Value="ProductFamily"/>
+          <Item Value="AddedDate"/>
+          <Item Value="RemovedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="LastUpdatedBy"/>
+          <Item Value="LastUpdatedDate"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstCampaignProducts" IterBinding="CampaignProductsIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousCampaignProducts" IterBinding="CampaignProductsIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextCampaignProducts" IterBinding="CampaignProductsIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastCampaignProducts" IterBinding="CampaignProductsIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <action id="SetCurrentRowWithKeyCampaignProducts"
+            IterBinding="CampaignProductsIterator" RequiresUpdateModel="false"
+            Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrCampaignProducts}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="CreateCampaignProducts" IterBinding="CampaignProductsIterator"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="DeleteCampaignProducts" IterBinding="CampaignProductsIterator"
+            RequiresUpdateModel="false" Action="removeCurrentRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

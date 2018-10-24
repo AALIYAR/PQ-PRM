@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.59.23" id="AgreementContactLookupPageDef"
+                Package="com.pq.tracs.view.pageDefs"
+                ControllerClass="oracle.jheadstart.controller.jsf.lifecycle.JhsPageLifecycle"
+                SkipValidation="skipDataControls">
+  <parameters/>
+  <executables>
+    <invokeAction id="applyBindParamsAgreementContactLookupInvoke"
+                  Binds="applyBindParamsAgreementContactLookup"
+                  Refresh="always"/>
+    <iterator id="AgreementContactLookupIterator" Binds="AgreementContactLookup"
+              DataControl="PrmAppModuleDataControl" RangeSize="20"/>
+    <searchRegion id="AgreementContactLookupIteratorQuery"
+                  Binds="AgreementContactLookupIterator"
+                  Criteria="__ImplicitViewCriteria__"
+                  InitialQueryOverridden="true"
+                  DefaultQuickSearchAttrName="FirstName"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"/>
+  </executables>
+  <bindings>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="applyBindParamsAgreementContactLookup"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="applyBindParams"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_applyBindParams_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="voUsage" NDValue="AgreementContactLookup"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="args"
+                 NDValue="#{AgreementContactLookupQueryBindParams.namedParams}"
+                 NDType="java.util.HashMap"/>
+      <NamedData NDName="doRequeryWhenParamsChanged" NDValue="true"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <attributeValues id="AgreementContactLookupId"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="Id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupContactName"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="ContactName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupJobTitle"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="JobTitle"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupJobRole"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="JobRole"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupFirstName"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="FirstName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupMiddleName"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="MiddleName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupLastName"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="LastName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupTitle"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="Title"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupGender"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="Gender"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues id="AgreementContactLookupPronunciation"
+                     IterBinding="AgreementContactLookupIterator">
+      <AttrNames>
+        <Item Value="Pronunciation"/>
+      </AttrNames>
+    </attributeValues>
+    <tree id="AgreementContactLookupTable"
+          IterBinding="AgreementContactLookupIterator">
+      <nodeDefinition Name="AgreementContactLookup"
+                      DefName="com.pq.tracs.model.lookup.ContentOwnerContactLookup">
+        <AttrNames>
+          <Item Value="Id"/>
+          <Item Value="ContactName"/>
+          <Item Value="JobTitle"/>
+          <Item Value="JobRole"/>
+          <Item Value="FirstName"/>
+          <Item Value="MiddleName"/>
+          <Item Value="LastName"/>
+          <Item Value="Title"/>
+          <Item Value="Gender"/>
+          <Item Value="Pronunciation"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="FirstAgreementContactLookup"
+            IterBinding="AgreementContactLookupIterator"
+            RequiresUpdateModel="true" Action="first"/>
+    <action id="PreviousAgreementContactLookup"
+            IterBinding="AgreementContactLookupIterator"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action id="NextAgreementContactLookup"
+            IterBinding="AgreementContactLookupIterator"
+            RequiresUpdateModel="true" Action="next"/>
+    <action id="LastAgreementContactLookup"
+            IterBinding="AgreementContactLookupIterator"
+            RequiresUpdateModel="true" Action="last"/>
+    <methodAction RequiresUpdateModel="true" Action="invokeMethod"
+                  id="advancedSearchAgreementContactLookup"
+                  IterBinding="AgreementContactLookupIterator"
+                  DataControl="PrmAppModuleDataControl"
+                  InstanceName="PrmAppModuleDataControl.dataProvider"
+                  MethodName="advancedSearch"
+                  ReturnName="PrmAppModuleDataControl.methodResults.PrmAppModuleDataControl_dataProvider_advancedSearch_result"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="viewObjectUsage"
+                 NDValue="#{pageFlowScope.searchAgreementContactLookup.dataCollection}"
+                 NDType="java.lang.String"/>
+      <NamedData NDName="arguments"
+                 NDValue="#{pageFlowScope.searchAgreementContactLookup.arguments}"
+                 NDType="java.util.ArrayList"/>
+      <NamedData NDName="allConditionsMet"
+                 NDValue="#{pageFlowScope.searchAgreementContactLookup.allConditionsMet}"
+                 NDType="java.lang.Boolean"/>
+    </methodAction>
+    <action id="SetCurrentRowWithKeyAgreementContactLookup"
+            IterBinding="AgreementContactLookupIterator"
+            RequiresUpdateModel="false" Action="setCurrentRowWithKey">
+      <NamedData NDName="rowKeyStr"
+                 NDValue="#{pageFlowScope.rowKeyStrAgreementContactLookup}"
+                 NDType="java.lang.String"/>
+    </action>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="PrmAppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false"
+            Action="rollbackTransaction" DataControl="PrmAppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

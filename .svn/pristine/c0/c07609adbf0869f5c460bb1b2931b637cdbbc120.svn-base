@@ -1,0 +1,463 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:h="http://java.sun.com/jsf/html"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:trh="http://myfaces.apache.org/trinidad/html"
+          xmlns:tr="http://myfaces.apache.org/trinidad"
+          xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <af:pageTemplate id="pt"
+                   viewId="/common/pageTemplates/JhsRegionTemplate.jspx">
+    <f:facet name="pageContent">
+      <af:panelStretchLayout topHeight="auto" id="RoyaltyContactLookupTopLc"
+                             partialTriggers="">
+        <f:facet name="top">
+          <!-- Pushed "disabled" on stretchContext, now: enabled (default), disabled (default/pageComponent/groupContent.vm) -->
+          <af:group id="g0">
+            <af:panelHeader id="ph0"
+                            text="#{nls['TABLE_TITLE_ROYALTYCONTACTLOOKUP']}"
+                            helpTopicId="RBH_ROYALTYCONTACTLOOKUP">
+              <f:facet name="toolbar">
+                <af:toolbox id="tbox0">
+                  <af:toolbar id="tbar0">
+                    <af:group id="gr0"></af:group>
+                    <af:group id="gr1"></af:group>
+                    <af:group id="gr2"></af:group>
+                  </af:toolbar>
+                </af:toolbox>
+              </f:facet>
+              <f:facet name="context"></f:facet>
+              <af:subform id="RoyaltyContactLookupSbf"
+                          rendered="#{!pageFlowScope.createModes.CreateRoyaltyContactLookup and !pageFlowScope.hideSearchArea}"
+                          defaultCommand="RoyaltyContactLookupQuickSearchButton">
+                <af:panelGroupLayout id="searchAreaRoyaltyContactLookup"
+                                     partialTriggers="">
+                  <f:attribute name="JhsIgnoreChanges" value="true"/>
+                  <af:panelGroupLayout id="qsAreaRoyaltyContactLookup"
+                                       rendered="#{pageFlowScope.searchRoyaltyContactLookup.quickSearchMode}"
+                                       layout="horizontal">
+                    <af:selectOneChoice id="qsSelectRoyaltyContactLookup"
+                                        label="#{nls['FILTER_BY']}"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchItem}"
+                                        autoSubmit="true" immediate="true"
+                                        valueChangeListener="#{pageFlowScope.searchRoyaltyContactLookup.searchItemChanged}">
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.ContactName.label}"
+                                     value="RoyaltyContactLookupContactName"
+                                     id="si0"/>
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.label}"
+                                     value="RoyaltyContactLookupJobTitle"
+                                     id="si1"/>
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.JobRole.label}"
+                                     value="RoyaltyContactLookupJobRole"
+                                     id="si2"/>
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.FirstName.label}"
+                                     value="RoyaltyContactLookupFirstName"
+                                     id="si3"/>
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.label}"
+                                     value="RoyaltyContactLookupMiddleName"
+                                     id="si4"/>
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.LastName.label}"
+                                     value="RoyaltyContactLookupLastName"
+                                     id="si5"/>
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.Title.label}"
+                                     value="RoyaltyContactLookupTitle"
+                                     id="si6"/>
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.Gender.label}"
+                                     value="RoyaltyContactLookupGender"
+                                     id="si7"/>
+                      <af:selectItem label="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.label}"
+                                     value="RoyaltyContactLookupPronunciation"
+                                     id="si8"/>
+                    </af:selectOneChoice>
+                    <af:spacer width="4"
+                               id="qsAreaRoyaltyContactLookupSpacer1"/>
+                    <af:panelGroupLayout partialTriggers="qsSelectRoyaltyContactLookup"
+                                         id="qsAreaRoyaltyContactLookuppanelGroupLayout">
+                      <af:switcher facetName="#{pageFlowScope.searchRoyaltyContactLookup.searchItem}"
+                                   id="qsAreaRoyaltyContactLookupSwitcher">
+                        <f:facet name="RoyaltyContactLookupContactName">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupContactName"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.ContactName.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.ContactName.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPCONTACTNAME"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.ContactName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="RoyaltyContactLookupJobTitle">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupJobTitle"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPJOBTITLE"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="RoyaltyContactLookupJobRole">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupJobRole"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.JobRole.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.JobRole.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPJOBROLE"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.JobRole.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="RoyaltyContactLookupFirstName">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupFirstName"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.FirstName.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.FirstName.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPFIRSTNAME"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.FirstName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="RoyaltyContactLookupMiddleName">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupMiddleName"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPMIDDLENAME"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="RoyaltyContactLookupLastName">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupLastName"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.LastName.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.LastName.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPLASTNAME"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.LastName.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="RoyaltyContactLookupTitle">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupTitle"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.Title.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.Title.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPTITLE"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.Title.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="RoyaltyContactLookupGender">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupGender"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.Gender.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.Gender.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPGENDER"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.Gender.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                        <f:facet name="RoyaltyContactLookupPronunciation">
+                          <af:inputText id="QuickSearchRoyaltyContactLookupPronunciation"
+                                        value="#{pageFlowScope.searchRoyaltyContactLookup.searchText}"
+                                        label="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.label}"
+                                        shortDesc="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.tooltip}"
+                                        helpTopicId="RBH_ROYALTYCONTACTLOOKUPPRONUNCIATION"
+                                        simple="true"
+                                        columns="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.displayWidth}"
+                                        maximumLength="4000"></af:inputText>
+                        </f:facet>
+                      </af:switcher>
+                    </af:panelGroupLayout>
+                    <af:spacer width="4"
+                               id="qsAreaRoyaltyContactLookupSpacer2"/>
+                    <af:commandImageLink action="#{pageFlowScope.searchRoyaltyContactLookup.quickSearch}"
+                                         shortDesc="#{nls['FILTER_BY']}"
+                                         icon="/jheadstart/images/go_ena.png"
+                                         id="RoyaltyContactLookupQuickSearchButton"/>
+                  </af:panelGroupLayout>
+                </af:panelGroupLayout>
+              </af:subform>
+            </af:panelHeader>
+            <af:spacer width="10" height="10" id="sp0"/>
+          </af:group>
+          <!-- Popped "disabled" from stretchContext, now: enabled (default) -->
+        </f:facet>
+        <f:facet name="center">
+          <af:panelStretchLayout topHeight="0" id="psl0">
+            <f:facet name="top"></f:facet>
+            <f:facet name="center">
+              <af:panelCollection id="RoyaltyContactLookupPC" featuresOff=" "
+                                  styleClass="AFStretchWidth">
+                <f:facet name="menus">
+                  <af:menu textAndAccessKey="#{nls['ACTION_MENU_LABEL']}"
+                           id="menu0">
+                    <af:menu textAndAccessKey="#{nls['GO_TO_MENU_LABEL']}"
+                             id="menu1">
+                      <af:group id="RoyaltyContactLookuptbb"
+                                rendered="#{ bindings.RoyaltyContactLookupIterator.currentRow!=null }">
+                        <af:commandMenuItem actionListener="#{bindings.FirstRoyaltyContactLookup.execute}"
+                                            id="RoyaltyContactLookupFirst"
+                                            partialSubmit="true"
+                                            icon="/afr/shuttleleftall_ena.png"
+                                            textAndAccessKey="#{nls['FIRST_ROW']}"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.PreviousRoyaltyContactLookup.execute}"
+                                            icon="/afr/shuttleleft_ena.png"
+                                            textAndAccessKey="#{nls['PREVIOUS_ROW']}"
+                                            id="RoyaltyContactLookupPrevious"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.NextRoyaltyContactLookup.execute}"
+                                            icon="/afr/shuttleright_ena.png"
+                                            textAndAccessKey="#{nls['NEXT_ROW']}"
+                                            id="RoyaltyContactLookupNext"
+                                            partialSubmit="true"></af:commandMenuItem>
+                        <af:commandMenuItem actionListener="#{bindings.LastRoyaltyContactLookup.execute}"
+                                            icon="/afr/shuttlerightall_ena.png"
+                                            textAndAccessKey="#{nls['LAST_ROW']}"
+                                            id="RoyaltyContactLookupLast"
+                                            partialSubmit="true"></af:commandMenuItem>
+                      </af:group>
+                    </af:menu>
+                  </af:menu>
+                </f:facet>
+                <f:facet name="toolbar">
+                  <af:toolbar id="tbar1">
+                    <af:commandToolbarButton text="Print"
+                                             id="RoyaltyContactLookupPrint"
+                                             shortDesc="Opens a new tab with printer friendly format.">
+                      <af:showPrintablePageBehavior/>
+                    </af:commandToolbarButton>
+                  </af:toolbar>
+                </f:facet>
+                <f:facet name="statusbar">
+                  <af:toolbar>
+                    <af:outputText value="#{bindings.RoyaltyContactLookupIterator.estimatedRowCount} rows found"/>
+                  </af:toolbar>
+                </f:facet>
+                <af:table id="RoyaltyContactLookupTab"
+                          contentDelivery="immediate"
+                          value="#{bindings.RoyaltyContactLookupTable.collectionModel}"
+                          columnStretching="blank" rowBandingInterval="0"
+                          editingMode="editAll" columnSelection="multiple"
+                          contextMenuSelect="true" rowSelection="single"
+                          selectionListener="#{pageFlowScope.RoyaltyContactLookupPage.selectionListener}"
+                          selectedRowKeys="#{pageFlowScope.RoyaltyContactLookupPage.selectedRowKeySet}"
+                          rowDisclosureListener="#{pageFlowScope.RoyaltyContactLookupTable.discloseRow}"
+                          var="row" varStatus="status"
+                          fetchSize="#{bindings.RoyaltyContactLookupTable.rangeSize}"
+                          emptyText="#{nls['NO_ROWS_FOUND']}"
+                          queryListener="#{bindings.RoyaltyContactLookupIteratorQuery.processQuery}"
+                          filterModel="#{bindings.RoyaltyContactLookupIteratorQuery.queryDescriptor}"
+                          filterVisible="true"
+                          binding="#{pageFlowScope.RoyaltyContactLookupPage.lovTable}"
+                          partialTriggers=" :::RoyaltyContactLookupPC ::RoyaltyContactLookupFirst ::RoyaltyContactLookupPrevious ::RoyaltyContactLookupNext ::RoyaltyContactLookupLast"
+                          styleClass="AFStretchWidth"
+                          summary="#{nls['TABLE_TITLE_ROYALTYCONTACTLOOKUP']}">
+                  <f:facet name="contextMenu">
+                    <af:popup id="RoyaltyContactLookupTablePopup"
+                              childCreation="deferred">
+                      <af:menu id="menu2">
+                        <af:menu text="#{nls['GO_TO_MENU_LABEL']}" id="menu3"></af:menu>
+                      </af:menu>
+                    </af:popup>
+                  </f:facet>
+                  <af:column id="RoyaltyContactLookupContactNameCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="240" sortProperty="ContactName"
+                             rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPCONTACTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.ContactName.label}"
+                                      id="ol0"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupContactName"
+                                  value="#{row.bindings.ContactName.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.ContactName.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.ContactName.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.ContactName.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.ContactName.displayWidth}"
+                                  maximumLength="141" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.ContactName.tooltip}">
+                      <f:validator binding="#{row.bindings.ContactName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="RoyaltyContactLookupJobTitleCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="180" sortProperty="JobTitle"
+                             rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPJOBTITLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.label}"
+                                      id="ol1"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupJobTitle"
+                                  value="#{row.bindings.JobTitle.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.displayWidth}"
+                                  maximumLength="4000" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.JobTitle.tooltip}">
+                      <f:validator binding="#{row.bindings.JobTitle.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="RoyaltyContactLookupJobRoleCol" sortable="true"
+                             filterable="true" noWrap="true" width="180"
+                             sortProperty="JobRole" rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPJOBROLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.JobRole.label}"
+                                      id="ol2"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupJobRole"
+                                  value="#{row.bindings.JobRole.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.JobRole.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.JobRole.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.JobRole.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.JobRole.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.JobRole.tooltip}">
+                      <f:validator binding="#{row.bindings.JobRole.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="RoyaltyContactLookupFirstNameCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="180" sortProperty="FirstName"
+                             rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPFIRSTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.FirstName.label}"
+                                      id="ol3"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupFirstName"
+                                  value="#{row.bindings.FirstName.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.FirstName.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.FirstName.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.FirstName.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.FirstName.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.FirstName.tooltip}">
+                      <f:validator binding="#{row.bindings.FirstName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="RoyaltyContactLookupMiddleNameCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="100" sortProperty="MiddleName"
+                             rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPMIDDLENAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.label}"
+                                      id="ol4"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupMiddleName"
+                                  value="#{row.bindings.MiddleName.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.displayWidth}"
+                                  maximumLength="40" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.MiddleName.tooltip}">
+                      <f:validator binding="#{row.bindings.MiddleName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="RoyaltyContactLookupLastNameCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="180" sortProperty="LastName"
+                             rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPLASTNAME"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.LastName.label}"
+                                      id="ol5"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupLastName"
+                                  value="#{row.bindings.LastName.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.LastName.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.LastName.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.LastName.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.LastName.displayWidth}"
+                                  maximumLength="100" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.LastName.tooltip}">
+                      <f:validator binding="#{row.bindings.LastName.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="RoyaltyContactLookupTitleCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="Title" rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPTITLE"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.Title.label}"
+                                      id="ol6"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupTitle"
+                                  value="#{row.bindings.Title.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.Title.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.Title.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.Title.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.Title.displayWidth}"
+                                  maximumLength="20" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.Title.tooltip}">
+                      <f:validator binding="#{row.bindings.Title.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="RoyaltyContactLookupGenderCol" sortable="true"
+                             filterable="true" noWrap="true" width="100"
+                             sortProperty="Gender" rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPGENDER"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.Gender.label}"
+                                      id="ol7"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupGender"
+                                  value="#{row.bindings.Gender.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.Gender.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.Gender.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.Gender.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.Gender.displayWidth}"
+                                  maximumLength="10" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.Gender.tooltip}">
+                      <f:validator binding="#{row.bindings.Gender.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                  <af:column id="RoyaltyContactLookupPronunciationCol"
+                             sortable="true" filterable="true" noWrap="true"
+                             width="180" sortProperty="Pronunciation"
+                             rowHeader="false"
+                             helpTopicId="RBH_ROYALTYCONTACTLOOKUPPRONUNCIATION"
+                             filterFeatures="caseInsensitive">
+                    <f:facet name="header">
+                      <af:outputLabel value="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.label}"
+                                      id="ol8"/>
+                    </f:facet>
+                    <af:inputText id="RoyaltyContactLookupPronunciation"
+                                  value="#{row.bindings.Pronunciation.inputValue}"
+                                  label="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.label}"
+                                  required="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.mandatory}"
+                                  rows="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.displayHeight}"
+                                  columns="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.displayWidth}"
+                                  maximumLength="400" readOnly="true"
+                                  shortDesc="#{bindings.RoyaltyContactLookupTable.hints.Pronunciation.tooltip}">
+                      <f:validator binding="#{row.bindings.Pronunciation.validator}"/>
+                    </af:inputText>
+                  </af:column>
+                </af:table>
+              </af:panelCollection>
+            </f:facet>
+          </af:panelStretchLayout>
+        </f:facet>
+      </af:panelStretchLayout>
+    </f:facet>
+    <f:facet name="popups">
+      <af:panelGroupLayout id="popupsPgl"></af:panelGroupLayout>
+    </f:facet>
+  </af:pageTemplate>
+</jsp:root>
+
+
+
